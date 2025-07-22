@@ -45,7 +45,7 @@ export default function Header() {
                       height: '200%',
                       background: 'white',
                       opacity: 0.3,
-                      transform: 'rotate(20deg)',
+                      transform: 'rotate(20deg) translateX(-100%)',
                       animation: 'movelight 10s ease-in-out infinite'
                     }}
                   ></div>
@@ -125,11 +125,11 @@ export default function Header() {
         }
         
         @keyframes movelight {
-          0% {
-            left: -30%;
+          from {
+            transform: rotate(20deg) translateX(-100%);
           }
-          100% {
-            left: 130%;
+          to {
+            transform: rotate(20deg) translateX(400%);
           }
         }
       `}</style>
