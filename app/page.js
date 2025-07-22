@@ -19,7 +19,7 @@ export default function Home() {
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-[120px] min-h-screen flex items-center bg-gradient-to-br from-[#00b4d8] via-[#0095b8] to-[#006a87]">
+      <section className="pt-[100px] min-h-screen flex items-center bg-gradient-to-br from-[#00b4d8] via-[#0095b8] to-[#006a87]">
         <div className="container max-w-7xl mx-auto px-4 py-16">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="text-white">

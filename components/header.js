@@ -10,7 +10,7 @@ export default function Header() {
   return (
     <header className="fixed w-full top-0 z-50 bg-white shadow-lg">
       <div className="container max-w-7xl mx-auto px-4">
-        <div className="flex justify-between items-center h-[120px]">
+        <div className="flex justify-between items-center h-[100px]">
           {/* Logo et nom */}
           <div className="flex items-center gap-4">
             <Link href="/">
@@ -30,8 +30,8 @@ export default function Header() {
                 <Image 
                   src="/images/logo.png" 
                   alt="Web Online Concept Logo" 
-                  width={130} 
-                  height={100} 
+                  width={104} 
+                  height={80} 
                   className="object-contain"
                 />
               </div>
@@ -39,10 +39,10 @@ export default function Header() {
             <div className="text-center">
               <Link href="/" className="block">
                 <h1 className="text-3xl font-bold relative inline-block">
-                  <span className="font-semibold tracking-tight" style={{ fontFamily: 'Inter, -apple-system, sans-serif', letterSpacing: '-0.02em' }}>
-                    <span className="text-[#00b4d8]" style={{ fontWeight: '600' }}>WEB</span>
-                    <span className="text-gray-800" style={{ fontWeight: '500' }}> ONLINE</span>
-                    <span className="text-[#00b4d8]" style={{ fontWeight: '600' }}> CONCEPT</span>
+                  <span className="tracking-tight" style={{ fontFamily: 'Montserrat, -apple-system, sans-serif', letterSpacing: '-0.01em' }}>
+                    <span className="text-[#00b4d8]" style={{ fontWeight: '700' }}>WEB</span>
+                    <span className="text-gray-800" style={{ fontWeight: '400' }}> ONLINE</span>
+                    <span className="text-[#00b4d8]" style={{ fontWeight: '700' }}> CONCEPT</span>
                   </span>
                   <div
                     style={{
@@ -70,7 +70,7 @@ export default function Header() {
                     e.currentTarget.querySelector('.underline-bar').style.width = '0';
                   }}
                 >
-                  <p className="text-base text-gray-600 mt-1 cursor-pointer">
+                  <p className="text-base text-gray-600 cursor-pointer" style={{ marginTop: '2px' }}>
                     Le partenaire de votre communication digitale
                   </p>
                   <div 
