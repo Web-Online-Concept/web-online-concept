@@ -75,7 +75,18 @@ export default function Header() {
                     >
                       WEB ONLINE CONCEPT
                     </span>
-                    <div className="shine-effect"></div>
+                    <div 
+                      className="shine-effect"
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: '-100%',
+                        width: '100%',
+                        height: '100%',
+                        background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent)',
+                        animation: 'slowshine 30s linear infinite'
+                      }}
+                    ></div>
                   </h1>
                 </Link>
                 <p className="text-sm text-gray-600 mt-1">Le partenaire de votre communication digitale</p>
