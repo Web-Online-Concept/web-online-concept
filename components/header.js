@@ -32,7 +32,7 @@ export default function Header() {
         }
         
         .animate-shine {
-          animation: shine 5s ease-in-out infinite;
+          animation: shine 10s ease-in-out infinite;
         }
         
         .text-gradient {
@@ -69,7 +69,7 @@ export default function Header() {
             rgba(255, 255, 255, 0.4),
             transparent
           );
-          animation: shine 5s ease-in-out infinite;
+          animation: shine 10s ease-in-out infinite;
         }
       `}</style>
 
