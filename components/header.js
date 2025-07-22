@@ -38,7 +38,7 @@ export default function Header() {
             </Link>
             <div className="text-center">
               <Link href="/" className="block">
-                <h1 className="text-3xl font-bold relative inline-block">
+                <h1 className="text-3xl font-bold relative inline-block" style={{ marginBottom: '-4px' }}>
                   <span style={{ fontFamily: 'Poppins, -apple-system, sans-serif', letterSpacing: '-0.05em' }}>
                     <span className="text-[#00b4d8]" style={{ fontWeight: '700' }}>WEB</span><span className="text-gray-800" style={{ fontWeight: '300' }}>ONLINE</span><span className="text-[#00b4d8]" style={{ fontWeight: '700' }}>CONCEPT</span>
                   </span>
@@ -68,7 +68,7 @@ export default function Header() {
                     e.currentTarget.querySelector('.underline-bar').style.width = '0';
                   }}
                 >
-                  <p className="text-base text-gray-600 cursor-pointer" style={{ marginTop: '2px' }}>
+                  <p className="text-base text-gray-600 cursor-pointer">
                     Le partenaire de votre communication digitale
                   </p>
                   <div 
