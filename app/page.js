@@ -340,10 +340,10 @@ export default function Home() {
 
             <div className="relative">
               <div className="bg-gradient-to-br from-[#00b4d8] to-[#006a87] rounded-2xl p-8 text-white">
-                <h3 className="text-2xl font-bold mb-4">Mieux qu'une agence web classique</h3>
+                <h3 className="text-2xl font-bold mb-4">Mieux qu&apos;une agence web classique</h3>
                 <p className="mb-6">
-                  WEB ONLINE CONCEPT, c'est la flexibilité du freelance avec la puissance d'une agence complète. 
-                  Nous permettons à toute entreprise, peu importe sa taille, d'optimiser au maximum sa communication 
+                  WEB ONLINE CONCEPT, c&apos;est la flexibilité du freelance avec la puissance d&apos;une agence complète. 
+                  Nous permettons à toute entreprise, peu importe sa taille, d&apos;optimiser au maximum sa communication 
                   digitale et sa présence sur le web.
                 </p>
                 <div className="flex items-center space-x-4">
@@ -352,7 +352,7 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="font-bold text-lg">Florent</p>
-                    <p className="opacity-90">Créateur de l'agence Web Online Concept</p>
+                    <p className="opacity-90">Créateur de l&apos;agence Web Online Concept</p>
                   </div>
                 </div>
               </div>
@@ -412,7 +412,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-lg font-bold text-gray-800 mb-2">Augmentation CA</h3>
-              <p className="text-gray-600">Augmentation significative de vos ventes et de votre chiffre d'affaire</p>
+              <p className="text-gray-600">Augmentation significative de vos ventes et de votre chiffre d&apos;affaire</p>
             </div>
 
             <div className="text-center">
