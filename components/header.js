@@ -34,9 +34,9 @@ export default function Header() {
                 className="object-contain"
               />
             </div>
-            <div>
+            <div className="text-center">
               <Link href="/" className="block">
-                <h1 className="text-3xl font-bold relative" style={{ display: 'inline-block' }}>
+                <h1 className="text-3xl font-bold relative inline-block">
                   <span className="font-semibold tracking-tight" style={{ fontFamily: 'Inter, -apple-system, sans-serif', letterSpacing: '-0.02em' }}>
                     <span className="text-[#00b4d8]" style={{ fontWeight: '600' }}>WEB</span>
                     <span className="text-gray-800" style={{ fontWeight: '500' }}> ONLINE</span>
@@ -58,28 +58,32 @@ export default function Header() {
                   />
                 </h1>
               </Link>
-              <p 
-                className="text-base text-gray-600 mt-1 text-center relative inline-block"
-                style={{
-                  cursor: 'pointer'
+              <div 
+                className="relative inline-block"
+                onMouseEnter={(e) => {
+                  e.currentTarget.querySelector('.underline-bar').style.width = '100%';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.querySelector('.underline-bar').style.width = '0';
                 }}
               >
-                Le partenaire de votre communication digitale
-                <span
-                  className="underline-effect"
+                <p className="text-base text-gray-600 mt-1 cursor-pointer">
+                  Le partenaire de votre communication digitale
+                </p>
+                <div 
+                  className="underline-bar"
                   style={{
                     position: 'absolute',
                     bottom: '-2px',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    width: '0%',
+                    left: '0',
+                    width: '0',
                     height: '2px',
                     background: 'linear-gradient(90deg, #00b4d8, #00d4ff)',
                     transition: 'width 0.3s ease',
                     borderRadius: '1px'
                   }}
                 />
-              </p>
+              </div>
             </div>
           </div>
 
@@ -150,14 +154,6 @@ export default function Header() {
           100% {
             transform: translateX(400px);
           }
-        }
-        
-        .logo-animation {
-          transition: transform 0.3s ease;
-        }
-        
-        .logo-animation:hover {
-          transform: scale(1.05) rotate(2deg);
         }
       `}</style>
     </header>
