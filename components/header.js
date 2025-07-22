@@ -86,38 +86,83 @@ export default function Header() {
                   />
                 </div>
               </Link>
+            </div>
+          </div>
+          
+          {/* Animation miniatures sites web */}
+          <div className="hidden md:flex items-center justify-center gap-3 mx-8">
+            <div className="flex gap-3" style={{ animation: 'slideWebsites 20s linear infinite' }}>
+              {/* Miniature 1 */}
+              <div style={{
+                width: '50px',
+                height: '35px',
+                background: 'white',
+                border: '1px solid #e0e0e0',
+                borderRadius: '3px',
+                overflow: 'hidden',
+                flexShrink: 0,
+                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+              }}>
+                <div style={{ height: '8px', background: '#0073a8' }}></div>
+                <div style={{ padding: '2px' }}>
+                  <div style={{ height: '2px', background: '#e0e0e0', marginBottom: '2px' }}></div>
+                  <div style={{ height: '2px', background: '#e0e0e0', width: '70%' }}></div>
+                </div>
+              </div>
               
-              {/* Animation site web */}
-              <div className="mt-2" style={{ height: '30px' }}>
-                <div 
-                  style={{
-                    display: 'inline-flex',
-                    gap: '8px',
-                    animation: 'rotate3d 8s linear infinite',
-                    transformStyle: 'preserve-3d'
-                  }}
-                >
-                  <div style={{
-                    width: '25px',
-                    height: '20px',
-                    background: 'linear-gradient(135deg, #0073a8 0%, #00b4d8 100%)',
-                    borderRadius: '3px',
-                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                  }} />
-                  <div style={{
-                    width: '25px',
-                    height: '20px',
-                    background: 'linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%)',
-                    borderRadius: '3px',
-                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                  }} />
-                  <div style={{
-                    width: '25px',
-                    height: '20px',
-                    background: 'linear-gradient(135deg, #0073a8 0%, #00b4d8 100%)',
-                    borderRadius: '3px',
-                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                  }} />
+              {/* Miniature 2 */}
+              <div style={{
+                width: '50px',
+                height: '35px',
+                background: 'white',
+                border: '1px solid #e0e0e0',
+                borderRadius: '3px',
+                overflow: 'hidden',
+                flexShrink: 0,
+                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+              }}>
+                <div style={{ height: '8px', background: '#00b4d8' }}></div>
+                <div style={{ padding: '2px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2px' }}>
+                  <div style={{ height: '15px', background: '#f0f0f0' }}></div>
+                  <div style={{ height: '15px', background: '#f0f0f0' }}></div>
+                </div>
+              </div>
+              
+              {/* Miniature 3 */}
+              <div style={{
+                width: '50px',
+                height: '35px',
+                background: 'white',
+                border: '1px solid #e0e0e0',
+                borderRadius: '3px',
+                overflow: 'hidden',
+                flexShrink: 0,
+                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+              }}>
+                <div style={{ height: '8px', background: 'linear-gradient(90deg, #0073a8, #00b4d8)' }}></div>
+                <div style={{ height: '10px', background: '#f5f5f5', margin: '2px' }}></div>
+                <div style={{ padding: '0 2px', display: 'flex', gap: '2px' }}>
+                  <div style={{ height: '8px', background: '#e0e0e0', flex: 1 }}></div>
+                  <div style={{ height: '8px', background: '#e0e0e0', flex: 1 }}></div>
+                  <div style={{ height: '8px', background: '#e0e0e0', flex: 1 }}></div>
+                </div>
+              </div>
+              
+              {/* Dupliquer pour l'animation continue */}
+              <div style={{
+                width: '50px',
+                height: '35px',
+                background: 'white',
+                border: '1px solid #e0e0e0',
+                borderRadius: '3px',
+                overflow: 'hidden',
+                flexShrink: 0,
+                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+              }}>
+                <div style={{ height: '8px', background: '#0073a8' }}></div>
+                <div style={{ padding: '2px' }}>
+                  <div style={{ height: '2px', background: '#e0e0e0', marginBottom: '2px' }}></div>
+                  <div style={{ height: '2px', background: '#e0e0e0', width: '70%' }}></div>
                 </div>
               </div>
             </div>
@@ -186,12 +231,12 @@ export default function Header() {
           }
         }
         
-        @keyframes rotate3d {
+        @keyframes slideWebsites {
           0% {
-            transform: rotateY(0deg);
+            transform: translateX(0);
           }
           100% {
-            transform: rotateY(360deg);
+            transform: translateX(-200px);
           }
         }
       `}</style>
