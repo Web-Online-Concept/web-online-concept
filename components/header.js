@@ -13,27 +13,29 @@ export default function Header() {
         <div className="flex justify-between items-center h-[140px]">
           {/* Logo et nom */}
           <div className="flex items-center gap-4">
-            <div 
-              className="logo-container"
-              style={{
-                transition: 'transform 0.3s ease',
-                cursor: 'pointer'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'scale(1.05) rotate(2deg)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
-              }}
-            >
-              <Image 
-                src="/images/logo.png" 
-                alt="Web Online Concept Logo" 
-                width={169} 
-                height={130} 
-                className="object-contain"
-              />
-            </div>
+            <Link href="/">
+              <div 
+                className="logo-container"
+                style={{
+                  transition: 'transform 0.3s ease',
+                  cursor: 'pointer'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.05) rotate(2deg)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
+                }}
+              >
+                <Image 
+                  src="/images/logo.png" 
+                  alt="Web Online Concept Logo" 
+                  width={169} 
+                  height={130} 
+                  className="object-contain"
+                />
+              </div>
+            </Link>
             <div className="text-center">
               <Link href="/" className="block">
                 <h1 className="text-3xl font-bold relative inline-block">
@@ -58,32 +60,34 @@ export default function Header() {
                   />
                 </h1>
               </Link>
-              <div 
-                className="relative inline-block"
-                onMouseEnter={(e) => {
-                  e.currentTarget.querySelector('.underline-bar').style.width = '100%';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.querySelector('.underline-bar').style.width = '0';
-                }}
-              >
-                <p className="text-base text-gray-600 mt-1 cursor-pointer">
-                  Le partenaire de votre communication digitale
-                </p>
+              <Link href="/">
                 <div 
-                  className="underline-bar"
-                  style={{
-                    position: 'absolute',
-                    bottom: '-2px',
-                    left: '0',
-                    width: '0',
-                    height: '2px',
-                    background: 'linear-gradient(90deg, #00b4d8, #00d4ff)',
-                    transition: 'width 0.3s ease',
-                    borderRadius: '1px'
+                  className="relative inline-block"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.querySelector('.underline-bar').style.width = '100%';
                   }}
-                />
-              </div>
+                  onMouseLeave={(e) => {
+                    e.currentTarget.querySelector('.underline-bar').style.width = '0';
+                  }}
+                >
+                  <p className="text-base text-gray-600 mt-1 cursor-pointer">
+                    Le partenaire de votre communication digitale
+                  </p>
+                  <div 
+                    className="underline-bar"
+                    style={{
+                      position: 'absolute',
+                      bottom: '-2px',
+                      left: '0',
+                      width: '0',
+                      height: '2px',
+                      background: 'linear-gradient(90deg, #00b4d8, #00d4ff)',
+                      transition: 'width 0.3s ease',
+                      borderRadius: '1px'
+                    }}
+                  />
+                </div>
+              </Link>
             </div>
           </div>
 
