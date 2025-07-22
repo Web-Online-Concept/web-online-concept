@@ -30,7 +30,7 @@ export default function Header() {
                       left: 0,
                       width: '100%',
                       height: '100%',
-                      background: 'rgba(255, 255, 255, 0.5)',
+                      background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent)',
                       transform: 'translateX(-100%)',
                       animation: 'test 30s linear infinite',
                       zIndex: 20
