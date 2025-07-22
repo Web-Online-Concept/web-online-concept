@@ -18,15 +18,15 @@ export default function Header() {
               alt="Web Online Concept Logo" 
               width={169} 
               height={130} 
-              className="object-contain"
+              className="object-contain logo-animation"
             />
             <div>
               <Link href="/" className="block">
                 <h1 className="text-3xl font-bold relative" style={{ display: 'inline-block' }}>
-                  <span className="font-extrabold tracking-tight">
-                    <span className="text-[#00b4d8]">WEB</span>
-                    <span className="text-gray-800"> ONLINE</span>
-                    <span className="text-[#00b4d8]"> CONCEPT</span>
+                  <span className="font-semibold tracking-tight" style={{ fontFamily: 'Inter, -apple-system, sans-serif', letterSpacing: '-0.02em' }}>
+                    <span className="text-[#00b4d8]" style={{ fontWeight: '600' }}>WEB</span>
+                    <span className="text-gray-800" style={{ fontWeight: '500' }}> ONLINE</span>
+                    <span className="text-[#00b4d8]" style={{ fontWeight: '600' }}> CONCEPT</span>
                   </span>
                   <div
                     style={{
@@ -44,7 +44,7 @@ export default function Header() {
                   />
                 </h1>
               </Link>
-              <p className="text-sm text-gray-600 mt-1 text-center">Le partenaire de votre communication digitale</p>
+              <p className="text-base text-gray-600 mt-1 text-center">Le partenaire de votre communication digitale</p>
             </div>
           </div>
 
@@ -115,6 +115,14 @@ export default function Header() {
           100% {
             transform: translateX(400px);
           }
+        }
+        
+        .logo-animation {
+          transition: transform 0.3s ease;
+        }
+        
+        .logo-animation:hover {
+          transform: scale(1.05) rotate(2deg);
         }
       `}</style>
     </header>
