@@ -19,7 +19,56 @@ export default function Header() {
           }
         }
         
+        @keyframes gradient {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+        
         .animate-shine {
+          animation: shine 3s ease-in-out infinite;
+        }
+        
+        .text-gradient {
+          background: linear-gradient(
+            90deg,
+            #00b4d8 0%,
+            #0095b8 25%,
+            #00d4ff 50%,
+            #0095b8 75%,
+            #00b4d8 100%
+          );
+          background-size: 200% auto;
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: gradient 3s ease infinite;
+        }
+        
+        .title-glow {
+          position: relative;
+          display: inline-block;
+        }
+        
+        .title-glow::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.4),
+            transparent
+          );
           animation: shine 3s ease-in-out infinite;
         }
       `}</style>
@@ -38,14 +87,11 @@ export default function Header() {
               />
               <div>
                 <Link href="/" className="block">
-                  <h1 className="text-3xl font-bold relative overflow-hidden group">
-                    <span className="relative z-10">
-                      <span className="text-[#00b4d8]">WEB</span>
-                      <span className="text-gray-800"> ONLINE</span>
-                      <span className="text-[#00b4d8]"> CONCEPT</span>
-                    </span>
-                    <span className="absolute inset-0 -z-10">
-                      <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent -skew-x-12 animate-shine"></span>
+                  <h1 className="text-3xl font-bold relative overflow-hidden">
+                    <span className="title-glow">
+                      <span className="text-gradient font-extrabold tracking-tight">
+                        WEB ONLINE CONCEPT
+                      </span>
                     </span>
                   </h1>
                 </Link>
