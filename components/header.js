@@ -3,93 +3,139 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import styles from '@/styles/header.module.css'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <header className={styles.header}>
-      <div className={styles.container}>
-        <div className={styles.headerContent}>
-          {/* Logo et nom */}
-          <div className={styles.logoSection}>
-            <Image 
-              src="/images/logo.png" 
-              alt="Web Online Concept Logo" 
-              width={120} 
-              height={120} 
-              className={styles.logoImage}
-            />
-            <div>
-              <Link href="/" className={styles.titleLink}>
-                <h1 className={styles.title}>
-                  <span className={styles.titleGlow}>
-                    <span className={styles.textGradient}>
+    <>
+      <style jsx>{`
+        @keyframes slowshine {
+          0% {
+            left: -100%;
+          }
+          100% {
+            left: 200%;
+          }
+        }
+        
+        @keyframes gradient {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+        
+        .shine-effect {
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.4),
+            transparent
+          );
+          animation: slowshine 30s linear infinite;
+        }
+      `}</style>
+
+      <header className="fixed w-full top-0 z-50 bg-white shadow-lg">
+        <div className="container max-w-7xl mx-auto px-4">
+          <div className="flex justify-between items-center h-[140px]">
+            {/* Logo et nom */}
+            <div className="flex items-center gap-4">
+              <Image 
+                src="/images/logo.png" 
+                alt="Web Online Concept Logo" 
+                width={120} 
+                height={120} 
+                className="object-contain"
+              />
+              <div>
+                <Link href="/" className="block">
+                  <h1 className="text-3xl font-bold relative overflow-hidden">
+                    <span 
+                      className="font-extrabold tracking-tight relative z-10 inline-block"
+                      style={{
+                        background: 'linear-gradient(90deg, #00b4d8 0%, #0095b8 25%, #00d4ff 50%, #0095b8 75%, #00b4d8 100%)',
+                        backgroundSize: '200% auto',
+                        backgroundClip: 'text',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        animation: 'gradient 3s ease infinite'
+                      }}
+                    >
                       WEB ONLINE CONCEPT
                     </span>
-                  </span>
-                </h1>
-              </Link>
-              <p className={styles.tagline}>Le partenaire de votre communication digitale</p>
+                    <div className="shine-effect"></div>
+                  </h1>
+                </Link>
+                <p className="text-sm text-gray-600 mt-1">Le partenaire de votre communication digitale</p>
+              </div>
             </div>
+
+            {/* Navigation Desktop */}
+            <nav className="hidden md:flex items-center space-x-8">
+              <Link href="#services" className="text-gray-700 hover:text-[#00b4d8] transition-colors">
+                Services
+              </Link>
+              <Link href="#team" className="text-gray-700 hover:text-[#00b4d8] transition-colors">
+                Notre équipe
+              </Link>
+              <Link href="#portfolio" className="text-gray-700 hover:text-[#00b4d8] transition-colors">
+                Réalisations
+              </Link>
+              <Link href="/contact" className="text-gray-700 hover:text-[#00b4d8] transition-colors">
+                Contact
+              </Link>
+              <Link href="/devis" className="bg-[#00b4d8] text-white px-6 py-2 rounded-full hover:bg-[#0095b8] transition-all transform hover:scale-105">
+                Devis gratuit
+              </Link>
+            </nav>
+
+            {/* Menu mobile */}
+            <button
+              className="md:hidden text-gray-700"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {isMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
           </div>
 
-          {/* Navigation Desktop */}
-          <nav className={styles.nav}>
-            <Link href="#services" className={styles.navLink}>
-              Services
-            </Link>
-            <Link href="#team" className={styles.navLink}>
-              Notre équipe
-            </Link>
-            <Link href="#portfolio" className={styles.navLink}>
-              Réalisations
-            </Link>
-            <Link href="/contact" className={styles.navLink}>
-              Contact
-            </Link>
-            <Link href="/devis" className={styles.ctaButton}>
-              Devis gratuit
-            </Link>
-          </nav>
-
-          {/* Menu mobile */}
-          <button
-            className={styles.mobileMenuButton}
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {isMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
+          {/* Mobile menu */}
+          {isMenuOpen && (
+            <div className="md:hidden py-4 border-t">
+              <Link href="#services" className="block py-2 text-gray-700 hover:text-[#00b4d8]">
+                Services
+              </Link>
+              <Link href="#team" className="block py-2 text-gray-700 hover:text-[#00b4d8]">
+                Notre équipe
+              </Link>
+              <Link href="#portfolio" className="block py-2 text-gray-700 hover:text-[#00b4d8]">
+                Réalisations
+              </Link>
+              <Link href="/contact" className="block py-2 text-gray-700 hover:text-[#00b4d8]">
+                Contact
+              </Link>
+              <Link href="/devis" className="block py-2 text-[#00b4d8] font-semibold">
+                Devis gratuit
+              </Link>
+            </div>
+          )}
         </div>
-
-        {/* Mobile menu */}
-        {isMenuOpen && (
-          <div className={styles.mobileMenu}>
-            <Link href="#services" className={styles.mobileNavLink}>
-              Services
-            </Link>
-            <Link href="#team" className={styles.mobileNavLink}>
-              Notre équipe
-            </Link>
-            <Link href="#portfolio" className={styles.mobileNavLink}>
-              Réalisations
-            </Link>
-            <Link href="/contact" className={styles.mobileNavLink}>
-              Contact
-            </Link>
-            <Link href="/devis" className={styles.mobileCtaLink}>
-              Devis gratuit
-            </Link>
-          </div>
-        )}
-      </div>
-    </header>
-  )
-}
+      </header>
+    </>
