@@ -1,0 +1,197 @@
+/* Animations */
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Header styles */
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 50;
+  background-color: white;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 140px;
+}
+
+.logoSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logoImage {
+  object-fit: contain;
+}
+
+.titleLink {
+  display: block;
+  text-decoration: none;
+}
+
+.title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  position: relative;
+}
+
+.titleGlow {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.titleGlow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  animation: shine 15s ease-in-out infinite;
+}
+
+.textGradient {
+  background: linear-gradient(
+    90deg,
+    #00b4d8 0%,
+    #0095b8 25%,
+    #00d4ff 50%,
+    #0095b8 75%,
+    #00b4d8 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient 3s ease infinite;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  position: relative;
+  z-index: 10;
+}
+
+.tagline {
+  font-size: 0.875rem;
+  color: #4b5563;
+  margin-top: 0.25rem;
+}
+
+/* Navigation */
+.nav {
+  display: none;
+}
+
+.navLink {
+  color: #374151;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.navLink:hover {
+  color: #00b4d8;
+}
+
+.ctaButton {
+  background-color: #00b4d8;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.ctaButton:hover {
+  background-color: #0095b8;
+  transform: scale(1.05);
+}
+
+/* Mobile menu button */
+.mobileMenuButton {
+  display: block;
+  background: none;
+  border: none;
+  color: #374151;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.mobileMenu {
+  padding: 1rem 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.mobileNavLink {
+  display: block;
+  padding: 0.5rem 0;
+  color: #374151;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.mobileNavLink:hover {
+  color: #00b4d8;
+}
+
+.mobileCtaLink {
+  display: block;
+  padding: 0.5rem 0;
+  color: #00b4d8;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Media queries */
+@media (min-width: 768px) {
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  .mobileMenuButton {
+    display: none;
+  }
+  
+  .mobileMenu {
+    display: none;
+  }
+}
