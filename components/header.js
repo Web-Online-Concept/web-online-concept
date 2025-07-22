@@ -10,11 +10,11 @@ export default function Header() {
   return (
     <>
       <style jsx>{`
-        @keyframes slowshine {
-          0% {
+        @keyframes verylongshine {
+          from {
             left: -100%;
           }
-          100% {
+          to {
             left: 200%;
           }
         }
@@ -84,7 +84,7 @@ export default function Header() {
                         width: '100%',
                         height: '100%',
                         background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent)',
-                        animation: 'slowshine 30s linear infinite'
+                        animation: 'verylongshine 30s linear infinite'
                       }}
                     ></div>
                   </h1>
