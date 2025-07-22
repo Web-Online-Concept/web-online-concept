@@ -89,6 +89,44 @@ export default function Header() {
             </div>
           </div>
 
+          {/* Carrousel de captures au centre */}
+          <div className="hidden lg:block mx-4">
+            <div 
+              className="relative overflow-hidden rounded-lg shadow-lg"
+              style={{
+                width: '180px',
+                height: '120px',
+                border: '2px solid #f0f0f0'
+              }}
+            >
+              {[1, 2, 3, 4, 5].map((num, index) => (
+                <div
+                  key={num}
+                  className="absolute inset-0"
+                  style={{
+                    opacity: 0,
+                    animation: `fadeCarousel 15s infinite ${index * 3}s`,
+                    background: '#f5f5f5'
+                  }}
+                >
+                  <Image 
+                    src={`/images/captures/capture-${num}.jpg`}
+                    alt={`Site exemple ${num}`}
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-2">
+                    <p className="text-white text-xs font-semibold">Site #{num}</p>
+                  </div>
+                </div>
+              ))}
+              {/* Placeholder si pas d'images */}
+              <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+                <p className="text-gray-400 text-xs text-center">Exemples<br/>de sites</p>
+              </div>
+            </div>
+          </div>
+
           {/* Navigation Desktop */}
           <nav className="hidden md:flex items-center space-x-8">
             <Link href="#services" className="text-gray-700 hover:text-[#0073a8] transition-colors">
@@ -104,70 +142,6 @@ export default function Header() {
               Devis Gratuit
             </Link>
           </nav>
-          
-          {/* Carrousel de captures entre titre et navigation */}
-          <div 
-            className="hidden md:block absolute"
-            style={{
-              left: '50%',
-              transform: 'translateX(-50%)',
-              width: '120px',
-              height: '80px'
-            }}
-          >
-            <div className="relative w-full h-full">
-              {/* Capture 1 */}
-              <img 
-                src="/images/captures/capture-1.jpg" 
-                alt="Site exemple 1"
-                className="absolute w-full h-full object-cover rounded-md shadow-md"
-                style={{
-                  opacity: 1,
-                  animation: 'fadeCarousel 15s infinite'
-                }}
-              />
-              {/* Capture 2 */}
-              <img 
-                src="/images/captures/capture-2.jpg" 
-                alt="Site exemple 2"
-                className="absolute w-full h-full object-cover rounded-md shadow-md"
-                style={{
-                  opacity: 0,
-                  animation: 'fadeCarousel 15s infinite 3s'
-                }}
-              />
-              {/* Capture 3 */}
-              <img 
-                src="/images/captures/capture-3.jpg" 
-                alt="Site exemple 3"
-                className="absolute w-full h-full object-cover rounded-md shadow-md"
-                style={{
-                  opacity: 0,
-                  animation: 'fadeCarousel 15s infinite 6s'
-                }}
-              />
-              {/* Capture 4 */}
-              <img 
-                src="/images/captures/capture-4.jpg" 
-                alt="Site exemple 4"
-                className="absolute w-full h-full object-cover rounded-md shadow-md"
-                style={{
-                  opacity: 0,
-                  animation: 'fadeCarousel 15s infinite 9s'
-                }}
-              />
-              {/* Capture 5 */}
-              <img 
-                src="/images/captures/capture-5.jpg" 
-                alt="Site exemple 5"
-                className="absolute w-full h-full object-cover rounded-md shadow-md"
-                style={{
-                  opacity: 0,
-                  animation: 'fadeCarousel 15s infinite 12s'
-                }}
-              />
-            </div>
-          </div>
 
           {/* Menu mobile */}
           <button
