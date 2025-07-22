@@ -16,8 +16,8 @@ export default function Header() {
             <Image 
               src="/images/logo.png" 
               alt="Web Online Concept Logo" 
-              width={130} 
-              height={130} 
+              width={182} 
+              height={140} 
               className="object-contain"
             />
             <div>
@@ -39,7 +39,7 @@ export default function Header() {
                       width: '50px',
                       height: '100%',
                       animation: 'slide 8s linear infinite',
-                      animationDelay: '2s',
+                      animationDelay: '5s',
                       transform: 'skewX(-20deg)'
                     }}
                   />
