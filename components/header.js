@@ -88,85 +88,6 @@ export default function Header() {
               </Link>
             </div>
           </div>
-          
-          {/* Animation miniatures sites web */}
-          <div className="hidden md:flex items-center justify-center gap-3 mx-8">
-            <div className="flex gap-3" style={{ animation: 'slideWebsites 20s linear infinite' }}>
-              {/* Miniature 1 */}
-              <div style={{
-                width: '50px',
-                height: '35px',
-                background: 'white',
-                border: '1px solid #e0e0e0',
-                borderRadius: '3px',
-                overflow: 'hidden',
-                flexShrink: 0,
-                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-              }}>
-                <div style={{ height: '8px', background: '#0073a8' }}></div>
-                <div style={{ padding: '2px' }}>
-                  <div style={{ height: '2px', background: '#e0e0e0', marginBottom: '2px' }}></div>
-                  <div style={{ height: '2px', background: '#e0e0e0', width: '70%' }}></div>
-                </div>
-              </div>
-              
-              {/* Miniature 2 */}
-              <div style={{
-                width: '50px',
-                height: '35px',
-                background: 'white',
-                border: '1px solid #e0e0e0',
-                borderRadius: '3px',
-                overflow: 'hidden',
-                flexShrink: 0,
-                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-              }}>
-                <div style={{ height: '8px', background: '#00b4d8' }}></div>
-                <div style={{ padding: '2px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2px' }}>
-                  <div style={{ height: '15px', background: '#f0f0f0' }}></div>
-                  <div style={{ height: '15px', background: '#f0f0f0' }}></div>
-                </div>
-              </div>
-              
-              {/* Miniature 3 */}
-              <div style={{
-                width: '50px',
-                height: '35px',
-                background: 'white',
-                border: '1px solid #e0e0e0',
-                borderRadius: '3px',
-                overflow: 'hidden',
-                flexShrink: 0,
-                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-              }}>
-                <div style={{ height: '8px', background: 'linear-gradient(90deg, #0073a8, #00b4d8)' }}></div>
-                <div style={{ height: '10px', background: '#f5f5f5', margin: '2px' }}></div>
-                <div style={{ padding: '0 2px', display: 'flex', gap: '2px' }}>
-                  <div style={{ height: '8px', background: '#e0e0e0', flex: 1 }}></div>
-                  <div style={{ height: '8px', background: '#e0e0e0', flex: 1 }}></div>
-                  <div style={{ height: '8px', background: '#e0e0e0', flex: 1 }}></div>
-                </div>
-              </div>
-              
-              {/* Dupliquer pour l'animation continue */}
-              <div style={{
-                width: '50px',
-                height: '35px',
-                background: 'white',
-                border: '1px solid #e0e0e0',
-                borderRadius: '3px',
-                overflow: 'hidden',
-                flexShrink: 0,
-                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-              }}>
-                <div style={{ height: '8px', background: '#0073a8' }}></div>
-                <div style={{ padding: '2px' }}>
-                  <div style={{ height: '2px', background: '#e0e0e0', marginBottom: '2px' }}></div>
-                  <div style={{ height: '2px', background: '#e0e0e0', width: '70%' }}></div>
-                </div>
-              </div>
-            </div>
-          </div>
 
           {/* Navigation Desktop */}
           <nav className="hidden md:flex items-center space-x-8">
@@ -183,6 +104,70 @@ export default function Header() {
               Devis Gratuit
             </Link>
           </nav>
+          
+          {/* Carrousel de captures entre titre et navigation */}
+          <div 
+            className="hidden md:block absolute"
+            style={{
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: '120px',
+              height: '80px'
+            }}
+          >
+            <div className="relative w-full h-full">
+              {/* Capture 1 */}
+              <img 
+                src="/images/captures/capture-1.jpg" 
+                alt="Site exemple 1"
+                className="absolute w-full h-full object-cover rounded-md shadow-md"
+                style={{
+                  opacity: 1,
+                  animation: 'fadeCarousel 15s infinite'
+                }}
+              />
+              {/* Capture 2 */}
+              <img 
+                src="/images/captures/capture-2.jpg" 
+                alt="Site exemple 2"
+                className="absolute w-full h-full object-cover rounded-md shadow-md"
+                style={{
+                  opacity: 0,
+                  animation: 'fadeCarousel 15s infinite 3s'
+                }}
+              />
+              {/* Capture 3 */}
+              <img 
+                src="/images/captures/capture-3.jpg" 
+                alt="Site exemple 3"
+                className="absolute w-full h-full object-cover rounded-md shadow-md"
+                style={{
+                  opacity: 0,
+                  animation: 'fadeCarousel 15s infinite 6s'
+                }}
+              />
+              {/* Capture 4 */}
+              <img 
+                src="/images/captures/capture-4.jpg" 
+                alt="Site exemple 4"
+                className="absolute w-full h-full object-cover rounded-md shadow-md"
+                style={{
+                  opacity: 0,
+                  animation: 'fadeCarousel 15s infinite 9s'
+                }}
+              />
+              {/* Capture 5 */}
+              <img 
+                src="/images/captures/capture-5.jpg" 
+                alt="Site exemple 5"
+                className="absolute w-full h-full object-cover rounded-md shadow-md"
+                style={{
+                  opacity: 0,
+                  animation: 'fadeCarousel 15s infinite 12s'
+                }}
+              />
+            </div>
+          </div>
 
           {/* Menu mobile */}
           <button
@@ -231,13 +216,12 @@ export default function Header() {
           }
         }
         
-        @keyframes slideWebsites {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-200px);
-          }
+        @keyframes fadeCarousel {
+          0% { opacity: 0; }
+          5% { opacity: 1; }
+          20% { opacity: 1; }
+          25% { opacity: 0; }
+          100% { opacity: 0; }
         }
       `}</style>
     </header>
