@@ -84,7 +84,7 @@
     transparent 100%
   );
   transform: translateX(-100%);
-  animation: shine 15s ease-in-out infinite;
+  animation: shine 30s ease-in-out infinite;
 }
 
 .textGradient {
