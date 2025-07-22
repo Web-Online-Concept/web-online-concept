@@ -23,20 +23,6 @@ export default function Header() {
             <div>
               <Link href="/" className="block">
                 <h1 className="text-3xl font-bold relative overflow-hidden">
-                  <div 
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100px',
-                      height: '100%',
-                      background: 'rgba(255, 255, 255, 0.4)',
-                      transform: 'translateX(-100%)',
-                      animation: 'test 30s linear infinite',
-                      zIndex: 20,
-                      filter: 'blur(40px)'
-                    }}
-                  ></div>
                   <span 
                     className="font-extrabold tracking-tight relative z-10 inline-block"
                     style={{
@@ -50,6 +36,19 @@ export default function Header() {
                   >
                     WEB ONLINE CONCEPT
                   </span>
+                  <div 
+                    style={{
+                      position: 'absolute',
+                      top: '-50%',
+                      left: '-10%',
+                      width: '30%',
+                      height: '200%',
+                      background: 'white',
+                      opacity: 0.3,
+                      transform: 'rotate(20deg)',
+                      animation: 'movelight 10s ease-in-out infinite'
+                    }}
+                  ></div>
                 </h1>
               </Link>
               <p className="text-sm text-gray-600 mt-1">Le partenaire de votre communication digitale</p>
@@ -125,12 +124,12 @@ export default function Header() {
           }
         }
         
-        @keyframes test {
+        @keyframes movelight {
           0% {
-            transform: translateX(-100%);
+            left: -30%;
           }
           100% {
-            transform: translateX(300%);
+            left: 130%;
           }
         }
       `}</style>
