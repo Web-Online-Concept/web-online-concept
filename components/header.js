@@ -22,19 +22,23 @@ export default function Header() {
             />
             <div>
               <Link href="/" className="block">
-                <h1 className="text-3xl font-bold relative overflow-hidden inline-block">
-                  <span className="font-extrabold tracking-tight relative z-10">
+                <h1 className="text-3xl font-bold relative" style={{ display: 'inline-block' }}>
+                  <span className="font-extrabold tracking-tight">
                     <span className="text-[#00b4d8]">WEB</span>
                     <span className="text-gray-800"> ONLINE</span>
                     <span className="text-[#00b4d8]"> CONCEPT</span>
                   </span>
-                  <span 
-                    className="absolute inset-0 w-full h-full"
+                  <div
                     style={{
-                      background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.5) 50%, transparent 100%)',
-                      width: '40%',
-                      animation: 'lightpass 8s ease-in-out infinite',
-                      transform: 'skewX(-25deg)'
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent)',
+                      width: '50px',
+                      height: '100%',
+                      animation: 'slide 5s linear infinite'
                     }}
                   />
                 </h1>
@@ -100,12 +104,12 @@ export default function Header() {
       </div>
       
       <style jsx>{`
-        @keyframes lightpass {
-          0% {
-            left: -40%;
+        @keyframes slide {
+          from {
+            transform: translateX(-50px);
           }
-          100% {
-            left: 140%;
+          to {
+            transform: translateX(400px);
           }
         }
       `}</style>
