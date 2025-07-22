@@ -22,33 +22,12 @@ export default function Header() {
             />
             <div>
               <Link href="/" className="block">
-                <h1 className="text-3xl font-bold relative overflow-hidden">
-                  <span 
-                    className="font-extrabold tracking-tight relative z-10 inline-block"
-                    style={{
-                      background: 'linear-gradient(90deg, #00b4d8 0%, #0095b8 25%, #00d4ff 50%, #0095b8 75%, #00b4d8 100%)',
-                      backgroundSize: '200% auto',
-                      backgroundClip: 'text',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      animation: 'gradient 3s ease infinite'
-                    }}
-                  >
-                    WEB ONLINE CONCEPT
+                <h1 className="text-3xl font-bold">
+                  <span className="font-extrabold tracking-tight">
+                    <span className="text-[#00b4d8]">WEB</span>
+                    <span className="text-gray-800"> ONLINE</span>
+                    <span className="text-[#00b4d8]"> CONCEPT</span>
                   </span>
-                  <div 
-                    style={{
-                      position: 'absolute',
-                      top: '-50%',
-                      left: '-10%',
-                      width: '30%',
-                      height: '200%',
-                      background: 'white',
-                      opacity: 0.3,
-                      transform: 'rotate(20deg) translateX(-100%)',
-                      animation: 'movelight 10s ease-in-out infinite'
-                    }}
-                  ></div>
                 </h1>
               </Link>
               <p className="text-sm text-gray-600 mt-1">Le partenaire de votre communication digitale</p>
@@ -110,29 +89,6 @@ export default function Header() {
           </div>
         )}
       </div>
-
-      <style jsx global>{`
-        @keyframes gradient {
-          0% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-          100% {
-            background-position: 0% 50%;
-          }
-        }
-        
-        @keyframes movelight {
-          from {
-            transform: rotate(20deg) translateX(-100%);
-          }
-          to {
-            transform: rotate(20deg) translateX(400%);
-          }
-        }
-      `}</style>
     </header>
   )
 }
