@@ -86,6 +86,40 @@ export default function Header() {
                   />
                 </div>
               </Link>
+              
+              {/* Animation site web */}
+              <div className="mt-2" style={{ height: '30px' }}>
+                <div 
+                  style={{
+                    display: 'inline-flex',
+                    gap: '8px',
+                    animation: 'rotate3d 8s linear infinite',
+                    transformStyle: 'preserve-3d'
+                  }}
+                >
+                  <div style={{
+                    width: '25px',
+                    height: '20px',
+                    background: 'linear-gradient(135deg, #0073a8 0%, #00b4d8 100%)',
+                    borderRadius: '3px',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                  }} />
+                  <div style={{
+                    width: '25px',
+                    height: '20px',
+                    background: 'linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%)',
+                    borderRadius: '3px',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                  }} />
+                  <div style={{
+                    width: '25px',
+                    height: '20px',
+                    background: 'linear-gradient(135deg, #0073a8 0%, #00b4d8 100%)',
+                    borderRadius: '3px',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                  }} />
+                </div>
+              </div>
             </div>
           </div>
 
@@ -94,17 +128,14 @@ export default function Header() {
             <Link href="#services" className="text-gray-700 hover:text-[#0073a8] transition-colors">
               Services
             </Link>
-            <Link href="#team" className="text-gray-700 hover:text-[#0073a8] transition-colors">
-              Notre équipe
+            <Link href="#tarifs" className="text-gray-700 hover:text-[#0073a8] transition-colors">
+              Tarifs
             </Link>
-            <Link href="#portfolio" className="text-gray-700 hover:text-[#0073a8] transition-colors">
+            <Link href="#realisations" className="text-gray-700 hover:text-[#0073a8] transition-colors">
               Réalisations
             </Link>
-            <Link href="/contact" className="text-gray-700 hover:text-[#0073a8] transition-colors">
-              Contact
-            </Link>
             <Link href="/devis" className="bg-[#0073a8] text-white px-6 py-2 rounded-full hover:bg-[#005580] transition-all transform hover:scale-105">
-              Devis gratuit
+              Devis Gratuit
             </Link>
           </nav>
 
@@ -129,17 +160,14 @@ export default function Header() {
             <Link href="#services" className="block py-2 text-gray-700 hover:text-[#0073a8]">
               Services
             </Link>
-            <Link href="#team" className="block py-2 text-gray-700 hover:text-[#0073a8]">
-              Notre équipe
+            <Link href="#tarifs" className="block py-2 text-gray-700 hover:text-[#0073a8]">
+              Tarifs
             </Link>
-            <Link href="#portfolio" className="block py-2 text-gray-700 hover:text-[#0073a8]">
+            <Link href="#realisations" className="block py-2 text-gray-700 hover:text-[#0073a8]">
               Réalisations
             </Link>
-            <Link href="/contact" className="block py-2 text-gray-700 hover:text-[#0073a8]">
-              Contact
-            </Link>
             <Link href="/devis" className="block py-2 text-[#0073a8] font-semibold">
-              Devis gratuit
+              Devis Gratuit
             </Link>
           </div>
         )}
@@ -155,6 +183,15 @@ export default function Header() {
           }
           100% {
             transform: translateX(400px);
+          }
+        }
+        
+        @keyframes rotate3d {
+          0% {
+            transform: rotateY(0deg);
+          }
+          100% {
+            transform: rotateY(360deg);
           }
         }
       `}</style>
