@@ -16,8 +16,8 @@ export default function Header() {
             <Image 
               src="/images/logo.png" 
               alt="Web Online Concept Logo" 
-              width={120} 
-              height={120} 
+              width={130} 
+              height={130} 
               className="object-contain"
             />
             <div>
@@ -45,7 +45,7 @@ export default function Header() {
                   />
                 </h1>
               </Link>
-              <p className="text-sm text-gray-600 mt-1">Le partenaire de votre communication digitale</p>
+              <p className="text-sm text-gray-600 mt-1 text-center">Le partenaire de votre communication digitale</p>
             </div>
           </div>
 
