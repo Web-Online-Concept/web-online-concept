@@ -30,8 +30,8 @@ export default function Header() {
                 <Image 
                   src="/images/logo.png" 
                   alt="Web Online Concept Logo" 
-                  width={169} 
-                  height={130} 
+                  width={156} 
+                  height={120} 
                   className="object-contain"
                 />
               </div>
