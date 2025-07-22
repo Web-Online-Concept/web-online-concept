@@ -13,13 +13,27 @@ export default function Header() {
         <div className="flex justify-between items-center h-[140px]">
           {/* Logo et nom */}
           <div className="flex items-center gap-4">
-            <Image 
-              src="/images/logo.png" 
-              alt="Web Online Concept Logo" 
-              width={169} 
-              height={130} 
-              className="object-contain logo-animation"
-            />
+            <div 
+              className="logo-container"
+              style={{
+                transition: 'transform 0.3s ease',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.05) rotate(2deg)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
+              }}
+            >
+              <Image 
+                src="/images/logo.png" 
+                alt="Web Online Concept Logo" 
+                width={169} 
+                height={130} 
+                className="object-contain"
+              />
+            </div>
             <div>
               <Link href="/" className="block">
                 <h1 className="text-3xl font-bold relative" style={{ display: 'inline-block' }}>
