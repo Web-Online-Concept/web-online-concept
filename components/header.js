@@ -58,7 +58,28 @@ export default function Header() {
                   />
                 </h1>
               </Link>
-              <p className="text-base text-gray-600 mt-1 text-center">Le partenaire de votre communication digitale</p>
+              <p 
+                className="text-base text-gray-600 mt-1 text-center relative inline-block"
+                style={{
+                  cursor: 'pointer'
+                }}
+              >
+                Le partenaire de votre communication digitale
+                <span
+                  className="underline-effect"
+                  style={{
+                    position: 'absolute',
+                    bottom: '-2px',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    width: '0%',
+                    height: '2px',
+                    background: 'linear-gradient(90deg, #00b4d8, #00d4ff)',
+                    transition: 'width 0.3s ease',
+                    borderRadius: '1px'
+                  }}
+                />
+              </p>
             </div>
           </div>
 
