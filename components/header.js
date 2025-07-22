@@ -16,8 +16,8 @@ export default function Header() {
             <Image 
               src="/images/logo.png" 
               alt="Web Online Concept Logo" 
-              width={182} 
-              height={140} 
+              width={169} 
+              height={130} 
               className="object-contain"
             />
             <div>
@@ -38,8 +38,7 @@ export default function Header() {
                       background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent)',
                       width: '50px',
                       height: '100%',
-                      animation: 'slide 8s linear infinite',
-                      animationDelay: '5s',
+                      animation: 'slide 13s linear infinite',
                       transform: 'skewX(-20deg)'
                     }}
                   />
@@ -107,10 +106,13 @@ export default function Header() {
       
       <style jsx>{`
         @keyframes slide {
-          from {
+          0% {
             transform: translateX(-50px);
           }
-          to {
+          38% {
+            transform: translateX(-50px);
+          }
+          100% {
             transform: translateX(400px);
           }
         }
