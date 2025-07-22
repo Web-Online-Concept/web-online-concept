@@ -20,7 +20,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="pt-[140px] min-h-screen flex items-center bg-gradient-to-br from-[#00b4d8] via-[#0095b8] to-[#006a87]">
-        <div className="container mx-auto px-4 py-16">
+        <div className="container max-w-7xl mx-auto px-4 py-16">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="text-white">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
@@ -56,7 +56,7 @@ export default function Home() {
 
       {/* Stats Section */}
       <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
+        <div className="container max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="group hover:transform hover:scale-105 transition-all">
               <h3 className="text-4xl font-bold text-[#00b4d8] mb-2">+10</h3>
@@ -80,7 +80,7 @@ export default function Home() {
 
       {/* Services Section */}
       <section id="services" className="py-20">
-        <div className="container mx-auto px-4">
+        <div className="container max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">
               Une gamme complète de solutions
@@ -210,7 +210,7 @@ export default function Home() {
 
       {/* Team Section */}
       <section id="team" className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
+        <div className="container max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">
               Une team professionnelle à votre écoute
@@ -296,7 +296,7 @@ export default function Home() {
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-[#00b4d8] to-[#006a87]">
-        <div className="container mx-auto px-4 text-center">
+        <div className="container max-w-7xl mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold text-white mb-4">
             Prêt à booster votre présence en ligne ?
           </h2>
@@ -317,7 +317,7 @@ export default function Home() {
 
       {/* Benefits Section */}
       <section className="py-20">
-        <div className="container mx-auto px-4">
+        <div className="container max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">
               Tous nos clients satisfaits

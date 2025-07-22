@@ -25,7 +25,7 @@ export default function Header() {
       `}</style>
 
       <header className="fixed w-full top-0 z-50 bg-white shadow-lg">
-        <div className="container mx-auto px-4">
+        <div className="container max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center h-[140px]">
             {/* Logo et nom */}
             <div className="flex items-center gap-4">
