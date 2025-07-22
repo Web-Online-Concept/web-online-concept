@@ -38,7 +38,9 @@ export default function Header() {
                       background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent)',
                       width: '50px',
                       height: '100%',
-                      animation: 'slide 5s linear infinite'
+                      animation: 'slide 8s linear infinite',
+                      animationDelay: '2s',
+                      transform: 'skewX(-20deg)'
                     }}
                   />
                 </h1>
