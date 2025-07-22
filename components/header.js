@@ -1,4 +1,11 @@
-"use client"
+<h1 className="text-3xl font-bold relative overflow-hidden">
+                  <div 
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height"use client"
 
 import Image from 'next/image'
 import Link from 'next/link'
@@ -43,7 +50,7 @@ export default function Header() {
                       left: 0,
                       width: '100%',
                       height: '100%',
-                      background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent)',
+                      background: 'rgba(255, 255, 255, 0.5)',
                       transform: 'translateX(-100%)',
                       animation: 'test 30s linear infinite'
                     }}
