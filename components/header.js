@@ -89,42 +89,37 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Carrousel de captures au centre */}
-          <div className="hidden lg:block mx-4">
-            <div 
-              className="relative overflow-hidden rounded-lg shadow-lg"
-              style={{
-                width: '135px',
-                height: '90px',
-                border: '2px solid #f0f0f0'
-              }}
+          {/* Vague décorative au centre */}
+          <div className="hidden lg:block mx-8">
+            <svg 
+              width="200" 
+              height="60" 
+              viewBox="0 0 200 60" 
+              className="opacity-20"
             >
-              {[1, 2, 3, 4, 5].map((num, index) => (
-                <div
-                  key={num}
-                  className="absolute inset-0"
-                  style={{
-                    opacity: 0,
-                    animation: `fadeCarousel 15s infinite ${index * 3}s`,
-                    background: '#f5f5f5'
-                  }}
-                >
-                  <Image 
-                    src={`/images/captures/capture-${num}.jpg`}
-                    alt={`Site exemple ${num}`}
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-2">
-                    <p className="text-white text-xs font-semibold">Site #{num}</p>
-                  </div>
-                </div>
-              ))}
-              {/* Placeholder si pas d'images */}
-              <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
-                <p className="text-gray-400 text-xs text-center">Exemples<br/>de sites</p>
-              </div>
-            </div>
+              <defs>
+                <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#0073a8" stopOpacity="0.8" />
+                  <stop offset="50%" stopColor="#00b4d8" stopOpacity="1" />
+                  <stop offset="100%" stopColor="#0073a8" stopOpacity="0.8" />
+                </linearGradient>
+              </defs>
+              <path 
+                d="M0,30 Q50,10 100,30 T200,30 L200,60 L0,60 Z" 
+                fill="url(#waveGradient)"
+                style={{
+                  animation: 'waveMotion 8s ease-in-out infinite'
+                }}
+              />
+              <path 
+                d="M0,35 Q50,20 100,35 T200,35 L200,60 L0,60 Z" 
+                fill="url(#waveGradient)"
+                opacity="0.5"
+                style={{
+                  animation: 'waveMotion 8s ease-in-out infinite 0.5s'
+                }}
+              />
+            </svg>
           </div>
 
           {/* Navigation Desktop */}
@@ -190,12 +185,16 @@ export default function Header() {
           }
         }
         
-        @keyframes fadeCarousel {
-          0% { opacity: 0; }
-          5% { opacity: 1; }
-          20% { opacity: 1; }
-          25% { opacity: 0; }
-          100% { opacity: 0; }
+        @keyframes waveMotion {
+          0% {
+            d: path("M0,30 Q50,10 100,30 T200,30 L200,60 L0,60 Z");
+          }
+          50% {
+            d: path("M0,30 Q50,45 100,30 T200,30 L200,60 L0,60 Z");
+          }
+          100% {
+            d: path("M0,30 Q50,10 100,30 T200,30 L200,60 L0,60 Z");
+          }
         }
       `}</style>
     </header>
