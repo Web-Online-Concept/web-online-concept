@@ -40,7 +40,7 @@ export default function Header() {
               <Link href="/" className="block">
                 <h1 className="text-3xl font-bold relative inline-block" style={{ marginBottom: '-4px' }}>
                   <span style={{ fontFamily: 'Poppins, -apple-system, sans-serif', letterSpacing: '-0.05em' }}>
-                    <span className="text-[#00b4d8]" style={{ fontWeight: '700' }}>WEB</span><span className="text-gray-800" style={{ fontWeight: '300' }}>ONLINE</span><span className="text-[#00b4d8]" style={{ fontWeight: '700' }}>CONCEPT</span>
+                    <span className="text-[#0073a8]" style={{ fontWeight: '700' }}>WEB</span><span className="text-gray-800" style={{ fontWeight: '300' }}>ONLINE</span><span className="text-[#0073a8]" style={{ fontWeight: '700' }}>CONCEPT</span>
                   </span>
                   <div
                     style={{
@@ -79,7 +79,7 @@ export default function Header() {
                       left: '0',
                       width: '0',
                       height: '2px',
-                      background: 'linear-gradient(90deg, #00b4d8, #00d4ff)',
+                      background: 'linear-gradient(90deg, #0073a8, #00b4d8)',
                       transition: 'width 0.3s ease',
                       borderRadius: '1px'
                     }}
@@ -91,19 +91,19 @@ export default function Header() {
 
           {/* Navigation Desktop */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link href="#services" className="text-gray-700 hover:text-[#00b4d8] transition-colors">
+            <Link href="#services" className="text-gray-700 hover:text-[#0073a8] transition-colors">
               Services
             </Link>
-            <Link href="#team" className="text-gray-700 hover:text-[#00b4d8] transition-colors">
+            <Link href="#team" className="text-gray-700 hover:text-[#0073a8] transition-colors">
               Notre équipe
             </Link>
-            <Link href="#portfolio" className="text-gray-700 hover:text-[#00b4d8] transition-colors">
+            <Link href="#portfolio" className="text-gray-700 hover:text-[#0073a8] transition-colors">
               Réalisations
             </Link>
-            <Link href="/contact" className="text-gray-700 hover:text-[#00b4d8] transition-colors">
+            <Link href="/contact" className="text-gray-700 hover:text-[#0073a8] transition-colors">
               Contact
             </Link>
-            <Link href="/devis" className="bg-[#00b4d8] text-white px-6 py-2 rounded-full hover:bg-[#0095b8] transition-all transform hover:scale-105">
+            <Link href="/devis" className="bg-[#0073a8] text-white px-6 py-2 rounded-full hover:bg-[#005580] transition-all transform hover:scale-105">
               Devis gratuit
             </Link>
           </nav>
@@ -126,19 +126,19 @@ export default function Header() {
         {/* Mobile menu */}
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t">
-            <Link href="#services" className="block py-2 text-gray-700 hover:text-[#00b4d8]">
+            <Link href="#services" className="block py-2 text-gray-700 hover:text-[#0073a8]">
               Services
             </Link>
-            <Link href="#team" className="block py-2 text-gray-700 hover:text-[#00b4d8]">
+            <Link href="#team" className="block py-2 text-gray-700 hover:text-[#0073a8]">
               Notre équipe
             </Link>
-            <Link href="#portfolio" className="block py-2 text-gray-700 hover:text-[#00b4d8]">
+            <Link href="#portfolio" className="block py-2 text-gray-700 hover:text-[#0073a8]">
               Réalisations
             </Link>
-            <Link href="/contact" className="block py-2 text-gray-700 hover:text-[#00b4d8]">
+            <Link href="/contact" className="block py-2 text-gray-700 hover:text-[#0073a8]">
               Contact
             </Link>
-            <Link href="/devis" className="block py-2 text-[#00b4d8] font-semibold">
+            <Link href="/devis" className="block py-2 text-[#0073a8] font-semibold">
               Devis gratuit
             </Link>
           </div>
