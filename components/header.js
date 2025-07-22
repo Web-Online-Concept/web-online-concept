@@ -10,7 +10,7 @@ export default function Header() {
   return (
     <header className="fixed w-full top-0 z-50 bg-white shadow-lg">
       <div className="container max-w-7xl mx-auto px-4">
-        <div className="flex justify-between items-center h-[140px]">
+        <div className="flex justify-between items-center h-[120px]">
           {/* Logo et nom */}
           <div className="flex items-center gap-4">
             <Link href="/">
@@ -30,8 +30,8 @@ export default function Header() {
                 <Image 
                   src="/images/logo.png" 
                   alt="Web Online Concept Logo" 
-                  width={156} 
-                  height={120} 
+                  width={130} 
+                  height={100} 
                   className="object-contain"
                 />
               </div>
