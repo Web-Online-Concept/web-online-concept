@@ -22,12 +22,21 @@ export default function Header() {
             />
             <div>
               <Link href="/" className="block">
-                <h1 className="text-3xl font-bold">
-                  <span className="font-extrabold tracking-tight">
+                <h1 className="text-3xl font-bold relative overflow-hidden inline-block">
+                  <span className="font-extrabold tracking-tight relative z-10">
                     <span className="text-[#00b4d8]">WEB</span>
                     <span className="text-gray-800"> ONLINE</span>
                     <span className="text-[#00b4d8]"> CONCEPT</span>
                   </span>
+                  <span 
+                    className="absolute inset-0 w-full h-full"
+                    style={{
+                      background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.5) 50%, transparent 100%)',
+                      width: '40%',
+                      animation: 'lightpass 8s ease-in-out infinite',
+                      transform: 'skewX(-25deg)'
+                    }}
+                  />
                 </h1>
               </Link>
               <p className="text-sm text-gray-600 mt-1">Le partenaire de votre communication digitale</p>
@@ -89,6 +98,17 @@ export default function Header() {
           </div>
         )}
       </div>
+      
+      <style jsx>{`
+        @keyframes lightpass {
+          0% {
+            left: -40%;
+          }
+          100% {
+            left: 140%;
+          }
+        }
+      `}</style>
     </header>
   )
 }
