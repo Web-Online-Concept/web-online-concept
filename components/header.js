@@ -39,10 +39,8 @@ export default function Header() {
             <div className="text-center">
               <Link href="/" className="block">
                 <h1 className="text-3xl font-bold relative inline-block">
-                  <span className="tracking-tight" style={{ fontFamily: 'Montserrat, -apple-system, sans-serif', letterSpacing: '-0.01em' }}>
-                    <span className="text-[#00b4d8]" style={{ fontWeight: '700' }}>WEB</span>
-                    <span className="text-gray-800" style={{ fontWeight: '400' }}> ONLINE</span>
-                    <span className="text-[#00b4d8]" style={{ fontWeight: '700' }}> CONCEPT</span>
+                  <span style={{ fontFamily: 'Poppins, -apple-system, sans-serif', letterSpacing: '-0.05em' }}>
+                    <span className="text-[#00b4d8]" style={{ fontWeight: '700' }}>WEB</span><span className="text-gray-800" style={{ fontWeight: '300' }}>ONLINE</span><span className="text-[#00b4d8]" style={{ fontWeight: '700' }}>CONCEPT</span>
                   </span>
                   <div
                     style={{
