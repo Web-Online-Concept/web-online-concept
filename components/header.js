@@ -12,10 +12,10 @@ export default function Header() {
       <style jsx>{`
         @keyframes shine {
           0% {
-            transform: translateX(-100%) skewX(-12deg);
+            transform: translateX(-100%);
           }
           100% {
-            transform: translateX(200%) skewX(-12deg);
+            transform: translateX(200%);
           }
         }
         
@@ -29,10 +29,6 @@ export default function Header() {
           100% {
             background-position: 0% 50%;
           }
-        }
-        
-        .animate-shine {
-          animation: shine 15s ease-in-out infinite;
         }
         
         .text-gradient {
@@ -54,21 +50,23 @@ export default function Header() {
         .title-glow {
           position: relative;
           display: inline-block;
+          overflow: hidden;
         }
         
         .title-glow::before {
           content: '';
           position: absolute;
           top: 0;
-          left: -100%;
+          left: 0;
           width: 100%;
           height: 100%;
           background: linear-gradient(
             90deg,
-            transparent,
-            rgba(255, 255, 255, 0.4),
-            transparent
+            transparent 0%,
+            rgba(255, 255, 255, 0.4) 50%,
+            transparent 100%
           );
+          transform: translateX(-100%);
           animation: shine 15s ease-in-out infinite;
         }
       `}</style>
@@ -87,9 +85,9 @@ export default function Header() {
               />
               <div>
                 <Link href="/" className="block">
-                  <h1 className="text-3xl font-bold relative overflow-hidden">
+                  <h1 className="text-3xl font-bold relative">
                     <span className="title-glow">
-                      <span className="text-gradient font-extrabold tracking-tight">
+                      <span className="text-gradient font-extrabold tracking-tight relative z-10">
                         WEB ONLINE CONCEPT
                       </span>
                     </span>
