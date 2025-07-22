@@ -28,12 +28,13 @@ export default function Header() {
                       position: 'absolute',
                       top: 0,
                       left: 0,
-                      width: '100%',
+                      width: '100px',
                       height: '100%',
-                      background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent)',
+                      background: 'rgba(255, 255, 255, 0.4)',
                       transform: 'translateX(-100%)',
                       animation: 'test 30s linear infinite',
-                      zIndex: 20
+                      zIndex: 20,
+                      filter: 'blur(40px)'
                     }}
                   ></div>
                   <span 
