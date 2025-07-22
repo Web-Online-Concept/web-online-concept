@@ -41,10 +41,11 @@ export default function Header() {
                       position: 'absolute',
                       top: 0,
                       left: 0,
-                      width: '20px',
-                      height: '20px',
-                      background: 'red',
-                      animation: 'test 10s linear infinite'
+                      width: '100%',
+                      height: '100%',
+                      background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent)',
+                      transform: 'translateX(-100%)',
+                      animation: 'test 30s linear infinite'
                     }}
                   ></div>
                 </h1>
@@ -124,10 +125,10 @@ export default function Header() {
         
         @keyframes test {
           0% {
-            transform: translateX(0);
+            transform: translateX(-100%);
           }
           100% {
-            transform: translateX(400px);
+            transform: translateX(300%);
           }
         }
       `}</style>
