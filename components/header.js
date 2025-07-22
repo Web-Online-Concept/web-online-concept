@@ -40,11 +40,11 @@ export default function Header() {
                     style={{
                       position: 'absolute',
                       top: 0,
-                      left: '-100%',
-                      width: '100%',
-                      height: '100%',
-                      background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent)',
-                      animation: 'shine60s 60s linear infinite'
+                      left: 0,
+                      width: '20px',
+                      height: '20px',
+                      background: 'red',
+                      animation: 'test 10s linear infinite'
                     }}
                   ></div>
                 </h1>
@@ -122,12 +122,12 @@ export default function Header() {
           }
         }
         
-        @keyframes shine60s {
+        @keyframes test {
           0% {
-            left: -100%;
+            transform: translateX(0);
           }
           100% {
-            left: 200%;
+            transform: translateX(400px);
           }
         }
       `}</style>
