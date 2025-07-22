@@ -69,7 +69,7 @@ export default function Header() {
                   }}
                 >
                   <p className="text-base text-gray-600 cursor-pointer">
-                    Votre Site Web Professionnel Clé en Main
+                    Sites Web Clés en Main à Prix Malins
                   </p>
                   <div 
                     className="underline-bar"
