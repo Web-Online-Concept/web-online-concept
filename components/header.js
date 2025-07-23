@@ -89,49 +89,25 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Vague décorative au centre */}
-          <div className="hidden lg:block mx-8">
-            <svg 
-              width="200" 
-              height="60" 
-              viewBox="0 0 200 60" 
-              className="opacity-20"
-            >
-              <defs>
-                <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#0073a8" stopOpacity="0.8" />
-                  <stop offset="50%" stopColor="#00b4d8" stopOpacity="1" />
-                  <stop offset="100%" stopColor="#0073a8" stopOpacity="0.8" />
-                </linearGradient>
-              </defs>
-              <path 
-                d="M0,30 Q50,10 100,30 T200,30 L200,60 L0,60 Z" 
-                fill="url(#waveGradient)"
-                style={{
-                  animation: 'waveMotion 8s ease-in-out infinite'
-                }}
-              />
-              <path 
-                d="M0,35 Q50,20 100,35 T200,35 L200,60 L0,60 Z" 
-                fill="url(#waveGradient)"
-                opacity="0.5"
-                style={{
-                  animation: 'waveMotion 8s ease-in-out infinite 0.5s'
-                }}
-              />
-            </svg>
-          </div>
-
           {/* Navigation Desktop */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link href="#services" className="text-gray-700 hover:text-[#0073a8] transition-colors">
+            <Link href="#services" className="relative text-gray-700 hover:text-[#0073a8] transition-colors group">
               Services
+              <span 
+                className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#0073a8] to-[#00b4d8] transition-all duration-300 group-hover:w-full"
+              />
             </Link>
-            <Link href="#tarifs" className="text-gray-700 hover:text-[#0073a8] transition-colors">
+            <Link href="#tarifs" className="relative text-gray-700 hover:text-[#0073a8] transition-colors group">
               Tarifs
+              <span 
+                className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#0073a8] to-[#00b4d8] transition-all duration-300 group-hover:w-full"
+              />
             </Link>
-            <Link href="#realisations" className="text-gray-700 hover:text-[#0073a8] transition-colors">
+            <Link href="#realisations" className="relative text-gray-700 hover:text-[#0073a8] transition-colors group">
               Réalisations
+              <span 
+                className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#0073a8] to-[#00b4d8] transition-all duration-300 group-hover:w-full"
+              />
             </Link>
             <Link href="/devis" className="bg-[#0073a8] text-white px-6 py-2 rounded-full hover:bg-[#005580] transition-all transform hover:scale-105">
               Devis Gratuit
@@ -182,18 +158,6 @@ export default function Header() {
           }
           100% {
             transform: translateX(400px);
-          }
-        }
-        
-        @keyframes waveMotion {
-          0% {
-            d: path("M0,30 Q50,10 100,30 T200,30 L200,60 L0,60 Z");
-          }
-          50% {
-            d: path("M0,30 Q50,45 100,30 T200,30 L200,60 L0,60 Z");
-          }
-          100% {
-            d: path("M0,30 Q50,10 100,30 T200,30 L200,60 L0,60 Z");
           }
         }
       `}</style>
