@@ -337,7 +337,7 @@ export default function Home() {
       <section id="services" className="py-20 bg-gray-100 relative">
         <div className="container max-w-7xl mx-auto px-4 relative z-10">
           <div className="text-center mb-12">
-            {/* Logo centré */}
+            {/* Logo centré au-dessus du titre */}
             <div className="flex justify-center mb-8">
               <Image
                 src="/images/logo.png"
