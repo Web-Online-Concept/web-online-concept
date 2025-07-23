@@ -39,7 +39,7 @@ export default function Home() {
           
           {/* Partie haute */}
           <div className="flex items-start pt-8 md:pt-16" style={{height: 'calc(50% - 25px)'}}>
-            <div className="grid md:grid-cols-[40%_60%] gap-8 w-full">
+            <div className="grid md:grid-cols-[40%_60%] gap-4 w-full">
               {/* Colonne gauche - Texte */}
               <div className="text-white">
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
@@ -78,16 +78,16 @@ export default function Home() {
                   </p>
                 </div>
                 <div 
-                  className="flex flex-wrap gap-4"
+                  className="flex flex-col sm:flex-row gap-4"
                   style={{
                     animation: 'fadeIn 1s ease-out 0.6s forwards',
                     opacity: 0
                   }}
                 >
-                  <Link href="/devis" className="bg-white text-[#0073a8] px-8 py-3 rounded-full font-semibold hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg">
+                  <Link href="/devis" className="bg-white text-[#0073a8] px-6 py-3 rounded-full font-semibold hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg text-center whitespace-nowrap">
                     Obtenir un devis gratuit
                   </Link>
-                  <Link href="#services" className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-[#0073a8] transition-all">
+                  <Link href="#services" className="border-2 border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-[#0073a8] transition-all text-center whitespace-nowrap">
                     Découvrir nos services
                   </Link>
                 </div>
