@@ -327,6 +327,20 @@ export default function Home() {
             </div>
 
             <div className="relative">
+              {/* Image au-dessus du bloc */}
+              <div className="mb-6">
+                <div className="border-4 border-[#0073a8] rounded-2xl overflow-hidden shadow-lg">
+                  <Image
+                    src="/images/team-image.jpg"
+                    alt="Équipe Web Online Concept"
+                    width={600}
+                    height={400}
+                    className="w-full h-auto"
+                  />
+                </div>
+              </div>
+              
+              {/* Bloc bleu existant */}
               <div className="bg-gradient-to-br from-[#0073a8] to-[#006a87] rounded-2xl p-8 text-white">
                 <h3 className="text-2xl font-bold mb-4">Mieux qu&apos;une agence web classique</h3>
                 <p className="mb-6">
