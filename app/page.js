@@ -90,8 +90,8 @@ export default function Home() {
               </div>
             </div>
             
-            {/* Colonne 2 - Commence après le texte de gauche */}
-            <div className="relative hidden md:block pt-32 lg:pt-40">
+            {/* Colonne 2 - Commence beaucoup plus bas */}
+            <div className="relative hidden md:block pt-48 lg:pt-56">
               <div className="relative w-full">
                 <h2 
                   className="text-5xl font-bold text-white mb-8"
@@ -188,19 +188,19 @@ export default function Home() {
         <div className="container max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="group hover:transform hover:scale-105 transition-all">
-              <h3 className="text-4xl font-bold text-[#00b4d8] mb-2">+10</h3>
+              <h3 className="text-4xl font-bold text-[#0073a8] mb-2">+10</h3>
               <p className="text-gray-600">Spécialistes freelance</p>
             </div>
             <div className="group hover:transform hover:scale-105 transition-all">
-              <h3 className="text-4xl font-bold text-[#00b4d8] mb-2">100%</h3>
+              <h3 className="text-4xl font-bold text-[#0073a8] mb-2">100%</h3>
               <p className="text-gray-600">Clients satisfaits</p>
             </div>
             <div className="group hover:transform hover:scale-105 transition-all">
-              <h3 className="text-4xl font-bold text-[#00b4d8] mb-2">24/7</h3>
+              <h3 className="text-4xl font-bold text-[#0073a8] mb-2">24/7</h3>
               <p className="text-gray-600">Support réactif</p>
             </div>
             <div className="group hover:transform hover:scale-105 transition-all">
-              <h3 className="text-4xl font-bold text-[#00b4d8] mb-2">#1</h3>
+              <h3 className="text-4xl font-bold text-[#0073a8] mb-2">#1</h3>
               <p className="text-gray-600">Rapport qualité/prix</p>
             </div>
           </div>
@@ -222,7 +222,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Service 1 */}
             <div className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all transform hover:-translate-y-2">
-              <div className="w-20 h-20 bg-[#00b4d8] rounded-full flex items-center justify-center mb-6 mx-auto">
+              <div className="w-20 h-20 bg-[#0073a8] rounded-full flex items-center justify-center mb-6 mx-auto">
                 <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
@@ -231,7 +231,7 @@ export default function Home() {
               <p className="text-gray-600 text-center mb-6">
                 Votre site internet clé en main, responsive et optimisé pour convertir vos visiteurs en clients.
               </p>
-              <Link href="/services/sites-vitrines" className="text-[#00b4d8] font-semibold hover:underline flex items-center justify-center">
+              <Link href="/services/sites-vitrines" className="text-[#0073a8] font-semibold hover:underline flex items-center justify-center">
                 En savoir plus 
                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -241,7 +241,7 @@ export default function Home() {
 
             {/* Service 2 */}
             <div className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all transform hover:-translate-y-2">
-              <div className="w-20 h-20 bg-[#00b4d8] rounded-full flex items-center justify-center mb-6 mx-auto">
+              <div className="w-20 h-20 bg-[#0073a8] rounded-full flex items-center justify-center mb-6 mx-auto">
                 <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                 </svg>
@@ -250,7 +250,7 @@ export default function Home() {
               <p className="text-gray-600 text-center mb-6">
                 Votre app mobile personnalisée disponible sur iOS et Android pour toucher vos clients partout.
               </p>
-              <Link href="/services/applications-mobiles" className="text-[#00b4d8] font-semibold hover:underline flex items-center justify-center">
+              <Link href="/services/applications-mobiles" className="text-[#0073a8] font-semibold hover:underline flex items-center justify-center">
                 En savoir plus 
                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -260,7 +260,7 @@ export default function Home() {
 
             {/* Service 3 */}
             <div className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all transform hover:-translate-y-2">
-              <div className="w-20 h-20 bg-[#00b4d8] rounded-full flex items-center justify-center mb-6 mx-auto">
+              <div className="w-20 h-20 bg-[#0073a8] rounded-full flex items-center justify-center mb-6 mx-auto">
                 <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
@@ -269,7 +269,7 @@ export default function Home() {
               <p className="text-gray-600 text-center mb-6">
                 Votre boutique e-commerce sur mesure pour vendre vos produits 24h/24 et 7j/7.
               </p>
-              <Link href="/services/boutiques-en-ligne" className="text-[#00b4d8] font-semibold hover:underline flex items-center justify-center">
+              <Link href="/services/boutiques-en-ligne" className="text-[#0073a8] font-semibold hover:underline flex items-center justify-center">
                 En savoir plus 
                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -279,7 +279,7 @@ export default function Home() {
 
             {/* Service 4 */}
             <div className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all transform hover:-translate-y-2">
-              <div className="w-20 h-20 bg-[#00b4d8] rounded-full flex items-center justify-center mb-6 mx-auto">
+              <div className="w-20 h-20 bg-[#0073a8] rounded-full flex items-center justify-center mb-6 mx-auto">
                 <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
                 </svg>
@@ -288,7 +288,7 @@ export default function Home() {
               <p className="text-gray-600 text-center mb-6">
                 Création et gestion de vos réseaux sociaux pour développer votre communauté.
               </p>
-              <Link href="/services/reseaux-sociaux" className="text-[#00b4d8] font-semibold hover:underline flex items-center justify-center">
+              <Link href="/services/reseaux-sociaux" className="text-[#0073a8] font-semibold hover:underline flex items-center justify-center">
                 En savoir plus 
                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -298,7 +298,7 @@ export default function Home() {
 
             {/* Service 5 */}
             <div className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all transform hover:-translate-y-2">
-              <div className="w-20 h-20 bg-[#00b4d8] rounded-full flex items-center justify-center mb-6 mx-auto">
+              <div className="w-20 h-20 bg-[#0073a8] rounded-full flex items-center justify-center mb-6 mx-auto">
                 <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
@@ -307,7 +307,7 @@ export default function Home() {
               <p className="text-gray-600 text-center mb-6">
                 Spécialiste SEO pour vous positionner dans les premiers résultats Google.
               </p>
-              <Link href="/services/referencement-seo" className="text-[#00b4d8] font-semibold hover:underline flex items-center justify-center">
+              <Link href="/services/referencement-seo" className="text-[#0073a8] font-semibold hover:underline flex items-center justify-center">
                 En savoir plus 
                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -317,7 +317,7 @@ export default function Home() {
 
             {/* Service 6 */}
             <div className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all transform hover:-translate-y-2">
-              <div className="w-20 h-20 bg-[#00b4d8] rounded-full flex items-center justify-center mb-6 mx-auto">
+              <div className="w-20 h-20 bg-[#0073a8] rounded-full flex items-center justify-center mb-6 mx-auto">
                 <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
                 </svg>
@@ -326,7 +326,7 @@ export default function Home() {
               <p className="text-gray-600 text-center mb-6">
                 Vos cartes de visite virtuelles modernes et interactives pour marquer les esprits.
               </p>
-              <Link href="/services/cartes-visite-digitales" className="text-[#00b4d8] font-semibold hover:underline flex items-center justify-center">
+              <Link href="/services/cartes-visite-digitales" className="text-[#0073a8] font-semibold hover:underline flex items-center justify-center">
                 En savoir plus 
                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -352,7 +352,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
             <div className="space-y-6">
               <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-[#00b4d8] rounded-full flex items-center justify-center">
+                <div className="flex-shrink-0 w-12 h-12 bg-[#0073a8] rounded-full flex items-center justify-center">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
@@ -364,7 +364,7 @@ export default function Home() {
               </div>
 
               <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-[#00b4d8] rounded-full flex items-center justify-center">
+                <div className="flex-shrink-0 w-12 h-12 bg-[#0073a8] rounded-full flex items-center justify-center">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
@@ -376,7 +376,7 @@ export default function Home() {
               </div>
 
               <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-[#00b4d8] rounded-full flex items-center justify-center">
+                <div className="flex-shrink-0 w-12 h-12 bg-[#0073a8] rounded-full flex items-center justify-center">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
@@ -388,7 +388,7 @@ export default function Home() {
               </div>
 
               <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-[#00b4d8] rounded-full flex items-center justify-center">
+                <div className="flex-shrink-0 w-12 h-12 bg-[#0073a8] rounded-full flex items-center justify-center">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
@@ -401,7 +401,7 @@ export default function Home() {
             </div>
 
             <div className="relative">
-              <div className="bg-gradient-to-br from-[#00b4d8] to-[#006a87] rounded-2xl p-8 text-white">
+              <div className="bg-gradient-to-br from-[#0073a8] to-[#006a87] rounded-2xl p-8 text-white">
                 <h3 className="text-2xl font-bold mb-4">Mieux qu&apos;une agence web classique</h3>
                 <p className="mb-6">
                   WEB ONLINE CONCEPT, c&apos;est la flexibilité du freelance avec la puissance d&apos;une agence complète. 
@@ -424,7 +424,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-[#00b4d8] to-[#006a87]">
+      <section className="py-20 bg-gradient-to-r from-[#0073a8] to-[#006a87]">
         <div className="container max-w-7xl mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold text-white mb-4">
             Prêt à booster votre présence en ligne ?
@@ -434,10 +434,10 @@ export default function Home() {
             Notre équipe vous répondra sous 24h.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/devis" className="bg-white text-[#00b4d8] px-8 py-4 rounded-full font-semibold hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg">
+            <Link href="/devis" className="bg-white text-[#0073a8] px-8 py-4 rounded-full font-semibold hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg">
               Demander un devis gratuit
             </Link>
-            <Link href="/contact" className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-[#00b4d8] transition-all">
+            <Link href="/contact" className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-[#0073a8] transition-all">
               Nous contacter
             </Link>
           </div>
