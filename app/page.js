@@ -106,20 +106,47 @@ export default function Home() {
             </div>
             
             <div className="relative hidden md:block">
-              <div 
-                className="relative w-full h-[500px]"
-                style={{
-                  animation: 'fadeIn 1.5s ease-out 0.8s forwards',
-                  opacity: 0
-                }}
-              >
-                <Image
-                  src="/images/hero-devices.png"
-                  alt="Sites web responsive"
-                  fill
-                  className="object-contain"
-                  priority
-                />
+              <div className="relative w-full h-[500px] flex flex-col justify-center">
+                <h2 
+                  className="text-5xl font-bold text-white mb-8"
+                  style={{
+                    fontFamily: 'Poppins, -apple-system, sans-serif',
+                    animation: 'fadeInScale 0.8s ease-out forwards'
+                  }}
+                >
+                  Réalisez..
+                </h2>
+                
+                <div className="space-y-4">
+                  {[
+                    { text: "Votre site internet clé en main", delay: "0.5s" },
+                    { text: "Votre app mobile personnalisée", delay: "1s" },
+                    { text: "Votre boutique en ligne sur mesure", delay: "1.5s" },
+                    { text: "Création & gestion des réseaux sociaux", delay: "2s" },
+                    { text: "Référencement Google : Spécialiste SEO", delay: "2.5s" },
+                    { text: "Meilleur rapport qualité / prix !", delay: "3s", highlight: true }
+                  ].map((item, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center gap-3"
+                      style={{
+                        opacity: 0,
+                        animation: `slideInLeft 0.6s ease-out ${item.delay} forwards`
+                      }}
+                    >
+                      <div className="flex-shrink-0">
+                        <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                          <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                      </div>
+                      <p className={`text-xl font-semibold ${item.highlight ? 'text-yellow-300' : 'text-white'}`}>
+                        {item.text}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -144,6 +171,28 @@ export default function Home() {
           }
           to {
             opacity: 1;
+          }
+        }
+        
+        @keyframes fadeInScale {
+          from {
+            opacity: 0;
+            transform: scale(0.8);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+        
+        @keyframes slideInLeft {
+          from {
+            opacity: 0;
+            transform: translateX(-50px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
           }
         }
       `}</style>
