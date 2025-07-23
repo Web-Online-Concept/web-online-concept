@@ -263,25 +263,87 @@ export default function Home() {
         }
       `}</style>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-gray-50">
+      {/* Team Section */}
+      <section id="team" className="py-20 bg-gray-50">
         <div className="container max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div className="group hover:transform hover:scale-105 transition-all">
-              <h3 className="text-4xl font-bold text-[#0073a8] mb-2">+10</h3>
-              <p className="text-gray-600">Spécialistes freelance</p>
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-800 mb-4">
+              Une team professionnelle à votre écoute
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Pour tous types de projets, une équipe de spécialistes dédiée à votre réussite
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+            <div className="space-y-6">
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-[#0073a8] rounded-full flex items-center justify-center">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">Une équipe composée de +10 spécialistes freelance</h3>
+                  <p className="text-gray-600">Chaque expert maîtrise parfaitement son domaine pour vous garantir le meilleur résultat.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-[#0073a8] rounded-full flex items-center justify-center">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">Tous les métiers du digital réunis</h3>
+                  <p className="text-gray-600">Webmasters, Webdesigners, Développeurs, Spécialistes SEO, Marketing digital & Stratégique.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-[#0073a8] rounded-full flex items-center justify-center">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">1 interlocuteur unique dédié</h3>
+                  <p className="text-gray-600">Un chef de projet dédié au suivi de votre projet de A à Z pour simplifier vos échanges.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-[#0073a8] rounded-full flex items-center justify-center">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">Disponibilité, réactivité et professionnalisme</h3>
+                  <p className="text-gray-600">Nous sommes là quand vous en avez besoin, avec une réponse rapide à toutes vos demandes.</p>
+                </div>
+              </div>
             </div>
-            <div className="group hover:transform hover:scale-105 transition-all">
-              <h3 className="text-4xl font-bold text-[#0073a8] mb-2">100%</h3>
-              <p className="text-gray-600">Clients satisfaits</p>
-            </div>
-            <div className="group hover:transform hover:scale-105 transition-all">
-              <h3 className="text-4xl font-bold text-[#0073a8] mb-2">24/7</h3>
-              <p className="text-gray-600">Support réactif</p>
-            </div>
-            <div className="group hover:transform hover:scale-105 transition-all">
-              <h3 className="text-4xl font-bold text-[#0073a8] mb-2">#1</h3>
-              <p className="text-gray-600">Rapport qualité/prix</p>
+
+            <div className="relative">
+              <div className="bg-gradient-to-br from-[#0073a8] to-[#006a87] rounded-2xl p-8 text-white">
+                <h3 className="text-2xl font-bold mb-4">Mieux qu&apos;une agence web classique</h3>
+                <p className="mb-6">
+                  WEB ONLINE CONCEPT, c&apos;est la flexibilité du freelance avec la puissance d&apos;une agence complète. 
+                  Nous permettons à toute entreprise, peu importe sa taille, d&apos;optimiser au maximum sa communication 
+                  digitale et sa présence sur le web.
+                </p>
+                <div className="flex items-center space-x-4">
+                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+                    <span className="text-2xl font-bold">F</span>
+                  </div>
+                  <div>
+                    <p className="font-bold text-lg">Florent</p>
+                    <p className="opacity-90">Créateur de l&apos;agence Web Online Concept</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -412,92 +474,6 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section id="team" className="py-20 bg-gray-50">
-        <div className="container max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">
-              Une team professionnelle à votre écoute
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Pour tous types de projets, une équipe de spécialistes dédiée à votre réussite
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-            <div className="space-y-6">
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-[#0073a8] rounded-full flex items-center justify-center">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">Une équipe composée de +10 spécialistes freelance</h3>
-                  <p className="text-gray-600">Chaque expert maîtrise parfaitement son domaine pour vous garantir le meilleur résultat.</p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-[#0073a8] rounded-full flex items-center justify-center">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">Tous les métiers du digital réunis</h3>
-                  <p className="text-gray-600">Webmasters, Webdesigners, Développeurs, Spécialistes SEO, Marketing digital & Stratégique.</p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-[#0073a8] rounded-full flex items-center justify-center">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">1 interlocuteur unique dédié</h3>
-                  <p className="text-gray-600">Un chef de projet dédié au suivi de votre projet de A à Z pour simplifier vos échanges.</p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-[#0073a8] rounded-full flex items-center justify-center">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">Disponibilité, réactivité et professionnalisme</h3>
-                  <p className="text-gray-600">Nous sommes là quand vous en avez besoin, avec une réponse rapide à toutes vos demandes.</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="relative">
-              <div className="bg-gradient-to-br from-[#0073a8] to-[#006a87] rounded-2xl p-8 text-white">
-                <h3 className="text-2xl font-bold mb-4">Mieux qu&apos;une agence web classique</h3>
-                <p className="mb-6">
-                  WEB ONLINE CONCEPT, c&apos;est la flexibilité du freelance avec la puissance d&apos;une agence complète. 
-                  Nous permettons à toute entreprise, peu importe sa taille, d&apos;optimiser au maximum sa communication 
-                  digitale et sa présence sur le web.
-                </p>
-                <div className="flex items-center space-x-4">
-                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                    <span className="text-2xl font-bold">F</span>
-                  </div>
-                  <div>
-                    <p className="font-bold text-lg">Florent</p>
-                    <p className="opacity-90">Créateur de l&apos;agence Web Online Concept</p>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
