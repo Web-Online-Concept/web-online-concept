@@ -39,10 +39,10 @@ export default function Home() {
           
           {/* Partie haute */}
           <div className="flex items-start pt-8 md:pt-16" style={{height: 'calc(50% - 25px)'}}>
-            <div className="grid md:grid-cols-[45%_55%] gap-12 w-full">
+            <div className="grid md:grid-cols-[40%_60%] gap-8 w-full">
               {/* Colonne gauche - Texte */}
               <div className="text-white">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
                   <span className="block overflow-hidden">
                     <span 
                       className="block"
