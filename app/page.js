@@ -106,7 +106,7 @@ export default function Home() {
                 <div className="space-y-4">
                   {[
                     { text: "Votre site internet clé en main", delay: "0.5s" },
-                    { text: "100% responsive et mobile-friendly", delay: "1s" },
+                    { text: "100% adapté mobile et tablette", delay: "1s" },
                     { text: "Choisissez vos options à la carte", delay: "1.5s" },
                     { text: "Développement sur mesure adapté", delay: "2s" },
                     { text: "Référencement Google : Spécialiste SEO", delay: "2.5s" },
