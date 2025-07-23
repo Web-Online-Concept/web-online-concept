@@ -309,7 +309,7 @@ export default function Home() {
             <div className="flex justify-center">
               <div className="border-4 border-[#0073a8] rounded-2xl overflow-hidden shadow-lg">
                 <Image
-                  src="/images/team-image.png"
+                  src="/images/team-image.jpg"
                   alt="Équipe Web Online Concept"
                   width={600}
                   height={400}
