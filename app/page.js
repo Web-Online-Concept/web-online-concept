@@ -96,7 +96,14 @@ export default function Home() {
               {/* Colonne droite - Image */}
               <div className="hidden md:flex items-center justify-center">
                 {/* Emplacement pour l'image du haut */}
-                <div className="w-full max-w-xl" style={{marginLeft: '-20px'}}>
+                <div 
+                  className="w-full max-w-xl" 
+                  style={{
+                    marginLeft: '-20px',
+                    opacity: 0,
+                    animation: 'fadeInRight 1s ease-out 0.8s forwards'
+                  }}
+                >
                   <Image
                     src="/images/hero-top.png"
                     alt="Création de sites web"
@@ -118,7 +125,13 @@ export default function Home() {
               {/* Colonne gauche - Image */}
               <div className="hidden md:flex items-center justify-center">
                 {/* Emplacement pour l'image du bas */}
-                <div className="w-full max-w-xl">
+                <div 
+                  className="w-full max-w-xl"
+                  style={{
+                    opacity: 0,
+                    animation: 'fadeInLeft 1s ease-out 1.2s forwards'
+                  }}
+                >
                   <Image
                     src="/images/hero-bottom.png"
                     alt="Solutions web professionnelles"
@@ -217,6 +230,28 @@ export default function Home() {
         }
         
         @keyframes slideInLeft {
+          from {
+            opacity: 0;
+            transform: translateX(-50px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        
+        @keyframes fadeInRight {
+          from {
+            opacity: 0;
+            transform: translateX(50px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        
+        @keyframes fadeInLeft {
           from {
             opacity: 0;
             transform: translateX(-50px);
