@@ -32,13 +32,13 @@ export default function Home() {
         </video>
         
         {/* Overlay pour estomper la vidéo */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0073a8]/80 via-[#00b4d8]/70 to-[#006a87]/80" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0073a8]/90 via-[#00b4d8]/80 to-[#006a87]/90" />
         
         {/* Contenu */}
-        <div className="container max-w-7xl mx-auto px-4 relative z-10 min-h-screen flex items-center">
+        <div className="container max-w-7xl mx-auto px-4 relative z-10 min-h-screen">
           <div className="grid md:grid-cols-2 gap-12 w-full">
-            {/* Colonne 1 - Plus haute */}
-            <div className="text-white md:self-start md:pt-20">
+            {/* Colonne 1 - Très haute, juste sous le header */}
+            <div className="text-white pt-8 md:pt-16">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                 <span className="block overflow-hidden">
                   <span 
@@ -90,8 +90,8 @@ export default function Home() {
               </div>
             </div>
             
-            {/* Colonne 2 - Plus basse */}
-            <div className="relative hidden md:block md:self-end md:pb-20">
+            {/* Colonne 2 - Commence après le texte de gauche */}
+            <div className="relative hidden md:block pt-32 lg:pt-40">
               <div className="relative w-full">
                 <h2 
                   className="text-5xl font-bold text-white mb-8"
