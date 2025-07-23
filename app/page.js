@@ -339,9 +339,13 @@ export default function Home() {
           <div className="text-center mb-12">
             {/* Logo centré au-dessus du titre */}
             <div className="flex justify-center mb-8">
-              <div className="w-[183px] h-[150px] bg-blue-200 rounded-lg flex items-center justify-center">
-                <span className="text-gray-600">Logo 150px</span>
-              </div>
+              <Image
+                src="/images/logo.png"
+                alt="Web Online Concept"
+                width={183}
+                height={150}
+                className="h-[150px] w-auto"
+              />
             </div>
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
               Votre site web à la carte
