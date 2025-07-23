@@ -78,7 +78,7 @@ export default function Home() {
                   </p>
                 </div>
                 <div 
-                  className="flex flex-col sm:flex-row gap-4"
+                  className="flex flex-col sm:flex-row gap-4 justify-center"
                   style={{
                     animation: 'fadeIn 1s ease-out 0.6s forwards',
                     opacity: 0
@@ -159,10 +159,16 @@ export default function Home() {
                       }}
                     >
                       <div className="flex-shrink-0">
-                        <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                          <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                          </svg>
+                        <div className={`w-8 h-8 ${item.highlight ? 'bg-yellow-400' : 'bg-green-500'} rounded-full flex items-center justify-center`}>
+                          {item.highlight ? (
+                            <svg className="w-5 h-5 text-yellow-900" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                          ) : (
+                            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                            </svg>
+                          )}
                         </div>
                       </div>
                       <p className={`text-xl font-semibold ${item.highlight ? 'text-yellow-300' : 'text-white'}`}>
