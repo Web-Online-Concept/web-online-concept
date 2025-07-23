@@ -38,7 +38,7 @@ export default function Home() {
         <div className="container max-w-7xl mx-auto px-4 relative z-10 min-h-screen flex flex-col">
           
           {/* Partie haute */}
-          <div className="flex-1 flex items-start pt-8 md:pt-16">
+          <div className="flex-1 flex items-start pt-8 md:pt-16" style={{minHeight: 'calc(50% - 50px)'}}>
             <div className="grid md:grid-cols-2 gap-12 w-full">
               {/* Colonne gauche - Texte */}
               <div className="text-white">
@@ -110,7 +110,7 @@ export default function Home() {
           </div>
           
           {/* Partie basse */}
-          <div className="flex-1 flex items-end pb-8 md:pb-16">
+          <div className="flex-1 flex items-end pb-8 md:pb-16" style={{minHeight: 'calc(50% + 50px)'}}>
             <div className="grid md:grid-cols-2 gap-12 w-full">
               {/* Colonne gauche - Image */}
               <div className="hidden md:flex items-center justify-center">
