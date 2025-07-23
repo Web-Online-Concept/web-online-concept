@@ -39,7 +39,7 @@ export default function Home() {
           
           {/* Partie haute */}
           <div className="flex items-start pt-8 md:pt-16" style={{height: 'calc(50% - 25px)'}}>
-            <div className="grid md:grid-cols-2 gap-12 w-full">
+            <div className="grid md:grid-cols-[45%_55%] gap-12 w-full">
               {/* Colonne gauche - Texte */}
               <div className="text-white">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
@@ -96,11 +96,11 @@ export default function Home() {
               {/* Colonne droite - Image */}
               <div className="hidden md:flex items-center justify-center">
                 {/* Emplacement pour l'image du haut */}
-                <div className="w-full max-w-md">
+                <div className="w-full max-w-xl">
                   <Image
                     src="/images/hero-top.png"
                     alt="Création de sites web"
-                    width={400}
+                    width={600}
                     height={300}
                     className="w-full h-auto"
                   />
