@@ -355,132 +355,174 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* Services Section - Concept À la Carte */}
       <section id="services" className="py-20">
         <div className="container max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">
-              Une gamme complète de solutions
+              Votre site web à la carte
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Pour répondre à toutes vos demandes et booster votre présence en ligne
+              Un concept simple et transparent : une formule de base complète à prix fixe, 
+              puis ajoutez uniquement les options dont vous avez besoin
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Service 1 */}
-            <div className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all transform hover:-translate-y-2">
+          {/* Présentation du concept en 3 étapes */}
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            {/* Étape 1 - La Base */}
+            <div className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all">
               <div className="w-20 h-20 bg-[#0073a8] rounded-full flex items-center justify-center mb-6 mx-auto">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
+                <span className="text-3xl font-bold text-white">1</span>
               </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Sites vitrines</h3>
+              <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">La Formule de Base</h3>
               <p className="text-gray-600 text-center mb-6">
-                Votre site internet clé en main, responsive et optimisé pour convertir vos visiteurs en clients.
+                Tout ce qu&apos;il faut pour démarrer votre présence en ligne
               </p>
-              <Link href="/services/sites-vitrines" className="text-[#0073a8] font-semibold hover:underline flex items-center justify-center">
-                En savoir plus 
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
+              <ul className="space-y-2 text-gray-600">
+                <li className="flex items-start">
+                  <svg className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Site 5 pages personnalisé</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Design professionnel adapté</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Pages légales & contact incluses</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>100% responsive mobile/tablette</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Accompagnement personnalisé</span>
+                </li>
+              </ul>
+              <div className="mt-6 text-center">
+                <p className="text-3xl font-bold text-[#0073a8]">Prix fixe</p>
+                <p className="text-sm text-gray-500">Transparent et sans surprise</p>
+              </div>
             </div>
 
-            {/* Service 2 */}
-            <div className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all transform hover:-translate-y-2">
+            {/* Étape 2 - Les Options */}
+            <div className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all">
               <div className="w-20 h-20 bg-[#0073a8] rounded-full flex items-center justify-center mb-6 mx-auto">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                </svg>
+                <span className="text-3xl font-bold text-white">2</span>
               </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Applications mobiles</h3>
+              <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Ajoutez vos Options</h3>
               <p className="text-gray-600 text-center mb-6">
-                Votre app mobile personnalisée disponible sur iOS et Android pour toucher vos clients partout.
+                Personnalisez selon vos besoins réels
               </p>
-              <Link href="/services/applications-mobiles" className="text-[#0073a8] font-semibold hover:underline flex items-center justify-center">
-                En savoir plus 
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
+              <ul className="space-y-2 text-gray-600">
+                <li className="flex items-start">
+                  <svg className="w-5 h-5 text-yellow-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
+                  <span>Pages supplémentaires</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="w-5 h-5 text-yellow-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
+                  <span>Galerie photos/vidéos</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="w-5 h-5 text-yellow-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
+                  <span>Formulaires avancés</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="w-5 h-5 text-yellow-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
+                  <span>Espace membre/blog</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="w-5 h-5 text-yellow-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
+                  <span>Et bien plus encore...</span>
+                </li>
+              </ul>
+              <div className="mt-6 text-center">
+                <p className="text-3xl font-bold text-[#0073a8]">À la carte</p>
+                <p className="text-sm text-gray-500">Payez uniquement ce dont vous avez besoin</p>
+              </div>
             </div>
 
-            {/* Service 3 */}
-            <div className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all transform hover:-translate-y-2">
+            {/* Étape 3 - Votre Site */}
+            <div className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all">
               <div className="w-20 h-20 bg-[#0073a8] rounded-full flex items-center justify-center mb-6 mx-auto">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
+                <span className="text-3xl font-bold text-white">3</span>
               </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Boutiques en ligne</h3>
+              <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Votre Site Unique</h3>
               <p className="text-gray-600 text-center mb-6">
-                Votre boutique e-commerce sur mesure pour vendre vos produits 24h/24 et 7j/7.
+                Résultat : exactement ce qu&apos;il vous faut
               </p>
-              <Link href="/services/boutiques-en-ligne" className="text-[#0073a8] font-semibold hover:underline flex items-center justify-center">
-                En savoir plus 
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
+              <ul className="space-y-2 text-gray-600">
+                <li className="flex items-start">
+                  <svg className="w-5 h-5 text-[#0073a8] mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Adapté à votre budget</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="w-5 h-5 text-[#0073a8] mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Correspond à vos besoins</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="w-5 h-5 text-[#0073a8] mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Sans fonctionnalités inutiles</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="w-5 h-5 text-[#0073a8] mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Évolutif dans le temps</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="w-5 h-5 text-[#0073a8] mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Prix maîtrisé et transparent</span>
+                </li>
+              </ul>
+              <div className="mt-6 text-center">
+                <p className="text-3xl font-bold text-[#0073a8]">100% Vous</p>
+                <p className="text-sm text-gray-500">Un site qui vous ressemble</p>
+              </div>
             </div>
+          </div>
 
-            {/* Service 4 */}
-            <div className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all transform hover:-translate-y-2">
-              <div className="w-20 h-20 bg-[#0073a8] rounded-full flex items-center justify-center mb-6 mx-auto">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Réseaux sociaux</h3>
-              <p className="text-gray-600 text-center mb-6">
-                Création et gestion de vos réseaux sociaux pour développer votre communauté.
-              </p>
-              <Link href="/services/reseaux-sociaux" className="text-[#0073a8] font-semibold hover:underline flex items-center justify-center">
-                En savoir plus 
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
-            </div>
-
-            {/* Service 5 */}
-            <div className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all transform hover:-translate-y-2">
-              <div className="w-20 h-20 bg-[#0073a8] rounded-full flex items-center justify-center mb-6 mx-auto">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Référencement SEO</h3>
-              <p className="text-gray-600 text-center mb-6">
-                Spécialiste SEO pour vous positionner dans les premiers résultats Google.
-              </p>
-              <Link href="/services/referencement-seo" className="text-[#0073a8] font-semibold hover:underline flex items-center justify-center">
-                En savoir plus 
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
-            </div>
-
-            {/* Service 6 */}
-            <div className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all transform hover:-translate-y-2">
-              <div className="w-20 h-20 bg-[#0073a8] rounded-full flex items-center justify-center mb-6 mx-auto">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Cartes de visite digitales</h3>
-              <p className="text-gray-600 text-center mb-6">
-                Vos cartes de visite virtuelles modernes et interactives pour marquer les esprits.
-              </p>
-              <Link href="/services/cartes-visite-digitales" className="text-[#0073a8] font-semibold hover:underline flex items-center justify-center">
-                En savoir plus 
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
-            </div>
+          {/* CTA vers la page tarifs */}
+          <div className="text-center">
+            <p className="text-lg text-gray-600 mb-6">
+              Découvrez notre grille tarifaire claire et détaillée
+            </p>
+            <Link href="/tarifs" className="inline-flex items-center bg-[#0073a8] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#006a87] transition-all transform hover:scale-105 shadow-lg">
+              Voir tous les tarifs et options
+              <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </Link>
           </div>
         </div>
       </section>
