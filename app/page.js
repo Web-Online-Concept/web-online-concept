@@ -322,10 +322,7 @@ export default function Home() {
           {/* Partie basse : Bloc bleu sur toute la largeur */}
           <div className="bg-gradient-to-br from-[#0073a8] to-[#006a87] rounded-2xl p-8 md:p-12 text-white">
             <div className="max-w-4xl mx-auto text-center">
-              <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Votre Site Unique</h3>
-              <p className="text-gray-600 text-center mb-6">
-                Résultat conforme à vos besoins : Un tarif optimisé pour votre entreprise !
-              </p>bold mb-4">Mieux qu&apos;une agence web classique</h3>
+              <h3 className="text-2xl font-bold mb-4">Mieux qu&apos;une agence web classique</h3>
               <p className="text-base leading-relaxed">
                 WEB ONLINE CONCEPT, c&apos;est la flexibilité du freelance avec la puissance d&apos;une agence complète. 
                 Nous permettons à toute entreprise, peu importe sa taille, d&apos;optimiser au maximum sa communication 
@@ -454,7 +451,6 @@ export default function Home() {
               <p className="text-gray-600 text-center mb-6">
                 Résultat conforme à vos besoins : Un tarif détaillé et optimisé pour votre site
               </p>
-              <ul className="space-y-2 text-gray-600">
               <ul className="space-y-2 text-gray-600">
                 <li className="flex items-start">
                   <svg className="w-5 h-5 text-[#0073a8] mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
