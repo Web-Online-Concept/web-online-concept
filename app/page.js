@@ -402,7 +402,7 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Ajoutez vos Options</h3>
               <p className="text-gray-600 text-center mb-6">
-                Personnalisez selon vos besoins réels
+                Personnalisez votre site selon vos besoins réels
               </p>
               <ul className="space-y-2 text-gray-600">
                 <li className="flex items-start">
@@ -449,7 +449,7 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Votre Site Unique</h3>
               <p className="text-gray-600 text-center mb-6">
-                Résultat : exactement ce qu&apos;il vous faut
+                Résultat conforme à vos besoins : Un tarif optimisé !
               </p>
               <ul className="space-y-2 text-gray-600">
                 <li className="flex items-start">
