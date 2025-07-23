@@ -34,65 +34,100 @@ export default function Home() {
         {/* Overlay pour estomper la vidéo */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#0073a8]/90 via-[#00b4d8]/80 to-[#006a87]/90" />
         
-        {/* Contenu */}
-        <div className="container max-w-7xl mx-auto px-4 relative z-10 min-h-screen">
-          <div className="grid md:grid-cols-2 gap-12 w-full">
-            {/* Colonne 1 - Très haute, juste sous le header */}
-            <div className="text-white pt-8 md:pt-16">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                <span className="block overflow-hidden">
-                  <span 
-                    className="block"
-                    style={{
-                      animation: 'slideInUp 0.8s ease-out forwards'
-                    }}
-                  >
-                    Votre présence web
+        {/* Contenu divisé en 2 parties horizontales */}
+        <div className="container max-w-7xl mx-auto px-4 relative z-10 min-h-screen flex flex-col">
+          
+          {/* Partie haute */}
+          <div className="flex-1 flex items-start pt-8 md:pt-16">
+            <div className="grid md:grid-cols-2 gap-12 w-full">
+              {/* Colonne gauche - Texte */}
+              <div className="text-white">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                  <span className="block overflow-hidden">
+                    <span 
+                      className="block"
+                      style={{
+                        animation: 'slideInUp 0.8s ease-out forwards'
+                      }}
+                    >
+                      Votre présence web
+                    </span>
                   </span>
-                </span>
-                <span className="block overflow-hidden">
-                  <span 
-                    className="block text-yellow-300"
+                  <span className="block overflow-hidden">
+                    <span 
+                      className="block text-yellow-300"
+                      style={{
+                        animation: 'slideInUp 0.8s ease-out 0.2s forwards',
+                        opacity: 0
+                      }}
+                    >
+                      commence ici
+                    </span>
+                  </span>
+                </h1>
+                <div className="overflow-hidden">
+                  <p 
+                    className="text-xl mb-8 opacity-90"
                     style={{
-                      animation: 'slideInUp 0.8s ease-out 0.2s forwards',
+                      animation: 'slideInUp 0.8s ease-out 0.4s forwards',
                       opacity: 0
                     }}
                   >
-                    commence ici
-                  </span>
-                </span>
-              </h1>
-              <div className="overflow-hidden">
-                <p 
-                  className="text-xl mb-8 opacity-90"
+                    Création de sites web professionnels à prix accessibles. 
+                    Une solution clé en main pour votre entreprise.
+                  </p>
+                </div>
+                <div 
+                  className="flex flex-wrap gap-4"
                   style={{
-                    animation: 'slideInUp 0.8s ease-out 0.4s forwards',
+                    animation: 'fadeIn 1s ease-out 0.6s forwards',
                     opacity: 0
                   }}
                 >
-                  Création de sites web professionnels à prix accessibles. 
-                  Une solution clé en main pour votre entreprise.
-                </p>
+                  <Link href="/devis" className="bg-white text-[#0073a8] px-8 py-3 rounded-full font-semibold hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg">
+                    Obtenir un devis gratuit
+                  </Link>
+                  <Link href="#services" className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-[#0073a8] transition-all">
+                    Découvrir nos services
+                  </Link>
+                </div>
               </div>
-              <div 
-                className="flex flex-wrap gap-4"
-                style={{
-                  animation: 'fadeIn 1s ease-out 0.6s forwards',
-                  opacity: 0
-                }}
-              >
-                <Link href="/devis" className="bg-white text-[#0073a8] px-8 py-3 rounded-full font-semibold hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg">
-                  Obtenir un devis gratuit
-                </Link>
-                <Link href="#services" className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-[#0073a8] transition-all">
-                  Découvrir nos services
-                </Link>
+              
+              {/* Colonne droite - Image */}
+              <div className="hidden md:flex items-center justify-center">
+                {/* Emplacement pour l'image du haut */}
+                <div className="w-full max-w-md">
+                  <Image
+                    src="/images/hero-top.png"
+                    alt="Création de sites web"
+                    width={400}
+                    height={300}
+                    className="w-full h-auto"
+                  />
+                </div>
               </div>
             </div>
-            
-            {/* Colonne 2 - Commence beaucoup plus bas */}
-            <div className="relative hidden md:block pt-80 lg:pt-96">
-              <div className="relative w-full">
+          </div>
+          
+          {/* Partie basse */}
+          <div className="flex-1 flex items-end pb-8 md:pb-16">
+            <div className="grid md:grid-cols-2 gap-12 w-full">
+              {/* Colonne gauche - Image */}
+              <div className="hidden md:flex items-center justify-center">
+                {/* Emplacement pour l'image du bas */}
+                <div className="w-full max-w-md">
+                  <Image
+                    src="/images/hero-bottom.png"
+                    alt="Solutions web professionnelles"
+                    width={400}
+                    height={300}
+                    className="w-full h-auto"
+                  />
+                </div>
+              </div>
+              
+              {/* Colonne droite - Liste Réalisez */}
+              <div className="text-white">
                 <h2 
                   className="text-5xl font-bold text-white mb-8"
                   style={{
@@ -136,6 +171,7 @@ export default function Home() {
               </div>
             </div>
           </div>
+          
         </div>
       </section>
       
