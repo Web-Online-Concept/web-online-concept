@@ -264,7 +264,7 @@ export default function Home() {
       `}</style>
 
       {/* Team Section */}
-      <section id="team" className="py-20 bg-gray-50">
+      <section id="team" className="py-20 bg-white">
         <div className="container max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">
@@ -356,8 +356,8 @@ export default function Home() {
       </section>
 
       {/* Services Section - Concept À la Carte */}
-      <section id="services" className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50">
-        <div className="container max-w-7xl mx-auto px-4">
+      <section id="services" className="py-20 bg-gradient-to-br from-blue-50/30 to-white relative">
+        <div className="container max-w-7xl mx-auto px-4 relative z-10">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">
               Votre site web à la carte
