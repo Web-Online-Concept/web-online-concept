@@ -91,7 +91,7 @@ export default function Home() {
             </div>
             
             {/* Colonne 2 - Commence beaucoup plus bas */}
-            <div className="relative hidden md:block pt-64 lg:pt-80">
+            <div className="relative hidden md:block pt-96 lg:pt-[30rem]">
               <div className="relative w-full">
                 <h2 
                   className="text-5xl font-bold text-white mb-8"
