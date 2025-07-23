@@ -19,28 +19,100 @@ export default function Home() {
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-[100px] min-h-screen flex items-center bg-gradient-to-br from-[#00b4d8] via-[#0095b8] to-[#006a87]">
-        <div className="container max-w-7xl mx-auto px-4 py-16">
+      <section className="pt-[100px] min-h-screen flex items-center relative overflow-hidden">
+        {/* Vidéo de fond */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/videos/hero-background.mp4" type="video/mp4" />
+        </video>
+        
+        {/* Overlay pour estomper la vidéo */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0073a8]/80 via-[#00b4d8]/70 to-[#006a87]/80" />
+        
+        {/* Contenu */}
+        <div className="container max-w-7xl mx-auto px-4 py-16 relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="text-white">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                Le partenaire de votre <span className="text-yellow-300">communication digitale</span>
+                <span className="block overflow-hidden">
+                  <span 
+                    className="block"
+                    style={{
+                      animation: 'slideInUp 0.8s ease-out forwards'
+                    }}
+                  >
+                    Votre présence web
+                  </span>
+                </span>
+                <span className="block overflow-hidden">
+                  <span 
+                    className="block text-yellow-300"
+                    style={{
+                      animation: 'slideInUp 0.8s ease-out 0.2s forwards',
+                      opacity: 0
+                    }}
+                  >
+                    commence ici
+                  </span>
+                </span>
               </h1>
-              <p className="text-xl mb-8 opacity-90">
-                Une équipe complète de passionnés & Freelances au service de votre présence en ligne. 
-                Sites web, applications mobiles, boutiques en ligne et bien plus encore.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Link href="/devis" className="bg-white text-[#00b4d8] px-8 py-3 rounded-full font-semibold hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg">
+              <div className="overflow-hidden">
+                <p 
+                  className="text-xl mb-8 opacity-90"
+                  style={{
+                    animation: 'slideInUp 0.8s ease-out 0.4s forwards',
+                    opacity: 0
+                  }}
+                >
+                  Création de sites web professionnels à prix accessibles. 
+                  Une solution clé en main pour votre entreprise.
+                </p>
+              </div>
+              <div 
+                className="flex flex-wrap gap-4"
+                style={{
+                  animation: 'fadeIn 1s ease-out 0.6s forwards',
+                  opacity: 0
+                }}
+              >
+                <Link href="/devis" className="bg-white text-[#0073a8] px-8 py-3 rounded-full font-semibold hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg">
                   Obtenir un devis gratuit
                 </Link>
-                <Link href="#services" className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-[#00b4d8] transition-all">
+                <Link href="#services" className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-[#0073a8] transition-all">
                   Découvrir nos services
                 </Link>
               </div>
+              
+              {/* Texte animé bonus */}
+              <div className="mt-12 flex items-center gap-4 opacity-80">
+                <div className="flex -space-x-2">
+                  <div className="w-10 h-10 bg-white/20 rounded-full border-2 border-white flex items-center justify-center text-sm font-bold">5★</div>
+                </div>
+                <p 
+                  className="text-sm"
+                  style={{
+                    animation: 'fadeIn 1s ease-out 1s forwards',
+                    opacity: 0
+                  }}
+                >
+                  Plus de 100 sites créés • 100% de clients satisfaits
+                </p>
+              </div>
             </div>
+            
             <div className="relative hidden md:block">
-              <div className="relative w-full h-[500px]">
+              <div 
+                className="relative w-full h-[500px]"
+                style={{
+                  animation: 'fadeIn 1.5s ease-out 0.8s forwards',
+                  opacity: 0
+                }}
+              >
                 <Image
                   src="/images/hero-devices.png"
                   alt="Sites web responsive"
@@ -53,6 +125,28 @@ export default function Home() {
           </div>
         </div>
       </section>
+      
+      <style jsx>{`
+        @keyframes slideInUp {
+          from {
+            transform: translateY(100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+        
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+      `}</style>
 
       {/* Stats Section */}
       <section className="py-16 bg-gray-50">
