@@ -96,7 +96,7 @@ export default function Home() {
               {/* Colonne droite - Image */}
               <div className="hidden md:flex items-center justify-center">
                 {/* Emplacement pour l'image du haut */}
-                <div className="w-full max-w-xl">
+                <div className="w-full max-w-xl" style={{marginLeft: '-20px'}}>
                   <Image
                     src="/images/hero-top.png"
                     alt="Création de sites web"
@@ -114,15 +114,15 @@ export default function Home() {
           
           {/* Partie basse */}
           <div className="flex items-end pb-8 md:pb-16" style={{height: 'calc(50% - 25px)'}}>
-            <div className="grid md:grid-cols-2 gap-12 w-full">
+            <div className="grid md:grid-cols-[55%_45%] gap-8 w-full">
               {/* Colonne gauche - Image */}
               <div className="hidden md:flex items-center justify-center">
                 {/* Emplacement pour l'image du bas */}
-                <div className="w-full max-w-md">
+                <div className="w-full max-w-xl">
                   <Image
                     src="/images/hero-bottom.png"
                     alt="Solutions web professionnelles"
-                    width={400}
+                    width={600}
                     height={300}
                     className="w-full h-auto"
                   />
