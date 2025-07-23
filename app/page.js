@@ -337,6 +337,16 @@ export default function Home() {
       <section id="services" className="py-20 bg-gray-100 relative">
         <div className="container max-w-7xl mx-auto px-4 relative z-10">
           <div className="text-center mb-12">
+            {/* Logo centré */}
+            <div className="flex justify-center mb-8">
+              <Image
+                src="/images/logo.png"
+                alt="Web Online Concept"
+                width={183}
+                height={150}
+                className="h-[150px] w-auto"
+              />
+            </div>
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
               Votre site web à la carte
             </h2>
