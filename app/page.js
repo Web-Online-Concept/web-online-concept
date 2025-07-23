@@ -275,7 +275,8 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+          {/* Partie haute : Texte à gauche, Image à droite */}
+          <div className="grid md:grid-cols-2 gap-12 items-center mb-12">
             <div className="space-y-6">
               <div className="flex items-start space-x-4">
                 <div className="flex-shrink-0 w-12 h-12 bg-[#0073a8] rounded-full flex items-center justify-center">
@@ -326,36 +327,36 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="relative">
-              {/* Image au-dessus du bloc */}
-              <div className="mb-6">
-                <div className="border-4 border-[#0073a8] rounded-2xl overflow-hidden shadow-lg">
-                  <Image
-                    src="/images/team-image.png"
-                    alt="Équipe Web Online Concept"
-                    width={600}
-                    height={400}
-                    className="w-full h-auto"
-                  />
-                </div>
+            {/* Image à droite */}
+            <div className="flex justify-center">
+              <div className="border-4 border-[#0073a8] rounded-2xl overflow-hidden shadow-lg">
+                <Image
+                  src="/images/team-image.png"
+                  alt="Équipe Web Online Concept"
+                  width={600}
+                  height={400}
+                  className="w-full h-auto"
+                />
               </div>
-              
-              {/* Bloc bleu existant */}
-              <div className="bg-gradient-to-br from-[#0073a8] to-[#006a87] rounded-2xl p-8 text-white">
-                <h3 className="text-2xl font-bold mb-4">Mieux qu&apos;une agence web classique</h3>
-                <p className="mb-6">
-                  WEB ONLINE CONCEPT, c&apos;est la flexibilité du freelance avec la puissance d&apos;une agence complète. 
-                  Nous permettons à toute entreprise, peu importe sa taille, d&apos;optimiser au maximum sa communication 
-                  digitale et sa présence sur le web.
-                </p>
-                <div className="flex items-center space-x-4">
-                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                    <span className="text-2xl font-bold">F</span>
-                  </div>
-                  <div>
-                    <p className="font-bold text-lg">Florent</p>
-                    <p className="opacity-90">Créateur de l&apos;agence Web Online Concept</p>
-                  </div>
+            </div>
+          </div>
+
+          {/* Partie basse : Bloc bleu sur toute la largeur */}
+          <div className="bg-gradient-to-br from-[#0073a8] to-[#006a87] rounded-2xl p-8 md:p-12 text-white">
+            <div className="max-w-4xl mx-auto text-center">
+              <h3 className="text-3xl font-bold mb-6">Mieux qu&apos;une agence web classique</h3>
+              <p className="text-lg mb-8 leading-relaxed">
+                WEB ONLINE CONCEPT, c&apos;est la flexibilité du freelance avec la puissance d&apos;une agence complète. 
+                Nous permettons à toute entreprise, peu importe sa taille, d&apos;optimiser au maximum sa communication 
+                digitale et sa présence sur le web.
+              </p>
+              <div className="flex items-center justify-center space-x-4">
+                <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center">
+                  <span className="text-3xl font-bold">F</span>
+                </div>
+                <div className="text-left">
+                  <p className="font-bold text-xl">Florent</p>
+                  <p className="opacity-90 text-lg">Créateur de l&apos;agence Web Online Concept</p>
                 </div>
               </div>
             </div>
