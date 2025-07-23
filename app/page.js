@@ -35,9 +35,10 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-br from-[#0073a8]/80 via-[#00b4d8]/70 to-[#006a87]/80" />
         
         {/* Contenu */}
-        <div className="container max-w-7xl mx-auto px-4 py-16 relative z-10">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="text-white">
+        <div className="container max-w-7xl mx-auto px-4 relative z-10 min-h-screen flex items-center">
+          <div className="grid md:grid-cols-2 gap-12 w-full">
+            {/* Colonne 1 - Plus haute */}
+            <div className="text-white md:self-start md:pt-20">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                 <span className="block overflow-hidden">
                   <span 
@@ -87,26 +88,11 @@ export default function Home() {
                   Découvrir nos services
                 </Link>
               </div>
-              
-              {/* Texte animé bonus */}
-              <div className="mt-12 flex items-center gap-4 opacity-80">
-                <div className="flex -space-x-2">
-                  <div className="w-10 h-10 bg-white/20 rounded-full border-2 border-white flex items-center justify-center text-sm font-bold">5★</div>
-                </div>
-                <p 
-                  className="text-sm"
-                  style={{
-                    animation: 'fadeIn 1s ease-out 1s forwards',
-                    opacity: 0
-                  }}
-                >
-                  Plus de 100 sites créés • 100% de clients satisfaits
-                </p>
-              </div>
             </div>
             
-            <div className="relative hidden md:block">
-              <div className="relative w-full h-[500px] flex flex-col justify-center">
+            {/* Colonne 2 - Plus basse */}
+            <div className="relative hidden md:block md:self-end md:pb-20">
+              <div className="relative w-full">
                 <h2 
                   className="text-5xl font-bold text-white mb-8"
                   style={{
@@ -120,9 +106,9 @@ export default function Home() {
                 <div className="space-y-4">
                   {[
                     { text: "Votre site internet clé en main", delay: "0.5s" },
-                    { text: "Votre app mobile personnalisée", delay: "1s" },
-                    { text: "Votre boutique en ligne sur mesure", delay: "1.5s" },
-                    { text: "Création & gestion des réseaux sociaux", delay: "2s" },
+                    { text: "100% responsive et mobile-friendly", delay: "1s" },
+                    { text: "Choisissez vos options à la carte", delay: "1.5s" },
+                    { text: "Développement sur mesure adapté", delay: "2s" },
                     { text: "Référencement Google : Spécialiste SEO", delay: "2.5s" },
                     { text: "Meilleur rapport qualité / prix !", delay: "3s", highlight: true }
                   ].map((item, index) => (
