@@ -38,80 +38,57 @@ export default function Home() {
         <div className="container max-w-7xl mx-auto px-4 relative z-10 min-h-screen flex flex-col">
           
           {/* Partie haute */}
-          <div className="flex items-start pt-8 md:pt-16" style={{height: 'calc(50% - 25px)'}}>
-            <div className="grid md:grid-cols-[40%_60%] gap-4 w-full">
-              {/* Colonne gauche - Texte */}
-              <div className="text-white">
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-                  <span className="block overflow-hidden">
-                    <span 
-                      className="block"
-                      style={{
-                        animation: 'slideInUp 0.8s ease-out forwards'
-                      }}
-                    >
-                      Votre présence web
-                    </span>
-                  </span>
-                  <span className="block overflow-hidden">
-                    <span 
-                      className="block text-yellow-300"
-                      style={{
-                        animation: 'slideInUp 0.8s ease-out 0.2s forwards',
-                        opacity: 0
-                      }}
-                    >
-                      commence ici
-                    </span>
-                  </span>
-                </h1>
-                <div className="overflow-hidden">
-                  <p 
-                    className="text-xl mb-8 opacity-90"
+          <div className="flex items-center justify-center pt-8 md:pt-16" style={{height: 'calc(50% - 25px)'}}>
+            {/* Texte centré */}
+            <div className="text-white text-center max-w-3xl">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+                <span className="block overflow-hidden">
+                  <span 
+                    className="block"
                     style={{
-                      animation: 'slideInUp 0.8s ease-out 0.4s forwards',
+                      animation: 'slideInUp 0.8s ease-out forwards'
+                    }}
+                  >
+                    Votre présence web
+                  </span>
+                </span>
+                <span className="block overflow-hidden">
+                  <span 
+                    className="block text-yellow-300"
+                    style={{
+                      animation: 'slideInUp 0.8s ease-out 0.2s forwards',
                       opacity: 0
                     }}
                   >
-                    Création de sites web professionnels à prix accessibles. 
-                    Une solution clé en main pour votre entreprise.
-                  </p>
-                </div>
-                <div 
-                  className="flex flex-col sm:flex-row gap-4 justify-center"
+                    commence ici
+                  </span>
+                </span>
+              </h1>
+              <div className="overflow-hidden">
+                <p 
+                  className="text-xl mb-8 opacity-90"
                   style={{
-                    animation: 'fadeIn 1s ease-out 0.6s forwards',
+                    animation: 'slideInUp 0.8s ease-out 0.4s forwards',
                     opacity: 0
                   }}
                 >
-                  <Link href="/devis" className="bg-white text-[#0073a8] px-6 py-3 rounded-full font-semibold hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg text-center whitespace-nowrap">
-                    Obtenir un devis gratuit
-                  </Link>
-                  <Link href="#services" className="border-2 border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-[#0073a8] transition-all text-center whitespace-nowrap">
-                    Découvrir nos services
-                  </Link>
-                </div>
+                  Création de sites web professionnels à prix accessibles. 
+                  Une solution clé en main pour votre entreprise.
+                </p>
               </div>
-              
-              {/* Colonne droite - Image */}
-              <div className="hidden md:flex items-center justify-center">
-                {/* Emplacement pour l'image du haut */}
-                <div 
-                  className="w-full max-w-xl" 
-                  style={{
-                    marginLeft: '-20px',
-                    opacity: 0,
-                    animation: 'fadeInRight 1s ease-out 0.8s forwards'
-                  }}
-                >
-                  <Image
-                    src="/images/hero-top.png"
-                    alt="Création de sites web"
-                    width={600}
-                    height={300}
-                    className="w-full h-auto"
-                  />
-                </div>
+              <div 
+                className="flex flex-col sm:flex-row gap-4 justify-center"
+                style={{
+                  animation: 'fadeIn 1s ease-out 0.6s forwards',
+                  opacity: 0
+                }}
+              >
+                <Link href="/devis" className="bg-white text-[#0073a8] px-6 py-3 rounded-full font-semibold hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg text-center whitespace-nowrap">
+                  Obtenir un devis gratuit
+                </Link>
+                <Link href="#services" className="border-2 border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-[#0073a8] transition-all text-center whitespace-nowrap">
+                  Découvrir nos services
+                </Link>
               </div>
             </div>
           </div>
@@ -122,11 +99,11 @@ export default function Home() {
           {/* Partie basse */}
           <div className="flex items-end pb-8 md:pb-16" style={{height: 'calc(50% - 25px)'}}>
             <div className="grid md:grid-cols-[55%_45%] gap-8 w-full">
-              {/* Colonne gauche - Image */}
+              {/* Colonne gauche - Image agrandie */}
               <div className="hidden md:flex items-center justify-center">
-                {/* Emplacement pour l'image du bas */}
+                {/* Image plus grande */}
                 <div 
-                  className="w-full max-w-xl"
+                  className="w-full max-w-2xl"
                   style={{
                     opacity: 0,
                     animation: 'fadeInLeft 1s ease-out 1.2s forwards'
@@ -135,8 +112,8 @@ export default function Home() {
                   <Image
                     src="/images/hero-bottom.png"
                     alt="Solutions web professionnelles"
-                    width={600}
-                    height={300}
+                    width={800}
+                    height={600}
                     className="w-full h-auto"
                   />
                 </div>
