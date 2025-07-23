@@ -359,7 +359,7 @@ export default function Home() {
       <section id="services" className="py-20 bg-gray-100 relative">
         <div className="container max-w-7xl mx-auto px-4 relative z-10">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
               Votre site web à la carte
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
