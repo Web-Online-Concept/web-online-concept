@@ -72,7 +72,8 @@ export default function Home() {
                     opacity: 0
                   }}
                 >
-                  Création de sites web professionnels à prix accessibles. 
+                  Création de sites web professionnels à prix accessibles.
+                  <br className="hidden md:block" />
                   Une solution clé en main pour votre entreprise.
                 </p>
               </div>
