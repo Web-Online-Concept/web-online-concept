@@ -116,8 +116,8 @@ export default function Home() {
             </div>
           </div>
           
-          {/* Espace de 50px entre les parties */}
-          <div style={{height: '50px'}}></div>
+          {/* Espace de 80px entre les parties */}
+          <div style={{height: '80px'}}></div>
           
           {/* Partie basse */}
           <div className="flex items-end pb-8 md:pb-16" style={{height: 'calc(50% - 25px)'}}>
