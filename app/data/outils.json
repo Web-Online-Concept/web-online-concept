@@ -1,0 +1,97 @@
+{
+  "categories": {
+    "developpement": {
+      "title": "Développement",
+      "icon": "💻",
+      "tools": [
+        {
+          "id": "2",
+          "name": "Vercel",
+          "url": "https://vercel.com",
+          "description": "Déploiement et hébergement Next.js",
+          "icon": "▲"
+        },
+        {
+          "id": "1",
+          "name": "GitHub",
+          "url": "https://github.com",
+          "description": "Hébergement de code et collaboration",
+          "icon": "🐙"
+        }
+      ]
+    },
+    "ia": {
+      "title": "IA Intelligences Artificielles",
+      "icon": "📁",
+      "tools": [
+        {
+          "name": "Claude AI",
+          "url": "https://claude.ai/",
+          "description": "Assistant IA précis et sécurisé pour vous aider à faire votre meilleur travail",
+          "icon": "🔗",
+          "id": "1753377038824"
+        },
+        {
+          "name": "Grok X",
+          "url": "https://x.com/i/grok",
+          "description": "IA du site Twitter X avec possibilité de vocal sur mobile",
+          "icon": "⚡",
+          "id": "1753354135580"
+        },
+        {
+          "name": "Chat GPT",
+          "url": "https://chatgpt.com/",
+          "description": "ChatGPT vous aide à obtenir des réponses, à trouver l'inspiration et à être plus productif.",
+          "icon": "🚀",
+          "id": "1753377327450"
+        },
+        {
+          "name": "Deepseek",
+          "url": "https://chat.deepseek.com/",
+          "description": "Discutez avec DeepSeek AI – votre assistant intelligent pour le codage",
+          "icon": "🖥️",
+          "id": "1753380987298"
+        },
+        {
+          "name": "N8N",
+          "url": "https://n8n.io/",
+          "description": "Automatisation flexible du flux de travail de l'IA pour les équipes techniques",
+          "icon": "🌐",
+          "id": "1753354075611"
+        },
+        {
+          "name": "Art Prompt Generator",
+          "url": "https://promptgenerator.art/",
+          "description": "Créez instantanément des suggestions artistiques professionnelles basées sur l'IA.",
+          "icon": "💻",
+          "id": "1753573843190"
+        }
+      ]
+    },
+    "multimedia": {
+      "title": "Images & Videos",
+      "icon": "🎬",
+      "tools": [
+        {
+          "name": "Compress JPG / PNG / PDF",
+          "url": "https://compressjpeg.com/fr/",
+          "description": "Réduire le poids des images selon leurs format pour optimiser leur telechargement",
+          "icon": "🛠️",
+          "id": "1753380557186"
+        },
+        {
+          "name": "Compresser Vidéo en Ligne",
+          "url": "https://www.compresservideo.fr/",
+          "description": "Compressez des vidéos en ligne gratuitement",
+          "icon": "🎥",
+          "id": "1753382433883"
+        }
+      ]
+    }
+  },
+  "order": [
+    "developpement",
+    "ia",
+    "multimedia"
+  ]
+}

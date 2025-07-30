@@ -1,0 +1,138 @@
+[
+  {
+    "id": "CLI-001",
+    "entreprise": "Restaurant Le Gourmet",
+    "contact": "Jean Dupont",
+    "email": "flotoulouse7@gmail.com",
+    "telephone": "01 42 86 82 82",
+    "adresse": "12 rue de la Paix",
+    "ville": "Paris",
+    "codePostal": "75002",
+    "pays": "France",
+    "siteWeb": "https://restaurant-legourmet.fr",
+    "status": "actif",
+    "notes": "Client depuis 2022. Site vitrine + réservation en ligne. Très satisfait du service.",
+    "dateCreation": "2022-03-15",
+    "stats": {
+      "totalFacture": 5400,
+      "totalPaye": 5400,
+      "nombreProjets": 2,
+      "derniereInteraction": "2024-12-15"
+    },
+    "historique": [
+      {
+        "date": "2022-03-15T10:00:00.000Z",
+        "type": "creation",
+        "description": "Création de la fiche client"
+      },
+      {
+        "date": "2022-03-20T14:30:00.000Z",
+        "type": "projet",
+        "description": "Démarrage du projet site vitrine"
+      },
+      {
+        "date": "2023-01-10T09:00:00.000Z",
+        "type": "facturation",
+        "description": "Facture FAC-2023-001 émise : 3200€"
+      }
+    ]
+  },
+  {
+    "id": "CLI-002",
+    "entreprise": "Boutique Mode & Style",
+    "contact": "Marie Martin",
+    "email": "contact@mode-style.com",
+    "telephone": "01 45 62 31 20",
+    "adresse": "45 avenue des Champs",
+    "ville": "Paris",
+    "codePostal": "75008",
+    "pays": "France",
+    "siteWeb": "https://mode-et-style.com",
+    "status": "actif",
+    "notes": "E-commerce WooCommerce. Maintenance mensuelle. Souhaite une refonte en 2025.",
+    "dateCreation": "2023-01-10",
+    "stats": {
+      "totalFacture": 8200,
+      "totalPaye": 6700,
+      "nombreProjets": 3,
+      "derniereInteraction": "2025-01-20"
+    },
+    "historique": [
+      {
+        "date": "2023-01-10T11:00:00.000Z",
+        "type": "creation",
+        "description": "Création de la fiche client"
+      },
+      {
+        "date": "2023-01-15T10:00:00.000Z",
+        "type": "projet",
+        "description": "Création boutique e-commerce"
+      },
+      {
+        "date": "2024-06-01T09:00:00.000Z",
+        "type": "maintenance",
+        "description": "Contrat de maintenance signé"
+      }
+    ]
+  },
+  {
+    "id": "CLI-003",
+    "entreprise": "Cabinet Médical Santé+",
+    "contact": "Dr. Sophie Bernard",
+    "email": "contact@sante-plus.fr",
+    "telephone": "01 53 89 45 67",
+    "adresse": "78 boulevard Haussmann",
+    "ville": "Paris",
+    "codePostal": "75009",
+    "pays": "France",
+    "siteWeb": "https://cabinet-sante-plus.fr",
+    "status": "prospect",
+    "notes": "Intéressé par un site avec prise de RDV en ligne. Devis envoyé le 15/01/2025.",
+    "dateCreation": "2025-01-15",
+    "stats": {
+      "totalFacture": 0,
+      "totalPaye": 0,
+      "nombreProjets": 0,
+      "derniereInteraction": "2025-01-15"
+    },
+    "historique": [
+      {
+        "date": "2025-01-15T14:00:00.000Z",
+        "type": "creation",
+        "description": "Création de la fiche prospect"
+      },
+      {
+        "date": "2025-01-15T15:00:00.000Z",
+        "type": "commercial",
+        "description": "Devis DEV-2025-003 envoyé : 4500€"
+      }
+    ]
+  },
+  {
+    "id": "CLI-004",
+    "entreprise": "Florent Test",
+    "contact": "Florent",
+    "email": "flotoulouse7@gmail.com",
+    "telephone": "06 00 00 00 00",
+    "adresse": "123 rue du Test",
+    "ville": "Toulouse",
+    "codePostal": "31000",
+    "pays": "France",
+    "status": "actif",
+    "notes": "Client de test pour les emails",
+    "dateCreation": "2025-01-25",
+    "stats": {
+      "totalFacture": 0,
+      "totalPaye": 0,
+      "nombreProjets": 0,
+      "derniereInteraction": "2025-01-25"
+    },
+    "historique": [
+      {
+        "date": "2025-01-25T10:00:00.000Z",
+        "type": "creation",
+        "description": "Création de la fiche client test"
+      }
+    ]
+  }
+]

@@ -1,0 +1,67 @@
+{
+  "tasks": [
+    {
+      "id": "1753430806430",
+      "type": "email",
+      "scheduledFor": "2025-07-25T10:08",
+      "status": "completed",
+      "createdAt": "2025-07-25T08:06:46.430Z",
+      "data": {
+        "destinataire": "flotoulouse7@gmail.com",
+        "objet": "Facture {numero} - {entreprise}",
+        "message": "Bonjour {prenom},\n\nJe vous prie de trouver ci-joint la facture {numero} d'un montant de {montant}€ TTC.\n\nDate d'échéance : {date_echeance}\n\nMerci de procéder au règlement dans les délais convenus.\n\nCordialement,\nWeb Online Concept",
+        "pieceJointe": {
+          "type": "fichier",
+          "nom": "2025-07-25 at 03-24-03.jpg",
+          "url": "/uploads/sites/site-1753430764523-2025-07-25at03-24-03.jpg",
+          "size": 7075
+        },
+        "clientId": null
+      },
+      "completedAt": "2025-07-25T08:18:11.582Z",
+      "messageId": "<1bbc1d9b-9309-ba46-4a52-50ae42452622@gmail.com>"
+    },
+    {
+      "id": "1753431096100",
+      "type": "email",
+      "scheduledFor": "2025-07-25T10:13",
+      "status": "completed",
+      "createdAt": "2025-07-25T08:11:36.100Z",
+      "data": {
+        "destinataire": "contact@legourmet.fr",
+        "objet": "Devis {numero} - Restaurant Le Gourmet",
+        "message": "Bonjour Jean,\n\nJe vous prie de trouver ci-joint le devis {numero} d'un montant de {montant}€ TTC.\n\nCe devis est valable 30 jours à compter de sa date d'émission.\n\nN'hésitez pas à me contacter si vous avez des questions.\n\nCordialement,\nWeb Online Concept",
+        "pieceJointe": {
+          "type": "fichier",
+          "nom": "2025-07-25 at 03-24-03.jpg",
+          "url": "/uploads/sites/site-1753431076312-2025-07-25at03-24-03.jpg",
+          "size": 7075
+        },
+        "clientId": "CLI-001"
+      },
+      "completedAt": "2025-07-25T08:18:12.631Z",
+      "messageId": "<2579846b-b9d8-ef24-eee2-f18f1ff887a5@gmail.com>"
+    },
+    {
+      "id": "1753431673653",
+      "type": "email",
+      "scheduledFor": "2025-07-25T10:23",
+      "status": "completed",
+      "createdAt": "2025-07-25T08:21:13.653Z",
+      "data": {
+        "destinataire": "flotoulouse7@gmail.com",
+        "objet": "Merci pour votre confiance - {entreprise}",
+        "message": "Bonjour {prenom},\n\nJe tenais à vous remercier pour votre confiance et votre collaboration sur ce projet.\n\nCe fut un plaisir de travailler avec {entreprise}.\n\nN'hésitez pas à me recontacter pour tout nouveau projet.\n\nCordialement,\nWeb Online Concept",
+        "pieceJointe": {
+          "type": "fichier",
+          "nom": "2025-07-25 at 03-24-03.jpg",
+          "url": "/uploads/sites/site-1753431663293-2025-07-25at03-24-03.jpg",
+          "size": 7075
+        },
+        "clientId": null
+      },
+      "completedAt": "2025-07-25T08:33:20.984Z",
+      "messageId": "<0abf2eb3-6726-5a66-e8df-5ffdb18b0faa@gmail.com>"
+    }
+  ]
+}

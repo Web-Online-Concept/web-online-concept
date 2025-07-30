@@ -1,0 +1,58 @@
+{
+  "entreprise": {
+    "nom": "",
+    "adresse": "",
+    "codePostal": "",
+    "ville": "",
+    "pays": "France",
+    "telephone": "",
+    "email": "",
+    "siteWeb": "",
+    "siret": "",
+    "numeroTVA": "",
+    "formeJuridique": "",
+    "capital": "",
+    "logo": "/uploads/sites/site-1753386754091-logowoc300300-min.png",
+    "couleurPrincipale": "#0073a8"
+  },
+  "facturation": {
+    "prefixeDevis": "DEV",
+    "prefixeFacture": "FAC",
+    "prochainNumeroDevis": 1,
+    "prochainNumeroFacture": 1,
+    "delaiPaiement": 0,
+    "tauxTVADefaut": 0,
+    "mentionsLegales": "",
+    "conditionsPaiement": "50% à l'acceptation du devis, qui déclenche le développement\n50% à la livraison du site",
+    "piedPage": "",
+    "signature": ""
+  },
+  "bancaire": {
+    "titulaire": "",
+    "iban": "",
+    "bic": "",
+    "banque": "",
+    "afficherRIB": true
+  },
+  "email": {
+    "expediteur": "web.online.concept@gmail.com",
+    "replyTo": "web.online.concept@gmail.com",
+    "sujetDevis": "Votre devis n°{numero}",
+    "sujetFacture": "Votre facture n°{numero}",
+    "messageDevis": "Bonjour,\n\nVeuillez trouver ci-joint votre devis.\n\nCordialement",
+    "messageFacture": "Bonjour,\n\nVeuillez trouver ci-joint votre facture.\n\nCordialement"
+  },
+  "smtp": {
+    "service": "gmail",
+    "host": "smtp.gmail.com",
+    "port": 587,
+    "secure": false,
+    "user": "web.online.concept@gmail.com",
+    "pass": "haecoeogifsdmqmg",
+    "fromName": "Web Online Concept"
+  },
+  "signature": {
+    "active": true,
+    "text": "\n\n--\nWeb Online Concept\nSites Web Clés en Main à Prix Malins\n📧 web.online.concept@gmail.com\n🌐 www.web-online-concept.com"
+  }
+}

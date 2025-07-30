@@ -1,0 +1,21 @@
+{
+  "emails": [
+    {
+      "id": "1753683055195",
+      "destinataire": "flotoulouse7@gmail.com",
+      "objet": "test",
+      "message": "je test",
+      "dateEnvoi": "2025-07-28T06:10:55.195Z",
+      "statut": "envoye",
+      "messageId": "<b66dd88f-2587-9c97-2a52-0eef3c963756@gmail.com>",
+      "clientId": "CLI-004",
+      "documentId": "",
+      "documentType": ""
+    }
+  ],
+  "stats": {
+    "totalEnvoyes": 2,
+    "tauxOuverture": 68,
+    "automatiques": 1
+  }
+}

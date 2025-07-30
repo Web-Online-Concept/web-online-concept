@@ -1,0 +1,152 @@
+[
+  {
+    "id": "facturation",
+    "title": "Devis & factures Manuelles",
+    "icon": "📄",
+    "description": "Gestion des devis et factures Manuelles",
+    "details": "Créez et gérez vos devis, convertissez-les en factures, suivez les paiements.",
+    "color": "from-blue-500 to-blue-600",
+    "link": "/admin/facturation",
+    "order": 1
+  },
+  {
+    "id": "devis",
+    "title": "Devis & Factures Automatisées",
+    "icon": "📋",
+    "description": "Gestions des devis & factures Automatisées",
+    "details": "Créez, validez et suivez vos devis. Gérez les paiements et la collecte de contenus.",
+    "color": "from-emerald-500 to-emerald-600",
+    "link": "/admin/devis",
+    "order": 2
+  },
+  {
+    "id": "affilies",
+    "title": "Affiliés",
+    "icon": "🤝",
+    "description": "Gestion des partenaires",
+    "details": "Gérez vos affiliés, leurs codes promo et suivez les commissions à payer.",
+    "color": "from-purple-500 to-purple-600",
+    "link": "/admin/affilies",
+    "order": 3
+  },
+  {
+    "id": "comptabilite",
+    "title": "Comptabilité",
+    "icon": "💰",
+    "description": "Tableau de bord financier",
+    "details": "Visualisez votre CA, suivez vos revenus, gérez la TVA.",
+    "color": "from-green-500 to-green-600",
+    "link": "/admin/comptabilite",
+    "order": 4
+  },
+  {
+    "id": "agenda",
+    "title": "Agenda",
+    "icon": "📅",
+    "description": "Gestion des projets",
+    "details": "Organisez vos projets, suivez les deadlines, gérez vos tâches.",
+    "color": "from-purple-500 to-purple-600",
+    "link": "/admin/agenda",
+    "order": 5
+  },
+  {
+    "id": "sites",
+    "title": "Portfolio - Sites Persos",
+    "icon": "🌐",
+    "description": "Portfolio clients",
+    "details": "Visualisez tous les sites que vous gérez.",
+    "color": "from-orange-500 to-orange-600",
+    "link": "/admin/sites",
+    "order": 6
+  },
+  {
+    "id": "outils",
+    "title": "Outils Web",
+    "icon": "🔧",
+    "description": "Accès rapide",
+    "details": "Tous vos outils de développement en un clic.",
+    "color": "from-pink-500 to-pink-600",
+    "link": "/admin/outils",
+    "order": 7
+  },
+  {
+    "id": "parametres",
+    "title": "Paramètres",
+    "icon": "⚙️",
+    "description": "Configuration",
+    "details": "Gérez les paramètres de votre entreprise et facturation.",
+    "color": "from-gray-500 to-gray-600",
+    "link": "/admin/parametres",
+    "order": 8
+  },
+  {
+    "id": "crm",
+    "title": "Fiches Clients",
+    "icon": "👥",
+    "description": "Gestion clients",
+    "details": "Centralisation des informations clients",
+    "color": "from-indigo-500 to-indigo-600",
+    "link": "/admin/crm",
+    "order": 9
+  },
+  {
+    "id": "depenses",
+    "title": "Dépenses",
+    "icon": "💸",
+    "description": "Gestion des charges",
+    "details": "Répertorie les charges entreprise ou dépenses dossiers clients",
+    "color": "from-red-500 to-red-600",
+    "link": "/admin/depenses",
+    "order": 10
+  },
+  {
+    "id": "backup",
+    "title": "Sauvegarde",
+    "icon": "🔑",
+    "description": "Export et import des données",
+    "details": "Sauvegarde et systeme de backup des datas du site",
+    "color": "from-gray-500 to-gray-600",
+    "link": "/admin/backup",
+    "order": 11
+  },
+  {
+    "id": "emails",
+    "title": "Emails",
+    "icon": "📧",
+    "description": "Communications clients",
+    "details": "Envoi d'emails manuels ou automatisés aux clients avec devis et factures",
+    "color": "from-indigo-500 to-indigo-600",
+    "link": "/admin/emails",
+    "order": 12
+  },
+  {
+    "id": "export",
+    "title": "Export Excel",
+    "icon": "📊",
+    "description": "Exporter toutes vos données",
+    "details": "Téléchargez vos données clients, factures, projets au format Excel.",
+    "color": "from-gray-500 to-gray-600",
+    "link": "/admin/export",
+    "order": 13
+  },
+  {
+    "id": "realisations",
+    "title": "Portfolio - Réalisations",
+    "icon": "🏪",
+    "description": "Portfolio visible",
+    "details": "Gérez les sites affichés sur votre page réalisations publique",
+    "color": "from-purple-500 to-purple-600",
+    "link": "/admin/realisations",
+    "order": 14
+  },
+  {
+    "id": "tarifs",
+    "title": "Gestion Tarifs",
+    "icon": "💰",
+    "description": "Modifier les tarifs du Site",
+    "details": "Gérez tous vos tarifs depuis un seul endroit. Modifications instantanées sur la page publique et le générateur de devis.",
+    "color": "from-orange-500 to-orange-600",
+    "link": "/admin/tarifs",
+    "order": 15
+  }
+]

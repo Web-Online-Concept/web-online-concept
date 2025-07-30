@@ -1,0 +1,15 @@
+{
+  "devis": [],
+  "compteur": 1,
+  "parametres": {
+    "validite_jours": 8,
+    "acompte_pourcentage": 50,
+    "entreprise": {
+      "nom": "Web Online Concept",
+      "adresse": "Rue Paul Estival, 31200 Toulouse",
+      "telephone": "06 03 36 93 42",
+      "email": "web.online.concept@gmail.com",
+      "siret": "510 583 800 00048"
+    }
+  }
+}

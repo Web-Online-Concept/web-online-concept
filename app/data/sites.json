@@ -1,0 +1,235 @@
+{
+  "actifs": {
+    "title": "Sites Clients Actifs",
+    "icon": "🟢",
+    "sites": [
+      {
+        "id": "1753325116814",
+        "name": "Reborn Retrogaming",
+        "url": "https://www.reborne-retrogaming.com/",
+        "type": "Wix",
+        "client": "Julien Carpentier",
+        "adresse": "1 Quater Impasse François Verdier, 31170 Tournefeuille, France",
+        "email": "retrogamingtoulouse@gmail.com",
+        "tel": "0628656900",
+        "infos": "",
+        "image": "/uploads/sites/site-1753325042279-reborn.jpg"
+      },
+      {
+        "id": "1753328763344",
+        "name": "Klart Concept",
+        "url": "https://www.klart-concept.com/",
+        "type": "Wix",
+        "client": "Jerome Brulard",
+        "adresse": "27 avenue Besques, 65400 Argelès-Gazost, France",
+        "email": "klart.concept@gmail.com",
+        "tel": "0660308306",
+        "infos": "",
+        "image": "/uploads/sites/site-1753328681002-klart.jpg"
+      },
+      {
+        "id": "1753330702208",
+        "name": "Diététiphyt",
+        "url": "https://www.dietetiphyt.com/",
+        "type": "Wix",
+        "client": "Agnès Désalmand",
+        "adresse": "7 rue Jean Bardou, 31200 Toulouse",
+        "email": "desalmand.dietetiphyt@gmail.com",
+        "tel": "07 81 99 48 86",
+        "infos": "",
+        "image": "/uploads/sites/site-1753330562339-dietetiphyt.jpg"
+      },
+      {
+        "id": "1753336289565",
+        "name": "Gaudissard Menuiseries",
+        "url": "https://www.gaudissard.fr/",
+        "type": "Wix",
+        "client": "Roxane Vaillant",
+        "adresse": "32, Rue du Fief Girard, 17290 Aigrefeuille d'Aunis",
+        "email": "r.vaillant@gaudissard.fr",
+        "tel": "06 17 48 15 37 / 05 46 35 42 48",
+        "infos": "",
+        "image": "/uploads/sites/site-1753336073407-gaudissard.jpg"
+      },
+      {
+        "id": "1753337339719",
+        "name": "Carpentier Impressions",
+        "url": "https://www.carpentier-impressions.fr/",
+        "type": "Wix",
+        "client": "Julien Carpentier",
+        "adresse": "8 rue Douladoure, 31103 Toulouse Cedex",
+        "email": "accueil@carpentier-impressions.fr",
+        "tel": "06 28 65 69 00",
+        "infos": "",
+        "image": "/uploads/sites/site-1753337258459-carpentier.jpg"
+      },
+      {
+        "id": "1753337776555",
+        "name": "Point Sérigraphie",
+        "url": "https://www.point-serigraphie.com/",
+        "type": "Wix",
+        "client": "Fabrice Lascaud",
+        "adresse": "3 rue Ambroise Paré, 81000 ALBI",
+        "email": "fabrice.lascaud@point-serigraphie.com",
+        "tel": "06 33 79 66 23 / 05 63 45 03 80",
+        "infos": "",
+        "image": "/uploads/sites/site-1753337638601-point-seri.jpg"
+      },
+      {
+        "id": "1753338516227",
+        "name": "Mozaic Environnement",
+        "url": "https://www.mozaic-environnement.com/",
+        "type": "Wix",
+        "client": "Fabrice Lascaud",
+        "adresse": "3 rue Ambroise Paré, 81000 ALBI",
+        "email": "fabrice.lascaud@point-serigraphie.com",
+        "tel": "06 33 79 66 23 / 05 63 45 03 80",
+        "infos": "",
+        "image": "/uploads/sites/site-1753338457917-mozaic-environnement.jpg"
+      },
+      {
+        "id": "1753338845840",
+        "name": "PRV Composites",
+        "url": "https://www.menuiserie-prv-17.fr/",
+        "type": "Wix",
+        "client": "Denis Vaillant",
+        "adresse": "ZI OUEST - RUE THEODORE TOURNAT - 17700 SURGERES - CHARENTE-MARITIME",
+        "email": "contact@prv-composites.com",
+        "tel": "05 46 07 57 81",
+        "infos": "Mail perso : vaillantde@wanadoo.fr",
+        "image": "/uploads/sites/site-1753338781861-prv-composites.jpg"
+      },
+      {
+        "id": "1753339089421",
+        "name": "Atelier Dussart",
+        "url": "https://www.atelier-dussart.com/",
+        "type": "Wix",
+        "client": "Claude Dussart",
+        "adresse": "4 rue du Chanois - 51250 ALLIANCELLES",
+        "email": "atelierdussart@gmail.com",
+        "tel": "03 26 73 16 49 / 06 07 33 17 75",
+        "infos": "",
+        "image": "/uploads/sites/site-1753339038376-dussart.jpg"
+      },
+      {
+        "id": "1753339422284",
+        "name": "Road to LA 2028",
+        "url": "https://www.road-to-la2028.com/",
+        "type": "Wix",
+        "client": "Boris Bonnefoi",
+        "adresse": "14 chemin de fontcalvy - 11590 Ouveillan",
+        "email": "bobolafrite@orange.fr",
+        "tel": "",
+        "infos": "Autre Mail : coachperso38@gmail.com",
+        "image": "/uploads/sites/site-1753339331550-road-la.jpg"
+      },
+      {
+        "id": "1753340203379",
+        "name": "Etsivous",
+        "url": "https://etsivous.vercel.app/",
+        "type": "Woc",
+        "client": "Fred ",
+        "adresse": "16 place des Quinconces - 33000 Bordeaux",
+        "email": "fred@kdekom.org",
+        "tel": "06 08 93 87 42",
+        "infos": "Url site : https://www.etsivous.net/",
+        "image": "/uploads/sites/site-1753340048865-etsivous.jpg"
+      },
+      {
+        "id": "1753340773448",
+        "name": "KdeKom",
+        "url": "https://www.kdekom.fr/",
+        "type": "Wix",
+        "client": "Fred",
+        "adresse": "16 place des Quinconces - 33000 Bordeaux",
+        "email": "fred@kdekom.org",
+        "tel": "06 08 93 87 42",
+        "infos": "",
+        "image": "/uploads/sites/site-1753340721020-kdekom.jpg"
+      },
+      {
+        "id": "1753341422601",
+        "name": "Fitbask",
+        "url": "https://www.fitbask.com/",
+        "type": "Wix",
+        "client": "Romain",
+        "adresse": "19 Chem. du Moulin de Habas, 64100 Bayonne",
+        "email": "contact@fitbask.com",
+        "tel": "06 99 41 69 43",
+        "infos": "",
+        "image": "/uploads/sites/site-1753341271908-fitbask.jpg"
+      },
+      {
+        "id": "1753343201127",
+        "name": "L'Agence Pro",
+        "url": "https://lagence.pro/liens/index.html",
+        "type": "Woc",
+        "client": "Fred Kdekom",
+        "adresse": "",
+        "email": "fred@kdekom.org",
+        "tel": "06 08 93 87 42",
+        "infos": "",
+        "image": "/uploads/sites/site-1753343121729-agence-pro.jpg"
+      }
+    ]
+  },
+  "persos": {
+    "title": "Sites Entreprise Actifs",
+    "icon": "✅",
+    "sites": [
+      {
+        "id": "1753333040436",
+        "name": "Cotes Boostées",
+        "url": "https://www.cotes-boostees.com/",
+        "type": "Wix",
+        "client": "Site Entreprise",
+        "adresse": "",
+        "email": "",
+        "tel": "",
+        "infos": "",
+        "image": "/uploads/sites/site-1753333009386-cotesboostees.jpg"
+      },
+      {
+        "id": "1753333270055",
+        "name": "Les Joueurs",
+        "url": "https://www.les-joueurs.com/",
+        "type": "Wix",
+        "client": "Site Entreprise",
+        "adresse": "",
+        "email": "",
+        "tel": "",
+        "infos": "",
+        "image": "/uploads/sites/site-1753333243521-les-joueurs.jpg"
+      },
+      {
+        "id": "1753334344226",
+        "name": "Mon Argent",
+        "url": "https://www.mon-argent.pro/",
+        "type": "Woc",
+        "client": "Site Entreprise",
+        "adresse": "",
+        "email": "",
+        "tel": "",
+        "infos": "Site test pour apprendre à coder IA",
+        "image": "/uploads/sites/site-1753334305868-mon-argent.jpg"
+      },
+      {
+        "id": "1753335362592",
+        "name": "Rounders",
+        "url": "https://www.rounders.pro/",
+        "type": "Woc",
+        "client": "Site Entreprise",
+        "adresse": "",
+        "email": "",
+        "tel": "",
+        "infos": "",
+        "image": "/uploads/sites/site-1753335327717-rounders.jpg"
+      }
+    ]
+  },
+  "archives": {
+    "title": "Anciens Sites",
+    "icon": "🗂️",
+    "sites": []
+  }
+}

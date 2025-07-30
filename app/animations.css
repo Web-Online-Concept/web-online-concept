@@ -1,0 +1,178 @@
+/* Animations globales pour Web Online Concept */
+
+/* Animation shine pour le logo/titre */
+@keyframes shine {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Animation slide pour le header */
+@keyframes slide {
+  0% {
+    transform: translateX(-50px);
+  }
+  38% {
+    transform: translateX(-50px);
+  }
+  100% {
+    transform: translateX(400px);
+  }
+}
+
+/* Classes pour l'animation shine */
+.shine-effect {
+  background: linear-gradient(
+    90deg,
+    #0073a8 0%,
+    #0073a8 40%,
+    #ffffff 50%,
+    #0073a8 60%,
+    #0073a8 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 3s linear infinite;
+}
+
+/* Animation alternative pour le shine (si la première ne marche pas) */
+.shine-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-hover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: shine 3s linear infinite;
+}
+
+/* Animations pour la page d'accueil */
+@keyframes slideInUp {
+  0% {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Classes d'animation réutilisables */
+.animate-slide-up {
+  opacity: 0;
+  animation: slideInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-up-delay-1 {
+  opacity: 0;
+  animation: slideInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+
+.animate-slide-up-delay-2 {
+  opacity: 0;
+  animation: slideInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+}
+
+.animate-fade-in-delay {
+  opacity: 0;
+  animation: fadeIn 1.2s ease-out 0.6s forwards;
+}
+
+.animate-fade-in-left {
+  opacity: 0;
+  animation: fadeInLeft 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
+}
+
+.animate-fade-in-scale {
+  opacity: 0;
+  animation: fadeInScale 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-left-delay-1 {
+  opacity: 0;
+  animation: slideInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+
+.animate-slide-left-delay-2 {
+  opacity: 0;
+  animation: slideInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+}
+
+.animate-slide-left-delay-3 {
+  opacity: 0;
+  animation: slideInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+}
+
+.animate-slide-left-delay-4 {
+  opacity: 0;
+  animation: slideInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
+}
+
+.animate-slide-left-delay-5 {
+  opacity: 0;
+  animation: slideInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1s forwards;
+}
+
+.animate-slide-left-delay-6 {
+  opacity: 0;
+  animation: slideInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
+}

@@ -1,0 +1,100 @@
+{
+  "factures": [
+    {
+      "id": "FAC-2025-001",
+      "type": "facture",
+      "numero": "FAC-2025-001",
+      "clientId": "CLI-001",
+      "clientNom": "Restaurant Le Gourmet",
+      "date": "2025-01-15",
+      "dateEcheance": "2025-02-15",
+      "status": "envoyee",
+      "lignes": [
+        {
+          "description": "Maintenance mensuelle site web",
+          "quantite": 1,
+          "prixUnitaire": 200,
+          "tva": 20,
+          "total": 200
+        },
+        {
+          "description": "Modifications menu restaurant",
+          "quantite": 5,
+          "prixUnitaire": 200,
+          "tva": 20,
+          "total": 1000
+        }
+      ],
+      "montantHT": 1200,
+      "montantTVA": 240,
+      "montantTTC": 1440,
+      "notes": "Maintenance mensuelle janvier 2025",
+      "dateCreation": "2025-01-15T10:00:00.000Z"
+    },
+    {
+      "id": "FAC-2024-042",
+      "type": "facture",
+      "numero": "FAC-2024-042",
+      "clientId": "CLI-002",
+      "clientNom": "Boutique Mode & Style",
+      "date": "2024-12-15",
+      "dateEcheance": "2025-01-15",
+      "status": "payee",
+      "lignes": [
+        {
+          "description": "Maintenance annuelle boutique en ligne",
+          "quantite": 1,
+          "prixUnitaire": 1200,
+          "tva": 20,
+          "total": 1200
+        },
+        {
+          "description": "Mise à jour WooCommerce et plugins",
+          "quantite": 1,
+          "prixUnitaire": 300,
+          "tva": 20,
+          "total": 300
+        }
+      ],
+      "montantHT": 1500,
+      "montantTVA": 300,
+      "montantTTC": 1800,
+      "notes": "Maintenance annuelle 2024",
+      "datePaiement": "2024-12-20",
+      "dateCreation": "2024-12-15T09:00:00.000Z"
+    }
+  ],
+  "devis": [
+    {
+      "id": "DEV-2025-001",
+      "type": "devis",
+      "numero": "DEV-2025-001",
+      "clientId": "CLI-003",
+      "clientNom": "Cabinet Médical Santé+",
+      "date": "2025-01-20",
+      "dateValidite": "2025-02-20",
+      "status": "envoye",
+      "lignes": [
+        {
+          "description": "Création site web médical responsive",
+          "quantite": 1,
+          "prixUnitaire": 3500,
+          "tva": 20,
+          "total": 3500
+        },
+        {
+          "description": "Module prise de RDV en ligne avec calendrier",
+          "quantite": 1,
+          "prixUnitaire": 1000,
+          "tva": 20,
+          "total": 1000
+        }
+      ],
+      "montantHT": 4500,
+      "montantTVA": 900,
+      "montantTTC": 5400,
+      "notes": "Site avec design médical professionnel. Intégration système de RDV.",
+      "dateCreation": "2025-01-20T14:00:00.000Z"
+    }
+  ]
+}

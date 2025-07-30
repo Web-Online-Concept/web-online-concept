@@ -1,0 +1,20 @@
+{
+  "factures": {
+    "prefixe": "FAC",
+    "annee": 2025,
+    "prochain": 1,
+    "format": "FAC-{annee}-{numero:04d}"
+  },
+  "devis": {
+    "prefixe": "DEV",
+    "annee": 2025,
+    "prochain": 1,
+    "format": "DEV-{annee}-{numero:04d}"
+  },
+  "avoirs": {
+    "prefixe": "AV",
+    "annee": 2025,
+    "prochain": 1,
+    "format": "AV-{annee}-{numero:04d}"
+  }
+}

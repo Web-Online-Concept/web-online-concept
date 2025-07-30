@@ -1,0 +1,21 @@
+{
+  "affilies": [
+    {
+      "id": "AFF001",
+      "code": "KDO",
+      "nom": "Test",
+      "prenom": "Test",
+      "societe": "",
+      "email": "flotoulouse7@gmail.com",
+      "telephone": "",
+      "rib": "",
+      "infos": "",
+      "commission": 10,
+      "reduction_client": 30,
+      "actif": true,
+      "date_creation": "2025-07-28T03:22:46.049Z",
+      "commissions_payees": []
+    }
+  ],
+  "compteur": 2
+}

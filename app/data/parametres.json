@@ -1,0 +1,59 @@
+{
+  "entreprise": {
+    "nom": "Web Online Concept",
+    "adresse": "123 Avenue du Web",
+    "codePostal": "75001",
+    "ville": "Paris",
+    "pays": "France",
+    "telephone": "01 23 45 67 89",
+    "email": "web.online.concept@gmail.com",
+    "siteWeb": "https://www.web-online-concept.com",
+    "siret": "123 456 789 00010",
+    "tva": "FR12345678900",
+    "logo": "/images/logo.png"
+  },
+  "facturation": {
+    "prefixeFacture": "FAC",
+    "prefixeDevis": "DEV",
+    "mentionsLegales": "Conditions de paiement : règlement à réception de facture.",
+    "delaiPaiement": 30,
+    "tauxTVA": 20,
+    "numeroFacture": 1,
+    "numeroDevis": 1
+  },
+  "smtp": {
+    "service": "gmail",
+    "user": "web.online.concept@gmail.com",
+    "pass": "haecoeogifsdmqmg",
+    "fromName": "Web Online Concept",
+    "port": 587,
+    "secure": false
+  },
+  "signature": {
+    "active": true,
+    "text": "\n\n--\nCordialement,\n\nWeb Online Concept\nSites Web Clés en Main à Prix Malins\n📧 web.online.concept@gmail.com\n🌐 www.web-online-concept.com\n\nCe message et ses éventuelles pièces jointes sont confidentiels et destinés exclusivement à la personne ou l'entité à laquelle ils sont adressés."
+  },
+  "templates": {
+    "devis": {
+      "objet": "Devis {numero} - {entreprise}",
+      "message": "Bonjour {prenom},\n\nJe vous prie de trouver ci-joint le devis {numero} d'un montant de {montant}€ TTC.\n\nCe devis est valable 30 jours à compter de sa date d'émission.\n\nN'hésitez pas à me contacter si vous avez des questions.\n\nCordialement,\n{entreprise_nom}"
+    },
+    "facture": {
+      "objet": "Facture {numero} - {entreprise}",
+      "message": "Bonjour {prenom},\n\nJe vous prie de trouver ci-joint la facture {numero} d'un montant de {montant}€ TTC.\n\nDate d'échéance : {date_echeance}\n\nMerci de procéder au règlement dans les délais convenus.\n\nCordialement,\n{entreprise_nom}"
+    },
+    "relance": {
+      "objet": "Relance - Facture {numero} impayée",
+      "message": "Bonjour {prenom},\n\nSauf erreur de notre part, la facture {numero} d'un montant de {montant}€ TTC reste impayée à ce jour.\n\nNous vous remercions de bien vouloir régulariser cette situation dans les meilleurs délais.\n\nSi le règlement a été effectué entre-temps, merci de ne pas tenir compte de ce message.\n\nCordialement,\n{entreprise_nom}"
+    },
+    "remerciement": {
+      "objet": "Merci pour votre confiance - {entreprise}",
+      "message": "Bonjour {prenom},\n\nJe tenais à vous remercier pour votre confiance et votre collaboration sur ce projet.\n\nCe fut un plaisir de travailler avec {entreprise}.\n\nN'hésitez pas à me recontacter pour tout nouveau projet.\n\nCordialement,\n{entreprise_nom}"
+    }
+  },
+  "theme": {
+    "couleurPrimaire": "#4F46E5",
+    "couleurSecondaire": "#10B981",
+    "modeSombre": false
+  }
+}
