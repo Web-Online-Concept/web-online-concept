@@ -1,6 +1,4 @@
-﻿<section className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">
-          <div className="grid md:grid-cols-2 'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
@@ -24,9 +22,9 @@ export default function InfosTarifs() {
   
   if (loading || !tarifs) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center" style={{paddingTop: '100px'}}>
+      <div className="min-h-screen bg-gray-50 pt-24 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0073a8] mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
           <p className="text-gray-600 mt-4">Chargement des tarifs...</p>
         </div>
       </div>
@@ -34,7 +32,7 @@ export default function InfosTarifs() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50" style={{paddingTop: '100px'}}>
+    <div className="min-h-screen bg-gray-50 pt-24">
       {/* Bloc 1 - Site Web Formule de Base */}
       <section className="bg-gradient-to-r from-[#0073a8] to-[#005580] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,55 +51,56 @@ export default function InfosTarifs() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-center">
             <div className="grid md:grid-cols-2 gap-6 w-full max-w-4xl">
-            <div>
-              <h3 className="font-semibold mb-3 text-lg">✨ Inclus dans votre site</h3>
-              <ul className="space-y-2 text-gray-700">
-                <li className="flex items-start">
-                  <span className="text-green-500 mr-2 mt-1">✓</span>
-                  Design moderne et personnalisé
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-500 mr-2 mt-1">✓</span>
-                  Site responsive (mobile, tablette, PC)
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-500 mr-2 mt-1">✓</span>
-                  5 pages personnalisées
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-500 mr-2 mt-1">✓</span>
-                  SEO de base inclus
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-500 mr-2 mt-1">✓</span>
-                  Hébergement 1 an inclus
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-3 text-lg">🎁 Services inclus</h3>
-              <ul className="space-y-2 text-gray-700">
-                <li className="flex items-start">
-                  <span className="text-green-500 mr-2 mt-1">✓</span>
-                  Formation à la prise en main
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-500 mr-2 mt-1">✓</span>
-                  Support technique 30 jours
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-500 mr-2 mt-1">✓</span>
-                  Certificat SSL (https)
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-500 mr-2 mt-1">✓</span>
-                  Nom de domaine 1 an
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-500 mr-2 mt-1">✓</span>
-                  Emails professionnels
-                </li>
-              </ul>
+              <div>
+                <h3 className="font-semibold mb-3 text-lg">✨ Inclus dans votre site</h3>
+                <ul className="space-y-2 text-gray-700">
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2 mt-1">✓</span>
+                    Design moderne et personnalisé
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2 mt-1">✓</span>
+                    Site responsive (mobile, tablette, PC)
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2 mt-1">✓</span>
+                    5 pages personnalisées
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2 mt-1">✓</span>
+                    SEO de base inclus
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2 mt-1">✓</span>
+                    Hébergement 1 an inclus
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="font-semibold mb-3 text-lg">🎁 Services inclus</h3>
+                <ul className="space-y-2 text-gray-700">
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2 mt-1">✓</span>
+                    Formation à la prise en main
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2 mt-1">✓</span>
+                    Support technique 30 jours
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2 mt-1">✓</span>
+                    Certificat SSL (https)
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2 mt-1">✓</span>
+                    Nom de domaine 1 an
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2 mt-1">✓</span>
+                    Emails professionnels
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
           <div className="text-center mt-6">
