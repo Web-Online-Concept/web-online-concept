@@ -34,7 +34,41 @@ export default function DemandeDevis() {
   useEffect(() => {
     fetch('/api/tarifs')
       .then(res => res.json())
-      .then(data => setTarifs(data))
+      .then(data => {
+        // Ordre personnalisé des options
+        const ordrePersonnalise = [
+          'page-supplementaire',
+          'pack-photos',
+          'hebergement',
+          'redaction',
+          'blog',
+          'maintenance',
+          'back-office',
+          'ecommerce',
+          'seo',
+          'logo',
+          'multilingue',
+          'reservation',
+          'emails',
+          'newsletter'
+        ]
+
+        // Réorganiser les options
+        if (data.options) {
+          const optionsTriees = ordrePersonnalise
+            .map(id => data.options.find(opt => opt.id === id))
+            .filter(opt => opt !== undefined)
+          
+          // Ajouter les options non listées
+          const optionsNonListees = data.options.filter(
+            opt => !ordrePersonnalise.includes(opt.id)
+          )
+          
+          data.options = [...optionsTriees, ...optionsNonListees]
+        }
+        
+        setTarifs(data)
+      })
       .catch(err => console.error('Erreur chargement tarifs:', err))
   }, [])
 
