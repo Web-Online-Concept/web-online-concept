@@ -289,7 +289,7 @@ export default function DemandeDevis() {
             {/* Type de projet */}
             <div className="mb-6">
               <h3 className="font-semibold text-lg mb-3">Type de projet *</h3>
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid md:grid-cols-3 gap-4">
                 <label className="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-[#0073a8] transition-colors">
                   <input
                     type="radio"
@@ -316,6 +316,20 @@ export default function DemandeDevis() {
                   <div className="ml-3">
                     <span className="font-medium">Remplacer un site existant</span>
                     <p className="text-sm text-gray-600">J'ai déjà un site à refaire</p>
+                  </div>
+                </label>
+                <label className="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-[#0073a8] transition-colors">
+                  <input
+                    type="radio"
+                    name="typeProjet"
+                    value="client-existant"
+                    checked={formData.typeProjet === 'client-existant'}
+                    onChange={(e) => setFormData({...formData, typeProjet: e.target.value})}
+                    className="w-4 h-4 text-[#0073a8] focus:ring-[#0073a8]"
+                  />
+                  <div className="ml-3">
+                    <span className="font-medium">Je suis déjà client</span>
+                    <p className="text-sm text-gray-600">Rajouter des options à mon site actuel</p>
                   </div>
                 </label>
               </div>

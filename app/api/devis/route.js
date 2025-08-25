@@ -149,7 +149,11 @@ export async function POST(request) {
       html: `
         <h2>Nouvelle demande de devis</h2>
         <p><strong>Numéro :</strong> ${quoteNumber}</p>
-        <p><strong>Type de projet :</strong> ${formData.typeProjet === 'nouveau' ? 'Création d\'un nouveau site' : 'Remplacement d\'un site existant'}</p>
+        <p><strong>Type de projet :</strong> ${
+          formData.typeProjet === 'nouveau' ? 'Création d\'un nouveau site' : 
+          formData.typeProjet === 'remplacement' ? 'Remplacement d\'un site existant' :
+          'Client existant - Ajout d\'options'
+        }</p>
         <p><strong>Client :</strong> ${formData.prenom} ${formData.nom}</p>
         ${formData.entreprise ? `<p><strong>Entreprise :</strong> ${formData.entreprise}</p>` : ''}
         <p><strong>Email :</strong> ${formData.email}</p>
