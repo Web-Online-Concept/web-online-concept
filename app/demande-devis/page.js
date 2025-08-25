@@ -1,76 +1,4 @@
-{/* Informations personnelles */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-2xl font-bold mb-6 text-gray-800">Vos informations</h2>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Nom et Prénom *
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Jean Dupont"
-                  value={`${formData.prenom} ${formData.nom}`.trim()}
-                  onChange={(e) => {
-                    const parts = e.target.value.split(' ')
-                    if (parts.length >= 2) {
-                      setFormData({
-                        ...formData,
-                        prenom: parts[0],
-                        nom: parts.slice(1).join(' ')
-                      })
-                    } else {
-                      setFormData({
-                        ...formData,
-                        prenom: parts[0] || '',
-                        nom: ''
-                      })
-                    }
-                  }}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Entreprise
-                </label>
-                <input
-                  type="text"
-                  value={formData.entreprise}
-                  onChange={(e) => setFormData({...formData, entreprise: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Téléphone *
-                </label>
-                <input
-                  type="tel"
-                  required
-                  value={formData.telephone}
-                  onChange={(e) => setFormData({...formData, telephone: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Site web actuel
-                </label>
-                <input
-                  type="url"
-                  placeholder="https://www.mon-site.fr"
-                  value={formData.siteActuel}
-                  onChange={(e) => setFormData({...formData, siteActuel: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Email *
-                </label>
-                <input
-                "use client"
+"use client"
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
@@ -260,28 +188,33 @@ export default function DemandeDevis() {
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-2xl font-bold mb-6 text-gray-800">Vos informations</h2>
             <div className="grid md:grid-cols-2 gap-4">
-              <div className="md:col-span-2">
+              <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Nom et Prénom *
                 </label>
-                <div className="grid grid-cols-2 gap-2">
-                  <input
-                    type="text"
-                    required
-                    placeholder="Prénom"
-                    value={formData.prenom}
-                    onChange={(e) => setFormData({...formData, prenom: e.target.value})}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
-                  />
-                  <input
-                    type="text"
-                    required
-                    placeholder="Nom"
-                    value={formData.nom}
-                    onChange={(e) => setFormData({...formData, nom: e.target.value})}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
-                  />
-                </div>
+                <input
+                  type="text"
+                  required
+                  placeholder="Jean Dupont"
+                  value={`${formData.prenom} ${formData.nom}`.trim()}
+                  onChange={(e) => {
+                    const parts = e.target.value.split(' ')
+                    if (parts.length >= 2) {
+                      setFormData({
+                        ...formData,
+                        prenom: parts[0],
+                        nom: parts.slice(1).join(' ')
+                      })
+                    } else {
+                      setFormData({
+                        ...formData,
+                        prenom: parts[0] || '',
+                        nom: ''
+                      })
+                    }
+                  }}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
+                />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
