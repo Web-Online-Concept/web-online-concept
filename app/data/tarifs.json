@@ -64,6 +64,12 @@
       "nom": "Module Newsletter",
       "prix": 200,
       "description": "Gestion des abonnés et envoi d'emails"
+    },
+    {
+      "id": "backoffice",
+      "nom": "Back Office / Interface d'administration",
+      "prix": 150,
+      "description": "Modifiez vous-même vos textes et images - Formation incluse"
     }
   ],
   "remises": [

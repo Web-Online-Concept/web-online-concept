@@ -105,14 +105,11 @@ export default function InfosTarifs() {
                   {/* Site Web Professionnel */}
                   <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-6 border border-blue-200">
                     <div className="flex items-center justify-between">
-                      <div className="flex-1">
+                      <div className="flex-1 text-center">
                         <h4 className="text-lg font-semibold">🌟 {tarifs.formuleBase.nom}</h4>
-                        <p className="text-gray-600">{tarifs.formuleBase.description}</p>
+                        <p className="text-3xl font-bold text-[#0073a8] mt-2">{tarifs.formuleBase.prix}€ HT</p>
+                        <p className="text-gray-600 mt-2">{tarifs.formuleBase.description}</p>
                         <p className="text-sm text-gray-500 mt-1">Design responsive • Animations modernes • Formation incluse</p>
-                      </div>
-                      <div className="flex-shrink-0 text-right ml-6">
-                        <p className="text-3xl font-bold text-[#0073a8]">{tarifs.formuleBase.prix}€</p>
-                        <p className="text-sm text-gray-500">tout compris</p>
                       </div>
                     </div>
                     
@@ -347,7 +344,7 @@ export default function InfosTarifs() {
                     {
                       num: "2",
                       title: "Devis personnalisé",
-                      desc: "Nous vous envoyons une proposition détaillée",
+                      desc: "Nous analysons votre demande et créons votre devis",
                       delay: "Sous 24-48h"
                     },
                     {
