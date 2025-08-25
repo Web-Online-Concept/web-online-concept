@@ -38,19 +38,18 @@ export default function InfosTarifs() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Site Web - Formule de Base - 500€ HT
+              Site Web - 500€ HT
             </h2>
             <p className="text-xl text-white/90 max-w-2xl mx-auto">
-              Site 5 pages, design personnalisé, responsive, SEO de base, hébergement 1 an inclus
+              Formule de base : Site 5 pages, design personnalisé, responsive, SEO de base, hébergement 1 an inclus
             </p>
           </div>
         </div>
       </section>
       
       <section className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-center">
-            <div className="grid md:grid-cols-2 gap-6 w-full max-w-4xl">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12">
               <div>
                 <h3 className="font-semibold mb-3 text-lg">✨ Inclus dans votre site</h3>
                 <ul className="space-y-2 text-gray-700">
