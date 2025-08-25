@@ -74,7 +74,7 @@ export default function InfosTarifs() {
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2 mt-1">✓</span>
-                  Hébergement 1 an inclus
+                  Hébergement & NDD inclus la 1ere année
                 </li>
               </ul>
             </div>
@@ -86,7 +86,7 @@ export default function InfosTarifs() {
               <ul className="space-y-3 text-gray-700">
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2 mt-1">✓</span>
-                  Formation à la prise en main
+                  Formation 1h à la prise en main
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2 mt-1">✓</span>
@@ -98,11 +98,11 @@ export default function InfosTarifs() {
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2 mt-1">✓</span>
-                  Nom de domaine 1 an
+                  Sites conformes RGPD
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2 mt-1">✓</span>
-                  Emails professionnels
+                  Conseils divers
                 </li>
               </ul>
             </div>
@@ -371,11 +371,12 @@ export default function InfosTarifs() {
             <div className="grid md:grid-cols-2 gap-6 mb-6">
               <div className="space-y-4">
                 <div className="bg-blue-50 rounded-lg p-4">
-                  <h4 className="font-semibold mb-2 text-blue-800">💳 Paiement</h4>
+                  <h4 className="font-semibold mb-2 text-blue-800">💳 Paiements</h4>
                   <ul className="text-sm text-gray-700 space-y-1">
                     <li>• Acompte 50% à la commande</li>
                     <li>• Solde 50% à la livraison</li>
                     <li>• Virement bancaire uniquement</li>
+                    <li>• Livraison du site après paiement total</li>
                   </ul>
                 </div>
 
