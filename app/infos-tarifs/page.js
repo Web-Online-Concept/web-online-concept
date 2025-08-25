@@ -5,7 +5,11 @@ import Link from 'next/link'
 import { ChevronRight, Check, Clock, Shield, HeadphonesIcon, Laptop, Search, PenTool, Rocket, MousePointer, RefreshCw, CheckCircle } from 'lucide-react'
 
 export default function InfosTarifs() {
-  const [tarifs, setTarifs] = useState(null)
+  const [tarifs, setTarifs] = useState({
+    formuleBase: { prix: 500 },
+    options: [],
+    remises: []
+  })
 
   useEffect(() => {
     // Charger les tarifs depuis l'API
@@ -19,15 +23,6 @@ export default function InfosTarifs() {
       .catch(err => console.error('Erreur chargement tarifs:', err))
   }, [])
 
-  // Valeurs par défaut si les tarifs ne sont pas chargés
-  const defaultTarifs = {
-    formuleBase: { prix: 500 },
-    options: [],
-    remises: []
-  }
-
-  const currentTarifs = tarifs || defaultTarifs
-
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -35,7 +30,7 @@ export default function InfosTarifs() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Site Web - {currentTarifs.formuleBase.prix}€ HT
+              Site Web - {tarifs.formuleBase.prix}€ HT
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-blue-100">
               Formule de base
@@ -175,7 +170,7 @@ export default function InfosTarifs() {
         
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {currentTarifs.options.map((option) => (
+            {tarifs.options.map((option) => (
               <div key={option.id} className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">{option.nom}</h3>
                 <p className="text-sm text-gray-600 mb-4">{option.description}</p>
