@@ -184,6 +184,55 @@ export default function DemandeDevis() {
         </h1>
         
         <form onSubmit={handleSubmit} className="space-y-8">
+          {/* Type de projet */}
+          <div className="bg-white rounded-lg shadow p-6">
+            <h2 className="text-2xl font-bold mb-6 text-gray-800">Type de projet</h2>
+            <div className="grid md:grid-cols-3 gap-4">
+              <label className="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-[#0073a8] transition-colors">
+                <input
+                  type="radio"
+                  name="typeProjet"
+                  value="nouveau"
+                  checked={formData.typeProjet === 'nouveau'}
+                  onChange={(e) => setFormData({...formData, typeProjet: e.target.value})}
+                  className="w-4 h-4 text-[#0073a8] focus:ring-[#0073a8]"
+                />
+                <div className="ml-3">
+                  <span className="font-medium">Créer un nouveau site</span>
+                  <p className="text-sm text-gray-600">Je n'ai pas encore de site internet</p>
+                </div>
+              </label>
+              <label className="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-[#0073a8] transition-colors">
+                <input
+                  type="radio"
+                  name="typeProjet"
+                  value="remplacement"
+                  checked={formData.typeProjet === 'remplacement'}
+                  onChange={(e) => setFormData({...formData, typeProjet: e.target.value})}
+                  className="w-4 h-4 text-[#0073a8] focus:ring-[#0073a8]"
+                />
+                <div className="ml-3">
+                  <span className="font-medium">Remplacer un site existant</span>
+                  <p className="text-sm text-gray-600">J'ai déjà un site à refaire</p>
+                </div>
+              </label>
+              <label className="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-[#0073a8] transition-colors">
+                <input
+                  type="radio"
+                  name="typeProjet"
+                  value="client-existant"
+                  checked={formData.typeProjet === 'client-existant'}
+                  onChange={(e) => setFormData({...formData, typeProjet: e.target.value})}
+                  className="w-4 h-4 text-[#0073a8] focus:ring-[#0073a8]"
+                />
+                <div className="ml-3">
+                  <span className="font-medium">Je suis déjà client</span>
+                  <p className="text-sm text-gray-600">Rajouter des options à mon site actuel</p>
+                </div>
+              </label>
+            </div>
+          </div>
+
           {/* Informations personnelles */}
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-2xl font-bold mb-6 text-gray-800">Vos informations</h2>
@@ -301,55 +350,6 @@ export default function DemandeDevis() {
           {/* Prestations */}
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-2xl font-bold mb-6 text-gray-800">Vos besoins</h2>
-            
-            {/* Type de projet */}
-            <div className="mb-6">
-              <h3 className="font-semibold text-lg mb-3">Type de projet *</h3>
-              <div className="grid md:grid-cols-3 gap-4">
-                <label className="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-[#0073a8] transition-colors">
-                  <input
-                    type="radio"
-                    name="typeProjet"
-                    value="nouveau"
-                    checked={formData.typeProjet === 'nouveau'}
-                    onChange={(e) => setFormData({...formData, typeProjet: e.target.value})}
-                    className="w-4 h-4 text-[#0073a8] focus:ring-[#0073a8]"
-                  />
-                  <div className="ml-3">
-                    <span className="font-medium">Créer un nouveau site</span>
-                    <p className="text-sm text-gray-600">Je n'ai pas encore de site internet</p>
-                  </div>
-                </label>
-                <label className="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-[#0073a8] transition-colors">
-                  <input
-                    type="radio"
-                    name="typeProjet"
-                    value="remplacement"
-                    checked={formData.typeProjet === 'remplacement'}
-                    onChange={(e) => setFormData({...formData, typeProjet: e.target.value})}
-                    className="w-4 h-4 text-[#0073a8] focus:ring-[#0073a8]"
-                  />
-                  <div className="ml-3">
-                    <span className="font-medium">Remplacer un site existant</span>
-                    <p className="text-sm text-gray-600">J'ai déjà un site à refaire</p>
-                  </div>
-                </label>
-                <label className="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-[#0073a8] transition-colors">
-                  <input
-                    type="radio"
-                    name="typeProjet"
-                    value="client-existant"
-                    checked={formData.typeProjet === 'client-existant'}
-                    onChange={(e) => setFormData({...formData, typeProjet: e.target.value})}
-                    className="w-4 h-4 text-[#0073a8] focus:ring-[#0073a8]"
-                  />
-                  <div className="ml-3">
-                    <span className="font-medium">Je suis déjà client</span>
-                    <p className="text-sm text-gray-600">Rajouter des options à mon site actuel</p>
-                  </div>
-                </label>
-              </div>
-            </div>
             
             {/* Formule de base */}
             <div className="mb-6 p-4 border border-gray-200 rounded-lg">
