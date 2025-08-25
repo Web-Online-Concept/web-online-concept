@@ -353,18 +353,20 @@ export default function DemandeDevis() {
             
             {/* Formule de base */}
             <div className="mb-6 p-4 border border-gray-200 rounded-lg">
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  checked={formData.siteWeb}
-                  onChange={(e) => setFormData({...formData, siteWeb: e.target.checked})}
-                  className="w-5 h-5 text-[#0073a8] rounded focus:ring-[#0073a8]"
-                />
-                <div className="ml-3">
-                  <span className="font-semibold text-lg">{tarifs.formuleBase.nom}</span>
-                  <span className="ml-2 text-[#0073a8] font-bold">{tarifs.formuleBase.prix}€</span>
-                  <p className="text-sm text-gray-600 mt-1">{tarifs.formuleBase.description}</p>
+              <label className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={formData.siteWeb}
+                    onChange={(e) => setFormData({...formData, siteWeb: e.target.checked})}
+                    className="w-5 h-5 text-[#0073a8] rounded focus:ring-[#0073a8]"
+                  />
+                  <div className="ml-3">
+                    <span className="font-semibold text-lg">{tarifs.formuleBase.nom}</span>
+                    <p className="text-sm text-gray-600 mt-1">{tarifs.formuleBase.description}</p>
+                  </div>
                 </div>
+                <span className="text-[#0073a8] font-bold text-xl ml-4">{tarifs.formuleBase.prix}€</span>
               </label>
             </div>
 
