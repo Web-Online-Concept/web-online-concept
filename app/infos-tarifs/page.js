@@ -116,7 +116,7 @@ export default function InfosTarifs() {
       </section>
 
       {/* Bloc 2 - Options disponibles */}
-      <section className="bg-gradient-to-r from-[#0288d1] to-[#0073a8] text-white py-16">
+      <section className="bg-gradient-to-r from-[#029be5] to-[#0288d1] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -151,7 +151,7 @@ export default function InfosTarifs() {
       </section>
 
       {/* Bloc 3 - Processus de création */}
-      <section className="bg-gradient-to-r from-[#039be5] to-[#0288d1] text-white py-16">
+      <section className="bg-gradient-to-r from-[#029be5] to-[#0288d1] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
