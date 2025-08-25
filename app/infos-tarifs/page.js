@@ -33,7 +33,7 @@ export default function InfosTarifs() {
 
   return (
     <div className="min-h-screen bg-gray-50 pt-24">
-      {/* Bloc 1 - Site Web Formule de Base */}
+      {/* Bloc 1 - Site Web - 500€ HT */}
       <section className="bg-gradient-to-r from-[#0073a8] to-[#005580] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
@@ -49,7 +49,8 @@ export default function InfosTarifs() {
       
       <section className="bg-white py-16">
         <div className="max-w-4xl mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="flex justify-center">
+            <div className="grid md:grid-cols-2 gap-12 w-full max-w-4xl">
               <div>
                 <h3 className="font-semibold mb-3 text-lg">✨ Inclus dans votre site</h3>
                 <ul className="space-y-2 text-gray-700">
@@ -102,7 +103,7 @@ export default function InfosTarifs() {
               </div>
             </div>
           </div>
-          <div className="text-center mt-6">
+          <div className="text-center mt-8">
             <Link href="/demande-devis" className="inline-block bg-[#0073a8] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#005580] transition-all transform hover:scale-105">
               Demander un devis gratuit
             </Link>
@@ -145,7 +146,7 @@ export default function InfosTarifs() {
         </div>
       </section>
 
-      {/* Bloc 3 - Processus et Conditions */}
+      {/* Bloc 3 - Processus et Conditions détaillées */}
       <section className="bg-gradient-to-r from-[#0073a8] to-[#005580] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
@@ -296,7 +297,7 @@ export default function InfosTarifs() {
             </div>
           </div>
 
-          {/* Conditions */}
+          {/* Conditions détaillées */}
           <div className="border-t pt-8">
             <h3 className="text-2xl font-semibold mb-6 text-center">Conditions détaillées</h3>
             
@@ -332,13 +333,13 @@ export default function InfosTarifs() {
                 </ul>
                 <div className="bg-amber-100 rounded-lg p-4 mt-4">
                   <p className="text-sm">
-                    <strong>💡 Besoin d&apos;aide ?</strong> Nous proposons des options de rédaction et des packs d&apos;images professionnelles.
+                    <strong>💡 Besoin d'aide ?</strong> Nous proposons des options de rédaction et des packs d'images professionnelles.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Conditions générales */}
+            {/* Grilles de conditions */}
             <div className="grid md:grid-cols-2 gap-6 mb-6">
               <div className="space-y-4">
                 <div className="bg-blue-50 rounded-lg p-4">
@@ -392,9 +393,9 @@ export default function InfosTarifs() {
               </h4>
               <ul className="space-y-2 text-sm text-red-700">
                 <li>• Les délais commencent à réception de TOUS les éléments</li>
-                <li>• Toute modification majeure après validation fera l&apos;objet d&apos;un nouveau devis</li>
+                <li>• Toute modification majeure après validation fera l'objet d'un nouveau devis</li>
                 <li>• Les prix indiqués sont HT (TVA non applicable)</li>
-                <li>• L&apos;hébergement et nom de domaine doivent être renouvelés chaque année</li>
+                <li>• L'hébergement et nom de domaine doivent être renouvelés chaque année</li>
               </ul>
             </div>
           </div>
