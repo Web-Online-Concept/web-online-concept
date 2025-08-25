@@ -41,7 +41,7 @@ export default function InfosTarifs() {
               Site Web - 500€ HT
             </h2>
             <p className="text-xl text-white/90 max-w-2xl mx-auto">
-              Formule de base : Site 5 pages, design personnalisé, responsive, SEO de base, hébergement 1 an inclus
+              Formule de base
             </p>
           </div>
         </div>
@@ -116,7 +116,7 @@ export default function InfosTarifs() {
       </section>
 
       {/* Bloc 2 - Options disponibles */}
-      <section className="bg-gradient-to-r from-[#0073a8] to-[#005580] text-white py-16">
+      <section className="bg-gradient-to-r from-[#0288d1] to-[#0073a8] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -151,7 +151,7 @@ export default function InfosTarifs() {
       </section>
 
       {/* Bloc 3 - Processus et Conditions détaillées */}
-      <section className="bg-gradient-to-r from-[#0073a8] to-[#005580] text-white py-16">
+      <section className="bg-gradient-to-r from-[#039be5] to-[#0288d1] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -201,108 +201,110 @@ export default function InfosTarifs() {
             </div>
 
             {/* Processus détaillé */}
-            <div className="space-y-4 border-t pt-6">
-              <div className="flex items-start">
-                <div className="bg-gray-100 text-gray-700 rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">
-                  1
-                </div>
-                <div className="ml-4 flex-1">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-semibold">Demande de devis</h3>
-                    <span className="text-sm text-gray-500">Immédiat</span>
+            <div className="max-w-4xl mx-auto">
+              <div className="space-y-3 border-t pt-6">
+                <div className="flex items-start gap-3">
+                  <div className="bg-gray-100 text-gray-700 rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">
+                    1
                   </div>
-                  <p className="text-gray-600 text-sm mt-1">Vous remplissez le formulaire en ligne</p>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between">
+                      <h3 className="font-semibold">Demande de devis</h3>
+                      <span className="text-sm text-gray-500">Immédiat</span>
+                    </div>
+                    <p className="text-gray-600 text-sm mt-1">Vous remplissez le formulaire en ligne</p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex items-start">
-                <div className="bg-gray-100 text-gray-700 rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">
-                  2
-                </div>
-                <div className="ml-4 flex-1">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-semibold">Devis personnalisé</h3>
-                    <span className="text-sm text-gray-500">Sous 24-48h</span>
+                <div className="flex items-start gap-3">
+                  <div className="bg-gray-100 text-gray-700 rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">
+                    2
                   </div>
-                  <p className="text-gray-600 text-sm mt-1">Nous analysons votre demande et créons votre devis</p>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between">
+                      <h3 className="font-semibold">Devis personnalisé</h3>
+                      <span className="text-sm text-gray-500">Sous 24-48h</span>
+                    </div>
+                    <p className="text-gray-600 text-sm mt-1">Nous analysons votre demande et créons votre devis</p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex items-start">
-                <div className="bg-gray-100 text-gray-700 rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">
-                  3
-                </div>
-                <div className="ml-4 flex-1">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-semibold">Validation</h3>
-                    <span className="text-sm text-gray-500">À votre rythme</span>
+                <div className="flex items-start gap-3">
+                  <div className="bg-gray-100 text-gray-700 rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">
+                    3
                   </div>
-                  <p className="text-gray-600 text-sm mt-1">Signature du devis et versement acompte (50%)</p>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between">
+                      <h3 className="font-semibold">Validation</h3>
+                      <span className="text-sm text-gray-500">À votre rythme</span>
+                    </div>
+                    <p className="text-gray-600 text-sm mt-1">Signature du devis et versement acompte (50%)</p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex items-start">
-                <div className="bg-gray-100 text-gray-700 rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">
-                  4
-                </div>
-                <div className="ml-4 flex-1">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-semibold">Brief créatif</h3>
-                    <span className="text-sm text-gray-500">1h par téléphone</span>
+                <div className="flex items-start gap-3">
+                  <div className="bg-gray-100 text-gray-700 rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">
+                    4
                   </div>
-                  <p className="text-gray-600 text-sm mt-1">Nous définissons ensemble vos besoins exacts</p>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between">
+                      <h3 className="font-semibold">Brief créatif</h3>
+                      <span className="text-sm text-gray-500">1h par téléphone</span>
+                    </div>
+                    <p className="text-gray-600 text-sm mt-1">Nous définissons ensemble vos besoins exacts</p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex items-start">
-                <div className="bg-gray-100 text-gray-700 rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">
-                  5
-                </div>
-                <div className="ml-4 flex-1">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-semibold">Envoi des contenus</h3>
-                    <span className="text-sm text-gray-500">Sous 1 semaine</span>
+                <div className="flex items-start gap-3">
+                  <div className="bg-gray-100 text-gray-700 rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">
+                    5
                   </div>
-                  <p className="text-gray-600 text-sm mt-1">Vous nous transmettez textes, images et logo</p>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between">
+                      <h3 className="font-semibold">Envoi des contenus</h3>
+                      <span className="text-sm text-gray-500">Sous 1 semaine</span>
+                    </div>
+                    <p className="text-gray-600 text-sm mt-1">Vous nous transmettez textes, images et logo</p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex items-start">
-                <div className="bg-gray-100 text-gray-700 rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">
-                  6
-                </div>
-                <div className="ml-4 flex-1">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-semibold">Création</h3>
-                    <span className="text-sm text-gray-500">2-3 semaines</span>
+                <div className="flex items-start gap-3">
+                  <div className="bg-gray-100 text-gray-700 rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">
+                    6
                   </div>
-                  <p className="text-gray-600 text-sm mt-1">Nous développons votre site web</p>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between">
+                      <h3 className="font-semibold">Création</h3>
+                      <span className="text-sm text-gray-500">2-3 semaines</span>
+                    </div>
+                    <p className="text-gray-600 text-sm mt-1">Nous développons votre site web</p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex items-start">
-                <div className="bg-gray-100 text-gray-700 rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">
-                  7
-                </div>
-                <div className="ml-4 flex-1">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-semibold">Révisions</h3>
-                    <span className="text-sm text-gray-500">2h</span>
+                <div className="flex items-start gap-3">
+                  <div className="bg-gray-100 text-gray-700 rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">
+                    7
                   </div>
-                  <p className="text-gray-600 text-sm mt-1">1 session de modifications inclus</p>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between">
+                      <h3 className="font-semibold">Révisions</h3>
+                      <span className="text-sm text-gray-500">2h</span>
+                    </div>
+                    <p className="text-gray-600 text-sm mt-1">1 session de modifications inclus</p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex items-start">
-                <div className="bg-gray-100 text-gray-700 rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">
-                  8
-                </div>
-                <div className="ml-4 flex-1">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-semibold">Mise en ligne</h3>
-                    <span className="text-sm text-gray-500">1h</span>
+                <div className="flex items-start gap-3">
+                  <div className="bg-gray-100 text-gray-700 rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">
+                    8
                   </div>
-                  <p className="text-gray-600 text-sm mt-1">Formation à la gestion du site</p>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between">
+                      <h3 className="font-semibold">Mise en ligne</h3>
+                      <span className="text-sm text-gray-500">1h</span>
+                    </div>
+                    <p className="text-gray-600 text-sm mt-1">Formation à la gestion du site</p>
+                  </div>
                 </div>
               </div>
             </div>
