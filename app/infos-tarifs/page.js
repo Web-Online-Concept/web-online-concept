@@ -1,4 +1,5 @@
 'use client'
+// Force redeploy - Version avec conditions
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
