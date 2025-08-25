@@ -188,7 +188,11 @@ export default function DemandeDevis() {
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-2xl font-bold mb-6 text-gray-800">Type de projet</h2>
             <div className="grid md:grid-cols-3 gap-4">
-              <label className="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-[#0073a8] transition-colors">
+              <label className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                formData.typeProjet === 'nouveau' 
+                  ? 'border-[#0073a8] bg-blue-50' 
+                  : 'border-gray-200 hover:border-[#0073a8]'
+              }`}>
                 <input
                   type="radio"
                   name="typeProjet"
@@ -202,7 +206,11 @@ export default function DemandeDevis() {
                   <p className="text-sm text-gray-600">Je n'ai pas encore de site internet</p>
                 </div>
               </label>
-              <label className="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-[#0073a8] transition-colors">
+              <label className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                formData.typeProjet === 'remplacement' 
+                  ? 'border-[#0073a8] bg-blue-50' 
+                  : 'border-gray-200 hover:border-[#0073a8]'
+              }`}>
                 <input
                   type="radio"
                   name="typeProjet"
@@ -216,7 +224,11 @@ export default function DemandeDevis() {
                   <p className="text-sm text-gray-600">J'ai déjà un site à refaire</p>
                 </div>
               </label>
-              <label className="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-[#0073a8] transition-colors">
+              <label className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                formData.typeProjet === 'client-existant' 
+                  ? 'border-[#0073a8] bg-blue-50' 
+                  : 'border-gray-200 hover:border-[#0073a8]'
+              }`}>
                 <input
                   type="radio"
                   name="typeProjet"
