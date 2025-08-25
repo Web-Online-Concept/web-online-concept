@@ -2,6 +2,10 @@ import { query } from '@/app/lib/db'
 import { NextResponse } from 'next/server'
 import { verifyAuth } from '@/app/lib/auth'
 
+// Configuration pour forcer Next.js à accepter les requêtes
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
 export async function GET() {
   try {
     // Récupérer la formule de base
@@ -69,9 +73,10 @@ export async function GET() {
   }
 }
 
-export async function PUT(request) {
+// Utiliser POST au lieu de PUT pour compatibilité Vercel
+export async function POST(request) {
   try {
-    // Vérifier l'authentification - CORRECTION: pas de paramètre pour verifyAuth
+    // Vérifier l'authentification
     const authResult = verifyAuth()
     if (!authResult.authenticated) {
       return NextResponse.json({ error: authResult.error }, { status: 401 })
