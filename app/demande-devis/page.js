@@ -376,14 +376,14 @@ export default function DemandeDevis() {
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
                       <span className="font-medium">{option.nom}</span>
-                      <span className="ml-2 text-[#0073a8] font-semibold">
-                        {option.prix}€ {option.unite || ''}
-                      </span>
                       {option.description && (
                         <p className="text-sm text-gray-600 mt-1">{option.description}</p>
                       )}
                     </div>
-                    <div className="ml-4">
+                    <div className="flex items-center gap-3">
+                      <span className="text-[#0073a8] font-semibold whitespace-nowrap">
+                        {option.prix}€ {option.unite || ''}
+                      </span>
                       <input
                         type="number"
                         min="0"
@@ -448,7 +448,7 @@ export default function DemandeDevis() {
                 </div>
                 {promoInfo && (
                   <p className="text-green-600 text-sm mt-1">
-                    ✓ {promoInfo.description}
+                    ✔ {promoInfo.description}
                   </p>
                 )}
               </div>
