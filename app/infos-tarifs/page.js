@@ -38,7 +38,7 @@ export default function InfosTarifs() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Site Web - {tarifs.siteBase}€ HT
+              Site Web - {tarifs.formuleBase.prix}€ HT
             </h2>
             <p className="text-xl text-white/90 max-w-2xl mx-auto">
               Formule de base
@@ -66,7 +66,7 @@ export default function InfosTarifs() {
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2 mt-1">✓</span>
-                  5 pages personnalisées
+                  5 pages personnalisées (+pages légales inclues)
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2 mt-1">✓</span>
