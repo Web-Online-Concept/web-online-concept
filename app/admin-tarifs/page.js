@@ -32,9 +32,13 @@ export default function AdminTarifs() {
         console.log('Données reçues:', data)  // DEBUG: voir les données
         setTarifs(data)
         setIsAuthenticated(true)
+      } else {
+        // Si erreur 401 ou autre, forcer la déconnexion
+        setIsAuthenticated(false)
       }
     } catch (error) {
       console.error('Erreur vérification auth:', error)
+      setIsAuthenticated(false)
     } finally {
       setLoading(false)
     }
@@ -66,9 +70,14 @@ export default function AdminTarifs() {
   }
 
   const handleLogout = async () => {
+    // Supprimer le cookie
     document.cookie = 'admin-token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+    // Réinitialiser l'état
     setIsAuthenticated(false)
-    router.push('/admin')
+    setPassword('')
+    setMessage('')
+    // Recharger la page pour afficher le formulaire de connexion
+    window.location.reload()
   }
 
   const handleSave = async () => {
