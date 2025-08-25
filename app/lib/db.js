@@ -1,16 +1,28 @@
 import { Pool } from 'pg'
+import dotenv from 'dotenv'
+
+// Charger les variables d'environnement en local
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config({ path: '.env.local' })
+}
 
 // Log de la connection string (masquée)
 console.log('DATABASE_URL exists:', !!process.env.DATABASE_URL)
 console.log('DATABASE_URL starts with:', process.env.DATABASE_URL?.substring(0, 30) + '...')
 
-// Configuration pour Neon
-const pool = new Pool({
+// Configuration pour Neon avec gestion SSL selon l'environnement
+const config = {
   connectionString: process.env.DATABASE_URL,
-  ssl: {
+}
+
+// SSL uniquement en production
+if (process.env.NODE_ENV === 'production') {
+  config.ssl = {
     rejectUnauthorized: false
   }
-})
+}
+
+const pool = new Pool(config)
 
 // Test de connexion au démarrage
 pool.connect((err, client, release) => {

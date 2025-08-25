@@ -1,6 +1,10 @@
+import dotenv from 'dotenv'
 import fs from 'fs/promises'
 import path from 'path'
 import { query } from '../app/lib/db.js'
+
+// Charger les variables d'environnement
+dotenv.config({ path: '.env.local' })
 
 async function migrate() {
   try {
