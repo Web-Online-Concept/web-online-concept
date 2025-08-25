@@ -25,9 +25,10 @@
     },
     {
       "id": "maintenance",
-      "nom": "Maintenance mensuelle",
+      "nom": "Maintenance Annuelle",
       "prix": 120,
-      "unite": "par mois"
+      "unite": "par an",
+      "description": "jusqu'à 4 modifications par mois incluses"
     },
     {
       "id": "redaction",
@@ -43,9 +44,9 @@
     },
     {
       "id": "photos",
-      "nom": "Pack 10 photos professionnelles",
+      "nom": "Pack 10 photos/vidéos au choix",
       "prix": 400,
-      "description": "Shooting photo professionnel"
+      "description": "Photos & Vidéos libres de droit"
     },
     {
       "id": "multilangue",
