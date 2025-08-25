@@ -48,62 +48,66 @@ export default function InfosTarifs() {
       </section>
       
       <section className="bg-white py-16">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="flex justify-center">
-            <div className="grid md:grid-cols-2 gap-12 w-full max-w-4xl">
-              <div>
-                <h3 className="font-semibold mb-3 text-lg">✨ Inclus dans votre site</h3>
-                <ul className="space-y-2 text-gray-700">
-                  <li className="flex items-start">
-                    <span className="text-green-500 mr-2 mt-1">✓</span>
-                    Design moderne et personnalisé
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-500 mr-2 mt-1">✓</span>
-                    Site responsive (mobile, tablette, PC)
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-500 mr-2 mt-1">✓</span>
-                    5 pages personnalisées
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-500 mr-2 mt-1">✓</span>
-                    SEO de base inclus
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-500 mr-2 mt-1">✓</span>
-                    Hébergement 1 an inclus
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="font-semibold mb-3 text-lg">🎁 Services inclus</h3>
-                <ul className="space-y-2 text-gray-700">
-                  <li className="flex items-start">
-                    <span className="text-green-500 mr-2 mt-1">✓</span>
-                    Formation à la prise en main
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-500 mr-2 mt-1">✓</span>
-                    Support technique 30 jours
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-500 mr-2 mt-1">✓</span>
-                    Certificat SSL (https)
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-500 mr-2 mt-1">✓</span>
-                    Nom de domaine 1 an
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-500 mr-2 mt-1">✓</span>
-                    Emails professionnels
-                  </li>
-                </ul>
-              </div>
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-gray-50 rounded-xl p-6 shadow-sm">
+              <h3 className="font-semibold mb-4 text-lg flex items-center">
+                <span className="text-2xl mr-2">✨</span>
+                Inclus dans votre site
+              </h3>
+              <ul className="space-y-3 text-gray-700">
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-2 mt-1">✓</span>
+                  Design moderne et personnalisé
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-2 mt-1">✓</span>
+                  Site responsive (mobile, tablette, PC)
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-2 mt-1">✓</span>
+                  5 pages personnalisées
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-2 mt-1">✓</span>
+                  SEO de base inclus
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-2 mt-1">✓</span>
+                  Hébergement 1 an inclus
+                </li>
+              </ul>
+            </div>
+            <div className="bg-gray-50 rounded-xl p-6 shadow-sm">
+              <h3 className="font-semibold mb-4 text-lg flex items-center">
+                <span className="text-2xl mr-2">🎁</span>
+                Services inclus
+              </h3>
+              <ul className="space-y-3 text-gray-700">
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-2 mt-1">✓</span>
+                  Formation à la prise en main
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-2 mt-1">✓</span>
+                  Support technique 30 jours
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-2 mt-1">✓</span>
+                  Certificat SSL (https)
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-2 mt-1">✓</span>
+                  Nom de domaine 1 an
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-2 mt-1">✓</span>
+                  Emails professionnels
+                </li>
+              </ul>
             </div>
           </div>
-          <div className="text-center mt-8">
+          <div className="text-center mt-10">
             <Link href="/demande-devis" className="inline-block bg-[#0073a8] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#005580] transition-all transform hover:scale-105">
               Demander un devis gratuit
             </Link>
@@ -129,16 +133,16 @@ export default function InfosTarifs() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-6">
             {tarifs.options.map((option) => (
-              <div key={option.id} className="border border-gray-200 rounded-lg p-6">
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-xl font-semibold">{option.nom}</h3>
-                  <span className="text-2xl font-bold text-[#0073a8]">{option.prix}€</span>
+              <div key={option.id} className="bg-white border border-gray-200 rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-xl font-semibold text-gray-800">{option.nom}</h3>
+                  <span className="text-2xl font-bold text-[#0073a8] bg-blue-50 px-3 py-1 rounded-lg">{option.prix}€</span>
                 </div>
                 {option.description && (
-                  <p className="text-gray-600">{option.description}</p>
+                  <p className="text-gray-600 leading-relaxed">{option.description}</p>
                 )}
                 {option.unite && (
-                  <p className="text-sm text-gray-500 mt-1">{option.unite}</p>
+                  <p className="text-sm text-gray-500 mt-2 italic">{option.unite}</p>
                 )}
               </div>
             ))}
@@ -164,25 +168,32 @@ export default function InfosTarifs() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Processus */}
           <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-6 text-center">Notre processus</h3>
-            <div className="grid md:grid-cols-3 gap-6 mb-8">
+            <h3 className="text-2xl font-semibold mb-6 text-center">Notre processus en 4 étapes</h3>
+            <div className="grid md:grid-cols-4 gap-6 mb-8">
               <div className="text-center">
                 <div className="bg-[#0073a8] text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
                   1
+                </div>
+                <h4 className="font-semibold mb-2">Devis Gratuit</h4>
+                <p className="text-gray-600 text-sm">Envoi de votre demande personnalisée</p>
+              </div>
+              <div className="text-center">
+                <div className="bg-[#0073a8] text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+                  2
                 </div>
                 <h4 className="font-semibold mb-2">Analyse</h4>
                 <p className="text-gray-600 text-sm">Nous analysons votre demande et créons votre devis personnalisé</p>
               </div>
               <div className="text-center">
                 <div className="bg-[#0073a8] text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
-                  2
+                  3
                 </div>
                 <h4 className="font-semibold mb-2">Création</h4>
                 <p className="text-gray-600 text-sm">Après devis accepté et acompte reçu, nous développons votre site web</p>
               </div>
               <div className="text-center">
                 <div className="bg-[#0073a8] text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
-                  3
+                  4
                 </div>
                 <h4 className="font-semibold mb-2">Livraison</h4>
                 <p className="text-gray-600 text-sm">Mise en ligne du site et formation rapide</p>
