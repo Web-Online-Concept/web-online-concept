@@ -60,6 +60,16 @@ async function generatePDF(formData, quoteNumber) {
   }
   doc.text(formData.email, 120, 86)
   doc.text(formData.telephone, 120, 94)
+  if (formData.adresse || formData.codePostal || formData.ville) {
+    let yPos = 102
+    if (formData.adresse) {
+      doc.text(formData.adresse, 120, yPos)
+      yPos += 8
+    }
+    if (formData.codePostal || formData.ville) {
+      doc.text(`${formData.codePostal || ''} ${formData.ville || ''}`.trim(), 120, yPos)
+    }
+  }
 
   // Tableau des prestations
   const tableData = []
@@ -139,10 +149,17 @@ export async function POST(request) {
       html: `
         <h2>Nouvelle demande de devis</h2>
         <p><strong>Numéro :</strong> ${quoteNumber}</p>
+        <p><strong>Type de projet :</strong> ${formData.typeProjet === 'nouveau' ? 'Création d\'un nouveau site' : 'Remplacement d\'un site existant'}</p>
         <p><strong>Client :</strong> ${formData.prenom} ${formData.nom}</p>
         ${formData.entreprise ? `<p><strong>Entreprise :</strong> ${formData.entreprise}</p>` : ''}
         <p><strong>Email :</strong> ${formData.email}</p>
         <p><strong>Téléphone :</strong> ${formData.telephone}</p>
+        ${formData.adresse || formData.codePostal || formData.ville ? `
+          <p><strong>Adresse :</strong><br>
+          ${formData.adresse ? formData.adresse + '<br>' : ''}
+          ${formData.codePostal ? formData.codePostal + ' ' : ''}${formData.ville || ''}
+          </p>
+        ` : ''}
         <p><strong>Montant total :</strong> ${formData.total} €</p>
         ${formData.commentaire ? `<p><strong>Projet :</strong><br>${formData.commentaire.replace(/\n/g, '<br>')}</p>` : ''}
       `,
