@@ -50,7 +50,7 @@ export default function InfosTarifs() {
       
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             <div>
               <h3 className="font-semibold mb-3 text-lg">✨ Inclus dans votre site</h3>
               <ul className="space-y-2 text-gray-700">
