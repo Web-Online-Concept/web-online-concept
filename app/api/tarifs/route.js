@@ -71,9 +71,9 @@ export async function GET() {
 
 export async function PUT(request) {
   try {
-    // Vérifier l'authentification
-    const authResult = await verifyAuth(request)
-    if (!authResult.success) {
+    // Vérifier l'authentification - CORRECTION: pas de paramètre pour verifyAuth
+    const authResult = verifyAuth()
+    if (!authResult.authenticated) {
       return NextResponse.json({ error: authResult.error }, { status: 401 })
     }
 
