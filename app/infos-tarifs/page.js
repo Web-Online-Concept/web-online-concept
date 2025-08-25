@@ -104,11 +104,13 @@ export default function InfosTarifs() {
                 <div className="space-y-4">
                   {/* Site Web Professionnel */}
                   <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-6 border border-blue-200">
-                    <div className="text-center">
-                      <h4 className="text-lg font-semibold mb-2">🌟 {tarifs.formuleBase.nom}</h4>
-                      <p className="text-3xl font-bold text-[#0073a8]">{tarifs.formuleBase.prix}€ HT</p>
-                      <p className="text-gray-600 mt-2">{tarifs.formuleBase.description}</p>
-                      <p className="text-sm text-gray-500 mt-1">Design responsive • Animations modernes • Formation incluse</p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex-1 text-center">
+                        <h4 className="text-lg font-semibold">🌟 {tarifs.formuleBase.nom}</h4>
+                        <p className="text-3xl font-bold text-[#0073a8] mt-2">{tarifs.formuleBase.prix}€ HT</p>
+                        <p className="text-gray-600 mt-2">{tarifs.formuleBase.description}</p>
+                        <p className="text-sm text-gray-500 mt-1">Design responsive • Animations modernes • Formation incluse</p>
+                      </div>
                     </div>
                     
                     {/* Bouton dépliable */}
@@ -195,13 +197,6 @@ export default function InfosTarifs() {
                             <p className="text-green-800 font-medium text-sm">
                               🎁 Bonus première année : Hébergement professionnel + Nom de domaine + Certificat SSL inclus !
                             </p>
-                          </div>
-                          
-                          {/* Bouton CTA centré */}
-                          <div className="text-center mt-4">
-                            <Link href="/demande-devis" className="inline-block bg-[#0073a8] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#005580] transition-all transform hover:scale-105">
-                              Demander un devis gratuit
-                            </Link>
                           </div>
                         </div>
                       )}
