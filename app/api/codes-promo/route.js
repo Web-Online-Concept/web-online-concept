@@ -1,8 +1,5 @@
 import { NextResponse } from 'next/server'
-import fs from 'fs/promises'
-import path from 'path'
-
-const dataPath = path.join(process.cwd(), 'app', 'data', 'tarifs.json')
+import { query } from '@/app/lib/db'
 
 export async function POST(request) {
   try {
@@ -12,14 +9,14 @@ export async function POST(request) {
       return NextResponse.json({ valid: false })
     }
 
-    // Lire les tarifs pour vérifier le code promo
-    const data = await fs.readFile(dataPath, 'utf8')
-    const tarifs = JSON.parse(data)
+    // Chercher le code promo dans la base de données
+    const result = await query(
+      'SELECT * FROM codes_promo WHERE UPPER(code) = UPPER($1) AND active = true',
+      [code]
+    )
     
-    // Chercher le code promo
-    const promo = tarifs.remises.find(r => r.code.toUpperCase() === code.toUpperCase())
-    
-    if (promo) {
+    if (result.rows.length > 0) {
+      const promo = result.rows[0]
       return NextResponse.json({ 
         valid: true, 
         reduction: promo.reduction,
@@ -30,6 +27,7 @@ export async function POST(request) {
     
     return NextResponse.json({ valid: false })
   } catch (error) {
+    console.error('Erreur vérification code promo:', error)
     return NextResponse.json({ valid: false })
   }
 }
