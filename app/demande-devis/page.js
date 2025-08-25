@@ -377,14 +377,16 @@ export default function DemandeDevis() {
                 <div key={option.id} className="p-3 border border-gray-200 rounded-lg">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
-                      <span className="font-medium">{option.nom}</span>
+                      <span className="font-medium">
+                        {option.nom}{option.unite ? ` (${option.unite})` : ''}
+                      </span>
                       {option.description && (
                         <p className="text-sm text-gray-600 mt-1">{option.description}</p>
                       )}
                     </div>
                     <div className="flex items-center gap-3">
                       <span className="text-[#0073a8] font-semibold whitespace-nowrap">
-                        {option.prix}€ {option.unite || ''}
+                        {option.prix}€
                       </span>
                       <input
                         type="number"
