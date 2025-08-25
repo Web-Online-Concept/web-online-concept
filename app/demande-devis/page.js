@@ -234,20 +234,18 @@ export default function DemandeDevis() {
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
                 />
               </div>
-              {(formData.typeProjet === 'remplacement' || formData.typeProjet === 'client-existant') && (
-                <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Adresse de votre site web actuel
-                  </label>
-                  <input
-                    type="url"
-                    placeholder="https://www.mon-site.fr"
-                    value={formData.siteActuel}
-                    onChange={(e) => setFormData({...formData, siteActuel: e.target.value})}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
-                  />
-                </div>
-              )}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Site web actuel
+                </label>
+                <input
+                  type="url"
+                  placeholder="https://www.mon-site.fr"
+                  value={formData.siteActuel}
+                  onChange={(e) => setFormData({...formData, siteActuel: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
+                />
+              </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Email *
