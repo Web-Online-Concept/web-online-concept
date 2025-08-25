@@ -139,46 +139,33 @@ export default function DemandeDevis() {
     setError('')
 
     // Préparer les données avec les options sélectionnées
-    const selectedOptions = []
+    const optionsSelectionnees = []
     Object.entries(formData.options).forEach(([optionId, quantity]) => {
       if (quantity > 0) {
-        const option = tarifs.options.find(o => o.id === optionId)
-        if (option) {
-          selectedOptions.push({
-            nom: option.nom,
-            prix: option.prix,
-            quantite: quantity,
-            total: option.prix * quantity
-          })
+        for (let i = 0; i < quantity; i++) {
+          optionsSelectionnees.push(optionId)
         }
       }
     })
 
-    // Calculer la remise
-    let remise = null
-    if (promoInfo) {
-      const totalAvantRemise = formData.siteWeb ? tarifs.formuleBase.prix : 0
-      const totalOptions = selectedOptions.reduce((acc, opt) => acc + opt.total, 0)
-      const totalBrut = totalAvantRemise + totalOptions
-
-      if (promoInfo.type === 'pourcentage') {
-        remise = {
-          description: promoInfo.description,
-          montant: Math.round(totalBrut * promoInfo.reduction / 100)
-        }
-      } else {
-        remise = {
-          description: promoInfo.description,
-          montant: promoInfo.reduction
-        }
-      }
-    }
-
     const dataToSend = {
-      ...formData,
-      options: selectedOptions,
-      remise,
-      total
+      formData: {
+        nom: formData.nom,
+        email: formData.email,
+        telephone: formData.telephone,
+        entreprise: formData.entreprise,
+        message: formData.commentaire
+      },
+      tarifs: tarifs,
+      total: total,
+      optionsSelectionnees: optionsSelectionnees,
+      codePromo: promoInfo ? { 
+        valid: true, 
+        code: formData.codePromo,
+        reduction: promoInfo.reduction,
+        type: promoInfo.type,
+        description: promoInfo.description
+      } : null
     }
 
     try {
@@ -191,7 +178,7 @@ export default function DemandeDevis() {
       const result = await res.json()
 
       if (res.ok) {
-        router.push(`/devis/confirmation?numero=${result.quoteNumber}`)
+        router.push(`/devis/confirmation?numero=${result.numeroDevis}`)
       } else {
         setError(result.error || 'Erreur lors de l\'envoi')
       }
@@ -290,23 +277,8 @@ export default function DemandeDevis() {
                 <input
                   type="text"
                   required
-                  value={`${formData.prenom} ${formData.nom}`.trim()}
-                  onChange={(e) => {
-                    const parts = e.target.value.split(' ')
-                    if (parts.length >= 2) {
-                      setFormData({
-                        ...formData,
-                        prenom: parts[0],
-                        nom: parts.slice(1).join(' ')
-                      })
-                    } else {
-                      setFormData({
-                        ...formData,
-                        prenom: parts[0] || '',
-                        nom: ''
-                      })
-                    }
-                  }}
+                  value={formData.nom}
+                  onChange={(e) => setFormData({...formData, nom: e.target.value})}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
                 />
               </div>
