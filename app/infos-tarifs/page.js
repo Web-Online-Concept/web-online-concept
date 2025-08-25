@@ -150,15 +150,15 @@ export default function InfosTarifs() {
         </div>
       </section>
 
-      {/* Bloc 3 - Processus et Conditions détaillées */}
+      {/* Bloc 3 - Processus de création */}
       <section className="bg-gradient-to-r from-[#039be5] to-[#0288d1] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Processus et Conditions détaillées
+              Processus de création
             </h2>
             <p className="text-xl text-white/90 max-w-2xl mx-auto">
-              Un accompagnement transparent de A à Z
+              4 étapes simples & un accompagnement personnalisé
             </p>
           </div>
         </div>
@@ -168,7 +168,6 @@ export default function InfosTarifs() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Processus */}
           <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-6 text-center">Notre processus en 4 étapes</h3>
             <div className="grid md:grid-cols-4 gap-6 mb-8">
               <div className="text-center">
                 <div className="bg-[#0073a8] text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
@@ -313,7 +312,6 @@ export default function InfosTarifs() {
           {/* Conditions détaillées */}
           <div className="border-t pt-8">
             <h3 className="text-2xl font-semibold mb-6 text-center">Conditions détaillées</h3>
-            
             {/* Contenus à fournir */}
             <div className="bg-amber-50 rounded-xl p-6 border-2 border-amber-300 mb-6">
               <h4 className="text-xl font-bold text-amber-900 mb-4 flex items-center">
