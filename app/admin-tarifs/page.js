@@ -29,6 +29,7 @@ export default function AdminTarifs() {
       })
       if (res.ok) {
         const data = await res.json()
+        console.log('Données reçues:', data)  // DEBUG: voir les données
         setTarifs(data)
         setIsAuthenticated(true)
       }
@@ -205,7 +206,7 @@ export default function AdminTarifs() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8">
+    <div className="min-h-screen bg-gray-100 pt-24 pb-8">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold">Gestion des Tarifs</h1>
