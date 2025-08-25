@@ -24,7 +24,7 @@ export default function InfosTarifs() {
   
   if (loading || !tarifs) {
     return (
-      <div className="min-h-screen bg-gray-50 pt-[100px] flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center" style={{paddingTop: '100px'}}>
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0073a8] mx-auto"></div>
           <p className="text-gray-600 mt-4">Chargement des tarifs...</p>
@@ -34,7 +34,7 @@ export default function InfosTarifs() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-[100px]">
+    <div className="min-h-screen bg-gray-50" style={{paddingTop: '100px'}}>
       {/* Bloc 1 - Site Web Formule de Base */}
       <section className="bg-gradient-to-r from-[#0073a8] to-[#005580] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
