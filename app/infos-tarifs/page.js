@@ -33,29 +33,16 @@ export default function InfosTarifs() {
 
   return (
     <div className="min-h-screen bg-gray-50 pt-[100px]">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-[#0073a8] to-[#005580] text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Nos Tarifs
-            </h1>
-            <p className="text-xl text-white/90 max-w-2xl mx-auto">
-              Des solutions web adaptées à votre budget
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* Bloc 1 - Site Web Formule de Base */}
-      <section className="bg-gradient-to-r from-[#0073a8] to-[#005580] text-white py-16 mt-12">
+      <section className="bg-gradient-to-r from-[#0073a8] to-[#005580] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
               Site Web - Formule de Base
             </h2>
+            <p className="text-6xl font-bold mb-4">500€ HT</p>
             <p className="text-xl text-white/90 max-w-2xl mx-auto">
-              500€ HT - Site 5 pages, design personnalisé, responsive, SEO de base, hébergement 1 an inclus
+              Site 5 pages, design personnalisé, responsive, SEO de base, hébergement 1 an inclus
             </p>
           </div>
         </div>
