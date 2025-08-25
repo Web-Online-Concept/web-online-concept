@@ -308,10 +308,27 @@ export default function InfosTarifs() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
+      {/* Bloc 4 - Conditions détaillées */}
+      <section className="bg-gradient-to-r from-[#029be5] to-[#0288d1] text-white py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Conditions détaillées
+            </h2>
+            <p className="text-xl text-white/90 max-w-2xl mx-auto">
+              Détail complet des conditions de créations
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Conditions détaillées */}
-          <div className="border-t pt-8">
-            <h3 className="text-2xl font-semibold mb-6 text-center">Conditions détaillées</h3>
+          <div>
             {/* Contenus à fournir */}
             <div className="bg-amber-50 rounded-xl p-6 border-2 border-amber-300 mb-6">
               <h4 className="text-xl font-bold text-amber-900 mb-4 flex items-center">
