@@ -1,4 +1,6 @@
-﻿'use client'
+﻿<section className="bg-white py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">
+          <div className="grid md:grid-cols-2 'use client'
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
@@ -38,9 +40,8 @@ export default function InfosTarifs() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Site Web - Formule de Base
+              Site Web - Formule de Base - 500€ HT
             </h2>
-            <p className="text-6xl font-bold mb-4">500€ HT</p>
             <p className="text-xl text-white/90 max-w-2xl mx-auto">
               Site 5 pages, design personnalisé, responsive, SEO de base, hébergement 1 an inclus
             </p>
@@ -50,7 +51,8 @@ export default function InfosTarifs() {
       
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="flex justify-center">
+            <div className="grid md:grid-cols-2 gap-6 w-full max-w-4xl">
             <div>
               <h3 className="font-semibold mb-3 text-lg">✨ Inclus dans votre site</h3>
               <ul className="space-y-2 text-gray-700">
