@@ -1,0 +1,83 @@
+{
+  "formuleBase": {
+    "nom": "Site Web - Formule de Base",
+    "prix": 500,
+    "description": "Site 5 pages, design personnalisé, responsive, hébergement 1 an inclus"
+  },
+  "options": [
+    {
+      "id": "page-supp",
+      "nom": "Page supplémentaire",
+      "prix": 50,
+      "unite": "par page"
+    },
+    {
+      "id": "ecommerce",
+      "nom": "Module E-commerce",
+      "prix": 800,
+      "description": "Boutique en ligne complète avec paiement sécurisé"
+    },
+    {
+      "id": "seo",
+      "nom": "Pack Référencement SEO",
+      "prix": 300,
+      "description": "Optimisation complète pour les moteurs de recherche"
+    },
+    {
+      "id": "maintenance",
+      "nom": "Maintenance mensuelle",
+      "prix": 120,
+      "unite": "par mois"
+    },
+    {
+      "id": "redaction",
+      "nom": "Rédaction de contenu",
+      "prix": 150,
+      "unite": "par page"
+    },
+    {
+      "id": "logo",
+      "nom": "Création de logo",
+      "prix": 250,
+      "description": "Logo professionnel avec 3 propositions"
+    },
+    {
+      "id": "photos",
+      "nom": "Pack 10 photos professionnelles",
+      "prix": 400,
+      "description": "Shooting photo professionnel"
+    },
+    {
+      "id": "multilangue",
+      "nom": "Site multilingue",
+      "prix": 500,
+      "unite": "par langue"
+    },
+    {
+      "id": "reservation",
+      "nom": "Système de réservation",
+      "prix": 600,
+      "description": "Calendrier et réservation en ligne"
+    },
+    {
+      "id": "newsletter",
+      "nom": "Module Newsletter",
+      "prix": 200,
+      "description": "Gestion des abonnés et envoi d'emails"
+    }
+  ],
+  "remises": [
+    {
+      "code": "WOC10",
+      "reduction": 10,
+      "type": "pourcentage",
+      "description": "10% de réduction"
+    },
+    {
+      "code": "NOUVEAU50",
+      "reduction": 50,
+      "type": "fixe",
+      "description": "50€ de réduction"
+    }
+  ]
+}
