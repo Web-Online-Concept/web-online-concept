@@ -195,7 +195,6 @@ export default function DemandeDevis() {
                 <input
                   type="text"
                   required
-                  placeholder="Jean Dupont"
                   value={`${formData.prenom} ${formData.nom}`.trim()}
                   onChange={(e) => {
                     const parts = e.target.value.split(' ')
@@ -241,18 +240,6 @@ export default function DemandeDevis() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Site web actuel
-                </label>
-                <input
-                  type="url"
-                  placeholder="https://www.mon-site.fr"
-                  value={formData.siteActuel}
-                  onChange={(e) => setFormData({...formData, siteActuel: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
                   Email *
                 </label>
                 <input
@@ -260,6 +247,18 @@ export default function DemandeDevis() {
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Site web actuel
+                </label>
+                <input
+                  type="url"
+                  placeholder="https://www.mon-site.fr"
+                  value={formData.siteActuel}
+                  onChange={(e) => setFormData({...formData, siteActuel: e.target.value})}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
                 />
               </div>
