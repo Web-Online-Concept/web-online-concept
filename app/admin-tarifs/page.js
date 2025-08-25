@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 
 export default function AdminTarifs() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [checkingAuth, setCheckingAuth] = useState(true)
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
@@ -12,12 +13,33 @@ export default function AdminTarifs() {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
-  // Charger les tarifs
+  // Vérifier l'authentification au chargement
+  useEffect(() => {
+    checkAuthentication()
+  }, [])
+
+  // Charger les tarifs si authentifié
   useEffect(() => {
     if (isAuthenticated) {
       fetchTarifs()
     }
   }, [isAuthenticated])
+
+  const checkAuthentication = async () => {
+    try {
+      // Essayer de charger les tarifs pour vérifier si on est authentifié
+      const res = await fetch('/api/tarifs')
+      if (res.ok) {
+        setIsAuthenticated(true)
+        const data = await res.json()
+        setTarifs(data)
+      }
+    } catch (error) {
+      console.error('Erreur vérification auth:', error)
+    } finally {
+      setCheckingAuth(false)
+    }
+  }
 
   const fetchTarifs = async () => {
     try {
@@ -30,11 +52,44 @@ export default function AdminTarifs() {
   }
 
   // Connexion
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault()
-    // Stocker le mot de passe pour les requêtes
-    sessionStorage.setItem('adminPassword', password)
-    setIsAuthenticated(true)
+    setError('')
+    setLoading(true)
+
+    try {
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password })
+      })
+
+      const data = await res.json()
+
+      if (res.ok) {
+        setIsAuthenticated(true)
+        setPassword('')
+        // Charger les tarifs après connexion
+        fetchTarifs()
+      } else {
+        setError(data.error || 'Erreur de connexion')
+      }
+    } catch (error) {
+      setError('Erreur de connexion au serveur')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // Déconnexion
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/admin/login', { method: 'DELETE' })
+      setIsAuthenticated(false)
+      setTarifs(null)
+    } catch (error) {
+      console.error('Erreur déconnexion:', error)
+    }
   }
 
   // Sauvegarder les modifications
@@ -47,19 +102,18 @@ export default function AdminTarifs() {
       const res = await fetch('/api/tarifs', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          password: sessionStorage.getItem('adminPassword'),
-          tarifs
-        })
+        body: JSON.stringify({ tarifs })
       })
 
       const data = await res.json()
 
       if (res.ok) {
         setSuccess('Tarifs mis à jour avec succès !')
+        setTimeout(() => setSuccess(''), 3000)
       } else {
         setError(data.error || 'Erreur lors de la mise à jour')
         if (res.status === 401) {
+          // Session expirée
           setIsAuthenticated(false)
         }
       }
@@ -141,6 +195,15 @@ export default function AdminTarifs() {
     setTarifs({ ...tarifs, remises: newRemises })
   }
 
+  // Écran de chargement initial
+  if (checkingAuth) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 pt-[100px]">
+        <div className="text-xl">Vérification...</div>
+      </div>
+    )
+  }
+
   // Page de connexion
   if (!isAuthenticated) {
     return (
@@ -170,9 +233,10 @@ export default function AdminTarifs() {
             )}
             <button
               type="submit"
-              className="w-full bg-[#0073a8] text-white py-2 px-4 rounded-lg hover:bg-[#005580] transition-colors"
+              disabled={loading}
+              className="w-full bg-[#0073a8] text-white py-2 px-4 rounded-lg hover:bg-[#005580] transition-colors disabled:bg-gray-400"
             >
-              Se connecter
+              {loading ? 'Connexion...' : 'Se connecter'}
             </button>
           </form>
         </div>
@@ -196,12 +260,20 @@ export default function AdminTarifs() {
           <h1 className="text-3xl font-bold text-gray-900">
             Administration des Tarifs
           </h1>
-          <button
-            onClick={() => router.push('/')}
-            className="text-gray-600 hover:text-gray-900"
-          >
-            Retour au site
-          </button>
+          <div className="flex gap-4">
+            <button
+              onClick={() => router.push('/admin')}
+              className="text-gray-600 hover:text-gray-900"
+            >
+              Retour admin
+            </button>
+            <button
+              onClick={handleLogout}
+              className="text-red-600 hover:text-red-700"
+            >
+              Déconnexion
+            </button>
+          </div>
         </div>
 
         {/* Messages */}
