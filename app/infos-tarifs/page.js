@@ -1,5 +1,4 @@
 'use client'
-// Force redeploy - Version avec conditions
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
@@ -8,7 +7,6 @@ export default function InfosTarifs() {
   const [tarifs, setTarifs] = useState(null)
   const [loading, setLoading] = useState(true)
   const [openSections, setOpenSections] = useState({})
-  const [showConditions, setShowConditions] = useState(false)
   
   useEffect(() => {
     fetch('/api/tarifs')
@@ -206,268 +204,192 @@ export default function InfosTarifs() {
             </div>
           </div>
 
-          {/* FAQ */}
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold text-center mb-8">Questions fréquentes</h2>
-            <div className="max-w-3xl mx-auto space-y-4">
-              <div className="bg-white rounded-lg shadow-md p-6">
-                <button
-                  onClick={() => toggleSection('faq1')}
-                  className="w-full flex items-center justify-between text-left"
-                >
-                  <h3 className="font-semibold">Quels sont les délais de création ?</h3>
-                  <svg className={`w-5 h-5 transform transition-transform ${openSections.faq1 ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                {openSections.faq1 && (
-                  <p className="mt-4 text-gray-600">
-                    Comptez environ 2 à 3 semaines après réception de tous vos contenus (textes, images, logo).
+          {/* Section Conditions - Directement affichée */}
+          <div className="space-y-8">
+            <h2 className="text-3xl font-bold text-center mb-8">Conditions détaillées</h2>
+            
+            {/* Contenus à fournir */}
+            <div className="bg-amber-50 rounded-xl p-6 border-2 border-amber-300">
+              <h2 className="text-2xl font-bold text-amber-900 mb-4 flex items-center">
+                <span className="text-3xl mr-3">📝</span>
+                Contenus à fournir
+              </h2>
+              <div className="space-y-4 text-amber-800">
+                <p className="font-medium">
+                  Pour créer votre site, vous devez nous fournir :
+                </p>
+                <ul className="space-y-2 ml-4">
+                  <li className="flex items-start">
+                    <span className="mr-2 mt-1">•</span>
+                    <div>
+                      <strong>Les textes</strong> : Tous les contenus écrits de votre site (présentation, services, etc.)
+                    </div>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="mr-2 mt-1">•</span>
+                    <div>
+                      <strong>Les images</strong> : Photos libres de droits, votre logo, visuels de vos produits/services
+                    </div>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="mr-2 mt-1">•</span>
+                    <div>
+                      <strong>Les informations</strong> : Coordonnées, horaires, liens réseaux sociaux, etc.
+                    </div>
+                  </li>
+                </ul>
+                <div className="bg-amber-100 rounded-lg p-4 mt-4">
+                  <p className="text-sm">
+                    <strong>💡 Besoin d\'aide ?</strong> Nous proposons des options de rédaction et des packs d\'images professionnelles.
                   </p>
-                )}
-              </div>
-
-              <div className="bg-white rounded-lg shadow-md p-6">
-                <button
-                  onClick={() => toggleSection('faq2')}
-                  className="w-full flex items-center justify-between text-left"
-                >
-                  <h3 className="font-semibold">Que se passe-t-il après la première année ?</h3>
-                  <svg className={`w-5 h-5 transform transition-transform ${openSections.faq2 ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                {openSections.faq2 && (
-                  <p className="mt-4 text-gray-600">
-                    L\'hébergement et le nom de domaine sont à renouveler chaque année (120€/an). Vous restez propriétaire de votre site.
-                  </p>
-                )}
-              </div>
-
-              <div className="bg-white rounded-lg shadow-md p-6">
-                <button
-                  onClick={() => toggleSection('faq3')}
-                  className="w-full flex items-center justify-between text-left"
-                >
-                  <h3 className="font-semibold">Faut-il fournir les contenus ?</h3>
-                  <svg className={`w-5 h-5 transform transition-transform ${openSections.faq3 ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                {openSections.faq3 && (
-                  <p className="mt-4 text-gray-600">
-                    Oui, vous devez nous fournir les textes et images. Si besoin, nous proposons des options de rédaction et de création visuelle.
-                  </p>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Bouton Conditions */}
-          <div className="mb-12 text-center">
-            <button
-              onClick={() => setShowConditions(!showConditions)}
-              className="inline-flex items-center px-6 py-3 bg-gray-100 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-all"
-            >
-              <span className="mr-2">📋</span>
-              {showConditions ? 'Masquer les conditions' : 'Voir les conditions détaillées'}
-              <svg 
-                className={`ml-2 w-5 h-5 transform transition-transform ${showConditions ? 'rotate-180' : ''}`}
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-          </div>
-
-          {/* Section Conditions */}
-          {showConditions && (
-            <div className="space-y-8 animate-fade-in">
-              {/* Contenus à fournir */}
-              <div className="bg-amber-50 rounded-xl p-6 border-2 border-amber-300">
-                <h2 className="text-2xl font-bold text-amber-900 mb-4 flex items-center">
-                  <span className="text-3xl mr-3">📝</span>
-                  Contenus à fournir
-                </h2>
-                <div className="space-y-4 text-amber-800">
-                  <p className="font-medium">
-                    Pour créer votre site, vous devez nous fournir :
-                  </p>
-                  <ul className="space-y-2 ml-4">
-                    <li className="flex items-start">
-                      <span className="mr-2 mt-1">•</span>
-                      <div>
-                        <strong>Les textes</strong> : Tous les contenus écrits de votre site (présentation, services, etc.)
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="mr-2 mt-1">•</span>
-                      <div>
-                        <strong>Les images</strong> : Photos libres de droits, votre logo, visuels de vos produits/services
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="mr-2 mt-1">•</span>
-                      <div>
-                        <strong>Les informations</strong> : Coordonnées, horaires, liens réseaux sociaux, etc.
-                      </div>
-                    </li>
-                  </ul>
-                  <div className="bg-amber-100 rounded-lg p-4 mt-4">
-                    <p className="text-sm">
-                      <strong>💡 Besoin d\'aide ?</strong> Nous proposons des options de rédaction et des packs d\'images professionnelles.
-                    </p>
-                  </div>
                 </div>
               </div>
+            </div>
 
-              {/* Processus détaillé */}
-              <div className="bg-white rounded-xl shadow-lg p-8">
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">
-                  Notre processus de création détaillé
-                </h2>
+            {/* Processus détaillé */}
+            <div className="bg-white rounded-xl shadow-lg p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-8">
+                Notre processus de création détaillé
+              </h2>
+
+              <div className="space-y-4">
+                {[
+                  {
+                    num: "1",
+                    title: "Demande de devis",
+                    desc: "Vous remplissez le formulaire en ligne",
+                    delay: "Immédiat"
+                  },
+                  {
+                    num: "2",
+                    title: "Devis personnalisé",
+                    desc: "Nous analysons votre demande et créons votre devis",
+                    delay: "Sous 24-48h"
+                  },
+                  {
+                    num: "3",
+                    title: "Validation",
+                    desc: "Signature du devis et versement de l\'acompte (30%)",
+                    delay: "À votre rythme"
+                  },
+                  {
+                    num: "4",
+                    title: "Brief créatif",
+                    desc: "Nous définissons ensemble vos besoins exacts",
+                    delay: "1h par téléphone"
+                  },
+                  {
+                    num: "5",
+                    title: "Envoi des contenus",
+                    desc: "Vous nous transmettez textes, images et logo",
+                    delay: "Sous 1 semaine"
+                  },
+                  {
+                    num: "6",
+                    title: "Création",
+                    desc: "Nous développons votre site web",
+                    delay: "2-3 semaines"
+                  },
+                  {
+                    num: "7",
+                    title: "Révisions",
+                    desc: "2 rounds de modifications inclus",
+                    delay: "3-5 jours"
+                  },
+                  {
+                    num: "8",
+                    title: "Mise en ligne",
+                    desc: "Paiement du solde et formation",
+                    delay: "1 journée"
+                  }
+                ].map((step) => (
+                  <div key={step.num} className="flex items-start">
+                    <div className="bg-[#0073a8] text-white rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">
+                      {step.num}
+                    </div>
+                    <div className="ml-4 flex-1">
+                      <div className="flex items-center justify-between">
+                        <h3 className="font-semibold">{step.title}</h3>
+                        <span className="text-sm text-gray-500">{step.delay}</span>
+                      </div>
+                      <p className="text-gray-600 text-sm mt-1">{step.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Conditions générales */}
+            <div className="bg-white rounded-xl shadow-lg p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-8">
+                Conditions générales
+              </h2>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div className="bg-blue-50 rounded-lg p-4">
+                    <h3 className="font-semibold mb-2 text-blue-800">💳 Paiement</h3>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• Acompte 30% à la commande</li>
+                      <li>• Solde 70% à la livraison</li>
+                      <li>• Virement, CB ou chèque</li>
+                      <li>• Paiement 3x sans frais possible</li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-green-50 rounded-lg p-4">
+                    <h3 className="font-semibold mb-2 text-green-800">✅ Nos garanties</h3>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• Site conforme RGPD</li>
+                      <li>• Compatible tous navigateurs</li>
+                      <li>• Formation 1h incluse</li>
+                      <li>• Support 30 jours offert</li>
+                    </ul>
+                  </div>
+                </div>
 
                 <div className="space-y-4">
-                  {[
-                    {
-                      num: "1",
-                      title: "Demande de devis",
-                      desc: "Vous remplissez le formulaire en ligne",
-                      delay: "Immédiat"
-                    },
-                    {
-                      num: "2",
-                      title: "Devis personnalisé",
-                      desc: "Nous analysons votre demande et créons votre devis",
-                      delay: "Sous 24-48h"
-                    },
-                    {
-                      num: "3",
-                      title: "Validation",
-                      desc: "Signature du devis et versement de l\'acompte (30%)",
-                      delay: "À votre rythme"
-                    },
-                    {
-                      num: "4",
-                      title: "Brief créatif",
-                      desc: "Nous définissons ensemble vos besoins exacts",
-                      delay: "1h par téléphone"
-                    },
-                    {
-                      num: "5",
-                      title: "Envoi des contenus",
-                      desc: "Vous nous transmettez textes, images et logo",
-                      delay: "Sous 1 semaine"
-                    },
-                    {
-                      num: "6",
-                      title: "Création",
-                      desc: "Nous développons votre site web",
-                      delay: "2-3 semaines"
-                    },
-                    {
-                      num: "7",
-                      title: "Révisions",
-                      desc: "2 rounds de modifications inclus",
-                      delay: "3-5 jours"
-                    },
-                    {
-                      num: "8",
-                      title: "Mise en ligne",
-                      desc: "Paiement du solde et formation",
-                      delay: "1 journée"
-                    }
-                  ].map((step) => (
-                    <div key={step.num} className="flex items-start">
-                      <div className="bg-[#0073a8] text-white rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">
-                        {step.num}
-                      </div>
-                      <div className="ml-4 flex-1">
-                        <div className="flex items-center justify-between">
-                          <h3 className="font-semibold">{step.title}</h3>
-                          <span className="text-sm text-gray-500">{step.delay}</span>
-                        </div>
-                        <p className="text-gray-600 text-sm mt-1">{step.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Conditions générales */}
-              <div className="bg-white rounded-xl shadow-lg p-8">
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">
-                  Conditions générales
-                </h2>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-4">
-                    <div className="bg-blue-50 rounded-lg p-4">
-                      <h3 className="font-semibold mb-2 text-blue-800">💳 Paiement</h3>
-                      <ul className="text-sm text-gray-700 space-y-1">
-                        <li>• Acompte 30% à la commande</li>
-                        <li>• Solde 70% à la livraison</li>
-                        <li>• Virement, CB ou chèque</li>
-                        <li>• Paiement 3x sans frais possible</li>
-                      </ul>
-                    </div>
-
-                    <div className="bg-green-50 rounded-lg p-4">
-                      <h3 className="font-semibold mb-2 text-green-800">✅ Nos garanties</h3>
-                      <ul className="text-sm text-gray-700 space-y-1">
-                        <li>• Site conforme RGPD</li>
-                        <li>• Compatible tous navigateurs</li>
-                        <li>• Formation 1h incluse</li>
-                        <li>• Support 30 jours offert</li>
-                      </ul>
-                    </div>
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h3 className="font-semibold mb-2 text-purple-800">📋 Vos responsabilités</h3>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• Fournir tous les contenus</li>
+                      <li>• Droits sur les images/textes</li>
+                      <li>• Validation dans les délais</li>
+                      <li>• Brief clair et complet</li>
+                    </ul>
                   </div>
 
-                  <div className="space-y-4">
-                    <div className="bg-purple-50 rounded-lg p-4">
-                      <h3 className="font-semibold mb-2 text-purple-800">📋 Vos responsabilités</h3>
-                      <ul className="text-sm text-gray-700 space-y-1">
-                        <li>• Fournir tous les contenus</li>
-                        <li>• Droits sur les images/textes</li>
-                        <li>• Validation dans les délais</li>
-                        <li>• Brief clair et complet</li>
-                      </ul>
-                    </div>
-
-                    <div className="bg-orange-50 rounded-lg p-4">
-                      <h3 className="font-semibold mb-2 text-orange-800">⚠️ Non inclus</h3>
-                      <ul className="text-sm text-gray-700 space-y-1">
-                        <li>• E-commerce / Boutique en ligne</li>
-                        <li>• Espace membre avec connexion</li>
-                        <li>• Application mobile</li>
-                        <li>• Référencement avancé (SEO+)</li>
-                      </ul>
-                    </div>
+                  <div className="bg-orange-50 rounded-lg p-4">
+                    <h3 className="font-semibold mb-2 text-orange-800">⚠️ Non inclus</h3>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• E-commerce / Boutique en ligne</li>
+                      <li>• Espace membre avec connexion</li>
+                      <li>• Application mobile</li>
+                      <li>• Référencement avancé (SEO+)</li>
+                    </ul>
                   </div>
                 </div>
-              </div>
-
-              {/* Mentions importantes */}
-              <div className="bg-red-50 rounded-xl p-6 border border-red-200">
-                <h3 className="font-semibold mb-4 text-red-800 flex items-center">
-                  <span className="text-xl mr-2">⚠️</span>
-                  Informations importantes
-                </h3>
-                <ul className="space-y-2 text-sm text-red-700">
-                  <li>• Les délais commencent à réception de TOUS les éléments</li>
-                  <li>• Toute modification majeure après validation fera l\'objet d\'un nouveau devis</li>
-                  <li>• La propriété du site est transférée après paiement complet</li>
-                  <li>• Les prix indiqués sont HT (TVA non applicable)</li>
-                  <li>• L\'hébergement doit être renouvelé chaque année</li>
-                </ul>
               </div>
             </div>
-          )}
+
+            {/* Mentions importantes */}
+            <div className="bg-red-50 rounded-xl p-6 border border-red-200">
+              <h3 className="font-semibold mb-4 text-red-800 flex items-center">
+                <span className="text-xl mr-2">⚠️</span>
+                Informations importantes
+              </h3>
+              <ul className="space-y-2 text-sm text-red-700">
+                <li>• Les délais commencent à réception de TOUS les éléments</li>
+                <li>• Toute modification majeure après validation fera l\'objet d\'un nouveau devis</li>
+                <li>• La propriété du site est transférée après paiement complet</li>
+                <li>• Les prix indiqués sont HT (TVA non applicable)</li>
+                <li>• L\'hébergement doit être renouvelé chaque année</li>
+              </ul>
+            </div>
+          </div>
 
           {/* CTA Final */}
-          <div className="text-center">
+          <div className="text-center mt-12">
             <Link
               href="/demande-devis"
               className="inline-flex items-center px-8 py-4 bg-[#0073a8] text-white font-bold rounded-lg hover:bg-[#005580] transition-all transform hover:scale-105 shadow-lg"
