@@ -1,242 +1,202 @@
-"use client"
+'use client'
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
 export default function AdminTarifs() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [checkingAuth, setCheckingAuth] = useState(true)
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
-  const [tarifs, setTarifs] = useState(null)
-  const [loading, setLoading] = useState(false)
   const router = useRouter()
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
+  const [message, setMessage] = useState('')
+  
+  const [tarifs, setTarifs] = useState({
+    formuleBase: { nom: '', prix: 0, description: '' },
+    options: [],
+    remises: []
+  })
 
-  // Vérifier l'authentification au chargement
+  // Vérifier l'authentification
   useEffect(() => {
-    checkAuthentication()
+    checkAuth()
   }, [])
 
-  // Charger les tarifs si authentifié
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchTarifs()
-    }
-  }, [isAuthenticated])
-
-  const checkAuthentication = async () => {
+  const checkAuth = async () => {
     try {
-      // Essayer de charger les tarifs pour vérifier si on est authentifié
-      const res = await fetch('/api/tarifs')
+      const res = await fetch('/api/tarifs', {
+        credentials: 'include'
+      })
       if (res.ok) {
-        setIsAuthenticated(true)
         const data = await res.json()
         setTarifs(data)
+        setIsAuthenticated(true)
       }
     } catch (error) {
       console.error('Erreur vérification auth:', error)
     } finally {
-      setCheckingAuth(false)
+      setLoading(false)
     }
   }
 
-  const fetchTarifs = async () => {
-    try {
-      const res = await fetch('/api/tarifs')
-      const data = await res.json()
-      setTarifs(data)
-    } catch (error) {
-      setError('Erreur lors du chargement des tarifs')
-    }
-  }
-
-  // Connexion
   const handleLogin = async (e) => {
     e.preventDefault()
-    setError('')
     setLoading(true)
-
+    
     try {
       const res = await fetch('/api/admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password })
+        body: JSON.stringify({ password }),
+        credentials: 'include'
       })
-
-      const data = await res.json()
-
+      
       if (res.ok) {
         setIsAuthenticated(true)
-        setPassword('')
-        // Charger les tarifs après connexion
-        fetchTarifs()
+        checkAuth()
       } else {
-        setError(data.error || 'Erreur de connexion')
+        setMessage('Mot de passe incorrect')
       }
     } catch (error) {
-      setError('Erreur de connexion au serveur')
+      setMessage('Erreur de connexion')
     } finally {
       setLoading(false)
     }
   }
 
-  // Déconnexion
   const handleLogout = async () => {
-    try {
-      await fetch('/api/admin/login', { method: 'DELETE' })
-      setIsAuthenticated(false)
-      setTarifs(null)
-    } catch (error) {
-      console.error('Erreur déconnexion:', error)
-    }
+    document.cookie = 'admin-token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+    setIsAuthenticated(false)
+    router.push('/admin')
   }
 
-  // Sauvegarder les modifications
   const handleSave = async () => {
-    setLoading(true)
-    setError('')
-    setSuccess('')
-
+    setSaving(true)
+    setMessage('')
+    
     try {
       const res = await fetch('/api/tarifs', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ tarifs })
+        method: 'PUT',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(tarifs),
+        credentials: 'include'
       })
-
-      const data = await res.json()
-
+      
       if (res.ok) {
-        setSuccess('Tarifs mis à jour avec succès !')
-        setTimeout(() => setSuccess(''), 3000)
+        setMessage('✓ Tarifs sauvegardés avec succès')
+      } else if (res.status === 401) {
+        setMessage('Session expirée, veuillez vous reconnecter')
+        setIsAuthenticated(false)
       } else {
-        setError(data.error || 'Erreur lors de la mise à jour')
-        if (res.status === 401) {
-          // Session expirée
-          setIsAuthenticated(false)
-        }
+        setMessage('Erreur lors de la sauvegarde')
       }
     } catch (error) {
-      setError('Erreur de connexion')
+      setMessage('Erreur de connexion')
     } finally {
-      setLoading(false)
+      setSaving(false)
     }
   }
 
-  // Mettre à jour la formule de base
   const updateFormuleBase = (field, value) => {
-    setTarifs({
-      ...tarifs,
+    setTarifs(prev => ({
+      ...prev,
       formuleBase: {
-        ...tarifs.formuleBase,
+        ...prev.formuleBase,
         [field]: field === 'prix' ? Number(value) : value
       }
-    })
+    }))
   }
 
-  // Mettre à jour une option
   const updateOption = (index, field, value) => {
     const newOptions = [...tarifs.options]
     newOptions[index] = {
       ...newOptions[index],
-      [field]: field === 'prix' ? Number(value) : value
+      [field]: field === 'prix' || field === 'ordre' ? Number(value) : value
     }
-    setTarifs({ ...tarifs, options: newOptions })
+    setTarifs(prev => ({ ...prev, options: newOptions }))
   }
 
-  // Ajouter une option
   const addOption = () => {
     const newOption = {
       id: `option-${Date.now()}`,
       nom: 'Nouvelle option',
-      prix: 100,
-      description: ''
+      prix: 0,
+      unite: '',
+      description: '',
+      ordre: tarifs.options.length + 1,
+      active: true
     }
-    setTarifs({
-      ...tarifs,
-      options: [...tarifs.options, newOption]
-    })
+    setTarifs(prev => ({
+      ...prev,
+      options: [...prev.options, newOption]
+    }))
   }
 
-  // Supprimer une option
-  const deleteOption = (index) => {
+  const removeOption = (index) => {
     const newOptions = tarifs.options.filter((_, i) => i !== index)
-    setTarifs({ ...tarifs, options: newOptions })
+    setTarifs(prev => ({ ...prev, options: newOptions }))
   }
 
-  // Mettre à jour un code promo
   const updateRemise = (index, field, value) => {
     const newRemises = [...tarifs.remises]
     newRemises[index] = {
       ...newRemises[index],
       [field]: field === 'reduction' ? Number(value) : value
     }
-    setTarifs({ ...tarifs, remises: newRemises })
+    setTarifs(prev => ({ ...prev, remises: newRemises }))
   }
 
-  // Ajouter un code promo
   const addRemise = () => {
     const newRemise = {
-      code: 'NOUVEAU',
-      reduction: 10,
+      code: '',
+      reduction: 0,
       type: 'pourcentage',
-      description: 'Nouvelle remise'
+      description: '',
+      active: true
     }
-    setTarifs({
-      ...tarifs,
-      remises: [...tarifs.remises, newRemise]
-    })
+    setTarifs(prev => ({
+      ...prev,
+      remises: [...prev.remises, newRemise]
+    }))
   }
 
-  // Supprimer un code promo
-  const deleteRemise = (index) => {
+  const removeRemise = (index) => {
     const newRemises = tarifs.remises.filter((_, i) => i !== index)
-    setTarifs({ ...tarifs, remises: newRemises })
+    setTarifs(prev => ({ ...prev, remises: newRemises }))
   }
 
-  // Écran de chargement initial
-  if (checkingAuth) {
+  if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 pt-[100px]">
-        <div className="text-xl">Vérification...</div>
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="text-xl">Chargement...</div>
       </div>
     )
   }
 
-  // Page de connexion
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 pt-[100px]">
-        <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow">
-          <div>
-            <h2 className="text-3xl font-bold text-center text-gray-900">
-              Administration des Tarifs
-            </h2>
-            <p className="mt-2 text-center text-gray-600">
-              Entrez le mot de passe administrateur
-            </p>
-          </div>
-          <form className="mt-8 space-y-6" onSubmit={handleLogin}>
-            <div>
-              <input
-                type="password"
-                required
-                className="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-[#0073a8] focus:border-[#0073a8]"
-                placeholder="Mot de passe"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            {error && (
-              <div className="text-red-500 text-sm text-center">{error}</div>
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+          <h1 className="text-2xl font-bold mb-6 text-center">Administration</h1>
+          <form onSubmit={handleLogin}>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Mot de passe"
+              className="w-full px-4 py-2 border rounded-lg mb-4"
+              required
+            />
+            {message && (
+              <p className="text-red-500 text-sm mb-4">{message}</p>
             )}
             <button
               type="submit"
-              disabled={loading}
-              className="w-full bg-[#0073a8] text-white py-2 px-4 rounded-lg hover:bg-[#005580] transition-colors disabled:bg-gray-400"
+              className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
             >
-              {loading ? 'Connexion...' : 'Se connecter'}
+              Se connecter
             </button>
           </form>
         </div>
@@ -244,232 +204,157 @@ export default function AdminTarifs() {
     )
   }
 
-  // Page d'administration
-  if (!tarifs) {
-    return (
-      <div className="min-h-screen flex items-center justify-center pt-[100px]">
-        <div className="text-xl">Chargement...</div>
-      </div>
-    )
-  }
-
   return (
-    <div className="min-h-screen bg-gray-50 pt-[120px] pb-20">
-      <div className="container max-w-6xl mx-auto px-4">
+    <div className="min-h-screen bg-gray-100 py-8">
+      <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">
-            Administration des Tarifs
-          </h1>
+          <h1 className="text-3xl font-bold">Gestion des Tarifs</h1>
           <div className="flex gap-4">
             <button
-              onClick={() => router.push('/admin')}
-              className="text-gray-600 hover:text-gray-900"
+              onClick={handleSave}
+              disabled={saving}
+              className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 disabled:opacity-50"
             >
-              Retour admin
+              {saving ? 'Enregistrement...' : 'Sauvegarder'}
             </button>
             <button
               onClick={handleLogout}
-              className="text-red-600 hover:text-red-700"
+              className="bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-700"
             >
               Déconnexion
             </button>
           </div>
         </div>
 
-        {/* Messages */}
-        {error && (
-          <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
-            {error}
-          </div>
-        )}
-        {success && (
-          <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
-            {success}
+        {message && (
+          <div className={`mb-6 p-4 rounded-lg ${
+            message.includes('✓') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+          }`}>
+            {message}
           </div>
         )}
 
         {/* Formule de base */}
-        <div className="bg-white rounded-lg shadow p-6 mb-8">
-          <h2 className="text-2xl font-bold mb-4 text-gray-800">Formule de Base</h2>
-          <div className="grid md:grid-cols-2 gap-4">
+        <div className="bg-white rounded-lg shadow p-6 mb-6">
+          <h2 className="text-xl font-bold mb-4">Formule de Base</h2>
+          <div className="grid md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Nom
-              </label>
+              <label className="block text-sm font-medium mb-1">Nom</label>
               <input
                 type="text"
                 value={tarifs.formuleBase.nom}
                 onChange={(e) => updateFormuleBase('nom', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
+                className="w-full px-3 py-2 border rounded-lg"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Prix (€)
-              </label>
+              <label className="block text-sm font-medium mb-1">Prix (€)</label>
               <input
                 type="number"
                 value={tarifs.formuleBase.prix}
                 onChange={(e) => updateFormuleBase('prix', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
+                className="w-full px-3 py-2 border rounded-lg"
               />
             </div>
-            <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Description
-              </label>
+            <div>
+              <label className="block text-sm font-medium mb-1">Description</label>
               <input
                 type="text"
                 value={tarifs.formuleBase.description}
                 onChange={(e) => updateFormuleBase('description', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
+                className="w-full px-3 py-2 border rounded-lg"
               />
             </div>
           </div>
         </div>
 
         {/* Options */}
-        <div className="bg-white rounded-lg shadow p-6 mb-8">
+        <div className="bg-white rounded-lg shadow p-6 mb-6">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold text-gray-800">Options</h2>
+            <h2 className="text-xl font-bold">Options</h2>
             <button
               onClick={addOption}
-              className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors"
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
             >
               + Ajouter une option
             </button>
           </div>
+          
           <div className="space-y-4">
             {tarifs.options.map((option, index) => (
-              <div key={option.id} className="border border-gray-200 rounded-lg p-4">
-                <div className="grid md:grid-cols-3 gap-4">
+              <div key={option.id} className="border rounded-lg p-4">
+                <div className="grid md:grid-cols-6 gap-3 items-end">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Nom
-                    </label>
+                    <label className="block text-sm font-medium mb-1">ID</label>
+                    <input
+                      type="text"
+                      value={option.id}
+                      onChange={(e) => updateOption(index, 'id', e.target.value)}
+                      className="w-full px-2 py-1 border rounded"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1">Nom</label>
                     <input
                       type="text"
                       value={option.nom}
                       onChange={(e) => updateOption(index, 'nom', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
+                      className="w-full px-2 py-1 border rounded"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Prix (€)
-                    </label>
+                    <label className="block text-sm font-medium mb-1">Prix (€)</label>
                     <input
                       type="number"
                       value={option.prix}
                       onChange={(e) => updateOption(index, 'prix', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
+                      className="w-full px-2 py-1 border rounded"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Unité (optionnel)
-                    </label>
+                    <label className="block text-sm font-medium mb-1">Unité</label>
                     <input
                       type="text"
                       value={option.unite || ''}
                       onChange={(e) => updateOption(index, 'unite', e.target.value)}
-                      placeholder="par page, par mois..."
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
-                    />
-                  </div>
-                  <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Description (optionnel)
-                    </label>
-                    <input
-                      type="text"
-                      value={option.description || ''}
-                      onChange={(e) => updateOption(index, 'description', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
-                    />
-                  </div>
-                  <div className="flex items-end">
-                    <button
-                      onClick={() => deleteOption(index)}
-                      className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors w-full"
-                    >
-                      Supprimer
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Codes promo */}
-        <div className="bg-white rounded-lg shadow p-6 mb-8">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold text-gray-800">Codes Promo</h2>
-            <button
-              onClick={addRemise}
-              className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors"
-            >
-              + Ajouter un code
-            </button>
-          </div>
-          <div className="space-y-4">
-            {tarifs.remises.map((remise, index) => (
-              <div key={index} className="border border-gray-200 rounded-lg p-4">
-                <div className="grid md:grid-cols-4 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Code
-                    </label>
-                    <input
-                      type="text"
-                      value={remise.code}
-                      onChange={(e) => updateRemise(index, 'code', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
+                      className="w-full px-2 py-1 border rounded"
+                      placeholder="par an, par mois..."
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Réduction
-                    </label>
+                    <label className="block text-sm font-medium mb-1">Ordre</label>
                     <input
                       type="number"
-                      value={remise.reduction}
-                      onChange={(e) => updateRemise(index, 'reduction', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
+                      value={option.ordre || 0}
+                      onChange={(e) => updateOption(index, 'ordre', e.target.value)}
+                      className="w-full px-2 py-1 border rounded"
                     />
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Type
+                  <div className="flex items-center gap-2">
+                    <label className="flex items-center">
+                      <input
+                        type="checkbox"
+                        checked={option.active !== false}
+                        onChange={(e) => updateOption(index, 'active', e.target.checked)}
+                        className="mr-1"
+                      />
+                      Actif
                     </label>
-                    <select
-                      value={remise.type}
-                      onChange={(e) => updateRemise(index, 'type', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
-                    >
-                      <option value="pourcentage">Pourcentage (%)</option>
-                      <option value="fixe">Montant fixe (€)</option>
-                    </select>
-                  </div>
-                  <div className="flex items-end">
                     <button
-                      onClick={() => deleteRemise(index)}
-                      className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors w-full"
+                      onClick={() => removeOption(index)}
+                      className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
                     >
                       Supprimer
                     </button>
                   </div>
                 </div>
                 <div className="mt-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Description
-                  </label>
+                  <label className="block text-sm font-medium mb-1">Description</label>
                   <input
                     type="text"
-                    value={remise.description}
-                    onChange={(e) => updateRemise(index, 'description', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
+                    value={option.description || ''}
+                    onChange={(e) => updateOption(index, 'description', e.target.value)}
+                    className="w-full px-2 py-1 border rounded"
                   />
                 </div>
               </div>
@@ -477,19 +362,70 @@ export default function AdminTarifs() {
           </div>
         </div>
 
-        {/* Bouton sauvegarder */}
-        <div className="flex justify-end">
-          <button
-            onClick={handleSave}
-            disabled={loading}
-            className={`px-8 py-3 rounded-lg font-semibold text-white transition-all ${
-              loading 
-                ? 'bg-gray-400 cursor-not-allowed' 
-                : 'bg-[#0073a8] hover:bg-[#005580] transform hover:scale-105'
-            }`}
-          >
-            {loading ? 'Sauvegarde...' : 'Sauvegarder les modifications'}
-          </button>
+        {/* Codes Promo */}
+        <div className="bg-white rounded-lg shadow p-6">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-bold">Codes Promo</h2>
+            <button
+              onClick={addRemise}
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+            >
+              + Ajouter un code
+            </button>
+          </div>
+          
+          <div className="space-y-4">
+            {tarifs.remises.map((remise, index) => (
+              <div key={index} className="border rounded-lg p-4">
+                <div className="grid md:grid-cols-5 gap-3 items-end">
+                  <div>
+                    <label className="block text-sm font-medium mb-1">Code</label>
+                    <input
+                      type="text"
+                      value={remise.code}
+                      onChange={(e) => updateRemise(index, 'code', e.target.value.toUpperCase())}
+                      className="w-full px-2 py-1 border rounded"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1">Réduction</label>
+                    <input
+                      type="number"
+                      value={remise.reduction}
+                      onChange={(e) => updateRemise(index, 'reduction', e.target.value)}
+                      className="w-full px-2 py-1 border rounded"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1">Type</label>
+                    <select
+                      value={remise.type}
+                      onChange={(e) => updateRemise(index, 'type', e.target.value)}
+                      className="w-full px-2 py-1 border rounded"
+                    >
+                      <option value="pourcentage">Pourcentage</option>
+                      <option value="fixe">Montant fixe</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1">Description</label>
+                    <input
+                      type="text"
+                      value={remise.description}
+                      onChange={(e) => updateRemise(index, 'description', e.target.value)}
+                      className="w-full px-2 py-1 border rounded"
+                    />
+                  </div>
+                  <button
+                    onClick={() => removeRemise(index)}
+                    className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
+                  >
+                    Supprimer
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
