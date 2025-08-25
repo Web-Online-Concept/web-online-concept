@@ -8,11 +8,10 @@ export default function DemandeDevis() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [tarifs, setTarifs] = useState(null)
+  const [nomComplet, setNomComplet] = useState('')
   
   // État du formulaire
   const [formData, setFormData] = useState({
-    nom: '',
-    prenom: '',
     entreprise: '',
     email: '',
     telephone: '',
@@ -150,7 +149,7 @@ export default function DemandeDevis() {
 
     const dataToSend = {
       formData: {
-        nom: formData.nom,
+        nom: nomComplet,
         email: formData.email,
         telephone: formData.telephone,
         entreprise: formData.entreprise,
@@ -277,8 +276,8 @@ export default function DemandeDevis() {
                 <input
                   type="text"
                   required
-                  value={formData.nom}
-                  onChange={(e) => setFormData({...formData, nom: e.target.value})}
+                  value={nomComplet}
+                  onChange={(e) => setNomComplet(e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
                 />
               </div>
