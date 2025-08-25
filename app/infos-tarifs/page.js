@@ -179,29 +179,29 @@ export default function InfosTarifs() {
                 <div className="bg-[#0073a8] text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
                   1
                 </div>
-                <h4 className="font-semibold mb-2">Devis Gratuit</h4>
-                <p className="text-gray-600 text-sm">Envoi de votre demande personnalisée</p>
+                <h4 className="font-semibold mb-2">Devis gratuit</h4>
+                <p className="text-gray-600 text-sm">Réception de votre devis personnalisé</p>
               </div>
               <div className="text-center">
                 <div className="bg-[#0073a8] text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
                   2
                 </div>
                 <h4 className="font-semibold mb-2">Analyse</h4>
-                <p className="text-gray-600 text-sm">Nous analysons votre demande et créons votre devis personnalisé</p>
+                <p className="text-gray-600 text-sm">Analyse de votre demande et création de votre devis personnalisé</p>
               </div>
               <div className="text-center">
                 <div className="bg-[#0073a8] text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
                   3
                 </div>
-                <h4 className="font-semibold mb-2">Création</h4>
+                <h4 className="font-semibold mb-2">Création du site</h4>
                 <p className="text-gray-600 text-sm">Après devis accepté et acompte reçu, nous développons votre site web</p>
               </div>
               <div className="text-center">
                 <div className="bg-[#0073a8] text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
                   4
                 </div>
-                <h4 className="font-semibold mb-2">Livraison</h4>
-                <p className="text-gray-600 text-sm">Mise en ligne du site et formation rapide</p>
+                <h4 className="font-semibold mb-2">Livraison du site</h4>
+                <p className="text-gray-600 text-sm">Mise en ligne et formation à la gestion du site</p>
               </div>
             </div>
 
