@@ -71,7 +71,7 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">La Formule de Base</h3>
               <p className="text-gray-600 text-center mb-6">
-                Tout ce qu'il faut pour démarrer votre présence en ligne
+                Tout ce qu&apos;il faut pour démarrer votre présence en ligne
               </p>
               <ul className="space-y-3">
                 <li className="flex items-start">
