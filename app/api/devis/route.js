@@ -1,209 +1,289 @@
 import { NextResponse } from 'next/server'
-import nodemailer from 'nodemailer'
+import { query } from '@/app/lib/db'
 import { jsPDF } from 'jspdf'
 import 'jspdf-autotable'
-import fs from 'fs/promises'
-import path from 'path'
+import nodemailer from 'nodemailer'
 
-// Créer le transporteur email
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
-})
-
-// Générer un numéro de devis unique
-function generateQuoteNumber() {
+// Fonction pour générer un numéro de devis unique
+function generateDevisNumber() {
   const date = new Date()
   const year = date.getFullYear()
   const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
   const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0')
-  return `WOC-${year}${month}-${random}`
+  return `DEV-${year}${month}${day}-${random}`
 }
 
-// Générer le PDF du devis
-async function generatePDF(formData, quoteNumber) {
+// Fonction pour générer le PDF (existante, conservée)
+function generatePDF(formData, tarifs, total, optionsSelectionnees, codePromo) {
   const doc = new jsPDF()
   
-  // En-tête avec bandeau
-  try {
-    const imagePath = path.join(process.cwd(), 'public', 'images', 'bandeau_devis.png')
-    const imageData = await fs.readFile(imagePath, { encoding: 'base64' })
-    doc.addImage(`data:image/png;base64,${imageData}`, 'PNG', 0, 0, 210, 40)
-  } catch (error) {
-    // Si l'image n'existe pas, on continue sans
-    doc.setFillColor(0, 115, 168)
-    doc.rect(0, 0, 210, 40, 'F')
-    doc.setTextColor(255, 255, 255)
-    doc.setFontSize(24)
-    doc.text('WEB ONLINE CONCEPT', 105, 25, { align: 'center' })
-  }
-
-  // Informations du devis
+  // Logo et en-tête
+  doc.setFillColor(0, 115, 168)
+  doc.rect(0, 0, 210, 40, 'F')
+  doc.setTextColor(255, 255, 255)
+  doc.setFontSize(24)
+  doc.text('WEB ONLINE CONCEPT', 20, 25)
+  doc.setFontSize(10)
+  doc.text('Sites Web Clés en Main à Prix Malins', 20, 32)
+  
+  // Infos société
+  doc.setTextColor(255, 255, 255)
+  doc.setFontSize(9)
+  doc.text('contact@web-online-concept.fr', 130, 20)
+  doc.text('06 12 34 56 78', 130, 25)
+  doc.text('SIRET: 123 456 789 00012', 130, 30)
+  
+  // Titre
   doc.setTextColor(0, 0, 0)
-  doc.setFontSize(20)
-  doc.text('DEVIS', 20, 60)
+  doc.setFontSize(18)
+  doc.text('DEVIS', 20, 55)
   
-  doc.setFontSize(12)
-  doc.text(`Devis N° : ${quoteNumber}`, 20, 70)
-  doc.text(`Date : ${new Date().toLocaleDateString('fr-FR')}`, 20, 78)
+  // Numéro et date
+  const numeroDevis = generateDevisNumber()
+  const date = new Date().toLocaleDateString('fr-FR')
+  doc.setFontSize(10)
+  doc.text(`Devis N° : ${numeroDevis}`, 20, 65)
+  doc.text(`Date : ${date}`, 20, 70)
+  doc.text('Validité : 30 jours', 20, 75)
   
-  // Informations client
-  doc.setFontSize(14)
-  doc.text('CLIENT', 120, 60)
+  // Infos client
+  doc.setFillColor(240, 240, 240)
+  doc.rect(110, 55, 80, 30, 'F')
   doc.setFontSize(11)
-  doc.text(`${formData.prenom} ${formData.nom}`, 120, 70)
+  doc.text('CLIENT', 115, 62)
+  doc.setFontSize(9)
+  doc.text(formData.nom, 115, 68)
   if (formData.entreprise) {
-    doc.text(formData.entreprise, 120, 78)
+    doc.text(formData.entreprise, 115, 73)
   }
-  doc.text(formData.email, 120, 86)
-  doc.text(formData.telephone, 120, 94)
-  if (formData.adresse || formData.codePostal || formData.ville) {
-    let yPos = 102
-    if (formData.adresse) {
-      doc.text(formData.adresse, 120, yPos)
-      yPos += 8
-    }
-    if (formData.codePostal || formData.ville) {
-      doc.text(`${formData.codePostal || ''} ${formData.ville || ''}`.trim(), 120, yPos)
-    }
-  }
-
+  doc.text(formData.email, 115, 78)
+  doc.text(formData.telephone, 115, 83)
+  
   // Tableau des prestations
+  let yPosition = 95
+  
   const tableData = []
-  let total = 0
-
+  
   // Formule de base
-  if (formData.siteWeb) {
-    tableData.push(['Site Web - Formule de Base', '1', '500 €', '500 €'])
-    total += 500
-  }
-
-  // Options
-  formData.options.forEach(option => {
-    tableData.push([option.nom, option.quantite || '1', `${option.prix} €`, `${option.total} €`])
-    total += option.total
+  tableData.push([
+    tarifs.formuleBase.nom,
+    tarifs.formuleBase.description,
+    `${tarifs.formuleBase.prix}€`
+  ])
+  
+  // Options sélectionnées
+  optionsSelectionnees.forEach(optionId => {
+    const option = tarifs.options.find(o => o.id === optionId)
+    if (option) {
+      tableData.push([
+        option.nom,
+        option.description || '',
+        `${option.prix}€`
+      ])
+    }
   })
-
-  // Ajouter la remise si applicable
-  if (formData.remise && formData.remise.montant > 0) {
-    tableData.push([
-      `Remise (${formData.remise.description})`,
-      '1',
-      `-${formData.remise.montant} €`,
-      `-${formData.remise.montant} €`
-    ])
-    total -= formData.remise.montant
-  }
-
+  
+  // Tableau avec jspdf-autotable
   doc.autoTable({
-    startY: 110,
-    head: [['Description', 'Quantité', 'Prix unitaire', 'Total']],
+    startY: yPosition,
+    head: [['Prestation', 'Description', 'Prix HT']],
     body: tableData,
     theme: 'striped',
-    styles: { fontSize: 10 },
-    headStyles: { fillColor: [0, 115, 168] }
+    headStyles: { fillColor: [0, 115, 168] },
+    columnStyles: {
+      0: { cellWidth: 50 },
+      1: { cellWidth: 100 },
+      2: { cellWidth: 30, halign: 'right' }
+    }
   })
-
-  // Total
-  const finalY = doc.lastAutoTable.finalY + 10
+  
+  // Totaux
+  yPosition = doc.lastAutoTable.finalY + 10
+  
+  const sousTotal = total
+  const montantTVA = sousTotal * 0.20
+  const totalTTC = sousTotal + montantTVA
+  
+  // Si code promo
+  if (codePromo && codePromo.valid) {
+    doc.setFontSize(10)
+    doc.text(`Sous-total HT :`, 130, yPosition)
+    doc.text(`${sousTotal.toFixed(2)}€`, 180, yPosition, { align: 'right' })
+    yPosition += 5
+    
+    doc.text(`Code promo (${codePromo.code}) :`, 130, yPosition)
+    const reduction = codePromo.type === 'pourcentage' 
+      ? `-${codePromo.reduction}%`
+      : `-${codePromo.reduction}€`
+    doc.text(reduction, 180, yPosition, { align: 'right' })
+    yPosition += 5
+  }
+  
+  doc.setFontSize(10)
+  doc.text(`Total HT :`, 130, yPosition)
+  doc.text(`${sousTotal.toFixed(2)}€`, 180, yPosition, { align: 'right' })
+  yPosition += 5
+  
+  doc.text(`TVA (20%) :`, 130, yPosition)
+  doc.text(`${montantTVA.toFixed(2)}€`, 180, yPosition, { align: 'right' })
+  yPosition += 5
+  
   doc.setFontSize(12)
   doc.setFont(undefined, 'bold')
-  doc.text('TOTAL HT :', 140, finalY)
-  doc.text(`${total} €`, 180, finalY, { align: 'right' })
-
-  // Commentaire projet
-  if (formData.commentaire) {
+  doc.text(`Total TTC :`, 130, yPosition)
+  doc.text(`${totalTTC.toFixed(2)}€`, 180, yPosition, { align: 'right' })
+  
+  // Message personnalisé si présent
+  if (formData.message) {
+    yPosition += 15
     doc.setFont(undefined, 'normal')
-    doc.setFontSize(11)
-    doc.text('Description du projet :', 20, finalY + 20)
-    const lines = doc.splitTextToSize(formData.commentaire, 170)
-    doc.text(lines, 20, finalY + 30)
+    doc.setFontSize(10)
+    doc.text('Message du client :', 20, yPosition)
+    yPosition += 5
+    doc.setFontSize(9)
+    const lines = doc.splitTextToSize(formData.message, 170)
+    doc.text(lines, 20, yPosition)
   }
-
-  // Conditions
-  doc.setFontSize(9)
-  doc.setTextColor(100)
-  const bottomY = 270
-  doc.text('Conditions : Devis valable 30 jours. Acompte de 30% à la commande.', 20, bottomY)
-  doc.text('Paiement : Virement bancaire ou chèque', 20, bottomY + 5)
-
-  return doc.output('arraybuffer')
+  
+  // Footer
+  doc.setFontSize(8)
+  doc.setTextColor(128, 128, 128)
+  doc.text('Ce devis est valable 30 jours. Passé ce délai, une nouvelle étude tarifaire sera nécessaire.', 105, 280, { align: 'center' })
+  
+  return { doc, numeroDevis }
 }
 
 export async function POST(request) {
   try {
-    const formData = await request.json()
-    const quoteNumber = generateQuoteNumber()
-
+    const { formData, tarifs, total, optionsSelectionnees, codePromo } = await request.json()
+    
     // Générer le PDF
-    const pdfBuffer = await generatePDF(formData, quoteNumber)
-
-    // Email pour Web Online Concept
-    const adminMailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
-      subject: `Nouvelle demande de devis - ${quoteNumber}`,
-      html: `
-        <h2>Nouvelle demande de devis</h2>
-        <p><strong>Numéro :</strong> ${quoteNumber}</p>
-        <p><strong>Type de projet :</strong> ${
-          formData.typeProjet === 'nouveau' ? 'Création d\'un nouveau site' : 
-          formData.typeProjet === 'remplacement' ? 'Remplacement d\'un site existant' :
-          'Client existant - Ajout d\'options'
-        }</p>
-        <p><strong>Client :</strong> ${formData.prenom} ${formData.nom}</p>
-        ${formData.entreprise ? `<p><strong>Entreprise :</strong> ${formData.entreprise}</p>` : ''}
-        ${formData.siteActuel ? `<p><strong>Site web actuel :</strong> <a href="${formData.siteActuel}">${formData.siteActuel}</a></p>` : ''}
-        <p><strong>Email :</strong> ${formData.email}</p>
-        <p><strong>Téléphone :</strong> ${formData.telephone}</p>
-        ${formData.adresse || formData.codePostal || formData.ville ? `
-          <p><strong>Adresse :</strong><br>
-          ${formData.adresse ? formData.adresse + '<br>' : ''}
-          ${formData.codePostal ? formData.codePostal + ' ' : ''}${formData.ville || ''}
-          </p>
-        ` : ''}
-        <p><strong>Montant total :</strong> ${formData.total} €</p>
-        ${formData.commentaire ? `<p><strong>Projet :</strong><br>${formData.commentaire.replace(/\n/g, '<br>')}</p>` : ''}
-      `,
-      attachments: [{
-        filename: `devis-${quoteNumber}.pdf`,
-        content: Buffer.from(pdfBuffer)
-      }]
+    const { doc, numeroDevis } = generatePDF(formData, tarifs, total, optionsSelectionnees, codePromo)
+    
+    // Convertir le PDF en base64 pour le stocker
+    const pdfBase64 = doc.output('datauristring').split(',')[1]
+    
+    // Calculer les montants
+    const totalHT = total
+    const tva = totalHT * 0.20
+    const totalTTC = totalHT + tva
+    
+    // Préparer les données du devis pour la base
+    const formuleBase = {
+      nom: tarifs.formuleBase.nom,
+      prix: tarifs.formuleBase.prix,
+      description: tarifs.formuleBase.description
     }
-
-    // Email de confirmation pour le client
-    const clientMailOptions = {
+    
+    const optionsDetails = optionsSelectionnees.map(optionId => {
+      const option = tarifs.options.find(o => o.id === optionId)
+      return option ? {
+        id: option.id,
+        nom: option.nom,
+        prix: option.prix,
+        description: option.description
+      } : null
+    }).filter(Boolean)
+    
+    // Récupérer l'IP et user agent (pour info)
+    const ip = request.headers.get('x-forwarded-for') || 'unknown'
+    const userAgent = request.headers.get('user-agent') || 'unknown'
+    
+    // Sauvegarder dans la base de données
+    await query(`
+      INSERT INTO devis (
+        numero, client_nom, client_email, client_telephone, client_entreprise,
+        formule_base, options_selectionnees, 
+        total_ht, tva, total_ttc,
+        code_promo, reduction, type_reduction,
+        statut, pdf_content, message_client,
+        ip_client, user_agent
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)
+    `, [
+      numeroDevis,
+      formData.nom,
+      formData.email,
+      formData.telephone,
+      formData.entreprise || null,
+      JSON.stringify(formuleBase),
+      JSON.stringify(optionsDetails),
+      totalHT,
+      tva,
+      totalTTC,
+      codePromo?.code || null,
+      codePromo?.reduction || 0,
+      codePromo?.type || null,
+      'envoyé',
+      pdfBase64,
+      formData.message || null,
+      ip,
+      userAgent
+    ])
+    
+    // Configuration du transporteur email
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+      }
+    })
+    
+    // Convertir le PDF pour l'attachement email
+    const pdfBuffer = Buffer.from(pdfBase64, 'base64')
+    
+    // Email au client
+    const mailOptionsClient = {
       from: process.env.EMAIL_USER,
       to: formData.email,
-      subject: 'Votre demande de devis - Web Online Concept',
+      subject: `Votre devis Web Online Concept - ${numeroDevis}`,
       html: `
-        <h2>Bonjour ${formData.prenom},</h2>
-        <p>Nous avons bien reçu votre demande de devis.</p>
-        <p>Votre référence : <strong>${quoteNumber}</strong></p>
-        <p>Nous allons étudier votre projet et vous recontacter dans les plus brefs délais.</p>
-        <p>Vous trouverez en pièce jointe le récapitulatif de votre demande.</p>
-        <br>
+        <h2>Bonjour ${formData.nom},</h2>
+        <p>Merci pour votre demande de devis.</p>
+        <p>Vous trouverez ci-joint votre devis personnalisé pour la création de votre site web.</p>
+        <p><strong>Montant total :</strong> ${totalTTC.toFixed(2)}€ TTC</p>
+        <p>Ce devis est valable 30 jours. N'hésitez pas à nous contacter pour toute question.</p>
         <p>Cordialement,<br>L'équipe Web Online Concept</p>
       `,
       attachments: [{
-        filename: `devis-${quoteNumber}.pdf`,
-        content: Buffer.from(pdfBuffer)
+        filename: `Devis_${numeroDevis}.pdf`,
+        content: pdfBuffer
       }]
     }
-
+    
+    // Email à l'admin
+    const mailOptionsAdmin = {
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_USER,
+      subject: `Nouveau devis - ${formData.nom} - ${numeroDevis}`,
+      html: `
+        <h2>Nouveau devis généré</h2>
+        <p><strong>N° :</strong> ${numeroDevis}</p>
+        <p><strong>Client :</strong> ${formData.nom}</p>
+        <p><strong>Email :</strong> ${formData.email}</p>
+        <p><strong>Téléphone :</strong> ${formData.telephone}</p>
+        ${formData.entreprise ? `<p><strong>Entreprise :</strong> ${formData.entreprise}</p>` : ''}
+        <p><strong>Montant :</strong> ${totalTTC.toFixed(2)}€ TTC</p>
+        ${formData.message ? `<p><strong>Message :</strong><br>${formData.message}</p>` : ''}
+        ${codePromo?.code ? `<p><strong>Code promo utilisé :</strong> ${codePromo.code}</p>` : ''}
+      `,
+      attachments: [{
+        filename: `Devis_${numeroDevis}.pdf`,
+        content: pdfBuffer
+      }]
+    }
+    
     // Envoyer les emails
-    await transporter.sendMail(adminMailOptions)
-    await transporter.sendMail(clientMailOptions)
-
+    await transporter.sendMail(mailOptionsClient)
+    await transporter.sendMail(mailOptionsAdmin)
+    
     return NextResponse.json({ 
-      success: true, 
-      quoteNumber,
-      message: 'Devis envoyé avec succès'
+      success: true,
+      numeroDevis,
+      message: 'Devis envoyé avec succès et sauvegardé dans l\'historique'
     })
-
+    
   } catch (error) {
     console.error('Erreur:', error)
     return NextResponse.json(
