@@ -70,14 +70,26 @@ export default function AdminTarifs() {
   }
 
   const handleLogout = async () => {
-    // Supprimer le cookie
-    document.cookie = 'admin-token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
-    // Réinitialiser l'état
-    setIsAuthenticated(false)
-    setPassword('')
-    setMessage('')
-    // Recharger la page pour afficher le formulaire de connexion
-    window.location.reload()
+    try {
+      const res = await fetch('/api/admin/logout', {
+        method: 'POST',
+        credentials: 'include'
+      })
+      
+      if (res.ok) {
+        // Réinitialiser l'état
+        setIsAuthenticated(false)
+        setPassword('')
+        setMessage('')
+        setTarifs({
+          formuleBase: { nom: '', prix: 0, description: '' },
+          options: [],
+          remises: []
+        })
+      }
+    } catch (error) {
+      console.error('Erreur déconnexion:', error)
+    }
   }
 
   const handleSave = async () => {
