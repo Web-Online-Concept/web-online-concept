@@ -70,6 +70,26 @@
       "nom": "Back Office / Interface d'administration",
       "prix": 150,
       "description": "Modifiez vous-même vos textes et images - Formation incluse"
+    },
+    {
+      "id": "emails-pro",
+      "nom": "Emails professionnels",
+      "prix": 60,
+      "unite": "par an",
+      "description": "Adresses email professionnelles @votredomaine.fr"
+    },
+    {
+      "id": "hebergement-domaine",
+      "nom": "Nom de domaine & Hébergement 1 an",
+      "prix": 75,
+      "unite": "par an",
+      "description": "Renouvellement annuel hébergement et nom de domaine"
+    },
+    {
+      "id": "blog-pro",
+      "nom": "Blog professionnel avec back office",
+      "prix": 300,
+      "description": "Module blog complet avec interface de gestion des articles"
     }
   ],
   "remises": [
