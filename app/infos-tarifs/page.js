@@ -60,6 +60,8 @@ export default function InfosTarifs() {
             </div>
             
             <div className="p-8">
+              {/* Processus */}
+              <div className="mb-8">
               <div className="text-center mb-8">
                 <p className="text-5xl font-bold text-[#0073a8] mb-2">500€ HT</p>
                 <p className="text-gray-600 text-lg">
