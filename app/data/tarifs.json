@@ -9,7 +9,8 @@
       "id": "page-supp",
       "nom": "Page supplémentaire",
       "prix": 50,
-      "unite": "par page"
+      "unite": "par page",
+      "description": "Augmentez la taille de votre site selon vos besoins"
     },
     {
       "id": "ecommerce",
@@ -34,7 +35,8 @@
       "id": "redaction",
       "nom": "Rédaction de contenu",
       "prix": 150,
-      "unite": "par page"
+      "unite": "par page",
+      "description": "Nous créons le contenu de vos page à votre demande"
     },
     {
       "id": "logo",
@@ -52,7 +54,8 @@
       "id": "multilangue",
       "nom": "Site multilingue",
       "prix": 500,
-      "unite": "par langue"
+      "unite": "par langue",
+      "description": "Toutes langues disponibles"
     },
     {
       "id": "reservation",
