@@ -77,7 +77,7 @@ export default function AdminTarifs() {
     
     try {
       const res = await fetch('/api/tarifs', {
-        method: 'PUT',
+        method: 'POST',  // Changé de PUT à POST
         headers: { 
           'Content-Type': 'application/json'
         },
