@@ -43,6 +43,7 @@ export default function InfosTarifs() {
             <p className="text-xl text-white/90 max-w-2xl mx-auto">
               Des solutions web adaptées à votre budget
             </p>
+            <h2 className="text-3xl text-yellow-400 mt-4">VERSION TEST - SI VOUS VOYEZ CECI, LE DEPLOIEMENT FONCTIONNE</h2>
           </div>
         </div>
       </section>
