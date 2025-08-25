@@ -105,12 +105,6 @@ export default function Header() {
                 className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#0073a8] to-[#00b4d8] transition-all duration-300 group-hover:w-full"
               />
             </Link>
-            <Link href="/admin-tarifs" className="relative text-gray-700 hover:text-[#0073a8] transition-colors group">
-              Admin
-              <span 
-                className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#0073a8] to-[#00b4d8] transition-all duration-300 group-hover:w-full"
-              />
-            </Link>
             <Link href="/demande-devis" className="bg-[#0073a8] text-white px-6 py-2 rounded-full hover:bg-[#005580] transition-all transform hover:scale-105">
               Devis Gratuit
             </Link>
@@ -147,13 +141,6 @@ export default function Header() {
               onClick={() => setIsMenuOpen(false)}
             >
               Infos & Tarifs
-            </Link>
-            <Link 
-              href="/admin-tarifs" 
-              className="block py-2 text-gray-700 hover:text-[#0073a8]"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Admin
             </Link>
             <Link 
               href="/demande-devis" 

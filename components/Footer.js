@@ -43,6 +43,12 @@ export default function Footer() {
           <p className="text-gray-400 text-sm">
             © 2025 Web Online Concept. Tous droits réservés.
           </p>
+          <Link 
+            href="/admin-tarifs" 
+            className="text-gray-600 hover:text-gray-500 text-xs mt-2 inline-block transition-colors"
+          >
+            Administration
+          </Link>
         </div>
       </div>
     </footer>
