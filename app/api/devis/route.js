@@ -156,6 +156,7 @@ export async function POST(request) {
         }</p>
         <p><strong>Client :</strong> ${formData.prenom} ${formData.nom}</p>
         ${formData.entreprise ? `<p><strong>Entreprise :</strong> ${formData.entreprise}</p>` : ''}
+        ${formData.siteActuel ? `<p><strong>Site web actuel :</strong> <a href="${formData.siteActuel}">${formData.siteActuel}</a></p>` : ''}
         <p><strong>Email :</strong> ${formData.email}</p>
         <p><strong>Téléphone :</strong> ${formData.telephone}</p>
         ${formData.adresse || formData.codePostal || formData.ville ? `

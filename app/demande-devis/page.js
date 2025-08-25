@@ -16,10 +16,11 @@ export default function DemandeDevis() {
     entreprise: '',
     email: '',
     telephone: '',
+    siteActuel: '',
     adresse: '',
     codePostal: '',
     ville: '',
-    typeProjet: 'nouveau', // 'nouveau' ou 'remplacement'
+    typeProjet: 'nouveau', // 'nouveau' ou 'remplacement' ou 'client-existant'
     siteWeb: true,
     options: {},
     codePromo: '',
@@ -187,29 +188,28 @@ export default function DemandeDevis() {
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-2xl font-bold mb-6 text-gray-800">Vos informations</h2>
             <div className="grid md:grid-cols-2 gap-4">
-              <div>
+              <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Prénom *
+                  Nom et Prénom *
                 </label>
-                <input
-                  type="text"
-                  required
-                  value={formData.prenom}
-                  onChange={(e) => setFormData({...formData, prenom: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Nom *
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={formData.nom}
-                  onChange={(e) => setFormData({...formData, nom: e.target.value})}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
-                />
+                <div className="grid grid-cols-2 gap-2">
+                  <input
+                    type="text"
+                    required
+                    placeholder="Prénom"
+                    value={formData.prenom}
+                    onChange={(e) => setFormData({...formData, prenom: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
+                  />
+                  <input
+                    type="text"
+                    required
+                    placeholder="Nom"
+                    value={formData.nom}
+                    onChange={(e) => setFormData({...formData, nom: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
+                  />
+                </div>
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -234,6 +234,20 @@ export default function DemandeDevis() {
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
                 />
               </div>
+              {(formData.typeProjet === 'remplacement' || formData.typeProjet === 'client-existant') && (
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Adresse de votre site web actuel
+                  </label>
+                  <input
+                    type="url"
+                    placeholder="https://www.mon-site.fr"
+                    value={formData.siteActuel}
+                    onChange={(e) => setFormData({...formData, siteActuel: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
+                  />
+                </div>
+              )}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Email *
