@@ -49,7 +49,7 @@ function ConfirmationContent() {
                   2
                 </span>
                 <p className="ml-3 text-gray-700">
-                  Si vous acceptez le devis, envoyez dès maintenant le paiement des 50% du solde
+                  Si vous acceptez le devis, envoyez dès que possible le paiement des 50% du solde total (infos sur le devis)
                 </p>
               </div>
               <div className="flex items-start">
