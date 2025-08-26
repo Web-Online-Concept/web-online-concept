@@ -67,11 +67,15 @@ export async function GET(request) {
     
     // Compter le total pour la pagination
     const countQuery = `SELECT COUNT(*) FROM devis ${whereClause}`
+    console.log('Executing query:', countQuery)
     const countResult = await query(countQuery, queryParams)
+    console.log('Query executed successfully', { duration: Date.now() - Date.now(), rows: countResult.rows.length })
     const totalCount = parseInt(countResult.rows[0].count)
     
-    // Récupérer les devis
-    queryParams.push(limit, offset)
+    // Récupérer les devis - Construire la requête avec les paramètres corrects
+    const limitParam = paramIndex++
+    const offsetParam = paramIndex++
+    
     const devisQuery = `
       SELECT 
         id, numero, date_creation, client_nom, client_email, 
@@ -80,8 +84,14 @@ export async function GET(request) {
       FROM devis 
       ${whereClause}
       ORDER BY ${sortBy} ${sortOrder}
-      LIMIT ${paramIndex} OFFSET ${paramIndex + 1}
+      LIMIT $${limitParam} OFFSET $${offsetParam}
     `
+    
+    console.log('Executing query:', devisQuery.trim().replace(/\s+/g, ' '))
+    
+    // Ajouter limit et offset aux paramètres
+    queryParams.push(limit)
+    queryParams.push(offset)
     
     const devisResult = await query(devisQuery, queryParams)
     
@@ -96,6 +106,8 @@ export async function GET(request) {
     })
     
   } catch (error) {
+    console.error('Database query error:', error)
+    console.error('Query was:', error.query)
     console.error('Erreur lecture devis:', error)
     return NextResponse.json(
       { error: 'Erreur lors de la lecture des devis' },
