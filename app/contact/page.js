@@ -175,9 +175,6 @@ export default function Contact() {
                   web.online.concept@gmail.com
                 </a>
               </p>
-              <p className="text-gray-600 mt-2">
-                Adresse : Rue Paul Estival, 31200 Toulouse
-              </p>
             </div>
           </div>
         </section>
