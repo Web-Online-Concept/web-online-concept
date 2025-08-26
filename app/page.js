@@ -22,26 +22,28 @@ export default function Home() {
         {/* Contenu */}
         <div className="container max-w-7xl mx-auto px-4 relative z-10">
           <div className="text-white text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)'}}>
-              <span className="block animate-slide-up">
-                Votre présence web
-              </span>
-              <span className="block text-yellow-300 animate-slide-up-delay-1" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
-                commence ici
-              </span>
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 animate-slide-up-delay-2" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)'}}>
-              Création de sites web professionnels à prix accessibles.
-              <br className="hidden md:block" />
-              Une solution clé en main pour votre entreprise.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-delay">
-              <Link href="/demande-devis" className="bg-white text-[#0073a8] px-8 py-4 rounded-full font-semibold hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg text-center whitespace-nowrap">
-                Obtenir un devis gratuit
-              </Link>
-              <Link href="#services" className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-[#0073a8] transition-all text-center whitespace-nowrap">
-                Découvrir nos services
-              </Link>
+            <div className="bg-[#00334d]/80 backdrop-blur-sm p-8 md:p-12 rounded-2xl">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)'}}>
+                <span className="block animate-slide-up">
+                  Votre présence web
+                </span>
+                <span className="block text-yellow-300 animate-slide-up-delay-1" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                  commence ici
+                </span>
+              </h1>
+              <p className="text-xl md:text-2xl mb-8 animate-slide-up-delay-2" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)'}}>
+                Création de sites web professionnels à prix accessibles.
+                <br className="hidden md:block" />
+                Une solution clé en main pour votre entreprise.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-delay">
+                <Link href="/demande-devis" className="bg-white text-[#0073a8] px-8 py-4 rounded-full font-semibold hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg text-center whitespace-nowrap">
+                  Obtenir un devis gratuit
+                </Link>
+                <Link href="#services" className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-[#0073a8] transition-all text-center whitespace-nowrap">
+                  Découvrir nos services
+                </Link>
+              </div>
             </div>
           </div>
         </div>
