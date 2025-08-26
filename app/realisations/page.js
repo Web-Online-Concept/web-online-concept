@@ -41,7 +41,7 @@ export default function Realisations() {
               Nos Réalisations
             </h1>
             <p className="text-xl text-white/90 max-w-2xl mx-auto">
-              Découvrez quelques-uns des sites web que nous avons créés pour nos clients
+              Divers sites web réalisés pour nos clients
             </p>
           </div>
         </div>
