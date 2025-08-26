@@ -245,7 +245,7 @@ export async function POST(request) {
         <h3>Prochaines étapes :</h3>
         <ol>
           <li>Nous allons étudier votre demande et vous enverrons dans les 24/48h un devis personnalisé</li>
-          <li>Si vous acceptez le devis, envoyez dès maintenant le paiement des 50% du solde</li>
+          <li>Si vous acceptez le devis, faites rapidement le paiement des 50% du solde (infos sur le devis)</li>
           <li>Une fois votre paiement reçu, nous vous contacterons rapidement par téléphone afin de faire le point sur le projet</li>
         </ol>
         <p>Pour toute question, contactez-nous à : web.online.concept@gmail.com</p>
