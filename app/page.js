@@ -101,7 +101,7 @@ export default function Home() {
                   <svg className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>Hébergement 1 an inclus</span>
+                  <span>Hébergement & Domaine 1 an inclus</span>
                 </li>
               </ul>
               <div className="mt-6 text-center">
@@ -117,7 +117,7 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Ajoutez vos Options</h3>
               <p className="text-gray-600 text-center mb-6">
-                Personnalisez selon vos besoins réels
+                Personnalisez votre site selon vos besoins réels
               </p>
               <ul className="space-y-3">
                 <li className="flex items-start">
@@ -130,7 +130,13 @@ export default function Home() {
                   <svg className="w-5 h-5 text-yellow-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                   </svg>
-                  <span>E-commerce / Boutique</span>
+                  <span>Blog / E-commerce / Boutique...</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="w-5 h-5 text-yellow-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
+                  <span>Rédaction de contenu</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-5 h-5 text-yellow-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
@@ -158,7 +164,7 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Votre Site Unique</h3>
               <p className="text-gray-600 text-center mb-6">
-                Un site web professionnel adapté à votre budget
+                Résultat conforme à vos besoins : Un tarif détaillé et optimisé pour votre site
               </p>
               <ul className="space-y-3">
                 <li className="flex items-start">
@@ -166,6 +172,12 @@ export default function Home() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   <span>Adapté à votre budget</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="w-5 h-5 text-[#0073a8] mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Correspond à vos besoins</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-5 h-5 text-[#0073a8] mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
