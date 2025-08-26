@@ -103,7 +103,7 @@ export default function AdminRealisations() {
       })
       
       if (res.ok) {
-        setMessage(`✔ Réalisation ${editingId ? 'modifiée' : 'ajoutée'} avec succès`)
+        setMessage(`✓ Réalisation ${editingId ? 'modifiée' : 'ajoutée'} avec succès`)
         resetForm()
         checkAuth()
       } else {
@@ -136,7 +136,7 @@ export default function AdminRealisations() {
         })
         
         if (res.ok) {
-          setMessage('✔ Réalisation supprimée')
+          setMessage('✓ Réalisation supprimée')
           checkAuth()
         } else {
           setMessage('Erreur lors de la suppression')
@@ -208,6 +208,12 @@ export default function AdminRealisations() {
               Gestion des Devis
             </button>
             <button
+              onClick={() => router.push('/admin-realisations')}
+              className="bg-gray-600 text-white px-6 py-2 rounded-lg"
+            >
+              Gestion des Réalisations
+            </button>
+            <button
               onClick={() => router.push('/admin-tarifs')}
               className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
             >
@@ -224,7 +230,7 @@ export default function AdminRealisations() {
 
         {message && (
           <div className={`mb-6 p-4 rounded-lg ${
-            message.includes('✔') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+            message.includes('✓') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
           }`}>
             {message}
           </div>

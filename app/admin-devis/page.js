@@ -187,6 +187,10 @@ export default function AdminDevis() {
     }
   }
 
+  const downloadPDF = (devisId) => {
+    window.open(`/api/devis/${devisId}/pdf`, '_blank')
+  }
+
   const formatDate = (date) => {
     return new Date(date).toLocaleDateString('fr-FR', {
       day: '2-digit',
@@ -249,12 +253,32 @@ export default function AdminDevis() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold">Gestion des Devis</h1>
-          <button
-            onClick={handleLogout}
-            className="bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-700"
-          >
-            Déconnexion
-          </button>
+          <div className="flex gap-4">
+            <button
+              onClick={() => router.push('/admin-devis')}
+              className="bg-gray-600 text-white px-6 py-2 rounded-lg"
+            >
+              Gestion des Devis
+            </button>
+            <button
+              onClick={() => router.push('/admin-realisations')}
+              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
+            >
+              Gestion des Réalisations
+            </button>
+            <button
+              onClick={() => router.push('/admin-tarifs')}
+              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
+            >
+              Gestion des Tarifs
+            </button>
+            <button
+              onClick={handleLogout}
+              className="bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-700"
+            >
+              Déconnexion
+            </button>
+          </div>
         </div>
 
         {message && (

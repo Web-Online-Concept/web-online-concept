@@ -107,7 +107,7 @@ export default function AdminTarifs() {
       })
       
       if (res.ok) {
-        setMessage('✔ Tarifs sauvegardés avec succès')
+        setMessage('✓ Tarifs sauvegardés avec succès')
       } else if (res.status === 401) {
         setMessage('Session expirée, veuillez vous reconnecter')
         setIsAuthenticated(false)
@@ -245,6 +245,12 @@ export default function AdminTarifs() {
               Gestion des Réalisations
             </button>
             <button
+              onClick={() => router.push('/admin-tarifs')}
+              className="bg-gray-600 text-white px-6 py-2 rounded-lg"
+            >
+              Gestion des Tarifs
+            </button>
+            <button
               onClick={handleSave}
               disabled={saving}
               className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 disabled:opacity-50"
@@ -262,7 +268,7 @@ export default function AdminTarifs() {
 
         {message && (
           <div className={`mb-6 p-4 rounded-lg ${
-            message.includes('✔') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+            message.includes('✓') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
           }`}>
             {message}
           </div>
