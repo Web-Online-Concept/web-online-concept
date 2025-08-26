@@ -327,7 +327,7 @@ export default function Home() {
               <div className="border-4 border-[#0073a8] rounded-2xl overflow-hidden shadow-lg">
                 <Image
                   src="/images/seo-google.jpg"
-                  alt="Référencement Google SEO"
+                  alt="Optimisation référencement Google SEO"
                   width={600}
                   height={400}
                   className="w-full h-auto"

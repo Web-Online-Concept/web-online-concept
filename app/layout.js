@@ -60,8 +60,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fr">
       <head>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" href="/images/favicon.ico" />
+        <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
       </head>
       <body className={inter.className}>
         <Header />
@@ -77,9 +77,14 @@ export default function RootLayout({ children }) {
               "description": "Création de sites web professionnels à prix accessible",
               "url": "https://web-online-concept.vercel.app",
               "telephone": "+33646170207",
+              "email": "web.online.concept@gmail.com",
               "priceRange": "€€",
               "address": {
                 "@type": "PostalAddress",
+                "streetAddress": "rue Paul Estival",
+                "addressLocality": "Toulouse",
+                "addressRegion": "Occitanie",
+                "postalCode": "31200",
                 "addressCountry": "FR"
               },
               "openingHoursSpecification": {
@@ -87,7 +92,11 @@ export default function RootLayout({ children }) {
                 "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
                 "opens": "09:00",
                 "closes": "18:00"
-              }
+              },
+              "sameAs": [
+                "https://www.facebook.com/webonlineconcept",
+                "https://www.linkedin.com/company/web-online-concept"
+              ]
             })
           }}
         />
