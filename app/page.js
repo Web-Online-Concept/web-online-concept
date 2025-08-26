@@ -1,223 +1,222 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import Image from 'next/image'
 
 export default function Home() {
   const router = useRouter()
-  const [expandedService, setExpandedService] = useState(null)
+  const [openFaq, setOpenFaq] = useState(null)
 
-  const services = [
+  const faqs = [
     {
-      title: 'Site Vitrine',
-      description: 'Présentez votre activité avec élégance',
-      details: 'Un site web professionnel pour présenter votre entreprise, vos services et vos valeurs. Design moderne et responsive.',
-      image: '/images/site-vitrine.jpg'
+      question: "Combien de temps pour créer mon site ?",
+      answer: "En général, un site vitrine est livré en 2 à 3 semaines, et un e-commerce en 4 à 6 semaines."
     },
     {
-      title: 'E-commerce',
-      description: 'Vendez en ligne 24/7',
-      details: 'Boutique en ligne complète avec gestion des stocks, paiements sécurisés et interface d\'administration.',
-      image: '/images/ecommerce.jpg'
+      question: "Puis-je modifier mon site moi-même ?",
+      answer: "Oui ! Tous nos sites incluent une interface d'administration simple pour gérer vos contenus."
     },
     {
-      title: 'Application Web',
-      description: 'Solutions sur mesure pour votre métier',
-      details: 'Développement d\'applications web spécifiques à vos besoins : CRM, gestion, réservation, etc.',
-      image: '/images/app-web.jpg'
-    },
-    {
-      title: 'Refonte de Site',
-      description: 'Modernisez votre présence en ligne',
-      details: 'Transformation complète de votre site existant avec les dernières technologies et tendances du web.',
-      image: '/images/refonte.jpg'
+      question: "Le référencement est-il inclus ?",
+      answer: "Le référencement de base (SEO) est inclus dans toutes nos formules. Des options avancées sont disponibles."
     }
   ]
 
   return (
     <main className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-600 to-purple-700 text-white pt-32 pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Créons ensemble votre présence digitale
+      {/* Hero avec vidéo */}
+      <section className="relative h-screen overflow-hidden">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/videos/hero-background.mp4" type="video/mp4" />
+        </video>
+        
+        <div className="absolute inset-0 bg-black bg-opacity-50" />
+        
+        <div className="relative z-10 h-full flex items-center justify-center text-white">
+          <div className="text-center px-4">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
+              Votre Vision, Notre Code
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-blue-100">
-              Sites web professionnels et solutions digitales sur mesure
+            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+              Créons ensemble des expériences web exceptionnelles qui propulsent votre entreprise vers de nouveaux sommets
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
                 onClick={() => router.push('/devis')}
-                className="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-blue-50 transition duration-200"
+                className="bg-gradient-to-r from-purple-600 to-blue-600 px-8 py-4 rounded-full font-semibold hover:scale-105 transition duration-300 shadow-lg"
               >
-                Devis Gratuit
+                Démarrer mon projet
               </button>
               <button 
                 onClick={() => router.push('/realisations')}
-                className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition duration-200"
+                className="bg-transparent border-2 border-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-black transition duration-300"
               >
-                Voir nos réalisations
+                Voir nos créations
               </button>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* Services Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Nos Services
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.map((service, index) => (
-              <div 
-                key={index}
-                className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-200 cursor-pointer"
-                onClick={() => setExpandedService(expandedService === index ? null : index)}
-              >
-                <Image
-                  src={service.image}
-                  alt={service.title}
-                  width={400}
-                  height={300}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2">{service.title}</h3>
-                  <p className="text-gray-600 mb-4">{service.description}</p>
-                  {expandedService === index && (
-                    <p className="text-sm text-gray-500">{service.details}</p>
-                  )}
-                  <button className="text-blue-600 font-semibold hover:text-blue-800">
-                    {expandedService === index ? 'Réduire' : 'En savoir plus'}
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
+        {/* Indicateur de scroll */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
         </div>
       </section>
 
-      {/* Formules Section */}
-      <section className="py-20 bg-gray-50">
+      {/* Section Formules */}
+      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
             Votre site web à la carte
           </h2>
-          <p className="text-xl text-center text-gray-600 mb-12">
-            Choisissez une formule de base et ajoutez les options dont vous avez besoin
+          <p className="text-xl text-center text-gray-600 mb-16 max-w-3xl mx-auto">
+            Des solutions flexibles qui s'adaptent à vos besoins et votre budget
           </p>
           
+          {/* Cartes de formules avec effet 3D */}
           <div className="grid md:grid-cols-3 gap-8">
-            {/* Formule Essentielle */}
-            <div className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition duration-200">
-              <h3 className="text-2xl font-bold mb-4">Essentielle</h3>
-              <p className="text-4xl font-bold text-blue-600 mb-6">490€</p>
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-center">
-                  <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Design professionnel
-                </li>
-                <li className="flex items-center">
-                  <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  5 pages
-                </li>
-                <li className="flex items-center">
-                  <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Responsive mobile
-                </li>
-              </ul>
-              <button 
-                onClick={() => router.push('/tarifs')}
-                className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700"
-              >
-                Découvrir
-              </button>
+            <div className="group relative bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="relative">
+                <h3 className="text-2xl font-bold mb-2">Starter</h3>
+                <p className="text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">490€</p>
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-start">
+                    <svg className="w-6 h-6 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span>Design moderne et responsive</span>
+                  </li>
+                  <li className="flex items-start">
+                    <svg className="w-6 h-6 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span>5 pages optimisées</span>
+                  </li>
+                  <li className="flex items-start">
+                    <svg className="w-6 h-6 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span>Formulaire de contact</span>
+                  </li>
+                </ul>
+                <button 
+                  onClick={() => router.push('/tarifs')}
+                  className="w-full bg-gray-900 text-white py-3 rounded-xl font-semibold hover:bg-gray-800 transition duration-300"
+                >
+                  En savoir plus
+                </button>
+              </div>
             </div>
 
-            {/* Formule Professionnelle */}
-            <div className="bg-blue-600 text-white rounded-lg shadow-lg p-8 hover:shadow-xl transition duration-200 transform scale-105">
-              <div className="text-sm bg-yellow-400 text-gray-800 inline-block px-3 py-1 rounded-full mb-4">
+            <div className="group relative bg-gradient-to-br from-purple-600 to-blue-600 rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 scale-105">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-gray-900 px-4 py-1 rounded-full text-sm font-bold">
                 Plus populaire
               </div>
-              <h3 className="text-2xl font-bold mb-4">Professionnelle</h3>
-              <p className="text-4xl font-bold mb-6">990€</p>
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-center">
-                  <svg className="w-5 h-5 text-white mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              <h3 className="text-2xl font-bold mb-2 text-white">Business</h3>
+              <p className="text-5xl font-bold mb-6 text-white">990€</p>
+              <ul className="space-y-4 mb-8 text-white">
+                <li className="flex items-start">
+                  <svg className="w-6 h-6 text-white mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  Tout de l'Essentielle
+                  <span>Tout du pack Starter +</span>
                 </li>
-                <li className="flex items-center">
-                  <svg className="w-5 h-5 text-white mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                <li className="flex items-start">
+                  <svg className="w-6 h-6 text-white mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  10 pages
+                  <span>10 pages + Blog</span>
                 </li>
-                <li className="flex items-center">
-                  <svg className="w-5 h-5 text-white mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                <li className="flex items-start">
+                  <svg className="w-6 h-6 text-white mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  Animations avancées
+                  <span>Animations avancées</span>
                 </li>
               </ul>
               <button 
                 onClick={() => router.push('/tarifs')}
-                className="w-full bg-white text-blue-600 py-3 rounded-lg font-semibold hover:bg-gray-100"
+                className="w-full bg-white text-gray-900 py-3 rounded-xl font-semibold hover:bg-gray-100 transition duration-300"
               >
-                Découvrir
+                En savoir plus
               </button>
             </div>
 
-            {/* Formule Premium */}
-            <div className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition duration-200">
-              <h3 className="text-2xl font-bold mb-4">Premium</h3>
-              <p className="text-4xl font-bold text-blue-600 mb-6">1990€</p>
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-center">
-                  <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Tout de la Pro
-                </li>
-                <li className="flex items-center">
-                  <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Pages illimitées
-                </li>
-                <li className="flex items-center">
-                  <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  E-commerce inclus
-                </li>
-              </ul>
-              <button 
-                onClick={() => router.push('/tarifs')}
-                className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700"
-              >
-                Découvrir
-              </button>
+            <div className="group relative bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="relative">
+                <h3 className="text-2xl font-bold mb-2">Premium</h3>
+                <p className="text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">1990€</p>
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-start">
+                    <svg className="w-6 h-6 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span>Tout du pack Business +</span>
+                  </li>
+                  <li className="flex items-start">
+                    <svg className="w-6 h-6 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span>E-commerce complet</span>
+                  </li>
+                  <li className="flex items-start">
+                    <svg className="w-6 h-6 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span>Applications sur mesure</span>
+                  </li>
+                </ul>
+                <button 
+                  onClick={() => router.push('/tarifs')}
+                  className="w-full bg-gray-900 text-white py-3 rounded-xl font-semibold hover:bg-gray-800 transition duration-300"
+                >
+                  En savoir plus
+                </button>
+              </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="text-center mt-8">
-            <p className="text-gray-600">
-              Besoin de plus d'options ? 
-              <button onClick={() => router.push('/tarifs')} className="text-blue-600 font-semibold ml-2 hover:underline">
-                Voir tous les détails et options
-              </button>
-            </p>
+      {/* Section FAQ moderne */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+            Questions fréquentes
+          </h2>
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition duration-200"
+                >
+                  <span className="font-semibold text-gray-900">{faq.question}</span>
+                  <svg 
+                    className={`w-5 h-5 text-gray-500 transform transition-transform duration-200 ${openFaq === index ? 'rotate-180' : ''}`} 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                {openFaq === index && (
+                  <div className="px-6 py-4 border-t">
+                    <p className="text-gray-600">{faq.answer}</p>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -267,7 +266,7 @@ export default function Home() {
       </section>
 
       {/* Statistiques */}
-      <section className="py-20 bg-blue-600 text-white">
+      <section className="py-20 bg-gradient-to-r from-purple-600 to-blue-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <div>
@@ -401,7 +400,7 @@ export default function Home() {
           </p>
           <button 
             onClick={() => router.push('/contact')}
-            className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition duration-200"
+            className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:scale-105 transition duration-300 shadow-lg"
           >
             Commencer mon projet
           </button>
