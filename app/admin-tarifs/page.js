@@ -1,4 +1,14 @@
-'use client'
+<button
+              onClick={() => router.push('/admin-devis')}
+              className="bg-blue-600 text-white px-6 py-4 min-h-[48px] rounded-lg hover:bg-blue-700"
+            >
+              Gestion des Devis
+            </button>
+            <button
+              onClick={() => router.push('/admin-realisations')}
+              className="bg-blue-600 text-white px-6 py-4 min-h-[48px] rounded-lg hover:bg-blue-700"
+            >
+              G'use client'
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
@@ -234,32 +244,32 @@ export default function AdminTarifs() {
           <div className="flex gap-4">
             <button
               onClick={() => router.push('/admin-devis')}
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
+              className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700"
             >
               Gestion des Devis
             </button>
             <button
               onClick={() => router.push('/admin-realisations')}
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
+              className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700"
             >
               Gestion des Réalisations
             </button>
             <button
               onClick={() => router.push('/admin-tarifs')}
-              className="bg-gray-600 text-white px-6 py-3 rounded-lg"
+              className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg"
             >
               Gestion des Tarifs
             </button>
             <button
               onClick={handleSave}
               disabled={saving}
-              className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 disabled:opacity-50"
+              className="bg-green-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-green-700 disabled:opacity-50"
             >
               {saving ? 'Enregistrement...' : 'Sauvegarder'}
             </button>
             <button
               onClick={handleLogout}
-              className="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700"
+              className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-gray-700"
             >
               Déconnexion
             </button>

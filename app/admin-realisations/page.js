@@ -203,25 +203,25 @@ export default function AdminRealisations() {
           <div className="flex gap-4">
             <button
               onClick={() => router.push('/admin-devis')}
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
+              className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700"
             >
               Gestion des Devis
             </button>
             <button
               onClick={() => router.push('/admin-realisations')}
-              className="bg-gray-600 text-white px-6 py-3 rounded-lg"
+              className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg"
             >
               Gestion des Réalisations
             </button>
             <button
               onClick={() => router.push('/admin-tarifs')}
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
+              className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700"
             >
               Gestion des Tarifs
             </button>
             <button
               onClick={handleLogout}
-              className="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700"
+              className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-gray-700"
             >
               Déconnexion
             </button>
