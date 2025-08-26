@@ -297,6 +297,100 @@ export default function Home() {
         </div>
       </section>
 
+      {/* SEO Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-800 mb-4">
+              Optimisation du référencement Web
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Nous optimisons votre site pour améliorer votre visibilité dans les résultats des meilleurs moteurs de recherche
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Image à gauche */}
+            <div className="flex justify-center order-2 md:order-1">
+              <div className="border-4 border-[#0073a8] rounded-2xl overflow-hidden shadow-lg">
+                <Image
+                  src="/images/seo-google.jpg"
+                  alt="Référencement Google SEO"
+                  width={600}
+                  height={400}
+                  className="w-full h-auto"
+                />
+              </div>
+            </div>
+
+            {/* Texte à droite */}
+            <div className="space-y-6 order-1 md:order-2">
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-[#0073a8] rounded-full flex items-center justify-center">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">Audit SEO complet de votre site</h3>
+                  <p className="text-gray-600">Nous analysons chaque page pour identifier les points d'amélioration et maximiser votre visibilité.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-[#0073a8] rounded-full flex items-center justify-center">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">Optimisation technique et contenu</h3>
+                  <p className="text-gray-600">Vitesse de chargement, balises méta, mots-clés stratégiques : tout est optimisé pour Google.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-[#0073a8] rounded-full flex items-center justify-center">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">Suivi et amélioration continue</h3>
+                  <p className="text-gray-600">Rapports mensuels de positionnement et ajustements pour maintenir votre site en tête des résultats.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-[#0073a8] rounded-full flex items-center justify-center">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">Référencement local ciblé</h3>
+                  <p className="text-gray-600">Soyez visible pour vos clients locaux avec une stratégie SEO adaptée à votre zone géographique.</p>
+                </div>
+              </div>
+
+              <div className="mt-8 bg-gradient-to-r from-[#0073a8] to-[#006a87] rounded-xl p-6 text-white">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <svg className="w-10 h-10 text-yellow-300" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-lg font-bold">Notre expertise à votre service</p>
+                    <p className="text-sm opacity-90">Des années d'expérience en référencement pour propulser votre site</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-[#0073a8] to-[#006a87]">
         <div className="container max-w-7xl mx-auto px-4 text-center">
