@@ -64,8 +64,8 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* Formule de Base */}
-            <div className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all">
-              <div className="w-20 h-20 bg-[#0073a8] rounded-full flex items-center justify-center mb-6 mx-auto">
+            <div className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group">
+              <div className="w-20 h-20 bg-[#0073a8] rounded-full flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300">
                 <span className="text-3xl font-bold text-white">1</span>
               </div>
               <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">La Formule de Base</h3>
@@ -105,14 +105,14 @@ export default function Home() {
                 </li>
               </ul>
               <div className="mt-6 text-center">
-                <p className="text-3xl font-bold text-[#0073a8]">500€</p>
+                <p className="text-3xl font-bold text-[#0073a8] group-hover:scale-110 transition-transform duration-300">500€</p>
                 <p className="text-sm text-gray-500">Prix fixe transparent</p>
               </div>
             </div>
 
             {/* Options */}
-            <div className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all">
-              <div className="w-20 h-20 bg-[#0073a8] rounded-full flex items-center justify-center mb-6 mx-auto">
+            <div className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group">
+              <div className="w-20 h-20 bg-[#0073a8] rounded-full flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300">
                 <span className="text-3xl font-bold text-white">2</span>
               </div>
               <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Ajoutez vos Options</h3>
@@ -121,45 +121,45 @@ export default function Home() {
               </p>
               <ul className="space-y-3">
                 <li className="flex items-start">
-                  <svg className="w-5 h-5 text-yellow-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-yellow-500 mr-2 flex-shrink-0 mt-0.5 group-hover:rotate-12 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                   </svg>
                   <span>Pages supplémentaires</span>
                 </li>
                 <li className="flex items-start">
-                  <svg className="w-5 h-5 text-yellow-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-yellow-500 mr-2 flex-shrink-0 mt-0.5 group-hover:rotate-12 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                   </svg>
                   <span>Blog / E-commerce / Boutique...</span>
                 </li>
                 <li className="flex items-start">
-                  <svg className="w-5 h-5 text-yellow-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-yellow-500 mr-2 flex-shrink-0 mt-0.5 group-hover:rotate-12 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                   </svg>
                   <span>Rédaction de contenu</span>
                 </li>
                 <li className="flex items-start">
-                  <svg className="w-5 h-5 text-yellow-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-yellow-500 mr-2 flex-shrink-0 mt-0.5 group-hover:rotate-12 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                   </svg>
                   <span>Référencement SEO</span>
                 </li>
                 <li className="flex items-start">
-                  <svg className="w-5 h-5 text-yellow-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-yellow-500 mr-2 flex-shrink-0 mt-0.5 group-hover:rotate-12 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                   </svg>
                   <span>Maintenance mensuelle</span>
                 </li>
               </ul>
               <div className="mt-6 text-center">
-                <p className="text-3xl font-bold text-[#0073a8]">À la carte</p>
+                <p className="text-3xl font-bold text-[#0073a8] group-hover:scale-110 transition-transform duration-300">À la carte</p>
                 <p className="text-sm text-gray-500">Payez uniquement ce dont vous avez besoin</p>
               </div>
             </div>
 
             {/* Résultat */}
-            <div className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all">
-              <div className="w-20 h-20 bg-[#0073a8] rounded-full flex items-center justify-center mb-6 mx-auto">
+            <div className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group">
+              <div className="w-20 h-20 bg-[#0073a8] rounded-full flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300">
                 <span className="text-3xl font-bold text-white">3</span>
               </div>
               <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Votre Site Unique</h3>
@@ -199,7 +199,7 @@ export default function Home() {
                 </li>
               </ul>
               <div className="mt-6 text-center">
-                <p className="text-3xl font-bold text-[#0073a8]">100% Vous</p>
+                <p className="text-3xl font-bold text-[#0073a8] group-hover:scale-110 transition-transform duration-300">100% Vous</p>
                 <p className="text-sm text-gray-500">Un site qui vous ressemble</p>
               </div>
             </div>
@@ -310,7 +310,7 @@ export default function Home() {
       </section>
 
       {/* SEO Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-100">
         <div className="container max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">
@@ -404,7 +404,7 @@ export default function Home() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-20">
+      <section className="py-20 bg-white">
         <div className="container max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">
