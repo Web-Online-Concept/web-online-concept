@@ -322,8 +322,8 @@ export default function DemandeDevis() {
                   Site web actuel
                 </label>
                 <input
-                  type="url"
-                  placeholder="https://www.mon-site.fr"
+                  type="text"
+                  placeholder="www.mon-site.fr"
                   value={formData.siteActuel}
                   onChange={(e) => setFormData({...formData, siteActuel: e.target.value})}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
