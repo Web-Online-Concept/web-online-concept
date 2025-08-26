@@ -101,15 +101,13 @@ function generatePDF(formData, tarifs, total, optionsSelectionnees, codePromo) {
   // Totaux
   yPosition = doc.lastAutoTable.finalY + 10
   
-  const sousTotal = total
-  const montantTVA = sousTotal * 0.20
-  const totalTTC = sousTotal + montantTVA
+  const total = total
   
   // Si code promo
   if (codePromo && codePromo.valid) {
     doc.setFontSize(10)
     doc.text(`Sous-total HT :`, 130, yPosition)
-    doc.text(`${sousTotal.toFixed(2)}€`, 180, yPosition, { align: 'right' })
+    doc.text(`${total.toFixed(2)}€`, 180, yPosition, { align: 'right' })
     yPosition += 5
     
     doc.text(`Code promo (${codePromo.code}) :`, 130, yPosition)
@@ -122,17 +120,17 @@ function generatePDF(formData, tarifs, total, optionsSelectionnees, codePromo) {
   
   doc.setFontSize(10)
   doc.text(`Total HT :`, 130, yPosition)
-  doc.text(`${sousTotal.toFixed(2)}€`, 180, yPosition, { align: 'right' })
+  doc.text(`${total.toFixed(2)}€`, 180, yPosition, { align: 'right' })
   yPosition += 5
   
-  doc.text(`TVA (20%) :`, 130, yPosition)
-  doc.text(`${montantTVA.toFixed(2)}€`, 180, yPosition, { align: 'right' })
+  doc.text(`TVA (0%) :`, 130, yPosition)
+  doc.text(`0.00€`, 180, yPosition, { align: 'right' })
   yPosition += 5
   
   doc.setFontSize(12)
   doc.setFont(undefined, 'bold')
-  doc.text(`Total TTC :`, 130, yPosition)
-  doc.text(`${totalTTC.toFixed(2)}€`, 180, yPosition, { align: 'right' })
+  doc.text(`Total :`, 130, yPosition)
+  doc.text(`${total.toFixed(2)}€`, 180, yPosition, { align: 'right' })
   
   // Message personnalisé si présent
   if (formData.message) {
@@ -164,10 +162,8 @@ export async function POST(request) {
     // Convertir le PDF en base64 pour le stocker
     const pdfBase64 = doc.output('datauristring').split(',')[1]
     
-    // Calculer les montants
+    // Pas de TVA pour micro-entreprise
     const totalHT = total
-    const tva = totalHT * 0.20
-    const totalTTC = totalHT + tva
     
     // Préparer les données du devis pour la base
     const formuleBase = {
@@ -209,8 +205,8 @@ export async function POST(request) {
       JSON.stringify(formuleBase),
       JSON.stringify(optionsDetails),
       totalHT,
-      tva,
-      totalTTC,
+      0, // Pas de TVA
+      totalHT, // Total TTC = Total HT pour micro-entreprise
       codePromo?.code || null,
       codePromo?.reduction || 0,
       codePromo?.type || null,
@@ -265,7 +261,7 @@ export async function POST(request) {
         <p><strong>Email :</strong> ${formData.email}</p>
         <p><strong>Téléphone :</strong> ${formData.telephone}</p>
         ${formData.entreprise ? `<p><strong>Entreprise :</strong> ${formData.entreprise}</p>` : ''}
-        <p><strong>Montant :</strong> ${totalTTC.toFixed(2)}€ TTC</p>
+        <p><strong>Montant :</strong> ${totalHT.toFixed(2)}€ HT</p>
         ${formData.message ? `<p><strong>Message :</strong><br>${formData.message}</p>` : ''}
         ${codePromo?.code ? `<p><strong>Code promo utilisé :</strong> ${codePromo.code}</p>` : ''}
       `,

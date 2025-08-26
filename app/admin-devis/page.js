@@ -338,13 +338,13 @@ export default function AdminDevis() {
                 <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                   <button
                     onClick={() => {
-                      setSortBy('total_ttc')
+                      setSortBy('total_ht')
                       setSortOrder(sortOrder === 'DESC' ? 'ASC' : 'DESC')
                     }}
                     className="flex items-center hover:text-gray-700"
                   >
-                    Total TTC
-                    {sortBy === 'total_ttc' && (
+                    Total HT
+                    {sortBy === 'total_ht' && (
                       <span className="ml-1">{sortOrder === 'DESC' ? '↓' : '↑'}</span>
                     )}
                   </button>
@@ -360,7 +360,7 @@ export default function AdminDevis() {
                   <td className="px-4 py-3 text-sm font-medium">{item.numero}</td>
                   <td className="px-4 py-3 text-sm">{item.client_nom}</td>
                   <td className="px-4 py-3 text-sm">{item.client_email}</td>
-                  <td className="px-4 py-3 text-sm font-semibold">{item.total_ttc}€</td>
+                  <td className="px-4 py-3 text-sm font-semibold">{item.total_ht}€</td>
                   <td className="px-4 py-3">
                     <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatutColor(item.statut)}`}>
                       {item.statut}
@@ -460,8 +460,8 @@ export default function AdminDevis() {
                     <h3 className="font-semibold mb-2">Informations devis</h3>
                     <p><strong>Date :</strong> {formatDate(selectedDevis.date_creation)}</p>
                     <p><strong>Total HT :</strong> {selectedDevis.total_ht}€</p>
-                    <p><strong>TVA :</strong> {selectedDevis.tva}€</p>
-                    <p><strong>Total TTC :</strong> {selectedDevis.total_ttc}€</p>
+                    <p><strong>TVA (0%) :</strong> 0.00€</p>
+                    <p><strong>Total :</strong> {selectedDevis.total_ht}€</p>
                     {selectedDevis.code_promo && (
                       <p><strong>Code promo :</strong> {selectedDevis.code_promo} (-{selectedDevis.reduction}€)</p>
                     )}

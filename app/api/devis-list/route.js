@@ -75,12 +75,12 @@ export async function GET(request) {
     const devisQuery = `
       SELECT 
         id, numero, date_creation, client_nom, client_email, 
-        client_telephone, client_entreprise, total_ttc, statut,
+        client_telephone, client_entreprise, total_ht, statut,
         code_promo, reduction
       FROM devis 
       ${whereClause}
       ORDER BY ${sortBy} ${sortOrder}
-      LIMIT $${paramIndex} OFFSET $${paramIndex + 1}
+      LIMIT ${paramIndex} OFFSET ${paramIndex + 1}
     `
     
     const devisResult = await query(devisQuery, queryParams)
