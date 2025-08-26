@@ -76,7 +76,7 @@ export async function GET() {
 // Utiliser POST au lieu de PUT pour compatibilité Vercel
 export async function POST(request) {
   try {
-    // Vérifier l'authentification
+    // Vérifier l'authentification - SANS PARAMÈTRE
     const authResult = verifyAuth()
     if (!authResult.authenticated) {
       return NextResponse.json({ error: authResult.error }, { status: 401 })
