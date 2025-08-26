@@ -1,14 +1,4 @@
-<button
-              onClick={() => router.push('/admin-devis')}
-              className="bg-blue-600 text-white px-6 py-4 min-h-[48px] rounded-lg hover:bg-blue-700"
-            >
-              Gestion des Devis
-            </button>
-            <button
-              onClick={() => router.push('/admin-realisations')}
-              className="bg-blue-600 text-white px-6 py-4 min-h-[48px] rounded-lg hover:bg-blue-700"
-            >
-              G'use client'
+'use client'
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
