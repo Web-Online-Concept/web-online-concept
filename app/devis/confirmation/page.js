@@ -41,7 +41,7 @@ function ConfirmationContent() {
                   1
                 </span>
                 <p className="ml-3 text-gray-700">
-                  Nous allons étudier votre demande et vous reverrons dans les 24/48h un devis personnalisé
+                  Nous allons étudier votre demande et vous enverrons dans les 24/48h un devis personnalisé
                 </p>
               </div>
               <div className="flex items-start">
@@ -49,7 +49,7 @@ function ConfirmationContent() {
                   2
                 </span>
                 <p className="ml-3 text-gray-700">
-                  Si vous acceptez le devis, envoyez dès que possible le paiement des 50% du solde total (infos sur le devis)
+                  Si vous acceptez le devis, envoyez dès maintenant le paiement des 50% du solde
                 </p>
               </div>
               <div className="flex items-start">
