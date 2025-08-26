@@ -17,7 +17,7 @@ export default function MentionsLegales() {
               <p><strong>Raison sociale :</strong> Auto-Entreprise Web Online Concept</p>
               <p><strong>Forme juridique :</strong> Auto-entrepreneur</p>
               <p><strong>Siège social :</strong> Rue Paul Estival, 31200 Toulouse</p>
-              <p><strong>SIRET :</strong> 510 583 800 00048</ertheless>
+              <p><strong>SIRET :</strong> 510 583 800 00048</p>
               <p><strong>Directeur de publication :</strong> Mr Regnault</p>
               <p><strong>Email :</strong> web.online.concept@gmail.com</p>
             </div>
