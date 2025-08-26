@@ -8,10 +8,10 @@ export default function DemandeDevis() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [tarifs, setTarifs] = useState(null)
-  const [nomComplet, setNomComplet] = useState('')
   
   // État du formulaire
   const [formData, setFormData] = useState({
+    nom: '',
     entreprise: '',
     email: '',
     telephone: '',
@@ -137,10 +137,6 @@ export default function DemandeDevis() {
     setLoading(true)
     setError('')
 
-    // Récupérer la valeur du nom depuis le formulaire
-    const form = e.target
-    const nomCompletValue = form.nomComplet.value
-
     // Préparer les données avec les options sélectionnées
     const optionsSelectionnees = []
     Object.entries(formData.options).forEach(([optionId, quantity]) => {
@@ -153,7 +149,7 @@ export default function DemandeDevis() {
 
     const dataToSend = {
       formData: {
-        nom: nomCompletValue,
+        nom: formData.nom,
         email: formData.email,
         telephone: formData.telephone,
         entreprise: formData.entreprise,
@@ -275,12 +271,14 @@ export default function DemandeDevis() {
             <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Nom et Prénom *
+                  Nom complet *
                 </label>
                 <input
                   type="text"
-                  name="nomComplet"
                   required
+                  value={formData.nom}
+                  onChange={(e) => setFormData({...formData, nom: e.target.value})}
+                  onKeyDown={(e) => e.stopPropagation()}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
                 />
               </div>
