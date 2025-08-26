@@ -474,9 +474,6 @@ export default function Home() {
             <Link href="/demande-devis" className="bg-white text-[#0073a8] px-8 py-4 rounded-full font-semibold hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg">
               Demander un devis gratuit
             </Link>
-            <Link href="tel:0646170207" className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-[#0073a8] transition-all">
-              06 46 17 02 07
-            </Link>
           </div>
         </div>
       </section>
