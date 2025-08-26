@@ -101,13 +101,13 @@ function generatePDF(formData, tarifs, total, optionsSelectionnees, codePromo) {
   // Totaux
   yPosition = doc.lastAutoTable.finalY + 10
   
-  const total = total
+  const montantTotal = total
   
   // Si code promo
   if (codePromo && codePromo.valid) {
     doc.setFontSize(10)
     doc.text(`Sous-total HT :`, 130, yPosition)
-    doc.text(`${total.toFixed(2)}€`, 180, yPosition, { align: 'right' })
+    doc.text(`${montantTotal.toFixed(2)}€`, 180, yPosition, { align: 'right' })
     yPosition += 5
     
     doc.text(`Code promo (${codePromo.code}) :`, 130, yPosition)
@@ -120,7 +120,7 @@ function generatePDF(formData, tarifs, total, optionsSelectionnees, codePromo) {
   
   doc.setFontSize(10)
   doc.text(`Total HT :`, 130, yPosition)
-  doc.text(`${total.toFixed(2)}€`, 180, yPosition, { align: 'right' })
+  doc.text(`${montantTotal.toFixed(2)}€`, 180, yPosition, { align: 'right' })
   yPosition += 5
   
   doc.text(`TVA (0%) :`, 130, yPosition)
@@ -130,7 +130,7 @@ function generatePDF(formData, tarifs, total, optionsSelectionnees, codePromo) {
   doc.setFontSize(12)
   doc.setFont(undefined, 'bold')
   doc.text(`Total :`, 130, yPosition)
-  doc.text(`${total.toFixed(2)}€`, 180, yPosition, { align: 'right' })
+  doc.text(`${montantTotal.toFixed(2)}€`, 180, yPosition, { align: 'right' })
   
   // Message personnalisé si présent
   if (formData.message) {
