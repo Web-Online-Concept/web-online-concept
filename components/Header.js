@@ -99,14 +99,14 @@ export default function Header() {
                 className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#0073a8] to-[#00b4d8] transition-all duration-300 group-hover:w-full"
               />
             </Link>
-            <Link href="/realisations" className="relative text-gray-700 hover:text-[#0073a8] transition-colors group">
-              Réalisations
+            <Link href="/infos-tarifs" className="relative text-gray-700 hover:text-[#0073a8] transition-colors group">
+              Infos & Tarifs
               <span 
                 className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#0073a8] to-[#00b4d8] transition-all duration-300 group-hover:w-full"
               />
             </Link>
-            <Link href="/infos-tarifs" className="relative text-gray-700 hover:text-[#0073a8] transition-colors group">
-              Infos & Tarifs
+            <Link href="/realisations" className="relative text-gray-700 hover:text-[#0073a8] transition-colors group">
+              Réalisations
               <span 
                 className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#0073a8] to-[#00b4d8] transition-all duration-300 group-hover:w-full"
               />
@@ -148,18 +148,18 @@ export default function Header() {
               Services
             </Link>
             <Link 
-              href="/realisations" 
-              className="block py-2 text-gray-700 hover:text-[#0073a8]"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Réalisations
-            </Link>
-            <Link 
               href="/infos-tarifs" 
               className="block py-2 text-gray-700 hover:text-[#0073a8]"
               onClick={() => setIsMenuOpen(false)}
             >
               Infos & Tarifs
+            </Link>
+            <Link 
+              href="/realisations" 
+              className="block py-2 text-gray-700 hover:text-[#0073a8]"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Réalisations
             </Link>
             <Link 
               href="/contact" 
