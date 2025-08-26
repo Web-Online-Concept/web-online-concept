@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server'
 import { query } from '@/app/lib/db'
+import { NextResponse } from 'next/server'
 import { jsPDF } from 'jspdf'
 import 'jspdf-autotable'
 import nodemailer from 'nodemailer'
@@ -233,26 +233,27 @@ export async function POST(request) {
     // Convertir le PDF pour l'attachement email
     const pdfBuffer = Buffer.from(pdfBase64, 'base64')
     
-    // Email au client
+    // Email de confirmation au client (SANS PDF)
     const mailOptionsClient = {
       from: process.env.EMAIL_USER,
       to: formData.email,
-      subject: `Votre devis Web Online Concept - ${numeroDevis}`,
+      subject: `Votre demande de devis - ${numeroDevis}`,
       html: `
         <h2>Bonjour ${formData.nom},</h2>
-        <p>Merci pour votre demande de devis.</p>
-        <p>Vous trouverez ci-joint votre devis personnalisé pour la création de votre site web.</p>
-        <p><strong>Montant total :</strong> ${totalTTC.toFixed(2)}€ TTC</p>
-        <p>Ce devis est valable 30 jours. N'hésitez pas à nous contacter pour toute question.</p>
+        <p>Nous avons bien reçu votre demande de devis.</p>
+        <p><strong>Référence :</strong> ${numeroDevis}</p>
+        <h3>Prochaines étapes :</h3>
+        <ol>
+          <li>Nous allons étudier votre demande et vous reverrons dans les 24/48h un devis personnalisé</li>
+          <li>Si vous acceptez le devis, envoyez dès maintenant le paiement des 50% du solde</li>
+          <li>Une fois votre paiement reçu, nous vous contacterons rapidement par téléphone afin de faire le point sur le projet</li>
+        </ol>
+        <p>Pour toute question, contactez-nous à : web.online.concept@gmail.com</p>
         <p>Cordialement,<br>L'équipe Web Online Concept</p>
-      `,
-      attachments: [{
-        filename: `Devis_${numeroDevis}.pdf`,
-        content: pdfBuffer
-      }]
+      `
     }
     
-    // Email à l'admin
+    // Email à l'admin AVEC LE PDF
     const mailOptionsAdmin = {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
@@ -281,7 +282,7 @@ export async function POST(request) {
     return NextResponse.json({ 
       success: true,
       numeroDevis,
-      message: 'Devis envoyé avec succès et sauvegardé dans l\'historique'
+      message: 'Devis envoyé avec succès'
     })
     
   } catch (error) {
