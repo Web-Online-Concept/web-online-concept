@@ -5,14 +5,14 @@ export default function Footer() {
     <footer className="bg-gray-900 text-white">
       <div className="container max-w-7xl mx-auto px-4 py-12">
         <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          <div>
+          <div className="text-center">
             <h3 className="text-xl font-bold mb-4">Web Online Concept</h3>
             <p className="text-gray-400">
               Création de sites web professionnels à prix accessibles.
             </p>
           </div>
           
-          <div>
+          <div className="text-center">
             <h4 className="text-lg font-semibold mb-4">Services</h4>
             <ul className="space-y-2 text-gray-400">
               <li><Link href="/#services" className="hover:text-white transition-colors">Nos services</Link></li>
@@ -21,7 +21,7 @@ export default function Footer() {
             </ul>
           </div>
           
-          <div>
+          <div className="text-center">
             <h4 className="text-lg font-semibold mb-4">Informations</h4>
             <ul className="space-y-2 text-gray-400">
               <li><Link href="/mentions-legales" className="hover:text-white transition-colors">Mentions légales</Link></li>
