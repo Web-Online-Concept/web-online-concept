@@ -165,25 +165,25 @@ export default function AdminDevis() {
     }
   }
 
-  const downloadPDF = async (devisId) => {
-    try {
-      const res = await fetch(`/api/devis/${devisId}/pdf`, {
-        credentials: 'include'
-      })
+  const deleteDevis = async (devisId, numero) => {
+    if (confirm(`Êtes-vous sûr de vouloir supprimer le devis ${numero} ?`)) {
+      try {
+        const res = await fetch(`/api/devis/${devisId}`, {
+          method: 'DELETE',
+          credentials: 'include'
+        })
 
-      if (res.ok) {
-        const blob = await res.blob()
-        const url = window.URL.createObjectURL(blob)
-        const a = document.createElement('a')
-        a.href = url
-        a.download = `devis_${devisId}.pdf`
-        document.body.appendChild(a)
-        a.click()
-        window.URL.revokeObjectURL(url)
-        document.body.removeChild(a)
+        if (res.ok) {
+          loadDevis()
+          setMessage('✓ Devis supprimé')
+          setTimeout(() => setMessage(''), 3000)
+        } else {
+          setMessage('Erreur lors de la suppression')
+        }
+      } catch (error) {
+        console.error('Erreur suppression:', error)
+        setMessage('Erreur lors de la suppression')
       }
-    } catch (error) {
-      console.error('Erreur téléchargement:', error)
     }
   }
 
@@ -385,6 +385,15 @@ export default function AdminDevis() {
                       >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                        </svg>
+                      </button>
+                      <button
+                        onClick={() => deleteDevis(item.id, item.numero)}
+                        className="text-red-600 hover:text-red-800"
+                        title="Supprimer"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                         </svg>
                       </button>
                     </div>

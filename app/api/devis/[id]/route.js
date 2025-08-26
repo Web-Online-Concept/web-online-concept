@@ -60,3 +60,37 @@ export async function GET(request, { params }) {
     )
   }
 }
+
+export async function DELETE(request, { params }) {
+  try {
+    // Vérifier l'authentification
+    const authResult = verifyAuth()
+    if (!authResult.authenticated) {
+      return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
+    }
+
+    const devisId = params.id
+    
+    // Supprimer le devis
+    const result = await query(
+      'DELETE FROM devis WHERE id = $1 RETURNING numero',
+      [devisId]
+    )
+    
+    if (result.rows.length === 0) {
+      return NextResponse.json({ error: 'Devis non trouvé' }, { status: 404 })
+    }
+    
+    return NextResponse.json({ 
+      success: true, 
+      message: `Devis ${result.rows[0].numero} supprimé` 
+    })
+    
+  } catch (error) {
+    console.error('Erreur suppression devis:', error)
+    return NextResponse.json(
+      { error: 'Erreur lors de la suppression' },
+      { status: 500 }
+    )
+  }
+}
