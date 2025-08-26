@@ -30,10 +30,8 @@ function genererPDF(devisData) {
   doc.setFontSize(9)
   doc.text([
     'Web Online Concept',
-    '123 Rue Example',
-    '75000 Paris',
-    'Tél : 01.23.45.67.89',
-    'Email : contact@web-online-concept.com'
+    'SIRET : 510 583 800 00048',
+    'Email : web.online.concept@gmail.com'
   ], 15, 50)
   
   // Numéro et date du devis
