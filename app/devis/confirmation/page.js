@@ -1,21 +1,12 @@
 "use client"
 
-import { useEffect, useState } from 'react'
+import { Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 
-export default function ConfirmationDevis() {
+function ConfirmationContent() {
   const searchParams = useSearchParams()
   const numeroDevis = searchParams.get('numero')
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) {
-    return null
-  }
 
   return (
     <div className="min-h-screen bg-gray-50 pt-[120px] pb-20">
@@ -66,7 +57,7 @@ export default function ConfirmationDevis() {
                   3
                 </span>
                 <p className="ml-3 text-gray-700">
-                  Une fois votre paiement reçu, vous vous recontacterons sous 24-48h pour discuter des détails de votre projet
+                  Une fois votre paiement reçu, nous vous contacterons rapidement par téléphone afin de faire le point sur le projet
                 </p>
               </div>
             </div>
@@ -88,5 +79,17 @@ export default function ConfirmationDevis() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function ConfirmationDevis() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 pt-[120px] pb-20 flex items-center justify-center">
+        <div className="text-xl">Chargement...</div>
+      </div>
+    }>
+      <ConfirmationContent />
+    </Suspense>
   )
 }
