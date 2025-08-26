@@ -22,15 +22,15 @@ export default function Home() {
         {/* Contenu */}
         <div className="container max-w-7xl mx-auto px-4 relative z-10">
           <div className="text-white text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)'}}>
               <span className="block animate-slide-up">
                 Votre présence web
               </span>
-              <span className="block text-yellow-300 animate-slide-up-delay-1">
+              <span className="block text-yellow-300 animate-slide-up-delay-1" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
                 commence ici
               </span>
             </h1>
-            <p className="text-xl md:text-2xl mb-8 opacity-90 animate-slide-up-delay-2">
+            <p className="text-xl md:text-2xl mb-8 animate-slide-up-delay-2" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)'}}>
               Création de sites web professionnels à prix accessibles.
               <br className="hidden md:block" />
               Une solution clé en main pour votre entreprise.
