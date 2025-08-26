@@ -137,6 +137,10 @@ export default function DemandeDevis() {
     setLoading(true)
     setError('')
 
+    // Récupérer la valeur du nom depuis le formulaire
+    const form = e.target
+    const nomCompletValue = form.nomComplet.value
+
     // Préparer les données avec les options sélectionnées
     const optionsSelectionnees = []
     Object.entries(formData.options).forEach(([optionId, quantity]) => {
@@ -149,7 +153,7 @@ export default function DemandeDevis() {
 
     const dataToSend = {
       formData: {
-        nom: nomComplet,
+        nom: nomCompletValue,
         email: formData.email,
         telephone: formData.telephone,
         entreprise: formData.entreprise,
@@ -275,8 +279,8 @@ export default function DemandeDevis() {
                 </label>
                 <input
                   type="text"
+                  name="nomComplet"
                   required
-                  defaultValue=""
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
                 />
               </div>
