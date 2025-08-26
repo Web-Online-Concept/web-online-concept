@@ -92,7 +92,7 @@ export default function AdminRealisations() {
     setMessage('')
     
     try {
-      const method = editingId ? 'PUT' : 'POST'
+      const method = editingId ? 'POST' : 'POST'
       const url = editingId ? `/api/realisations/${editingId}` : '/api/realisations'
       
       const res = await fetch(url, {

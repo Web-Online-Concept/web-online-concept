@@ -2,8 +2,12 @@ import { query } from '@/app/lib/db'
 import { NextResponse } from 'next/server'
 import { verifyAuth } from '@/app/lib/auth'
 
-// PUT - Modifier une réalisation
-export async function PUT(request, { params }) {
+// Configuration pour forcer Next.js à accepter les requêtes
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
+// POST - Modifier une réalisation (au lieu de PUT)
+export async function POST(request, { params }) {
   try {
     // Vérifier l'authentification
     const authResult = verifyAuth()

@@ -60,22 +60,36 @@ export default function Realisations() {
                 <div key={realisation.id} className="group">
                   <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
                     {/* Image */}
-                    <div className="aspect-w-16 aspect-h-10 bg-gray-200 overflow-hidden">
-                      <img
-                        src={`/images/${realisation.image}`}
-                        alt={realisation.titre}
-                        className="w-full h-48 object-cover object-top group-hover:scale-105 transition-transform duration-300"
-                        onError={(e) => {
-                          e.target.src = '/images/placeholder.jpg'
-                        }}
-                      />
-                    </div>
+                    <a 
+                      href={realisation.url || '#'} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="block"
+                    >
+                      <div className="relative bg-gray-200 overflow-hidden" style={{ paddingBottom: '50%' }}>
+                        <img
+                          src={`/images/${realisation.image}`}
+                          alt={realisation.titre}
+                          className="absolute top-0 left-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                          onError={(e) => {
+                            e.target.src = '/images/placeholder.jpg'
+                          }}
+                        />
+                      </div>
+                    </a>
                     
                     {/* Contenu */}
-                    <div className="p-4">
-                      <h3 className="font-bold text-lg text-gray-900 mb-2">
-                        {realisation.titre}
-                      </h3>
+                    <div className="p-4 text-center">
+                      <a 
+                        href={realisation.url || '#'} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="hover:text-[#0073a8] transition-colors"
+                      >
+                        <h3 className="font-bold text-lg text-gray-900 mb-2">
+                          {realisation.titre}
+                        </h3>
+                      </a>
                       
                       {realisation.url && (
                         <a
@@ -89,7 +103,7 @@ export default function Realisations() {
                       )}
                       
                       {realisation.description && (
-                        <p className="text-gray-600 text-sm line-clamp-3">
+                        <p className="text-gray-600 text-sm">
                           {realisation.description}
                         </p>
                       )}
