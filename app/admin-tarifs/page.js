@@ -239,6 +239,12 @@ export default function AdminTarifs() {
               Gestion des Devis
             </button>
             <button
+              onClick={() => router.push('/admin-realisations')}
+              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
+            >
+              Gestion des Réalisations
+            </button>
+            <button
               onClick={handleSave}
               disabled={saving}
               className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 disabled:opacity-50"
