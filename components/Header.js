@@ -71,7 +71,7 @@ export default function Header() {
                   }}
                 >
                   <p className="text-base text-gray-600 cursor-pointer">
-                    Sites Web Clés en Main à Prix Malins
+                    Sites Web ClÃ©s en Main Ã  Prix Malins
                   </p>
                   <div 
                     className="underline-bar"
@@ -106,7 +106,13 @@ export default function Header() {
               />
             </Link>
             <Link href="/realisations" className="relative text-gray-700 hover:text-[#0073a8] transition-colors group">
-              Réalisations
+              RÃ©alisations
+              <span 
+                className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#0073a8] to-[#00b4d8] transition-all duration-300 group-hover:w-full"
+              />
+            </Link>
+            <Link href="/blog" className="relative text-gray-700 hover:text-[#0073a8] transition-colors group">
+              Blog
               <span 
                 className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#0073a8] to-[#00b4d8] transition-all duration-300 group-hover:w-full"
               />
@@ -159,7 +165,14 @@ export default function Header() {
               className="block py-2 text-gray-700 hover:text-[#0073a8]"
               onClick={() => setIsMenuOpen(false)}
             >
-              Réalisations
+              RÃ©alisations
+            </Link>
+            <Link 
+              href="/blog" 
+              className="block py-2 text-gray-700 hover:text-[#0073a8]"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Blog
             </Link>
             <Link 
               href="/contact" 
