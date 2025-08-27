@@ -11,16 +11,44 @@ export default async function AdminBlogPage() {
   const posts = await getAllPosts()
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-gradient-to-br from-[#0073a8] via-[#00b4d8] to-[#006a87] text-white py-6">
-        <div className="container max-w-7xl mx-auto px-4">
-          <h1 className="text-3xl font-bold">Administration du Blog</h1>
+    <div className="min-h-screen bg-gray-100 pt-24 pb-8">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold">Gestion Blog</h1>
+          <div className="flex gap-4">
+            <Link
+              href="/admin-tarifs"
+              className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700 w-32 text-center"
+            >
+              Gestion<br />Tarifs
+            </Link>
+            <Link
+              href="/admin-realisations"
+              className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700 w-32 text-center"
+            >
+              Gestion<br />Réalisations
+            </Link>
+            <Link
+              href="/admin-blog"
+              className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg w-32 text-center"
+            >
+              Gestion<br />Blog
+            </Link>
+            <Link
+              href="/admin-devis"
+              className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700 w-32 text-center"
+            >
+              Gestion<br />Devis
+            </Link>
+            <Link
+              href="/api/admin/logout"
+              className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-gray-700 w-32 text-center"
+            >
+              Déconnexion
+            </Link>
+          </div>
         </div>
-      </div>
 
-      {/* Main Content */}
-      <div className="container max-w-7xl mx-auto px-4 py-8">
         {/* Actions Bar */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
           <div className="flex flex-wrap justify-between items-center gap-4">
@@ -133,16 +161,6 @@ export default async function AdminBlogPage() {
               </div>
             </div>
           )}
-        </div>
-
-        {/* Back to Admin */}
-        <div className="mt-8 text-center">
-          <Link 
-            href="/admin-tarifs" 
-            className="text-gray-600 hover:text-[#0073a8] transition-colors"
-          >
-            ← Retour à l'administration générale
-          </Link>
         </div>
       </div>
     </div>
