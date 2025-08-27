@@ -57,8 +57,8 @@ export default function Realisations() {
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {realisations.map((realisation) => (
-                <div key={realisation.id} className="group">
-                  <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <div key={realisation.id} className="group h-full">
+                  <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full flex flex-col">
                     {/* Image */}
                     <a 
                       href={realisation.url || '#'} 
@@ -79,14 +79,14 @@ export default function Realisations() {
                     </a>
                     
                     {/* Contenu */}
-                    <div className="p-4 text-center">
+                    <div className="p-4 text-center flex-1 flex flex-col">
                       <a 
                         href={realisation.url || '#'} 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="hover:text-[#0073a8] transition-colors"
                       >
-                        <h3 className="font-bold text-lg text-gray-900 mb-2">
+                        <h3 className="font-bold text-lg text-gray-900 mb-2 line-clamp-1">
                           {realisation.titre}
                         </h3>
                       </a>
@@ -96,14 +96,14 @@ export default function Realisations() {
                           href={realisation.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[#0073a8] hover:text-[#005580] transition-colors duration-200 text-sm block mb-2"
+                          className="text-[#0073a8] hover:text-[#005580] transition-colors duration-200 text-sm block mb-2 line-clamp-1"
                         >
                           {realisation.url.replace('https://', '').replace('http://', '').replace('www.', '')}
                         </a>
                       )}
                       
                       {realisation.description && (
-                        <p className="text-gray-600 text-sm">
+                        <p className="text-gray-600 text-sm line-clamp-2">
                           {realisation.description}
                         </p>
                       )}
