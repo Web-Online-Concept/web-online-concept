@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
+import '../styles/quill-custom.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 

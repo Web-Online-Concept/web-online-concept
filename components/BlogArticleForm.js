@@ -1,9 +1,16 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import Image from 'next/image'
+import dynamic from 'next/dynamic'
+import 'react-quill/dist/quill.snow.css'
+
+// Import dynamique de React Quill pour éviter les erreurs SSR
+const ReactQuill = dynamic(() => import('react-quill'), { 
+  ssr: false,
+  loading: () => <p>Chargement de l'éditeur...</p>
+})
 
 export default function BlogArticleForm({ mode = 'create', article = null, categories = [] }) {
   const router = useRouter()
@@ -26,9 +33,28 @@ export default function BlogArticleForm({ mode = 'create', article = null, categ
   })
   
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [showPreview, setShowPreview] = useState(false)
   const [uploadingImage, setUploadingImage] = useState(false)
   const [imageError, setImageError] = useState(false)
+
+  // Configuration de Quill
+  const modules = useMemo(() => ({
+    toolbar: [
+      [{ 'header': [1, 2, 3, false] }],
+      ['bold', 'italic', 'underline', 'strike'],
+      ['blockquote', 'code-block'],
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      ['link', 'image', 'video'],
+      ['clean']
+    ],
+  }), [])
+
+  const formats = [
+    'header',
+    'bold', 'italic', 'underline', 'strike',
+    'blockquote', 'code-block',
+    'list', 'bullet',
+    'link', 'image', 'video'
+  ]
 
   // Générer le slug automatiquement depuis le titre
   const generateSlug = (title) => {
@@ -60,6 +86,14 @@ export default function BlogArticleForm({ mode = 'create', article = null, categ
     if (name === 'featured_image') {
       setImageError(false)
     }
+  }
+
+  // Gérer le changement de contenu Quill
+  const handleContentChange = (value) => {
+    setFormData(prev => ({
+      ...prev,
+      content: value
+    }))
   }
 
   // Gérer les catégories
@@ -158,24 +192,6 @@ export default function BlogArticleForm({ mode = 'create', article = null, categ
       alert('Erreur lors de la sauvegarde')
     } finally {
       setIsSubmitting(false)
-    }
-  }
-
-  // Insérer une image dans le contenu
-  const insertImage = () => {
-    const imageUrl = prompt('URL de l\'image :')
-    if (imageUrl) {
-      const imageMarkdown = `\n![Description de l'image](${imageUrl})\n`
-      const textarea = document.querySelector('textarea[name="content"]')
-      const start = textarea.selectionStart
-      const end = textarea.selectionEnd
-      const text = formData.content
-      const before = text.substring(0, start)
-      const after = text.substring(end, text.length)
-      setFormData(prev => ({
-        ...prev,
-        content: before + imageMarkdown + after
-      }))
     }
   }
 
@@ -322,7 +338,7 @@ export default function BlogArticleForm({ mode = 'create', article = null, categ
                 placeholder="/images/mon-image.jpg ou https://..."
               />
               <p className="text-xs text-gray-500 mt-1">
-                Utilisez des images déjà uploadées : /images/hero-top.png, /images/logo.png, etc.
+                Utilisez des images déjà uploadées : /images/blog/votre-image.jpg
               </p>
             </div>
           </div>
@@ -350,24 +366,11 @@ export default function BlogArticleForm({ mode = 'create', article = null, categ
 
       {/* Contenu */}
       <div className="bg-white rounded-lg shadow-md p-6">
-        <div className="flex justify-between items-center mb-4">
+        <div className="mb-4">
           <h2 className="text-xl font-bold text-gray-900">Contenu de l'article</h2>
-          <div className="flex gap-2">
-            <button
-              type="button"
-              onClick={insertImage}
-              className="text-sm bg-gray-600 text-white px-3 py-1 rounded hover:bg-gray-700 transition-colors"
-            >
-              Insérer une image
-            </button>
-            <button
-              type="button"
-              onClick={() => setShowPreview(!showPreview)}
-              className="text-sm bg-[#0073a8] text-white px-3 py-1 rounded hover:bg-[#006a87] transition-colors"
-            >
-              {showPreview ? 'Éditer' : 'Prévisualiser'}
-            </button>
-          </div>
+          <p className="text-sm text-gray-600 mt-1">
+            Utilisez l'éditeur ci-dessous pour formater votre texte facilement
+          </p>
         </div>
         
         <div className="mb-4">
@@ -384,31 +387,26 @@ export default function BlogArticleForm({ mode = 'create', article = null, categ
           />
         </div>
         
-        {!showPreview ? (
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Contenu (Markdown) *
-            </label>
-            <textarea
-              name="content"
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Contenu de l'article *
+          </label>
+          <div className="prose-editor">
+            <ReactQuill
+              theme="snow"
               value={formData.content}
-              onChange={handleChange}
-              rows={20}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0073a8] focus:border-transparent font-mono text-sm"
-              placeholder="# Titre de section&#10;&#10;Votre contenu en **Markdown**..."
-              required
+              onChange={handleContentChange}
+              modules={modules}
+              formats={formats}
+              className="bg-white"
+              style={{ minHeight: '400px' }}
+              placeholder="Commencez à écrire votre article..."
             />
-            <p className="text-xs text-gray-500 mt-1">
-              Utilisez la syntaxe Markdown : # Titre, ## Sous-titre, **gras**, *italique*, [lien](url), ![image](url)
-            </p>
           </div>
-        ) : (
-          <div className="prose prose-lg max-w-none border border-gray-200 rounded-lg p-4 bg-gray-50">
-            <p className="text-sm text-gray-600 mb-4">Aperçu du rendu :</p>
-            {/* Ici, idéalement on convertirait le Markdown en HTML pour la preview */}
-            <div className="whitespace-pre-wrap">{formData.content}</div>
-          </div>
-        )}
+          <p className="text-xs text-gray-500 mt-2">
+            Astuce : Pour insérer une image, cliquez sur l'icône image dans la barre d'outils
+          </p>
+        </div>
       </div>
 
       {/* SEO */}
