@@ -40,12 +40,12 @@ export default async function AdminBlogPage() {
             >
               Gestion<br />Devis
             </Link>
-            <button
-              onClick={() => window.location.href = '/api/admin/logout'}
-              className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-gray-700 w-32 text-center"
+            <Link
+              href="/api/admin/logout"
+              className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-gray-700 w-32 text-center flex flex-col justify-center"
             >
               Déconnexion
-            </button>
+            </Link>
           </div>
         </div>
 
