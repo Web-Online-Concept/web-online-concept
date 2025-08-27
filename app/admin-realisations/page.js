@@ -203,31 +203,31 @@ export default function AdminRealisations() {
           <div className="flex gap-4">
             <button
               onClick={() => router.push('/admin-tarifs')}
-              className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700"
+              className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700 w-32 text-center"
             >
               Gestion<br />Tarifs
             </button>
             <button
               onClick={() => router.push('/admin-realisations')}
-              className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg"
+              className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg w-32 text-center"
             >
               Gestion<br />Réalisations
             </button>
             <button
               onClick={() => router.push('/admin-blog')}
-              className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700"
+              className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700 w-32 text-center"
             >
-              Gestion du Blog
+              Gestion<br />Blog
             </button>
             <button
               onClick={() => router.push('/admin-devis')}
-              className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700"
+              className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700 w-32 text-center"
             >
               Gestion<br />Devis
             </button>
             <button
               onClick={handleLogout}
-              className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-gray-700"
+              className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-gray-700 w-32 text-center"
             >
               Déconnexion
             </button>
