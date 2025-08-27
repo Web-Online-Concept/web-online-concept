@@ -107,7 +107,7 @@ export default function AdminTarifs() {
       })
       
       if (res.ok) {
-        setMessage('✓ Tarifs sauvegardés avec succès')
+        setMessage('✔ Tarifs sauvegardés avec succès')
       } else if (res.status === 401) {
         setMessage('Session expirée, veuillez vous reconnecter')
         setIsAuthenticated(false)
@@ -233,10 +233,10 @@ export default function AdminTarifs() {
           <h1 className="text-3xl font-bold">Gestion des Tarifs</h1>
           <div className="flex gap-4">
             <button
-              onClick={() => router.push('/admin-devis')}
-              className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700"
+              onClick={() => router.push('/admin-tarifs')}
+              className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg"
             >
-              Gestion des Devis
+              Gestion des Tarifs
             </button>
             <button
               onClick={() => router.push('/admin-realisations')}
@@ -245,17 +245,16 @@ export default function AdminTarifs() {
               Gestion des Réalisations
             </button>
             <button
-              onClick={() => router.push('/admin-tarifs')}
-              className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg"
+              onClick={() => router.push('/admin-blog')}
+              className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700"
             >
-              Gestion des Tarifs
+              Gestion du Blog
             </button>
             <button
-              onClick={handleSave}
-              disabled={saving}
-              className="bg-green-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-green-700 disabled:opacity-50"
+              onClick={() => router.push('/admin-devis')}
+              className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700"
             >
-              {saving ? 'Enregistrement...' : 'Sauvegarder'}
+              Gestion des Devis
             </button>
             <button
               onClick={handleLogout}
@@ -268,7 +267,7 @@ export default function AdminTarifs() {
 
         {message && (
           <div className={`mb-6 p-4 rounded-lg ${
-            message.includes('✓') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+            message.includes('✔') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
           }`}>
             {message}
           </div>
@@ -466,6 +465,17 @@ export default function AdminTarifs() {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Bouton Sauvegarder en bas */}
+        <div className="mt-8 text-center">
+          <button
+            onClick={handleSave}
+            disabled={saving}
+            className="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 disabled:opacity-50 font-semibold text-lg"
+          >
+            {saving ? 'Enregistrement...' : 'Sauvegarder les modifications'}
+          </button>
         </div>
       </div>
     </div>
