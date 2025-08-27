@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createPost, getAllPosts, generateUniqueSlug } from '@/lib/blog-db'
 import { verifyAuth } from '@/app/lib/auth'
+import { cleanHTML } from '@/utils/cleanHTML'
 
 // GET - Récupérer tous les articles
 export async function GET(request) {
@@ -40,6 +41,9 @@ export async function POST(request) {
         { status: 400 }
       )
     }
+    
+    // NETTOYER LE CONTENU HTML
+    data.content = cleanHTML(data.content)
     
     // Générer un slug s'il n'est pas fourni ou s'assurer qu'il est unique
     if (!data.slug) {
