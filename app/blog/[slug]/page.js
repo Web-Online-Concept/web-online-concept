@@ -6,11 +6,12 @@ import { remark } from 'remark'
 import html from 'remark-html'
 import ShareButtons from '@/components/ShareButtons'
 import { headers } from 'next/headers'
+import { convertChatGPTToHTML, cleanExistingContent } from '@/utils/convertChatGPTToHTML'
 
 // Fonction pour détecter si le contenu est du HTML
 function isHTML(content) {
   // Vérifier si le contenu contient des balises HTML courantes
-  const htmlPattern = /<(p|div|h[1-6]|ul|ol|li|strong|em|a|article|section|br)\b[^>]*>/i
+  const htmlPattern = /<(p|div|h[1-6]|ul|ol|li|strong|em|a|article|section)\b[^>]*>/i
   return htmlPattern.test(content)
 }
 
@@ -26,8 +27,14 @@ async function processContent(content) {
     // Si c'est déjà du HTML, retourner tel quel
     return content
   } else {
-    // Sinon, convertir le Markdown en HTML
-    return await markdownToHtml(content)
+    // Essayer de détecter si c'est du format ChatGPT
+    if (content.includes('**') || content.includes('*') || content.match(/^[🔍📱🌍🚀🛠️]/m)) {
+      // Convertir depuis le format ChatGPT
+      return convertChatGPTToHTML(content)
+    } else {
+      // Sinon, convertir le Markdown en HTML
+      return await markdownToHtml(content)
+    }
   }
 }
 
