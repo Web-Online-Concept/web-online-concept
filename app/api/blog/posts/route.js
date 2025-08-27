@@ -56,9 +56,19 @@ export async function POST(request) {
       data.slug = await generateUniqueSlug(data.slug)
     }
     
+    // Nettoyer published_at - convertir chaîne vide en null
+    if (data.published_at === '') {
+      data.published_at = null
+    }
+    
     // Si l'article est publié mais sans date, utiliser la date actuelle
     if (data.status === 'published' && !data.published_at) {
       data.published_at = new Date().toISOString()
+    }
+    
+    // Si l'article n'est pas publié, s'assurer que published_at est null
+    if (data.status === 'draft') {
+      data.published_at = null
     }
     
     // Créer l'article
