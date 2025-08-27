@@ -225,7 +225,8 @@ export default async function BlogArticlePage({ params }) {
                   prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-4 prose-pre:rounded-lg prose-pre:overflow-x-auto
                   prose-img:rounded-lg prose-img:shadow-md prose-img:mx-auto
                   [&_p]:mb-4 [&_p:last-child]:mb-0
-                  [&_br]:hidden"
+                  [&_.MsoNormal]:mb-4 [&_.MsoListBullet*]:list-disc [&_.MsoListBullet*]:ml-6
+                  [&_.MsoListNumber*]:list-decimal [&_.MsoListNumber*]:ml-6"
                 dangerouslySetInnerHTML={{ __html: contentHtml }}
               />
               
