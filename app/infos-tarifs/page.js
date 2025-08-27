@@ -62,8 +62,8 @@ export default function InfosTarifs() {
               src="/images/hero-top.png" 
               alt="Création de sites web professionnels - Web Online Concept"
               className="mx-auto rounded-lg shadow-lg"
-              width={800}
-              height={400}
+              width={400}
+              height={200}
               priority
             />
           </div>
