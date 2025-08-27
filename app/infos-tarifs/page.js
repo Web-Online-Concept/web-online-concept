@@ -69,8 +69,8 @@ export default function InfosTarifs() {
           </div>
           
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-gray-50 rounded-xl p-6 shadow-sm">
-              <h3 className="font-semibold mb-4 text-lg flex items-center">
+            <div className="bg-gray-100 rounded-xl p-6 shadow-md border border-gray-200">
+              <h3 className="font-semibold mb-4 text-lg flex items-center text-gray-800">
                 <span className="text-2xl mr-2">✨</span>
                 Inclus dans votre site
               </h3>
@@ -97,8 +97,8 @@ export default function InfosTarifs() {
                 </li>
               </ul>
             </div>
-            <div className="bg-gray-50 rounded-xl p-6 shadow-sm">
-              <h3 className="font-semibold mb-4 text-lg flex items-center">
+            <div className="bg-gray-100 rounded-xl p-6 shadow-md border border-gray-200">
+              <h3 className="font-semibold mb-4 text-lg flex items-center text-gray-800">
                 <span className="text-2xl mr-2">🎁</span>
                 Services inclus
               </h3>
