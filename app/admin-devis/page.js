@@ -280,7 +280,7 @@ export default function AdminDevis() {
             </button>
             <button
               onClick={handleLogout}
-              className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-gray-700 w-32 text-center"
+              className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-gray-700 w-32 text-center flex flex-col justify-center"
             >
               Déconnexion
             </button>
