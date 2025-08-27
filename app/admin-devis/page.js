@@ -157,7 +157,7 @@ export default function AdminDevis() {
 
       if (res.ok) {
         loadDevis()
-        setMessage('✓ Statut mis à jour')
+        setMessage('✔ Statut mis à jour')
         setTimeout(() => setMessage(''), 3000)
       }
     } catch (error) {
@@ -175,7 +175,7 @@ export default function AdminDevis() {
 
         if (res.ok) {
           loadDevis()
-          setMessage('✓ Devis supprimé')
+          setMessage('✔ Devis supprimé')
           setTimeout(() => setMessage(''), 3000)
         } else {
           setMessage('Erreur lors de la suppression')
@@ -252,29 +252,35 @@ export default function AdminDevis() {
     <div className="min-h-screen bg-gray-100 pt-24 pb-8">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold">Gestion des Devis</h1>
+          <h1 className="text-3xl font-bold">Gestion Devis</h1>
           <div className="flex gap-4">
             <button
-              onClick={() => router.push('/admin-devis')}
-              className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg"
+              onClick={() => router.push('/admin-tarifs')}
+              className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700 w-32 text-center"
             >
-              Gestion des Devis
+              Gestion<br />Tarifs
             </button>
             <button
               onClick={() => router.push('/admin-realisations')}
-              className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700"
+              className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700 w-32 text-center"
             >
-              Gestion des Réalisations
+              Gestion<br />Réalisations
             </button>
             <button
-              onClick={() => router.push('/admin-tarifs')}
-              className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700"
+              onClick={() => router.push('/admin-blog')}
+              className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700 w-32 text-center"
             >
-              Gestion des Tarifs
+              Gestion<br />Blog
+            </button>
+            <button
+              onClick={() => router.push('/admin-devis')}
+              className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg w-32 text-center"
+            >
+              Gestion<br />Devis
             </button>
             <button
               onClick={handleLogout}
-              className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-gray-700"
+              className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-gray-700 w-32 text-center"
             >
               Déconnexion
             </button>
@@ -283,7 +289,7 @@ export default function AdminDevis() {
 
         {message && (
           <div className={`mb-6 p-4 rounded-lg ${
-            message.includes('✓') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+            message.includes('✔') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
           }`}>
             {message}
           </div>
