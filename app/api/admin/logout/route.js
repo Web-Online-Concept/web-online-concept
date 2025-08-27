@@ -3,8 +3,14 @@ import { cookies } from 'next/headers'
 
 export async function POST() {
   try {
-    // Supprimer le cookie d'authentification
-    cookies().delete('admin-token')
+    // Supprimer le cookie d'authentification avec les mêmes options que lors de sa création
+    cookies().set('admin-token', '', {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'lax',
+      maxAge: 0, // Expire immédiatement
+      path: '/'
+    })
     
     return NextResponse.json({ 
       success: true, 
