@@ -7,10 +7,28 @@ import html from 'remark-html'
 import ShareButtons from '@/components/ShareButtons'
 import { headers } from 'next/headers'
 
+// Fonction pour détecter si le contenu est du HTML
+function isHTML(content) {
+  // Vérifier si le contenu contient des balises HTML courantes
+  const htmlPattern = /<(p|div|h[1-6]|ul|ol|li|strong|em|a|article|section|br)\b[^>]*>/i
+  return htmlPattern.test(content)
+}
+
 // Fonction pour convertir le Markdown en HTML
 async function markdownToHtml(markdown) {
   const result = await remark().use(html).process(markdown)
   return result.toString()
+}
+
+// Fonction pour traiter le contenu (HTML ou Markdown)
+async function processContent(content) {
+  if (isHTML(content)) {
+    // Si c'est déjà du HTML, retourner tel quel
+    return content
+  } else {
+    // Sinon, convertir le Markdown en HTML
+    return await markdownToHtml(content)
+  }
 }
 
 // Génération des métadonnées
@@ -41,7 +59,9 @@ export async function generateMetadata({ params }) {
 // Fonction pour estimer le temps de lecture
 function calculateReadingTime(text) {
   const wordsPerMinute = 200
-  const wordCount = text.trim().split(/\s+/).length
+  // Retirer les balises HTML pour le comptage
+  const textWithoutHtml = text.replace(/<[^>]*>/g, '')
+  const wordCount = textWithoutHtml.trim().split(/\s+/).length
   const minutes = Math.ceil(wordCount / wordsPerMinute)
   return minutes
 }
@@ -59,8 +79,8 @@ export default async function BlogArticlePage({ params }) {
   const userAgent = headersList.get('user-agent') || 'unknown'
   await recordPostView(post.id, ipAddress, userAgent)
   
-  // Convertir le contenu Markdown en HTML
-  const contentHtml = await markdownToHtml(post.content)
+  // Traiter le contenu (HTML ou Markdown)
+  const contentHtml = await processContent(post.content)
   
   // Calculer le temps de lecture
   const readingTime = calculateReadingTime(post.content)
