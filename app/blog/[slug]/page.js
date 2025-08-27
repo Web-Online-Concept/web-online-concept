@@ -207,7 +207,9 @@ export default async function BlogArticlePage({ params }) {
                   prose-blockquote:border-l-4 prose-blockquote:border-[#0073a8] prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-600 prose-blockquote:my-6
                   prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm
                   prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-4 prose-pre:rounded-lg prose-pre:overflow-x-auto
-                  prose-img:rounded-lg prose-img:shadow-md prose-img:mx-auto"
+                  prose-img:rounded-lg prose-img:shadow-md prose-img:mx-auto
+                  [&_p]:mb-4 [&_p:last-child]:mb-0
+                  [&_br]:hidden"
                 dangerouslySetInnerHTML={{ __html: contentHtml }}
               />
               
