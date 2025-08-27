@@ -236,7 +236,7 @@ export default function AdminTarifs() {
               onClick={() => router.push('/admin-tarifs')}
               className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg"
             >
-              Gestion des<br />Tarifs
+              Gestion<br />Tarifs
             </button>
             <button
               onClick={() => router.push('/admin-realisations')}
@@ -254,7 +254,7 @@ export default function AdminTarifs() {
               onClick={() => router.push('/admin-devis')}
               className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700"
             >
-              Gestion des Devis
+              Gestion<br />Devis
             </button>
             <button
               onClick={handleLogout}

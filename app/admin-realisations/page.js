@@ -205,13 +205,13 @@ export default function AdminRealisations() {
               onClick={() => router.push('/admin-tarifs')}
               className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700"
             >
-              Gestion des Tarifs
+              Gestion<br />Tarifs
             </button>
             <button
               onClick={() => router.push('/admin-realisations')}
               className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg"
             >
-              Gestion des Réalisations
+              Gestion<br />Réalisations
             </button>
             <button
               onClick={() => router.push('/admin-blog')}
@@ -223,7 +223,7 @@ export default function AdminRealisations() {
               onClick={() => router.push('/admin-devis')}
               className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700"
             >
-              Gestion des Devis
+              Gestion<br />Devis
             </button>
             <button
               onClick={handleLogout}
