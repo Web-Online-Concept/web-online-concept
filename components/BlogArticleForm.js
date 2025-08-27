@@ -1,16 +1,8 @@
 'use client'
 
-import { useState, useRef, useMemo } from 'react'
+import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
-import 'react-quill/dist/quill.snow.css'
-
-// Import dynamique de React Quill pour éviter les erreurs SSR
-const ReactQuill = dynamic(() => import('react-quill'), { 
-  ssr: false,
-  loading: () => <p>Chargement de l'éditeur...</p>
-})
 
 export default function BlogArticleForm({ mode = 'create', article = null, categories = [] }) {
   const router = useRouter()
@@ -35,26 +27,7 @@ export default function BlogArticleForm({ mode = 'create', article = null, categ
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [uploadingImage, setUploadingImage] = useState(false)
   const [imageError, setImageError] = useState(false)
-
-  // Configuration de Quill
-  const modules = useMemo(() => ({
-    toolbar: [
-      [{ 'header': [1, 2, 3, false] }],
-      ['bold', 'italic', 'underline', 'strike'],
-      ['blockquote', 'code-block'],
-      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-      ['link', 'image', 'video'],
-      ['clean']
-    ],
-  }), [])
-
-  const formats = [
-    'header',
-    'bold', 'italic', 'underline', 'strike',
-    'blockquote', 'code-block',
-    'list', 'bullet',
-    'link', 'image', 'video'
-  ]
+  const [showPreview, setShowPreview] = useState(false)
 
   // Générer le slug automatiquement depuis le titre
   const generateSlug = (title) => {
@@ -86,14 +59,6 @@ export default function BlogArticleForm({ mode = 'create', article = null, categ
     if (name === 'featured_image') {
       setImageError(false)
     }
-  }
-
-  // Gérer le changement de contenu Quill
-  const handleContentChange = (value) => {
-    setFormData(prev => ({
-      ...prev,
-      content: value
-    }))
   }
 
   // Gérer les catégories
@@ -366,11 +331,15 @@ export default function BlogArticleForm({ mode = 'create', article = null, categ
 
       {/* Contenu */}
       <div className="bg-white rounded-lg shadow-md p-6">
-        <div className="mb-4">
+        <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold text-gray-900">Contenu de l'article</h2>
-          <p className="text-sm text-gray-600 mt-1">
-            Utilisez l'éditeur ci-dessous pour formater votre texte facilement
-          </p>
+          <button
+            type="button"
+            onClick={() => setShowPreview(!showPreview)}
+            className="text-sm bg-[#0073a8] text-white px-4 py-2 rounded hover:bg-[#006a87] transition-colors"
+          >
+            {showPreview ? 'Éditer' : 'Prévisualiser'}
+          </button>
         </div>
         
         <div className="mb-4">
@@ -387,26 +356,48 @@ export default function BlogArticleForm({ mode = 'create', article = null, categ
           />
         </div>
         
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Contenu de l'article *
-          </label>
-          <div className="prose-editor">
-            <ReactQuill
-              theme="snow"
+        {!showPreview ? (
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Contenu de l'article (HTML) *
+            </label>
+            <textarea
+              name="content"
               value={formData.content}
-              onChange={handleContentChange}
-              modules={modules}
-              formats={formats}
-              className="bg-white"
-              style={{ minHeight: '400px' }}
-              placeholder="Commencez à écrire votre article..."
+              onChange={handleChange}
+              rows={20}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0073a8] focus:border-transparent font-mono text-sm"
+              placeholder="Collez votre HTML ici ou écrivez directement..."
+              required
             />
+            <div className="mt-2 space-y-1">
+              <p className="text-xs text-gray-600 font-medium">Guide rapide HTML :</p>
+              <p className="text-xs text-gray-500">
+                • Titre principal : &lt;h1&gt;Mon titre&lt;/h1&gt;
+              </p>
+              <p className="text-xs text-gray-500">
+                • Sous-titre : &lt;h2&gt;Mon sous-titre&lt;/h2&gt;
+              </p>
+              <p className="text-xs text-gray-500">
+                • Paragraphe : &lt;p&gt;Mon texte&lt;/p&gt;
+              </p>
+              <p className="text-xs text-gray-500">
+                • Gras : &lt;strong&gt;texte gras&lt;/strong&gt;
+              </p>
+              <p className="text-xs text-gray-500">
+                • Liste : &lt;ul&gt;&lt;li&gt;Point 1&lt;/li&gt;&lt;li&gt;Point 2&lt;/li&gt;&lt;/ul&gt;
+              </p>
+              <p className="text-xs text-gray-500">
+                • Image : &lt;img src="/images/blog/mon-image.jpg" alt="Description"&gt;
+              </p>
+            </div>
           </div>
-          <p className="text-xs text-gray-500 mt-2">
-            Astuce : Pour insérer une image, cliquez sur l'icône image dans la barre d'outils
-          </p>
-        </div>
+        ) : (
+          <div className="prose prose-lg max-w-none border border-gray-200 rounded-lg p-4 bg-gray-50">
+            <h3 className="text-sm font-medium text-gray-700 mb-2">Aperçu :</h3>
+            <div dangerouslySetInnerHTML={{ __html: formData.content }} />
+          </div>
+        )}
       </div>
 
       {/* SEO */}
