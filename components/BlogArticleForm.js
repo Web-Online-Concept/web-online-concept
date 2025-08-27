@@ -3,10 +3,12 @@
 import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { Editor } from '@tinymce/tinymce-react'
 
 export default function BlogArticleForm({ mode = 'create', article = null, categories = [] }) {
   const router = useRouter()
   const fileInputRef = useRef(null)
+  const editorRef = useRef(null)
   
   // État du formulaire
   const [formData, setFormData] = useState({
@@ -27,7 +29,6 @@ export default function BlogArticleForm({ mode = 'create', article = null, categ
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [uploadingImage, setUploadingImage] = useState(false)
   const [imageError, setImageError] = useState(false)
-  const [showPreview, setShowPreview] = useState(false)
 
   // Générer le slug automatiquement depuis le titre
   const generateSlug = (title) => {
@@ -136,7 +137,8 @@ export default function BlogArticleForm({ mode = 'create', article = null, categ
       // Nettoyer les données avant envoi
       const dataToSend = {
         ...formData,
-        published_at: formData.published_at || null  // Convertir chaîne vide en null
+        content: editorRef.current.getContent(), // Récupérer le contenu de TinyMCE
+        published_at: formData.published_at || null
       }
       
       const response = await fetch(url, {
@@ -163,7 +165,6 @@ export default function BlogArticleForm({ mode = 'create', article = null, categ
   // Vérifier si l'URL de l'image est valide
   const isValidImageUrl = (url) => {
     if (!url) return false
-    // Vérifier que c'est une URL relative ou absolue valide
     return url.startsWith('/') || url.startsWith('http://') || url.startsWith('https://')
   }
 
@@ -331,15 +332,11 @@ export default function BlogArticleForm({ mode = 'create', article = null, categ
 
       {/* Contenu */}
       <div className="bg-white rounded-lg shadow-md p-6">
-        <div className="flex justify-between items-center mb-4">
+        <div className="mb-4">
           <h2 className="text-xl font-bold text-gray-900">Contenu de l'article</h2>
-          <button
-            type="button"
-            onClick={() => setShowPreview(!showPreview)}
-            className="text-sm bg-[#0073a8] text-white px-4 py-2 rounded hover:bg-[#006a87] transition-colors"
-          >
-            {showPreview ? 'Éditer' : 'Prévisualiser'}
-          </button>
+          <p className="text-sm text-gray-600 mt-1">
+            Éditeur visuel - Formatez votre texte comme dans Word
+          </p>
         </div>
         
         <div className="mb-4">
@@ -356,48 +353,50 @@ export default function BlogArticleForm({ mode = 'create', article = null, categ
           />
         </div>
         
-        {!showPreview ? (
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Contenu de l'article (HTML) *
-            </label>
-            <textarea
-              name="content"
-              value={formData.content}
-              onChange={handleChange}
-              rows={20}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0073a8] focus:border-transparent font-mono text-sm"
-              placeholder="Collez votre HTML ici ou écrivez directement..."
-              required
-            />
-            <div className="mt-2 space-y-1">
-              <p className="text-xs text-gray-600 font-medium">Guide rapide HTML :</p>
-              <p className="text-xs text-gray-500">
-                • Titre principal : &lt;h1&gt;Mon titre&lt;/h1&gt;
-              </p>
-              <p className="text-xs text-gray-500">
-                • Sous-titre : &lt;h2&gt;Mon sous-titre&lt;/h2&gt;
-              </p>
-              <p className="text-xs text-gray-500">
-                • Paragraphe : &lt;p&gt;Mon texte&lt;/p&gt;
-              </p>
-              <p className="text-xs text-gray-500">
-                • Gras : &lt;strong&gt;texte gras&lt;/strong&gt;
-              </p>
-              <p className="text-xs text-gray-500">
-                • Liste : &lt;ul&gt;&lt;li&gt;Point 1&lt;/li&gt;&lt;li&gt;Point 2&lt;/li&gt;&lt;/ul&gt;
-              </p>
-              <p className="text-xs text-gray-500">
-                • Image : &lt;img src="/images/blog/mon-image.jpg" alt="Description"&gt;
-              </p>
-            </div>
-          </div>
-        ) : (
-          <div className="prose prose-lg max-w-none border border-gray-200 rounded-lg p-4 bg-gray-50">
-            <h3 className="text-sm font-medium text-gray-700 mb-2">Aperçu :</h3>
-            <div dangerouslySetInnerHTML={{ __html: formData.content }} />
-          </div>
-        )}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Contenu de l'article *
+          </label>
+          <Editor
+            apiKey="sc5sn2i22r4cd2g4phfct7exajptsws2qt2j0kw1tdnxzlr1"
+            onInit={(evt, editor) => editorRef.current = editor}
+            initialValue={formData.content}
+            init={{
+              height: 500,
+              menubar: false,
+              plugins: [
+                'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                'insertdatetime', 'media', 'table', 'help', 'wordcount', 'emoticons'
+              ],
+              toolbar: 'undo redo | blocks | ' +
+                'bold italic underline strikethrough | alignleft aligncenter ' +
+                'alignright alignjustify | bullist numlist outdent indent | ' +
+                'forecolor backcolor | link image media | removeformat | help',
+              block_formats: 'Paragraphe=p; Titre 1=h1; Titre 2=h2; Titre 3=h3; Citation=blockquote',
+              content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px; line-height:1.6; }',
+              language: 'fr_FR',
+              language_url: 'https://cdn.tiny.cloud/1/no-api-key/tinymce/6/langs/fr_FR.js',
+              paste_data_images: false,
+              images_upload_handler: (blobInfo, progress) => {
+                return new Promise((resolve, reject) => {
+                  reject('Utilisez le champ URL pour les images. Upload non disponible sur Vercel.');
+                });
+              },
+              setup: (editor) => {
+                editor.on('change', () => {
+                  setFormData(prev => ({
+                    ...prev,
+                    content: editor.getContent()
+                  }))
+                })
+              }
+            }}
+          />
+          <p className="text-xs text-gray-500 mt-2">
+            Vous pouvez coller du contenu depuis Word, Google Docs, ChatGPT ou tout autre source
+          </p>
+        </div>
       </div>
 
       {/* SEO */}
