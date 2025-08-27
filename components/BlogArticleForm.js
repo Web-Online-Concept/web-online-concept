@@ -134,12 +134,18 @@ export default function BlogArticleForm({ mode = 'create', article = null, categ
         ? '/api/blog/posts' 
         : `/api/blog/posts/${article.id}`
       
+      // Nettoyer les données avant envoi
+      const dataToSend = {
+        ...formData,
+        published_at: formData.published_at || null  // Convertir chaîne vide en null
+      }
+      
       const response = await fetch(url, {
         method: mode === 'create' ? 'POST' : 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(dataToSend)
       })
       
       if (response.ok) {
