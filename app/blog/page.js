@@ -10,6 +10,9 @@ export const metadata = {
   keywords: 'blog, création site web, seo, webdesign, tutoriels, marketing digital',
 }
 
+// Force la revalidation de la page toutes les 60 secondes
+export const revalidate = 60
+
 export default async function BlogPage({ searchParams }) {
   const page = parseInt(searchParams.page || '1')
   const { posts, totalPages, currentPage } = await getPublishedPosts(page)
