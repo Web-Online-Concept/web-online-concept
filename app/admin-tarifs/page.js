@@ -230,7 +230,7 @@ export default function AdminTarifs() {
     <div className="min-h-screen bg-gray-100 pt-24 pb-8">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold">Gestion des Tarifs</h1>
+          <h1 className="text-3xl font-bold">Gestion Tarifs</h1>
           <div className="flex gap-4">
             <button
               onClick={() => router.push('/admin-tarifs')}
