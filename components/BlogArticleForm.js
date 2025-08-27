@@ -28,6 +28,7 @@ export default function BlogArticleForm({ mode = 'create', article = null, categ
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showPreview, setShowPreview] = useState(false)
   const [uploadingImage, setUploadingImage] = useState(false)
+  const [imageError, setImageError] = useState(false)
 
   // Générer le slug automatiquement depuis le titre
   const generateSlug = (title) => {
@@ -54,6 +55,11 @@ export default function BlogArticleForm({ mode = 'create', article = null, categ
         slug: generateSlug(value)
       }))
     }
+    
+    // Réinitialiser l'erreur d'image si on change l'URL
+    if (name === 'featured_image') {
+      setImageError(false)
+    }
   }
 
   // Gérer les catégories
@@ -66,10 +72,16 @@ export default function BlogArticleForm({ mode = 'create', article = null, categ
     }))
   }
 
-  // Upload d'image
+  // Upload d'image (désactivé sur Vercel)
   const handleImageUpload = async (e) => {
     const file = e.target.files[0]
     if (!file) return
+    
+    // Sur Vercel, on ne peut pas uploader
+    if (process.env.NODE_ENV === 'production') {
+      alert('L\'upload d\'images n\'est pas disponible en production. Utilisez le champ URL directe avec une image déjà uploadée via GitHub.')
+      return
+    }
     
     const validTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif']
     if (!validTypes.includes(file.type)) {
@@ -161,6 +173,13 @@ export default function BlogArticleForm({ mode = 'create', article = null, categ
     }
   }
 
+  // Vérifier si l'URL de l'image est valide
+  const isValidImageUrl = (url) => {
+    if (!url) return false
+    // Vérifier que c'est une URL relative ou absolue valide
+    return url.startsWith('/') || url.startsWith('http://') || url.startsWith('https://')
+  }
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Informations principales */}
@@ -247,51 +266,58 @@ export default function BlogArticleForm({ mode = 'create', article = null, categ
         <h2 className="text-xl font-bold text-gray-900 mb-4">Image principale</h2>
         
         <div className="flex items-start gap-6">
-          {formData.featured_image && (
+          {formData.featured_image && isValidImageUrl(formData.featured_image) && !imageError && (
             <div className="relative w-48 h-32 flex-shrink-0">
-              <Image
+              <img
                 src={formData.featured_image}
                 alt="Image principale"
-                fill
-                className="object-cover rounded-lg"
+                className="w-full h-full object-cover rounded-lg"
+                onError={() => setImageError(true)}
               />
             </div>
           )}
           
           <div className="flex-1">
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
-              className="hidden"
-            />
+            {process.env.NODE_ENV !== 'production' && (
+              <>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="hidden"
+                />
+                
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current.click()}
+                  disabled={uploadingImage}
+                  className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors disabled:opacity-50 mb-3"
+                >
+                  {uploadingImage ? 'Upload en cours...' : 'Choisir une image (local uniquement)'}
+                </button>
+                
+                <p className="text-sm text-gray-500 mb-3">
+                  Formats acceptés : JPG, PNG, WebP, GIF. Max 5MB.
+                </p>
+              </>
+            )}
             
-            <button
-              type="button"
-              onClick={() => fileInputRef.current.click()}
-              disabled={uploadingImage}
-              className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors disabled:opacity-50"
-            >
-              {uploadingImage ? 'Upload en cours...' : 'Choisir une image'}
-            </button>
-            
-            <p className="text-sm text-gray-500 mt-2">
-              Formats acceptés : JPG, PNG, WebP, GIF. Max 5MB.
-            </p>
-            
-            <div className="mt-3">
+            <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Ou URL directe
+                URL de l'image
               </label>
               <input
-                type="url"
+                type="text"
                 name="featured_image"
                 value={formData.featured_image}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0073a8] focus:border-transparent text-sm"
-                placeholder="https://..."
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0073a8] focus:border-transparent"
+                placeholder="/images/mon-image.jpg ou https://..."
               />
+              <p className="text-xs text-gray-500 mt-1">
+                Utilisez des images déjà uploadées : /images/hero-top.png, /images/logo.png, etc.
+              </p>
             </div>
           </div>
         </div>
