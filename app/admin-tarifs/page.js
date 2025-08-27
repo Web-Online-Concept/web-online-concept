@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 export default function AdminTarifs() {
   const router = useRouter()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -58,7 +59,7 @@ export default function AdminTarifs() {
       const res = await fetch('/api/admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ email, password }),
         credentials: 'include'
       })
       
@@ -66,7 +67,7 @@ export default function AdminTarifs() {
         setIsAuthenticated(true)
         checkAuth()
       } else {
-        setMessage('Mot de passe incorrect')
+        setMessage('Email ou mot de passe incorrect')
       }
     } catch (error) {
       setMessage('Erreur de connexion')
@@ -85,6 +86,7 @@ export default function AdminTarifs() {
       if (res.ok) {
         // Réinitialiser l'état
         setIsAuthenticated(false)
+        setEmail('')
         setPassword('')
         setMessage('')
         setTarifs({
@@ -209,6 +211,14 @@ export default function AdminTarifs() {
         <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
           <h1 className="text-2xl font-bold mb-6 text-center">Administration</h1>
           <form onSubmit={handleLogin}>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              className="w-full px-4 py-2 border rounded-lg mb-4"
+              required
+            />
             <input
               type="password"
               value={password}

@@ -1,14 +1,136 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { getAllPosts, deletePost } from '@/lib/blog-db'
 import AdminBlogActions from '@/components/AdminBlogActions'
 
-export const metadata = {
-  title: 'Administration Blog - Web Online Concept',
-  robots: 'noindex, nofollow',
-}
+export default function AdminBlogPage() {
+  const router = useRouter()
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(true)
+  const [message, setMessage] = useState('')
+  const [posts, setPosts] = useState([])
 
-export default async function AdminBlogPage() {
-  const posts = await getAllPosts()
+  // Vérifier l'authentification et charger les posts
+  useEffect(() => {
+    checkAuth()
+  }, [])
+
+  const checkAuth = async () => {
+    try {
+      const res = await fetch('/api/admin/check-auth', {
+        credentials: 'include'
+      })
+      if (res.ok) {
+        setIsAuthenticated(true)
+        // Charger les posts après avoir vérifié l'authentification
+        const postsRes = await fetch('/api/blog/posts', {
+          credentials: 'include'
+        })
+        if (postsRes.ok) {
+          const data = await postsRes.json()
+          setPosts(data)
+        }
+      } else {
+        setIsAuthenticated(false)
+      }
+    } catch (error) {
+      console.error('Erreur vérification auth:', error)
+      setIsAuthenticated(false)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    
+    try {
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+        credentials: 'include'
+      })
+      
+      if (res.ok) {
+        setIsAuthenticated(true)
+        checkAuth()
+      } else {
+        setMessage('Email ou mot de passe incorrect')
+      }
+    } catch (error) {
+      setMessage('Erreur de connexion')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/admin/logout', {
+        method: 'POST',
+        credentials: 'include'
+      })
+      
+      setIsAuthenticated(false)
+      setEmail('')
+      setPassword('')
+      setMessage('')
+      setPosts([])
+    } catch (error) {
+      console.error('Erreur déconnexion:', error)
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="text-xl">Chargement...</div>
+      </div>
+    )
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+          <h1 className="text-2xl font-bold mb-6 text-center">Administration Blog</h1>
+          <form onSubmit={handleLogin}>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              className="w-full px-4 py-2 border rounded-lg mb-4"
+              required
+            />
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Mot de passe"
+              className="w-full px-4 py-2 border rounded-lg mb-4"
+              required
+            />
+            {message && (
+              <p className="text-red-500 text-sm mb-4">{message}</p>
+            )}
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
+            >
+              Se connecter
+            </button>
+          </form>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 pt-24 pb-8">
@@ -16,36 +138,36 @@ export default async function AdminBlogPage() {
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold">Gestion Blog</h1>
           <div className="flex gap-4">
-            <Link
-              href="/admin-tarifs"
+            <button
+              onClick={() => router.push('/admin-tarifs')}
               className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700 w-32 text-center"
             >
               Gestion<br />Tarifs
-            </Link>
-            <Link
-              href="/admin-realisations"
+            </button>
+            <button
+              onClick={() => router.push('/admin-realisations')}
               className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700 w-32 text-center"
             >
               Gestion<br />Réalisations
-            </Link>
-            <Link
-              href="/admin-blog"
+            </button>
+            <button
+              onClick={() => router.push('/admin-blog')}
               className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg w-32 text-center"
             >
               Gestion<br />Blog
-            </Link>
-            <Link
-              href="/admin-devis"
+            </button>
+            <button
+              onClick={() => router.push('/admin-devis')}
               className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700 w-32 text-center"
             >
               Gestion<br />Devis
-            </Link>
-            <Link
-              href="/api/admin/logout"
+            </button>
+            <button
+              onClick={handleLogout}
               className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-gray-700 w-32 text-center flex flex-col justify-center"
             >
               Déconnexion
-            </Link>
+            </button>
           </div>
         </div>
 

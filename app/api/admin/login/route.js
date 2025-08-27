@@ -7,17 +7,28 @@ const JWT_SECRET = process.env.ADMIN_PASSWORD + '_jwt_secret_key'
 
 export async function POST(request) {
   try {
-    const { password } = await request.json()
+    const { email, password } = await request.json()
+
+    // Vérifier l'email et le mot de passe
+    if (!email || !password) {
+      return NextResponse.json({ error: 'Email et mot de passe requis' }, { status: 400 })
+    }
+
+    // Vérifier l'email
+    if (email !== process.env.ADMIN_EMAIL) {
+      return NextResponse.json({ error: 'Email ou mot de passe incorrect' }, { status: 401 })
+    }
 
     // Vérifier le mot de passe
     if (password !== process.env.ADMIN_PASSWORD) {
-      return NextResponse.json({ error: 'Mot de passe incorrect' }, { status: 401 })
+      return NextResponse.json({ error: 'Email ou mot de passe incorrect' }, { status: 401 })
     }
 
     // Créer le token JWT (expire dans 24h)
     const token = jwt.sign(
       { 
         authenticated: true,
+        email: email,
         timestamp: Date.now()
       },
       JWT_SECRET,
