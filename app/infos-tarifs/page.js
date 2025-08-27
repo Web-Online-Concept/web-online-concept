@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function InfosTarifs() {
   const [tarifs, setTarifs] = useState({
@@ -55,6 +56,18 @@ export default function InfosTarifs() {
       
       <section className="bg-white py-16">
         <div className="max-w-5xl mx-auto px-4">
+          {/* Image hero centrée */}
+          <div className="mb-12 text-center">
+            <Image 
+              src="/images/hero-top.png" 
+              alt="Création de sites web professionnels - Web Online Concept"
+              className="mx-auto rounded-lg shadow-lg"
+              width={800}
+              height={400}
+              priority
+            />
+          </div>
+          
           <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-gray-50 rounded-xl p-6 shadow-sm">
               <h3 className="font-semibold mb-4 text-lg flex items-center">
