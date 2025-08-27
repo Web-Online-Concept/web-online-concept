@@ -30,16 +30,25 @@ export default function AdminRealisations() {
 
   const checkAuth = async () => {
     try {
-      const res = await fetch('/api/realisations', {
+      const res = await fetch('/api/admin/check-auth', {
         credentials: 'include'
       })
       if (res.ok) {
-        const data = await res.json()
-        setRealisations(data)
         setIsAuthenticated(true)
+        // Charger les réalisations après avoir vérifié l'authentification
+        const realisationsRes = await fetch('/api/realisations', {
+          credentials: 'include'
+        })
+        if (realisationsRes.ok) {
+          const data = await realisationsRes.json()
+          setRealisations(data)
+        }
+      } else {
+        setIsAuthenticated(false)
       }
     } catch (error) {
       console.error('Erreur vérification auth:', error)
+      setIsAuthenticated(false)
     } finally {
       setLoading(false)
     }

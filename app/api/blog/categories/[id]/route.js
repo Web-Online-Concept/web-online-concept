@@ -1,9 +1,16 @@
 import { NextResponse } from 'next/server'
 import { updateCategory, deleteCategory, getAllCategories } from '@/lib/blog-db'
+import { verifyAuth } from '@/app/lib/auth'
 
 // PUT - Mettre à jour une catégorie
 export async function PUT(request, { params }) {
   try {
+    // Vérifier l'authentification
+    const authResult = await verifyAuth(request)
+    if (!authResult.authenticated) {
+      return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
+    }
+
     const data = await request.json()
     const categoryId = parseInt(params.id)
     
@@ -60,6 +67,12 @@ export async function PUT(request, { params }) {
 // DELETE - Supprimer une catégorie
 export async function DELETE(request, { params }) {
   try {
+    // Vérifier l'authentification
+    const authResult = await verifyAuth(request)
+    if (!authResult.authenticated) {
+      return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
+    }
+
     const categoryId = parseInt(params.id)
     
     // Vérifier si la catégorie existe et n'a pas d'articles

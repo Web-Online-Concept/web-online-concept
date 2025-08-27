@@ -50,14 +50,26 @@ export default function AdminDevis() {
 
   const checkAuth = async () => {
     try {
-      const res = await fetch('/api/devis-list', {
+      const res = await fetch('/api/admin/check-auth', {
         credentials: 'include'
       })
       if (res.ok) {
         setIsAuthenticated(true)
+        // Charger les devis après avoir vérifié l'authentification
+        const devisRes = await fetch('/api/devis-list', {
+          credentials: 'include'
+        })
+        if (devisRes.ok) {
+          const data = await devisRes.json()
+          setDevis(data.devis)
+          setTotalPages(data.pagination.totalPages)
+        }
+      } else {
+        setIsAuthenticated(false)
       }
     } catch (error) {
-      console.error('Erreur auth:', error)
+      console.error('Erreur vérification auth:', error)
+      setIsAuthenticated(false)
     } finally {
       setLoading(false)
     }

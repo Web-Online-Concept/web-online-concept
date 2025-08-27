@@ -5,7 +5,7 @@ import { verifyAuth } from '@/app/lib/auth'
 export async function GET(request, { params }) {
   try {
     // Vérifier l'authentification
-    const authResult = verifyAuth()
+    const authResult = await verifyAuth(request)
     if (!authResult.authenticated) {
       return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
     }
@@ -64,7 +64,7 @@ export async function GET(request, { params }) {
 export async function DELETE(request, { params }) {
   try {
     // Vérifier l'authentification
-    const authResult = verifyAuth()
+    const authResult = await verifyAuth(request)
     if (!authResult.authenticated) {
       return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
     }

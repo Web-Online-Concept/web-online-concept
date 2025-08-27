@@ -6,8 +6,14 @@ import { verifyAuth } from '@/app/lib/auth'
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
-export async function GET() {
+export async function GET(request) {
   try {
+    // Vérifier l'authentification
+    const authResult = await verifyAuth(request)
+    if (!authResult.authenticated) {
+      return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
+    }
+
     // Récupérer la formule de base
     const formuleResult = await query('SELECT * FROM formule_base LIMIT 1')
     const formuleBase = formuleResult.rows[0] || {
@@ -76,10 +82,10 @@ export async function GET() {
 // Utiliser POST au lieu de PUT pour compatibilité Vercel
 export async function POST(request) {
   try {
-    // Vérifier l'authentification - SANS PARAMÈTRE
-    const authResult = verifyAuth()
+    // Vérifier l'authentification
+    const authResult = await verifyAuth(request)
     if (!authResult.authenticated) {
-      return NextResponse.json({ error: authResult.error }, { status: 401 })
+      return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
     }
 
     const tarifs = await request.json()

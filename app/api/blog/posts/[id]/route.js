@@ -1,9 +1,16 @@
 import { NextResponse } from 'next/server'
 import { getPostById, updatePost, deletePost, generateUniqueSlug } from '@/lib/blog-db'
+import { verifyAuth } from '@/app/lib/auth'
 
 // GET - Récupérer un article par son ID
 export async function GET(request, { params }) {
   try {
+    // Vérifier l'authentification
+    const authResult = await verifyAuth(request)
+    if (!authResult.authenticated) {
+      return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
+    }
+
     const post = await getPostById(params.id)
     
     if (!post) {
@@ -26,6 +33,12 @@ export async function GET(request, { params }) {
 // PUT - Mettre à jour un article
 export async function PUT(request, { params }) {
   try {
+    // Vérifier l'authentification
+    const authResult = await verifyAuth(request)
+    if (!authResult.authenticated) {
+      return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
+    }
+
     const data = await request.json()
     
     // Vérifier que l'article existe
@@ -85,6 +98,12 @@ export async function PUT(request, { params }) {
 // DELETE - Supprimer un article
 export async function DELETE(request, { params }) {
   try {
+    // Vérifier l'authentification
+    const authResult = await verifyAuth(request)
+    if (!authResult.authenticated) {
+      return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
+    }
+
     // Vérifier que l'article existe
     const existingPost = await getPostById(params.id)
     if (!existingPost) {

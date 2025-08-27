@@ -1,9 +1,16 @@
 import { NextResponse } from 'next/server'
 import { createPost, getAllPosts, generateUniqueSlug } from '@/lib/blog-db'
+import { verifyAuth } from '@/app/lib/auth'
 
 // GET - Récupérer tous les articles
-export async function GET() {
+export async function GET(request) {
   try {
+    // Vérifier l'authentification
+    const authResult = await verifyAuth(request)
+    if (!authResult.authenticated) {
+      return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
+    }
+
     const posts = await getAllPosts()
     return NextResponse.json(posts)
   } catch (error) {
@@ -18,6 +25,12 @@ export async function GET() {
 // POST - Créer un nouvel article
 export async function POST(request) {
   try {
+    // Vérifier l'authentification
+    const authResult = await verifyAuth(request)
+    if (!authResult.authenticated) {
+      return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
+    }
+
     const data = await request.json()
     
     // Validation des données obligatoires

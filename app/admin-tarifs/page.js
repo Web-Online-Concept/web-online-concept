@@ -24,14 +24,20 @@ export default function AdminTarifs() {
 
   const checkAuth = async () => {
     try {
-      const res = await fetch('/api/tarifs', {
+      const res = await fetch('/api/admin/check-auth', {
         credentials: 'include'
       })
       if (res.ok) {
-        const data = await res.json()
-        console.log('Données reçues:', data)  // DEBUG: voir les données
-        setTarifs(data)
         setIsAuthenticated(true)
+        // Charger les tarifs après avoir vérifié l'authentification
+        const tarifsRes = await fetch('/api/tarifs', {
+          credentials: 'include'
+        })
+        if (tarifsRes.ok) {
+          const data = await tarifsRes.json()
+          console.log('Données reçues:', data)  // DEBUG: voir les données
+          setTarifs(data)
+        }
       } else {
         // Si erreur 401 ou autre, forcer la déconnexion
         setIsAuthenticated(false)

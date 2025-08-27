@@ -10,7 +10,7 @@ export const dynamic = 'force-dynamic'
 export async function POST(request, { params }) {
   try {
     // Vérifier l'authentification
-    const authResult = verifyAuth()
+    const authResult = await verifyAuth(request)
     if (!authResult.authenticated) {
       return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
     }
@@ -48,7 +48,7 @@ export async function POST(request, { params }) {
 export async function DELETE(request, { params }) {
   try {
     // Vérifier l'authentification
-    const authResult = verifyAuth()
+    const authResult = await verifyAuth(request)
     if (!authResult.authenticated) {
       return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
     }
