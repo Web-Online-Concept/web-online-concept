@@ -77,7 +77,16 @@ export default async function BlogArticlePage({ params }) {
   const headersList = headers()
   const ipAddress = headersList.get('x-forwarded-for') || 'unknown'
   const userAgent = headersList.get('user-agent') || 'unknown'
-  await recordPostView(post.id, ipAddress, userAgent)
+  
+  // DEBUG: Log pour voir l'ID réel
+  console.log('Post ID:', post.id, 'Post slug:', post.slug)
+  
+  try {
+    await recordPostView(post.id, ipAddress, userAgent)
+  } catch (error) {
+    console.error('Erreur recordPostView:', error)
+    // Continue sans bloquer l'affichage
+  }
   
   // Traiter le contenu (HTML ou Markdown)
   const contentHtml = await processContent(post.content)
