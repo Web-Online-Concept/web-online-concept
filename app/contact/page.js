@@ -30,7 +30,7 @@ export default function Contact() {
       const result = await res.json()
 
       if (res.ok) {
-        setMessage('✓ Message envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.')
+        setMessage('✔ Message envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.')
         setFormData({
           nom: '',
           entreprise: '',
@@ -48,13 +48,45 @@ export default function Contact() {
     }
   }
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Contact - Web Online Concept',
+    description: 'Contactez Web Online Concept pour votre projet de site web',
+    url: 'https://www.webonlineconcept.com/contact',
+    provider: {
+      '@type': 'Organization',
+      name: 'Web Online Concept',
+      email: 'web.online.concept@gmail.com',
+      url: 'https://www.webonlineconcept.com'
+    }
+  }
+
   return (
     <>
       <Head>
-        <title>Contact - Web Online Concept</title>
-        <meta name="description" content="Contactez Web Online Concept pour discuter de votre projet de site web. Devis gratuit et réponse rapide garantie." />
-        <meta name="keywords" content="contact web online concept, devis site web, création site internet toulouse" />
+        <title>Contact Web Online Concept - Devis Gratuit Site Internet</title>
+        <meta name="description" content="Contactez Web Online Concept pour discuter de votre projet de site web. Formulaire de contact, email direct. Devis gratuit et réponse rapide garantie sous 24h." />
+        <meta name="keywords" content="contact web online concept, contact agence web, devis site web gratuit, création site internet contact, formulaire contact web" />
+        <link rel="canonical" href="https://www.webonlineconcept.com/contact" />
+        
+        <meta property="og:title" content="Contact Web Online Concept - Devis Gratuit Site Internet" />
+        <meta property="og:description" content="Contactez Web Online Concept pour discuter de votre projet de site web. Devis gratuit et réponse rapide garantie." />
+        <meta property="og:url" content="https://www.webonlineconcept.com/contact" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Web Online Concept" />
+        <meta property="og:image" content="/images/og-contact.jpg" />
+        
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Contact Web Online Concept" />
+        <meta name="twitter:description" content="Contactez-nous pour votre projet de site web. Devis gratuit et réponse rapide." />
+        <meta name="twitter:image" content="/images/og-contact.jpg" />
       </Head>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
       <div className="min-h-screen bg-gray-50 pt-24">
         {/* Hero */}
@@ -72,7 +104,7 @@ export default function Contact() {
         </section>
 
         {/* Formulaire */}
-        <section className="py-16">
+        <section className="py-16" aria-label="Formulaire de contact">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-white rounded-lg shadow-lg p-8">
               <h2 className="text-2xl font-bold mb-8 text-center">Envoyez-nous un message</h2>
@@ -80,24 +112,29 @@ export default function Contact() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="nom" className="block text-sm font-medium text-gray-700 mb-2">
                       Nom *
                     </label>
                     <input
                       type="text"
+                      id="nom"
+                      name="nom"
                       required
                       value={formData.nom}
                       onChange={(e) => setFormData({...formData, nom: e.target.value})}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
+                      aria-required="true"
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="entreprise" className="block text-sm font-medium text-gray-700 mb-2">
                       Entreprise
                     </label>
                     <input
                       type="text"
+                      id="entreprise"
+                      name="entreprise"
                       value={formData.entreprise}
                       onChange={(e) => setFormData({...formData, entreprise: e.target.value})}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
@@ -106,49 +143,58 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                     Email *
                   </label>
                   <input
                     type="email"
+                    id="email"
+                    name="email"
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({...formData, email: e.target.value})}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
+                    aria-required="true"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="objet" className="block text-sm font-medium text-gray-700 mb-2">
                     Objet *
                   </label>
                   <input
                     type="text"
+                    id="objet"
+                    name="objet"
                     required
                     value={formData.objet}
                     onChange={(e) => setFormData({...formData, objet: e.target.value})}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
+                    aria-required="true"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
                     Message *
                   </label>
                   <textarea
+                    id="message"
+                    name="message"
                     required
                     rows={6}
                     value={formData.message}
                     onChange={(e) => setFormData({...formData, message: e.target.value})}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0073a8]"
                     placeholder="Décrivez votre projet, vos besoins..."
+                    aria-required="true"
                   />
                 </div>
 
                 {message && (
                   <div className={`p-4 rounded-lg ${
-                    message.includes('✓') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-                  }`}>
+                    message.includes('✔') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                  }`} role="alert">
                     {message}
                   </div>
                 )}
@@ -170,11 +216,11 @@ export default function Contact() {
             {/* Informations de contact */}
             <div className="mt-12 text-center">
               <h3 className="text-xl font-semibold mb-4">Autres moyens de nous contacter</h3>
-              <p className="text-gray-600">
+              <address className="text-gray-600 not-italic">
                 Email : <a href="mailto:web.online.concept@gmail.com" className="text-[#0073a8] hover:underline">
                   web.online.concept@gmail.com
                 </a>
-              </p>
+              </address>
             </div>
           </div>
         </section>
