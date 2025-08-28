@@ -1,48 +1,8 @@
-import { Metadata } from 'next'
+'use client'
+
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-
-export const metadata = {
-  title: 'Nos Réalisations - Portfolio Sites Web | Web Online Concept',
-  description: 'Découvrez notre portfolio de sites web réalisés pour nos clients. Sites vitrines, e-commerce, blogs professionnels créés sur mesure.',
-  keywords: 'réalisations web, portfolio sites web, exemples sites internet, création site web portfolio, web online concept réalisations',
-  openGraph: {
-    title: 'Nos Réalisations - Portfolio Sites Web | Web Online Concept',
-    description: 'Découvrez notre portfolio de sites web réalisés pour nos clients. Sites vitrines, e-commerce, blogs professionnels.',
-    url: 'https://www.webonlineconcept.com/realisations',
-    siteName: 'Web Online Concept',
-    images: [
-      {
-        url: '/images/og-realisations.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Portfolio Web Online Concept'
-      }
-    ],
-    locale: 'fr_FR',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Nos Réalisations - Portfolio Sites Web',
-    description: 'Découvrez notre portfolio de sites web réalisés pour nos clients.',
-    images: ['/images/og-realisations.jpg'],
-  },
-  alternates: {
-    canonical: 'https://www.webonlineconcept.com/realisations',
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-}
+import Head from 'next/head'
 
 export default function Realisations() {
   const [realisations, setRealisations] = useState([])
@@ -87,6 +47,25 @@ export default function Realisations() {
 
   return (
     <>
+      <Head>
+        <title>Nos Réalisations - Portfolio Sites Web | Web Online Concept</title>
+        <meta name="description" content="Découvrez notre portfolio de sites web réalisés pour nos clients. Sites vitrines, e-commerce, blogs professionnels créés sur mesure." />
+        <meta name="keywords" content="réalisations web, portfolio sites web, exemples sites internet, création site web portfolio, web online concept réalisations" />
+        <link rel="canonical" href="https://www.webonlineconcept.com/realisations" />
+        
+        <meta property="og:title" content="Nos Réalisations - Portfolio Sites Web | Web Online Concept" />
+        <meta property="og:description" content="Découvrez notre portfolio de sites web réalisés pour nos clients. Sites vitrines, e-commerce, blogs professionnels." />
+        <meta property="og:url" content="https://www.webonlineconcept.com/realisations" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Web Online Concept" />
+        <meta property="og:image" content="/images/og-realisations.jpg" />
+        
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Nos Réalisations - Portfolio Sites Web" />
+        <meta name="twitter:description" content="Découvrez notre portfolio de sites web réalisés pour nos clients." />
+        <meta name="twitter:image" content="/images/og-realisations.jpg" />
+      </Head>
+      
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
