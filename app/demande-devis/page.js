@@ -32,12 +32,25 @@ export default function DemandeDevis() {
   // Charger les tarifs
   useEffect(() => {
     fetch('/api/tarifs')
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Erreur chargement tarifs')
+        }
+        return res.json()
+      })
       .then(data => {
         // Les données arrivent déjà triées par ordre depuis l'API
         setTarifs(data)
       })
-      .catch(err => console.error('Erreur chargement tarifs:', err))
+      .catch(err => {
+        console.error('Erreur chargement tarifs:', err)
+        // Définir des tarifs par défaut en cas d'erreur
+        setTarifs({
+          formuleBase: { nom: 'Site Web - Formule de Base', prix: 500, description: 'Site 5 pages' },
+          options: [],
+          remises: []
+        })
+      })
   }, [])
 
   // Calculer le total
