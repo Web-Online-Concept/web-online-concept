@@ -80,7 +80,7 @@ function genererPDF(devisData) {
   // Formule de base
   doc.setFont(undefined, 'bold')
   doc.text(formuleBase.nom, 20, yPosition)
-  doc.text(`${formuleBase.prix.toFixed(2)} €`, 175, yPosition, { align: 'right' })
+  doc.text(`${parseFloat(formuleBase.prix).toFixed(2)} €`, 175, yPosition, { align: 'right' })
   yPosition += 6
   doc.setFont(undefined, 'normal')
   doc.setFontSize(8)
@@ -97,7 +97,7 @@ function genererPDF(devisData) {
           ? `${option.nom} (x${option.quantite})`
           : option.nom
         doc.text(designation, 20, yPosition)
-        doc.text(`${option.prixTotal.toFixed(2)} €`, 175, yPosition, { align: 'right' })
+        doc.text(`${parseFloat(option.prixTotal).toFixed(2)} €`, 175, yPosition, { align: 'right' })
         yPosition += 6
         
         if (option.description) {
@@ -121,14 +121,14 @@ function genererPDF(devisData) {
   
   // Sous-total
   doc.text('Sous-total HT :', 140, yPosition)
-  doc.text(`${total.toFixed(2)} €`, 175, yPosition, { align: 'right' })
+  doc.text(`${parseFloat(total).toFixed(2)} €`, 175, yPosition, { align: 'right' })
   yPosition += 8
   
   // Remise
   if (remise && remise.montant > 0) {
     doc.setTextColor(0, 150, 0)
     doc.text(`Remise ${remise.code} :`, 140, yPosition)
-    doc.text(`-${remise.montant.toFixed(2)} €`, 175, yPosition, { align: 'right' })
+    doc.text(`-${parseFloat(remise.montant).toFixed(2)} €`, 175, yPosition, { align: 'right' })
     yPosition += 8
     doc.setTextColor(0, 0, 0)
   }
@@ -139,7 +139,7 @@ function genererPDF(devisData) {
   yPosition += 8
   
   // Total
-  const montantTotal = total - (remise?.montant || 0)
+  const montantTotal = parseFloat(total) - (remise?.montant || 0)
   doc.setFillColor(0, 115, 168)
   doc.rect(135, yPosition - 5, 60, 10, 'F')
   doc.setTextColor(255, 255, 255)
@@ -176,7 +176,20 @@ export async function POST(request) {
     console.log('DATABASE_URL starts with:', process.env.DATABASE_URL?.substring(0, 30) + '...')
 
     const data = await request.json()
+    
+    // LOG DE DEBUG
+    console.log('=== DONNÉES REÇUES ===')
+    console.log('Structure complète:', JSON.stringify(data, null, 2))
+    console.log('formData:', data.formData)
+    console.log('formuleBase:', data.formuleBase)
+    console.log('optionsSelectionnees:', data.optionsSelectionnees)
+    
     const { formData, formuleBase, optionsSelectionnees, total, remise } = data
+
+    // Vérifier que les données essentielles sont présentes
+    if (!formData || !formuleBase) {
+      throw new Error(`Données manquantes - formData: ${!!formData}, formuleBase: ${!!formuleBase}`)
+    }
 
     // Obtenir la date du jour au format YYYYMMDD
     const aujourd_hui = new Date().toISOString().slice(0,10).replace(/-/g,'')
@@ -199,19 +212,19 @@ export async function POST(request) {
     // Préparer les données pour l'insertion
     const formuleBaseJson = JSON.stringify({
       nom: formuleBase.nom,
-      prix: formuleBase.prix,
+      prix: parseFloat(formuleBase.prix),
       description: formuleBase.description
     })
 
     const optionsJson = JSON.stringify(
-      optionsSelectionnees
+      (optionsSelectionnees || [])
         .filter(opt => opt.quantite > 0)
         .map(opt => ({
           id: opt.id,
           nom: opt.nom,
-          prix: opt.prix,
+          prix: parseFloat(opt.prix),
           quantite: opt.quantite,
-          prixTotal: opt.prixTotal,
+          prixTotal: parseFloat(opt.prixTotal),
           unite: opt.unite,
           description: opt.description
         }))
@@ -239,9 +252,9 @@ export async function POST(request) {
       formData.entreprise || null,
       formuleBaseJson,
       optionsJson,
-      total,
+      parseFloat(total),
       0, // TVA à 0 pour micro-entreprise
-      total - (remise?.montant || 0),
+      parseFloat(total) - (remise?.montant || 0),
       remise?.code || null,
       remise?.montant || 0,
       remise?.type || null,
@@ -298,9 +311,9 @@ export async function POST(request) {
         <p><strong>Email :</strong> ${formData.email}</p>
         <p><strong>Téléphone :</strong> ${formData.telephone || 'Non renseigné'}</p>
         <p><strong>Entreprise :</strong> ${formData.entreprise || 'Non renseignée'}</p>
-        <p><strong>Total HT :</strong> ${total.toFixed(2)} €</p>
-        ${remise ? `<p><strong>Remise :</strong> ${remise.montant.toFixed(2)} € (${remise.code})</p>` : ''}
-        <p><strong>Total final :</strong> ${(total - (remise?.montant || 0)).toFixed(2)} €</p>
+        <p><strong>Total HT :</strong> ${parseFloat(total).toFixed(2)} €</p>
+        ${remise ? `<p><strong>Remise :</strong> ${parseFloat(remise.montant).toFixed(2)} € (${remise.code})</p>` : ''}
+        <p><strong>Total final :</strong> ${(parseFloat(total) - (remise?.montant || 0)).toFixed(2)} €</p>
         ${formData.message ? `<p><strong>Message :</strong> ${formData.message}</p>` : ''}
       `,
       attachments: [{
@@ -316,7 +329,7 @@ export async function POST(request) {
 
     return NextResponse.json({
       success: true,
-      numero,
+      numeroDevis: numero,
       message: 'Devis envoyé avec succès'
     })
 
