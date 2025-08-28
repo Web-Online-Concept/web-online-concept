@@ -22,38 +22,9 @@ export async function GET(request) {
       description: 'Site 5 pages, design personnalisé, responsive, SEO de base, hébergement 1 an inclus'
     }
 
-    // Récupérer les options
-    const optionsResult = await query('SELECT * FROM options WHERE active = true ORDER BY ordre, nom')
-    const optionsFromDB = optionsResult.rows
-
-    // Ordre personnalisé des options
-    const ordrePersonnalise = [
-      'page-supplementaire',
-      'pack-photos',
-      'hebergement',
-      'redaction',
-      'blog',
-      'maintenance',
-      'back-office',
-      'ecommerce',
-      'seo',
-      'logo',
-      'multilingue',
-      'reservation',
-      'emails',
-      'newsletter'
-    ]
-
-    // Réorganiser les options selon l'ordre personnalisé
-    const options = ordrePersonnalise
-      .map(id => optionsFromDB.find(opt => opt.id === id))
-      .filter(opt => opt !== undefined)
-    
-    // Ajouter les options non listées à la fin
-    const optionsNonListees = optionsFromDB.filter(
-      opt => !ordrePersonnalise.includes(opt.id)
-    )
-    options.push(...optionsNonListees)
+    // Récupérer les options triées par ordre depuis la base de données
+    const optionsResult = await query('SELECT * FROM options WHERE active = true ORDER BY ordre ASC, nom ASC')
+    const options = optionsResult.rows
 
     // Récupérer les codes promo - SANS les colonnes date_debut et date_fin
     const promoResult = await query(`
