@@ -1,7 +1,48 @@
-'use client'
-
+import { Metadata } from 'next'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+
+export const metadata = {
+  title: 'Nos Réalisations - Portfolio Sites Web | Web Online Concept',
+  description: 'Découvrez notre portfolio de sites web réalisés pour nos clients. Sites vitrines, e-commerce, blogs professionnels créés sur mesure.',
+  keywords: 'réalisations web, portfolio sites web, exemples sites internet, création site web portfolio, web online concept réalisations',
+  openGraph: {
+    title: 'Nos Réalisations - Portfolio Sites Web | Web Online Concept',
+    description: 'Découvrez notre portfolio de sites web réalisés pour nos clients. Sites vitrines, e-commerce, blogs professionnels.',
+    url: 'https://www.webonlineconcept.com/realisations',
+    siteName: 'Web Online Concept',
+    images: [
+      {
+        url: '/images/og-realisations.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Portfolio Web Online Concept'
+      }
+    ],
+    locale: 'fr_FR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Nos Réalisations - Portfolio Sites Web',
+    description: 'Découvrez notre portfolio de sites web réalisés pour nos clients.',
+    images: ['/images/og-realisations.jpg'],
+  },
+  alternates: {
+    canonical: 'https://www.webonlineconcept.com/realisations',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+}
 
 export default function Realisations() {
   const [realisations, setRealisations] = useState([])
@@ -20,6 +61,19 @@ export default function Realisations() {
       })
   }, [])
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Nos Réalisations',
+    description: 'Portfolio de sites web réalisés par Web Online Concept',
+    url: 'https://www.webonlineconcept.com/realisations',
+    provider: {
+      '@type': 'Organization',
+      name: 'Web Online Concept',
+      url: 'https://www.webonlineconcept.com'
+    }
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 pt-24 flex items-center justify-center">
@@ -32,105 +86,114 @@ export default function Realisations() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-24 pb-16">
-      {/* En-tête */}
-      <section className="bg-gradient-to-r from-[#0073a8] to-[#005580] text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Nos Réalisations
-            </h1>
-            <p className="text-xl text-white/90 max-w-2xl mx-auto">
-              Divers sites web réalisés pour nos clients
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Grille des réalisations */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {realisations.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="text-gray-600 text-lg">Aucune réalisation disponible pour le moment.</p>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      
+      <div className="min-h-screen bg-gray-50 pt-24 pb-16">
+        {/* En-tête */}
+        <section className="bg-gradient-to-r from-[#0073a8] to-[#005580] text-white py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">
+                Nos Réalisations
+              </h1>
+              <p className="text-xl text-white/90 max-w-2xl mx-auto">
+                Divers sites web réalisés pour nos clients
+              </p>
             </div>
-          ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              {realisations.map((realisation) => (
-                <div key={realisation.id} className="group h-full">
-                  <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full flex flex-col">
-                    {/* Image */}
-                    <a 
-                      href={realisation.url || '#'} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="block"
-                    >
-                      <div className="relative bg-gray-200 overflow-hidden" style={{ paddingBottom: '50%' }}>
-                        <img
-                          src={`/images/${realisation.image}`}
-                          alt={realisation.titre}
-                          className="absolute top-0 left-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
-                          onError={(e) => {
-                            e.target.src = '/images/placeholder.jpg'
-                          }}
-                        />
-                      </div>
-                    </a>
-                    
-                    {/* Contenu */}
-                    <div className="p-4 text-center flex-1 flex flex-col">
+          </div>
+        </section>
+
+        {/* Grille des réalisations */}
+        <section className="py-16" aria-label="Portfolio de réalisations">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {realisations.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-gray-600 text-lg">Aucune réalisation disponible pour le moment.</p>
+              </div>
+            ) : (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                {realisations.map((realisation) => (
+                  <article key={realisation.id} className="group h-full">
+                    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full flex flex-col">
+                      {/* Image */}
                       <a 
                         href={realisation.url || '#'} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="hover:text-[#0073a8] transition-colors"
+                        className="block"
+                        aria-label={`Voir le site ${realisation.titre}`}
                       >
-                        <h3 className="font-bold text-lg text-gray-900 mb-2 line-clamp-1">
-                          {realisation.titre}
-                        </h3>
+                        <div className="relative bg-gray-200 overflow-hidden" style={{ paddingBottom: '50%' }}>
+                          <img
+                            src={`/images/${realisation.image}`}
+                            alt={realisation.titre}
+                            loading="lazy"
+                            className="absolute top-0 left-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                            onError={(e) => {
+                              e.target.src = '/images/placeholder.jpg'
+                            }}
+                          />
+                        </div>
                       </a>
                       
-                      {realisation.url && (
-                        <a
-                          href={realisation.url}
-                          target="_blank"
+                      {/* Contenu */}
+                      <div className="p-4 text-center flex-1 flex flex-col">
+                        <a 
+                          href={realisation.url || '#'} 
+                          target="_blank" 
                           rel="noopener noreferrer"
-                          className="text-[#0073a8] hover:text-[#005580] transition-colors duration-200 text-sm block mb-2 line-clamp-1"
+                          className="hover:text-[#0073a8] transition-colors"
                         >
-                          {realisation.url.replace('https://', '').replace('http://', '').replace('www.', '')}
+                          <h2 className="font-bold text-lg text-gray-900 mb-2 line-clamp-1">
+                            {realisation.titre}
+                          </h2>
                         </a>
-                      )}
-                      
-                      {realisation.description && (
-                        <p className="text-gray-600 text-sm line-clamp-4">
-                          {realisation.description}
-                        </p>
-                      )}
+                        
+                        {realisation.url && (
+                          <a
+                            href={realisation.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#0073a8] hover:text-[#005580] transition-colors duration-200 text-sm block mb-2 line-clamp-1"
+                          >
+                            {realisation.url.replace('https://', '').replace('http://', '').replace('www.', '')}
+                          </a>
+                        )}
+                        
+                        {realisation.description && (
+                          <p className="text-gray-600 text-sm line-clamp-4">
+                            {realisation.description}
+                          </p>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                </div>
-              ))}
+                  </article>
+                ))}
+              </div>
+            )}
+            
+            {/* Call to Action */}
+            <div className="text-center mt-16">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                Vous avez un projet de site web ?
+              </h2>
+              <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
+                Contactez-nous pour obtenir un devis gratuit et personnalisé pour votre projet
+              </p>
+              <Link
+                href="/demande-devis"
+                className="inline-flex items-center px-8 py-4 bg-[#0073a8] text-white font-bold rounded-lg hover:bg-[#005580] transition-all transform hover:scale-105 shadow-lg"
+              >
+                Demander un devis gratuit
+              </Link>
             </div>
-          )}
-          
-          {/* Call to Action */}
-          <div className="text-center mt-16">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
-              Vous avez un projet de site web ?
-            </h3>
-            <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-              Contactez-nous pour obtenir un devis gratuit et personnalisé pour votre projet
-            </p>
-            <Link
-              href="/demande-devis"
-              className="inline-flex items-center px-8 py-4 bg-[#0073a8] text-white font-bold rounded-lg hover:bg-[#005580] transition-all transform hover:scale-105 shadow-lg"
-            >
-              Demander un devis gratuit
-            </Link>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </>
   )
 }
