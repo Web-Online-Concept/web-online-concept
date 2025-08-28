@@ -56,26 +56,20 @@ export default function DemandeDevis() {
   // Calculer le total
   useEffect(() => {
     if (!tarifs) return
-    
-    console.log('=== CALCUL TOTAL ===')
-    console.log('Tarifs:', tarifs)
-    console.log('Options sélectionnées:', formData.options)
 
     let newTotal = 0
     
     // Formule de base
     if (formData.siteWeb) {
-      newTotal += tarifs.formuleBase.prix
-      console.log('Prix de base ajouté:', tarifs.formuleBase.prix)
+      newTotal += parseFloat(tarifs.formuleBase.prix) || 0
     }
 
     // Options
     Object.entries(formData.options).forEach(([optionId, quantity]) => {
       if (quantity > 0) {
         const option = tarifs.options.find(o => o.id === optionId)
-        console.log(`Option ${optionId} x${quantity}:`, option)
         if (option) {
-          newTotal += option.prix * quantity
+          newTotal += (parseFloat(option.prix) || 0) * quantity
         }
       }
     })
@@ -89,7 +83,6 @@ export default function DemandeDevis() {
       }
     }
 
-    console.log('Total calculé:', newTotal)
     setTotal(Math.round(newTotal))
   }, [formData.siteWeb, formData.options, promoInfo, tarifs])
 
