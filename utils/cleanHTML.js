@@ -64,5 +64,18 @@ export function cleanHTML(html) {
   // S'assurer que les paragraphes sont bien fermés
   html = html.replace(/<p>([^<]+)(?!<\/p>)/gi, '<p>$1</p>');
   
+  // Ajouter un espace entre les paragraphes consécutifs pour éviter qu'ils soient collés
+  html = html.replace(/<\/p>\s*<p>/gi, '</p>\n\n<p>');
+  
+  // Ajouter un espace après les titres
+  html = html.replace(/<\/h([1-6])>\s*<p>/gi, '</h$1>\n\n<p>');
+  html = html.replace(/<\/h([1-6])>\s*<h/gi, '</h$1>\n\n<h');
+  
+  // Ajouter un espace autour des listes
+  html = html.replace(/<\/p>\s*<ul>/gi, '</p>\n\n<ul>');
+  html = html.replace(/<\/ul>\s*<p>/gi, '</ul>\n\n<p>');
+  html = html.replace(/<\/p>\s*<ol>/gi, '</p>\n\n<ol>');
+  html = html.replace(/<\/ol>\s*<p>/gi, '</ol>\n\n<p>');
+  
   return html.trim();
 }

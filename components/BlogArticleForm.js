@@ -367,7 +367,7 @@ export default function BlogArticleForm({ mode = 'create', article = null, categ
               plugins: [
                 'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
                 'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                'insertdatetime', 'media', 'table', 'help', 'wordcount', 'emoticons', 'paste'
+                'insertdatetime', 'media', 'table', 'help', 'wordcount', 'emoticons'
               ],
               toolbar: 'undo redo | blocks | ' +
                 'bold italic underline strikethrough | alignleft aligncenter ' +
@@ -378,13 +378,6 @@ export default function BlogArticleForm({ mode = 'create', article = null, categ
               language: 'fr_FR',
               language_url: 'https://cdn.tiny.cloud/1/no-api-key/tinymce/6/langs/fr_FR.js',
               paste_data_images: false,
-              paste_as_text: false,
-              paste_word_valid_elements: 'h1,h2,h3,h4,h5,h6,p,span,strong,b,em,i,u,strike,br,ul,ol,li,a[href|target],table,tr,td,th,tbody,thead',
-              paste_retain_style_properties: '',
-              paste_strip_class_attributes: 'all',
-              paste_remove_styles: true,
-              paste_remove_styles_if_webkit: true,
-              paste_convert_word_fake_lists: true,
               images_upload_handler: (blobInfo, progress) => {
                 return new Promise((resolve, reject) => {
                   reject('Utilisez le champ URL pour les images. Upload non disponible sur Vercel.');
