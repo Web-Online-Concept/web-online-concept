@@ -8,11 +8,8 @@ export const dynamic = 'force-dynamic'
 
 export async function GET(request) {
   try {
-    // Vérifier l'authentification
-    const authResult = await verifyAuth(request)
-    if (!authResult.authenticated) {
-      return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
-    }
+    // La route GET est publique, pas besoin d'authentification
+    // Les pages demande-devis et infos-tarifs en ont besoin
 
     // Récupérer la formule de base
     const formuleResult = await query('SELECT * FROM formule_base LIMIT 1')
