@@ -3,12 +3,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Création de Sites Web Professionnels à 500€ - Web Online Concept',
-  description: 'Créez votre site web professionnel à partir de 500€ HT. Design moderne, SEO inclus, hébergement offert 1 an. Devis gratuit sous 24h.',
-  keywords: 'création site web, site internet pas cher, site web 500 euros, création site professionnel, site vitrine, agence web, web online concept',
+  title: 'Création de Sites Web Professionnels à Prix Accessibles - Web Online Concept',
+  description: 'Création de sites web professionnels à prix accessibles. Solution clé en main pour votre entreprise. Devis gratuit et réponse sous 24h.',
+  keywords: 'création site web, site internet professionnel, site web prix accessible, web online concept, création site entreprise',
   openGraph: {
-    title: 'Création de Sites Web Professionnels à 500€ - Web Online Concept',
-    description: 'Créez votre site web professionnel à partir de 500€ HT. Design moderne, SEO inclus, hébergement offert 1 an.',
+    title: 'Création de Sites Web Professionnels à Prix Accessibles - Web Online Concept',
+    description: 'Création de sites web professionnels à prix accessibles. Solution clé en main pour votre entreprise.',
     url: 'https://www.webonlineconcept.com',
     siteName: 'Web Online Concept',
     images: [
@@ -16,7 +16,7 @@ export const metadata = {
         url: '/images/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Web Online Concept - Création de sites web'
+        alt: 'Web Online Concept'
       }
     ],
     locale: 'fr_FR',
@@ -24,8 +24,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Création de Sites Web Professionnels à 500€',
-    description: 'Créez votre site web professionnel à partir de 500€ HT. Design moderne, SEO inclus.',
+    title: 'Création de Sites Web Professionnels à Prix Accessibles',
+    description: 'Création de sites web professionnels à prix accessibles. Solution clé en main pour votre entreprise.',
     images: ['/images/og-image.jpg'],
   },
   alternates: {
@@ -51,24 +51,17 @@ export default function Home() {
     name: 'Web Online Concept',
     description: 'Agence de création de sites web professionnels à prix accessibles',
     url: 'https://www.webonlineconcept.com',
-    logo: 'https://www.webonlineconcept.com/images/logo.png',
     priceRange: '€€',
     address: {
       '@type': 'PostalAddress',
-      addressCountry: 'FR',
-      addressRegion: 'Occitanie'
+      addressCountry: 'FR'
     },
     offers: {
       '@type': 'Offer',
-      name: 'Site Web - Formule de Base',
+      name: 'Formule de Base',
       price: '500',
       priceCurrency: 'EUR',
-      description: 'Site 5 pages avec design moderne, SEO de base et hébergement 1 an inclus'
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.8',
-      reviewCount: '127'
+      description: 'Site 5 pages personnalisé avec design professionnel'
     }
   }
 
@@ -88,7 +81,7 @@ export default function Home() {
           loop
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
-          aria-label="Vidéo de présentation Web Online Concept"
+          aria-label="Vidéo de présentation"
         >
           <source src="/videos/hero-background.mp4" type="video/mp4" />
         </video>
@@ -99,16 +92,16 @@ export default function Home() {
             <div className="bg-[#00334d]/80 backdrop-blur-sm p-8 md:p-12 rounded-2xl">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)'}}>
                 <span className="block animate-slide-up">
-                  Création de Sites Web
+                  Votre présence web
                 </span>
                 <span className="block text-yellow-300 animate-slide-up-delay-1" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
-                  à partir de 500€
+                  commence ici
                 </span>
               </h1>
               <p className="text-xl md:text-2xl mb-8 animate-slide-up-delay-2" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)'}}>
-                Sites web professionnels pour TPE, PME et artisans.
+                Création de sites web professionnels à prix accessibles.
                 <br className="hidden md:block" />
-                Design moderne, SEO inclus, hébergement offert 1 an.
+                Une solution clé en main pour votre entreprise.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-delay">
                 <Link href="/demande-devis" className="bg-white text-[#0073a8] px-8 py-4 rounded-full font-semibold hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg text-center whitespace-nowrap">
@@ -128,10 +121,10 @@ export default function Home() {
         <div className="container max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Création de Site Internet à Prix Fixe
+              Votre site web à la carte
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Une formule transparente : site web complet à 500€ HT, 
+              Un concept simple et transparent : une formule de base complète, 
               puis ajoutez uniquement les options dont vous avez besoin
             </p>
           </div>
@@ -142,7 +135,7 @@ export default function Home() {
               <div className="w-20 h-20 bg-[#0073a8] rounded-full flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300">
                 <span className="text-3xl font-bold text-white">1</span>
               </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Site Web 500€ HT</h3>
+              <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">La Formule de Base</h3>
               <p className="text-gray-600 text-center mb-6">
                 Tout ce qu&apos;il faut pour démarrer votre présence en ligne
               </p>
@@ -151,13 +144,13 @@ export default function Home() {
                   <svg className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>Site vitrine 5 pages personnalisé</span>
+                  <span>Site 5 pages personnalisé</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>Design professionnel moderne</span>
+                  <span>Design professionnel adapté</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -169,7 +162,7 @@ export default function Home() {
                   <svg className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>Référencement SEO de base inclus</span>
+                  <span>SEO de base inclus</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -189,7 +182,7 @@ export default function Home() {
               <div className="w-20 h-20 bg-[#0073a8] rounded-full flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300">
                 <span className="text-3xl font-bold text-white">2</span>
               </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Options Sur Mesure</h3>
+              <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Ajoutez vos Options</h3>
               <p className="text-gray-600 text-center mb-6">
                 Personnalisez votre site selon vos besoins réels
               </p>
@@ -198,31 +191,31 @@ export default function Home() {
                   <svg className="w-5 h-5 text-yellow-500 mr-2 flex-shrink-0 mt-0.5 group-hover:rotate-12 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                   </svg>
-                  <span>Pages supplémentaires (25€/page)</span>
+                  <span>Pages supplémentaires</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-5 h-5 text-yellow-500 mr-2 flex-shrink-0 mt-0.5 group-hover:rotate-12 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                   </svg>
-                  <span>Blog / E-commerce / Réservation</span>
+                  <span>Blog / E-commerce / Boutique...</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-5 h-5 text-yellow-500 mr-2 flex-shrink-0 mt-0.5 group-hover:rotate-12 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                   </svg>
-                  <span>Rédaction de contenu professionnelle</span>
+                  <span>Rédaction de contenu</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-5 h-5 text-yellow-500 mr-2 flex-shrink-0 mt-0.5 group-hover:rotate-12 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                   </svg>
-                  <span>Pack référencement SEO avancé</span>
+                  <span>Référencement SEO</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-5 h-5 text-yellow-500 mr-2 flex-shrink-0 mt-0.5 group-hover:rotate-12 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                   </svg>
-                  <span>Maintenance et mises à jour</span>
+                  <span>Maintenance mensuelle</span>
                 </li>
               </ul>
               <div className="mt-6 text-center">
@@ -238,38 +231,38 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Votre Site Unique</h3>
               <p className="text-gray-600 text-center mb-6">
-                Un site web professionnel adapté à votre budget et vos besoins
+                Résultat conforme à vos besoins : Un tarif détaillé et optimisé pour votre site
               </p>
               <ul className="space-y-3">
                 <li className="flex items-start">
                   <svg className="w-5 h-5 text-[#0073a8] mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span>Prix transparent et maîtrisé</span>
+                  <span>Adapté à votre budget</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-5 h-5 text-[#0073a8] mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span>Livraison rapide sous 2-3 semaines</span>
+                  <span>Correspond à vos besoins</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-5 h-5 text-[#0073a8] mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span>Formation incluse à la prise en main</span>
+                  <span>Sans fonctionnalités inutiles</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-5 h-5 text-[#0073a8] mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span>Support technique 30 jours offert</span>
+                  <span>Évolutif dans le temps</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-5 h-5 text-[#0073a8] mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span>Site évolutif dans le temps</span>
+                  <span>Prix maîtrisé et transparent</span>
                 </li>
               </ul>
               <div className="mt-6 text-center">
@@ -296,10 +289,10 @@ export default function Home() {
         <div className="container max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">
-              Agence Web : Une Équipe d'Experts à Votre Service
+              Une team professionnelle à votre écoute
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Plus de 10 spécialistes freelance pour créer votre site web professionnel
+              Pour tous types de projets, une équipe de spécialistes dédiée à votre réussite
             </p>
           </div>
 
@@ -313,8 +306,8 @@ export default function Home() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">Équipe de +10 experts du web</h3>
-                  <p className="text-gray-600">Webmasters, designers, développeurs, experts SEO, chacun maîtrise son domaine à la perfection.</p>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">Une équipe composée de +10 spécialistes freelance</h3>
+                  <p className="text-gray-600">Chaque expert maîtrise parfaitement son domaine pour vous garantir le meilleur résultat.</p>
                 </div>
               </div>
 
@@ -325,8 +318,8 @@ export default function Home() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">Création de sites web sur mesure</h3>
-                  <p className="text-gray-600">Sites vitrines, e-commerce, blogs, landing pages : nous créons tous types de sites internet.</p>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">Tous les métiers du digital réunis</h3>
+                  <p className="text-gray-600">Webmasters, Webdesigners, Développeurs, Spécialistes SEO, Marketing digital & Stratégique.</p>
                 </div>
               </div>
 
@@ -337,8 +330,8 @@ export default function Home() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">Un chef de projet dédié</h3>
-                  <p className="text-gray-600">Un seul interlocuteur qui coordonne toute l'équipe pour simplifier la création de votre site.</p>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">1 interlocuteur unique dédié</h3>
+                  <p className="text-gray-600">Un chef de projet dédié au suivi de votre projet de A à Z pour simplifier vos échanges.</p>
                 </div>
               </div>
 
@@ -349,8 +342,8 @@ export default function Home() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">Réactivité et professionnalisme</h3>
-                  <p className="text-gray-600">Réponse sous 24h, respect des délais, accompagnement personnalisé tout au long du projet.</p>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">Disponibilité, réactivité et professionnalisme</h3>
+                  <p className="text-gray-600">Nous sommes là quand vous en avez besoin, avec une réponse rapide à toutes vos demandes.</p>
                 </div>
               </div>
             </div>
@@ -360,7 +353,7 @@ export default function Home() {
               <div className="border-4 border-[#0073a8] rounded-2xl overflow-hidden shadow-lg">
                 <Image
                   src="/images/team-image.jpg"
-                  alt="Équipe Web Online Concept - Agence création sites web"
+                  alt="Équipe Web Online Concept"
                   width={600}
                   height={400}
                   className="w-full h-auto"
@@ -372,11 +365,11 @@ export default function Home() {
           {/* Partie basse : Bloc bleu sur toute la largeur */}
           <div className="bg-gradient-to-br from-[#0073a8] to-[#006a87] rounded-2xl p-8 md:p-12 text-white">
             <div className="max-w-4xl mx-auto text-center">
-              <h3 className="text-2xl font-bold mb-4">L'Alternative Idéale à une Agence Web Traditionnelle</h3>
+              <h3 className="text-2xl font-bold mb-4">Mieux qu&apos;une agence web classique</h3>
               <p className="text-base leading-relaxed">
-                Web Online Concept combine la flexibilité et les tarifs attractifs du freelance avec l'expertise complète d'une agence web. 
-                Nous permettons à toute entreprise, TPE, PME ou artisan, d'avoir un site web professionnel 
-                sans se ruiner. Création de sites internet à prix fixe, transparence totale, résultats garantis.
+                WEB ONLINE CONCEPT, c&apos;est la flexibilité du freelance avec la puissance d&apos;une agence complète. 
+                Nous permettons à toute entreprise, peu importe sa taille, d&apos;optimiser au maximum sa communication 
+                digitale et sa présence sur le web.
               </p>
             </div>
           </div>
@@ -388,10 +381,10 @@ export default function Home() {
         <div className="container max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">
-              Référencement SEO Inclus dans Chaque Site
+              Optimisation du référencement Web
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Votre site web optimisé pour Google dès sa création, avec possibilité d'amélioration SEO avancée
+              Nous optimisons votre site pour améliorer votre visibilité dans les résultats des meilleurs moteurs de recherche
             </p>
           </div>
 
@@ -401,7 +394,7 @@ export default function Home() {
               <div className="border-4 border-[#0073a8] rounded-2xl overflow-hidden shadow-lg">
                 <Image
                   src="/images/seo-google.jpg"
-                  alt="Référencement SEO Google - Optimisation site web"
+                  alt="Optimisation référencement Google SEO"
                   width={600}
                   height={400}
                   className="w-full h-auto"
@@ -418,8 +411,8 @@ export default function Home() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">SEO de base inclus dans la formule 500€</h3>
-                  <p className="text-gray-600">Balises meta, structure optimisée, sitemap XML, robots.txt : les fondamentaux du référencement.</p>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">Audit SEO complet de votre site</h3>
+                  <p className="text-gray-600">Nous analysons chaque page pour identifier les points d'amélioration et maximiser votre visibilité.</p>
                 </div>
               </div>
 
@@ -430,8 +423,8 @@ export default function Home() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">Sites web rapides et optimisés</h3>
-                  <p className="text-gray-600">Performance optimale, temps de chargement rapide, code propre : critères essentiels pour Google.</p>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">Optimisation technique et contenu</h3>
+                  <p className="text-gray-600">Vitesse de chargement, balises méta, mots-clés stratégiques : tout est optimisé pour Google.</p>
                 </div>
               </div>
 
@@ -442,8 +435,8 @@ export default function Home() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">Pack SEO avancé en option (400€)</h3>
-                  <p className="text-gray-600">Audit complet, recherche mots-clés, optimisation contenu, netlinking, suivi positionnement.</p>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">Suivi et amélioration continue</h3>
+                  <p className="text-gray-600">Rapports mensuels de positionnement et ajustements pour maintenir votre site en tête des résultats.</p>
                 </div>
               </div>
 
@@ -454,8 +447,8 @@ export default function Home() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">Référencement local pour artisans et PME</h3>
-                  <p className="text-gray-600">Google My Business, citations locales, optimisation géographique pour attirer vos clients locaux.</p>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">Référencement local ciblé</h3>
+                  <p className="text-gray-600">Soyez visible pour vos clients locaux avec une stratégie SEO adaptée à votre zone géographique.</p>
                 </div>
               </div>
 
@@ -467,8 +460,8 @@ export default function Home() {
                     </svg>
                   </div>
                   <div className="ml-4">
-                    <p className="text-lg font-bold">+127 sites web créés et référencés</p>
-                    <p className="text-sm opacity-90">Expertise SEO reconnue depuis 2015</p>
+                    <p className="text-lg font-bold">Notre expertise à votre service</p>
+                    <p className="text-sm opacity-90">Des années d'expérience en référencement pour propulser votre site</p>
                   </div>
                 </div>
               </div>
@@ -482,10 +475,10 @@ export default function Home() {
         <div className="container max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">
-              Pourquoi Choisir Web Online Concept ?
+              Tous nos clients satisfaits
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Les avantages d'un site web professionnel créé par nos experts
+              Découvrez pourquoi nos clients nous font confiance
             </p>
           </div>
 
@@ -496,8 +489,8 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h3 className="text-lg font-bold text-gray-800 mb-2">Prix fixe transparent</h3>
-              <p className="text-gray-600">Site complet à 500€ HT, pas de mauvaise surprise, devis détaillé gratuit</p>
+              <h3 className="text-lg font-bold text-gray-800 mb-2">Visibilité améliorée</h3>
+              <p className="text-gray-600">Optimisation pour une meilleure présence dans les moteurs de recherche</p>
             </div>
 
             <div className="text-center">
@@ -506,7 +499,7 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                 </svg>
               </div>
-              <h3 className="text-lg font-bold text-gray-800 mb-2">Croissance garantie</h3>
+              <h3 className="text-lg font-bold text-gray-800 mb-2">Potentiel de croissance</h3>
               <p className="text-gray-600">Un site professionnel pour développer votre activité et attirer plus de clients</p>
             </div>
 
@@ -517,8 +510,8 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-bold text-gray-800 mb-2">Design moderne</h3>
-              <p className="text-gray-600">Sites web au design actuel qui valorisent votre image professionnelle</p>
+              <h3 className="text-lg font-bold text-gray-800 mb-2">Image professionnelle</h3>
+              <p className="text-gray-600">Un site moderne qui valorise votre entreprise et renforce votre crédibilité</p>
             </div>
 
             <div className="text-center">
@@ -527,8 +520,8 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-bold text-gray-800 mb-2">Support inclus</h3>
-              <p className="text-gray-600">Formation 1h offerte + support technique 30 jours pour bien démarrer</p>
+              <h3 className="text-lg font-bold text-gray-800 mb-2">Gestion simplifiée</h3>
+              <p className="text-gray-600">Interface intuitive pour mettre à jour facilement le contenu de votre site</p>
             </div>
           </div>
         </div>
@@ -538,15 +531,15 @@ export default function Home() {
       <section className="py-20 bg-gradient-to-r from-[#0073a8] to-[#006a87]">
         <div className="container max-w-7xl mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold text-white mb-4">
-            Créez Votre Site Web Professionnel Dès Aujourd'hui
+            Prêt à booster votre présence en ligne ?
           </h2>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Devis gratuit personnalisé sous 24h. 
-            Votre site en ligne sous 2-3 semaines. Prix fixe garanti.
+            Demandez votre devis gratuit et sans engagement dès maintenant. 
+            Réponse garantie sous 24h.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/demande-devis" className="bg-white text-[#0073a8] px-8 py-4 rounded-full font-semibold hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg">
-              Demander un devis gratuit →
+              Demander un devis gratuit
             </Link>
           </div>
         </div>
