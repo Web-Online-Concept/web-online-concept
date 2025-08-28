@@ -226,7 +226,11 @@ export default async function BlogArticlePage({ params }) {
                   prose-img:rounded-lg prose-img:shadow-md prose-img:mx-auto
                   [&_p]:mb-4 [&_p:last-child]:mb-0
                   [&_.MsoNormal]:mb-4 [&_.MsoListBullet*]:list-disc [&_.MsoListBullet*]:ml-6
-                  [&_.MsoListNumber*]:list-decimal [&_.MsoListNumber*]:ml-6"
+                  [&_.MsoListNumber*]:list-decimal [&_.MsoListNumber*]:ml-6
+                  [&_h1+p]:mt-4 [&_h2+p]:mt-4 [&_h3+p]:mt-3
+                  [&_ul]:my-4 [&_ol]:my-4
+                  [&_p+ul]:mt-4 [&_p+ol]:mt-4
+                  [&_ul+p]:mt-4 [&_ol+p]:mt-4"
                 dangerouslySetInnerHTML={{ __html: contentHtml }}
               />
               
