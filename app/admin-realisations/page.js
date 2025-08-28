@@ -233,12 +233,6 @@ export default function AdminRealisations() {
               Gestion<br />Réalisations
             </button>
             <button
-              onClick={() => router.push('/admin-blog')}
-              className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700 w-32 text-center"
-            >
-              Gestion<br />Blog
-            </button>
-            <button
               onClick={() => router.push('/admin-devis')}
               className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700 w-32 text-center"
             >
