@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getPostById, updatePost, deletePost, generateUniqueSlug } from '@/lib/blog-db'
 import { verifyAuth } from '@/app/lib/auth'
+import { cleanHTML } from '@/utils/cleanHTML'
 
 // GET - Récupérer un article par son ID
 export async function GET(request, { params }) {
@@ -57,6 +58,9 @@ export async function PUT(request, { params }) {
         { status: 400 }
       )
     }
+    
+    // NETTOYER LE CONTENU HTML
+    data.content = cleanHTML(data.content)
     
     // Si le slug a changé, vérifier qu'il est unique
     if (data.slug && data.slug !== existingPost.slug) {
