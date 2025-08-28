@@ -119,16 +119,6 @@ export default function DemandeDevis() {
     setLoading(true)
     setError('')
 
-    // Préparer les données avec les options sélectionnées
-    const optionsSelectionnees = []
-    Object.entries(formData.options).forEach(([optionId, quantity]) => {
-      if (quantity > 0) {
-        for (let i = 0; i < quantity; i++) {
-          optionsSelectionnees.push(optionId)
-        }
-      }
-    })
-
     const dataToSend = {
       formData: {
         nom: formData.nom,
@@ -137,15 +127,21 @@ export default function DemandeDevis() {
         entreprise: formData.entreprise,
         message: formData.commentaire
       },
-      tarifs: tarifs,
+      formuleBase: tarifs.formuleBase,
+      optionsSelectionnees: tarifs.options
+        .filter(opt => formData.options[opt.id] > 0)
+        .map(opt => ({
+          ...opt,
+          quantite: formData.options[opt.id],
+          prixTotal: parseFloat(opt.prix) * formData.options[opt.id]
+        })),
       total: total,
-      optionsSelectionnees: optionsSelectionnees,
-      codePromo: promoInfo ? { 
-        valid: true, 
+      remise: promoInfo ? {
         code: formData.codePromo,
-        reduction: promoInfo.reduction,
-        type: promoInfo.type,
-        description: promoInfo.description
+        montant: promoInfo.type === 'pourcentage' 
+          ? total * (promoInfo.reduction / 100)
+          : promoInfo.reduction,
+        type: promoInfo.type
       } : null
     }
 
