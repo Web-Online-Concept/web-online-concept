@@ -2,15 +2,9 @@ import { query } from '@/app/lib/db'
 import { NextResponse } from 'next/server'
 import { verifyAuth } from '@/app/lib/auth'
 
-// GET - Récupérer toutes les réalisations
-export async function GET(request) {
+// GET - Récupérer toutes les réalisations (PUBLIC)
+export async function GET() {
   try {
-    // Vérifier l'authentification
-    const authResult = await verifyAuth(request)
-    if (!authResult.authenticated) {
-      return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
-    }
-
     const result = await query(
       'SELECT * FROM realisations ORDER BY ordre ASC, date_creation DESC'
     )
@@ -24,7 +18,7 @@ export async function GET(request) {
   }
 }
 
-// POST - Ajouter une nouvelle réalisation
+// POST - Ajouter une nouvelle réalisation (PROTÉGÉ)
 export async function POST(request) {
   try {
     // Vérifier l'authentification
