@@ -148,6 +148,7 @@ export default function AdminBlog() {
       console.log('Réponse API:', res.status)
       if (res.ok) {
         const data = await res.json()
+        console.log('Articles reçus:', data)
         setArticles(data)
       } else {
         console.error('Erreur API:', res.status)
