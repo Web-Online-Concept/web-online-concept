@@ -265,7 +265,9 @@ export default function AdminBlog() {
         resetForm()
         loadArticles()
       } else {
-        setMessage('Erreur lors de l\'enregistrement')
+        const error = await res.text()
+        console.error('Erreur serveur:', error)
+        setMessage(`Erreur: ${error || 'Erreur lors de l\'enregistrement'}`)
       }
     } catch (error) {
       setMessage('Erreur de connexion')
