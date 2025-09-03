@@ -33,6 +33,12 @@ export async function GET(request) {
     // Pour le public, ne montrer que les articles publiés
     const isAdmin = await verifyAuth(request)
     
+    // Si la requête vient de la page admin et n'est pas authentifiée
+    const referer = request.headers.get('referer') || ''
+    if (referer.includes('/admin-blog') && !isAdmin) {
+      return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
+    }
+    
     if (id) {
       // Récupérer un article par ID
       const query = isAdmin 

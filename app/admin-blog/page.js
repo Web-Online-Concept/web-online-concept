@@ -79,18 +79,29 @@ export default function AdminBlog() {
         })
       },
       
-      // Configuration pour le copier-coller
+      // Configuration pour le copier-coller (mise à jour pour TinyMCE 6)
       paste_data_images: true,
       paste_as_text: false,
-      paste_word_valid_elements: "p,b,strong,i,em,h1,h2,h3,h4,h5,h6,ul,ol,li,a,br",
-      paste_retain_style_properties: "color font-size",
-      paste_preprocess: (plugin, args) => {
+      paste_block_drop: false,
+      paste_merge_formats: true,
+      paste_preprocess: (editor, args) => {
         // Nettoyer le HTML collé
-        const content = args.content
-        // Supprimer les styles indésirables
-        args.content = content.replace(/style="[^"]*"/gi, '')
-          .replace(/class="[^"]*"/gi, '')
-          .replace(/<o:p\s*\/>/gi, '') // Supprimer les tags Office
+        let content = args.content
+        // Supprimer les styles indésirables sauf couleur et taille
+        content = content.replace(/style="[^"]*"/gi, (match) => {
+          // Garder seulement color et font-size
+          const colorMatch = match.match(/color:\s*[^;"]*/i)
+          const sizeMatch = match.match(/font-size:\s*[^;"]*/i)
+          const styles = []
+          if (colorMatch) styles.push(colorMatch[0])
+          if (sizeMatch) styles.push(sizeMatch[0])
+          return styles.length > 0 ? `style="${styles.join('; ')}"` : ''
+        })
+        // Supprimer les classes
+        content = content.replace(/class="[^"]*"/gi, '')
+        // Supprimer les tags Office
+        content = content.replace(/<o:p\s*\/>/gi, '')
+        args.content = content
       },
       
       // Callback quand le contenu change
