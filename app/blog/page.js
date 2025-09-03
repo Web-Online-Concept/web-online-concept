@@ -35,12 +35,18 @@ export const metadata = {
 async function getArticles() {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
+    console.log('Fetching from:', `${baseUrl}/api/blog/public`)
+    
     const res = await fetch(`${baseUrl}/api/blog/public`, {
       cache: 'no-store' // Pour toujours avoir les derniers articles
     })
     
+    console.log('Response status:', res.status)
+    
     if (res.ok) {
-      return await res.json()
+      const data = await res.json()
+      console.log('Articles from API:', data)
+      return data
     }
     return []
   } catch (error) {
@@ -52,6 +58,7 @@ async function getArticles() {
 // Page principale (Server Component)
 export default async function BlogPage() {
   const articles = await getArticles()
+  console.log('Articles loaded in page:', articles.length, articles)
   
   // Données structurées pour le SEO (Blog)
   const jsonLd = {
