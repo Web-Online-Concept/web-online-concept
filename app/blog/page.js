@@ -1,21 +1,22 @@
 import { Suspense } from 'react'
 import BlogContent from './BlogContent'
+import Link from 'next/link'
 
 // Métadonnées pour le SEO
 export const metadata = {
-  title: 'Blog - Actualités, Tutoriels et Conseils',
-  description: 'Découvrez nos derniers articles, tutoriels et actualités. Conseils pratiques et retours d\'expérience pour vous accompagner dans vos projets.',
+  title: 'Blog - Actualités, Tutoriels et Conseils | Web Online Concept',
+  description: 'Découvrez nos derniers articles, tutoriels et actualités. Conseils pratiques et retours d\'expérience pour vous accompagner dans vos projets web.',
   openGraph: {
-    title: 'Blog - Actualités, Tutoriels et Conseils',
+    title: 'Blog - Actualités, Tutoriels et Conseils | Web Online Concept',
     description: 'Découvrez nos derniers articles, tutoriels et actualités. Conseils pratiques et retours d\'expérience.',
     type: 'website',
     url: '/blog',
     images: [
       {
-        url: '/og-blog.jpg', // À créer
+        url: '/og-blog.jpg',
         width: 1200,
         height: 630,
-        alt: 'Blog'
+        alt: 'Blog Web Online Concept'
       }
     ]
   },
@@ -56,8 +57,8 @@ export default async function BlogPage() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Blog',
-    name: 'Notre Blog',
-    description: 'Actualités, tutoriels et conseils',
+    name: 'Blog Web Online Concept',
+    description: 'Actualités, tutoriels et conseils sur la création de sites web',
     url: '/blog',
     inLanguage: 'fr-FR',
     blogPost: articles.map(article => ({
@@ -69,7 +70,7 @@ export default async function BlogPage() {
       dateModified: article.updated_at,
       author: {
         '@type': 'Organization',
-        name: 'Votre Entreprise' // À personnaliser
+        name: 'Web Online Concept'
       }
     }))
   }
@@ -82,27 +83,46 @@ export default async function BlogPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      {/* Hero Section (Server Component) */}
-      <div className="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
+      {/* Hero Section uniforme avec les autres pages */}
+      <section className="bg-gradient-to-r from-[#0073a8] to-[#005580] text-white py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Notre Blog
             </h1>
-            <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
-              Découvrez nos derniers articles, tutoriels et actualités
+            <p className="text-xl text-white/90 max-w-2xl mx-auto">
+              Actualités, tutoriels et conseils sur la création de sites web
             </p>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Contenu dynamique avec loading state */}
-      <Suspense fallback={<BlogLoading />}>
-        <BlogContent initialArticles={articles} />
-      </Suspense>
+      <div className="min-h-screen bg-gray-50 pt-24 pb-16">
+        <Suspense fallback={<BlogLoading />}>
+          <BlogContent initialArticles={articles} />
+        </Suspense>
 
-      {/* Newsletter CTA (Server Component) */}
-      <NewsletterSection />
+        {/* Call to Action - Devis gratuit */}
+        <section className="py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                Vous avez un projet de site web ?
+              </h2>
+              <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
+                Contactez-nous pour obtenir un devis gratuit et personnalisé pour votre projet
+              </p>
+              <Link
+                href="/demande-devis"
+                className="inline-flex items-center px-8 py-4 bg-[#0073a8] text-white font-bold rounded-lg hover:bg-[#005580] transition-all transform hover:scale-105 shadow-lg"
+              >
+                Demander un devis gratuit
+              </Link>
+            </div>
+          </div>
+        </section>
+      </div>
     </>
   )
 }
@@ -126,35 +146,5 @@ function BlogLoading() {
         </div>
       </div>
     </div>
-  )
-}
-
-// Section Newsletter (Server Component)
-function NewsletterSection() {
-  return (
-    <section className="bg-gradient-to-r from-blue-600 to-blue-800 py-16 mt-16">
-      <div className="max-w-4xl mx-auto px-4 text-center">
-        <h2 className="text-3xl font-bold text-white mb-4">
-          Restez informé
-        </h2>
-        <p className="text-blue-100 text-lg mb-8">
-          Inscrivez-vous à notre newsletter pour recevoir nos derniers articles
-        </p>
-        <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-          <input
-            type="email"
-            placeholder="Votre email"
-            className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
-            required
-          />
-          <button 
-            type="submit"
-            className="bg-white text-blue-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors"
-          >
-            S'inscrire
-          </button>
-        </form>
-      </div>
-    </section>
   )
 }
