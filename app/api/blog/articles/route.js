@@ -1,24 +1,6 @@
 import { NextResponse } from 'next/server'
-import { cookies } from 'next/headers'
 import { neon } from '@neondatabase/serverless'
-import jwt from 'jsonwebtoken'
-
-// Vérifier l'authentification
-async function verifyAuth(request) {
-  const cookieStore = cookies()
-  const token = cookieStore.get('token')
-  
-  if (!token) {
-    return false
-  }
-  
-  try {
-    jwt.verify(token.value, process.env.JWT_SECRET)
-    return true
-  } catch (error) {
-    return false
-  }
-}
+import { verifyAuth } from '@/app/lib/auth'
 
 // GET - Récupérer tous les articles ou un article spécifique
 export async function GET(request) {
@@ -29,10 +11,9 @@ export async function GET(request) {
     const slug = searchParams.get('slug')
     const status = searchParams.get('status')
     
-    // Vérifier si c'est une requête admin (avec cookie d'auth)
-    const cookieStore = cookies()
-    const authToken = cookieStore.get('admin-token') // Utiliser admin-token
-    const isAdmin = authToken ? await verifyAuth(request) : false
+    // Vérifier si c'est une requête admin
+    const authResult = verifyAuth()
+    const isAdmin = authResult.authenticated
     
     if (id) {
       // Récupérer un article par ID
@@ -96,7 +77,8 @@ export async function GET(request) {
 // POST - Créer un nouvel article (admin seulement)
 export async function POST(request) {
   // Vérifier l'authentification
-  if (!await verifyAuth(request)) {
+  const authResult = verifyAuth()
+  if (!authResult.authenticated) {
     return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
   }
   
@@ -161,7 +143,8 @@ export async function POST(request) {
 // PUT - Modifier un article (admin seulement)
 export async function PUT(request) {
   // Vérifier l'authentification
-  if (!await verifyAuth(request)) {
+  const authResult = verifyAuth()
+  if (!authResult.authenticated) {
     return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
   }
   
