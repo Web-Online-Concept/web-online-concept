@@ -99,6 +99,7 @@ export default async function BlogPage() {
 
       {/* Contenu dynamique avec loading state */}
       <div className="min-h-screen bg-gray-50 pt-24 pb-16">
+        {/* Contenu dynamique avec loading state */}
         <Suspense fallback={<BlogLoading />}>
           <BlogContent initialArticles={articles} />
         </Suspense>
