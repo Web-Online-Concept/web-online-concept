@@ -173,32 +173,42 @@ export async function PUT(request) {
       )
     }
     
-    // Construire dynamiquement la requête de mise à jour
-    const updateFields = {
-      title: body.title,
-      slug: body.slug,
-      content: body.content || '',
-      excerpt: body.excerpt || null,
-      category: body.category || null,
-      featured_image: body.featured_image || null,
-      status: body.status || 'draft',
-      updated_at: new Date()
-    }
-    
-    // Ajouter published_at si l'article passe en published
+    // Si le statut passe à "published", on doit mettre à jour published_at
     if (body.status === 'published' && existing[0].status !== 'published') {
-      updateFields.published_at = new Date()
+      const result = await sql`
+        UPDATE blog_articles
+        SET
+          title = ${body.title},
+          slug = ${body.slug},
+          content = ${body.content || ''},
+          excerpt = ${body.excerpt || null},
+          category = ${body.category || null},
+          featured_image = ${body.featured_image || null},
+          status = ${body.status || 'draft'},
+          updated_at = CURRENT_TIMESTAMP,
+          published_at = CURRENT_TIMESTAMP
+        WHERE id = ${id}
+        RETURNING *
+      `
+      return NextResponse.json(result[0])
+    } else {
+      // Mise à jour normale sans toucher published_at
+      const result = await sql`
+        UPDATE blog_articles
+        SET
+          title = ${body.title},
+          slug = ${body.slug},
+          content = ${body.content || ''},
+          excerpt = ${body.excerpt || null},
+          category = ${body.category || null},
+          featured_image = ${body.featured_image || null},
+          status = ${body.status || 'draft'},
+          updated_at = CURRENT_TIMESTAMP
+        WHERE id = ${id}
+        RETURNING *
+      `
+      return NextResponse.json(result[0])
     }
-    
-    // Effectuer la mise à jour
-    const result = await sql`
-      UPDATE blog_articles
-      SET ${sql(updateFields)}
-      WHERE id = ${id}
-      RETURNING *
-    `
-    
-    return NextResponse.json(result[0])
   } catch (error) {
     console.error('Erreur PUT article détaillée:', error)
     return NextResponse.json(
