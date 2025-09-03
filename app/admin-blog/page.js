@@ -1,7 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
+import Script from 'next/script'
 
 export default function AdminBlog() {
   const router = useRouter()
@@ -11,6 +12,7 @@ export default function AdminBlog() {
   const [articles, setArticles] = useState([])
   const [showForm, setShowForm] = useState(false)
   const [editingArticle, setEditingArticle] = useState(null)
+  const editorRef = useRef(null)
   
   // État pour le formulaire
   const [formData, setFormData] = useState({
@@ -19,13 +21,94 @@ export default function AdminBlog() {
     excerpt: '',
     category: '',
     content: '',
-    status: 'draft'
+    status: 'draft',
+    featured_image: ''
   })
 
   // Vérifier l'authentification
   useEffect(() => {
     checkAuth()
   }, [])
+
+  // Initialiser TinyMCE quand le formulaire est affiché
+  useEffect(() => {
+    if (showForm && window.tinymce) {
+      initializeTinyMCE()
+    }
+    
+    return () => {
+      // Nettoyer l'éditeur lors du démontage
+      if (window.tinymce && window.tinymce.get('content-editor')) {
+        window.tinymce.get('content-editor').remove()
+      }
+    }
+  }, [showForm])
+
+  const initializeTinyMCE = () => {
+    if (window.tinymce.get('content-editor')) {
+      window.tinymce.get('content-editor').remove()
+    }
+
+    window.tinymce.init({
+      selector: '#content-editor',
+      height: 500,
+      menubar: false,
+      language: 'fr_FR',
+      plugins: [
+        'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+        'searchreplace', 'visualblocks', 'code', 'fullscreen',
+        'insertdatetime', 'media', 'table', 'help', 'wordcount'
+      ],
+      toolbar: 'undo redo | blocks | ' +
+        'bold italic forecolor | alignleft aligncenter ' +
+        'alignright alignjustify | bullist numlist outdent indent | ' +
+        'link image media | removeformat | code fullscreen | help',
+      content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-size: 16px; line-height: 1.6; }',
+      
+      // Configuration pour les images
+      images_upload_handler: async (blobInfo, progress) => {
+        return new Promise((resolve, reject) => {
+          // Pour l'instant, on convertit en base64
+          // Plus tard, on intégrera Cloudinary ici
+          const reader = new FileReader()
+          reader.onload = () => {
+            resolve(reader.result)
+          }
+          reader.onerror = reject
+          reader.readAsDataURL(blobInfo.blob())
+        })
+      },
+      
+      // Configuration pour le copier-coller
+      paste_data_images: true,
+      paste_as_text: false,
+      paste_word_valid_elements: "p,b,strong,i,em,h1,h2,h3,h4,h5,h6,ul,ol,li,a,br",
+      paste_retain_style_properties: "color font-size",
+      paste_preprocess: (plugin, args) => {
+        // Nettoyer le HTML collé
+        const content = args.content
+        // Supprimer les styles indésirables
+        args.content = content.replace(/style="[^"]*"/gi, '')
+          .replace(/class="[^"]*"/gi, '')
+          .replace(/<o:p\s*\/>/gi, '') // Supprimer les tags Office
+      },
+      
+      // Callback quand le contenu change
+      setup: (editor) => {
+        editor.on('change', () => {
+          const content = editor.getContent()
+          setFormData(prev => ({ ...prev, content }))
+        })
+        
+        // Charger le contenu initial si en mode édition
+        editor.on('init', () => {
+          if (editingArticle && editingArticle.content) {
+            editor.setContent(editingArticle.content)
+          }
+        })
+      }
+    })
+  }
 
   const checkAuth = async () => {
     try {
@@ -100,7 +183,8 @@ export default function AdminBlog() {
       excerpt: '',
       category: '',
       content: '',
-      status: 'draft'
+      status: 'draft',
+      featured_image: ''
     })
     setEditingArticle(null)
     setShowForm(false)
@@ -113,7 +197,8 @@ export default function AdminBlog() {
       excerpt: article.excerpt || '',
       category: article.category || '',
       content: article.content || '',
-      status: article.status
+      status: article.status,
+      featured_image: article.featured_image || ''
     })
     setEditingArticle(article)
     setShowForm(true)
@@ -142,6 +227,11 @@ export default function AdminBlog() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setMessage('')
+    
+    // Récupérer le contenu de TinyMCE
+    if (window.tinymce && window.tinymce.get('content-editor')) {
+      formData.content = window.tinymce.get('content-editor').getContent()
+    }
     
     try {
       const method = editingArticle ? 'PUT' : 'POST'
@@ -181,206 +271,228 @@ export default function AdminBlog() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 pt-24 pb-8">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold">Gestion Blog</h1>
-          <div className="flex gap-4">
-            <button
-              onClick={() => router.push('/admin-tarifs')}
-              className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700 w-32 text-center"
-            >
-              Gestion<br />Tarifs
-            </button>
-            <button
-              onClick={() => router.push('/admin-realisations')}
-              className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700 w-32 text-center"
-            >
-              Gestion<br />Réalisations
-            </button>
-            <button
-              onClick={() => router.push('/admin-devis')}
-              className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700 w-32 text-center"
-            >
-              Gestion<br />Devis
-            </button>
-            <button
-              onClick={() => router.push('/admin-blog')}
-              className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg w-32 text-center"
-            >
-              Gestion<br />Blog
-            </button>
-            <button
-              onClick={handleLogout}
-              className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-gray-700 w-32 text-center"
-            >
-              Déconnexion
-            </button>
-          </div>
-        </div>
+    <>
+      {/* Charger TinyMCE */}
+      <Script 
+        src="https://cdn.tiny.cloud/1/sc5sn2i22r4cd2g4phfct7exajptsws2qt2j0kw1tdnxzlr1/tinymce/6/tinymce.min.js" 
+        strategy="lazyOnload"
+        onLoad={() => {
+          if (showForm) {
+            initializeTinyMCE()
+          }
+        }}
+      />
 
-        {message && (
-          <div className={`mb-6 p-4 rounded-lg ${
-            message.includes('✓') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-          }`}>
-            {message}
-          </div>
-        )}
-
-        {/* Liste des articles ou formulaire */}
-        {!showForm ? (
-          <>
-            {/* Bouton Nouvel Article */}
-            <div className="mb-6">
+      <div className="min-h-screen bg-gray-100 pt-24 pb-8">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex justify-between items-center mb-8">
+            <h1 className="text-3xl font-bold">Gestion Blog</h1>
+            <div className="flex gap-4">
               <button
-                onClick={() => setShowForm(true)}
-                className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
+                onClick={() => router.push('/admin-tarifs')}
+                className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700 w-32 text-center"
               >
-                + Nouvel Article
+                Gestion<br />Tarifs
+              </button>
+              <button
+                onClick={() => router.push('/admin-realisations')}
+                className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700 w-32 text-center"
+              >
+                Gestion<br />Réalisations
+              </button>
+              <button
+                onClick={() => router.push('/admin-devis')}
+                className="bg-blue-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-blue-700 w-32 text-center"
+              >
+                Gestion<br />Devis
+              </button>
+              <button
+                onClick={() => router.push('/admin-blog')}
+                className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg w-32 text-center"
+              >
+                Gestion<br />Blog
+              </button>
+              <button
+                onClick={handleLogout}
+                className="bg-gray-600 text-white px-4 py-3 text-sm rounded-lg hover:bg-gray-700 w-32 text-center"
+              >
+                Déconnexion
               </button>
             </div>
-
-            {/* Liste des articles */}
-            <div className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-xl font-bold mb-4">Articles existants</h2>
-              {articles.length === 0 ? (
-                <p className="text-gray-500">Aucun article pour le moment</p>
-              ) : (
-                <div className="space-y-4">
-                  {articles.map(article => (
-                    <div key={article.id} className="border rounded-lg p-4 flex justify-between items-center">
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-lg">{article.title}</h3>
-                        <div className="text-sm text-gray-600 mt-1">
-                          <span className="mr-4">Slug: {article.slug}</span>
-                          <span className="mr-4">Catégorie: {article.category || 'Sans catégorie'}</span>
-                          <span className={`px-2 py-1 rounded text-xs ${
-                            article.status === 'published' 
-                              ? 'bg-green-100 text-green-800' 
-                              : 'bg-yellow-100 text-yellow-800'
-                          }`}>
-                            {article.status === 'published' ? 'Publié' : 'Brouillon'}
-                          </span>
-                        </div>
-                        {article.excerpt && (
-                          <p className="text-gray-600 mt-2 text-sm">{article.excerpt}</p>
-                        )}
-                      </div>
-                      <div className="flex gap-2 ml-4">
-                        <button
-                          onClick={() => handleEdit(article)}
-                          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-                        >
-                          Modifier
-                        </button>
-                        <button
-                          onClick={() => handleDelete(article.id)}
-                          className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
-                        >
-                          Supprimer
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </>
-        ) : (
-          /* Formulaire de création/édition */
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-xl font-bold mb-4">
-              {editingArticle ? 'Modifier l\'article' : 'Nouvel article'}
-            </h2>
-            <form onSubmit={handleSubmit}>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium mb-1">Titre</label>
-                  <input
-                    type="text"
-                    value={formData.title}
-                    onChange={(e) => handleTitleChange(e.target.value)}
-                    className="w-full px-3 py-2 border rounded-lg"
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium mb-1">Slug (URL)</label>
-                  <input
-                    type="text"
-                    value={formData.slug}
-                    onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
-                    className="w-full px-3 py-2 border rounded-lg"
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium mb-1">Catégorie</label>
-                  <input
-                    type="text"
-                    value={formData.category}
-                    onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
-                    className="w-full px-3 py-2 border rounded-lg"
-                    placeholder="Ex: Actualités, Tutoriels..."
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium mb-1">Extrait</label>
-                  <textarea
-                    value={formData.excerpt}
-                    onChange={(e) => setFormData(prev => ({ ...prev, excerpt: e.target.value }))}
-                    className="w-full px-3 py-2 border rounded-lg"
-                    rows="3"
-                    placeholder="Résumé de l'article..."
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium mb-1">Contenu (temporaire - éditeur à venir)</label>
-                  <textarea
-                    value={formData.content}
-                    onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
-                    className="w-full px-3 py-2 border rounded-lg"
-                    rows="10"
-                    placeholder="Contenu de l'article..."
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium mb-1">Statut</label>
-                  <select
-                    value={formData.status}
-                    onChange={(e) => setFormData(prev => ({ ...prev, status: e.target.value }))}
-                    className="w-full px-3 py-2 border rounded-lg"
-                  >
-                    <option value="draft">Brouillon</option>
-                    <option value="published">Publié</option>
-                  </select>
-                </div>
-                
-                <div className="flex gap-4 pt-4">
-                  <button
-                    type="submit"
-                    className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700"
-                  >
-                    {editingArticle ? 'Modifier' : 'Créer'}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={resetForm}
-                    className="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600"
-                  >
-                    Annuler
-                  </button>
-                </div>
-              </div>
-            </form>
           </div>
-        )}
+
+          {message && (
+            <div className={`mb-6 p-4 rounded-lg ${
+              message.includes('✓') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+            }`}>
+              {message}
+            </div>
+          )}
+
+          {/* Liste des articles ou formulaire */}
+          {!showForm ? (
+            <>
+              {/* Bouton Nouvel Article */}
+              <div className="mb-6">
+                <button
+                  onClick={() => setShowForm(true)}
+                  className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
+                >
+                  + Nouvel Article
+                </button>
+              </div>
+
+              {/* Liste des articles */}
+              <div className="bg-white rounded-lg shadow p-6">
+                <h2 className="text-xl font-bold mb-4">Articles existants</h2>
+                {articles.length === 0 ? (
+                  <p className="text-gray-500">Aucun article pour le moment</p>
+                ) : (
+                  <div className="space-y-4">
+                    {articles.map(article => (
+                      <div key={article.id} className="border rounded-lg p-4 flex justify-between items-center">
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-lg">{article.title}</h3>
+                          <div className="text-sm text-gray-600 mt-1">
+                            <span className="mr-4">Slug: {article.slug}</span>
+                            <span className="mr-4">Catégorie: {article.category || 'Sans catégorie'}</span>
+                            <span className={`px-2 py-1 rounded text-xs ${
+                              article.status === 'published' 
+                                ? 'bg-green-100 text-green-800' 
+                                : 'bg-yellow-100 text-yellow-800'
+                            }`}>
+                              {article.status === 'published' ? 'Publié' : 'Brouillon'}
+                            </span>
+                          </div>
+                          {article.excerpt && (
+                            <p className="text-gray-600 mt-2 text-sm">{article.excerpt}</p>
+                          )}
+                        </div>
+                        <div className="flex gap-2 ml-4">
+                          <button
+                            onClick={() => handleEdit(article)}
+                            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                          >
+                            Modifier
+                          </button>
+                          <button
+                            onClick={() => handleDelete(article.id)}
+                            className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+                          >
+                            Supprimer
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </>
+          ) : (
+            /* Formulaire de création/édition */
+            <div className="bg-white rounded-lg shadow p-6">
+              <h2 className="text-xl font-bold mb-4">
+                {editingArticle ? 'Modifier l\'article' : 'Nouvel article'}
+              </h2>
+              <form onSubmit={handleSubmit}>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-1">Titre</label>
+                    <input
+                      type="text"
+                      value={formData.title}
+                      onChange={(e) => handleTitleChange(e.target.value)}
+                      className="w-full px-3 py-2 border rounded-lg"
+                      required
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium mb-1">Slug (URL)</label>
+                    <input
+                      type="text"
+                      value={formData.slug}
+                      onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
+                      className="w-full px-3 py-2 border rounded-lg"
+                      required
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium mb-1">Catégorie</label>
+                    <input
+                      type="text"
+                      value={formData.category}
+                      onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
+                      className="w-full px-3 py-2 border rounded-lg"
+                      placeholder="Ex: Actualités, Tutoriels..."
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-1">Image à la une (URL temporaire)</label>
+                    <input
+                      type="url"
+                      value={formData.featured_image}
+                      onChange={(e) => setFormData(prev => ({ ...prev, featured_image: e.target.value }))}
+                      className="w-full px-3 py-2 border rounded-lg"
+                      placeholder="https://..."
+                    />
+                    <p className="text-xs text-gray-500 mt-1">L'upload via Cloudinary sera ajouté prochainement</p>
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium mb-1">Extrait</label>
+                    <textarea
+                      value={formData.excerpt}
+                      onChange={(e) => setFormData(prev => ({ ...prev, excerpt: e.target.value }))}
+                      className="w-full px-3 py-2 border rounded-lg"
+                      rows="3"
+                      placeholder="Résumé de l'article pour les aperçus..."
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium mb-1">Contenu de l'article</label>
+                    <textarea
+                      id="content-editor"
+                      className="w-full"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium mb-1">Statut</label>
+                    <select
+                      value={formData.status}
+                      onChange={(e) => setFormData(prev => ({ ...prev, status: e.target.value }))}
+                      className="w-full px-3 py-2 border rounded-lg"
+                    >
+                      <option value="draft">Brouillon</option>
+                      <option value="published">Publié</option>
+                    </select>
+                  </div>
+                  
+                  <div className="flex gap-4 pt-4">
+                    <button
+                      type="submit"
+                      className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700"
+                    >
+                      {editingArticle ? 'Modifier' : 'Créer'}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={resetForm}
+                      className="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600"
+                    >
+                      Annuler
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
