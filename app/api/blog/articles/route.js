@@ -31,7 +31,7 @@ export async function GET(request) {
     
     // Vérifier si c'est une requête admin (avec cookie d'auth)
     const cookieStore = cookies()
-    const authToken = cookieStore.get('token')
+    const authToken = cookieStore.get('admin-token') // Utiliser admin-token
     const isAdmin = authToken ? await verifyAuth(request) : false
     
     if (id) {
