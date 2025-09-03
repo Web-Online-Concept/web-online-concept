@@ -77,37 +77,35 @@ export default async function BlogPage() {
 
   return (
     <>
-      {/* Données structurées */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      {/* Hero Section uniforme avec les autres pages */}
-      <section className="bg-gradient-to-r from-[#0073a8] to-[#005580] text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Notre Blog
-            </h1>
-            <p className="text-xl text-white/90 max-w-2xl mx-auto">
-              Actualités, tutoriels et conseils sur la création de sites web
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Contenu dynamique avec loading state */}
       <div className="min-h-screen bg-gray-50 pt-24 pb-16">
-        {/* Contenu dynamique avec loading state */}
-        <Suspense fallback={<BlogLoading />}>
-          <BlogContent initialArticles={articles} />
-        </Suspense>
-
-        {/* Call to Action - Devis gratuit */}
-        <section className="py-16">
+        {/* En-tête */}
+        <section className="bg-gradient-to-r from-[#0073a8] to-[#005580] text-white py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">
+                Notre Blog
+              </h1>
+              <p className="text-xl text-white/90 max-w-2xl mx-auto">
+                Actualités, tutoriels et conseils sur la création de sites web
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Contenu dynamique avec loading state */}
+        <section className="py-16" aria-label="Articles du blog">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <Suspense fallback={<BlogLoading />}>
+              <BlogContent initialArticles={articles} />
+            </Suspense>
+            
+            {/* Call to Action */}
+            <div className="text-center mt-16">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
                 Vous avez un projet de site web ?
               </h2>
@@ -131,20 +129,18 @@ export default async function BlogPage() {
 // Composant de chargement
 function BlogLoading() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="animate-pulse">
-        <div className="h-12 bg-gray-200 rounded w-full mb-8"></div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[...Array(6)].map((_, i) => (
-            <div key={i} className="bg-white rounded-xl shadow-md overflow-hidden">
-              <div className="h-48 bg-gray-200"></div>
-              <div className="p-6">
-                <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-              </div>
+    <div className="animate-pulse">
+      <div className="h-12 bg-gray-200 rounded w-full mb-8"></div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {[...Array(6)].map((_, i) => (
+          <div key={i} className="bg-white rounded-xl shadow-md overflow-hidden">
+            <div className="h-48 bg-gray-200"></div>
+            <div className="p-6">
+              <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+              <div className="h-4 bg-gray-200 rounded w-1/2"></div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </div>
   )
