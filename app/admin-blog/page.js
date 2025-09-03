@@ -44,6 +44,13 @@ export default function AdminBlog() {
     }
   }, [showForm])
 
+  // Charger les articles une fois authentifié
+  useEffect(() => {
+    if (isAuthenticated && !loading) {
+      loadArticles()
+    }
+  }, [isAuthenticated, loading])
+
   const initializeTinyMCE = () => {
     // S'assurer que TinyMCE est chargé
     if (!window.tinymce) return
@@ -112,8 +119,7 @@ export default function AdminBlog() {
       })
       if (res.ok) {
         setIsAuthenticated(true)
-        // Charger les articles après authentification
-        loadArticles()
+        // NE PAS appeler loadArticles() ici
       } else {
         router.push('/admin-tarifs')
       }
