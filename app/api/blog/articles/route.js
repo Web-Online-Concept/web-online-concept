@@ -42,7 +42,7 @@ export async function GET(request) {
       
       // Incrémenter les vues si c'est une visite publique
       if (!isAdmin) {
-        await sql`UPDATE blog_articles SET views = views + 1 WHERE id = ${result[0].id}`
+        await sql`UPDATE blog_articles SET views = COALESCE(views, 0) + 1 WHERE id = ${result[0].id}`
       }
       
       return NextResponse.json(result[0])
@@ -173,53 +173,36 @@ export async function PUT(request) {
       )
     }
     
-    // Si le statut passe à "published", mettre à jour published_at
-    let publishedAt = null
-    if (body.status === 'published' && existing[0].status !== 'published') {
-      publishedAt = new Date()
+    // Construire dynamiquement la requête de mise à jour
+    const updateFields = {
+      title: body.title,
+      slug: body.slug,
+      content: body.content || '',
+      excerpt: body.excerpt || null,
+      category: body.category || null,
+      featured_image: body.featured_image || null,
+      status: body.status || 'draft',
+      updated_at: new Date()
     }
     
-    // Construire la requête de mise à jour
-    if (publishedAt) {
-      // Avec published_at
-      const result = await sql`
-        UPDATE blog_articles
-        SET
-          title = ${body.title},
-          slug = ${body.slug},
-          content = ${body.content || ''},
-          excerpt = ${body.excerpt || null},
-          category = ${body.category || null},
-          featured_image = ${body.featured_image || null},
-          status = ${body.status || 'draft'},
-          updated_at = CURRENT_TIMESTAMP,
-          published_at = ${publishedAt}
-        WHERE id = ${id}
-        RETURNING *
-      `
-      return NextResponse.json(result[0])
-    } else {
-      // Sans modifier published_at
-      const result = await sql`
-        UPDATE blog_articles
-        SET
-          title = ${body.title},
-          slug = ${body.slug},
-          content = ${body.content || ''},
-          excerpt = ${body.excerpt || null},
-          category = ${body.category || null},
-          featured_image = ${body.featured_image || null},
-          status = ${body.status || 'draft'},
-          updated_at = CURRENT_TIMESTAMP
-        WHERE id = ${id}
-        RETURNING *
-      `
-      return NextResponse.json(result[0])
+    // Ajouter published_at si l'article passe en published
+    if (body.status === 'published' && existing[0].status !== 'published') {
+      updateFields.published_at = new Date()
     }
+    
+    // Effectuer la mise à jour
+    const result = await sql`
+      UPDATE blog_articles
+      SET ${sql(updateFields)}
+      WHERE id = ${id}
+      RETURNING *
+    `
+    
+    return NextResponse.json(result[0])
   } catch (error) {
-    console.error('Erreur PUT article:', error)
+    console.error('Erreur PUT article détaillée:', error)
     return NextResponse.json(
-      { error: 'Erreur lors de la modification de l\'article' },
+      { error: `Erreur lors de la modification: ${error.message}` },
       { status: 500 }
     )
   }
