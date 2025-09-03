@@ -29,15 +29,10 @@ export async function GET(request) {
     const slug = searchParams.get('slug')
     const status = searchParams.get('status')
     
-    // Pour l'admin, vérifier l'auth pour voir tous les articles
-    // Pour le public, ne montrer que les articles publiés
-    const isAdmin = await verifyAuth(request)
-    
-    // Si la requête vient de la page admin et n'est pas authentifiée
-    const referer = request.headers.get('referer') || ''
-    if (referer.includes('/admin-blog') && !isAdmin) {
-      return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
-    }
+    // Vérifier si c'est une requête admin (avec cookie d'auth)
+    const cookieStore = cookies()
+    const authToken = cookieStore.get('token')
+    const isAdmin = authToken ? await verifyAuth(request) : false
     
     if (id) {
       // Récupérer un article par ID

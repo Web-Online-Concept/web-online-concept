@@ -45,6 +45,10 @@ export default function AdminBlog() {
   }, [showForm])
 
   const initializeTinyMCE = () => {
+    // S'assurer que TinyMCE est chargé
+    if (!window.tinymce) return
+
+    // Supprimer l'instance existante
     if (window.tinymce.get('content-editor')) {
       window.tinymce.get('content-editor').remove()
     }
@@ -68,8 +72,6 @@ export default function AdminBlog() {
       // Configuration pour les images
       images_upload_handler: async (blobInfo, progress) => {
         return new Promise((resolve, reject) => {
-          // Pour l'instant, on convertit en base64
-          // Plus tard, on intégrera Cloudinary ici
           const reader = new FileReader()
           reader.onload = () => {
             resolve(reader.result)
@@ -79,30 +81,12 @@ export default function AdminBlog() {
         })
       },
       
-      // Configuration pour le copier-coller (mise à jour pour TinyMCE 6)
+      // Configuration pour le copier-coller (TinyMCE 6)
       paste_data_images: true,
       paste_as_text: false,
       paste_block_drop: false,
       paste_merge_formats: true,
-      paste_preprocess: (editor, args) => {
-        // Nettoyer le HTML collé
-        let content = args.content
-        // Supprimer les styles indésirables sauf couleur et taille
-        content = content.replace(/style="[^"]*"/gi, (match) => {
-          // Garder seulement color et font-size
-          const colorMatch = match.match(/color:\s*[^;"]*/i)
-          const sizeMatch = match.match(/font-size:\s*[^;"]*/i)
-          const styles = []
-          if (colorMatch) styles.push(colorMatch[0])
-          if (sizeMatch) styles.push(sizeMatch[0])
-          return styles.length > 0 ? `style="${styles.join('; ')}"` : ''
-        })
-        // Supprimer les classes
-        content = content.replace(/class="[^"]*"/gi, '')
-        // Supprimer les tags Office
-        content = content.replace(/<o:p\s*\/>/gi, '')
-        args.content = content
-      },
+      automatic_uploads: true,
       
       // Callback quand le contenu change
       setup: (editor) => {
