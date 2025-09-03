@@ -270,10 +270,11 @@ export default function AdminBlog() {
       {/* Charger TinyMCE */}
       <Script 
         src="https://cdn.tiny.cloud/1/sc5sn2i22r4cd2g4phfct7exajptsws2qt2j0kw1tdnxzlr1/tinymce/6/tinymce.min.js" 
-        strategy="lazyOnload"
+        strategy="afterInteractive"
         onLoad={() => {
+          console.log('TinyMCE chargé')
           if (showForm) {
-            initializeTinyMCE()
+            setTimeout(() => initializeTinyMCE(), 100)
           }
         }}
       />

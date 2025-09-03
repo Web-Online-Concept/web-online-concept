@@ -35,7 +35,7 @@ export const metadata = {
 async function getArticles() {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
-    const res = await fetch(`${baseUrl}/api/blog/articles`, {
+    const res = await fetch(`${baseUrl}/api/blog/public`, {
       cache: 'no-store' // Pour toujours avoir les derniers articles
     })
     

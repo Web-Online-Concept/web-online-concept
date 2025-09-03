@@ -6,7 +6,7 @@ import Link from 'next/link'
 async function getArticle(slug) {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
-    const res = await fetch(`${baseUrl}/api/blog/articles?slug=${slug}`, {
+    const res = await fetch(`${baseUrl}/api/blog/public?slug=${slug}`, {
       cache: 'no-store'
     })
     
@@ -24,7 +24,7 @@ async function getArticle(slug) {
 async function getRelatedArticles(category, currentSlug) {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
-    const res = await fetch(`${baseUrl}/api/blog/articles`, {
+    const res = await fetch(`${baseUrl}/api/blog/public`, {
       cache: 'no-store'
     })
     
