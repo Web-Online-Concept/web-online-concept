@@ -179,24 +179,43 @@ export async function PUT(request) {
       publishedAt = new Date()
     }
     
-    // Mettre à jour l'article
-    const result = await sql`
-      UPDATE blog_articles
-      SET
-        title = ${body.title},
-        slug = ${body.slug},
-        content = ${body.content || ''},
-        excerpt = ${body.excerpt || null},
-        category = ${body.category || null},
-        featured_image = ${body.featured_image || null},
-        status = ${body.status || 'draft'},
-        updated_at = CURRENT_TIMESTAMP,
-        published_at = ${publishedAt ? publishedAt : sql`published_at`}
-      WHERE id = ${id}
-      RETURNING *
-    `
-    
-    return NextResponse.json(result[0])
+    // Construire la requête de mise à jour
+    if (publishedAt) {
+      // Avec published_at
+      const result = await sql`
+        UPDATE blog_articles
+        SET
+          title = ${body.title},
+          slug = ${body.slug},
+          content = ${body.content || ''},
+          excerpt = ${body.excerpt || null},
+          category = ${body.category || null},
+          featured_image = ${body.featured_image || null},
+          status = ${body.status || 'draft'},
+          updated_at = CURRENT_TIMESTAMP,
+          published_at = ${publishedAt}
+        WHERE id = ${id}
+        RETURNING *
+      `
+      return NextResponse.json(result[0])
+    } else {
+      // Sans modifier published_at
+      const result = await sql`
+        UPDATE blog_articles
+        SET
+          title = ${body.title},
+          slug = ${body.slug},
+          content = ${body.content || ''},
+          excerpt = ${body.excerpt || null},
+          category = ${body.category || null},
+          featured_image = ${body.featured_image || null},
+          status = ${body.status || 'draft'},
+          updated_at = CURRENT_TIMESTAMP
+        WHERE id = ${id}
+        RETURNING *
+      `
+      return NextResponse.json(result[0])
+    }
   } catch (error) {
     console.error('Erreur PUT article:', error)
     return NextResponse.json(
