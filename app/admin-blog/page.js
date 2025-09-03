@@ -47,7 +47,12 @@ export default function AdminBlog() {
   // Charger les articles une fois authentifié
   useEffect(() => {
     if (isAuthenticated && !loading) {
-      loadArticles()
+      console.log('Chargement des articles - Auth:', isAuthenticated, 'Loading:', loading)
+      // Petit délai pour s'assurer que le cookie est bien établi
+      const timer = setTimeout(() => {
+        loadArticles()
+      }, 500)
+      return () => clearTimeout(timer)
     }
   }, [isAuthenticated, loading])
 
@@ -132,13 +137,20 @@ export default function AdminBlog() {
   }
 
   const loadArticles = async () => {
+    console.log('LoadArticles appelé')
     try {
       const res = await fetch('/api/blog/articles', {
-        credentials: 'include'
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        }
       })
+      console.log('Réponse API:', res.status)
       if (res.ok) {
         const data = await res.json()
         setArticles(data)
+      } else {
+        console.error('Erreur API:', res.status)
       }
     } catch (error) {
       console.error('Erreur chargement articles:', error)
