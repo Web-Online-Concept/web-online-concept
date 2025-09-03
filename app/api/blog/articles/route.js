@@ -226,7 +226,8 @@ export async function PUT(request) {
 // DELETE - Supprimer un article (admin seulement)
 export async function DELETE(request) {
   // Vérifier l'authentification
-  if (!await verifyAuth(request)) {
+  const authResult = verifyAuth()
+  if (!authResult.authenticated) {
     return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
   }
   
