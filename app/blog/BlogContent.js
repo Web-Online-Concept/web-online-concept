@@ -11,16 +11,13 @@ export default function BlogContent({ initialArticles }) {
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [searchTerm, setSearchTerm] = useState('')
 
-  // Extraire les catégories uniques (avec normalisation complète)
-  const normalizeCategory = (cat) => cat?.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-  
-  const uniqueCategories = [...new Set(articles.map(a => normalizeCategory(a.category)).filter(Boolean))]
-  const categories = ['all', ...new Set(articles.map(a => a.category?.trim()).filter(Boolean))]
+  // Extraire les catégories uniques
+  const categories = ['all', ...new Set(articles.map(a => a.category).filter(Boolean))]
 
-  // Filtrer les articles
+  // Filtrer les articles (comparaison insensible à la casse)
   const filteredArticles = articles.filter(article => {
     const matchCategory = selectedCategory === 'all' || 
-                         normalizeCategory(article.category) === normalizeCategory(selectedCategory)
+                         article.category?.toLowerCase() === selectedCategory.toLowerCase()
     const matchSearch = article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                        (article.excerpt && article.excerpt.toLowerCase().includes(searchTerm.toLowerCase()))
     return matchCategory && matchSearch
