@@ -42,8 +42,8 @@ export default function BlogContent({ initialArticles }) {
     return minutes
   }
 
-  // Article en vedette (le plus récent publié)
-  const featuredArticle = articles.find(a => a.status === 'published')
+  // Article en vedette (le premier article filtré)
+  const featuredArticle = filteredArticles.find(a => a.status === 'published')
 
   return (
     <>
@@ -95,8 +95,8 @@ export default function BlogContent({ initialArticles }) {
           </div>
         ) : (
           <>
-            {/* Article en vedette */}
-            {featuredArticle && selectedCategory === 'all' && !searchTerm && (
+            {/* Article en vedette - Toujours visible sauf en recherche */}
+            {featuredArticle && !searchTerm && (
               <section className="mb-16" aria-labelledby="featured-heading">
                 <h2 id="featured-heading" className="text-2xl font-bold text-gray-900 mb-8">
                   Article en vedette
@@ -156,81 +156,83 @@ export default function BlogContent({ initialArticles }) {
               </section>
             )}
 
-            {/* Grille d'articles */}
-            <section aria-labelledby="articles-heading">
-              {selectedCategory === 'all' && !searchTerm && featuredArticle && (
-                <h2 id="articles-heading" className="text-2xl font-bold text-gray-900 mb-8">
-                  Tous les articles
-                </h2>
-              )}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredArticles
-                  .filter(article => featuredArticle ? article.id !== featuredArticle.id : true)
-                  .map(article => (
-                  <article
-                    key={article.id}
-                    className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-                  >
-                    <Link href={`/blog/${article.slug}`} className="block">
-                      {/* Image ou placeholder */}
-                      {article.featured_image ? (
-                        <div className="h-48 overflow-hidden relative">
-                          <Image
-                            src={article.featured_image}
-                            alt={article.title}
-                            fill
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            className="object-cover group-hover:scale-105 transition-transform duration-300"
-                          />
-                        </div>
-                      ) : (
-                        <div className="h-48 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-                          <div className="text-gray-400 text-4xl font-bold">
-                            {article.title.charAt(0)}
+            {/* Grille d'articles - Exclut l'article vedette s'il y a plus d'un article */}
+            {filteredArticles.length > 1 && (
+              <section aria-labelledby="articles-heading">
+                {!searchTerm && (
+                  <h2 id="articles-heading" className="text-2xl font-bold text-gray-900 mb-8">
+                    {selectedCategory === 'all' ? 'Autres articles' : 'Articles dans cette catégorie'}
+                  </h2>
+                )}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {filteredArticles
+                    .filter(article => !searchTerm && featuredArticle ? article.id !== featuredArticle.id : true)
+                    .map(article => (
+                    <article
+                      key={article.id}
+                      className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                    >
+                      <Link href={`/blog/${article.slug}`} className="block">
+                        {/* Image ou placeholder */}
+                        {article.featured_image ? (
+                          <div className="h-48 overflow-hidden relative">
+                            <Image
+                              src={article.featured_image}
+                              alt={article.title}
+                              fill
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                              className="object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
                           </div>
-                        </div>
-                      )}
-
-                      {/* Contenu */}
-                      <div className="p-6">
-                        <div className="flex items-center gap-3 text-sm text-gray-600 mb-3">
-                          {article.category && (
-                            <span className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs font-medium">
-                              {article.category}
-                            </span>
-                          )}
-                          <time dateTime={article.published_at || article.created_at}>
-                            {formatDate(article.published_at || article.created_at)}
-                          </time>
-                        </div>
-                        
-                        <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
-                          {article.title}
-                        </h3>
-                        
-                        {article.excerpt && (
-                          <p className="text-gray-600 mb-4 line-clamp-3">
-                            {article.excerpt}
-                          </p>
+                        ) : (
+                          <div className="h-48 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                            <div className="text-gray-400 text-4xl font-bold">
+                              {article.title.charAt(0)}
+                            </div>
+                          </div>
                         )}
-                        
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center text-blue-600 text-sm font-medium">
-                            <span>Lire la suite</span>
-                            <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
+
+                        {/* Contenu */}
+                        <div className="p-6">
+                          <div className="flex items-center gap-3 text-sm text-gray-600 mb-3">
+                            {article.category && (
+                              <span className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs font-medium">
+                                {article.category}
+                              </span>
+                            )}
+                            <time dateTime={article.published_at || article.created_at}>
+                              {formatDate(article.published_at || article.created_at)}
+                            </time>
                           </div>
-                          <span className="text-sm text-gray-500">
-                            {getReadingTime(article.content)} min
-                          </span>
+                          
+                          <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
+                            {article.title}
+                          </h3>
+                          
+                          {article.excerpt && (
+                            <p className="text-gray-600 mb-4 line-clamp-3">
+                              {article.excerpt}
+                            </p>
+                          )}
+                          
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center text-blue-600 text-sm font-medium">
+                              <span>Lire la suite</span>
+                              <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                              </svg>
+                            </div>
+                            <span className="text-sm text-gray-500">
+                              {getReadingTime(article.content)} min
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                    </Link>
-                  </article>
-                ))}
-              </div>
-            </section>
+                      </Link>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            )}
           </>
         )}
       </main>
