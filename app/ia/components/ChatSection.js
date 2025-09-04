@@ -14,7 +14,8 @@ export default function ChatSection({
   const messagesEndRef = useRef(null)
   const recognitionRef = useRef(null)
   
-  // Auto-scroll vers le bas
+  // Auto-scroll vers le bas - DÉSACTIVÉ temporairement
+  /*
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }
@@ -22,6 +23,7 @@ export default function ChatSection({
   useEffect(() => {
     scrollToBottom()
   }, [messages])
+  */
   
   // Configuration de la reconnaissance vocale
   useEffect(() => {
