@@ -165,7 +165,7 @@ export default function ChatSection({
       </div>
 
       {/* Zone des messages */}
-      <div className="overflow-y-auto space-y-4 pr-2" style={{ height: '300px' }}>
+      <div className="overflow-y-auto space-y-4 pr-2" style={{ height: '350px' }}>
         {messages.map((message) => (
           <div
             key={message.id}
