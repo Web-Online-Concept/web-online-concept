@@ -106,7 +106,7 @@ export async function POST(request) {
       )
     }
     
-    // Créer l'article
+    // Créer l'article avec les vues initiales
     const result = await sql`
       INSERT INTO blog_articles (
         title,
@@ -116,7 +116,8 @@ export async function POST(request) {
         category,
         featured_image,
         status,
-        published_at
+        published_at,
+        views
       ) VALUES (
         ${body.title},
         ${body.slug},
@@ -125,7 +126,8 @@ export async function POST(request) {
         ${body.category || null},
         ${body.featured_image || null},
         ${body.status || 'draft'},
-        ${body.status === 'published' ? new Date() : null}
+        ${body.status === 'published' ? new Date() : null},
+        ${body.initial_views || 0}
       )
       RETURNING *
     `

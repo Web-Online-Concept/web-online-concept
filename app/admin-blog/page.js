@@ -459,6 +459,19 @@ export default function AdminBlog() {
                   </div>
                   
                   <div>
+                    <label className="block text-sm font-medium mb-1">Vues initiales</label>
+                    <input
+                      type="number"
+                      value={formData.initial_views}
+                      onChange={(e) => setFormData(prev => ({ ...prev, initial_views: parseInt(e.target.value) || 0 }))}
+                      className="w-full px-3 py-2 border rounded-lg"
+                      placeholder="0"
+                      min="0"
+                    />
+                    <p className="text-xs text-gray-500 mt-1">Nombre de vues de départ (0 par défaut)</p>
+                  </div>
+                  
+                  <div>
                     <label className="block text-sm font-medium mb-1">Extrait</label>
                     <textarea
                       value={formData.excerpt}
