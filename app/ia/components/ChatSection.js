@@ -11,6 +11,7 @@ export default function ChatSection({
 }) {
   const [inputValue, setInputValue] = useState('')
   const [isRecording, setIsRecording] = useState(false)
+  const [showExportMenu, setShowExportMenu] = useState(false)
   const messagesEndRef = useRef(null)
   const recognitionRef = useRef(null)
   
@@ -85,10 +86,93 @@ export default function ChatSection({
     }).format(date)
   }
 
+  // Fonction pour copier la conversation
+  const copyConversation = () => {
+    const conversationText = messages.map(msg => {
+      const time = formatTime(msg.timestamp)
+      const sender = msg.type === 'user' ? 'Vous' : 'Florent'
+      return `[${time}] ${sender}: ${msg.text}`
+    }).join('\n\n')
+    
+    navigator.clipboard.writeText(conversationText)
+      .then(() => {
+        alert('Conversation copiée dans le presse-papiers !')
+        setShowExportMenu(false)
+      })
+      .catch(err => {
+        console.error('Erreur lors de la copie:', err)
+      })
+  }
+
+  // Fonction pour télécharger la conversation
+  const downloadConversation = () => {
+    const conversationText = messages.map(msg => {
+      const time = formatTime(msg.timestamp)
+      const sender = msg.type === 'user' ? 'Vous' : 'Florent'
+      return `[${time}] ${sender}: ${msg.text}`
+    }).join('\n\n')
+    
+    const header = `Conversation avec Florent - Web Online Concept\nDate: ${new Date().toLocaleDateString('fr-FR')}\n${'='.repeat(50)}\n\n`
+    const fullText = header + conversationText
+    
+    // Créer un blob et télécharger
+    const blob = new Blob([fullText], { type: 'text/plain;charset=utf-8' })
+    const url = window.URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `conversation-florent-${new Date().toISOString().slice(0,10)}.txt`
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    window.URL.revokeObjectURL(url)
+    
+    setShowExportMenu(false)
+  }
+
   return (
     <div className="flex flex-col h-[600px]">
+      {/* Barre d'outils */}
+      <div className="flex justify-between items-center mb-4 pb-2 border-b">
+        <h3 className="text-lg font-semibold text-gray-700">Conversation</h3>
+        <div className="relative">
+          <button
+            onClick={() => setShowExportMenu(!showExportMenu)}
+            className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors"
+            title="Exporter la conversation"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+          </button>
+          
+          {/* Menu d'export */}
+          {showExportMenu && (
+            <div className="absolute right-0 top-10 bg-white shadow-lg rounded-lg py-2 w-48 z-10 border">
+              <button
+                onClick={copyConversation}
+                className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                </svg>
+                Copier la conversation
+              </button>
+              <button
+                onClick={downloadConversation}
+                className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Télécharger (.txt)
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+
       {/* Zone des messages */}
-      <div className="flex-1 overflow-y-auto mb-4 space-y-4 pr-2">{/* Ajout de pr-2 pour le padding */}
+      <div className="flex-1 overflow-y-auto mb-4 space-y-4 pr-2">
         {messages.map((message) => (
           <div
             key={message.id}
