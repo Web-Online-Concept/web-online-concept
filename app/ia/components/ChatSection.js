@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { useState, useRef, useEffect } from 'react'
 
@@ -6,8 +6,7 @@ export default function ChatSection({
   messages, 
   onSendMessage, 
   isLoading, 
-  onStartListening,
-  onStopListening 
+  onReset 
 }) {
   const [inputValue, setInputValue] = useState('')
   const [isRecording, setIsRecording] = useState(false)
@@ -15,27 +14,17 @@ export default function ChatSection({
   const messagesEndRef = useRef(null)
   const recognitionRef = useRef(null)
   
-  // Auto-scroll vers le bas - Amélioré
+  // Auto-scroll vers le bas
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" })
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }
   
-  // Scroll uniquement pour les nouveaux messages
   useEffect(() => {
-    // Petit délai pour laisser le DOM se mettre à jour
     const timer = setTimeout(() => {
       scrollToBottom()
     }, 100)
-    
     return () => clearTimeout(timer)
   }, [messages])
-  
-  // Scroll quand on commence à taper (pour voir la zone de saisie)
-  useEffect(() => {
-    if (inputValue && inputValue.length === 1) {
-      scrollToBottom()
-    }
-  }, [inputValue])
   
   // Configuration de la reconnaissance vocale
   useEffect(() => {
@@ -55,17 +44,15 @@ export default function ChatSection({
       recognition.onerror = (event) => {
         console.error('Erreur reconnaissance vocale:', event.error)
         setIsRecording(false)
-        onStopListening()
       }
       
       recognition.onend = () => {
         setIsRecording(false)
-        onStopListening()
       }
       
       recognitionRef.current = recognition
     }
-  }, [onStopListening])
+  }, [])
   
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -86,7 +73,6 @@ export default function ChatSection({
     } else {
       recognitionRef.current.start()
       setIsRecording(true)
-      onStartListening()
     }
   }
   
@@ -100,9 +86,8 @@ export default function ChatSection({
   // Fonction pour copier la conversation
   const copyConversation = () => {
     const conversationText = messages.map(msg => {
-      const time = formatTime(msg.timestamp)
-      const sender = msg.type === 'user' ? 'Vous' : 'Florent'
-      return `[${time}] ${sender}: ${msg.text}`
+      const sender = msg.role === 'user' ? 'Vous' : 'Florent'
+      return `${sender}: ${msg.content}`
     }).join('\n\n')
     
     navigator.clipboard.writeText(conversationText)
@@ -118,15 +103,13 @@ export default function ChatSection({
   // Fonction pour télécharger la conversation
   const downloadConversation = () => {
     const conversationText = messages.map(msg => {
-      const time = formatTime(msg.timestamp)
-      const sender = msg.type === 'user' ? 'Vous' : 'Florent'
-      return `[${time}] ${sender}: ${msg.text}`
+      const sender = msg.role === 'user' ? 'Vous' : 'Florent'
+      return `${sender}: ${msg.content}`
     }).join('\n\n')
     
     const header = `Conversation avec Florent - Web Online Concept\nDate: ${new Date().toLocaleDateString('fr-FR')}\n${'='.repeat(50)}\n\n`
     const fullText = header + conversationText
     
-    // Créer un blob et télécharger
     const blob = new Blob([fullText], { type: 'text/plain;charset=utf-8' })
     const url = window.URL.createObjectURL(blob)
     const a = document.createElement('a')
@@ -141,44 +124,58 @@ export default function ChatSection({
   }
 
   return (
-    <div className="flex flex-col h-[550px]">
+    <div className="bg-white rounded-xl shadow-lg p-8 h-[550px] flex flex-col">
       {/* Barre d'outils */}
       <div className="flex justify-between items-center mb-4 pb-2 border-b">
         <h3 className="text-lg font-semibold text-gray-700">Conversation</h3>
-        <div className="relative">
+        <div className="flex items-center gap-2">
+          {/* Bouton reset */}
           <button
-            onClick={() => setShowExportMenu(!showExportMenu)}
+            onClick={onReset}
             className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors"
-            title="Exporter la conversation"
+            title="Nouvelle conversation"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
             </svg>
           </button>
           
-          {/* Menu d'export */}
-          {showExportMenu && (
-            <div className="absolute right-0 top-10 bg-white shadow-lg rounded-lg py-2 w-48 z-10 border">
-              <button
-                onClick={copyConversation}
-                className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                </svg>
-                Copier la conversation
-              </button>
-              <button
-                onClick={downloadConversation}
-                className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                Télécharger (.txt)
-              </button>
-            </div>
-          )}
+          {/* Bouton export */}
+          <div className="relative">
+            <button
+              onClick={() => setShowExportMenu(!showExportMenu)}
+              className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors"
+              title="Exporter la conversation"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+            </button>
+            
+            {/* Menu d'export */}
+            {showExportMenu && (
+              <div className="absolute right-0 top-10 bg-white shadow-lg rounded-lg py-2 w-48 z-10 border">
+                <button
+                  onClick={copyConversation}
+                  className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                  </svg>
+                  Copier la conversation
+                </button>
+                <button
+                  onClick={downloadConversation}
+                  className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  Télécharger (.txt)
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -187,22 +184,17 @@ export default function ChatSection({
         {messages.map((message) => (
           <div
             key={message.id}
-            className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
+            className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div
               className={`max-w-[80%] rounded-2xl px-4 py-3 ${
-                message.type === 'user'
+                message.role === 'user'
                   ? 'bg-blue-500 text-white'
                   : 'bg-gray-100 text-gray-800'
               }`}
             >
               <p className="text-sm leading-relaxed whitespace-pre-wrap">
-                {message.text}
-              </p>
-              <p className={`text-xs mt-1 ${
-                message.type === 'user' ? 'text-blue-100' : 'text-gray-500'
-              }`}>
-                {formatTime(message.timestamp)}
+                {message.content}
               </p>
             </div>
           </div>
