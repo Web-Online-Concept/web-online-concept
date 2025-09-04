@@ -30,7 +30,7 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4">Services</h4>
             <ul className="space-y-2 text-gray-400">
               <li><Link href="/#services" className="hover:text-white transition-colors">Nos services</Link></li>
-              <li><Link href="/infos-tarifs" className="hover:text-white transition-colors">Tarifs</Link></li>
+              <li><Link href="/infos-tarifs" className="hover:text-white transition-colors">Infos & Tarifs</Link></li>
               <li><Link href="/realisations" className="hover:text-white transition-colors">Réalisations</Link></li>
               <li><Link href="/blog" className="hover:text-white transition-colors">Blog</Link></li>
               <li><Link href="/demande-devis" className="hover:text-white transition-colors">Devis gratuit</Link></li>
