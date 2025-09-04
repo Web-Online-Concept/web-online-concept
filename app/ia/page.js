@@ -28,7 +28,6 @@ export default function IAPage() {
   const handleSendMessage = async (message) => {
     if (!message.trim() || isLoading) return
 
-    // Ajouter le message utilisateur
     const userMessage = {
       id: Date.now(),
       role: 'user',
@@ -42,30 +41,24 @@ export default function IAPage() {
     setIsSpeaking(false)
 
     try {
-      // Appeler l'API
       const response = await fetch('/api/florent', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message })
       })
 
       const data = await response.json()
       
-      // Créer la réponse IA
       const aiMessage = {
         id: Date.now() + 1,
         role: 'assistant',
         content: data.response || "Je suis désolé, je n'ai pas pu comprendre votre question."
       }
 
-      // Afficher la réponse et la lire
       const newMessages = [...messages, userMessage, aiMessage]
       setMessages(newMessages)
       setIsLoading(false)
-      
-      // Si on a un audioUrl d'ElevenLabs, le passer au VoiceHandler
+
       if (data.audioUrl) {
         setCurrentAudio(data.audioUrl)
       }
@@ -122,16 +115,15 @@ export default function IAPage() {
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-6 max-w-7xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
           {/* Avatar Florent */}
-          <div className="flex flex-col items-center justify-start bg-white rounded-xl shadow-lg pt-2 px-8 pb-8 relative h-[900px]">
+          <div className="flex flex-col items-center justify-start bg-white rounded-xl shadow-lg p-8 relative h-[900px]">
             <FlorentAvatar 
               isSpeaking={isSpeaking} 
               isListening={false} 
               isThinking={isLoading} 
             />
             
-            {/* Bouton arrêter la voix */}
             {isSpeaking && (
               <button
                 onClick={handleStopSpeaking}
