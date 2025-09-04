@@ -182,8 +182,8 @@ export default function ChatSection({
         </div>
       </div>
 
-      {/* Zone des messages */}
-      <div className="flex-1 overflow-y-auto mb-4 space-y-4 pr-2">
+      {/* Zone des messages - avec moins d'espace en bas */}
+      <div className="flex-1 overflow-y-auto mb-2 space-y-4 pr-2">
         {messages.map((message) => (
           <div
             key={message.id}
@@ -222,8 +222,8 @@ export default function ChatSection({
         <div ref={messagesEndRef} />
       </div>
       
-      {/* Zone de saisie */}
-      <form onSubmit={handleSubmit} className="border-t pt-4">
+      {/* Zone de saisie - remontée avec moins de padding */}
+      <form onSubmit={handleSubmit} className="border-t pt-3">
         <div className="flex gap-2">
           <input
             type="text"
