@@ -1,29 +1,51 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white">
       <div className="container max-w-7xl mx-auto px-4 py-12">
-        <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+          {/* Colonne Logo */}
           <div className="text-center">
-            <h3 className="text-xl font-bold mb-4">Web Online Concept</h3>
+            <Link href="/">
+              <div className="inline-block hover:opacity-90 transition-opacity">
+                <Image 
+                  src="/images/logo.png" 
+                  alt="Web Online Concept Logo" 
+                  width={104} 
+                  height={80} 
+                  className="object-contain mx-auto"
+                />
+              </div>
+            </Link>
+          </div>
+
+          {/* Colonne Titre */}
+          <div className="text-center">
+            <h3 className="text-lg font-semibold mb-4">Web Online Concept</h3>
             <p className="text-gray-400">
               Création de sites web professionnels à prix accessibles.
             </p>
           </div>
           
+          {/* Colonne Services */}
           <div className="text-center">
             <h4 className="text-lg font-semibold mb-4">Services</h4>
             <ul className="space-y-2 text-gray-400">
               <li><Link href="/#services" className="hover:text-white transition-colors">Nos services</Link></li>
               <li><Link href="/infos-tarifs" className="hover:text-white transition-colors">Tarifs</Link></li>
+              <li><Link href="/realisations" className="hover:text-white transition-colors">Réalisations</Link></li>
+              <li><Link href="/blog" className="hover:text-white transition-colors">Blog</Link></li>
               <li><Link href="/demande-devis" className="hover:text-white transition-colors">Devis gratuit</Link></li>
             </ul>
           </div>
           
+          {/* Colonne Informations */}
           <div className="text-center">
             <h4 className="text-lg font-semibold mb-4">Informations</h4>
             <ul className="space-y-2 text-gray-400">
+              <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
               <li><Link href="/mentions-legales" className="hover:text-white transition-colors">Mentions légales</Link></li>
               <li><Link href="/cgv" className="hover:text-white transition-colors">CGV</Link></li>
               <li><Link href="/politique-confidentialite" className="hover:text-white transition-colors">Confidentialité</Link></li>
