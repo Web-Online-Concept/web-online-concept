@@ -16,7 +16,10 @@ export default function ChatSection({
   
   // Auto-scroll vers le bas
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    const messagesContainer = messagesEndRef.current?.parentElement
+    if (messagesContainer) {
+      messagesContainer.scrollTop = messagesContainer.scrollHeight
+    }
   }
   
   useEffect(() => {
