@@ -222,8 +222,8 @@ export default function ChatSection({
         <div ref={messagesEndRef} />
       </div>
       
-      {/* Zone de saisie - remontée avec encore moins de padding */}
-      <form onSubmit={handleSubmit} className="border-t pt-2">
+      {/* Zone de saisie - suppression complète du padding */}
+      <form onSubmit={handleSubmit} className="border-t pt-0 mt-2">
         <div className="flex gap-2">
           <input
             type="text"
