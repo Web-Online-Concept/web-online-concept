@@ -6,8 +6,9 @@ export default function Footer() {
     <footer className="bg-gray-900 text-white">
       <div className="container max-w-7xl mx-auto px-4 py-12">
         <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          {/* Colonne avec Logo et Titre */}
+          {/* Colonne avec Titre et Logo */}
           <div className="text-center">
+            <h3 className="text-lg font-semibold mb-4">Web Online Concept</h3>
             <Link href="/">
               <div className="inline-block hover:opacity-90 transition-opacity mb-4">
                 <Image 
@@ -19,7 +20,6 @@ export default function Footer() {
                 />
               </div>
             </Link>
-            <h3 className="text-lg font-semibold mb-4">Web Online Concept</h3>
             <p className="text-gray-400">
               Création de sites web professionnels à prix accessibles.
             </p>
