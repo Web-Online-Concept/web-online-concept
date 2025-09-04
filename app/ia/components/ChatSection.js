@@ -183,7 +183,7 @@ export default function ChatSection({
       </div>
 
       {/* Zone des messages - HAUTEUR TRÈS RÉDUITE */}
-      <div className="overflow-y-auto space-y-4 pr-2" style={{ height: '400px' }}>
+      <div className="overflow-y-auto space-y-4 pr-2" style={{ height: '300px' }}>
         {messages.map((message) => (
           <div
             key={message.id}
