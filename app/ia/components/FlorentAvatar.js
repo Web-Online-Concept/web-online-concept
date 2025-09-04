@@ -4,18 +4,7 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 
 export default function FlorentAvatar({ isSpeaking, isListening, isThinking }) {
-  const [blinkAnimation, setBlinkAnimation] = useState(false)
   
-  // Animation de clignement des yeux
-  useEffect(() => {
-    const blinkInterval = setInterval(() => {
-      setBlinkAnimation(true)
-      setTimeout(() => setBlinkAnimation(false), 150)
-    }, 3000 + Math.random() * 2000)
-    
-    return () => clearInterval(blinkInterval)
-  }, [])
-
   return (
     <div className="relative w-full max-w-sm mx-auto">
       {/* Conteneur principal de l'avatar */}
