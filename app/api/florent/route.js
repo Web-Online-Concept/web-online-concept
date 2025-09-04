@@ -19,6 +19,12 @@ ENTREPRISE :
 - Email : ${companyInfo.general.email}
 - Localisation : ${companyInfo.general.address}
 - Baseline : "${companyInfo.general.baseline}"
+- SITE WEB OFFICIEL : ${companyInfo.general.website} (ATTENTION : c'est .COM, pas .FR !)
+
+IMPORTANT - INFORMATIONS CRITIQUES À NE JAMAIS CONFONDRE :
+- Notre site : www.web-online-concept.com (AVEC tirets, domaine .COM)
+- Email : web.online.concept@gmail.com
+- Localisation : TOULOUSE (31200), PAS une autre ville
 
 ÉQUIPE :
 - ${companyInfo.team.size} : ${companyInfo.team.expertise.join(', ')}
