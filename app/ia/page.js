@@ -116,25 +116,15 @@ export default function IAPage() {
       <div className="container mx-auto px-4 py-6 max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
           {/* Avatar Florent - 3/12 (25%) */}
-          <div className="md:col-span-3 flex flex-col items-center justify-start bg-white rounded-xl shadow-lg p-8 relative h-[600px]">
-            <FlorentAvatar 
-              isSpeaking={isSpeaking} 
-              isListening={false} 
-              isThinking={isLoading} 
-            />
-            
-            {isSpeaking && (
-              <button
-                onClick={handleStopSpeaking}
-                className="absolute bottom-8 left-1/2 transform -translate-x-1/2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors flex items-center gap-2"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <rect x="6" y="4" width="4" height="16" rx="1" fill="currentColor" />
-                  <rect x="14" y="4" width="4" height="16" rx="1" fill="currentColor" />
-                </svg>
-                Arrêter la voix
-              </button>
-            )}
+          <div className="md:col-span-3">
+            <div className="relative bg-white rounded-xl shadow-lg p-8 h-[600px] flex flex-col justify-start">
+              <FlorentAvatar 
+                isSpeaking={isSpeaking} 
+                isListening={false} 
+                isThinking={isLoading}
+                onStopSpeaking={handleStopSpeaking}
+              />
+            </div>
           </div>
 
           {/* Chat Section - 9/12 (75%) */}
