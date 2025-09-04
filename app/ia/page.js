@@ -10,7 +10,6 @@ export default function IAPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [isSpeaking, setIsSpeaking] = useState(false)
   const [currentText, setCurrentText] = useState('')
-  const [currentAudio, setCurrentAudio] = useState(null)
   const [showWelcome, setShowWelcome] = useState(true)
 
   useEffect(() => {
@@ -21,6 +20,8 @@ export default function IAPage() {
       content: "Bonjour ! Je suis Florent, consultant digital chez Web Online Concept. Je suis là pour répondre à toutes vos questions sur la création de sites internet, mais aussi sur tout autre sujet qui vous intéresse. Comment puis-je vous aider aujourd'hui ?"
     }
     setMessages([welcomeMessage])
+    setCurrentText(welcomeMessage.content)
+    setIsSpeaking(true)
   }, [])
 
   const handleSendMessage = async (message) => {
@@ -36,7 +37,6 @@ export default function IAPage() {
     setMessages(prev => [...prev, userMessage])
     setIsLoading(true)
     setCurrentText('')
-    setCurrentAudio(null)
     setIsSpeaking(false)
 
     try {
@@ -62,11 +62,6 @@ export default function IAPage() {
       const newMessages = [...messages, userMessage, aiMessage]
       setMessages(newMessages)
       setIsLoading(false)
-      
-      // Si on a un audioUrl d'ElevenLabs, le passer au VoiceHandler
-      if (data.audioUrl) {
-        setCurrentAudio(data.audioUrl)
-      }
       setCurrentText(aiMessage.content)
       setIsSpeaking(true)
 
@@ -93,7 +88,6 @@ export default function IAPage() {
     setIsLoading(false)
     setIsSpeaking(false)
     setCurrentText('')
-    setCurrentAudio(null)
   }
 
   const handleStopSpeaking = () => {
@@ -101,7 +95,6 @@ export default function IAPage() {
       window.stopSpeaking()
     }
     setIsSpeaking(false)
-    setCurrentAudio(null)
   }
 
   return (
@@ -121,8 +114,8 @@ export default function IAPage() {
       {/* Main Content */}
       <div className="container mx-auto px-4 py-6 max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-          {/* Avatar Florent - HAUTEUR FIXE 500px */}
-          <div className="flex flex-col items-center justify-center bg-white rounded-xl shadow-lg p-8 relative h-[500px]">
+          {/* Avatar Florent */}
+          <div className="flex flex-col items-center justify-center bg-white rounded-xl shadow-lg p-8 relative">
             <FlorentAvatar isLoading={isLoading} isSpeaking={isSpeaking} />
             
             {/* Bouton arrêter la voix */}
