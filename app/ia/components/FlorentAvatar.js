@@ -53,8 +53,8 @@ export default function FlorentAvatar({ isSpeaking, isListening, isThinking }) {
       {/* Informations sur Florent */}
       <div className="mt-8 text-center">
         <h2 className="text-2xl font-bold text-gray-800">Florent</h2>
-        <p className="text-gray-600 mt-1">IA Consultant Web Online Concept</p>
-        <p className="text-sm text-gray-500 mt-2">Expert en transformation digitale</p>
+        <p className="text-gray-600 mt-1">Consultant Web Online Concept</p>
+        <p className="text-sm text-gray-500 mt-2">Testez comment fonctionne une IA en ligne</p>
       </div>
       
       {/* Effet de respiration subtile - DÉSACTIVÉ pour l'instant */}
