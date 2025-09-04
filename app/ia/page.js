@@ -114,7 +114,7 @@ export default function IAPage() {
       </section>
 
       {/* Contenu principal */}
-      <div className="container max-w-6xl mx-auto px-4 py-8">
+      <div className="container max-w-6xl mx-auto px-4 py-6">
         <div className="grid lg:grid-cols-2 gap-8 items-stretch">
           {/* Avatar Florent */}
           <div className="bg-white rounded-2xl shadow-xl p-8 flex flex-col justify-center">

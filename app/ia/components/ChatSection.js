@@ -141,7 +141,7 @@ export default function ChatSection({
   }
 
   return (
-    <div className="flex flex-col h-[600px]">
+    <div className="flex flex-col h-[500px]">
       {/* Barre d'outils */}
       <div className="flex justify-between items-center mb-4 pb-2 border-b">
         <h3 className="text-lg font-semibold text-gray-700">Conversation</h3>
