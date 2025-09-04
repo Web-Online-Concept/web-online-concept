@@ -23,6 +23,23 @@ export default function BlogContent({ initialArticles }) {
     return matchCategory && matchSearch
   })
 
+  // DEBUG TEMPORAIRE
+  console.log('=== DEBUG FILTRAGE ===')
+  console.log('Catégorie sélectionnée:', selectedCategory)
+  console.log('Articles:', articles.map(a => ({
+    title: a.title,
+    category: a.category,
+    categoryLength: a.category?.length
+  })))
+  console.log('Filtrage test:', {
+    article: articles[0]?.category,
+    selected: selectedCategory,
+    lowercase1: articles[0]?.category?.toLowerCase(),
+    lowercase2: selectedCategory.toLowerCase(),
+    match: articles[0]?.category?.toLowerCase() === selectedCategory.toLowerCase()
+  })
+  console.log('Articles filtrés:', filteredArticles.length)
+
   // Formater la date
   const formatDate = (dateString) => {
     const date = new Date(dateString)
