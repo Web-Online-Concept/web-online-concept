@@ -103,9 +103,9 @@ export default function IAPage() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 items-stretch">
           {/* Avatar Florent */}
-          <div className="bg-white rounded-2xl shadow-xl p-8">
+          <div className="bg-white rounded-2xl shadow-xl p-8 flex flex-col justify-center">
             <FlorentAvatar 
               isSpeaking={isSpeaking}
               isListening={isListening}
@@ -114,7 +114,7 @@ export default function IAPage() {
           </div>
 
           {/* Zone de chat */}
-          <div className="bg-white rounded-2xl shadow-xl p-8 h-[600px] flex flex-col">
+          <div className="bg-white rounded-2xl shadow-xl p-8 flex flex-col">
             <ChatSection
               messages={messages}
               onSendMessage={handleSendMessage}

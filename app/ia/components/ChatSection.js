@@ -84,9 +84,9 @@ export default function ChatSection({
   }
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-[600px]">
       {/* Zone des messages */}
-      <div className="flex-1 overflow-y-auto mb-4 space-y-4">
+      <div className="flex-1 overflow-y-auto mb-4 space-y-4 pr-2">{/* Ajout de pr-2 pour le padding */}
         {messages.map((message) => (
           <div
             key={message.id}
