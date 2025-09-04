@@ -116,7 +116,7 @@ export default function ChatSection({
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-8 h-[900px] flex flex-col justify-start">
+    <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col justify-start">
       {/* Barre d'outils */}
       <div className="flex justify-between items-center mb-4 pb-2 border-b">
         <h3 className="text-lg font-semibold text-gray-700">Conversation</h3>
@@ -165,7 +165,7 @@ export default function ChatSection({
       </div>
 
       {/* Zone des messages */}
-      <div className="overflow-y-auto space-y-4 pr-2" style={{ height: '350px' }}>
+      <div className="overflow-y-auto space-y-4 pr-2 flex-1">
         {messages.map((message) => (
           <div
             key={message.id}
@@ -200,9 +200,7 @@ export default function ChatSection({
         <div ref={messagesEndRef} />
       </div>
       
-      <div style={{ height: '50px' }}></div>
-      
-      <form onSubmit={handleSubmit} className="border-t pt-2">
+      <form onSubmit={handleSubmit} className="border-t pt-2 mt-2">
         <div className="flex gap-2">
           <input
             type="text"

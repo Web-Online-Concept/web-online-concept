@@ -14,7 +14,6 @@ export default function IAPage() {
   const [showWelcome, setShowWelcome] = useState(true)
 
   useEffect(() => {
-    // Message de bienvenue au chargement
     const welcomeMessage = {
       id: 1,
       role: 'assistant',
@@ -115,9 +114,9 @@ export default function IAPage() {
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-6 max-w-7xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
           {/* Avatar Florent */}
-          <div className="flex flex-col items-center justify-start bg-white rounded-xl shadow-lg p-8 relative h-[900px]">
+          <div className="flex flex-col items-center justify-start bg-white rounded-xl shadow-lg p-8 relative">
             <FlorentAvatar 
               isSpeaking={isSpeaking} 
               isListening={false} 
