@@ -11,12 +11,12 @@ export default function BlogContent({ initialArticles }) {
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [searchTerm, setSearchTerm] = useState('')
 
-  // Extraire les catégories uniques
-  const categories = ['all', ...new Set(articles.map(a => a.category).filter(Boolean))]
+  // Extraire les catégories uniques (avec nettoyage)
+  const categories = ['all', ...new Set(articles.map(a => a.category?.trim()).filter(Boolean))]
 
   // Filtrer les articles
   const filteredArticles = articles.filter(article => {
-    const matchCategory = selectedCategory === 'all' || article.category === selectedCategory
+    const matchCategory = selectedCategory === 'all' || article.category?.trim() === selectedCategory
     const matchSearch = article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                        (article.excerpt && article.excerpt.toLowerCase().includes(searchTerm.toLowerCase()))
     return matchCategory && matchSearch
