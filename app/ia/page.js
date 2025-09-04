@@ -131,7 +131,7 @@ export default function IAPage() {
             {isSpeaking && (
               <button
                 onClick={handleStopSpeaking}
-                className="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors flex items-center gap-2"
+                className="absolute bottom-8 left-1/2 transform -translate-x-1/2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors flex items-center gap-2"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <rect x="6" y="4" width="4" height="16" rx="1" fill="currentColor" />
