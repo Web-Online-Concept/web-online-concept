@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Image from 'next/image'
 
 export default function FlorentAvatar({ isSpeaking, isListening, isThinking }) {
@@ -18,16 +18,6 @@ export default function FlorentAvatar({ isSpeaking, isListening, isThinking }) {
             height={500}
             className="object-cover"
             priority
-          />
-          
-          {/* Overlay pour les yeux (effet clignement) */}
-          <div
-            className={`absolute inset-0 bg-black transition-opacity duration-150 pointer-events-none ${
-              blinkAnimation ? 'opacity-100' : 'opacity-0'
-            }`}
-            style={{
-              clipPath: 'polygon(25% 35%, 75% 35%, 75% 45%, 25% 45%)'
-            }}
           />
           
           {/* Indicateur de parole */}
