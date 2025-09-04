@@ -107,7 +107,7 @@ export default function IAPage() {
               Assistant IA
             </h1>
             <p className="text-xl text-white/90 max-w-2xl mx-auto">
-              Découvrez notre assistant intelligent
+              Testez notre assistant intelligent (Voix/Textes)
             </p>
           </div>
         </div>
