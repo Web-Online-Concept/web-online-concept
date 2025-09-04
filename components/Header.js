@@ -175,6 +175,13 @@ export default function Header() {
               Blog
             </Link>
             <Link 
+              href="/ia" 
+              className="block py-2 text-gray-700 hover:text-[#0073a8]"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              IA
+            </Link>
+            <Link 
               href="/contact" 
               className="block py-2 text-gray-700 hover:text-[#0073a8]"
               onClick={() => setIsMenuOpen(false)}
