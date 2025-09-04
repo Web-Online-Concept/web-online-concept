@@ -6,7 +6,7 @@ import Image from 'next/image'
 export default function FlorentAvatar({ isSpeaking, isListening, isThinking }) {
   
   return (
-    <div className="relative w-full max-w-sm mx-auto">
+    <div className="relative w-full mx-auto">
       {/* Conteneur principal de l'avatar */}
       <div className={`relative transition-all duration-300 ${isThinking ? 'scale-98' : 'scale-100'}`}>
         {/* Photo de Florent */}
