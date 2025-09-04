@@ -15,16 +15,27 @@ export default function ChatSection({
   const messagesEndRef = useRef(null)
   const recognitionRef = useRef(null)
   
-  // Auto-scroll vers le bas - DÉSACTIVÉ temporairement
-  /*
+  // Auto-scroll vers le bas - Amélioré
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" })
   }
   
+  // Scroll uniquement pour les nouveaux messages
   useEffect(() => {
-    scrollToBottom()
+    // Petit délai pour laisser le DOM se mettre à jour
+    const timer = setTimeout(() => {
+      scrollToBottom()
+    }, 100)
+    
+    return () => clearTimeout(timer)
   }, [messages])
-  */
+  
+  // Scroll quand on commence à taper (pour voir la zone de saisie)
+  useEffect(() => {
+    if (inputValue && inputValue.length === 1) {
+      scrollToBottom()
+    }
+  }, [inputValue])
   
   // Configuration de la reconnaissance vocale
   useEffect(() => {
