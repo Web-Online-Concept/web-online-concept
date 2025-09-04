@@ -1,4 +1,7 @@
-'use client'
+{/* Photo de Florent - Sans le conteneur avec overflow */}
+        <Image
+          src="/images/florent-avatar.jpg"
+          alt="Florent - Consultant Digital'use client'
 
 import { useEffect } from 'react'
 import Image from 'next/image'
@@ -10,14 +13,15 @@ export default function FlorentAvatar({ isSpeaking, isListening, isThinking }) {
       {/* Conteneur principal de l'avatar */}
       <div className={`relative transition-all duration-300 ${isThinking ? 'scale-98' : 'scale-100'}`}>
         {/* Photo de Florent - Taille réduite */}
-        <div className="relative overflow-hidden rounded-2xl shadow-2xl">
+        <div className="relative rounded-2xl shadow-2xl">
           <Image
             src="/images/florent-avatar.jpg"
             alt="Florent - Consultant Digital"
             width={300}
             height={375}
-            className="object-cover"
+            className="object-contain rounded-2xl"
             priority
+          />
           />
           
           {/* Indicateur de parole */}
