@@ -1,7 +1,4 @@
-{/* Photo de Florent - Sans le conteneur avec overflow */}
-        <Image
-          src="/images/florent-avatar.jpg"
-          alt="Florent - Consultant Digital'use client'
+'use client'
 
 import { useEffect } from 'react'
 import Image from 'next/image'
@@ -12,7 +9,7 @@ export default function FlorentAvatar({ isSpeaking, isListening, isThinking }) {
     <div className="relative w-full max-w-sm mx-auto">
       {/* Conteneur principal de l'avatar */}
       <div className={`relative transition-all duration-300 ${isThinking ? 'scale-98' : 'scale-100'}`}>
-        {/* Photo de Florent - Taille réduite */}
+        {/* Photo de Florent */}
         <div className="relative rounded-2xl shadow-2xl">
           <Image
             src="/images/florent-avatar.jpg"
@@ -21,7 +18,6 @@ export default function FlorentAvatar({ isSpeaking, isListening, isThinking }) {
             height={375}
             className="object-contain rounded-2xl"
             priority
-          />
           />
           
           {/* Indicateur de parole */}
@@ -61,7 +57,7 @@ export default function FlorentAvatar({ isSpeaking, isListening, isThinking }) {
         <p className="text-sm text-gray-500 mt-2">Testez comment fonctionne une IA en ligne</p>
       </div>
       
-      {/* Effet de respiration subtile - DÉSACTIVÉ pour l'instant */}
+      {/* Effet de respiration subtile */}
       <style jsx>{`
         .scale-98 {
           transform: scale(0.98);
