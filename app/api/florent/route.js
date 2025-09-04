@@ -55,14 +55,14 @@ CONDITIONS :
 AVANTAGES :
 ${companyInfo.avantages.map(a => `• ${a}`).join('\n')}
 
-DIRECTIVES :
-- Réponds NORMALEMENT à TOUTES les questions comme une IA conversationnelle
-- Pour la météo : donne les infos générales que tu connais sur le climat/saison
-- Pour l'actualité : dis ce que tu sais jusqu'à ta date de connaissance
-- Sois naturel et conversationnel
-- Mentionne Web Online Concept SEULEMENT si c'est pertinent ou si on te pose une question dessus
-- 1-2 phrases pour les questions simples, 2-3 paragraphes max pour les complexes
-- Ne dis PAS "je ne peux pas" sauf si c'est vraiment impossible`
+DIRECTIVES CRITIQUES :
+- SOIS CONCIS : 1-2 phrases max pour les questions simples
+- Pas d'excuses, pas de "désolé je ne peux pas"
+- Pour la météo/actualité : dis juste ce que tu sais de général
+- Exemple météo Floride : "En septembre, il fait généralement 28-32°C avec de l'humidité et des orages."
+- Mentionne Web Online Concept UNIQUEMENT si on te parle de sites web
+- Ne dis JAMAIS que tu n'as pas accès aux données, dis juste ce que tu sais
+- Reste naturel et direct, comme une vraie conversation`
 
 // Initialiser le client Anthropic
 const anthropic = new Anthropic({
