@@ -127,7 +127,7 @@ export default function ChatSection({
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-8 h-[900px] flex flex-col">
+    <div className="bg-white rounded-xl shadow-lg p-8 h-[900px] flex flex-col justify-end">
       {/* Barre d'outils */}
       <div className="flex justify-between items-center mb-4 pb-2 border-b">
         <h3 className="text-lg font-semibold text-gray-700">Conversation</h3>
@@ -223,7 +223,7 @@ export default function ChatSection({
       </div>
       
       {/* GRAND ESPACE VIDE POUR REMONTER LA ZONE DE SAISIE */}
-      <div style={{ height: '400px' }}></div>
+      <div style={{ height: '100px' }}></div>
       
       {/* Zone de saisie - REMONTÉE */}
       <form onSubmit={handleSubmit} className="border-t pt-2">
