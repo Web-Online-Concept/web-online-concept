@@ -125,7 +125,11 @@ export default function IAPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
           {/* Avatar Florent */}
           <div className="flex flex-col items-center justify-center bg-white rounded-xl shadow-lg p-8 relative h-[900px]">
-            <FlorentAvatar isLoading={isLoading} isSpeaking={isSpeaking} />
+            <FlorentAvatar 
+              isSpeaking={isSpeaking} 
+              isListening={false} 
+              isThinking={isLoading} 
+            />
             
             {/* Bouton arrêter la voix */}
             {isSpeaking && (
