@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import Anthropic from '@anthropic-ai/sdk'
 
 // Configuration de l'assistant Florent
 const FLORENT_CONTEXT = `Tu es Florent, consultant digital senior chez Web Online Concept. Voici ton profil et tes connaissances :
@@ -44,96 +45,92 @@ AVANTAGES CLIENTS :
 - Optimisation SEO de base incluse
 
 DIRECTIVES :
-- Réponds de manière concise mais complète
+- Réponds de manière concise mais complète (maximum 3-4 paragraphes)
 - Utilise des exemples concrets quand c'est pertinent
 - Si on te pose une question hors web, réponds brièvement puis ramène vers nos services
 - Propose naturellement un devis gratuit quand c'est approprié
-- Reste professionnel mais chaleureux`
+- Reste professionnel mais chaleureux
+- Évite les longs monologues, privilégie les réponses directes`
+
+// Initialiser le client Anthropic
+const anthropic = new Anthropic({
+  apiKey: process.env.CLAUDE_API_KEY,
+})
 
 export async function POST(request) {
   try {
     const { message } = await request.json()
 
-    // Pour le développement, on utilise une réponse simulée
-    // En production, vous devrez intégrer l'API Claude ici
-    
-    // TODO: Remplacer par l'appel réel à Claude API
-    /*
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': process.env.CLAUDE_API_KEY,
-        'anthropic-version': '2023-06-01'
-      },
-      body: JSON.stringify({
-        model: 'claude-3-opus-20240229',
-        max_tokens: 1024,
+    // Vérifier que la clé API existe
+    if (!process.env.CLAUDE_API_KEY) {
+      console.error('CLAUDE_API_KEY manquante')
+      
+      // Fallback sur les réponses simulées si pas de clé
+      return NextResponse.json({
+        response: "Je suis désolé, je rencontre un problème de configuration. Permettez-moi de vous présenter nos services : nous créons des sites web professionnels à partir de 497€, avec un design moderne et une livraison rapide. Souhaitez-vous en savoir plus sur nos offres ?"
+      })
+    }
+
+    try {
+      // Appel à Claude API
+      const completion = await anthropic.messages.create({
+        model: "claude-3-haiku-20240307", // Modèle rapide et économique
+        max_tokens: 500,
+        temperature: 0.7,
+        system: FLORENT_CONTEXT,
         messages: [
           {
-            role: 'system',
-            content: FLORENT_CONTEXT
-          },
-          {
-            role: 'user',
+            role: "user",
             content: message
           }
         ]
       })
-    })
-    
-    const data = await response.json()
-    const aiResponse = data.content[0].text
-    */
 
-    // Réponses simulées pour le développement
-    const simulatedResponses = {
-      'bonjour': `Bonjour ! Ravi de vous rencontrer. Je suis Florent, consultant digital chez Web Online Concept. Je suis là pour vous accompagner dans votre projet web. 
+      // Extraire la réponse
+      const responseText = completion.content[0].text
 
-Que ce soit pour créer un site vitrine, une boutique en ligne ou une application sur mesure, je peux vous conseiller la meilleure solution adaptée à vos besoins et votre budget.
+      return NextResponse.json({
+        response: responseText,
+        // audioUrl: null // Sera ajouté avec ElevenLabs
+      })
 
-Quel type de projet avez-vous en tête ?`,
+    } catch (apiError) {
+      console.error('Erreur Claude API:', apiError)
       
-      'tarif': `Nos tarifs sont très compétitifs et transparents :
+      // Si l'API échoue, utiliser une réponse de fallback intelligente
+      const fallbackResponses = {
+        'tarif': `Nos tarifs sont très compétitifs :
+• Site Vitrine : 497€
+• Site E-commerce : 997€  
+• Site Sur Mesure : à partir de 1497€
 
-📱 Site Vitrine à 497€ : Parfait pour présenter votre activité, avec 5 pages optimisées et un design moderne.
+Tous incluent l'hébergement 1 an et 3 mois de support. Voulez-vous un devis personnalisé gratuit ?`,
+        
+        'service': `Nous proposons 3 formules principales :
+1. Site Vitrine pour présenter votre activité
+2. Site E-commerce pour vendre en ligne
+3. Site Sur Mesure pour des besoins spécifiques
 
-🛍️ E-commerce à 997€ : Une boutique complète pour vendre en ligne, avec paiement sécurisé et gestion des stocks.
-
-⚡ Sur Mesure dès 1497€ : Pour des besoins spécifiques avec des fonctionnalités avancées.
-
-Tous nos sites incluent l'hébergement 1 an et 3 mois de support. Voulez-vous un devis personnalisé gratuit ?`,
-      
-      'délai': `Nos délais sont parmi les plus rapides du marché :
-
-• Site Vitrine : 7 jours ouvrés
-• Site E-commerce : 14 jours ouvrés  
-• Site Sur Mesure : 21 à 30 jours selon la complexité
-
-Nous respectons toujours nos engagements de délais. D'ailleurs, nous pouvons commencer votre projet dès cette semaine si vous le souhaitez !`
-    }
-
-    // Chercher une réponse correspondante ou réponse par défaut
-    let responseText = simulatedResponses['bonjour'] // Réponse par défaut
-    
-    const lowerMessage = message.toLowerCase()
-    for (const [key, value] of Object.entries(simulatedResponses)) {
-      if (lowerMessage.includes(key)) {
-        responseText = value
-        break
+Quelle solution vous intéresse ?`,
+        
+        'default': `Je suis Florent de Web Online Concept. Nous créons des sites web professionnels adaptés à vos besoins et votre budget. Comment puis-je vous aider dans votre projet web ?`
       }
+      
+      // Chercher un mot-clé dans le message
+      const lowerMessage = message.toLowerCase()
+      let response = fallbackResponses.default
+      
+      if (lowerMessage.includes('tarif') || lowerMessage.includes('prix') || lowerMessage.includes('coût')) {
+        response = fallbackResponses.tarif
+      } else if (lowerMessage.includes('service') || lowerMessage.includes('offre')) {
+        response = fallbackResponses.service
+      }
+      
+      return NextResponse.json({ response })
     }
-
-    // TODO: Intégrer ElevenLabs pour la génération audio
-    // Pour l'instant, on utilisera la synthèse vocale du navigateur
-    
-    return NextResponse.json({
-      response: responseText,
-      // audioUrl: null // Sera ajouté avec ElevenLabs
-    })
     
   } catch (error) {
-    console.error('Erreur API:', error)
+    console.error('Erreur générale:', error)
     return NextResponse.json(
       { error: 'Une erreur est survenue' },
       { status: 500 }
