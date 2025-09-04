@@ -10,6 +10,7 @@ export default function IAPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [isSpeaking, setIsSpeaking] = useState(false)
   const [currentText, setCurrentText] = useState('')
+  const [currentAudio, setCurrentAudio] = useState(null)
   const [showWelcome, setShowWelcome] = useState(true)
 
   useEffect(() => {
@@ -37,6 +38,7 @@ export default function IAPage() {
     setMessages(prev => [...prev, userMessage])
     setIsLoading(true)
     setCurrentText('')
+    setCurrentAudio(null)
     setIsSpeaking(false)
 
     try {
@@ -62,6 +64,11 @@ export default function IAPage() {
       const newMessages = [...messages, userMessage, aiMessage]
       setMessages(newMessages)
       setIsLoading(false)
+      
+      // Si on a un audioUrl d'ElevenLabs, le passer au VoiceHandler
+      if (data.audioUrl) {
+        setCurrentAudio(data.audioUrl)
+      }
       setCurrentText(aiMessage.content)
       setIsSpeaking(true)
 
@@ -88,6 +95,7 @@ export default function IAPage() {
     setIsLoading(false)
     setIsSpeaking(false)
     setCurrentText('')
+    setCurrentAudio(null)
   }
 
   const handleStopSpeaking = () => {
@@ -95,6 +103,7 @@ export default function IAPage() {
       window.stopSpeaking()
     }
     setIsSpeaking(false)
+    setCurrentAudio(null)
   }
 
   return (
