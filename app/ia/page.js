@@ -114,9 +114,9 @@ export default function IAPage() {
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-6 max-w-7xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-          {/* Avatar Florent */}
-          <div className="flex flex-col items-center justify-start bg-white rounded-xl shadow-lg p-8 relative h-[600px]">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+          {/* Avatar Florent - 3/12 (25%) */}
+          <div className="md:col-span-3 flex flex-col items-center justify-start bg-white rounded-xl shadow-lg p-8 relative h-[600px]">
             <FlorentAvatar 
               isSpeaking={isSpeaking} 
               isListening={false} 
@@ -137,13 +137,15 @@ export default function IAPage() {
             )}
           </div>
 
-          {/* Chat Section */}
-          <ChatSection 
-            messages={messages}
-            onSendMessage={handleSendMessage}
-            isLoading={isLoading}
-            onReset={handleReset}
-          />
+          {/* Chat Section - 9/12 (75%) */}
+          <div className="md:col-span-9">
+            <ChatSection 
+              messages={messages}
+              onSendMessage={handleSendMessage}
+              isLoading={isLoading}
+              onReset={handleReset}
+            />
+          </div>
         </div>
       </div>
 
