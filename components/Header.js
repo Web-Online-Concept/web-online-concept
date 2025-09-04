@@ -111,14 +111,14 @@ export default function Header() {
                 className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#0073a8] to-[#00b4d8] transition-all duration-300 group-hover:w-full"
               />
             </Link>
-            <Link href="/contact" className="relative text-gray-700 hover:text-[#0073a8] transition-colors group">
-              Contact
+            <Link href="/blog" className="relative text-gray-700 hover:text-[#0073a8] transition-colors group">
+              Blog
               <span 
                 className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#0073a8] to-[#00b4d8] transition-all duration-300 group-hover:w-full"
               />
             </Link>
-            <Link href="/blog" className="relative text-gray-700 hover:text-[#0073a8] transition-colors group">
-              Blog
+            <Link href="/contact" className="relative text-gray-700 hover:text-[#0073a8] transition-colors group">
+              Contact
               <span 
                 className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#0073a8] to-[#00b4d8] transition-all duration-300 group-hover:w-full"
               />
@@ -168,18 +168,18 @@ export default function Header() {
               Réalisations
             </Link>
             <Link 
-              href="/contact" 
-              className="block py-2 text-gray-700 hover:text-[#0073a8]"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Contact
-            </Link>
-            <Link 
               href="/blog" 
               className="block py-2 text-gray-700 hover:text-[#0073a8]"
               onClick={() => setIsMenuOpen(false)}
             >
               Blog
+            </Link>
+            <Link 
+              href="/contact" 
+              className="block py-2 text-gray-700 hover:text-[#0073a8]"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Contact
             </Link>
             <Link 
               href="/demande-devis" 
