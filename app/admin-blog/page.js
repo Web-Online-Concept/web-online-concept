@@ -70,18 +70,21 @@ export default function AdminBlog() {
     window.tinymce.init({
       selector: '#content-editor',
       height: 500,
-      menubar: false,
+      menubar: true,
       language: 'fr_FR',
       plugins: [
         'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
         'searchreplace', 'visualblocks', 'code', 'fullscreen',
-        'insertdatetime', 'media', 'table', 'help', 'wordcount'
+        'insertdatetime', 'media', 'table', 'help', 'wordcount', 'heading'
       ],
-      toolbar: 'undo redo | formatselect | bold italic forecolor | ' +
-        'alignleft aligncenter alignright alignjustify | ' +
-        'bullist numlist outdent indent | link image media | ' +
-        'removeformat | code fullscreen | help',
-      block_formats: 'Paragraphe=p; Titre 1=h1; Titre 2=h2; Titre 3=h3; Titre 4=h4',
+      toolbar: 'undo redo | styles | bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | removeformat | code fullscreen | help',
+      style_formats: [
+        { title: 'Titre 1', format: 'h1' },
+        { title: 'Titre 2', format: 'h2' },
+        { title: 'Titre 3', format: 'h3' },
+        { title: 'Titre 4', format: 'h4' },
+        { title: 'Paragraphe', format: 'p' }
+      ],
       content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-size: 16px; line-height: 1.6; }',
       
       // Configuration pour préserver les URLs des images
