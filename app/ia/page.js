@@ -21,9 +21,6 @@ export default function IAPage() {
       content: "Bonjour ! Je suis Florent, consultant digital chez Web Online Concept. Je suis là pour répondre à toutes vos questions sur la création de sites internet, mais aussi sur tout autre sujet qui vous intéresse. Comment puis-je vous aider aujourd'hui ?"
     }
     setMessages([welcomeMessage])
-    
-    // Ne pas lire automatiquement le message de bienvenue pour éviter les problèmes d'autoplay
-    // Les navigateurs modernes bloquent souvent l'audio automatique
   }, [])
 
   const handleSendMessage = async (message) => {
@@ -66,7 +63,7 @@ export default function IAPage() {
       setMessages(newMessages)
       setIsLoading(false)
       
-      // Si on a un audioUrl, le passer au VoiceHandler
+      // Si on a un audioUrl d'ElevenLabs, le passer au VoiceHandler
       if (data.audioUrl) {
         setCurrentAudio(data.audioUrl)
       }
@@ -108,8 +105,8 @@ export default function IAPage() {
   }
 
   return (
-    <>
-      {/* Header Hero */}
+    <div className="min-h-screen bg-gray-50 pt-24">
+      {/* Header Hero - avec pt-24 sur la section pour le décalage */}
       <section className="bg-gradient-to-r from-[#0073a8] to-[#005580] text-white py-16">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -124,7 +121,7 @@ export default function IAPage() {
       {/* Main Content */}
       <div className="container mx-auto px-4 py-6 max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-          {/* Avatar Florent */}
+          {/* Avatar Florent - AVEC LE CADRE BLANC */}
           <div className="flex flex-col items-center justify-center bg-white rounded-xl shadow-lg p-8 relative">
             <FlorentAvatar isLoading={isLoading} isSpeaking={isSpeaking} />
             
@@ -143,7 +140,7 @@ export default function IAPage() {
             )}
           </div>
 
-          {/* Chat Section */}
+          {/* Chat Section - le composant a déjà son propre cadre blanc */}
           <ChatSection 
             messages={messages}
             onSendMessage={handleSendMessage}
@@ -159,6 +156,6 @@ export default function IAPage() {
         isPlaying={isSpeaking}
         onSpeakingChange={setIsSpeaking}
       />
-    </>
+    </div>
   )
 }
