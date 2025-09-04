@@ -106,7 +106,14 @@ export async function POST(request) {
       )
     }
     
-    // Créer l'article avec les vues initiales
+    // Gérer la date de publication
+    let publishedAt = null
+    if (body.status === 'published') {
+      // Si une date est fournie, l'utiliser, sinon utiliser la date actuelle
+      publishedAt = body.published_at ? new Date(body.published_at) : new Date()
+    }
+    
+    // Créer l'article avec les vues initiales et la date personnalisée
     const result = await sql`
       INSERT INTO blog_articles (
         title,
@@ -126,7 +133,7 @@ export async function POST(request) {
         ${body.category || null},
         ${body.featured_image || null},
         ${body.status || 'draft'},
-        ${body.status === 'published' ? new Date() : null},
+        ${publishedAt},
         ${body.initial_views || 0}
       )
       RETURNING *
@@ -165,7 +172,7 @@ export async function PUT(request) {
     
     // Vérifier que l'article existe
     const existing = await sql`
-      SELECT id, status FROM blog_articles WHERE id = ${id}
+      SELECT id, status, published_at FROM blog_articles WHERE id = ${id}
     `
     
     if (existing.length === 0) {
@@ -175,42 +182,35 @@ export async function PUT(request) {
       )
     }
     
-    // Si le statut passe à "published", on doit mettre à jour published_at
-    if (body.status === 'published' && existing[0].status !== 'published') {
-      const result = await sql`
-        UPDATE blog_articles
-        SET
-          title = ${body.title},
-          slug = ${body.slug},
-          content = ${body.content || ''},
-          excerpt = ${body.excerpt || null},
-          category = ${body.category || null},
-          featured_image = ${body.featured_image || null},
-          status = ${body.status || 'draft'},
-          updated_at = CURRENT_TIMESTAMP,
-          published_at = CURRENT_TIMESTAMP
-        WHERE id = ${id}
-        RETURNING *
-      `
-      return NextResponse.json(result[0])
-    } else {
-      // Mise à jour normale sans toucher published_at
-      const result = await sql`
-        UPDATE blog_articles
-        SET
-          title = ${body.title},
-          slug = ${body.slug},
-          content = ${body.content || ''},
-          excerpt = ${body.excerpt || null},
-          category = ${body.category || null},
-          featured_image = ${body.featured_image || null},
-          status = ${body.status || 'draft'},
-          updated_at = CURRENT_TIMESTAMP
-        WHERE id = ${id}
-        RETURNING *
-      `
-      return NextResponse.json(result[0])
+    // Gérer la date de publication
+    let publishedAt = existing[0].published_at
+    
+    // Si le statut passe à "published" ET qu'aucune date n'était définie
+    if (body.status === 'published' && existing[0].status !== 'published' && !publishedAt) {
+      publishedAt = body.published_at ? new Date(body.published_at) : new Date()
+    } else if (body.published_at) {
+      // Si une date est fournie explicitement, toujours l'utiliser
+      publishedAt = new Date(body.published_at)
     }
+    
+    // Mise à jour avec la gestion de la date personnalisée
+    const result = await sql`
+      UPDATE blog_articles
+      SET
+        title = ${body.title},
+        slug = ${body.slug},
+        content = ${body.content || ''},
+        excerpt = ${body.excerpt || null},
+        category = ${body.category || null},
+        featured_image = ${body.featured_image || null},
+        status = ${body.status || 'draft'},
+        updated_at = CURRENT_TIMESTAMP,
+        published_at = ${publishedAt}
+      WHERE id = ${id}
+      RETURNING *
+    `
+    
+    return NextResponse.json(result[0])
   } catch (error) {
     console.error('Erreur PUT article détaillée:', error)
     return NextResponse.json(

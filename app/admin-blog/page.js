@@ -22,7 +22,9 @@ export default function AdminBlog() {
     category: '',
     content: '',
     status: 'draft',
-    featured_image: ''
+    featured_image: '',
+    initial_views: 0,
+    published_at: ''
   })
 
   // Vérifier l'authentification
@@ -198,13 +200,23 @@ export default function AdminBlog() {
       category: '',
       content: '',
       status: 'draft',
-      featured_image: ''
+      featured_image: '',
+      initial_views: 0,
+      published_at: ''
     })
     setEditingArticle(null)
     setShowForm(false)
   }
 
   const handleEdit = (article) => {
+    // Convertir la date au format datetime-local si elle existe
+    let formattedDate = ''
+    if (article.published_at) {
+      const date = new Date(article.published_at)
+      // Format: YYYY-MM-DDTHH:mm
+      formattedDate = date.toISOString().slice(0, 16)
+    }
+    
     setFormData({
       title: article.title,
       slug: article.slug,
@@ -212,7 +224,9 @@ export default function AdminBlog() {
       category: article.category || '',
       content: article.content || '',
       status: article.status,
-      featured_image: article.featured_image || ''
+      featured_image: article.featured_image || '',
+      initial_views: article.views || 0,
+      published_at: formattedDate
     })
     setEditingArticle(article)
     setShowForm(true)
@@ -469,6 +483,17 @@ export default function AdminBlog() {
                       min="0"
                     />
                     <p className="text-xs text-gray-500 mt-1">Nombre de vues de départ (0 par défaut)</p>
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium mb-1">Date de publication</label>
+                    <input
+                      type="datetime-local"
+                      value={formData.published_at}
+                      onChange={(e) => setFormData(prev => ({ ...prev, published_at: e.target.value }))}
+                      className="w-full px-3 py-2 border rounded-lg"
+                    />
+                    <p className="text-xs text-gray-500 mt-1">Laissez vide pour utiliser la date actuelle lors de la publication</p>
                   </div>
                   
                   <div>
