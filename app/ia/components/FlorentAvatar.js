@@ -10,13 +10,13 @@ export default function FlorentAvatar({ isSpeaking, isListening, isThinking }) {
       {/* Conteneur principal de l'avatar */}
       <div className={`relative transition-all duration-300 ${isThinking ? 'scale-98' : 'scale-100'}`}>
         {/* Photo de Florent */}
-        <div className="relative rounded-2xl shadow-2xl overflow-hidden">
+        <div className="relative rounded-2xl shadow-2xl overflow-hidden w-[280px] h-[350px] mx-auto">
           <Image
             src="/images/florent-avatar.jpg"
             alt="Florent - Consultant Digital"
-            width={300}
-            height={375}
-            className="object-cover rounded-2xl w-full h-full"
+            width={280}
+            height={350}
+            className="object-cover rounded-2xl"
             priority
           />
           
