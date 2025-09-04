@@ -228,7 +228,7 @@ export default function AdminBlog() {
       })
       
       if (res.ok) {
-        setMessage('✓ Article supprimé avec succès')
+        setMessage('✔ Article supprimé avec succès')
         loadArticles()
       } else {
         setMessage('Erreur lors de la suppression')
@@ -261,7 +261,7 @@ export default function AdminBlog() {
       })
       
       if (res.ok) {
-        setMessage(`✓ Article ${editingArticle ? 'modifié' : 'créé'} avec succès`)
+        setMessage(`✔ Article ${editingArticle ? 'modifié' : 'créé'} avec succès`)
         resetForm()
         loadArticles()
       } else {
@@ -340,7 +340,7 @@ export default function AdminBlog() {
 
           {message && (
             <div className={`mb-6 p-4 rounded-lg ${
-              message.includes('✓') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+              message.includes('✔') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
             }`}>
               {message}
             </div>
@@ -447,15 +447,15 @@ export default function AdminBlog() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-1">Image à la une (URL temporaire)</label>
+                    <label className="block text-sm font-medium mb-1">Image à la une</label>
                     <input
-                      type="url"
+                      type="text"
                       value={formData.featured_image}
                       onChange={(e) => setFormData(prev => ({ ...prev, featured_image: e.target.value }))}
                       className="w-full px-3 py-2 border rounded-lg"
-                      placeholder="https://..."
+                      placeholder="/images/blog/nom-image.jpg ou https://..."
                     />
-                    <p className="text-xs text-gray-500 mt-1">L'upload via Cloudinary sera ajouté prochainement</p>
+                    <p className="text-xs text-gray-500 mt-1">Chemin relatif (/images/...) ou URL complète (https://...)</p>
                   </div>
                   
                   <div>
