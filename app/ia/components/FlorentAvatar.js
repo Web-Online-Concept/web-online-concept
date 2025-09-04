@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { useEffect } from 'react'
 import Image from 'next/image'
@@ -9,13 +9,13 @@ export default function FlorentAvatar({ isSpeaking, isListening, isThinking }) {
     <div className="relative w-full max-w-sm mx-auto">
       {/* Conteneur principal de l'avatar */}
       <div className={`relative transition-all duration-300 ${isThinking ? 'scale-98' : 'scale-100'}`}>
-        {/* Photo de Florent */}
+        {/* Photo de Florent - Taille réduite */}
         <div className="relative overflow-hidden rounded-2xl shadow-2xl">
           <Image
             src="/images/florent-avatar.jpg"
             alt="Florent - Consultant Digital"
-            width={400}
-            height={500}
+            width={300}
+            height={375}
             className="object-cover"
             priority
           />
