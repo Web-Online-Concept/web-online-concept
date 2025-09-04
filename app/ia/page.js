@@ -21,8 +21,9 @@ export default function IAPage() {
       content: "Bonjour ! Je suis Florent, consultant digital chez Web Online Concept. Je suis là pour répondre à toutes vos questions sur la création de sites internet, mais aussi sur tout autre sujet qui vous intéresse. Comment puis-je vous aider aujourd'hui ?"
     }
     setMessages([welcomeMessage])
-    setCurrentText(welcomeMessage.content)
-    setIsSpeaking(true)
+    
+    // Ne pas lire automatiquement le message de bienvenue pour éviter les problèmes d'autoplay
+    // Les navigateurs modernes bloquent souvent l'audio automatique
   }, [])
 
   const handleSendMessage = async (message) => {
