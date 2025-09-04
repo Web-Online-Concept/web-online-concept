@@ -227,7 +227,7 @@ export default async function ArticlePage({ params }) {
           {/* Contenu de l'article */}
           <div className="bg-white px-8 md:px-12 pb-12">
             <div 
-              className="prose prose-lg max-w-none prose-headings:font-bold [&>h1]:text-5xl [&>h2]:text-4xl [&>h3]:text-3xl [&>h4]:text-2xl [&>h5]:text-xl [&>h6]:text-lg prose-p:text-gray-700 prose-a:text-blue-600 prose-img:rounded-lg prose-img:shadow-lg prose-ol:list-decimal prose-ol:pl-6 prose-ul:list-disc prose-ul:pl-6 prose-li:text-gray-700"
+              className="blog-content prose prose-lg max-w-none prose-headings:font-bold prose-p:text-gray-700 prose-a:text-blue-600 prose-img:rounded-lg prose-img:shadow-lg prose-ol:list-decimal prose-ol:pl-6 prose-ul:list-disc prose-ul:pl-6 prose-li:text-gray-700"
               dangerouslySetInnerHTML={{ __html: article.content }}
             />
           </div>
