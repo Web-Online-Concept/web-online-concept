@@ -25,9 +25,9 @@ export default function Footer() {
             </p>
           </div>
           
-          {/* Colonne Services */}
+          {/* Colonne À Propos */}
           <div className="text-center">
-            <h4 className="text-lg font-semibold mb-4">Services</h4>
+            <h4 className="text-lg font-semibold mb-4">À Propos</h4>
             <ul className="space-y-2 text-gray-400">
               <li><Link href="/#services" className="hover:text-white transition-colors">Nos services</Link></li>
               <li><Link href="/infos-tarifs" className="hover:text-white transition-colors">Infos & Tarifs</Link></li>
