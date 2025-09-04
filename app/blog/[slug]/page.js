@@ -124,14 +124,14 @@ export default async function ArticlePage({ params }) {
     dateModified: article.updated_at,
     author: {
       '@type': 'Organization',
-      name: 'Votre Entreprise' // À personnaliser
+      name: 'Web Online Concept'
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Votre Entreprise', // À personnaliser
+      name: 'Web Online Concept',
       logo: {
         '@type': 'ImageObject',
-        url: '/logo.png' // À personnaliser
+        url: '/logo.png'
       }
     },
     mainEntityOfPage: {
@@ -258,7 +258,8 @@ export default async function ArticlePage({ params }) {
                 </svg>
                 LinkedIn
               </a>
-              {/* <button
+              {/* Bouton copier le lien commenté pour éviter l'erreur
+              <button
                 onClick={() => navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_BASE_URL}/blog/${article.slug}`)}
                 className="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center gap-2"
               >
@@ -266,7 +267,8 @@ export default async function ArticlePage({ params }) {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
                 Copier le lien
-              </button> */}
+              </button>
+              */}
             </div>
           </div>
         </div>
