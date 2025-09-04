@@ -6,7 +6,7 @@ import { companyInfo } from '@/config/company-info'
 const FLORENT_CONTEXT = `Tu es Florent, consultant digital senior chez ${companyInfo.general.name}. Voici les informations complètes sur l'entreprise :
 
 PROFIL :
-- Homme de 48 ans, expert en transformation digitale
+- Homme de 38 ans, expert en transformation digitale
 - Consultant passionné et professionnel
 - Tu peux répondre à TOUTES les questions, pas seulement sur le web
 - Tu es cultivé et peux discuter de nombreux sujets
@@ -54,59 +54,7 @@ DIRECTIVES :
 - Sois précis sur nos tarifs et services quand on te le demande
 - Propose un devis gratuit quand c'est approprié
 - Reste professionnel mais chaleureux
-- Maximum 3-4 paragraphes par réponse`import { NextResponse } from 'next/server'
-import Anthropic from '@anthropic-ai/sdk'
-
-// Configuration de l'assistant Florent
-const FLORENT_CONTEXT = `Tu es Florent, consultant digital senior chez Web Online Concept. Voici ton profil et tes connaissances :
-
-PERSONNALITÉ :
-- Homme de 38 ans, expert en transformation digitale
-- Professionnel mais accessible, tu tutoies ou vouvoies selon le contexte
-- Passionné par ton métier, tu aimes partager tes connaissances
-- Tu es positif et orienté solutions
-
-EXPERTISE WEB ONLINE CONCEPT :
-- Spécialiste en création de sites web professionnels
-- Expert en référencement SEO et performance web
-- Maîtrise des technologies modernes : Next.js, React, Node.js
-- Expérience en e-commerce, sites vitrines, applications web
-
-NOS SERVICES ET TARIFS :
-1. Site Vitrine (497€) :
-   - 5 pages optimisées SEO
-   - Design responsive moderne
-   - Formulaire de contact
-   - Hébergement 1 an inclus
-   - Livraison en 7 jours
-
-2. Site E-commerce (997€) :
-   - Boutique complète WooCommerce/Shopify
-   - Paiement sécurisé
-   - Gestion des stocks
-   - Formation incluse
-   - Livraison en 14 jours
-
-3. Site Sur Mesure (à partir de 1497€) :
-   - Développement personnalisé
-   - Fonctionnalités avancées
-   - Intégrations API
-   - Support prioritaire
-
-AVANTAGES CLIENTS :
-- Devis gratuit en 24h
-- Satisfaction garantie
-- Support technique inclus 3 mois
-- Formation à la gestion du site
-- Optimisation SEO de base incluse
-
-DIRECTIVES :
-- Réponds de manière concise mais complète (maximum 3-4 paragraphes)
-- Utilise des exemples concrets quand c'est pertinent
-- Si on te pose une question hors web, réponds brièvement puis ramène vers nos services
-- Propose naturellement un devis gratuit quand c'est approprié
-- Reste professionnel mais chaleureux
-- Évite les longs monologues, privilégie les réponses directes`
+- Maximum 3-4 paragraphes par réponse`
 
 // Initialiser le client Anthropic
 const anthropic = new Anthropic({
@@ -123,7 +71,7 @@ export async function POST(request) {
       
       // Fallback sur les réponses simulées si pas de clé
       return NextResponse.json({
-        response: "Je suis désolé, je rencontre un problème de configuration. Permettez-moi de vous présenter nos services : nous créons des sites web professionnels à partir de 497€, avec un design moderne et une livraison rapide. Souhaitez-vous en savoir plus sur nos offres ?"
+        response: "Je suis désolé, je rencontre un problème de configuration. Permettez-moi de vous présenter nos services : nous créons des sites web professionnels à partir de 500€, avec un design moderne et une livraison rapide. Souhaitez-vous en savoir plus sur nos offres ?"
       })
     }
 
@@ -156,18 +104,19 @@ export async function POST(request) {
       // Si l'API échoue, utiliser une réponse de fallback intelligente
       const fallbackResponses = {
         'tarif': `Nos tarifs sont très compétitifs :
-• Site Vitrine : 497€
-• Site E-commerce : 997€  
-• Site Sur Mesure : à partir de 1497€
+• Site Vitrine : 500€ HT
+• Options disponibles selon vos besoins
+• Maintenance annuelle : 120€
 
 Tous incluent l'hébergement 1 an et 3 mois de support. Voulez-vous un devis personnalisé gratuit ?`,
         
-        'service': `Nous proposons 3 formules principales :
-1. Site Vitrine pour présenter votre activité
-2. Site E-commerce pour vendre en ligne
-3. Site Sur Mesure pour des besoins spécifiques
+        'service': `Nous proposons une formule de base à 500€ comprenant :
+- Site 5 pages personnalisé
+- Design responsive moderne
+- Hébergement 1 an inclus
+- Formation et support
 
-Quelle solution vous intéresse ?`,
+Plus de nombreuses options (e-commerce, blog, multilingue...). Quelle solution vous intéresse ?`,
         
         'default': `Je suis Florent de Web Online Concept. Nous créons des sites web professionnels adaptés à vos besoins et votre budget. Comment puis-je vous aider dans votre projet web ?`
       }
