@@ -86,6 +86,13 @@ export default function IAPage() {
     }
   }
 
+  const handleStopSpeaking = () => {
+    if (voiceHandlerRef.current) {
+      voiceHandlerRef.current.stop()
+      setIsSpeaking(false)
+    }
+  }
+
   const handleReset = () => {
     window.location.reload()
   }
