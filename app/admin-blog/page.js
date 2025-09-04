@@ -83,6 +83,11 @@ export default function AdminBlog() {
         'link image media | removeformat | code fullscreen | help',
       content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-size: 16px; line-height: 1.6; }',
       
+      // Configuration pour préserver les URLs des images
+      relative_urls: false,
+      remove_script_host: false,
+      convert_urls: false,
+      
       // Configuration pour les images
       images_upload_handler: async (blobInfo, progress) => {
         return new Promise((resolve, reject) => {
