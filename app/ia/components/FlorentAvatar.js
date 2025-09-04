@@ -78,22 +78,11 @@ export default function FlorentAvatar({ isSpeaking, isListening, isThinking }) {
         <p className="text-sm text-gray-500 mt-2">Expert en transformation digitale</p>
       </div>
       
-      {/* Effet de respiration subtile */}
+      {/* Effet de respiration subtile - DÉSACTIVÉ pour l'instant */}
       <style jsx>{`
-        @keyframes breathe {
-          0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.02); }
-        }
-        
         .scale-98 {
           transform: scale(0.98);
         }
-        
-        ${!isThinking ? `
-          div > div:first-child {
-            animation: breathe 4s ease-in-out infinite;
-          }
-        ` : ''}
       `}</style>
     </div>
   )

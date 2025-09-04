@@ -13,42 +13,67 @@ const VoiceHandler = forwardRef(({ onStartSpeaking, onStopSpeaking }, ref) => {
         // Annuler toute parole en cours
         window.speechSynthesis.cancel()
         
-        const utterance = new SpeechSynthesisUtterance(text)
-        
-        // Configuration pour une voix française masculine
-        utterance.lang = 'fr-FR'
-        utterance.rate = 0.9
-        utterance.pitch = 0.9
-        utterance.volume = 1
-        
-        // Chercher une voix française masculine
-        const voices = window.speechSynthesis.getVoices()
-        const frenchMaleVoice = voices.find(voice => 
-          voice.lang.includes('fr') && 
-          (voice.name.toLowerCase().includes('male') || 
-           voice.name.toLowerCase().includes('homme') ||
-           voice.name.includes('Thomas') ||
-           voice.name.includes('Nicolas'))
-        )
-        
-        if (frenchMaleVoice) {
-          utterance.voice = frenchMaleVoice
+        // Attendre que les voix soient chargées
+        const speakWithVoice = () => {
+          const utterance = new SpeechSynthesisUtterance(text)
+          
+          // Configuration pour une voix française masculine
+          utterance.lang = 'fr-FR'
+          utterance.rate = 0.95
+          utterance.pitch = 0.8 // Plus bas pour une voix masculine
+          utterance.volume = 1
+          
+          // Chercher une voix française masculine
+          const voices = window.speechSynthesis.getVoices()
+          
+          // Priorité aux voix masculines françaises
+          const frenchMaleVoice = voices.find(voice => 
+            voice.lang.includes('fr') && 
+            (voice.name.toLowerCase().includes('male') || 
+             voice.name.toLowerCase().includes('homme') ||
+             voice.name.includes('Thomas') ||
+             voice.name.includes('Nicolas') ||
+             voice.name.includes('Antoine') ||
+             voice.name.includes('Microsoft Paul') || // Windows
+             voice.name.includes('Fred') || // Mac
+             voice.name.includes('Google français')) // Chrome
+          )
+          
+          // Si pas de voix masculine, prendre n'importe quelle voix française
+          const frenchVoice = frenchMaleVoice || voices.find(voice => 
+            voice.lang.includes('fr-FR') || voice.lang.includes('fr')
+          )
+          
+          if (frenchVoice) {
+            utterance.voice = frenchVoice
+            console.log('Voix sélectionnée:', frenchVoice.name)
+          } else {
+            console.log('Aucune voix française trouvée')
+          }
+          
+          utterance.onstart = () => {
+            onStartSpeaking()
+          }
+          
+          utterance.onend = () => {
+            onStopSpeaking()
+          }
+          
+          utterance.onerror = (event) => {
+            console.error('Erreur synthèse vocale:', event)
+            onStopSpeaking()
+          }
+          
+          window.speechSynthesis.speak(utterance)
         }
         
-        utterance.onstart = () => {
-          onStartSpeaking()
+        // Si les voix sont déjà chargées
+        if (window.speechSynthesis.getVoices().length > 0) {
+          speakWithVoice()
+        } else {
+          // Attendre le chargement des voix
+          window.speechSynthesis.onvoiceschanged = speakWithVoice
         }
-        
-        utterance.onend = () => {
-          onStopSpeaking()
-        }
-        
-        utterance.onerror = (event) => {
-          console.error('Erreur synthèse vocale:', event)
-          onStopSpeaking()
-        }
-        
-        window.speechSynthesis.speak(utterance)
       }
     },
     
