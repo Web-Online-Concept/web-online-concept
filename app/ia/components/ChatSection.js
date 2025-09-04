@@ -223,7 +223,7 @@ export default function ChatSection({
       </div>
       
       {/* GRAND ESPACE VIDE POUR REMONTER LA ZONE DE SAISIE */}
-      <div style={{ height: '350px' }}></div>
+      <div style={{ height: '550px' }}></div>
       
       {/* Zone de saisie - REMONTÉE */}
       <form onSubmit={handleSubmit} className="border-t pt-2">
