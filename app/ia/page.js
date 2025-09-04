@@ -106,7 +106,7 @@ export default function IAPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 pt-24">
-      {/* Header Hero - avec pt-24 sur la section pour le décalage */}
+      {/* Header Hero */}
       <section className="bg-gradient-to-r from-[#0073a8] to-[#005580] text-white py-16">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -121,8 +121,8 @@ export default function IAPage() {
       {/* Main Content */}
       <div className="container mx-auto px-4 py-6 max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-          {/* Avatar Florent - AVEC LE CADRE BLANC */}
-          <div className="flex flex-col items-center justify-center bg-white rounded-xl shadow-lg p-8 relative">
+          {/* Avatar Florent - HAUTEUR FIXE 500px */}
+          <div className="flex flex-col items-center justify-center bg-white rounded-xl shadow-lg p-8 relative h-[500px]">
             <FlorentAvatar isLoading={isLoading} isSpeaking={isSpeaking} />
             
             {/* Bouton arrêter la voix */}
@@ -140,7 +140,7 @@ export default function IAPage() {
             )}
           </div>
 
-          {/* Chat Section - le composant a déjà son propre cadre blanc */}
+          {/* Chat Section */}
           <ChatSection 
             messages={messages}
             onSendMessage={handleSendMessage}

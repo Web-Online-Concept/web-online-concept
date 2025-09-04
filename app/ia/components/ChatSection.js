@@ -124,7 +124,7 @@ export default function ChatSection({
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-8 h-[550px] flex flex-col">
+    <div className="bg-white rounded-xl shadow-lg p-8 h-[500px] flex flex-col">
       {/* Barre d'outils */}
       <div className="flex justify-between items-center mb-4 pb-2 border-b">
         <h3 className="text-lg font-semibold text-gray-700">Conversation</h3>
