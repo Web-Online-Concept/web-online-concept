@@ -5,11 +5,11 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white">
       <div className="container max-w-7xl mx-auto px-4 py-12">
-        <div className="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto">
-          {/* Colonne Logo */}
+        <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          {/* Colonne avec Logo et Titre */}
           <div className="text-center">
             <Link href="/">
-              <div className="inline-block hover:opacity-90 transition-opacity">
+              <div className="inline-block hover:opacity-90 transition-opacity mb-4">
                 <Image 
                   src="/images/logo.png" 
                   alt="Web Online Concept Logo" 
@@ -19,10 +19,6 @@ export default function Footer() {
                 />
               </div>
             </Link>
-          </div>
-
-          {/* Colonne Titre */}
-          <div className="text-center">
             <h3 className="text-lg font-semibold mb-4">Web Online Concept</h3>
             <p className="text-gray-400">
               Création de sites web professionnels à prix accessibles.
