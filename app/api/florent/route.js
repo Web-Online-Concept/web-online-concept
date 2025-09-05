@@ -92,7 +92,7 @@ async function generateAudio(text) {
   }
 
   try {
-    const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/onwK4e9ZLuTAKqWW03F9', {
+    const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/kENkNtk0xyzG09WW40xE', {
       method: 'POST',
       headers: {
         'xi-api-key': process.env.ELEVENLABS_API_KEY,

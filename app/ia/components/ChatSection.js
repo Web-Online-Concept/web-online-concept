@@ -13,6 +13,7 @@ export default function ChatSection({
   const [inputValue, setInputValue] = useState('')
   const [isRecording, setIsRecording] = useState(false)
   const [showExportMenu, setShowExportMenu] = useState(false)
+  const [voiceEnabled, setVoiceEnabled] = useState(true)
   const messagesEndRef = useRef(null)
   const recognitionRef = useRef(null)
   const finalTranscriptRef = useRef('')
@@ -60,7 +61,7 @@ export default function ChatSection({
         
         // Envoyer automatiquement le message si on a une transcription finale
         if (finalTranscriptRef.current.trim() && !isLoading) {
-          onSendMessage(finalTranscriptRef.current.trim())
+          onSendMessage(finalTranscriptRef.current.trim(), voiceEnabled)
           setInputValue('')
           finalTranscriptRef.current = ''
         }
@@ -68,12 +69,12 @@ export default function ChatSection({
       
       recognitionRef.current = recognition
     }
-  }, [onSendMessage, isLoading])
+  }, [onSendMessage, isLoading, voiceEnabled])
   
   const handleSubmit = (e) => {
     e.preventDefault()
     if (inputValue.trim() && !isLoading) {
-      onSendMessage(inputValue.trim())
+      onSendMessage(inputValue.trim(), voiceEnabled)
       setInputValue('')
     }
   }
@@ -138,6 +139,25 @@ export default function ChatSection({
       <div className="flex justify-between items-center mb-4 pb-2 border-b">
         <h3 className="text-lg font-semibold text-gray-700">Assistant Virtuel : Posez moi vos questions</h3>
         <div className="flex items-center gap-2">
+          {/* Bouton voix on/off */}
+          <button
+            onClick={() => {
+              setVoiceEnabled(!voiceEnabled)
+              // Si on désactive la voix et qu'elle est en train de parler, l'arrêter
+              if (voiceEnabled && window.stopSpeaking) {
+                window.stopSpeaking()
+              }
+            }}
+            className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-colors ${
+              voiceEnabled 
+                ? 'bg-green-100 text-green-700 hover:bg-green-200' 
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+            }`}
+            title={voiceEnabled ? "Désactiver la voix" : "Activer la voix"}
+          >
+            {voiceEnabled ? "Voix activée" : "Voix désactivée"}
+          </button>
+          
           {/* Bouton reset */}
           <button
             onClick={onReset}
@@ -187,7 +207,7 @@ export default function ChatSection({
         {!hasStarted && messages.length > 0 && (
           <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-95 z-10">
             <button
-              onClick={onStart}
+              onClick={() => onStart(voiceEnabled)}
               className="px-8 py-4 bg-blue-500 text-white text-lg font-semibold rounded-full hover:bg-blue-600 transition-all transform hover:scale-105 shadow-lg flex items-center gap-3"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

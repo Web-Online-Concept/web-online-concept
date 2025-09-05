@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect } from 'react'
-import Image from 'next/image'
 
 export default function FlorentAvatar({ isSpeaking, isListening, isThinking, onStopSpeaking }) {
   
@@ -9,15 +8,15 @@ export default function FlorentAvatar({ isSpeaking, isListening, isThinking, onS
     <div className="relative w-full mx-auto">
       {/* Conteneur principal de l'avatar */}
       <div className={`relative transition-all duration-300 ${isThinking ? 'scale-98' : 'scale-100'}`}>
-        {/* Photo de Florent */}
-        <div className="relative rounded-2xl shadow-2xl overflow-hidden w-[200px] h-[250px] mx-auto">
-          <Image
-            src="/images/florent-avatar.jpg"
-            alt="Florent - Consultant Digital"
-            width={200}
-            height={250}
-            className="object-cover rounded-2xl"
-            priority
+        {/* Vidéo de l'agent */}
+        <div className="relative rounded-2xl overflow-hidden w-[200px] h-[250px] mx-auto">
+          <video
+            src="/videos/agent_virtuel_ia.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="object-cover rounded-2xl w-full h-full"
           />
           
           {/* Indicateur de parole */}
