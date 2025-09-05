@@ -54,14 +54,15 @@ export default function IAPage() {
         content: data.response || "Je suis désolé, je n'ai pas pu comprendre votre question."
       }
 
-      const newMessages = [...messages, userMessage, aiMessage]
-      setMessages(newMessages)
+      // MODIFICATION ICI : Afficher le message immédiatement
+      setMessages(prev => [...prev, aiMessage])
       setIsLoading(false)
-
+      
+      // Préparer la voix
+      setCurrentText(aiMessage.content)
       if (data.audioUrl) {
         setCurrentAudio(data.audioUrl)
       }
-      setCurrentText(aiMessage.content)
       setIsSpeaking(true)
 
     } catch (error) {
@@ -74,7 +75,7 @@ export default function IAPage() {
         content: "Désolé, j'ai rencontré un problème technique. Pouvez-vous réessayer ?"
       }
       
-      setMessages(prev => [...prev, userMessage, errorMessage])
+      setMessages(prev => [...prev, errorMessage])
     }
   }
 
