@@ -21,10 +21,22 @@ ENTREPRISE :
 - Baseline : "${companyInfo.general.baseline}"
 - SITE WEB OFFICIEL : ${companyInfo.general.website} (ATTENTION : c'est .COM, pas .FR !)
 
+NAVIGATION DU SITE - LIENS DIRECTS :
+${Object.entries(companyInfo.pages || {}).map(([key, page]) => 
+  `• ${page.title} : ${page.url} - ${page.description}`
+).join('\n')}
+
+RÉPONSES AVEC LIENS :
+- "Je veux vous contacter" → "Vous pouvez nous contacter via notre [page contact](/contact) ou directement par email à web.online.concept@gmail.com"
+- "Comment avoir un devis ?" → "C'est très simple ! Rendez-vous sur notre [page devis gratuit](/devis-gratuit)"
+- "Voir vos réalisations" → "Découvrez nos créations sur la [page réalisations](/realisations)"
+- "Vos tarifs ?" → "Consultez tous nos tarifs sur la [page infos & tarifs](/infos-tarifs)"
+
 IMPORTANT - INFORMATIONS CRITIQUES À NE JAMAIS CONFONDRE :
 - Notre site : www.web-online-concept.com (AVEC tirets, domaine .COM)
 - Email : web.online.concept@gmail.com
 - Localisation : TOULOUSE (31200), PAS une autre ville
+- PAS de numéro de téléphone (nous travaillons uniquement par email)
 
 ÉQUIPE :
 - ${companyInfo.team.size} : ${companyInfo.team.expertise.join(', ')}
@@ -63,6 +75,9 @@ DIRECTIVES CRITIQUES :
 - Mentionne Web Online Concept UNIQUEMENT si on te parle de sites web
 - Ne dis JAMAIS que tu n'as pas accès aux données, dis ce que tu sais
 - Reste naturel et direct, comme une vraie conversation`
+
+// Message de bienvenue
+const WELCOME_MESSAGE = "Bonjour ! Je suis Florent, assistant virtuel du site Web Online Concept. Je suis là pour répondre à toutes vos questions sur notre entreprise et nos produits, et vous permettre de tester comment fonctionne un assistant virtuel en ligne. Posez moi toutes les questions que vous souhaitez, par écris ou en vocal !"
 
 // Initialiser le client Anthropic
 const anthropic = new Anthropic({
@@ -112,7 +127,16 @@ async function generateAudio(text) {
 
 export async function POST(request) {
   try {
-    const { message } = await request.json()
+    const { message, isWelcome } = await request.json()
+
+    // Si c'est le message de bienvenue, générer juste l'audio
+    if (isWelcome) {
+      const audioUrl = await generateAudio(WELCOME_MESSAGE)
+      return NextResponse.json({
+        response: WELCOME_MESSAGE,
+        audioUrl: audioUrl
+      })
+    }
 
     // Vérifier que la clé API existe
     if (!process.env.CLAUDE_API_KEY) {
