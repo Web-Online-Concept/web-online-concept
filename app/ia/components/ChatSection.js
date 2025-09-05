@@ -150,12 +150,12 @@ export default function ChatSection({
             }}
             className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-colors ${
               voiceEnabled 
-                ? 'bg-green-100 text-green-700 hover:bg-green-200' 
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                ? 'bg-red-100 text-red-700 hover:bg-red-200' 
+                : 'bg-green-100 text-green-700 hover:bg-green-200'
             }`}
             title={voiceEnabled ? "Désactiver la voix" : "Activer la voix"}
           >
-            {voiceEnabled ? "Voix activée" : "Voix désactivée"}
+            {voiceEnabled ? "Désactiver la voix" : "Activer la voix"}
           </button>
           
           {/* Bouton reset */}
