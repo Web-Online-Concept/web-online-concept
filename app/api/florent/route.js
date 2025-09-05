@@ -100,13 +100,16 @@ async function generateAudio(text) {
       },
       body: JSON.stringify({
         text: text,
-        model_id: 'eleven_multilingual_v2',
+        model_id: 'eleven_turbo_v2_5', // Modèle TURBO pour plus de rapidité
         voice_settings: {
-          stability: 0.75,
+          stability: 0.5, // Réduit pour plus de rapidité
           similarity_boost: 0.75,
-          style: 0.5,
+          style: 0.0, // Réduit pour plus de rapidité
           use_speaker_boost: true
-        }
+        },
+        // Optimisations supplémentaires
+        optimize_streaming_latency: 1, // Optimise pour la latence
+        output_format: "mp3_22050_32" // Format plus léger = plus rapide
       })
     })
 
@@ -149,10 +152,10 @@ export async function POST(request) {
     }
 
     try {
-      // Appel à Claude API
+      // Appel à Claude API avec le modèle Haiku 3.5 plus récent et rapide
       const completion = await anthropic.messages.create({
-        model: "claude-3-haiku-20240307", // Modèle rapide et économique
-        max_tokens: 500,
+        model: "claude-3-5-haiku-20241022", // Modèle plus récent et rapide
+        max_tokens: 300, // Réduit pour des réponses plus courtes et rapides
         temperature: 0.7,
         system: FLORENT_CONTEXT,
         messages: [
