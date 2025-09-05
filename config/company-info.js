@@ -14,6 +14,50 @@ export const companyInfo = {
     baseline: "Sites Web Clés en Main à Prix Malins"
   },
 
+  // Structure du site et pages
+  pages: {
+    home: {
+      url: "/",
+      title: "Accueil",
+      description: "Page d'accueil du site"
+    },
+    services: {
+      url: "/services",
+      title: "Nos Services",
+      description: "Découvrez tous nos services de création de sites web"
+    },
+    tarifs: {
+      url: "/infos-tarifs",
+      title: "Infos & Tarifs",
+      description: "Consultez nos tarifs détaillés et options"
+    },
+    realisations: {
+      url: "/realisations",
+      title: "Réalisations",
+      description: "Découvrez nos créations et projets clients"
+    },
+    blog: {
+      url: "/blog",
+      title: "Blog",
+      description: "Articles et actualités sur le web et le digital"
+    },
+    contact: {
+      url: "/contact",
+      title: "Contact",
+      description: "Formulaire de contact et coordonnées"
+    },
+    devisGratuit: {
+      url: "/devis-gratuit",
+      title: "Devis Gratuit",
+      description: "Demandez votre devis personnalisé gratuit"
+    },
+    ia: {
+      url: "/ia",
+      title: "Assistant IA",
+      description: "Testez notre assistant virtuel intelligent"
+    }
+  },
+
   // Équipe
   team: {
     size: "+10 spécialistes freelance",
