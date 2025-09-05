@@ -1,24 +1,25 @@
+// app/sitemap.js
 export default async function sitemap() {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.web-online-concept.com'
   
   // Pages statiques principales
   const staticPages = [
     {
       url: baseUrl,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 1,
     },
     {
-      url: `${baseUrl}/blog`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/tarifs`,
+      url: `${baseUrl}/services`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/infos-tarifs`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
@@ -28,10 +29,46 @@ export default async function sitemap() {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/blog`,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/ia`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/contact`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.7,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/demande-devis`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/mentions-legales`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
+      url: `${baseUrl}/cgv`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
+      url: `${baseUrl}/politique-confidentialite`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.3,
     },
   ]
 
@@ -39,7 +76,7 @@ export default async function sitemap() {
   let blogPosts = []
   try {
     const response = await fetch(`${baseUrl}/api/blog/articles`, {
-      cache: 'no-store'
+      next: { revalidate: 3600 } // Cache 1 heure
     })
     
     if (response.ok) {

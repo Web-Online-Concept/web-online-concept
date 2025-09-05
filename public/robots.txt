@@ -1,0 +1,31 @@
+# Robots.txt pour Web Online Concept
+# https://www.web-online-concept.com
+
+User-agent: *
+Allow: /
+
+# Bloquer l'accès aux dossiers sensibles
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /node_modules/
+
+# Autoriser les ressources importantes
+Allow: /images/
+Allow: /*.js$
+Allow: /*.css$
+
+# Sitemap
+Sitemap: https://www.web-online-concept.com/sitemap.xml
+
+# Crawl-delay pour éviter la surcharge
+Crawl-delay: 1
+
+# Bots spécifiques
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
