@@ -13,6 +13,7 @@ export default function ChatSection({
   const [showExportMenu, setShowExportMenu] = useState(false)
   const messagesEndRef = useRef(null)
   const recognitionRef = useRef(null)
+  const finalTranscriptRef = useRef('')
   
   const scrollToBottom = () => {
     const messagesContainer = messagesEndRef.current?.parentElement
@@ -40,6 +41,11 @@ export default function ChatSection({
           .map(result => result[0].transcript)
           .join('')
         setInputValue(transcript)
+        
+        // Sauvegarder la transcription finale
+        if (event.results[event.results.length - 1].isFinal) {
+          finalTranscriptRef.current = transcript
+        }
       }
       
       recognition.onerror = (event) => {
@@ -49,11 +55,18 @@ export default function ChatSection({
       
       recognition.onend = () => {
         setIsRecording(false)
+        
+        // Envoyer automatiquement le message si on a une transcription finale
+        if (finalTranscriptRef.current.trim() && !isLoading) {
+          onSendMessage(finalTranscriptRef.current.trim())
+          setInputValue('')
+          finalTranscriptRef.current = ''
+        }
       }
       
       recognitionRef.current = recognition
     }
-  }, [])
+  }, [onSendMessage, isLoading])
   
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -72,6 +85,8 @@ export default function ChatSection({
     if (isRecording) {
       recognitionRef.current.stop()
     } else {
+      // Réinitialiser la transcription
+      finalTranscriptRef.current = ''
       recognitionRef.current.start()
       setIsRecording(true)
     }
@@ -220,6 +235,7 @@ export default function ChatSection({
                 : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
             }`}
             disabled={isLoading}
+            title={isRecording ? "Cliquez pour arrêter et envoyer" : "Cliquez pour parler"}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
