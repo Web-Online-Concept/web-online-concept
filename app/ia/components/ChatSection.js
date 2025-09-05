@@ -212,7 +212,17 @@ export default function ChatSection({
               }`}
             >
               <p className="text-sm leading-relaxed whitespace-pre-wrap">
-                {message.content}
+                {message.role === 'assistant' ? (
+                  // Convertir les liens markdown en liens HTML pour l'assistant
+                  <span dangerouslySetInnerHTML={{
+                    __html: message.content.replace(
+                      /\[([^\]]+)\]\(([^)]+)\)/g,
+                      '<a href="$2" class="text-blue-600 hover:text-blue-800 underline">$1</a>'
+                    )
+                  }} />
+                ) : (
+                  message.content
+                )}
               </p>
             </div>
           </div>
