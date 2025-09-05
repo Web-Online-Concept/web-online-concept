@@ -54,7 +54,7 @@ export default function FlorentAvatar({ isSpeaking, isListening, isThinking, onS
       <div className="mt-8 text-center">
         <h2 className="text-2xl font-bold text-gray-800">IA Florent</h2>
         <p className="text-gray-600 mt-1">Web Online Concept</p>
-        <p className="text-sm text-gray-500 mt-2">Testez comment fonctionne une IA en ligne</p>
+        <p className="text-sm text-gray-500 mt-2">Testez comment fonctionne un assistant virtuel en ligne</p>
         
         {/* Bouton Arrêter la voix - Juste sous le texte */}
         {isSpeaking && (

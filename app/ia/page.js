@@ -17,7 +17,7 @@ export default function IAPage() {
     const welcomeMessage = {
       id: 1,
       role: 'assistant',
-      content: "Bonjour ! Je suis Florent, consultant digital chez Web Online Concept. Je suis là pour répondre à toutes vos questions sur la création de sites internet, mais aussi sur tout autre sujet qui vous intéresse. Comment puis-je vous aider aujourd'hui ?"
+      content: "Bonjour ! Je suis Florent, assistant virtuel du site Web Online Concept. Je suis là pour répondre à toutes vos questions sur notre entreprise et nos produits, et vous permettre de tester comment fonctionne un assistant virtuel en ligne. Posez moi toutes les questions que vous souhaitez, par écris ou en vocal !"
     }
     setMessages([welcomeMessage])
     setCurrentText(welcomeMessage.content)
@@ -83,7 +83,7 @@ export default function IAPage() {
     setMessages([{
       id: Date.now(),
       role: 'assistant',
-      content: "Bonjour ! Je suis Florent, consultant digital chez Web Online Concept. Comment puis-je vous aider aujourd'hui ?"
+      content: "Bonjour ! Je suis Florent, assistant virtuel du site Web Online Concept. Je suis là pour répondre à toutes vos questions sur notre entreprise et nos produits, et vous permettre de tester comment fonctionne un assistant virtuel en ligne. Posez moi toutes les questions que vous souhaitez, par écris ou en vocal !"
     }])
     setIsLoading(false)
     setIsSpeaking(false)
