@@ -6,7 +6,9 @@ export default function ChatSection({
   messages, 
   onSendMessage, 
   isLoading, 
-  onReset 
+  onReset,
+  hasStarted,
+  onStart 
 }) {
   const [inputValue, setInputValue] = useState('')
   const [isRecording, setIsRecording] = useState(false)
@@ -180,7 +182,23 @@ export default function ChatSection({
       </div>
 
       {/* Zone des messages */}
-      <div className="overflow-y-auto space-y-4 pr-2 flex-1">
+      <div className="overflow-y-auto space-y-4 pr-2 flex-1 relative">
+        {/* Bouton pour commencer si pas encore démarré */}
+        {!hasStarted && messages.length > 0 && (
+          <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-95 z-10">
+            <button
+              onClick={onStart}
+              className="px-8 py-4 bg-blue-500 text-white text-lg font-semibold rounded-full hover:bg-blue-600 transition-all transform hover:scale-105 shadow-lg flex items-center gap-3"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Cliquez pour commencer
+            </button>
+          </div>
+        )}
+        
         {messages.map((message) => (
           <div
             key={message.id}

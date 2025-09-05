@@ -12,6 +12,7 @@ export default function IAPage() {
   const [currentText, setCurrentText] = useState('')
   const [currentAudio, setCurrentAudio] = useState(null)
   const [showWelcome, setShowWelcome] = useState(true)
+  const [hasStarted, setHasStarted] = useState(false)
 
   useEffect(() => {
     const welcomeMessage = {
@@ -20,9 +21,40 @@ export default function IAPage() {
       content: "Bonjour ! Je suis Florent, assistant virtuel du site Web Online Concept. Je suis là pour répondre à toutes vos questions sur notre entreprise et nos produits, et vous permettre de tester comment fonctionne un assistant virtuel en ligne. Posez moi toutes les questions que vous souhaitez, par écris ou en vocal !"
     }
     setMessages([welcomeMessage])
-    setCurrentText(welcomeMessage.content)
-    setIsSpeaking(true)
   }, [])
+
+  const handleStartConversation = async () => {
+    setHasStarted(true)
+    
+    // Utiliser directement le message de bienvenue existant
+    const welcomeText = messages[0].content
+    setCurrentText(welcomeText)
+    
+    try {
+      const response = await fetch('/api/florent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          message: "dis bonjour",
+          isWelcome: true 
+        })
+      })
+      
+      const data = await response.json()
+      
+      if (data.audioUrl) {
+        setCurrentAudio(data.audioUrl)
+        setIsSpeaking(true)
+      } else {
+        // Si pas d'audio ElevenLabs, utiliser la voix du navigateur
+        setIsSpeaking(true)
+      }
+    } catch (error) {
+      console.error('Erreur:', error)
+      // En cas d'erreur, utiliser la voix du navigateur
+      setIsSpeaking(true)
+    }
+  }
 
   const handleSendMessage = async (message) => {
     if (!message.trim() || isLoading) return
@@ -89,6 +121,7 @@ export default function IAPage() {
     setIsSpeaking(false)
     setCurrentText('')
     setCurrentAudio(null)
+    setHasStarted(false)
   }
 
   const handleStopSpeaking = () => {
@@ -135,6 +168,8 @@ export default function IAPage() {
               onSendMessage={handleSendMessage}
               isLoading={isLoading}
               onReset={handleReset}
+              hasStarted={hasStarted}
+              onStart={handleStartConversation}
             />
           </div>
         </div>
