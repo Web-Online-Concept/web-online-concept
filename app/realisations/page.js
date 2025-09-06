@@ -36,7 +36,7 @@ export default function Realisations() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 pt-24 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 pt-[80px] md:pt-24 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
           <p className="text-gray-600 mt-4">Chargement des réalisations...</p>
@@ -71,12 +71,12 @@ export default function Realisations() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <div className="min-h-screen bg-gray-50 pt-24 pb-16">
+      <div className="min-h-screen bg-gray-50 pt-[80px] md:pt-24 pb-16">
         {/* En-tête */}
         <section className="bg-gradient-to-r from-[#0073a8] to-[#005580] text-white py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
                 Nos Réalisations
               </h1>
               <p className="text-xl text-white/90 max-w-2xl mx-auto">
