@@ -55,7 +55,7 @@ export default function Header() {
             {/* Nom de l'entreprise */}
             <div className="text-center">
               <Link href="/" className="block">
-                <h1 className="text-xl md:text-3xl font-bold relative inline-block" style={{ marginBottom: '-4px' }}>
+                <h1 className="text-2xl md:text-3xl font-bold relative inline-block" style={{ marginBottom: '-4px' }}>
                   <span style={{ fontFamily: 'Poppins, -apple-system, sans-serif', letterSpacing: '-0.05em' }}>
                     <span className="text-[#0073a8]" style={{ fontWeight: '700' }}>WEB</span><span> </span><span className="text-red-800" style={{ fontWeight: '700', fontStyle: 'italic' }}>ONLINE</span><span> </span><span className="text-[#0073a8]" style={{ fontWeight: '700' }}>CONCEPT</span>
                   </span>
@@ -76,6 +76,7 @@ export default function Header() {
                     />
                   </div>
                 </h1>
+                <p className="text-xs text-gray-600 md:hidden">Sites Web Clés en Main à Prix Malins</p>
               </Link>
               <Link href="/" className="hidden md:block">
                 <div 
