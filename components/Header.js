@@ -156,7 +156,7 @@ export default function Header() {
         {/* Mobile menu - Effet WOW plein écran avec animations */}
         {isMenuOpen && (
           <div 
-            className="fixed inset-0 bg-gradient-to-br from-[#0073a8] via-[#00b4d8] to-[#0073a8] md:hidden z-50 overflow-hidden"
+            className="fixed inset-0 bg-[#00334d]/95 backdrop-blur-sm md:hidden z-50 overflow-hidden"
             style={{
               top: '80px'
             }}
