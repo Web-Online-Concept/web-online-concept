@@ -52,14 +52,7 @@ export const metadata = {
 export default function FlorentCardLayout({ children }) {
   return (
     <>
-      <style jsx global>{`
-        header, footer {
-          display: none !important;
-        }
-      `}</style>
-      <div className="vcard-page">
-        {children}
-      </div>
+      {children}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
