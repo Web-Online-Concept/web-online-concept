@@ -134,10 +134,10 @@ export default function ChatSection({
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-8 h-[600px] flex flex-col justify-start">
+    <div className="bg-white rounded-xl shadow-lg p-4 md:p-8 h-[600px] flex flex-col justify-start">
       {/* Barre d'outils */}
-      <div className="flex justify-between items-center mb-4 pb-2 border-b">
-        <h3 className="text-lg font-semibold text-gray-700">Assistant Virtuel : Posez moi vos questions</h3>
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 pb-2 border-b gap-2">
+        <h3 className="text-lg font-semibold text-gray-700 w-full md:w-auto">Assistant Virtuel : Posez moi vos questions</h3>
         <div className="flex items-center gap-2">
           {/* Bouton voix on/off */}
           <button
@@ -294,7 +294,7 @@ export default function ChatSection({
           <button
             type="submit"
             disabled={isLoading || !inputValue.trim()}
-            className="px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+            className="px-4 md:px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex-shrink-0"
           >
             {isLoading ? (
               <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
