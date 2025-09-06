@@ -172,21 +172,10 @@ END:VCARD`
       </div>
 
       {/* Contenu principal */}
-      <div className="relative z-20 min-h-screen flex flex-col items-center justify-center p-6 max-w-md mx-auto">
-        {/* Logo en haut */}
-        <div className="mb-8 animate-fade-in">
-          <Image
-            src="/images/logo.png"
-            alt="Web Online Concept"
-            width={180}
-            height={60}
-            className="drop-shadow-2xl"
-          />
-        </div>
-
+      <div className="relative z-20 min-h-screen flex flex-col items-center pt-8 px-6 max-w-md mx-auto">
         {/* Cercle central avec photo/logo animé */}
-        <div className="relative mb-8">
-          <div className="w-48 h-48 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 p-1 animate-pulse-slow">
+        <div className="relative mb-6">
+          <div className="w-56 h-56 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 p-1 animate-pulse-slow">
             <div className="w-full h-full rounded-full bg-gray-900 relative overflow-hidden">
               {/* Photo */}
               <div className={`absolute inset-0 transition-all duration-1000 ${showPhoto ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`}>
@@ -198,15 +187,17 @@ END:VCARD`
                 />
               </div>
               
-              {/* Logo */}
+              {/* Logo avec fond blanc circulaire */}
               <div className={`absolute inset-0 flex items-center justify-center transition-all duration-1000 ${!showPhoto ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
-                <Image
-                  src="/images/logo.png"
-                  alt="Web Online Concept Logo"
-                  width={120}
-                  height={120}
-                  className="object-contain p-4"
-                />
+                <div className="w-full h-full bg-white rounded-full flex items-center justify-center p-4">
+                  <Image
+                    src="/images/logo.png"
+                    alt="Web Online Concept Logo"
+                    width={200}
+                    height={200}
+                    className="object-contain w-full h-full"
+                  />
+                </div>
               </div>
             </div>
           </div>
