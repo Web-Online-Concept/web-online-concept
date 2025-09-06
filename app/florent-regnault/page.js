@@ -140,21 +140,21 @@ END:VCARD`
   if (!mounted) return null
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900">
-      {/* Image de fond avec overlay */}
-      <div className="absolute inset-0 z-0">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900">
+      {/* Bannière en-tête avec l'image */}
+      <div className="relative h-40 w-full overflow-hidden">
         <Image
           src="/images/card-background.jpg"
           alt="Background"
           fill
-          className="object-cover opacity-30"
+          className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/70" />
       </div>
 
       {/* Particules animées */}
-      <div className="absolute inset-0 z-10">
+      <div className="absolute inset-0 z-10 pointer-events-none">
         {[...Array(20)].map((_, i) => (
           <div
             key={i}
@@ -172,10 +172,10 @@ END:VCARD`
       </div>
 
       {/* Contenu principal */}
-      <div className="relative z-20 min-h-screen flex flex-col items-center pt-8 px-6 max-w-md mx-auto">
-        {/* Cercle central avec photo/logo animé */}
-        <div className="relative mb-6">
-          <div className="w-56 h-56 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 p-1 animate-pulse-slow">
+      <div className="relative z-20 flex-1 flex flex-col items-center px-6 max-w-md mx-auto w-full -mt-16">
+        {/* Cercle central avec photo/logo animé - Plus petit */}
+        <div className="relative mb-4">
+          <div className="w-32 h-32 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 p-1 animate-pulse-slow">
             <div className="w-full h-full rounded-full bg-gray-900 relative overflow-hidden">
               {/* Photo */}
               <div className={`absolute inset-0 transition-all duration-1000 ${showPhoto ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`}>
@@ -189,42 +189,40 @@ END:VCARD`
               
               {/* Logo avec fond blanc circulaire */}
               <div className={`absolute inset-0 flex items-center justify-center transition-all duration-1000 ${!showPhoto ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
-                <div className="w-full h-full bg-white rounded-full flex items-center justify-center p-4">
+                <div className="w-full h-full bg-white rounded-full flex items-center justify-center p-2">
                   <Image
                     src="/images/logo.png"
                     alt="Web Online Concept Logo"
-                    width={200}
-                    height={200}
+                    width={100}
+                    height={100}
                     className="object-contain w-full h-full"
                   />
                 </div>
               </div>
             </div>
           </div>
-          
-          {/* Badge animé */}
-          <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-1 rounded-full text-sm font-medium animate-bounce-slow">
-            Responsable
-          </div>
         </div>
 
         {/* Nom et titre */}
         <div className="text-center mb-6 animate-slide-up">
-          <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">
+          <h1 className="text-3xl font-bold text-white mb-1 tracking-tight">
             Florent Regnault
           </h1>
-          <p className="text-xl text-gray-300">
+          <p className="text-lg text-gray-300">
             Web Online Concept
+          </p>
+          <p className="text-sm text-gray-400 mt-1">
+            Responsable
           </p>
         </div>
 
-        {/* Grille de boutons */}
-        <div className="grid grid-cols-3 gap-4 mb-8 w-full max-w-sm animate-slide-up-delay">
+        {/* Grille de boutons 2x3 */}
+        <div className="grid grid-cols-3 gap-3 mb-6 w-full animate-slide-up-delay">
           {actionButtons.map((button, index) => (
             <button
               key={index}
               onClick={button.action}
-              className={`${button.color} text-white rounded-2xl p-4 transition-all duration-200 transform hover:scale-110 hover:shadow-xl flex flex-col items-center justify-center space-y-2 animate-fade-in`}
+              className={`${button.color} text-white rounded-xl p-3 transition-all duration-200 transform hover:scale-105 hover:shadow-lg flex flex-col items-center justify-center space-y-1 animate-fade-in`}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               {button.icon}
@@ -236,39 +234,38 @@ END:VCARD`
         {/* Bouton principal "Ajouter aux contacts" */}
         <button
           onClick={generateVCard}
-          className="w-full max-w-sm bg-gradient-to-r from-orange-500 to-pink-500 text-white font-bold py-4 px-8 rounded-full transform transition-all duration-200 hover:scale-105 hover:shadow-2xl flex items-center justify-center space-x-3 animate-pulse-slow mb-12"
+          className="w-full bg-gradient-to-r from-orange-500 to-pink-500 text-white font-bold py-3 px-6 rounded-full transform transition-all duration-200 hover:scale-105 hover:shadow-xl flex items-center justify-center space-x-2 animate-pulse-slow mb-8"
         >
-          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
             <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
           </svg>
-          <span className="text-lg">Ajouter aux contacts</span>
+          <span>Ajouter aux contacts</span>
         </button>
 
         {/* Section de texte supplémentaire */}
-        <div className="w-full max-w-md text-center mb-8 px-4">
+        <div className="w-full text-center mb-8">
           <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
-            <h2 className="text-2xl font-bold text-white mb-4">
+            <h2 className="text-xl font-bold text-white mb-3">
               Créons votre présence digitale
             </h2>
-            <p className="text-gray-200 mb-4 leading-relaxed">
-              Spécialiste en création de sites web professionnels, je vous accompagne dans votre transformation digitale. 
-              Du site vitrine au e-commerce, chaque projet est unique et mérite une solution sur-mesure.
+            <p className="text-gray-200 mb-4 text-sm leading-relaxed">
+              Spécialiste en création de sites web professionnels, je vous accompagne dans votre transformation digitale.
             </p>
-            <div className="space-y-3 text-left">
+            <div className="space-y-2 text-left text-sm">
               <div className="flex items-start">
-                <span className="text-green-400 mr-2 text-xl">✓</span>
+                <span className="text-green-400 mr-2">✓</span>
                 <span className="text-gray-200">Sites web à partir de 500€</span>
               </div>
               <div className="flex items-start">
-                <span className="text-green-400 mr-2 text-xl">✓</span>
+                <span className="text-green-400 mr-2">✓</span>
                 <span className="text-gray-200">Design moderne et responsive</span>
               </div>
               <div className="flex items-start">
-                <span className="text-green-400 mr-2 text-xl">✓</span>
+                <span className="text-green-400 mr-2">✓</span>
                 <span className="text-gray-200">SEO et performance optimisés</span>
               </div>
               <div className="flex items-start">
-                <span className="text-green-400 mr-2 text-xl">✓</span>
+                <span className="text-green-400 mr-2">✓</span>
                 <span className="text-gray-200">Support et maintenance inclus</span>
               </div>
             </div>
@@ -277,7 +274,7 @@ END:VCARD`
 
         {/* Message de confirmation */}
         {copied && (
-          <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-full shadow-lg animate-fade-in">
+          <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-full shadow-lg animate-fade-in z-50">
             Lien copié !
           </div>
         )}
@@ -307,17 +304,11 @@ END:VCARD`
           50% { transform: scale(1.02); }
         }
         
-        @keyframes bounce-slow {
-          0%, 100% { transform: translateX(-50%) translateY(0); }
-          50% { transform: translateX(-50%) translateY(-5px); }
-        }
-        
         .animate-float { animation: float linear infinite; }
         .animate-fade-in { animation: fade-in 0.6s ease-out forwards; }
         .animate-slide-up { animation: slide-up 0.8s ease-out forwards; }
         .animate-slide-up-delay { animation: slide-up 0.8s ease-out 0.2s forwards; opacity: 0; }
         .animate-pulse-slow { animation: pulse-slow 3s ease-in-out infinite; }
-        .animate-bounce-slow { animation: bounce-slow 2s ease-in-out infinite; }
       `}</style>
     </div>
   )
