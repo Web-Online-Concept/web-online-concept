@@ -1,0 +1,283 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import Image from 'next/image'
+
+export default function FlorentCard() {
+  const [copied, setCopied] = useState(false)
+  const [showPhoto, setShowPhoto] = useState(true)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+    // Alterner entre photo et logo toutes les 3 secondes
+    const interval = setInterval(() => {
+      setShowPhoto(prev => !prev)
+    }, 3000)
+    return () => clearInterval(interval)
+  }, [])
+
+  const generateVCard = () => {
+    const vcard = `BEGIN:VCARD
+VERSION:3.0
+FN:Florent Regnault
+ORG:Web Online Concept
+TITLE:Responsable
+TEL;TYPE=CELL:+33603369342
+EMAIL:web.online.concept@gmail.com
+URL:https://www.web-online-concept.com
+END:VCARD`
+
+    const blob = new Blob([vcard], { type: 'text/vcard' })
+    const url = window.URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = 'florent-regnault.vcf'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    window.URL.revokeObjectURL(url)
+  }
+
+  const shareCard = () => {
+    const shareText = "Découvrez ma carte de visite digitale : https://www.web-online-concept.com/florent-regnault"
+    
+    if (navigator.share) {
+      navigator.share({
+        title: 'Carte de visite - Florent Regnault',
+        text: shareText,
+        url: 'https://www.web-online-concept.com/florent-regnault'
+      })
+    } else {
+      navigator.clipboard.writeText(shareText)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    }
+  }
+
+  const actionButtons = [
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+        </svg>
+      ),
+      label: 'Appeler',
+      action: () => window.location.href = 'tel:+33603369342',
+      color: 'bg-green-500 hover:bg-green-600'
+    },
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+        </svg>
+      ),
+      label: 'Email',
+      action: () => window.location.href = 'mailto:web.online.concept@gmail.com',
+      color: 'bg-blue-500 hover:bg-blue-600'
+    },
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/>
+        </svg>
+      ),
+      label: 'SMS',
+      action: () => window.location.href = 'sms:+33603369342',
+      color: 'bg-purple-500 hover:bg-purple-600'
+    },
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+      ),
+      label: 'Site Web',
+      action: () => window.open('https://www.web-online-concept.com', '_blank'),
+      color: 'bg-indigo-500 hover:bg-indigo-600'
+    },
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      ),
+      label: 'Twitter',
+      action: () => window.open('https://x.com/webonlinecom', '_blank'),
+      color: 'bg-gray-800 hover:bg-gray-900'
+    },
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+        </svg>
+      ),
+      label: 'Partager',
+      action: shareCard,
+      color: 'bg-orange-500 hover:bg-orange-600'
+    }
+  ]
+
+  if (!mounted) return null
+
+  return (
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900">
+      {/* Image de fond avec overlay */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/card-background.jpg"
+          alt="Background"
+          fill
+          className="object-cover opacity-30"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
+      </div>
+
+      {/* Particules animées */}
+      <div className="absolute inset-0 z-10">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute animate-float"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${15 + Math.random() * 10}s`
+            }}
+          >
+            <div className="w-2 h-2 bg-blue-400 rounded-full opacity-20" />
+          </div>
+        ))}
+      </div>
+
+      {/* Contenu principal */}
+      <div className="relative z-20 min-h-screen flex flex-col items-center justify-center p-6 max-w-md mx-auto">
+        {/* Logo en haut */}
+        <div className="mb-8 animate-fade-in">
+          <Image
+            src="/images/logo.png"
+            alt="Web Online Concept"
+            width={180}
+            height={60}
+            className="drop-shadow-2xl"
+          />
+        </div>
+
+        {/* Cercle central avec photo/logo animé */}
+        <div className="relative mb-8">
+          <div className="w-48 h-48 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 p-1 animate-pulse-slow">
+            <div className="w-full h-full rounded-full bg-gray-900 relative overflow-hidden">
+              {/* Photo */}
+              <div className={`absolute inset-0 transition-all duration-1000 ${showPhoto ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`}>
+                <Image
+                  src="/images/florent-photo.jpg"
+                  alt="Florent Regnault"
+                  fill
+                  className="object-cover rounded-full"
+                />
+              </div>
+              
+              {/* Logo */}
+              <div className={`absolute inset-0 flex items-center justify-center transition-all duration-1000 ${!showPhoto ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
+                <Image
+                  src="/images/logo.png"
+                  alt="Web Online Concept Logo"
+                  width={120}
+                  height={120}
+                  className="object-contain p-4"
+                />
+              </div>
+            </div>
+          </div>
+          
+          {/* Badge animé */}
+          <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-1 rounded-full text-sm font-medium animate-bounce-slow">
+            Responsable
+          </div>
+        </div>
+
+        {/* Nom et titre */}
+        <div className="text-center mb-8 animate-slide-up">
+          <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">
+            Florent Regnault
+          </h1>
+          <p className="text-xl text-gray-300">
+            Web Online Concept
+          </p>
+        </div>
+
+        {/* Grille de boutons */}
+        <div className="grid grid-cols-3 gap-4 mb-8 w-full max-w-sm animate-slide-up-delay">
+          {actionButtons.map((button, index) => (
+            <button
+              key={index}
+              onClick={button.action}
+              className={`${button.color} text-white rounded-2xl p-4 transition-all duration-200 transform hover:scale-110 hover:shadow-xl flex flex-col items-center justify-center space-y-2 animate-fade-in`}
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              {button.icon}
+              <span className="text-xs font-medium">{button.label}</span>
+            </button>
+          ))}
+        </div>
+
+        {/* Bouton principal "Ajouter aux contacts" */}
+        <button
+          onClick={generateVCard}
+          className="w-full max-w-sm bg-gradient-to-r from-orange-500 to-pink-500 text-white font-bold py-4 px-8 rounded-full transform transition-all duration-200 hover:scale-105 hover:shadow-2xl flex items-center justify-center space-x-3 animate-pulse-slow"
+        >
+          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+          </svg>
+          <span className="text-lg">Ajouter aux contacts</span>
+        </button>
+
+        {/* Message de confirmation */}
+        {copied && (
+          <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-full shadow-lg animate-fade-in">
+            Lien copié !
+          </div>
+        )}
+      </div>
+
+      {/* CSS pour les animations */}
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0) translateX(0); }
+          25% { transform: translateY(-20px) translateX(10px); }
+          50% { transform: translateY(10px) translateX(-10px); }
+          75% { transform: translateY(-10px) translateX(20px); }
+        }
+        
+        @keyframes fade-in {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slide-up {
+          from { opacity: 0; transform: translateY(40px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse-slow {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.02); }
+        }
+        
+        @keyframes bounce-slow {
+          0%, 100% { transform: translateX(-50%) translateY(0); }
+          50% { transform: translateX(-50%) translateY(-5px); }
+        }
+        
+        .animate-float { animation: float linear infinite; }
+        .animate-fade-in { animation: fade-in 0.6s ease-out forwards; }
+        .animate-slide-up { animation: slide-up 0.8s ease-out forwards; }
+        .animate-slide-up-delay { animation: slide-up 0.8s ease-out 0.2s forwards; opacity: 0; }
+        .animate-pulse-slow { animation: pulse-slow 3s ease-in-out infinite; }
+        .animate-bounce-slow { animation: bounce-slow 2s ease-in-out infinite; }
+      `}</style>
+    </div>
+  )
+}
