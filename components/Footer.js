@@ -43,6 +43,7 @@ export default function Footer() {
             <div className="text-center">
               <h4 className="text-lg font-semibold mb-4">Informations</h4>
               <ul className="space-y-2 text-gray-400">
+                <li><a href="https://x.com/webonlinecom" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Twitter X</a></li>
                 <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
                 <li><Link href="/mentions-legales" className="hover:text-white transition-colors">Mentions légales</Link></li>
                 <li><Link href="/cgv" className="hover:text-white transition-colors">CGV</Link></li>
