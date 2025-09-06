@@ -153,85 +153,154 @@ export default function Header() {
           </nav>
         </div>
 
-        {/* Mobile menu - Effet WOW plein écran */}
+        {/* Mobile menu - Effet WOW plein écran avec animations */}
         {isMenuOpen && (
           <div 
-            className="fixed inset-0 bg-gradient-to-br from-[#0073a8] via-[#00b4d8] to-[#0073a8] md:hidden z-50"
+            className="fixed inset-0 bg-gradient-to-br from-[#0073a8] via-[#00b4d8] to-[#0073a8] md:hidden z-50 overflow-hidden"
             style={{
               top: '80px'
             }}
           >
-            <div className="flex flex-col justify-center items-center h-full px-8">
+            {/* Effet de vagues animées en arrière-plan */}
+            <div className="absolute inset-0 opacity-20">
+              <div 
+                className="absolute w-[200%] h-[200%] -left-1/2 -top-1/2"
+                style={{
+                  background: 'radial-gradient(circle at center, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 70%)',
+                  animation: 'wave 8s ease-in-out infinite'
+                }}
+              />
+              <div 
+                className="absolute w-[200%] h-[200%] -right-1/2 -bottom-1/2"
+                style={{
+                  background: 'radial-gradient(circle at center, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 70%)',
+                  animation: 'wave 10s ease-in-out infinite reverse'
+                }}
+              />
+            </div>
+
+            <div className="flex flex-col justify-center items-center h-full px-8 relative">
               <nav className="text-center space-y-6">
                 <Link 
                   href="/#services" 
-                  className="block text-3xl font-bold text-white hover:scale-110 transform transition-all duration-300"
+                  className="flex items-center justify-center gap-4 text-3xl font-bold text-white hover:scale-110 transform transition-all duration-300 opacity-0"
                   onClick={() => setIsMenuOpen(false)}
                   style={{
-                    textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
+                    textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+                    animation: 'slideInFade 0.5s ease-out 0.1s forwards'
                   }}
                 >
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
                   Services
                 </Link>
                 <Link 
                   href="/infos-tarifs" 
-                  className="block text-3xl font-bold text-white hover:scale-110 transform transition-all duration-300"
+                  className="flex items-center justify-center gap-4 text-3xl font-bold text-white hover:scale-110 transform transition-all duration-300 opacity-0"
                   onClick={() => setIsMenuOpen(false)}
                   style={{
-                    textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
+                    textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+                    animation: 'slideInFade 0.5s ease-out 0.2s forwards'
                   }}
                 >
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
                   Infos & Tarifs
                 </Link>
                 <Link 
                   href="/realisations" 
-                  className="block text-3xl font-bold text-white hover:scale-110 transform transition-all duration-300"
+                  className="flex items-center justify-center gap-4 text-3xl font-bold text-white hover:scale-110 transform transition-all duration-300 opacity-0"
                   onClick={() => setIsMenuOpen(false)}
                   style={{
-                    textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
+                    textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+                    animation: 'slideInFade 0.5s ease-out 0.3s forwards'
                   }}
                 >
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
                   Réalisations
                 </Link>
                 <Link 
                   href="/blog" 
-                  className="block text-3xl font-bold text-white hover:scale-110 transform transition-all duration-300"
+                  className="flex items-center justify-center gap-4 text-3xl font-bold text-white hover:scale-110 transform transition-all duration-300 opacity-0"
                   onClick={() => setIsMenuOpen(false)}
                   style={{
-                    textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
+                    textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+                    animation: 'slideInFade 0.5s ease-out 0.4s forwards'
                   }}
                 >
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                  </svg>
                   Blog
                 </Link>
                 <Link 
                   href="/ia" 
-                  className="block text-3xl font-bold text-white hover:scale-110 transform transition-all duration-300"
+                  className="flex items-center justify-center gap-4 text-3xl font-bold text-white hover:scale-110 transform transition-all duration-300 opacity-0"
                   onClick={() => setIsMenuOpen(false)}
                   style={{
-                    textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
+                    textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+                    animation: 'slideInFade 0.5s ease-out 0.5s forwards'
                   }}
                 >
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
                   IA
                 </Link>
                 <Link 
                   href="/contact" 
-                  className="block text-3xl font-bold text-white hover:scale-110 transform transition-all duration-300"
+                  className="flex items-center justify-center gap-4 text-3xl font-bold text-white hover:scale-110 transform transition-all duration-300 opacity-0"
                   onClick={() => setIsMenuOpen(false)}
                   style={{
-                    textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
+                    textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+                    animation: 'slideInFade 0.5s ease-out 0.6s forwards'
                   }}
                 >
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
                   Contact
                 </Link>
                 <Link 
                   href="/demande-devis" 
-                  className="block mt-8 bg-white text-[#0073a8] px-8 py-4 rounded-full text-xl font-bold hover:scale-110 transform transition-all duration-300 shadow-xl"
+                  className="flex items-center justify-center gap-4 mt-8 bg-white text-[#0073a8] px-8 py-4 rounded-full text-xl font-bold hover:scale-110 transform transition-all duration-300 shadow-xl opacity-0"
                   onClick={() => setIsMenuOpen(false)}
+                  style={{
+                    animation: 'slideInFade 0.5s ease-out 0.8s forwards, pulse 2s ease-in-out infinite'
+                  }}
                 >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
                   Devis Gratuit
                 </Link>
               </nav>
             </div>
+
+            <style jsx>{`
+              @keyframes slideInFade {
+                from {
+                  opacity: 0;
+                  transform: translateX(-30px);
+                }
+                to {
+                  opacity: 1;
+                  transform: translateX(0);
+                }
+              }
+              @keyframes wave {
+                0%, 100% { transform: rotate(0deg) scale(1); }
+                50% { transform: rotate(180deg) scale(1.1); }
+              }
+              @keyframes pulse {
+                0%, 100% { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+                50% { box-shadow: 0 20px 25px -5px rgba(0, 115, 168, 0.25), 0 10px 10px -5px rgba(0, 115, 168, 0.1); }
+              }
+            `}</style>
           </div>
         )}
       </div>
