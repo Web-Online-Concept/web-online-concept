@@ -218,7 +218,7 @@ END:VCARD`
         </div>
 
         {/* Nom et titre */}
-        <div className="text-center mb-8 animate-slide-up">
+        <div className="text-center mb-6 animate-slide-up">
           <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">
             Florent Regnault
           </h1>
@@ -245,13 +245,44 @@ END:VCARD`
         {/* Bouton principal "Ajouter aux contacts" */}
         <button
           onClick={generateVCard}
-          className="w-full max-w-sm bg-gradient-to-r from-orange-500 to-pink-500 text-white font-bold py-4 px-8 rounded-full transform transition-all duration-200 hover:scale-105 hover:shadow-2xl flex items-center justify-center space-x-3 animate-pulse-slow"
+          className="w-full max-w-sm bg-gradient-to-r from-orange-500 to-pink-500 text-white font-bold py-4 px-8 rounded-full transform transition-all duration-200 hover:scale-105 hover:shadow-2xl flex items-center justify-center space-x-3 animate-pulse-slow mb-12"
         >
           <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
             <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
           </svg>
           <span className="text-lg">Ajouter aux contacts</span>
         </button>
+
+        {/* Section de texte supplémentaire */}
+        <div className="w-full max-w-md text-center mb-8 px-4">
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
+            <h2 className="text-2xl font-bold text-white mb-4">
+              Créons votre présence digitale
+            </h2>
+            <p className="text-gray-200 mb-4 leading-relaxed">
+              Spécialiste en création de sites web professionnels, je vous accompagne dans votre transformation digitale. 
+              Du site vitrine au e-commerce, chaque projet est unique et mérite une solution sur-mesure.
+            </p>
+            <div className="space-y-3 text-left">
+              <div className="flex items-start">
+                <span className="text-green-400 mr-2 text-xl">✓</span>
+                <span className="text-gray-200">Sites web à partir de 500€</span>
+              </div>
+              <div className="flex items-start">
+                <span className="text-green-400 mr-2 text-xl">✓</span>
+                <span className="text-gray-200">Design moderne et responsive</span>
+              </div>
+              <div className="flex items-start">
+                <span className="text-green-400 mr-2 text-xl">✓</span>
+                <span className="text-gray-200">SEO et performance optimisés</span>
+              </div>
+              <div className="flex items-start">
+                <span className="text-green-400 mr-2 text-xl">✓</span>
+                <span className="text-gray-200">Support et maintenance inclus</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Message de confirmation */}
         {copied && (
