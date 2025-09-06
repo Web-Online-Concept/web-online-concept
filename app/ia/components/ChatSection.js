@@ -264,47 +264,49 @@ export default function ChatSection({
       </div>
       
       <form onSubmit={handleSubmit} className="border-t pt-2 mt-2">
-        <div className="flex gap-2">
+        <div className="flex flex-col md:flex-row gap-2">
           <input
             type="text"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="Posez votre question à Florent..."
-            className="flex-1 px-4 py-3 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full md:flex-1 px-4 py-3 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             disabled={isLoading || isRecording}
           />
           
-          <button
-            type="button"
-            onClick={toggleRecording}
-            className={`p-3 rounded-full transition-colors ${
-              isRecording 
-                ? 'bg-red-500 hover:bg-red-600 text-white animate-pulse' 
-                : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
-            }`}
-            disabled={isLoading}
-            title={isRecording ? "Cliquez pour arrêter et envoyer" : "Cliquez pour parler"}
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
-                d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-            </svg>
-          </button>
-          
-          <button
-            type="submit"
-            disabled={isLoading || !inputValue.trim()}
-            className="px-4 md:px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex-shrink-0"
-          >
-            {isLoading ? (
-              <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
-            ) : (
+          <div className="flex gap-2 justify-center md:justify-start">
+            <button
+              type="button"
+              onClick={toggleRecording}
+              className={`p-3 rounded-full transition-colors ${
+                isRecording 
+                  ? 'bg-red-500 hover:bg-red-600 text-white animate-pulse' 
+                  : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+              }`}
+              disabled={isLoading}
+              title={isRecording ? "Cliquez pour arrêter et envoyer" : "Cliquez pour parler"}
+            >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
-                  d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                  d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
               </svg>
-            )}
-          </button>
+            </button>
+            
+            <button
+              type="submit"
+              disabled={isLoading || !inputValue.trim()}
+              className="px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+            >
+              {isLoading ? (
+                <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              ) : (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                </svg>
+              )}
+            </button>
+          </div>
         </div>
       </form>
     </div>
