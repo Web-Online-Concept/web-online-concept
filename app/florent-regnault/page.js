@@ -10,11 +10,28 @@ export default function FlorentCard() {
 
   useEffect(() => {
     setMounted(true)
+    // Masquer le header et footer
+    const style = document.createElement('style')
+    style.textContent = `
+      header, footer, .header, .footer {
+        display: none !important;
+      }
+      body {
+        padding-top: 0 !important;
+      }
+    `
+    document.head.appendChild(style)
+    
     // Alterner entre photo et logo toutes les 3 secondes
     const interval = setInterval(() => {
       setShowPhoto(prev => !prev)
     }, 3000)
-    return () => clearInterval(interval)
+    
+    // Cleanup
+    return () => {
+      clearInterval(interval)
+      document.head.removeChild(style)
+    }
   }, [])
 
   const generateVCard = () => {
@@ -56,15 +73,16 @@ END:VCARD`
   }
 
   const actionButtons = [
+    // Première ligne
     {
       icon: (
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
         </svg>
       ),
-      label: 'Appeler',
-      action: () => window.location.href = 'tel:+33603369342',
-      color: 'bg-green-500 hover:bg-green-600'
+      label: 'Site Web',
+      action: () => window.open('https://www.web-online-concept.com', '_blank'),
+      color: 'bg-indigo-500 hover:bg-indigo-600'
     },
     {
       icon: (
@@ -79,32 +97,33 @@ END:VCARD`
     {
       icon: (
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/>
-        </svg>
-      ),
-      label: 'SMS',
-      action: () => window.location.href = 'sms:+33603369342',
-      color: 'bg-purple-500 hover:bg-purple-600'
-    },
-    {
-      icon: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-        </svg>
-      ),
-      label: 'Site Web',
-      action: () => window.open('https://www.web-online-concept.com', '_blank'),
-      color: 'bg-indigo-500 hover:bg-indigo-600'
-    },
-    {
-      icon: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
           <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
         </svg>
       ),
       label: 'Twitter',
       action: () => window.open('https://x.com/webonlinecom', '_blank'),
       color: 'bg-gray-800 hover:bg-gray-900'
+    },
+    // Deuxième ligne
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+        </svg>
+      ),
+      label: 'Appeler',
+      action: () => window.location.href = 'tel:+33603369342',
+      color: 'bg-green-500 hover:bg-green-600'
+    },
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/>
+        </svg>
+      ),
+      label: 'SMS',
+      action: () => window.location.href = 'sms:+33603369342',
+      color: 'bg-purple-500 hover:bg-purple-600'
     },
     {
       icon: (
