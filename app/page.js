@@ -120,7 +120,7 @@ export default function Home() {
       <section id="services" className="py-20 bg-gray-50 scroll-mt-[100px]">
         <div className="container max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Votre site web à la carte
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -288,12 +288,25 @@ export default function Home() {
       <section className="py-20 bg-white">
         <div className="container max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
               Une team professionnelle à votre écoute
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
               Pour tous types de projets, une équipe de spécialistes dédiée à votre réussite
             </p>
+          </div>
+
+          {/* Image sur mobile, en dessous du sous-titre */}
+          <div className="flex justify-center md:hidden mb-8">
+            <div className="border-4 border-[#0073a8] rounded-2xl overflow-hidden shadow-lg">
+              <Image
+                src="/images/team-image.jpg"
+                alt="Équipe Web Online Concept"
+                width={600}
+                height={400}
+                className="w-full h-auto"
+              />
+            </div>
           </div>
 
           {/* Partie haute : Texte à gauche, Image à droite */}
@@ -348,8 +361,8 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Image à droite */}
-            <div className="flex justify-center">
+            {/* Image à droite - cachée sur mobile */}
+            <div className="hidden md:flex justify-center">
               <div className="border-4 border-[#0073a8] rounded-2xl overflow-hidden shadow-lg">
                 <Image
                   src="/images/team-image.jpg"
@@ -380,17 +393,30 @@ export default function Home() {
       <section className="py-20 bg-gray-100">
         <div className="container max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
               Optimisation du référencement Web
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
               Nous optimisons votre site pour améliorer votre visibilité dans les résultats des meilleurs moteurs de recherche
             </p>
           </div>
 
+          {/* Image sur mobile, en dessous du sous-titre */}
+          <div className="flex justify-center md:hidden mb-8">
+            <div className="border-4 border-[#0073a8] rounded-2xl overflow-hidden shadow-lg">
+              <Image
+                src="/images/seo-google.jpg"
+                alt="Optimisation référencement Google SEO"
+                width={600}
+                height={400}
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Image à gauche */}
-            <div className="flex justify-center order-2 md:order-1">
+            {/* Image à gauche - cachée sur mobile */}
+            <div className="hidden md:flex justify-center order-2 md:order-1">
               <div className="border-4 border-[#0073a8] rounded-2xl overflow-hidden shadow-lg">
                 <Image
                   src="/images/seo-google.jpg"
