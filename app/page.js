@@ -89,8 +89,8 @@ export default function Home() {
         {/* Contenu */}
         <div className="container max-w-7xl mx-auto px-4 relative z-10">
           <div className="text-white text-center max-w-3xl mx-auto">
-            <div className="bg-[#00334d]/80 backdrop-blur-sm p-8 md:p-12 rounded-2xl">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)'}}>
+            <div className="bg-[#00334d]/80 backdrop-blur-sm p-6 md:p-12 rounded-2xl">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)'}}>
                 <span className="block animate-slide-up">
                   Votre présence web
                 </span>
@@ -98,7 +98,7 @@ export default function Home() {
                   commence ici
                 </span>
               </h1>
-              <p className="text-xl md:text-2xl mb-8 animate-slide-up-delay-2" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)'}}>
+              <p className="text-lg md:text-2xl mb-6 md:mb-8 animate-slide-up-delay-2" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)'}}>
                 Création de sites web professionnels à prix accessibles.
                 <br className="hidden md:block" />
                 Une solution clé en main pour votre entreprise.
