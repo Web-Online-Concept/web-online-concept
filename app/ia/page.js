@@ -139,11 +139,11 @@ export default function IAPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-24">
+    <div className="min-h-screen bg-gray-50 pt-[80px] md:pt-24">
       {/* Header Hero */}
       <section className="bg-gradient-to-r from-[#0073a8] to-[#005580] text-white py-16">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
             La Puissance de l'IA pour Votre Entreprise
           </h1>
           <p className="text-xl text-white/90">
@@ -166,7 +166,7 @@ export default function IAPage() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
           {/* Avatar Florent - 3/12 (25%) */}
           <div className="md:col-span-3">
-            <div className="relative bg-white rounded-xl shadow-lg p-8 h-[600px] flex flex-col justify-start">
+            <div className="relative bg-white rounded-xl shadow-lg p-8 h-auto md:h-[600px] flex flex-col justify-start">
               <FlorentAvatar 
                 isSpeaking={isSpeaking} 
                 isListening={false} 
