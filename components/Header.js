@@ -10,9 +10,24 @@ export default function Header() {
   return (
     <header className="fixed w-full top-0 z-50 bg-white shadow-lg">
       <div className="container max-w-7xl mx-auto px-4">
-        <div className="flex justify-between items-center h-[100px]">
-          {/* Logo et nom */}
-          <div className="flex items-center gap-4">
+        <div className="flex justify-between items-center h-[80px] md:h-[100px]">
+          {/* Conteneur mobile avec burger à gauche */}
+          <div className="flex items-center gap-2 md:gap-4 w-full md:w-auto">
+            {/* Menu burger mobile - À GAUCHE */}
+            <button
+              className="md:hidden text-gray-700 p-2"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {isMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+
+            {/* Logo */}
             <Link href="/">
               <div 
                 className="logo-container"
@@ -30,15 +45,17 @@ export default function Header() {
                 <Image 
                   src="/images/logo.png" 
                   alt="Web Online Concept Logo" 
-                  width={104} 
-                  height={80} 
-                  className="object-contain"
+                  width={80} 
+                  height={62} 
+                  className="object-contain md:w-[104px] md:h-[80px]"
                 />
               </div>
             </Link>
+            
+            {/* Nom de l'entreprise */}
             <div className="text-center">
               <Link href="/" className="block">
-                <h1 className="text-3xl font-bold relative inline-block" style={{ marginBottom: '-4px' }}>
+                <h1 className="text-xl md:text-3xl font-bold relative inline-block" style={{ marginBottom: '-4px' }}>
                   <span style={{ fontFamily: 'Poppins, -apple-system, sans-serif', letterSpacing: '-0.05em' }}>
                     <span className="text-[#0073a8]" style={{ fontWeight: '700' }}>WEB</span><span> </span><span className="text-red-800" style={{ fontWeight: '700', fontStyle: 'italic' }}>ONLINE</span><span> </span><span className="text-[#0073a8]" style={{ fontWeight: '700' }}>CONCEPT</span>
                   </span>
@@ -60,7 +77,7 @@ export default function Header() {
                   </div>
                 </h1>
               </Link>
-              <Link href="/">
+              <Link href="/" className="hidden md:block">
                 <div 
                   className="relative inline-block"
                   onMouseEnter={(e) => {
@@ -133,20 +150,6 @@ export default function Header() {
               Devis Gratuit
             </Link>
           </nav>
-
-          {/* Menu mobile */}
-          <button
-            className="md:hidden text-gray-700"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {isMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
         </div>
 
         {/* Mobile menu */}
@@ -154,49 +157,49 @@ export default function Header() {
           <div className="md:hidden py-4 border-t">
             <Link 
               href="/#services" 
-              className="block py-2 text-gray-700 hover:text-[#0073a8]"
+              className="block py-3 px-4 text-lg text-gray-700 hover:text-[#0073a8] hover:bg-gray-50"
               onClick={() => setIsMenuOpen(false)}
             >
               Services
             </Link>
             <Link 
               href="/infos-tarifs" 
-              className="block py-2 text-gray-700 hover:text-[#0073a8]"
+              className="block py-3 px-4 text-lg text-gray-700 hover:text-[#0073a8] hover:bg-gray-50"
               onClick={() => setIsMenuOpen(false)}
             >
               Infos & Tarifs
             </Link>
             <Link 
               href="/realisations" 
-              className="block py-2 text-gray-700 hover:text-[#0073a8]"
+              className="block py-3 px-4 text-lg text-gray-700 hover:text-[#0073a8] hover:bg-gray-50"
               onClick={() => setIsMenuOpen(false)}
             >
               Réalisations
             </Link>
             <Link 
               href="/blog" 
-              className="block py-2 text-gray-700 hover:text-[#0073a8]"
+              className="block py-3 px-4 text-lg text-gray-700 hover:text-[#0073a8] hover:bg-gray-50"
               onClick={() => setIsMenuOpen(false)}
             >
               Blog
             </Link>
             <Link 
               href="/ia" 
-              className="block py-2 text-gray-700 hover:text-[#0073a8]"
+              className="block py-3 px-4 text-lg text-gray-700 hover:text-[#0073a8] hover:bg-gray-50"
               onClick={() => setIsMenuOpen(false)}
             >
               IA
             </Link>
             <Link 
               href="/contact" 
-              className="block py-2 text-gray-700 hover:text-[#0073a8]"
+              className="block py-3 px-4 text-lg text-gray-700 hover:text-[#0073a8] hover:bg-gray-50"
               onClick={() => setIsMenuOpen(false)}
             >
               Contact
             </Link>
             <Link 
               href="/demande-devis" 
-              className="block py-2 text-[#0073a8] font-semibold"
+              className="block py-3 px-4 text-lg text-[#0073a8] font-semibold bg-blue-50 mt-2"
               onClick={() => setIsMenuOpen(false)}
             >
               Devis Gratuit
