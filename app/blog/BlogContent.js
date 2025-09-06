@@ -63,22 +63,24 @@ export default function BlogContent({ initialArticles }) {
             </div>
 
             {/* Filtres par catégorie */}
-            <nav className="flex gap-2 overflow-x-auto pb-2 md:pb-0" aria-label="Filtres par catégorie">
-              {categories.map(cat => (
-                <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
-                  aria-pressed={selectedCategory === cat}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap ${
-                    selectedCategory === cat
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
-                >
-                  {cat === 'all' ? 'Tous' : cat}
-                </button>
-              ))}
-            </nav>
+            <div className="w-full md:w-auto overflow-x-auto">
+              <nav className="flex gap-2 pb-2 md:pb-0" aria-label="Filtres par catégorie">
+                {categories.map(cat => (
+                  <button
+                    key={cat}
+                    onClick={() => setSelectedCategory(cat)}
+                    aria-pressed={selectedCategory === cat}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap ${
+                      selectedCategory === cat
+                        ? 'bg-blue-600 text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    {cat === 'all' ? 'Tous' : cat}
+                  </button>
+                ))}
+              </nav>
+            </div>
           </div>
         </div>
       </div>
