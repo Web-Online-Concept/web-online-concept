@@ -76,8 +76,8 @@ export default function Header() {
                     />
                   </div>
                 </h1>
-                <p className="text-xs text-gray-600 md:hidden">Sites Web Clés en Main à Prix Malins</p>
               </Link>
+              <p className="text-xs text-gray-600 block md:hidden text-center">Sites Web Clés en Main à Prix Malins</p>
               <Link href="/" className="hidden md:block">
                 <div 
                   className="relative inline-block"
@@ -153,58 +153,85 @@ export default function Header() {
           </nav>
         </div>
 
-        {/* Mobile menu */}
+        {/* Mobile menu - Effet WOW plein écran */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t">
-            <Link 
-              href="/#services" 
-              className="block py-3 px-4 text-lg text-gray-700 hover:text-[#0073a8] hover:bg-gray-50"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Services
-            </Link>
-            <Link 
-              href="/infos-tarifs" 
-              className="block py-3 px-4 text-lg text-gray-700 hover:text-[#0073a8] hover:bg-gray-50"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Infos & Tarifs
-            </Link>
-            <Link 
-              href="/realisations" 
-              className="block py-3 px-4 text-lg text-gray-700 hover:text-[#0073a8] hover:bg-gray-50"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Réalisations
-            </Link>
-            <Link 
-              href="/blog" 
-              className="block py-3 px-4 text-lg text-gray-700 hover:text-[#0073a8] hover:bg-gray-50"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Blog
-            </Link>
-            <Link 
-              href="/ia" 
-              className="block py-3 px-4 text-lg text-gray-700 hover:text-[#0073a8] hover:bg-gray-50"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              IA
-            </Link>
-            <Link 
-              href="/contact" 
-              className="block py-3 px-4 text-lg text-gray-700 hover:text-[#0073a8] hover:bg-gray-50"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Contact
-            </Link>
-            <Link 
-              href="/demande-devis" 
-              className="block py-3 px-4 text-lg text-[#0073a8] font-semibold bg-blue-50 mt-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Devis Gratuit
-            </Link>
+          <div 
+            className="fixed inset-0 bg-gradient-to-br from-[#0073a8] via-[#00b4d8] to-[#0073a8] md:hidden z-50"
+            style={{
+              top: '80px'
+            }}
+          >
+            <div className="flex flex-col justify-center items-center h-full px-8">
+              <nav className="text-center space-y-6">
+                <Link 
+                  href="/#services" 
+                  className="block text-3xl font-bold text-white hover:scale-110 transform transition-all duration-300"
+                  onClick={() => setIsMenuOpen(false)}
+                  style={{
+                    textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
+                  }}
+                >
+                  Services
+                </Link>
+                <Link 
+                  href="/infos-tarifs" 
+                  className="block text-3xl font-bold text-white hover:scale-110 transform transition-all duration-300"
+                  onClick={() => setIsMenuOpen(false)}
+                  style={{
+                    textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
+                  }}
+                >
+                  Infos & Tarifs
+                </Link>
+                <Link 
+                  href="/realisations" 
+                  className="block text-3xl font-bold text-white hover:scale-110 transform transition-all duration-300"
+                  onClick={() => setIsMenuOpen(false)}
+                  style={{
+                    textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
+                  }}
+                >
+                  Réalisations
+                </Link>
+                <Link 
+                  href="/blog" 
+                  className="block text-3xl font-bold text-white hover:scale-110 transform transition-all duration-300"
+                  onClick={() => setIsMenuOpen(false)}
+                  style={{
+                    textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
+                  }}
+                >
+                  Blog
+                </Link>
+                <Link 
+                  href="/ia" 
+                  className="block text-3xl font-bold text-white hover:scale-110 transform transition-all duration-300"
+                  onClick={() => setIsMenuOpen(false)}
+                  style={{
+                    textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
+                  }}
+                >
+                  IA
+                </Link>
+                <Link 
+                  href="/contact" 
+                  className="block text-3xl font-bold text-white hover:scale-110 transform transition-all duration-300"
+                  onClick={() => setIsMenuOpen(false)}
+                  style={{
+                    textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
+                  }}
+                >
+                  Contact
+                </Link>
+                <Link 
+                  href="/demande-devis" 
+                  className="block mt-8 bg-white text-[#0073a8] px-8 py-4 rounded-full text-xl font-bold hover:scale-110 transform transition-all duration-300 shadow-xl"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Devis Gratuit
+                </Link>
+              </nav>
+            </div>
           </div>
         )}
       </div>
