@@ -264,17 +264,20 @@ export default function ChatSection({
       </div>
       
       <form onSubmit={handleSubmit} className="border-t pt-2 mt-2">
-        <div className="flex flex-col md:flex-row gap-2">
+        {/* Sur mobile : colonne, sur desktop : ligne */}
+        <div className="flex flex-col gap-3 md:flex-row md:gap-2">
+          {/* Zone de saisie - pleine largeur sur mobile */}
           <input
             type="text"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="Posez votre question à Florent..."
-            className="w-full md:flex-1 px-4 py-3 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-3 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent md:flex-1"
             disabled={isLoading || isRecording}
           />
           
-          <div className="flex gap-2 justify-center md:justify-start">
+          {/* Conteneur des boutons - centré sur mobile */}
+          <div className="flex gap-2 justify-center md:justify-start md:flex-shrink-0">
             <button
               type="button"
               onClick={toggleRecording}
