@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="container max-w-7xl mx-auto px-4 py-12">
         <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
           {/* Colonne avec Titre et Logo */}
-          <div className="text-center">
+          <div className="text-center col-span-2 md:col-span-1">
             <h3 className="text-lg font-semibold mb-4">Web Online Concept</h3>
             <Link href="/">
               <div className="inline-block hover:opacity-90 transition-opacity mb-4">
@@ -25,27 +25,30 @@ export default function Footer() {
             </p>
           </div>
           
-          {/* Colonne À Propos */}
-          <div className="text-center">
-            <h4 className="text-lg font-semibold mb-4">À Propos</h4>
-            <ul className="space-y-2 text-gray-400">
-              <li><Link href="/#services" className="hover:text-white transition-colors">Nos services</Link></li>
-              <li><Link href="/infos-tarifs" className="hover:text-white transition-colors">Infos & Tarifs</Link></li>
-              <li><Link href="/realisations" className="hover:text-white transition-colors">Réalisations</Link></li>
-              <li><Link href="/blog" className="hover:text-white transition-colors">Blog</Link></li>
-              <li><Link href="/demande-devis" className="hover:text-white transition-colors">Devis gratuit</Link></li>
-            </ul>
-          </div>
-          
-          {/* Colonne Informations */}
-          <div className="text-center">
-            <h4 className="text-lg font-semibold mb-4">Informations</h4>
-            <ul className="space-y-2 text-gray-400">
-              <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
-              <li><Link href="/mentions-legales" className="hover:text-white transition-colors">Mentions légales</Link></li>
-              <li><Link href="/cgv" className="hover:text-white transition-colors">CGV</Link></li>
-              <li><Link href="/politique-confidentialite" className="hover:text-white transition-colors">Confidentialité</Link></li>
-            </ul>
+          {/* Colonnes À Propos et Informations - 2 colonnes sur mobile */}
+          <div className="col-span-2 md:col-span-2 grid grid-cols-2 gap-8">
+            {/* Colonne À Propos */}
+            <div className="text-center">
+              <h4 className="text-lg font-semibold mb-4">À Propos</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><Link href="/#services" className="hover:text-white transition-colors">Nos services</Link></li>
+                <li><Link href="/infos-tarifs" className="hover:text-white transition-colors">Infos & Tarifs</Link></li>
+                <li><Link href="/realisations" className="hover:text-white transition-colors">Réalisations</Link></li>
+                <li><Link href="/blog" className="hover:text-white transition-colors">Blog</Link></li>
+                <li><Link href="/demande-devis" className="hover:text-white transition-colors">Devis gratuit</Link></li>
+              </ul>
+            </div>
+            
+            {/* Colonne Informations */}
+            <div className="text-center">
+              <h4 className="text-lg font-semibold mb-4">Informations</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+                <li><Link href="/mentions-legales" className="hover:text-white transition-colors">Mentions légales</Link></li>
+                <li><Link href="/cgv" className="hover:text-white transition-colors">CGV</Link></li>
+                <li><Link href="/politique-confidentialite" className="hover:text-white transition-colors">Confidentialité</Link></li>
+              </ul>
+            </div>
           </div>
         </div>
         
