@@ -73,13 +73,12 @@ END:VCARD`
   }
 
   const shareCard = () => {
-    const shareText = "Découvrez ma carte de visite digitale : https://www.web-online-concept.com/florent-regnault"
+    const shareText = "Florent Regnault - Web Online Concept - Ma carte de visite digitale : https://www.web-online-concept.com/florent-regnault"
     
     if (navigator.share) {
       navigator.share({
         title: 'Florent Regnault - Web Online Concept',
-        text: shareText,
-        url: 'https://www.web-online-concept.com/florent-regnault'
+        text: shareText
       })
     } else {
       navigator.clipboard.writeText(shareText)
