@@ -141,7 +141,7 @@ END:VCARD`
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900">
-      {/* Bannière en-tête avec l'image */}
+      {/* Bannière en-tête avec l'image SANS OPACITÉ */}
       <div className="relative h-40 w-full overflow-hidden">
         <Image
           src="/images/card-background.jpg"
@@ -150,7 +150,6 @@ END:VCARD`
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/70" />
       </div>
 
       {/* Particules animées */}
@@ -242,7 +241,7 @@ END:VCARD`
           <span>Ajouter aux contacts</span>
         </button>
 
-        {/* Section de texte supplémentaire */}
+        {/* Section de texte avec À propos et Services */}
         <div className="w-full text-center mb-8">
           <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
             <h2 className="text-xl font-bold text-white mb-3">
