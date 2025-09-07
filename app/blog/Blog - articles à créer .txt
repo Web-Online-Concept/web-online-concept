@@ -29,7 +29,6 @@ Pour enrichir ton blog et élargir son audience, je vais te proposer **50+ idée
 16. No-Code & Low-Code : alliés ou ennemis des développeurs ?
 17. Pourquoi intégrer un chatbot sur son site web
 18. Dark mode et design moderne : gadget ou vraie tendance ?
-19. Comment choisir le bon hébergeur pour son site web
 20. L’accessibilité numérique : pourquoi c’est obligatoire et comment l’appliquer
 
 ---
@@ -53,7 +52,7 @@ Pour enrichir ton blog et élargir son audience, je vais te proposer **50+ idée
 
 31. Les meilleures stratégies pour réduire l’abandon de panier
 32. Comment choisir la bonne plateforme e-commerce pour son projet
-33. Dropshipping en 2025 : est-ce toujours rentable ?
+
 34. L’importance de la confiance dans l’expérience d’achat en ligne
 35. Les moyens de paiement incontournables pour un site e-commerce
 36. Comment transformer vos fiches produits en véritables aimants à ventes
@@ -81,7 +80,6 @@ Pour enrichir ton blog et élargir son audience, je vais te proposer **50+ idée
 
 ## 💡 Bonus (Inspirations & Vision)
 
-51. Les entrepreneurs les plus influents du digital à suivre
 52. Comment Apple inspire le monde du design et du web
 53. Jeff Bezos : ses stratégies qui ont transformé le e-commerce
 54. Pourquoi la culture startup influence les grandes entreprises
