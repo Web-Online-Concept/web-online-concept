@@ -328,6 +328,7 @@ END:VCARD`
         .animate-slide-up { animation: slide-up 0.8s ease-out forwards; }
         .animate-slide-up-delay { animation: slide-up 0.8s ease-out 0.2s forwards; opacity: 0; }
         .animate-pulse-slow { animation: pulse-slow 3s ease-in-out infinite; }
+        .animate-gradient-shift { animation: gradient-shift 20s ease-in-out infinite; }
       `}</style>
     </div>
   )
