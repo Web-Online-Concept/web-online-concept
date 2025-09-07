@@ -35,6 +35,28 @@ export default function FlorentCard() {
   }, [])
 
   const generateVCard = () => {
+    // Détection de navigateur intégré
+    const isInAppBrowser = () => {
+      const ua = navigator.userAgent || navigator.vendor || window.opera;
+      return (ua.includes('FBAN') || ua.includes('FBAV') || // Facebook
+              ua.includes('Instagram') || 
+              ua.includes('Line') || 
+              ua.includes('Telegram') ||
+              ua.includes('WhatsApp'));
+    };
+
+    if (isInAppBrowser()) {
+      // Message plus élégant avec suggestion d'ouvrir dans le navigateur
+      setCopied(true);
+      setTimeout(() => {
+        if (confirm('Pour télécharger le contact, ouvrez cette page dans Chrome ou Safari. Voulez-vous copier le lien ?')) {
+          navigator.clipboard.writeText(window.location.href);
+        }
+        setCopied(false);
+      }, 100);
+      return;
+    }
+
     const vcard = `BEGIN:VCARD
 VERSION:3.0
 FN:Florent Regnault
