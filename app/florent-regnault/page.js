@@ -47,13 +47,29 @@ END:VCARD`
 
     const blob = new Blob([vcard], { type: 'text/vcard' })
     const url = window.URL.createObjectURL(blob)
-    const link = document.createElement('a')
-    link.href = url
-    link.download = 'florent-regnault.vcf'
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-    window.URL.revokeObjectURL(url)
+    
+    // Détection du système
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+    const isAndroid = /Android/.test(navigator.userAgent)
+    
+    // Pour iOS : utilise une méthode qui ouvre directement dans Safari
+    if (isIOS) {
+      // Sur iOS, on ouvre directement l'URL du blob qui déclenche l'aperçu natif
+      window.location.href = url
+    } else {
+      // Pour Android et autres : téléchargement classique
+      const link = document.createElement('a')
+      link.href = url
+      link.download = 'florent-regnault.vcf'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+    }
+    
+    // Nettoyage après un délai pour iOS
+    setTimeout(() => {
+      window.URL.revokeObjectURL(url)
+    }, 100)
   }
 
   const shareCard = () => {
@@ -61,7 +77,7 @@ END:VCARD`
     
     if (navigator.share) {
       navigator.share({
-        title: 'Carte de visite - Florent Regnault',
+        title: 'Florent Regnault - Web Online Concept',
         text: shareText,
         url: 'https://www.web-online-concept.com/florent-regnault'
       })
