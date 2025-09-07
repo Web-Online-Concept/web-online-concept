@@ -22,10 +22,10 @@ export default function FlorentCard() {
     `
     document.head.appendChild(style)
     
-    // Alterner entre photo et logo toutes les 3 secondes
+    // Alterner entre photo et logo toutes les 8 secondes
     const interval = setInterval(() => {
       setShowPhoto(prev => !prev)
-    }, 3000)
+    }, 8000)
     
     // Cleanup
     return () => {
