@@ -246,11 +246,15 @@ END:VCARD`
         <div className="w-full text-center mb-8">
           <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
             <h2 className="text-xl font-bold text-white mb-3">
-              Créons votre présence digitale
+              À propos
             </h2>
-            <p className="text-gray-200 mb-4 text-sm leading-relaxed">
-              Spécialiste en création de sites web professionnels, je vous accompagne dans votre transformation digitale.
+            <p className="text-gray-200 mb-6 text-sm leading-relaxed">
+              Responsable de l'entreprise et coordinateur des projets, je vous accompagne dans la création de sites web professionnels et dans votre transformation digitale.
             </p>
+            
+            <h3 className="text-lg font-bold text-white mb-3">
+              Découvrez nos services
+            </h3>
             <div className="space-y-2 text-left text-sm">
               <div className="flex items-start">
                 <span className="text-green-400 mr-2">✓</span>
