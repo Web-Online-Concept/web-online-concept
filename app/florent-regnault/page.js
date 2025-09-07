@@ -156,7 +156,7 @@ END:VCARD`
   if (!mounted) return null
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 overflow-x-hidden">
       {/* Bannière en-tête avec l'image SANS OPACITÉ */}
       <div className="relative h-40 w-full overflow-hidden">
         <Image
