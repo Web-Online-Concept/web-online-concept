@@ -303,9 +303,9 @@ END:VCARD`
       <style jsx>{`
         @keyframes float {
           0%, 100% { transform: translateY(0) translateX(0); }
-          25% { transform: translateY(-20px) translateX(10px); }
-          50% { transform: translateY(10px) translateX(-10px); }
-          75% { transform: translateY(-10px) translateX(20px); }
+          25% { transform: translateY(-10px) translateX(5px); }
+          50% { transform: translateY(5px) translateX(-5px); }
+          75% { transform: translateY(-5px) translateX(10px); }
         }
         
         @keyframes fade-in {
