@@ -156,7 +156,7 @@ END:VCARD`
   if (!mounted) return null
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 overflow-x-hidden">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900">
       {/* Bannière en-tête avec l'image SANS OPACITÉ */}
       <div className="relative h-40 w-full overflow-hidden">
         <Image
@@ -166,24 +166,6 @@ END:VCARD`
           className="object-cover"
           priority
         />
-      </div>
-
-      {/* Particules animées */}
-      <div className="absolute inset-0 z-10 pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute animate-float"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${15 + Math.random() * 10}s`
-            }}
-          >
-            <div className="w-2 h-2 bg-blue-400 rounded-full opacity-20" />
-          </div>
-        ))}
       </div>
 
       {/* Contenu principal */}
@@ -301,13 +283,6 @@ END:VCARD`
 
       {/* CSS pour les animations */}
       <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0) translateX(0); }
-          25% { transform: translateY(-10px) translateX(5px); }
-          50% { transform: translateY(5px) translateX(-5px); }
-          75% { transform: translateY(-5px) translateX(10px); }
-        }
-        
         @keyframes fade-in {
           from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }
