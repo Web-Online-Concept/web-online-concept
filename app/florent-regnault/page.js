@@ -45,17 +45,26 @@ EMAIL:web.online.concept@gmail.com
 URL:https://www.web-online-concept.com
 END:VCARD`
 
-    const blob = new Blob([vcard], { type: 'text/vcard' })
+    const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' })
     const url = window.URL.createObjectURL(blob)
     
     // Détection du système
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
-    const isAndroid = /Android/.test(navigator.userAgent)
     
     // Pour iOS : utilise une méthode qui ouvre directement dans Safari
     if (isIOS) {
-      // Sur iOS, on ouvre directement l'URL du blob qui déclenche l'aperçu natif
-      window.location.href = url
+      // Sur iOS, on crée un lien temporaire et on le clique
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', 'florent-regnault.vcf')
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      
+      // Nettoyage après un délai
+      setTimeout(() => {
+        window.URL.revokeObjectURL(url)
+      }, 100)
     } else {
       // Pour Android et autres : téléchargement classique
       const link = document.createElement('a')
@@ -64,12 +73,8 @@ END:VCARD`
       document.body.appendChild(link)
       link.click()
       document.body.removeChild(link)
-    }
-    
-    // Nettoyage après un délai pour iOS
-    setTimeout(() => {
       window.URL.revokeObjectURL(url)
-    }, 100)
+    }
   }
 
   const shareCard = () => {
