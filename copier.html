@@ -1,23 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Copier texte</title>
+  <title>Copier mon texte</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: #f4f4f4;
+      font-family: sans-serif;
+    }
+    #copier {
+      font-size: 100px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      outline: none;
+    }
+    #copier:active {
+      transform: scale(0.9);
+    }
+  </style>
 </head>
-<body style="text-align:center; margin-top:50px; font-family:sans-serif;">
-
-  <!-- Texte à copier -->
-  <p id="texte">https://monsite.com/monfichier.mp3</p>
+<body>
 
   <!-- Icône copier -->
-  <button onclick="copierTexte()" style="font-size:40px; background:none; border:none; cursor:pointer;">
-    📋
-  </button>
+  <button id="copier" onclick="copierTexte()">📋</button>
 
   <script>
+    const texteACopier = "https://monsite.com/monfichier.mp3"; // 👉 mets ici ton lien ou ton texte
+
     function copierTexte() {
-      const texte = document.getElementById("texte").innerText;
-      navigator.clipboard.writeText(texte).then(() => {
+      navigator.clipboard.writeText(texteACopier).then(() => {
         alert("Texte copié !");
       });
     }
