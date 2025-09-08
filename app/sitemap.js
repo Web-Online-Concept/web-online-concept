@@ -47,6 +47,12 @@ export default async function sitemap() {
       priority: 0.75,
     },
     {
+      url: `${baseUrl}/florent-regnault`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
       url: `${baseUrl}/mentions-legales`,
       lastModified: new Date(),
       changeFrequency: 'yearly',
@@ -69,7 +75,7 @@ export default async function sitemap() {
   // Récupérer tous les articles du blog
   let blogPosts = []
   try {
-    const response = await fetch(`${baseUrl}/api/blog/public`, {
+    const response = await fetch(`${baseUrl}/api/blog/articles`, {
       next: { revalidate: 3600 }, // Cache 1 heure
       headers: {
         'Content-Type': 'application/json',
