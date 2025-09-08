@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Copier texte</title>
+</head>
+<body style="text-align:center; margin-top:50px; font-family:sans-serif;">
+
+  <!-- Texte à copier -->
+  <p id="texte">https://monsite.com/monfichier.mp3</p>
+
+  <!-- Icône copier -->
+  <button onclick="copierTexte()" style="font-size:40px; background:none; border:none; cursor:pointer;">
+    📋
+  </button>
+
+  <script>
+    function copierTexte() {
+      const texte = document.getElementById("texte").innerText;
+      navigator.clipboard.writeText(texte).then(() => {
+        alert("Texte copié !");
+      });
+    }
+  </script>
+
+</body>
+</html>
