@@ -24,8 +24,20 @@ export const metadata = {
   },
   manifest: '/manifest.json',
   icons: {
-    icon: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
+    icon: [
+      { 
+        url: '/favicon-woc.ico',
+        sizes: 'any'
+      }
+    ],
+    shortcut: ['/favicon-woc.ico'],
+    apple: ['/apple-touch-icon.png'],
+    other: [
+      {
+        rel: 'icon',
+        url: '/favicon-woc.ico',
+      }
+    ]
   },
   openGraph: {
     type: 'website',
@@ -89,15 +101,8 @@ export default function RootLayout({ children }) {
                 "postalCode": "31200",
                 "addressCountry": "FR"
               },
-              "openingHoursSpecification": {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-                "opens": "09:00",
-                "closes": "18:00"
-              },
               "sameAs": [
-                "https://x.com/webonlinecom",
-                "https://www.linkedin.com/company/web-online-concept"
+                "https://x.com/webonlinecom"
               ]
             })
           }}
