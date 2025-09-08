@@ -57,12 +57,23 @@ export default function Footer() {
           <p className="text-gray-400 text-sm">
             © 2025 Web Online Concept. Tous droits réservés.
           </p>
-          <Link 
-            href="/admin-tarifs" 
-            className="text-gray-600 hover:text-gray-500 text-xs mt-2 inline-block transition-colors"
-          >
-            Administration
-          </Link>
+          <div className="text-xs mt-2">
+            <Link 
+              href="/admin-tarifs" 
+              className="text-gray-600 hover:text-gray-500 transition-colors"
+            >
+              Administration
+            </Link>
+            <span className="text-gray-600 mx-2">-</span>
+            <a 
+              href="https://www.web-online-concept.com/florent-regnault" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-600 hover:text-gray-500 transition-colors"
+            >
+              Vcard
+            </a>
+          </div>
         </div>
       </div>
     </footer>
