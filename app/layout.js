@@ -24,7 +24,7 @@ export const metadata = {
   },
   manifest: '/manifest.json',
   icons: {
-    icon: '/favicon.ico',
+    icon: '/favicon-woc.ico',
     apple: '/apple-touch-icon.png',
   },
   openGraph: {
