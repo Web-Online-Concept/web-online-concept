@@ -24,20 +24,9 @@ export const metadata = {
   },
   manifest: '/manifest.json',
   icons: {
-    icon: [
-      { 
-        url: '/favicon-woc.ico',
-        sizes: 'any'
-      }
-    ],
-    shortcut: ['/favicon-woc.ico'],
-    apple: ['/apple-touch-icon.png'],
-    other: [
-      {
-        rel: 'icon',
-        url: '/favicon-woc.ico',
-      }
-    ]
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
   },
   openGraph: {
     type: 'website',
