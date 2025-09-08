@@ -7,7 +7,7 @@ import Footer from '@/components/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  metadataBase: new URL('https://web-online-concept.vercel.app'),
+  metadataBase: new URL('https://www.web-online-concept.com'),
   title: {
     default: 'Création Site Internet Professionnel - Devis Gratuit | Web Online Concept',
     template: '%s | Web Online Concept'
@@ -22,16 +22,21 @@ export const metadata = {
     address: false,
     telephone: false,
   },
+  manifest: '/manifest.json',
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
-    url: 'https://web-online-concept.vercel.app',
+    url: 'https://www.web-online-concept.com',
     siteName: 'Web Online Concept',
     title: 'Création Site Internet Professionnel - Web Online Concept',
     description: 'Création de sites web professionnels sur mesure. Design moderne, responsive, hébergement inclus.',
     images: [
       {
-        url: 'https://web-online-concept.vercel.app/images/og-image.jpg',
+        url: 'https://www.web-online-concept.com/images/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'Web Online Concept - Création de sites internet'
@@ -42,7 +47,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Web Online Concept - Création Sites Web Pro',
     description: 'Création de sites internet professionnels. Design moderne, responsive, optimisé SEO.',
-    images: ['https://web-online-concept.vercel.app/images/og-image.jpg'],
+    images: ['https://www.web-online-concept.com/images/og-image.jpg'],
   },
   robots: {
     index: true,
@@ -60,10 +65,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fr">
-      <head>
-        <link rel="icon" href="/images/favicon.ico" />
-        <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
-      </head>
       <body className={inter.className}>
         <Header />
         <main>{children}</main>
@@ -76,8 +77,8 @@ export default function RootLayout({ children }) {
               "@type": "LocalBusiness",
               "name": "Web Online Concept",
               "description": "Création de sites web professionnels à prix accessible",
-              "url": "https://web-online-concept.vercel.app",
-              "telephone": "+33646170207",
+              "url": "https://www.web-online-concept.com",
+              "telephone": "+33603369342",
               "email": "web.online.concept@gmail.com",
               "priceRange": "€€",
               "address": {
@@ -95,7 +96,7 @@ export default function RootLayout({ children }) {
                 "closes": "18:00"
               },
               "sameAs": [
-                "https://www.facebook.com/webonlineconcept",
+                "https://x.com/webonlinecom",
                 "https://www.linkedin.com/company/web-online-concept"
               ]
             })

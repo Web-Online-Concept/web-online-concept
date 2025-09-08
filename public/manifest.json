@@ -1,0 +1,27 @@
+{
+  "name": "Web Online Concept",
+  "short_name": "WOC",
+  "description": "Création de sites web professionnels à prix accessible",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e40af",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "developer"],
+  "lang": "fr",
+  "dir": "ltr"
+}
