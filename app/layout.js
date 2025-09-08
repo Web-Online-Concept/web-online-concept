@@ -24,10 +24,7 @@ export const metadata = {
   },
   manifest: '/manifest.json',
   icons: {
-    icon: [
-      { url: '/favicon-woc.ico', type: 'image/x-icon' }
-    ],
-    shortcut: '/favicon-woc.ico',
+    icon: '/favicon.ico',
     apple: '/apple-touch-icon.png',
   },
   openGraph: {
@@ -68,9 +65,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fr">
-      <head>
-        <link rel="icon" href="/favicon-woc.ico" />
-      </head>
       <body className={inter.className}>
         <Header />
         <main>{children}</main>
