@@ -20,24 +20,48 @@
       border: none;
       outline: none;
     }
-    #copier:active {
-      transform: scale(0.9);
+    #message {
+      position: fixed;
+      bottom: 20px;
+      background: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      display: none;
+      font-size: 18px;
     }
   </style>
 </head>
 <body>
 
   <!-- Icône copier -->
-  <button id="copier" onclick="copierTexte()">📋</button>
+  <button id="copier">📋</button>
+  <div id="message">✅ Copié !</div>
 
   <script>
-    const texteACopier = "Florent Regnault - Web Online Concept - Ma carte de visite digitale : https://www.web-online-concept.com/florent-regnault"; // 👉 mets ici ton lien ou ton texte
+    const texteACopier = "https://monsite.com/monfichier.mp3"; // 🔗 ton texte à copier
+    const bouton = document.getElementById("copier");
+    const message = document.getElementById("message");
 
-    function copierTexte() {
-      navigator.clipboard.writeText(texteACopier).then(() => {
-        alert("Texte copié !");
-      });
-    }
+    bouton.addEventListener("click", async () => {
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(texteACopier);
+        } else {
+          // fallback pour vieux navigateurs
+          const input = document.createElement("input");
+          input.value = texteACopier;
+          document.body.appendChild(input);
+          input.select();
+          document.execCommand("copy");
+          document.body.removeChild(input);
+        }
+        message.style.display = "block";
+        setTimeout(() => message.style.display = "none", 1500);
+      } catch (err) {
+        alert("Impossible de copier : " + err);
+      }
+    });
   </script>
 
 </body>
