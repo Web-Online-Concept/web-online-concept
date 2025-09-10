@@ -41,7 +41,6 @@ Pour enrichir ton blog et élargir son audience, je vais te proposer **50+ idée
 24. Pourquoi la recherche vocale change la stratégie SEO
 25. SEO mobile : comment optimiser pour les recherches sur smartphone
 26. Netlinking : comment construire un profil de liens de qualité
-27. Les erreurs SEO les plus fréquentes à éviter absolument
 28. L’impact des réseaux sociaux sur le SEO
 29. Comment bien structurer ses balises Hn pour Google
 30. Pourquoi Google E-E-A-T est devenu un facteur clé du référencement
@@ -51,10 +50,7 @@ Pour enrichir ton blog et élargir son audience, je vais te proposer **50+ idée
 ## 🛒 E-commerce & Business en ligne
 
 31. Les meilleures stratégies pour réduire l’abandon de panier
-32. Comment choisir la bonne plateforme e-commerce pour son projet
-
 34. L’importance de la confiance dans l’expérience d’achat en ligne
-35. Les moyens de paiement incontournables pour un site e-commerce
 36. Comment transformer vos fiches produits en véritables aimants à ventes
 37. Stratégies de fidélisation client pour une boutique en ligne
 38. Pourquoi les avis et notes boostent les conversions
@@ -83,7 +79,6 @@ Pour enrichir ton blog et élargir son audience, je vais te proposer **50+ idée
 52. Comment Apple inspire le monde du design et du web
 53. Jeff Bezos : ses stratégies qui ont transformé le e-commerce
 54. Pourquoi la culture startup influence les grandes entreprises
-55. Les métiers du digital qui vont exploser dans les prochaines années
 
 ---
 
