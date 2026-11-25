@@ -13,9 +13,15 @@
 
 html {
   scroll-behavior: smooth;
-  /* Le menu reste collé en haut : à chaque changement de page ou ancre,
-     le contenu s'arrête sous le menu au lieu de passer dessous */
-  scroll-padding-top: 88px;
+  /* Le menu reste collé en haut (73 px sur mobile, 77 px au-delà) : la marge de défilement
+     reste juste sous sa hauteur pour que le contenu ne passe jamais dessous,
+     sans déclencher de défilement parasite au changement de page */
+  scroll-padding-top: 72px;
+}
+@media (min-width: 40rem) {
+  html {
+    scroll-padding-top: 76px;
+  }
 }
 
 body {
