@@ -13,6 +13,9 @@
 
 html {
   scroll-behavior: smooth;
+  /* Le menu reste collé en haut : à chaque changement de page ou ancre,
+     le contenu s'arrête sous le menu au lieu de passer dessous */
+  scroll-padding-top: 88px;
 }
 
 body {
