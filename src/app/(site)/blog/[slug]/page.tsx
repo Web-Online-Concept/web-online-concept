@@ -4,7 +4,10 @@ import { permanentRedirect } from "next/navigation";
 import { Suspense } from "react";
 import { marked } from "marked";
 import { AppelFinal, Conteneur } from "@/components/site/Blocs";
+import Partage from "@/components/site/Partage";
 import { articleParSlug, dateFr } from "@/lib/articles";
+import { SITE } from "@/lib/contenu";
+import { IMAGE_PARTAGE } from "@/lib/seo";
 
 export async function generateMetadata({ params }: PageProps<"/blog/[slug]">): Promise<Metadata> {
   const { slug } = await params;
@@ -14,7 +17,17 @@ export async function generateMetadata({ params }: PageProps<"/blog/[slug]">): P
     title: a.titre,
     description: a.extrait,
     alternates: { canonical: `/blog/${slug}` },
-    openGraph: { type: "article", title: a.titre, description: a.extrait, ...(a.image_url ? { images: [a.image_url] } : {}) },
+    openGraph: {
+      type: "article",
+      locale: "fr_FR",
+      siteName: "Web Online Concept",
+      title: a.titre,
+      description: a.extrait,
+      url: `/blog/${slug}`,
+      ...(a.publie_le ? { publishedTime: a.publie_le } : {}),
+      images: a.image_url ? [a.image_url] : [IMAGE_PARTAGE],
+    },
+    twitter: { card: "summary_large_image", title: a.titre, description: a.extrait, images: [a.image_url ?? IMAGE_PARTAGE.url] },
   };
 }
 
@@ -46,6 +59,9 @@ async function Contenu({ params }: { params: Promise<{ slug: string }> }) {
             <img src={a.image_url} alt="" className="mb-10 aspect-[16/9] w-full rounded-2xl object-cover" />
           )}
           <div className="prose-woc" dangerouslySetInnerHTML={{ __html: html }} />
+          <div className="mt-14 border-t border-[#E3E9F0] pt-8">
+            <Partage url={`${SITE.url}/blog/${slug}`} titre={a.titre} />
+          </div>
         </Conteneur>
       </article>
     </>
