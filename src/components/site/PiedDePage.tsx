@@ -1,7 +1,7 @@
 import { cacheLife } from "next/cache";
 import Image from "next/image";
 import Link from "next/link";
-import { NAVIGATION, SITE } from "@/lib/contenu";
+import { NAVIGATION } from "@/lib/contenu";
 
 // Année du copyright, recalculée chaque jour
 async function Annee() {
@@ -17,15 +17,6 @@ export default function PiedDePage() {
         <div className="flex flex-col items-center gap-4">
           <Image src="/logo/logo-web-fond-sombre.svg" alt="Web Online Concept" width={207} height={44} className="h-11 w-auto" />
           <p className="max-w-xs text-[15px] leading-relaxed">Studio de développement web à Toulouse depuis 2009.</p>
-          <a href={`mailto:${SITE.email}`} className="text-[15px] text-white underline-offset-4 hover:underline">
-            {SITE.email}
-          </a>
-          <Link
-            href="/contact"
-            className="mt-2 rounded-full bg-bleu px-6 py-3 text-[15px] font-medium text-white transition-colors hover:bg-[#3A72FF]"
-          >
-            Parlons de votre projet
-          </Link>
         </div>
 
         <nav aria-label="Plan du site" className="flex flex-col items-center gap-2.5 text-[15px]">
@@ -47,6 +38,12 @@ export default function PiedDePage() {
           </Link>
           <Link href="/confidentialite" className="hover:text-white">
             Confidentialité
+          </Link>
+          <Link
+            href="/contact"
+            className="mt-5 rounded-full bg-bleu px-6 py-3 font-medium text-white transition-colors hover:bg-[#3A72FF]"
+          >
+            Parlons de votre projet
           </Link>
         </nav>
       </div>
