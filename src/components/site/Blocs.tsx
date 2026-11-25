@@ -5,7 +5,7 @@ import IllustrationEntete, {
   type VarianteEntete,
 } from "@/components/site/illustrations/Entetes";
 import type { Realisation } from "@/lib/contenu";
-import { SITE } from "@/lib/contenu";
+import { ENGAGEMENTS, SITE } from "@/lib/contenu";
 
 export function Conteneur({
   children,
@@ -121,6 +121,40 @@ export function AppelFinal() {
         >
           Décrire mon projet
         </Link>
+      </Conteneur>
+    </section>
+  );
+}
+
+export function BlocEngagements({ fond = "bg-white" }: { fond?: string }) {
+  return (
+    <section className={`${fond} py-20 sm:py-24`}>
+      <Conteneur>
+        <h2 className="text-[clamp(1.7rem,3vw,2.4rem)] font-semibold tracking-tight text-nuit">Nos engagements</h2>
+        <ul className="mt-10 grid gap-x-10 gap-y-9 sm:grid-cols-2 lg:grid-cols-3">
+          {ENGAGEMENTS.map((e) => (
+            <li key={e.titre} className="flex gap-4">
+              <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#E3F8EC] text-[#0E7A45]">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12.5l4.2 4.2L19 7" />
+                </svg>
+              </span>
+              <div>
+                <h3 className="text-lg font-semibold text-nuit">{e.titre}</h3>
+                <p className="mt-1.5 text-[15px] leading-relaxed text-[#2C4558]">{e.texte}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
       </Conteneur>
     </section>
   );

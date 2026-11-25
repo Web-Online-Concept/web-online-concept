@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useRef } from "react";
+import { BESOINS, SOURCES } from "@/lib/contenu";
 import { envoyerMessage, type EtatContact } from "./actions";
 
 const initial: EtatContact = { statut: "initial" };
@@ -71,11 +72,39 @@ export default function Formulaire() {
           <input id="email" name="email" defaultValue={etat.valeurs?.email} type="email" autoComplete="email" required className={styleChamp} aria-invalid={!!e.email} aria-describedby={e.email ? "email-erreur" : undefined} />
         </Champ>
       </div>
+      <div className="grid gap-5 sm:grid-cols-2">
+        <Champ id="telephone" libelle="Téléphone (facultatif)" erreur={e.telephone}>
+          <input id="telephone" name="telephone" type="tel" defaultValue={etat.valeurs?.telephone} autoComplete="tel" className={styleChamp} aria-invalid={!!e.telephone} aria-describedby={e.telephone ? "telephone-erreur" : undefined} />
+        </Champ>
+        <Champ id="besoin" libelle="Votre projet" erreur={e.besoin}>
+          <select key={`besoin-${etat.valeurs?.besoin ?? ""}`} id="besoin" name="besoin" required defaultValue={etat.valeurs?.besoin ?? ""} className={styleChamp} aria-invalid={!!e.besoin} aria-describedby={e.besoin ? "besoin-erreur" : undefined}>
+            <option value="" disabled>
+              Choisissez…
+            </option>
+            {BESOINS.map((b) => (
+              <option key={b} value={b}>
+                {b}
+              </option>
+            ))}
+          </select>
+        </Champ>
+      </div>
       <Champ id="objet" libelle="Objet" erreur={e.objet}>
         <input id="objet" name="objet" defaultValue={etat.valeurs?.objet} className={styleChamp} aria-invalid={!!e.objet} aria-describedby={e.objet ? "objet-erreur" : undefined} />
       </Champ>
       <Champ id="message" libelle="Votre projet et vos objectifs" erreur={e.message}>
         <textarea id="message" name="message" defaultValue={etat.valeurs?.message} rows={7} required className={styleChamp} aria-invalid={!!e.message} aria-describedby={e.message ? "message-erreur" : undefined} />
+      </Champ>
+
+      <Champ id="source" libelle="Comment avez-vous connu Web Online Concept ? (facultatif)">
+        <select key={`source-${etat.valeurs?.source ?? ""}`} id="source" name="source" defaultValue={etat.valeurs?.source ?? ""} className={styleChamp}>
+          <option value="">Choisissez…</option>
+          {SOURCES.map((x) => (
+            <option key={x} value={x}>
+              {x}
+            </option>
+          ))}
+        </select>
       </Champ>
 
       <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">

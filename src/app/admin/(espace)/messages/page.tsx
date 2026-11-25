@@ -43,7 +43,21 @@ async function Contenu() {
                   <a href={`mailto:${m.email}?subject=${encodeURIComponent(`Re: ${m.objet || "votre message"}`)}`} className="text-bleu hover:underline">
                     {m.email}
                   </a>
+                  {m.telephone && (
+                    <>
+                      ,{" "}
+                      <a href={`tel:${String(m.telephone).replace(/[^0-9+]/g, "")}`} className="text-bleu hover:underline">
+                        {m.telephone}
+                      </a>
+                    </>
+                  )}
                 </p>
+                {(m.besoin || m.source) && (
+                  <p className="mt-3 flex flex-wrap gap-2 text-sm">
+                    {m.besoin && <span className="rounded-full bg-[#E8EFFF] px-3 py-1 text-[#1638A8]">{m.besoin}</span>}
+                    {m.source && <span className="rounded-full bg-ciel px-3 py-1 text-[#4A6178]">Nous a connu par : {m.source}</span>}
+                  </p>
+                )}
                 <p className="mt-4 whitespace-pre-line text-[15px] leading-relaxed">{m.message}</p>
                 <div className="mt-5 flex flex-wrap gap-3">
                   <a href={`mailto:${m.email}?subject=${encodeURIComponent(`Re: ${m.objet || "votre message"}`)}`} className={classeBoutonSecondaire}>

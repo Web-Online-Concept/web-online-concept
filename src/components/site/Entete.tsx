@@ -16,7 +16,7 @@ function Liens({ chemin }: { chemin: string | null }) {
             key={l.href}
             href={l.href}
             aria-current={actif ? "page" : undefined}
-            className={`rounded-full px-3 py-2 text-[15px] font-medium transition-colors xl:px-4 xl:text-base ${
+            className={`rounded-full px-2.5 py-2 text-[15px] font-medium transition-colors xl:px-4 xl:text-base ${
               actif ? "bg-white/12 text-white" : "text-[#E6EDF5] hover:bg-white/6 hover:text-white"
             }`}
           >
@@ -43,13 +43,13 @@ export default function Entete() {
           <Image src="/logo/logo-web-fond-sombre.svg" alt="" width={207} height={44} priority className="h-10 w-auto sm:h-11" />
         </Link>
 
-        <nav aria-label="Navigation principale" className="hidden items-center gap-1 lg:flex">
+        <nav aria-label="Navigation principale" className="hidden items-center gap-0.5 lg:flex xl:gap-1">
           <Suspense fallback={<Liens chemin={null} />}>
             <LiensActifs />
           </Suspense>
           <Link
             href="/contact"
-            className="ml-3 rounded-full bg-bleu px-5 py-2.5 text-[15px] font-medium whitespace-nowrap text-white transition-colors hover:bg-[#3A72FF] xl:text-base"
+            className="ml-2 rounded-full bg-bleu px-4 py-2.5 text-[15px] font-medium whitespace-nowrap text-white transition-colors hover:bg-[#3A72FF] xl:ml-3 xl:px-5 xl:text-base"
           >
             Parlons de votre projet
           </Link>

@@ -1,6 +1,6 @@
 // Pictogrammes au trait des capacités (24 × 24, couleur héritée).
 
-export type NomIcone = "site" | "app" | "abonnement" | "ia" | "donnees" | "securite";
+export type NomIcone = "site" | "app" | "abonnement" | "ia" | "visibilite" | "donnees" | "evolution" | "securite";
 
 const TRACES: Record<NomIcone, React.ReactNode> = {
   site: (
@@ -33,6 +33,21 @@ const TRACES: Record<NomIcone, React.ReactNode> = {
     <>
       <path d="M11 3.5l1.85 4.9 4.9 1.85-4.9 1.85L11 17l-1.85-4.9-4.9-1.85 4.9-1.85z" />
       <path d="M18.5 14.5l.75 1.95 1.95.75-1.95.75-.75 1.95-.75-1.95-1.95-.75 1.95-.75z" />
+    </>
+  ),
+  visibilite: (
+    <>
+      <circle cx="10.5" cy="10.5" r="6.75" />
+      <path d="M15.4 15.4l5.1 5.1" />
+      <path d="M8 13v-1.5M10.5 13V9.5M13 13V8" />
+    </>
+  ),
+  evolution: (
+    <>
+      <path d="M19.75 12a7.75 7.75 0 0 1-13.4 5.3" />
+      <path d="M4.25 12a7.75 7.75 0 0 1 13.4-5.3" />
+      <path d="M17.9 3.2v3.6h-3.6" />
+      <path d="M6.1 20.8v-3.6h3.6" />
     </>
   ),
   donnees: (

@@ -19,6 +19,7 @@ export const NAVIGATION = [
   { href: "/methode", libelle: "Méthode" },
   { href: "/a-propos", libelle: "À propos" },
   { href: "/blog", libelle: "Blog" },
+  { href: "/faq", libelle: "FAQ" },
 ];
 
 export const MANIFESTE = [
@@ -373,6 +374,13 @@ export const CAPACITES: Capacite[] = [
     exemples: ["memoday"],
   },
   {
+    titre: "Référencement et visibilité IA",
+    icone: "visibilite",
+    texte:
+      "Référencement naturel et local, fiche Google Business, données structurées et contenus pensés pour être cités par ChatGPT, Perplexity ou Google : votre site trouvé là où vos clients cherchent.",
+    exemples: ["inspiration-et-meditation", "klart-concept"],
+  },
+  {
     titre: "Données et back-offices",
     icone: "donnees",
     texte:
@@ -380,10 +388,17 @@ export const CAPACITES: Capacite[] = [
     exemples: ["galerie-carpentier", "inspiration-et-meditation"],
   },
   {
+    titre: "Refonte, migration et suivi",
+    icone: "evolution",
+    texte:
+      "Refonte d'un site existant, changement d'hébergeur ou de technologie sans perdre votre référencement, puis mises à jour et évolutions dans la durée.",
+    exemples: ["galerie-carpentier", "menuiserie-gaudissard"],
+  },
+  {
     titre: "Performance et sécurité",
     icone: "securite",
     texte:
-      "Hébergement, sauvegardes, maintenance et conformité RGPD : un site rapide, protégé et suivi dans la durée.",
+      "Hébergement rapide, sauvegardes, sécurité et conformité RGPD : un site qui se charge vite et reste protégé.",
     exemples: [],
   },
 ];
@@ -411,6 +426,116 @@ export const METHODE: Etape[] = [
     texte:
       "Une veille permanente sur les technologies et l'IA : chaque nouveauté utile vient renforcer votre projet, longtemps après sa mise en ligne.",
   },
+];
+
+export const ENGAGEMENTS: Etape[] = [
+  {
+    titre: "Un premier échange offert",
+    texte: "Gratuit et sans engagement : on parle de vos objectifs avant de parler de solution.",
+  },
+  {
+    titre: "Une réponse sous 48 heures",
+    texte: "Chaque demande reçoit une réponse sous 48 heures ouvrées.",
+  },
+  {
+    titre: "Tout vous appartient",
+    texte: "Votre site, ses contenus et vos données sont à vous : vous restez libre, à tout moment.",
+  },
+  {
+    titre: "Un seul interlocuteur",
+    texte: "La même personne du premier échange au suivi : pas de relais, pas d'information perdue.",
+  },
+  {
+    titre: "Vous validez avant la mise en ligne",
+    texte: "Vous testez votre site ou votre application en conditions réelles avant sa publication.",
+  },
+  {
+    titre: "Une prise en main accompagnée",
+    texte: "Vous apprenez à faire vivre votre site, pour être autonome dès le premier jour.",
+  },
+];
+
+export type Question = { question: string; reponse: string; lien?: Lien };
+
+export const FAQ: Question[] = [
+  {
+    question: "Comment se passe un premier contact ?",
+    reponse:
+      "Vous décrivez votre projet et vos objectifs grâce au formulaire de contact. Vous recevez une réponse sous 48 heures ouvrées, puis un premier échange, gratuit et sans engagement, permet de cadrer le besoin ensemble.",
+    lien: { href: "/contact", libelle: "Décrire mon projet" },
+  },
+  {
+    question: "Combien de temps faut-il pour créer un site ?",
+    reponse:
+      "Cela dépend de l'ambition du projet : quelques semaines pour un site vitrine, davantage pour une application ou une plateforme complète. Grâce à l'IA, les délais sont bien plus courts qu'auparavant, et un planning précis vous est donné dès le cadrage.",
+  },
+  {
+    question: "Pourrai-je modifier mon site moi-même ?",
+    reponse:
+      "Oui. Votre projet peut inclure un espace d'administration pensé pour vous : textes, images, produits, actualités, œuvres ou rendez-vous. Vous êtes accompagné pour le prendre en main, et vous pouvez toujours confier les évolutions plus importantes.",
+    lien: { href: "/realisations/galerie-carpentier", libelle: "Exemple : la Galerie Michel Carpentier" },
+  },
+  {
+    question: "Le référencement est-il compris ?",
+    reponse:
+      "Les fondations du référencement sont intégrées dès la conception : structure des pages, vitesse de chargement, balisage, données structurées et affichage mobile. Pour aller plus loin, un accompagnement dédié est possible : référencement local, fiche Google Business, contenus.",
+  },
+  {
+    question: "Qu'est-ce que la visibilité dans les IA ?",
+    reponse:
+      "De plus en plus de personnes posent leurs questions à ChatGPT, à Perplexity ou à la recherche Google enrichie par l'IA, au lieu de parcourir une liste de liens. La visibilité IA consiste à structurer votre site et vos contenus pour que ces outils comprennent votre activité, la citent et renvoient vers vous.",
+  },
+  {
+    question: "Faut-il refaire mon site ou simplement le mettre à jour ?",
+    reponse:
+      "Tout dépend de son état. Un diagnostic de l'existant permet de recommander la solution la plus adaptée : parfois quelques améliorations suffisent, parfois une refonte est plus intéressante. Dans les deux cas, votre référencement est préservé.",
+  },
+  {
+    question: "À qui appartient le site une fois livré ?",
+    reponse: "À vous. Votre site, ses contenus et vos données vous appartiennent : vous restez libre, à tout moment.",
+  },
+  {
+    question: "Que se passe-t-il après la mise en ligne ?",
+    reponse:
+      "Votre site est suivi dans la durée : mises à jour, sauvegardes, sécurité, évolutions et amélioration du référencement. Vous n'êtes jamais seul face à votre site.",
+  },
+  {
+    question: "Pouvez-vous intégrer de l'IA dans mon projet ?",
+    reponse:
+      "Oui : compréhension des messages, lecture automatique de documents, recherche par le sens, assistants. L'IA est intégrée là où elle vous fait gagner du temps, comme dans l'application MemoDay.",
+    lien: { href: "/realisations/memoday", libelle: "Découvrir MemoDay" },
+  },
+  {
+    question: "Développez-vous des applications mobiles ?",
+    reponse:
+      "Oui, pour l'iPhone et Android à partir d'une seule base de code, avec publication sur l'App Store et Google Play. L'application fonctionne aussi dans le navigateur.",
+    lien: { href: "/realisations/memoday", libelle: "Exemple : MemoDay" },
+  },
+  {
+    question: "Travaillez-vous uniquement à Toulouse ?",
+    reponse:
+      "Le studio est basé à Toulouse et travaille partout en France à distance. Plusieurs clients sont installés à Albi, dans les Hautes-Pyrénées ou près de La Rochelle.",
+    lien: { href: "/realisations#clients", libelle: "Voir les sites clients" },
+  },
+];
+
+// Formulaire de contact
+export const BESOINS = [
+  "Création de site",
+  "Application web ou mobile",
+  "Plateforme ou abonnement",
+  "Refonte ou migration",
+  "Référencement et visibilité IA",
+  "Maintenance et suivi",
+  "Autre",
+];
+
+export const SOURCES = [
+  "Recherche Google",
+  "ChatGPT ou une autre IA",
+  "Recommandation",
+  "Un site réalisé par Web Online Concept",
+  "Autre",
 ];
 
 export const LEGAL = {

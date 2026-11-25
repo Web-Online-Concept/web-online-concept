@@ -3,7 +3,7 @@ import { articlesPublies } from "@/lib/articles";
 import { REALISATIONS, SITE } from "@/lib/contenu";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const pages = ["", "/realisations", "/capacites", "/methode", "/a-propos", "/blog", "/contact", "/mentions-legales", "/confidentialite"];
+  const pages = ["", "/realisations", "/capacites", "/methode", "/a-propos", "/blog", "/faq", "/contact", "/mentions-legales", "/confidentialite"];
   const articles = await articlesPublies();
   return [
     ...pages.map((p) => ({ url: `${SITE.url}${p}` })),

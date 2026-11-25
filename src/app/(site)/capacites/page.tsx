@@ -7,7 +7,7 @@ import { CAPACITES, realisation } from "@/lib/contenu";
 export const metadata: Metadata = {
   title: "Capacités",
   description:
-    "Sites sur mesure, applications web et mobiles, plateformes à abonnement, IA intégrée, back-offices, performance et sécurité.",
+    "Sites sur mesure, applications web et mobiles, plateformes à abonnement, IA intégrée, référencement et visibilité IA, back-offices, refonte et suivi, performance et sécurité.",
 };
 
 export default function Capacites() {

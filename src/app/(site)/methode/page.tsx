@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { AppelFinal, Conteneur, EnTetePage } from "@/components/site/Blocs";
+import { AppelFinal, BlocEngagements, Conteneur, EnTetePage } from "@/components/site/Blocs";
 import { MANIFESTE, METHODE } from "@/lib/contenu";
 
 export const metadata: Metadata = {
@@ -33,7 +33,8 @@ export default function Methode() {
           </ol>
         </Conteneur>
       </section>
-      <section className="bg-ciel py-16 sm:py-20">
+      <BlocEngagements fond="bg-ciel" />
+      <section className="bg-white py-16 sm:py-20">
         <Conteneur className="max-w-4xl">
           <p className="text-xl leading-relaxed text-[#4A6178]">{MANIFESTE[0]}</p>
           <p className="mt-4 text-xl leading-relaxed text-[#2C4558]">{MANIFESTE[1]}</p>

@@ -3,7 +3,7 @@
 
 import type { NomIcone } from "@/components/site/Icones";
 
-export type VarianteEntete = "realisations" | "capacites" | "methode" | "apropos" | "blog" | "contact";
+export type VarianteEntete = "realisations" | "capacites" | "methode" | "apropos" | "blog" | "contact" | "faq";
 
 const CX = 220;
 const CY = 160;
@@ -82,6 +82,8 @@ const PICTOS: Record<NomIcone, string> = {
   app: "M9.35 2.5h5.3a2.6 2.6 0 0 1 2.6 2.6v13.8a2.6 2.6 0 0 1-2.6 2.6h-5.3a2.6 2.6 0 0 1-2.6-2.6V5.1a2.6 2.6 0 0 1 2.6-2.6zM10.75 5h2.5M11 18.5h2",
   abonnement: "M5 5.5h14a2.5 2.5 0 0 1 2.5 2.5v8a2.5 2.5 0 0 1-2.5 2.5H5A2.5 2.5 0 0 1 2.5 16V8A2.5 2.5 0 0 1 5 5.5zM2.5 9.75h19M6 14.5h4",
   ia: "M11 3.5l1.85 4.9 4.9 1.85-4.9 1.85L11 17l-1.85-4.9-4.9-1.85 4.9-1.85zM18.5 14.5l.75 1.95 1.95.75-1.95.75-.75 1.95-.75-1.95-1.95-.75 1.95-.75z",
+  visibilite: "M17.25 10.5a6.75 6.75 0 1 1-13.5 0 6.75 6.75 0 0 1 13.5 0zM15.4 15.4l5.1 5.1M8 13v-1.5M10.5 13V9.5M13 13V8",
+  evolution: "M19.75 12a7.75 7.75 0 0 1-13.4 5.3M4.25 12a7.75 7.75 0 0 1 13.4-5.3M17.9 3.2v3.6h-3.6M6.1 20.8v-3.6h3.6",
   donnees: "M4.75 5.75c0-1.5 3.25-2.75 7.25-2.75s7.25 1.25 7.25 2.75-3.25 2.75-7.25 2.75-7.25-1.25-7.25-2.75zM4.75 5.75v12.5c0 1.5 3.25 2.75 7.25 2.75s7.25-1.25 7.25-2.75V5.75M4.75 12c0 1.5 3.25 2.75 7.25 2.75s7.25-1.25 7.25-2.75",
   securite: "M12 2.75l7.25 3v5.1c0 4.6-3.05 8.4-7.25 10.4-4.2-2-7.25-5.8-7.25-10.4v-5.1zM8.75 12.1l2.2 2.2 4.3-4.4",
 };
@@ -102,10 +104,10 @@ function Picto({ nom, x, y, taille = 26, couleur = "#7CCBFF" }: { nom: NomIcone;
 }
 
 function Capacites({ id }: { id: string }) {
-  const noms: NomIcone[] = ["site", "app", "abonnement", "ia", "donnees", "securite"];
+  const noms: NomIcone[] = ["site", "app", "abonnement", "ia", "visibilite", "donnees", "evolution", "securite"];
   const pos = noms.map((_, i) => {
     const a = (i / noms.length) * Math.PI * 2 - Math.PI / 2;
-    return { x: CX + Math.cos(a) * 158, y: CY + Math.sin(a) * 104 };
+    return { x: CX + Math.cos(a) * 170, y: CY + Math.sin(a) * 112 };
   });
   return (
     <>
@@ -114,8 +116,8 @@ function Capacites({ id }: { id: string }) {
         <line key={i} x1={CX} y1={CY} x2={p.x} y2={p.y} stroke="#00B4D8" strokeOpacity="0.28" strokeDasharray="2 5" />
       ))}
       {pos.map((p, i) => (
-        <Carte key={noms[i]} id={id} x={p.x - 27} y={p.y - 27} l={54} h={54} r={16} retard={i * 0.5}>
-          <Picto nom={noms[i]} x={14} y={14} taille={26} couleur={i % 2 ? "#2BD47D" : "#7CCBFF"} />
+        <Carte key={noms[i]} id={id} x={p.x - 25} y={p.y - 25} l={50} h={50} r={15} retard={i * 0.45}>
+          <Picto nom={noms[i]} x={12} y={12} taille={26} couleur={i % 2 ? "#2BD47D" : "#7CCBFF"} />
         </Carte>
       ))}
     </>
@@ -288,6 +290,41 @@ function Contact({ id }: { id: string }) {
   );
 }
 
+function Faq({ id }: { id: string }) {
+  return (
+    <>
+      <Fond id={id} rx={190} ry={64} planete={0} />
+      <Carte id={id} x={62} y={48} l={170} h={112} r={20}>
+        <circle cx="44" cy="56" r="26" fill={`url(#${id}-visuel)`} />
+        <text
+          x="44"
+          y="66"
+          textAnchor="middle"
+          fontSize="30"
+          fontWeight="600"
+          fill="#FFFFFF"
+          style={{ fontFamily: "var(--font-sora), sans-serif" }}
+        >
+          ?
+        </text>
+        <rect x="82" y="40" width="70" height="8" rx="4" fill="#C3D0DD" fillOpacity="0.8" />
+        <rect x="82" y="56" width="56" height="6" rx="3" fill="#3B5A85" />
+        <rect x="82" y="68" width="44" height="6" rx="3" fill="#3B5A85" />
+        <path d="M40 112 L34 128 L56 112 Z" fill="#10233F" />
+      </Carte>
+      <Carte id={id} x={190} y={150} l={196} h={110} r={20} retard={0.9}>
+        <circle cx="28" cy="30" r="11" fill="#2BD47D" fillOpacity="0.2" />
+        <path d="M22.5 30.5l3.8 3.8 7.2-7.4" stroke="#2BD47D" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+        <rect x="48" y="24" width="120" height="8" rx="4" fill="#C3D0DD" fillOpacity="0.8" />
+        <rect x="20" y="54" width="156" height="6" rx="3" fill="#3B5A85" />
+        <rect x="20" y="66" width="140" height="6" rx="3" fill="#3B5A85" />
+        <rect x="20" y="78" width="98" height="6" rx="3" fill="#2A4366" />
+        <path d="M160 110 L170 126 L144 110 Z" fill="#10233F" />
+      </Carte>
+    </>
+  );
+}
+
 export default function IllustrationEntete({ variante, className = "" }: { variante: VarianteEntete; className?: string }) {
   const id = `ie-${variante}`;
   return (
@@ -299,6 +336,7 @@ export default function IllustrationEntete({ variante, className = "" }: { varia
       {variante === "realisations" && <Realisations id={id} />}
       {variante === "blog" && <Blog id={id} />}
       {variante === "contact" && <Contact id={id} />}
+      {variante === "faq" && <Faq id={id} />}
     </svg>
   );
 }

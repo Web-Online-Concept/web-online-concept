@@ -3,6 +3,7 @@ import { PastilleIcone } from "@/components/site/Icones";
 import Constellation from "@/components/site/illustrations/Constellation";
 import {
   AppelFinal,
+  BlocEngagements,
   CarteRealisation,
   Conteneur,
 } from "@/components/site/Blocs";
@@ -127,9 +128,9 @@ export default function Accueil() {
               Le détail des capacités
             </Link>
           </div>
-          <ul className="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
             {CAPACITES.map((c) => (
-              <li key={c.titre} className="flex gap-4">
+              <li key={c.titre} className="flex flex-col gap-4">
                 <PastilleIcone nom={c.icone} />
                 <div>
                   <h3 className="text-lg font-semibold text-nuit">{c.titre}</h3>
@@ -174,6 +175,8 @@ export default function Accueil() {
           </ol>
         </Conteneur>
       </section>
+
+      <BlocEngagements />
 
       <AppelFinal />
     </>
