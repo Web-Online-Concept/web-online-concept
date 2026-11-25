@@ -1,6 +1,8 @@
 "use server";
 
+import { after } from "next/server";
 import { BESOINS, SOURCES } from "@/lib/contenu";
+import { notifierNouveauMessage } from "@/lib/notification";
 import { clientService } from "@/lib/supabase/service";
 
 export type EtatContact = {
@@ -53,5 +55,6 @@ export async function envoyerMessage(_etat: EtatContact, formData: FormData): Pr
   if (error) {
     return { statut: "erreur", message: "L'envoi a échoué. Réessayez ou écrivez à contact@web-online-concept.com.", valeurs };
   }
+  after(() => notifierNouveauMessage({ nom, email, telephone, besoin, source, objet, message }));
   return { statut: "envoye" };
 }
