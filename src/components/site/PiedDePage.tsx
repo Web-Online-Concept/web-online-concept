@@ -1,22 +1,34 @@
+import { cacheLife } from "next/cache";
 import Image from "next/image";
 import Link from "next/link";
 import { NAVIGATION, SITE } from "@/lib/contenu";
 
+// Année du copyright, recalculée chaque jour
+async function Annee() {
+  "use cache";
+  cacheLife("days");
+  return <>{new Date().getFullYear()}</>;
+}
+
 export default function PiedDePage() {
   return (
-    <footer className="border-t border-white/10 bg-nuit text-[#B8C6D6]">
-      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1.4fr_1fr_1fr]">
-        <div className="flex flex-col gap-4">
-          <Image src="/logo/logo-web-fond-sombre.svg" alt="Web Online Concept" width={207} height={44} className="h-11 w-auto self-start" />
-          <p className="max-w-sm text-[15px] leading-relaxed">
-            Studio de développement web à Toulouse depuis 2009.
-          </p>
-          <a href={`mailto:${SITE.email}`} className="self-start text-[15px] text-white underline-offset-4 hover:underline">
+    <footer className="border-t border-white/10 bg-nuit text-[#C3D0DD]">
+      <div className="mx-auto grid max-w-5xl gap-12 px-5 py-16 text-center sm:px-8 md:grid-cols-3 md:gap-8">
+        <div className="flex flex-col items-center gap-4">
+          <Image src="/logo/logo-web-fond-sombre.svg" alt="Web Online Concept" width={207} height={44} className="h-11 w-auto" />
+          <p className="max-w-xs text-[15px] leading-relaxed">Studio de développement web à Toulouse depuis 2009.</p>
+          <a href={`mailto:${SITE.email}`} className="text-[15px] text-white underline-offset-4 hover:underline">
             {SITE.email}
           </a>
+          <Link
+            href="/contact"
+            className="mt-2 rounded-full bg-bleu px-6 py-3 text-[15px] font-medium text-white transition-colors hover:bg-[#3A72FF]"
+          >
+            Parlons de votre projet
+          </Link>
         </div>
 
-        <nav aria-label="Plan du site" className="flex flex-col gap-2.5 text-[15px]">
+        <nav aria-label="Plan du site" className="flex flex-col items-center gap-2.5 text-[15px]">
           <span className="mb-1 font-semibold text-white">Le studio</span>
           {NAVIGATION.map((l) => (
             <Link key={l.href} href={l.href} className="hover:text-white">
@@ -28,7 +40,7 @@ export default function PiedDePage() {
           </Link>
         </nav>
 
-        <nav aria-label="Informations légales" className="flex flex-col gap-2.5 text-[15px]">
+        <nav aria-label="Informations légales" className="flex flex-col items-center gap-2.5 text-[15px]">
           <span className="mb-1 font-semibold text-white">Informations</span>
           <Link href="/mentions-legales" className="hover:text-white">
             Mentions légales
@@ -39,7 +51,9 @@ export default function PiedDePage() {
         </nav>
       </div>
       <div className="border-t border-white/10">
-        <p className="mx-auto max-w-6xl px-5 py-5 text-sm sm:px-8">Web Online Concept, Toulouse.</p>
+        <p className="mx-auto max-w-6xl px-5 py-6 text-center text-sm text-[#93A6BB] sm:px-8">
+          © <Annee /> Web Online Concept, Toulouse. Tous droits réservés.
+        </p>
       </div>
     </footer>
   );
