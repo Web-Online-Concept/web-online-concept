@@ -7,13 +7,7 @@ export default function PiedDePage() {
     <footer className="border-t border-white/10 bg-nuit text-[#B8C6D6]">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1.4fr_1fr_1fr]">
         <div className="flex flex-col gap-4">
-          <Image
-            src="/logo/logo-horizontal-couleur-fond-sombre.svg"
-            alt="Web Online Concept"
-            width={220}
-            height={71}
-            className="h-16 w-auto self-start"
-          />
+          <Image src="/logo/logo-web-fond-sombre.svg" alt="Web Online Concept" width={207} height={44} className="h-11 w-auto self-start" />
           <p className="max-w-sm text-[15px] leading-relaxed">
             Studio de développement web à Toulouse depuis 2009.
           </p>

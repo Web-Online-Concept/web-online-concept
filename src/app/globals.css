@@ -13,15 +13,10 @@
 
 html {
   scroll-behavior: smooth;
-  /* Le menu reste collé en haut (73 px sur mobile, 77 px au-delà) : la marge de défilement
-     reste juste sous sa hauteur pour que le contenu ne passe jamais dessous,
-     sans déclencher de défilement parasite au changement de page */
-  scroll-padding-top: 72px;
-}
-@media (min-width: 40rem) {
-  html {
-    scroll-padding-top: 76px;
-  }
+  /* Le menu reste collé en haut (77 px de haut) : la marge de défilement reste juste
+     sous sa hauteur pour que le contenu ne passe jamais dessous, sans déclencher
+     de défilement parasite au changement de page */
+  scroll-padding-top: 76px;
 }
 
 body {

@@ -16,8 +16,8 @@ function Liens({ chemin }: { chemin: string | null }) {
             key={l.href}
             href={l.href}
             aria-current={actif ? "page" : undefined}
-            className={`rounded-full px-4 py-2 text-[15px] transition-colors ${
-              actif ? "bg-white/10 text-white" : "text-[#B8C6D6] hover:text-white"
+            className={`rounded-full px-3 py-2 text-[15px] font-medium transition-colors xl:px-4 xl:text-base ${
+              actif ? "bg-white/12 text-white" : "text-[#E6EDF5] hover:bg-white/6 hover:text-white"
             }`}
           >
             {l.libelle}
@@ -38,16 +38,9 @@ export default function Entete() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-nuit/95 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-3 sm:px-8">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-4 sm:px-8">
         <Link href="/" className="shrink-0" aria-label="Web Online Concept, accueil" onClick={() => setOuvert(false)}>
-          <Image
-            src="/logo/logo-horizontal-couleur-fond-sombre.svg"
-            alt=""
-            width={190}
-            height={61}
-            priority
-            className="h-12 w-auto sm:h-[52px]"
-          />
+          <Image src="/logo/logo-web-fond-sombre.svg" alt="" width={207} height={44} priority className="h-10 w-auto sm:h-11" />
         </Link>
 
         <nav aria-label="Navigation principale" className="hidden items-center gap-1 lg:flex">
@@ -56,7 +49,7 @@ export default function Entete() {
           </Suspense>
           <Link
             href="/contact"
-            className="ml-3 rounded-full bg-bleu px-5 py-2.5 text-[15px] font-medium text-white transition-colors hover:bg-[#3A72FF]"
+            className="ml-3 rounded-full bg-bleu px-5 py-2.5 text-[15px] font-medium whitespace-nowrap text-white transition-colors hover:bg-[#3A72FF] xl:text-base"
           >
             Parlons de votre projet
           </Link>
