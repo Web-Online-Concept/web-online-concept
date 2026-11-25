@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
+import { metaPage } from "@/lib/seo";
 import { Conteneur, EnTetePage } from "@/components/site/Blocs";
 import { LEGAL } from "@/lib/contenu";
 
-export const metadata: Metadata = {
-  title: "Mentions légales",
-  robots: { index: true, follow: true },
-};
+export const metadata: Metadata = metaPage("Mentions légales", "Mentions légales du site web-online-concept.com : éditeur, hébergeur, propriété intellectuelle.", "/mentions-legales");
 
 export default function MentionsLegales() {
   return (

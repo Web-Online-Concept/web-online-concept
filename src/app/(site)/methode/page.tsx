@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
+import { metaPage } from "@/lib/seo";
 import { AppelFinal, BlocEngagements, Conteneur, EnTetePage } from "@/components/site/Blocs";
 import { MANIFESTE, METHODE } from "@/lib/contenu";
 
-export const metadata: Metadata = {
-  title: "Méthode",
-  description: "Une méthode augmentée par l'IA : cadrer vite, produire plus, tout vérifier, faire évoluer.",
-};
+export const metadata: Metadata = metaPage("Méthode", "Une méthode augmentée par l'IA : cadrer vite, produire plus, tout vérifier, faire évoluer. Et des engagements concrets à chaque étape.", "/methode");
 
 export default function Methode() {
   return (

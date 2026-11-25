@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
+import { metaPage } from "@/lib/seo";
 import { Conteneur, EnTetePage } from "@/components/site/Blocs";
 import { LEGAL } from "@/lib/contenu";
 
-export const metadata: Metadata = {
-  title: "Politique de confidentialité",
-};
+export const metadata: Metadata = metaPage("Politique de confidentialité", "Comment Web Online Concept traite les données personnelles transmises par le formulaire de contact.", "/confidentialite");
 
 export default function Confidentialite() {
   return (

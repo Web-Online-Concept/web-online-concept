@@ -1,14 +1,11 @@
 import type { Metadata } from "next";
+import { metaPage } from "@/lib/seo";
 import Link from "next/link";
 import { AppelFinal, CarteRealisation, Conteneur, EnTetePage } from "@/components/site/Blocs";
 import { CadreNavigateur } from "@/components/site/Cadres";
 import { PROJETS_SUR_MESURE, SITES_CLIENTS } from "@/lib/contenu";
 
-export const metadata: Metadata = {
-  title: "Réalisations",
-  description:
-    "Applications web et mobiles, galerie d'art, sites avec réservation, sites vitrines d'entreprises : les projets conçus et développés par Web Online Concept.",
-};
+export const metadata: Metadata = metaPage("Réalisations", "Applications web et mobiles, galerie d'art, sites avec réservation, sites vitrines d'entreprises : les projets conçus et développés par Web Online Concept.", "/realisations");
 
 export default function Realisations() {
   return (

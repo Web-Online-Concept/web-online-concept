@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
+import { metaPage } from "@/lib/seo";
 import { AppelFinal, Conteneur, EnTetePage } from "@/components/site/Blocs";
 
-export const metadata: Metadata = {
-  title: "À propos",
-  description: "Web Online Concept, studio de développement web à Toulouse depuis 2009.",
-};
+export const metadata: Metadata = metaPage("À propos", "Web Online Concept, studio de développement web et d'intelligence artificielle à Toulouse depuis 2009 : un interlocuteur unique, la capacité de production d'une équipe entière.", "/a-propos");
 
 const ENGAGEMENTS = [
   {

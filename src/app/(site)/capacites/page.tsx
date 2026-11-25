@@ -1,14 +1,11 @@
 import type { Metadata } from "next";
+import { metaPage } from "@/lib/seo";
 import Link from "next/link";
 import { AppelFinal, Conteneur, EnTetePage } from "@/components/site/Blocs";
 import { PastilleIcone } from "@/components/site/Icones";
 import { CAPACITES, realisation } from "@/lib/contenu";
 
-export const metadata: Metadata = {
-  title: "Capacités",
-  description:
-    "Sites sur mesure, applications web et mobiles, plateformes à abonnement, IA intégrée, référencement et visibilité IA, back-offices, refonte et suivi, performance et sécurité.",
-};
+export const metadata: Metadata = metaPage("Capacités", "Sites sur mesure, applications web et mobiles, plateformes à abonnement, IA intégrée, référencement et visibilité IA, back-offices, refonte et suivi, performance et sécurité.", "/capacites");
 
 export default function Capacites() {
   return (

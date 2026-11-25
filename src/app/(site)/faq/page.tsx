@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
+import { jsonLd, metaPage } from "@/lib/seo";
 import Link from "next/link";
 import { AppelFinal, Conteneur, EnTetePage } from "@/components/site/Blocs";
 import { FAQ, SITE } from "@/lib/contenu";
 
-export const metadata: Metadata = {
-  title: "Questions fréquentes",
-  description:
-    "Délais, autonomie, référencement, visibilité dans les IA, refonte, propriété du site, suivi : les réponses aux questions les plus fréquentes sur un projet avec Web Online Concept.",
-};
+export const metadata: Metadata = metaPage("Questions fréquentes", "Délais, autonomie, référencement, visibilité dans les IA, refonte, propriété du site, suivi : les réponses aux questions les plus fréquentes sur un projet avec Web Online Concept.", "/faq");
 
 // Données structurées FAQPage : aident Google et les IA à reprendre les réponses
 const donneesStructurees = {
@@ -25,7 +22,7 @@ export default function Faq() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(donneesStructurees).replace(/</g, "\\u003c") }}
+        dangerouslySetInnerHTML={jsonLd(donneesStructurees)}
       />
       <EnTetePage
         illustration="faq"

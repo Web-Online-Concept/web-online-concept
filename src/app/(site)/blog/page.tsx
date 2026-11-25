@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
+import { metaPage } from "@/lib/seo";
 import Link from "next/link";
 import { AppelFinal, Conteneur, EnTetePage } from "@/components/site/Blocs";
 import { articlesPublies, dateFr } from "@/lib/articles";
 
-export const metadata: Metadata = {
-  title: "Blog",
-  description: "IA, développement web et coulisses des projets : les articles de Web Online Concept.",
-};
+export const metadata: Metadata = metaPage("Blog", "IA, développement web et coulisses des projets : les articles de Web Online Concept.", "/blog");
 
 export default async function Blog() {
   const articles = await articlesPublies();

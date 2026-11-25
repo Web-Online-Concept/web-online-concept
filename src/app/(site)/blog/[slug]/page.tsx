@@ -13,6 +13,7 @@ export async function generateMetadata({ params }: PageProps<"/blog/[slug]">): P
   return {
     title: a.titre,
     description: a.extrait,
+    alternates: { canonical: `/blog/${slug}` },
     openGraph: { type: "article", title: a.titre, description: a.extrait, ...(a.image_url ? { images: [a.image_url] } : {}) },
   };
 }

@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
+import { metaPage } from "@/lib/seo";
 import { Conteneur, EnTetePage } from "@/components/site/Blocs";
 import { SITE } from "@/lib/contenu";
 import Formulaire from "./Formulaire";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description: "Décrivez votre projet et vos objectifs : Web Online Concept vous répond rapidement.",
-};
+export const metadata: Metadata = metaPage("Contact", "Décrivez votre projet et vos objectifs : Web Online Concept vous répond sous 48 heures ouvrées, premier échange gratuit et sans engagement.", "/contact");
 
 export default function Contact() {
   return (

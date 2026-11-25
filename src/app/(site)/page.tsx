@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { ID_ENTREPRISE, jsonLd } from "@/lib/seo";
 import { PastilleIcone } from "@/components/site/Icones";
 import Constellation from "@/components/site/illustrations/Constellation";
 import Vitrine, { type Diapo, type Ecran } from "@/components/site/Vitrine";
@@ -18,6 +20,53 @@ import {
   SITES_CLIENTS,
 } from "@/lib/contenu";
 
+export const metadata: Metadata = { alternates: { canonical: "/" } };
+
+// Données structurées : l'entreprise et le site, pour Google et les moteurs d'IA
+const DONNEES = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": ID_ENTREPRISE,
+      name: SITE.nom,
+      url: SITE.url,
+      logo: `${SITE.url}/icon-512.png`,
+      image: `${SITE.url}/opengraph-image.png`,
+      description: SITE.sousTitre,
+      slogan: SITE.titre,
+      email: SITE.email,
+      foundingDate: "2009",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "5 rue Paul Estival",
+        postalCode: "31200",
+        addressLocality: "Toulouse",
+        addressRegion: "Occitanie",
+        addressCountry: "FR",
+      },
+      areaServed: { "@type": "Country", name: "France" },
+      knowsAbout: CAPACITES.map((c) => c.titre),
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Capacités",
+        itemListElement: CAPACITES.map((c) => ({
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: c.titre, description: c.texte },
+        })),
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE.url}/#site`,
+      url: SITE.url,
+      name: SITE.nom,
+      inLanguage: "fr-FR",
+      publisher: { "@id": ID_ENTREPRISE },
+    },
+  ],
+};
+
 // Captures pour le Hero : la première capture « ordinateur » de chaque réalisation, et les écrans de MemoDay
 const DIAPOS: Diapo[] = REALISATIONS.flatMap((r) => {
   const v = r.visuels?.find((x) => x.format === "ordinateur");
@@ -28,6 +77,7 @@ const ECRANS: Ecran[] = REALISATIONS.flatMap((r) => (r.visuels ?? []).filter((x)
 export default function Accueil() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(DONNEES)} />
       {/* Accroche */}
       <section className="relative overflow-hidden bg-nuit text-white lg:flex lg:min-h-[calc(100svh-77px)] lg:items-center">
         <Conteneur className="relative grid items-center gap-10 py-16 sm:py-24 lg:grid-cols-[1fr_1.05fr] lg:gap-4 lg:py-16">

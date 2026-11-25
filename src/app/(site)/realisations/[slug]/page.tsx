@@ -3,7 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AppelFinal, Conteneur } from "@/components/site/Blocs";
 import { Cadre } from "@/components/site/Cadres";
-import { REALISATIONS, realisation } from "@/lib/contenu";
+import { REALISATIONS, realisation, SITE } from "@/lib/contenu";
+import { ID_ENTREPRISE, jsonLd, metaPage } from "@/lib/seo";
 
 export function generateStaticParams() {
   return REALISATIONS.map((r) => ({ slug: r.slug }));
@@ -15,7 +16,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const r = realisation(slug);
   if (!r) return {};
-  return { title: r.nom, description: r.accroche };
+  return metaPage(r.nom, r.accroche, `/realisations/${r.slug}`);
 }
 
 export default async function PageRealisation({
@@ -26,9 +27,33 @@ export default async function PageRealisation({
   if (!r) notFound();
   const autres = REALISATIONS.filter((x) => x.slug !== r.slug);
   const [principal, ...galerie] = r.visuels ?? [];
+  const donnees = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Accueil", item: SITE.url },
+          { "@type": "ListItem", position: 2, name: "Réalisations", item: `${SITE.url}/realisations` },
+          { "@type": "ListItem", position: 3, name: r.nom, item: `${SITE.url}/realisations/${r.slug}` },
+        ],
+      },
+      {
+        "@type": "CreativeWork",
+        name: r.nom,
+        headline: r.accroche,
+        description: r.besoin,
+        genre: r.type,
+        url: r.site.href,
+        creator: { "@id": ID_ENTREPRISE },
+        ...(principal ? { image: `${SITE.url}${principal.src}` } : {}),
+      },
+    ],
+  };
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(donnees)} />
       <section className="relative overflow-hidden bg-nuit text-white">
         <div
           aria-hidden="true"
