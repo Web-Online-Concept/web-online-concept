@@ -1,3 +1,5 @@
+import type { NomIcone } from "@/components/site/Icones";
+
 // Contenu éditorial du site (validé avec Florent, novembre 2026).
 
 export const SITE = {
@@ -126,7 +128,67 @@ export const REALISATIONS: Realisation[] = [
   },
 ];
 
-import type { NomIcone } from "@/components/site/Icones";
+// Sites vitrines créés et gérés pour des clients (présentés en liste sur la page Réalisations)
+export type Reference = {
+  nom: string;
+  activite: string;
+  lieu: string;
+  realise: string[];
+  site: Lien;
+  visuel?: Visuel;
+};
+
+export const REFERENCES: Reference[] = [
+  {
+    nom: "Menuiserie Gaudissard",
+    activite: "Fabricant de menuiseries PVC et aluminium depuis 1964",
+    lieu: "Aigrefeuille-d'Aunis, près de La Rochelle",
+    realise: ["Catalogue par produit et par matériau", "Demande de devis gratuit", "Espace client"],
+    site: { href: "https://www.gaudissard.fr/", libelle: "gaudissard.fr" },
+  },
+  {
+    nom: "Carpentier Communication",
+    activite: "Imprimeur d'affiches, PLV, panneaux et adhésifs depuis 1962",
+    lieu: "Toulouse",
+    realise: ["Gamme complète par support", "Demande de devis gratuit", "Assistance PAO et brochure à télécharger"],
+    site: { href: "https://www.carpentier-impressions.fr/", libelle: "carpentier-impressions.fr" },
+  },
+  {
+    nom: "Re-borne Retrogaming",
+    activite: "Animations retrogaming et location de bornes d'arcade pour les événements",
+    lieu: "Toulouse",
+    realise: ["Prestations et tarifs", "Catalogue du matériel", "Actualités et demande de devis"],
+    site: { href: "https://www.reborne-retrogaming.com/", libelle: "reborne-retrogaming.com" },
+  },
+  {
+    nom: "Klart Concept",
+    activite: "Création et rénovation de salles de bain, cuisines et agencements",
+    lieu: "Argelès-Gazost, Hautes-Pyrénées",
+    realise: ["Galeries de réalisations", "Avis clients et blog", "Référencement sur sa zone d'intervention"],
+    site: { href: "https://www.klart-concept.com/", libelle: "klart-concept.com" },
+  },
+  {
+    nom: "Diététi'Phyt",
+    activite: "Diététicienne-nutritionniste et conseillère en phytothérapie",
+    lieu: "Toulouse",
+    realise: ["Prise de rendez-vous en ligne", "Téléconsultation", "Blog et ressources pour les patients"],
+    site: { href: "https://www.dietetiphyt.com/", libelle: "dietetiphyt.com" },
+  },
+  {
+    nom: "Point Sérigraphie",
+    activite: "Impression sérigraphique et numérique sur tous supports depuis 1976",
+    lieu: "Albi",
+    realise: ["Treize familles de produits", "Catalogues à télécharger", "Devis sous 24 heures"],
+    site: { href: "https://www.point-serigraphie.com/", libelle: "point-serigraphie.com" },
+  },
+  {
+    nom: "Mozaic Environnement",
+    activite: "Signalétique et supports imprimés pour la collecte et le tri des déchets",
+    lieu: "Albi",
+    realise: ["Dix-huit catégories de produits", "Échantillons gratuits", "Demande de devis"],
+    site: { href: "https://www.mozaic-environnement.com/", libelle: "mozaic-environnement.com" },
+  },
+];
 
 export type Capacite = { titre: string; texte: string; exemples: string[]; icone: NomIcone };
 

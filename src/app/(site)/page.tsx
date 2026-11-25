@@ -11,6 +11,7 @@ import {
   MANIFESTE,
   METHODE,
   REALISATIONS,
+  REFERENCES,
   SITE,
 } from "@/lib/contenu";
 
@@ -77,6 +78,12 @@ export default function Accueil() {
               <CarteRealisation key={r.slug} r={r} />
             ))}
           </div>
+          <p className="mt-10 max-w-4xl text-[15px] leading-relaxed text-[#4A6178]">
+            Ils nous ont aussi confié leur site : {REFERENCES.map((r) => r.nom).join(", ")}.{" "}
+            <Link href="/realisations#clients" className="font-medium text-bleu hover:underline">
+              Voir leurs sites
+            </Link>
+          </p>
         </Conteneur>
       </section>
 
