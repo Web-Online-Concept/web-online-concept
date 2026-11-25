@@ -2,7 +2,7 @@ import "server-only";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { genererRapport } from "@/lib/pdf/tableau";
 import { urssafAnnee } from "./donnees";
-import { libelleMois, STATUTS_FACTURE } from "./format";
+import { deMois, libelleMois, STATUTS_FACTURE } from "./format";
 
 type Valeur = string | number | null;
 type TypeColonne = "texte" | "euros" | "date";
@@ -31,6 +31,8 @@ const MODES: Record<string, string> = {
 };
 
 const r2 = (n: number) => Math.round(n * 100) / 100;
+const pct = (n: number) => `${String(n).replace(".", ",")} %`;
+const majuscule = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
 
 function jourFr(iso: string) {
   const [a, m, j] = iso.slice(0, 10).split("-");
@@ -42,7 +44,7 @@ function dateParis(horodatage: string) {
 }
 
 const eurosPdf = (n: number) =>
-  new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(n).replace(/[  ]/g, " ");
+  new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(n).replace(/[\u202f\u00a0]/g, " ");
 
 // --- Livre des recettes : encaissements dans l'ordre chronologique ---------
 async function livreRecettes(sb: SupabaseClient, annee: number): Promise<Tableau> {
@@ -75,7 +77,7 @@ async function livreRecettes(sb: SupabaseClient, annee: number): Promise<Tableau
       date: String(h.mois),
       piece: "",
       client: "Divers",
-      nature: `Recettes de ${libelleMois(String(h.mois))} encaissées hors outil${h.note ? ` (${h.note})` : ""}`,
+      nature: `Recettes ${deMois(String(h.mois))} encaissées hors outil${h.note ? ` (${h.note})` : ""}`,
       mode: "",
       montant: Number(h.montant),
     });
@@ -118,7 +120,7 @@ async function recapUrssaf(sb: SupabaseClient, annee: number): Promise<Tableau> 
     somme.total += m.total;
     somme.paye += d?.montant_paye ?? 0;
     return [
-      libelleMois(m.mois),
+      majuscule(libelleMois(m.mois)),
       m.ca,
       d ? d.ca_declare : null,
       m.cotisations,
@@ -131,11 +133,11 @@ async function recapUrssaf(sb: SupabaseClient, annee: number): Promise<Tableau> 
   });
   const notes = [
     t
-      ? `Taux appliqués : cotisations ${t.cotisations} %, versement libératoire ${t.versement_liberatoire} %, formation professionnelle ${t.formation} % (${t.libelle_categorie}). Plafond annuel : ${eurosPdf(plafond)}.`
+      ? `Taux appliqués : cotisations ${pct(t.cotisations)}, versement libératoire ${pct(t.versement_liberatoire)}, formation professionnelle ${pct(t.formation)} (${t.libelle_categorie}). Plafond annuel : ${eurosPdf(plafond)}.`
       : "Aucun taux URSSAF paramétré.",
     "Chaque part est calculée sur le chiffre d'affaires encaissé du mois arrondi à l'euro, puis arrondie à l'euro.",
   ];
-  for (const [m, d] of declarations) if (d.note) notes.push(`${libelleMois(m)} : ${d.note}`);
+  for (const [m, d] of declarations) if (d.note) notes.push(`${majuscule(libelleMois(m))} : ${d.note}`);
   return {
     fichier: `urssaf-${annee}`,
     titre: "Récapitulatif URSSAF",

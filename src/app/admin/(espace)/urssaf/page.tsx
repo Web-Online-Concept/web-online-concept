@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { Alerte, Carte, Chargement, Champ, classeBouton, classeBoutonSecondaire, classeChamp, TitrePage } from "@/components/admin/ui";
 import { exigerAdmin } from "@/lib/admin/acces";
 import { urssafAnnee } from "@/lib/admin/donnees";
-import { aujourdhui, fmtDate, fmtEuros, libelleMois, MOIS } from "@/lib/admin/format";
+import { aujourdhui, deMois, fmtDate, fmtEuros, libelleMois, MOIS } from "@/lib/admin/format";
 import { enregistrerDeclaration, enregistrerHorsOutil, supprimerDeclaration } from "./actions";
 
 export const metadata = { title: "URSSAF" };
@@ -94,13 +94,19 @@ async function Contenu({ searchParams }: { searchParams: Promise<Sp> }) {
           <table className="w-full min-w-[860px] text-left text-[15px]">
             <thead className="text-sm text-[#4A6178]">
               <tr>
-                <th className="py-2 font-medium">Mois</th>
-                <th className="py-2 text-right font-medium">CA encaissé</th>
-                <th className="py-2 text-right font-medium">Cotisations{tauxActuel && ` ${pct(tauxActuel.cotisations)}`}</th>
-                <th className="py-2 text-right font-medium">Impôt{tauxActuel && ` ${pct(tauxActuel.versement_liberatoire)}`}</th>
-                <th className="py-2 text-right font-medium">Formation{tauxActuel && ` ${pct(tauxActuel.formation)}`}</th>
-                <th className="py-2 text-right font-medium">À payer</th>
-                <th className="py-2 pl-6 font-medium">Déclaration</th>
+                <th className="py-2 align-bottom font-medium">Mois</th>
+                <th className="py-2 pl-4 text-right align-bottom font-medium">CA encaissé</th>
+                <th className="py-2 pl-4 text-right align-bottom font-medium">
+                  Cotisations{tauxActuel && <span className="block text-xs font-normal">{pct(tauxActuel.cotisations)}</span>}
+                </th>
+                <th className="py-2 pl-4 text-right align-bottom font-medium">
+                  Impôt{tauxActuel && <span className="block text-xs font-normal">{pct(tauxActuel.versement_liberatoire)}</span>}
+                </th>
+                <th className="py-2 pl-4 text-right align-bottom font-medium">
+                  Formation{tauxActuel && <span className="block text-xs font-normal">{pct(tauxActuel.formation)}</span>}
+                </th>
+                <th className="py-2 pl-4 text-right align-bottom font-medium">À payer</th>
+                <th className="py-2 pl-6 align-bottom font-medium">Déclaration</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#EEF2F7]">
@@ -115,13 +121,15 @@ async function Contenu({ searchParams }: { searchParams: Promise<Sp> }) {
                       <Link href={`/admin/urssaf?annee=${annee}&mois=${m.mois}#saisie`} className="capitalize hover:text-bleu hover:underline">
                         {libelleMois(m.mois)}
                       </Link>
-                      {m.caHorsOutil > 0 && <span className="block text-xs text-[#4A6178]">dont {fmtEuros(m.caHorsOutil)} hors outil</span>}
+                      {m.caHorsOutil > 0 && (
+                        <span className="block text-xs text-[#4A6178]">{m.caOutil > 0 ? `dont ${fmtEuros(m.caHorsOutil)} hors outil` : "saisi hors outil"}</span>
+                      )}
                     </td>
-                    <td className="py-3 text-right">{futur ? "" : fmtEuros(m.ca)}</td>
-                    <td className="py-3 text-right">{futur ? "" : fmtEuros(m.cotisations, true)}</td>
-                    <td className="py-3 text-right">{futur ? "" : fmtEuros(m.versementLiberatoire, true)}</td>
-                    <td className="py-3 text-right">{futur ? "" : fmtEuros(m.formation, true)}</td>
-                    <td className="py-3 text-right font-semibold">{futur ? "" : fmtEuros(m.total, true)}</td>
+                    <td className="py-3 pl-4 text-right">{futur ? "" : fmtEuros(m.ca)}</td>
+                    <td className="py-3 pl-4 text-right">{futur ? "" : fmtEuros(m.cotisations, true)}</td>
+                    <td className="py-3 pl-4 text-right">{futur ? "" : fmtEuros(m.versementLiberatoire, true)}</td>
+                    <td className="py-3 pl-4 text-right">{futur ? "" : fmtEuros(m.formation, true)}</td>
+                    <td className="py-3 pl-4 text-right font-semibold">{futur ? "" : fmtEuros(m.total, true)}</td>
                     <td className="py-3 pl-6 text-sm">
                       {d ? (
                         <>
@@ -150,11 +158,11 @@ async function Contenu({ searchParams }: { searchParams: Promise<Sp> }) {
             <tfoot className="border-t-2 border-[#DCE3EC] font-semibold">
               <tr>
                 <td className="py-3">Total</td>
-                <td className="py-3 text-right">{fmtEuros(totaux.ca)}</td>
-                <td className="py-3 text-right">{fmtEuros(totaux.cot, true)}</td>
-                <td className="py-3 text-right">{fmtEuros(totaux.vl, true)}</td>
-                <td className="py-3 text-right">{fmtEuros(totaux.cfp, true)}</td>
-                <td className="py-3 text-right">{fmtEuros(totaux.total, true)}</td>
+                <td className="py-3 pl-4 text-right">{fmtEuros(totaux.ca)}</td>
+                <td className="py-3 pl-4 text-right">{fmtEuros(totaux.cot, true)}</td>
+                <td className="py-3 pl-4 text-right">{fmtEuros(totaux.vl, true)}</td>
+                <td className="py-3 pl-4 text-right">{fmtEuros(totaux.cfp, true)}</td>
+                <td className="py-3 pl-4 text-right">{fmtEuros(totaux.total, true)}</td>
                 <td />
               </tr>
             </tfoot>
@@ -173,7 +181,7 @@ async function Contenu({ searchParams }: { searchParams: Promise<Sp> }) {
       <div className="mt-5 grid gap-5 lg:grid-cols-2">
         <Carte>
           <h2 id="saisie" className="scroll-mt-6 text-lg font-semibold">
-            Déclaration de {libelleMois(selection.mois)}
+            Déclaration {deMois(selection.mois)}
           </h2>
           <p className="mt-1 text-sm text-[#4A6178]">
             À reporter sur{" "}
@@ -235,7 +243,7 @@ async function Contenu({ searchParams }: { searchParams: Promise<Sp> }) {
         </Carte>
 
         <Carte>
-          <h2 className="text-lg font-semibold">CA hors outil de {libelleMois(selection.mois)}</h2>
+          <h2 className="text-lg font-semibold">CA hors outil {deMois(selection.mois)}</h2>
           <p className="mt-1 text-sm leading-relaxed text-[#4A6178]">
             Pour les recettes encaissées sans facture de cet outil (avant sa mise en service, par exemple). Elles s&apos;ajoutent au calcul du mois. Laissez
             vide ou 0 pour effacer. Choisissez le mois en cliquant sur son nom dans le tableau.

@@ -95,6 +95,14 @@ export default function EditeurDocument({
 
       <div>
         <h2 className="mb-3 text-lg font-semibold">Lignes</h2>
+        {lignes.length > 0 && (
+          <div aria-hidden="true" className="mb-1.5 hidden gap-3 px-[17px] text-xs font-medium text-[#4A6178] md:grid md:grid-cols-[1fr_90px_90px_130px]">
+            <span>Désignation</span>
+            <span>Quantité</span>
+            <span>Unité</span>
+            <span>Prix unitaire</span>
+          </div>
+        )}
         <div className="flex flex-col gap-3">
           {lignes.map((l, i) => {
             const tot = Math.round(nombre(l.quantite) * nombre(l.prix_unitaire) * 100) / 100;

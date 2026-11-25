@@ -41,3 +41,9 @@ export const STATUTS_DEVIS: Record<string, string> = {
   refuse: "Refusé",
   expire: "Expiré",
 };
+
+// « de mars 2026 », « d'avril 2026 », « d'août 2026 »
+export function deMois(iso: string) {
+  const l = libelleMois(iso);
+  return /^[aeiouéèâ]/i.test(l) ? `d'${l}` : `de ${l}`;
+}

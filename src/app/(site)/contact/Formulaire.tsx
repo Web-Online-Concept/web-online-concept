@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useState } from "react";
+import { useActionState, useEffect, useRef } from "react";
 import { envoyerMessage, type EtatContact } from "./actions";
 
 const initial: EtatContact = { statut: "initial" };
@@ -36,9 +36,11 @@ const styleChamp =
 
 export default function Formulaire() {
   const [etat, action, enCours] = useActionState(envoyerMessage, initial);
-  const [afficheLe, setAfficheLe] = useState(0);
+  // Heure d'affichage du formulaire (anti-robots), posée côté navigateur
+  // (recopiée à chaque envoi : React remet le formulaire à zéro après une action)
+  const afficheLe = useRef(0);
   useEffect(() => {
-    setAfficheLe(Date.now());
+    afficheLe.current = Date.now();
   }, []);
 
   if (etat.statut === "envoye") {
@@ -52,27 +54,35 @@ export default function Formulaire() {
 
   const e = etat.erreurs ?? {};
   return (
-    <form action={action} className="flex flex-col gap-5" noValidate>
+    <form
+      action={action}
+      onSubmit={(e) => {
+        const champ = e.currentTarget.elements.namedItem("affiche_le");
+        if (champ instanceof HTMLInputElement) champ.value = String(afficheLe.current);
+      }}
+      className="flex flex-col gap-5"
+      noValidate
+    >
       <div className="grid gap-5 sm:grid-cols-2">
         <Champ id="nom" libelle="Nom" erreur={e.nom}>
-          <input id="nom" name="nom" autoComplete="name" required className={styleChamp} aria-invalid={!!e.nom} aria-describedby={e.nom ? "nom-erreur" : undefined} />
+          <input id="nom" name="nom" defaultValue={etat.valeurs?.nom} autoComplete="name" required className={styleChamp} aria-invalid={!!e.nom} aria-describedby={e.nom ? "nom-erreur" : undefined} />
         </Champ>
         <Champ id="email" libelle="E-mail" erreur={e.email}>
-          <input id="email" name="email" type="email" autoComplete="email" required className={styleChamp} aria-invalid={!!e.email} aria-describedby={e.email ? "email-erreur" : undefined} />
+          <input id="email" name="email" defaultValue={etat.valeurs?.email} type="email" autoComplete="email" required className={styleChamp} aria-invalid={!!e.email} aria-describedby={e.email ? "email-erreur" : undefined} />
         </Champ>
       </div>
       <Champ id="objet" libelle="Objet" erreur={e.objet}>
-        <input id="objet" name="objet" className={styleChamp} aria-invalid={!!e.objet} aria-describedby={e.objet ? "objet-erreur" : undefined} />
+        <input id="objet" name="objet" defaultValue={etat.valeurs?.objet} className={styleChamp} aria-invalid={!!e.objet} aria-describedby={e.objet ? "objet-erreur" : undefined} />
       </Champ>
       <Champ id="message" libelle="Votre projet et vos objectifs" erreur={e.message}>
-        <textarea id="message" name="message" rows={7} required className={styleChamp} aria-invalid={!!e.message} aria-describedby={e.message ? "message-erreur" : undefined} />
+        <textarea id="message" name="message" defaultValue={etat.valeurs?.message} rows={7} required className={styleChamp} aria-invalid={!!e.message} aria-describedby={e.message ? "message-erreur" : undefined} />
       </Champ>
 
       <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
         <label htmlFor="site_web">Ne pas remplir</label>
         <input id="site_web" name="site_web" tabIndex={-1} autoComplete="off" />
       </div>
-      <input type="hidden" name="affiche_le" value={afficheLe} />
+      <input type="hidden" name="affiche_le" defaultValue="0" />
 
       {etat.message && (
         <p role="alert" className="rounded-xl bg-[#FEF3F2] px-4 py-3 text-[15px] text-[#B42318]">

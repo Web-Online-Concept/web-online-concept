@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { BoutonLien, Carte, Chargement, Pastille, TitrePage } from "@/components/admin/ui";
 import { exigerAdmin } from "@/lib/admin/acces";
 import { round2, urssafAnnee } from "@/lib/admin/donnees";
-import { aujourdhui, fmtDate, fmtEuros, libelleMois, STATUTS_FACTURE } from "@/lib/admin/format";
+import { aujourdhui, deMois, fmtDate, fmtEuros, STATUTS_FACTURE } from "@/lib/admin/format";
 
 export const metadata = { title: "Tableau de bord" };
 
@@ -50,7 +50,7 @@ async function Contenu() {
 
       <div className="grid gap-5 lg:grid-cols-3">
         <Carte className="lg:col-span-2">
-          <h2 className="text-lg font-semibold">Déclaration URSSAF de {libelleMois(moisPrecedent)}</h2>
+          <h2 className="text-lg font-semibold">Déclaration URSSAF {deMois(moisPrecedent)}</h2>
           {declPrec?.declare_le ? (
             <p className="mt-3 text-[15px] text-[#0E7A45]">
               Déclarée le {fmtDate(declPrec.declare_le)} : {fmtEuros(declPrec.ca_declare, true)} de CA

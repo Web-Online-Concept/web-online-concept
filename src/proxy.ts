@@ -20,7 +20,21 @@ export async function proxy(request: NextRequest) {
       },
     },
   });
-  await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  // Sans session administrateur : direction la page de connexion, avant tout rendu
+  const chemin = request.nextUrl.pathname;
+  const libre = chemin.startsWith("/admin/connexion") || chemin.startsWith("/admin/auth");
+  if (!libre && user?.email?.toLowerCase() !== "web.online.concept@gmail.com") {
+    const cible = request.nextUrl.clone();
+    cible.pathname = "/admin/connexion";
+    cible.search = "";
+    const redirection = NextResponse.redirect(cible);
+    reponse.cookies.getAll().forEach((c) => redirection.cookies.set(c));
+    return redirection;
+  }
   return reponse;
 }
 
