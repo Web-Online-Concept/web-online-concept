@@ -26,6 +26,9 @@ export const MANIFESTE = [
 ];
 
 export type Chiffre = { valeur: string; libelle: string };
+
+// Capture d'écran d'une réalisation (fichier dans public/realisations/<slug>/)
+export type Visuel = { src: string; alt: string; l: number; h: number; format: "ordinateur" | "telephone" };
 export type Lien = { href: string; libelle: string };
 
 export type Realisation = {
@@ -41,6 +44,7 @@ export type Realisation = {
   site: Lien;
   autresLiens?: Lien[];
   teinte: string; // couleur dominante de la carte
+  visuels?: Visuel[]; // le premier sert de vignette
 };
 
 export const REALISATIONS: Realisation[] = [
@@ -122,41 +126,49 @@ export const REALISATIONS: Realisation[] = [
   },
 ];
 
-export type Capacite = { titre: string; texte: string; exemples: string[] };
+import type { NomIcone } from "@/components/site/Icones";
+
+export type Capacite = { titre: string; texte: string; exemples: string[]; icone: NomIcone };
 
 export const CAPACITES: Capacite[] = [
   {
     titre: "Sites sur mesure",
+    icone: "site",
     texte:
       "Vitrines, galeries, sites multilingues : un design unique, rapide sur tous les écrans et pensé pour le référencement dès la première ligne.",
     exemples: ["galerie-carpentier", "inspiration-et-meditation"],
   },
   {
     titre: "Applications web et mobiles",
+    icone: "app",
     texte:
       "Une seule base de code pour l'iPhone, Android et le navigateur, publiée sur l'App Store et Google Play.",
     exemples: ["memoday"],
   },
   {
     titre: "Plateformes à abonnement",
+    icone: "abonnement",
     texte:
       "Comptes utilisateurs, formules, paiement par Stripe et achats intégrés aux stores : un service en ligne prêt à encaisser.",
     exemples: ["memoday"],
   },
   {
     titre: "IA intégrée",
+    icone: "ia",
     texte:
       "Compréhension du langage, lecture de documents, recherche par le sens, assistants : l'IA au cœur du produit, là où elle fait gagner du temps.",
     exemples: ["memoday"],
   },
   {
     titre: "Données et back-offices",
+    icone: "donnees",
     texte:
       "Bases de données sécurisées, outils de gestion, réservations, e-mails automatiques et tableaux de bord : vous pilotez votre activité en autonomie.",
     exemples: ["galerie-carpentier", "inspiration-et-meditation"],
   },
   {
     titre: "Performance et sécurité",
+    icone: "securite",
     texte:
       "Hébergement, sauvegardes, maintenance et conformité RGPD : un site rapide, protégé et suivi dans la durée.",
     exemples: [],

@@ -11,6 +11,7 @@ export default function Methode() {
   return (
     <>
       <EnTetePage
+        illustration="methode"
         titre="Une méthode augmentée par l'IA"
         intro="L'expertise technique fixe le cap, l'IA démultiplie la production. Résultat : des projets ambitieux, livrés vite, sans compromis sur la qualité."
       />

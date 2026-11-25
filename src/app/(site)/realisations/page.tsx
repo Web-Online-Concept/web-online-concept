@@ -11,6 +11,7 @@ export default function Realisations() {
   return (
     <>
       <EnTetePage
+        illustration="realisations"
         titre="Réalisations"
         intro="Une application mobile dopée à l'IA, une galerie d'art, un site avec réservation en ligne : chaque projet part d'objectifs précis et va jusqu'à la mise en ligne."
       />

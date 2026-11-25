@@ -29,6 +29,7 @@ export default function APropos() {
   return (
     <>
       <EnTetePage
+        illustration="apropos"
         titre="Un studio de développement web à Toulouse, depuis 2009"
         intro="Plus de quinze ans à concevoir des sites et des applications, et aujourd'hui une façon de travailler transformée par l'IA : un interlocuteur unique, avec la capacité de production d'une équipe entière."
       />

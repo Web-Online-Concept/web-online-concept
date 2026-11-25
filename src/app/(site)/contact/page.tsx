@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function Contact() {
   return (
     <>
-      <EnTetePage titre="Parlons de votre projet" intro={SITE.phraseFinale} />
+      <EnTetePage titre="Parlons de votre projet" intro={SITE.phraseFinale} illustration="contact" />
       <section className="bg-white py-16 sm:py-20">
         <Conteneur className="grid gap-14 lg:grid-cols-[1.6fr_1fr]">
           <Formulaire />

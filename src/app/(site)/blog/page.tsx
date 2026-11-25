@@ -13,6 +13,7 @@ export default async function Blog() {
   return (
     <>
       <EnTetePage
+        illustration="blog"
         titre="Blog"
         intro="IA, développement et coulisses des projets : ce qui change vraiment dans la façon de construire le web."
       />

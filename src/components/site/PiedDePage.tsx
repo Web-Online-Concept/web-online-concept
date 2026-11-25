@@ -4,7 +4,7 @@ import { NAVIGATION, SITE } from "@/lib/contenu";
 
 export default function PiedDePage() {
   return (
-    <footer className="bg-nuit text-[#B8C6D6]">
+    <footer className="border-t border-white/10 bg-nuit text-[#B8C6D6]">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1.4fr_1fr_1fr]">
         <div className="flex flex-col gap-4">
           <Image
