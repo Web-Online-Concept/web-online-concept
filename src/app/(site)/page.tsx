@@ -10,9 +10,9 @@ import {
   CAPACITES,
   MANIFESTE,
   METHODE,
-  REALISATIONS,
-  REFERENCES,
+  PROJETS_SUR_MESURE,
   SITE,
+  SITES_CLIENTS,
 } from "@/lib/contenu";
 
 export default function Accueil() {
@@ -74,15 +74,21 @@ export default function Accueil() {
             </Link>
           </div>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {REALISATIONS.map((r) => (
+            {PROJETS_SUR_MESURE.map((r) => (
               <CarteRealisation key={r.slug} r={r} />
             ))}
           </div>
           <p className="mt-10 max-w-4xl text-[15px] leading-relaxed text-[#4A6178]">
-            Ils nous ont aussi confié leur site : {REFERENCES.map((r) => r.nom).join(", ")}.{" "}
-            <Link href="/realisations#clients" className="font-medium text-bleu hover:underline">
-              Voir leurs sites
-            </Link>
+            Ils nous ont aussi confié leur site :{" "}
+            {SITES_CLIENTS.map((r, i) => (
+              <span key={r.slug}>
+                {i > 0 && ", "}
+                <Link href={`/realisations/${r.slug}`} className="text-[#2C4558] underline decoration-[#CBD5E1] underline-offset-4 hover:text-bleu hover:decoration-bleu">
+                  {r.nom}
+                </Link>
+              </span>
+            ))}
+            .
           </p>
         </Conteneur>
       </section>

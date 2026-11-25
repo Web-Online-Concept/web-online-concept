@@ -41,17 +41,21 @@ export type Realisation = {
   accroche: string;
   besoin: string;
   realise: string[];
-  technos: string[];
+  technos?: string[];
   chiffres: Chiffre[];
   site: Lien;
   autresLiens?: Lien[];
   teinte: string; // couleur dominante de la carte
   visuels?: Visuel[]; // le premier sert de vignette
+  categorie: "sur-mesure" | "client";
+  // Pour la liste des sites clients : activité, ville et trois points forts
+  resume?: { activite: string; lieu: string; points: string[] };
 };
 
 export const REALISATIONS: Realisation[] = [
   {
     slug: "memoday",
+    categorie: "sur-mesure",
     nom: "MemoDay",
     type: "Application web et mobile, produit maison",
     accroche: "Une mémoire personnelle pour tout ce qu'on ne veut pas oublier.",
@@ -81,6 +85,7 @@ export const REALISATIONS: Realisation[] = [
   },
   {
     slug: "galerie-carpentier",
+    categorie: "sur-mesure",
     nom: "Galerie Michel Carpentier",
     type: "Galerie d'art en ligne",
     client: "Michel Carpentier, peintre",
@@ -104,6 +109,7 @@ export const REALISATIONS: Realisation[] = [
   },
   {
     slug: "inspiration-et-meditation",
+    categorie: "sur-mesure",
     nom: "Inspiration & Méditation",
     type: "Site de praticienne avec réservation en ligne",
     client: "Anne Brulard Labasse",
@@ -125,68 +131,213 @@ export const REALISATIONS: Realisation[] = [
     ],
     site: { href: "https://inspirationetmeditation.com", libelle: "inspirationetmeditation.com" },
     teinte: "#2BD47D",
-  },
-];
-
-// Sites vitrines créés et gérés pour des clients (présentés en liste sur la page Réalisations)
-export type Reference = {
-  nom: string;
-  activite: string;
-  lieu: string;
-  realise: string[];
-  site: Lien;
-  visuel?: Visuel;
-};
-
-export const REFERENCES: Reference[] = [
-  {
+  },  {
+    slug: "menuiserie-gaudissard",
+    categorie: "client",
     nom: "Menuiserie Gaudissard",
-    activite: "Fabricant de menuiseries PVC et aluminium depuis 1964",
-    lieu: "Aigrefeuille-d'Aunis, près de La Rochelle",
-    realise: ["Catalogue par produit et par matériau", "Demande de devis gratuit", "Espace client"],
+    type: "Site vitrine et catalogue de produits",
+    client: "Menuiserie Gaudissard, Aigrefeuille-d'Aunis",
+    accroche: "Toute la gamme d'un fabricant de menuiseries, de la fenêtre au portail, avec devis gratuit.",
+    besoin:
+      "Fabricant de menuiseries PVC et aluminium depuis 1964, près de La Rochelle, la Menuiserie Gaudissard propose une gamme très large, en dimensions standard ou sur mesure. Il fallait présenter chaque famille de produits clairement, faire connaître l'entreprise et son atelier, et transformer les visites en demandes de devis.",
+    realise: [
+      "Un catalogue organisé par famille de produits et par matériau : fenêtres, portes, portails, volets, pergolas, carports, clôtures, garde-corps et barrières anti-inondation.",
+      "Une demande de devis gratuit accessible depuis tout le site.",
+      "La présentation de l'entreprise : son histoire, son atelier, les visites du showroom sur rendez-vous et ses reportages.",
+      "Les informations pratiques : services, plan d'accès et documents à télécharger.",
+      "Un espace client et un accès à la boutique des produits déclassés.",
+      "La création du site, puis sa gestion dans la durée.",
+    ],
+    chiffres: [
+      { valeur: "1964", libelle: "année de création de l'entreprise" },
+      { valeur: "10", libelle: "familles de produits présentées" },
+      { valeur: "40", libelle: "salariés dans l'entreprise" },
+    ],
     site: { href: "https://www.gaudissard.fr/", libelle: "gaudissard.fr" },
+    teinte: "#1F5EFF",
+    resume: {
+      activite: "Fabricant de menuiseries PVC et aluminium depuis 1964",
+      lieu: "Aigrefeuille-d'Aunis, près de La Rochelle",
+      points: ["Catalogue par produit et par matériau", "Demande de devis gratuit", "Espace client"],
+    },
   },
   {
+    slug: "carpentier-communication",
+    categorie: "client",
     nom: "Carpentier Communication",
-    activite: "Imprimeur d'affiches, PLV, panneaux et adhésifs depuis 1962",
-    lieu: "Toulouse",
-    realise: ["Gamme complète par support", "Demande de devis gratuit", "Assistance PAO et brochure à télécharger"],
+    type: "Site vitrine d'imprimeur avec devis en ligne",
+    client: "Carpentier Communication, Toulouse",
+    accroche: "Affiches, PLV, panneaux et adhésifs : l'offre complète d'un imprimeur toulousain, avec devis gratuit.",
+    besoin:
+      "Imprimeur à Toulouse depuis 1962, Carpentier Communication réalise affiches, PLV, panneaux et adhésifs en sérigraphie, en numérique et en offset grand format, avec livraison dans toute la France. Le site devait présenter chaque support, mettre en avant le savoir-faire de l'atelier et faciliter les demandes de devis.",
+    realise: [
+      "Une page par famille de produits : affiches, PLV, panneaux et adhésifs.",
+      "Un formulaire de devis gratuit.",
+      "Une page d'assistance PAO pour accompagner les clients dans la préparation de leurs fichiers.",
+      "Une brochure de produits à télécharger.",
+      "La présentation de l'entreprise, de ses références clients et des conditions de livraison.",
+      "La création du site, puis sa gestion dans la durée.",
+    ],
+    chiffres: [
+      { valeur: "1962", libelle: "année de création de l'entreprise" },
+      { valeur: "4", libelle: "familles de produits" },
+      { valeur: "12", libelle: "références clients présentées" },
+    ],
     site: { href: "https://www.carpentier-impressions.fr/", libelle: "carpentier-impressions.fr" },
+    teinte: "#00B4D8",
+    resume: {
+      activite: "Imprimeur d'affiches, PLV, panneaux et adhésifs depuis 1962",
+      lieu: "Toulouse",
+      points: ["Gamme complète par support", "Demande de devis gratuit", "Assistance PAO et brochure à télécharger"],
+    },
   },
   {
+    slug: "re-borne-retrogaming",
+    categorie: "client",
     nom: "Re-borne Retrogaming",
-    activite: "Animations retrogaming et location de bornes d'arcade pour les événements",
-    lieu: "Toulouse",
-    realise: ["Prestations et tarifs", "Catalogue du matériel", "Actualités et demande de devis"],
+    type: "Site vitrine d'animations événementielles",
+    client: "Re-borne Retrogaming, Toulouse",
+    accroche: "Consoles rétro et bornes d'arcade pour les événements, du séminaire au mariage.",
+    besoin:
+      "Re-borne Retrogaming anime les salons, séminaires, soirées d'entreprise et fêtes privées avec des consoles rétro, des bornes d'arcade et un camion d'arcade mobile, le Pixel Truck. Le site devait donner envie, détailler les formules et le matériel, et recueillir les demandes de devis.",
+    realise: [
+      "La présentation du concept et des prestations, pour les entreprises comme pour les particuliers.",
+      "Un catalogue du matériel : consoles, bornes d'arcade et options.",
+      "Une page de tarifs présentant les formules.",
+      "Une rubrique d'actualités.",
+      "Des formulaires de devis gratuit et de contact.",
+      "La création du site, puis sa gestion dans la durée.",
+    ],
+    chiffres: [
+      { valeur: "19", libelle: "consoles au catalogue" },
+      { valeur: "5 à 30", libelle: "postes de jeu par événement" },
+      { valeur: "4", libelle: "bornes d'arcade dans le Pixel Truck" },
+    ],
     site: { href: "https://www.reborne-retrogaming.com/", libelle: "reborne-retrogaming.com" },
+    teinte: "#2BD47D",
+    resume: {
+      activite: "Animations retrogaming et location de bornes d'arcade pour les événements",
+      lieu: "Toulouse",
+      points: ["Prestations et tarifs", "Catalogue du matériel", "Actualités et demande de devis"],
+    },
   },
   {
+    slug: "klart-concept",
+    categorie: "client",
     nom: "Klart Concept",
-    activite: "Création et rénovation de salles de bain, cuisines et agencements",
-    lieu: "Argelès-Gazost, Hautes-Pyrénées",
-    realise: ["Galeries de réalisations", "Avis clients et blog", "Référencement sur sa zone d'intervention"],
+    type: "Site vitrine d'artisan de la rénovation",
+    client: "Klart Concept, Argelès-Gazost",
+    accroche: "Salles de bain, cuisines et agencements sur mesure dans les Hautes-Pyrénées.",
+    besoin:
+      "Klart Concept crée et rénove salles de bain, cuisines et agencements, et prend en charge tous les corps de métier d'une rénovation intérieure, clés en main. Le site devait montrer la qualité des réalisations, couvrir toute la zone d'intervention et générer des demandes de devis.",
+    realise: [
+      "Une page par spécialité : salles de bain, cuisines, agencements et conseils.",
+      "Des pages métiers : isolation, électricité, plomberie, carrelage et peinture.",
+      "Des galeries photos des réalisations.",
+      "Une page zone d'activité couvrant une vingtaine de communes, dont Tarbes et Lourdes.",
+      "Les avis clients Google, un blog bricolage et une page partenaires.",
+      "Une demande de devis gratuit, ainsi que la création du site et sa gestion dans la durée.",
+    ],
+    chiffres: [
+      { valeur: "15 ans", libelle: "d'expérience de l'entreprise" },
+      { valeur: "20", libelle: "communes dans la zone d'intervention" },
+      { valeur: "5", libelle: "corps de métier présentés" },
+    ],
     site: { href: "https://www.klart-concept.com/", libelle: "klart-concept.com" },
+    teinte: "#0B8E9E",
+    resume: {
+      activite: "Création et rénovation de salles de bain, cuisines et agencements",
+      lieu: "Argelès-Gazost, Hautes-Pyrénées",
+      points: ["Galeries de réalisations", "Avis clients et blog", "Référencement sur sa zone d'intervention"],
+    },
   },
   {
+    slug: "dietetiphyt",
+    categorie: "client",
     nom: "Diététi'Phyt",
-    activite: "Diététicienne-nutritionniste et conseillère en phytothérapie",
-    lieu: "Toulouse",
-    realise: ["Prise de rendez-vous en ligne", "Téléconsultation", "Blog et ressources pour les patients"],
+    type: "Site de praticienne avec prise de rendez-vous",
+    client: "Diététi'Phyt, Toulouse",
+    accroche: "Le site d'une diététicienne-nutritionniste, avec rendez-vous en ligne et téléconsultation.",
+    besoin:
+      "Diététi'Phyt accompagne ses patients en nutrition et en phytothérapie : alimentation équilibrée, perte de poids, maladies chroniques. Le site devait présenter clairement chaque accompagnement, mettre les patients en confiance et rendre la prise de rendez-vous immédiate, au cabinet comme à distance.",
+    realise: [
+      "Une page par accompagnement : alimentation équilibrée, perte de poids et maladies chroniques.",
+      "La prise de rendez-vous en ligne, avec téléconsultation et visites à domicile.",
+      "Une page lieux et tarifs.",
+      "Un blog, une foire aux questions et des ressources pour les patients.",
+      "Les liens vers Instagram, Facebook et LinkedIn.",
+      "La création du site, puis sa gestion dans la durée.",
+    ],
+    chiffres: [
+      { valeur: "3", libelle: "accompagnements détaillés" },
+      { valeur: "24 h/24", libelle: "prise de rendez-vous en ligne" },
+    ],
     site: { href: "https://www.dietetiphyt.com/", libelle: "dietetiphyt.com" },
+    teinte: "#1638A8",
+    resume: {
+      activite: "Diététicienne-nutritionniste et conseillère en phytothérapie",
+      lieu: "Toulouse",
+      points: ["Prise de rendez-vous en ligne", "Téléconsultation", "Blog et ressources pour les patients"],
+    },
   },
   {
+    slug: "point-serigraphie",
+    categorie: "client",
     nom: "Point Sérigraphie",
-    activite: "Impression sérigraphique et numérique sur tous supports depuis 1976",
-    lieu: "Albi",
-    realise: ["Treize familles de produits", "Catalogues à télécharger", "Devis sous 24 heures"],
+    type: "Site vitrine d'imprimeur avec catalogues",
+    client: "Point Sérigraphie, Albi",
+    accroche: "Autocollants, vitrophanies, panneaux, marquages : l'impression sur tous supports, à Albi depuis 1976.",
+    besoin:
+      "Point Sérigraphie imprime en sérigraphie et en numérique sur une très grande variété de supports, avec livraison dans toute la France en 24 à 48 heures. Le site devait rendre lisible une offre très large et faciliter les demandes de devis.",
+    realise: [
+      "Une page par famille de produits : autocollants, vitrophanies, panneaux, marquages, transferts, banderoles, PLV, magnétiques, cartes et badges, ardoises et doming.",
+      "Un formulaire de devis gratuit, avec une réponse sous 24 heures.",
+      "Des catalogues à télécharger.",
+      "Un fil d'actualités.",
+      "Les pages entreprise, prépresse et livraison dans toute la France.",
+      "La création du site, puis sa gestion dans la durée.",
+    ],
+    chiffres: [
+      { valeur: "1976", libelle: "année de création de l'entreprise" },
+      { valeur: "11", libelle: "familles de produits" },
+      { valeur: "24 à 48 h", libelle: "de livraison dans toute la France" },
+    ],
     site: { href: "https://www.point-serigraphie.com/", libelle: "point-serigraphie.com" },
+    teinte: "#00B4D8",
+    resume: {
+      activite: "Impression sérigraphique et numérique sur tous supports depuis 1976",
+      lieu: "Albi",
+      points: ["Onze familles de produits", "Catalogues à télécharger", "Devis sous 24 heures"],
+    },
   },
   {
+    slug: "mozaic-environnement",
+    categorie: "client",
     nom: "Mozaic Environnement",
-    activite: "Signalétique et supports imprimés pour la collecte et le tri des déchets",
-    lieu: "Albi",
-    realise: ["Dix-huit catégories de produits", "Échantillons gratuits", "Demande de devis"],
+    type: "Site vitrine pour les collectivités",
+    client: "Mozaic Environnement, Albi",
+    accroche: "Signalétique et supports imprimés pour la collecte et le tri des déchets.",
+    besoin:
+      "Mozaic Environnement imprime les supports de communication de la collecte et du tri des déchets : signalétique, adhésifs de conteneurs, consignes de tri, banderoles. Sa clientèle de collectivités, d'associations et d'entreprises du déchet attendait un catalogue clair et un accès direct aux devis et aux échantillons.",
+    realise: [
+      "Un catalogue de dix-huit catégories de produits.",
+      "Des catalogues à consulter.",
+      "Une demande d'échantillons gratuits.",
+      "Des formulaires de devis gratuit et de contact.",
+      "La présentation de l'entreprise et de ses adhésions professionnelles (AdCF, FESPA France).",
+      "La création du site, puis sa gestion dans la durée.",
+    ],
+    chiffres: [
+      { valeur: "18", libelle: "catégories de produits" },
+      { valeur: "1976", libelle: "année de création de l'entreprise" },
+    ],
     site: { href: "https://www.mozaic-environnement.com/", libelle: "mozaic-environnement.com" },
+    teinte: "#2BD47D",
+    resume: {
+      activite: "Signalétique et supports imprimés pour la collecte et le tri des déchets",
+      lieu: "Albi",
+      points: ["Dix-huit catégories de produits", "Échantillons gratuits", "Demande de devis"],
+    },
   },
 ];
 
@@ -278,6 +429,9 @@ export const LEGAL = {
     site: "https://vercel.com",
   },
 };
+
+export const PROJETS_SUR_MESURE = REALISATIONS.filter((r) => r.categorie === "sur-mesure");
+export const SITES_CLIENTS = REALISATIONS.filter((r) => r.categorie === "client");
 
 export function realisation(slug: string) {
   return REALISATIONS.find((r) => r.slug === slug);

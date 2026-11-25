@@ -108,19 +108,23 @@ export default async function PageRealisation({
             <p className="mt-4 text-[17px] leading-relaxed text-[#2C4558]">
               {r.besoin}
             </p>
-            <h2 className="mt-12 text-2xl font-semibold text-nuit">
-              Technologies
-            </h2>
-            <ul className="mt-4 flex flex-wrap gap-2">
-              {r.technos.map((t) => (
-                <li
-                  key={t}
-                  className="rounded-full bg-ciel px-4 py-1.5 text-sm text-nuit"
-                >
-                  {t}
-                </li>
-              ))}
-            </ul>
+            {r.technos && r.technos.length > 0 && (
+              <>
+                <h2 className="mt-12 text-2xl font-semibold text-nuit">
+                  Technologies
+                </h2>
+                <ul className="mt-4 flex flex-wrap gap-2">
+                  {r.technos.map((t) => (
+                    <li
+                      key={t}
+                      className="rounded-full bg-ciel px-4 py-1.5 text-sm text-nuit"
+                    >
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
           </div>
           <div>
             <h2 className="text-2xl font-semibold text-nuit">
