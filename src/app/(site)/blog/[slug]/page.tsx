@@ -10,7 +10,11 @@ export async function generateMetadata({ params }: PageProps<"/blog/[slug]">): P
   const { slug } = await params;
   const a = await articleParSlug(slug);
   if (!a) return { title: "Article introuvable" };
-  return { title: a.titre, description: a.extrait };
+  return {
+    title: a.titre,
+    description: a.extrait,
+    openGraph: { type: "article", title: a.titre, description: a.extrait, ...(a.image_url ? { images: [a.image_url] } : {}) },
+  };
 }
 
 async function Contenu({ params }: { params: Promise<{ slug: string }> }) {
@@ -36,6 +40,10 @@ async function Contenu({ params }: { params: Promise<{ slug: string }> }) {
       </section>
       <article className="bg-white py-14 sm:py-16">
         <Conteneur className="max-w-3xl">
+          {a.image_url && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={a.image_url} alt="" className="mb-10 aspect-[16/9] w-full rounded-2xl object-cover" />
+          )}
           <div className="prose-woc" dangerouslySetInnerHTML={{ __html: html }} />
         </Conteneur>
       </article>
