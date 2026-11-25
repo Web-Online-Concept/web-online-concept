@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { AppelFinal, CarteRealisation, Conteneur, EnTetePage } from "@/components/site/Blocs";
+import { CadreNavigateur } from "@/components/site/Cadres";
 import { PROJETS_SUR_MESURE, SITES_CLIENTS } from "@/lib/contenu";
 
 export const metadata: Metadata = {
@@ -42,7 +43,17 @@ export default function Realisations() {
           </div>
           <ul className="mt-10 divide-y divide-[#E3E9F0] border-y border-[#E3E9F0]">
             {SITES_CLIENTS.map((r) => (
-              <li key={r.slug} className="grid gap-4 py-7 lg:grid-cols-[1.15fr_1.4fr_auto] lg:items-center lg:gap-10">
+              <li
+                key={r.slug}
+                className={`grid gap-4 py-7 lg:items-center lg:gap-10 ${
+                  r.visuels?.[0] ? "lg:grid-cols-[13rem_1.15fr_1.4fr_auto]" : "lg:grid-cols-[1.15fr_1.4fr_auto]"
+                }`}
+              >
+                {r.visuels?.[0] && (
+                  <Link href={`/realisations/${r.slug}`} tabIndex={-1} aria-hidden="true" className="hidden lg:block">
+                    <CadreNavigateur v={r.visuels[0]} sizes="208px" className="transition-transform duration-300 hover:-translate-y-0.5" />
+                  </Link>
+                )}
                 <div>
                   <h3 className="text-xl font-semibold text-nuit">
                     <Link href={`/realisations/${r.slug}`} className="hover:text-bleu">

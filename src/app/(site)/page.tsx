@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PastilleIcone } from "@/components/site/Icones";
 import Constellation from "@/components/site/illustrations/Constellation";
+import Vitrine, { type Diapo, type Ecran } from "@/components/site/Vitrine";
 import {
   AppelFinal,
   BlocEngagements,
@@ -12,9 +13,17 @@ import {
   MANIFESTE,
   METHODE,
   PROJETS_SUR_MESURE,
+  REALISATIONS,
   SITE,
   SITES_CLIENTS,
 } from "@/lib/contenu";
+
+// Captures pour le Hero : la première capture « ordinateur » de chaque réalisation, et les écrans de MemoDay
+const DIAPOS: Diapo[] = REALISATIONS.flatMap((r) => {
+  const v = r.visuels?.find((x) => x.format === "ordinateur");
+  return v ? [{ src: v.src, alt: v.alt, nom: r.nom, type: r.type, slug: r.slug, domaine: r.site.libelle }] : [];
+});
+const ECRANS: Ecran[] = REALISATIONS.flatMap((r) => (r.visuels ?? []).filter((x) => x.format === "telephone").map((x) => ({ src: x.src, alt: x.alt })));
 
 export default function Accueil() {
   return (
@@ -47,7 +56,9 @@ export default function Accueil() {
               </Link>
             </div>
           </div>
-          <Constellation className="mx-auto w-full max-w-[440px] lg:-mr-[8%] lg:w-[116%] lg:max-w-none" />
+          <div className="mx-auto w-full max-w-[460px] lg:-mr-[6%] lg:w-[112%] lg:max-w-none">
+            {DIAPOS.length ? <Vitrine diapos={DIAPOS} ecrans={ECRANS} /> : <Constellation className="w-full" />}
+          </div>
         </Conteneur>
         <a
           href="#realisations"
