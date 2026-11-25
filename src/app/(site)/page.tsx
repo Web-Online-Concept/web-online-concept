@@ -18,8 +18,8 @@ export default function Accueil() {
   return (
     <>
       {/* Accroche */}
-      <section className="relative overflow-hidden bg-nuit text-white">
-        <Conteneur className="relative grid items-center gap-10 py-16 sm:py-24 lg:grid-cols-[1fr_1.05fr] lg:gap-4 lg:py-20">
+      <section className="relative overflow-hidden bg-nuit text-white lg:flex lg:min-h-[calc(100svh-77px)] lg:items-center">
+        <Conteneur className="relative grid items-center gap-10 py-16 sm:py-24 lg:grid-cols-[1fr_1.05fr] lg:gap-4 lg:py-16">
           <div>
             <h1 className="text-[clamp(1.9rem,4.2vw,3.55rem)] font-semibold leading-[1.08] tracking-tight text-balance">
               {SITE.titre.replace(
@@ -47,10 +47,19 @@ export default function Accueil() {
           </div>
           <Constellation className="mx-auto w-full max-w-[440px] lg:-mr-[8%] lg:w-[116%] lg:max-w-none" />
         </Conteneur>
+        <a
+          href="#realisations"
+          aria-label="Descendre vers les réalisations"
+          className="absolute bottom-6 left-1/2 hidden h-11 w-11 -translate-x-1/2 items-center justify-center rounded-full border border-white/20 text-[#B8C6D6] transition-colors hover:border-white/50 hover:text-white lg:flex"
+        >
+          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M6 9.5l6 6 6-6" />
+          </svg>
+        </a>
       </section>
 
       {/* Réalisations */}
-      <section className="bg-ciel py-20 sm:py-24">
+      <section id="realisations" className="bg-ciel py-20 sm:py-24">
         <Conteneur>
           <div className="flex flex-wrap items-end justify-between gap-4">
             <h2 className="text-[clamp(1.7rem,3vw,2.4rem)] font-semibold tracking-tight text-nuit">
