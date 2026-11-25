@@ -25,7 +25,7 @@ export default function FormulaireAcceptation({ jeton, total }: { jeton: string;
         </label>
         <input id="nom" name="nom" required autoComplete="name" className="rounded-xl border border-[#CBD5E1] px-4 py-3 outline-none focus:border-bleu focus:ring-2 focus:ring-bleu/20" />
       </div>
-      <label className="flex items-start gap-3 text-[15px] leading-relaxed">
+      <label className="flex cursor-pointer items-start gap-3 text-[15px] leading-relaxed">
         <input type="checkbox" name="accord" value="oui" required className="mt-1 h-4 w-4 accent-bleu" />
         <span>J&apos;accepte ce devis d&apos;un montant de {total}. Ce bon pour accord vaut commande.</span>
       </label>

@@ -36,9 +36,7 @@ body {
   input[type="file"]:not(:disabled),
   input[type="date"]:not(:disabled),
   select:not(:disabled),
-  summary,
-  label:has(> input[type="checkbox"]),
-  label:has(> input[type="radio"]) {
+  summary {
     cursor: pointer;
   }
   button:disabled,

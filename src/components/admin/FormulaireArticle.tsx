@@ -53,13 +53,13 @@ export default function FormulaireArticle({ action, valeurs }: { action: (f: For
         <div className="flex items-center gap-4">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={valeurs.image_url} alt="Couverture actuelle" className="h-20 w-36 rounded-lg object-cover" />
-          <label className="flex items-center gap-2 text-[15px]">
+          <label className="flex cursor-pointer items-center gap-2 text-[15px]">
             <input type="checkbox" name="retirer_image" value="oui" className="h-4 w-4 accent-bleu" />
             Retirer l&apos;image
           </label>
         </div>
       )}
-      <label className="flex items-center gap-3 rounded-xl bg-ciel px-4 py-3 text-[15px]">
+      <label className="flex cursor-pointer items-center gap-3 rounded-xl bg-ciel px-4 py-3 text-[15px]">
         <input type="checkbox" name="publie" value="oui" defaultChecked={valeurs.publie} className="h-4 w-4 accent-bleu" />
         Publier sur le site
       </label>
