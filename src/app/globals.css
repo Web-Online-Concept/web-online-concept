@@ -11,8 +11,83 @@
   --font-sans: var(--font-sora);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: #ffffff;
   color: var(--color-nuit);
   font-family: var(--font-sora), system-ui, sans-serif;
+}
+
+:focus-visible {
+  outline: 3px solid #00b4d8;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .orbite-satellite {
+    display: none;
+  }
+}
+
+/* Contenu rédigé (articles, pages légales) */
+.prose-woc {
+  color: #2c4558;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+.prose-woc > * + * {
+  margin-top: 1.1em;
+}
+.prose-woc h2 {
+  color: var(--color-nuit);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-top: 2.2em;
+}
+.prose-woc h3 {
+  color: var(--color-nuit);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 1.8em;
+}
+.prose-woc a {
+  color: var(--color-bleu);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose-woc ul {
+  list-style: disc;
+  padding-left: 1.3em;
+}
+.prose-woc ol {
+  list-style: decimal;
+  padding-left: 1.3em;
+}
+.prose-woc li + li {
+  margin-top: 0.4em;
+}
+.prose-woc strong {
+  color: var(--color-nuit);
+  font-weight: 600;
+}
+.prose-woc blockquote {
+  border-left: 3px solid var(--color-cyan);
+  padding-left: 1em;
+  color: #4a6178;
+}
+.prose-woc img {
+  border-radius: 12px;
+}
+.prose-woc code {
+  background: #eef2f7;
+  border-radius: 6px;
+  padding: 0.1em 0.35em;
+  font-size: 0.92em;
 }
