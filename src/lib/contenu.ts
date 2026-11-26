@@ -289,6 +289,12 @@ export const REALISATIONS: Realisation[] = [
     ],
     site: { href: "https://www.carpentier-galerie.com/fr", libelle: "carpentier-galerie.com" },
     teinte: "#0B8E9E",
+    visuels: [
+      { src: "/realisations/galerie-carpentier/accueil.webp", alt: "Page d'accueil du site de Galerie Michel Carpentier", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/galerie-carpentier/expositions.webp", alt: "Page « Expositions » du site de Galerie Michel Carpentier", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/galerie-carpentier/mers-oceans.webp", alt: "Page « Mers & Océans » du site de Galerie Michel Carpentier", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/galerie-carpentier/mobile.webp", alt: "Version mobile du site de Galerie Michel Carpentier", l: 659, h: 1188, format: "telephone" },
+    ],
     resume: {
       activite: "Galerie d'art en ligne du peintre Michel Carpentier",
       lieu: "Bordeaux",
