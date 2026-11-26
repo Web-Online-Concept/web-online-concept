@@ -395,6 +395,12 @@ export const REALISATIONS: Realisation[] = [
     ],
     site: { href: "https://www.mozaic-environnement.com/", libelle: "mozaic-environnement.com" },
     teinte: "#2BD47D",
+    visuels: [
+      { src: "/realisations/mozaic-environnement/accueil.webp", alt: "Page d'accueil du site de Mozaic Environnement", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/mozaic-environnement/catalogues.webp", alt: "Page « Nos catalogues » du site de Mozaic Environnement", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/mozaic-environnement/etapes.webp", alt: "Page « Étapes de commande » du site de Mozaic Environnement", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/mozaic-environnement/mobile.webp", alt: "Version mobile du site de Mozaic Environnement", l: 659, h: 1187, format: "telephone" },
+    ],
     resume: {
       activite: "Signalétique et supports imprimés pour la collecte et le tri des déchets",
       lieu: "Albi",
