@@ -357,12 +357,37 @@ function Contact({ id }: { id: string }) {
   );
 }
 
+// FAQ : une question posée, le studio qui « écrit » (trois points) puis la réponse qui s'affiche, en boucle ;
+// des points gravitent derrière les bulles (tout est fixe si l'on limite les animations)
 function Faq({ id }: { id: string }) {
+  const rx = 190;
+  const ry = 64;
+  const orbite = `M ${CX + rx} ${CY} A ${rx} ${ry} 0 1 1 ${CX - rx} ${CY} A ${rx} ${ry} 0 1 1 ${CX + rx} ${CY}`;
+  const points = [
+    { r: 5, couleur: "#2BD47D", depart: 0 },
+    { r: 4, couleur: "#7CCBFF", depart: -9 },
+  ];
   return (
     <>
-      <Fond id={id} rx={190} ry={64} planete={0} />
+      <Fond id={id} rx={rx} ry={ry} planete={0} />
+      <g transform={`rotate(-14 ${CX} ${CY})`}>
+        <g className="orbite-mobile">
+          {points.map((p, k) => (
+            <circle key={k} r={p.r} fill={p.couleur}>
+              <animateMotion dur="18s" begin={`${p.depart}s`} repeatCount="indefinite" path={orbite} />
+            </circle>
+          ))}
+        </g>
+        <g className="orbite-fixe">
+          {points.map((p, k) => (
+            <circle key={k} cx={CX + Math.cos(k * 3 + 0.5) * rx} cy={CY + Math.sin(k * 3 + 0.5) * ry} r={p.r} fill={p.couleur} />
+          ))}
+        </g>
+      </g>
       <Carte id={id} x={62} y={48} l={170} h={112} r={20}>
-        <circle cx="44" cy="56" r="26" fill={`url(#${id}-visuel)`} />
+        <g className="pulse">
+          <circle cx="44" cy="56" r="26" fill={`url(#${id}-visuel)`} />
+        </g>
         <text
           x="44"
           y="66"
@@ -380,12 +405,21 @@ function Faq({ id }: { id: string }) {
         <path d="M40 112 L34 128 L56 112 Z" fill="#10233F" />
       </Carte>
       <Carte id={id} x={190} y={150} l={196} h={110} r={20} retard={0.9}>
-        <circle cx="28" cy="30" r="11" fill="#2BD47D" fillOpacity="0.2" />
-        <path d="M22.5 30.5l3.8 3.8 7.2-7.4" stroke="#2BD47D" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-        <rect x="48" y="24" width="120" height="8" rx="4" fill="#C3D0DD" fillOpacity="0.8" />
-        <rect x="20" y="54" width="156" height="6" rx="3" fill="#3B5A85" />
-        <rect x="20" y="66" width="140" height="6" rx="3" fill="#3B5A85" />
-        <rect x="20" y="78" width="98" height="6" rx="3" fill="#2A4366" />
+        {/* Le studio écrit… */}
+        <g className="faqh-points">
+          {[78, 98, 118].map((cx, k) => (
+            <circle key={cx} className="c-saute" style={{ animationDelay: `${k * 0.15}s` }} cx={cx} cy="55" r="6" fill="#7CCBFF" />
+          ))}
+        </g>
+        {/* … puis la réponse s'affiche */}
+        <g className="faqh-reponse">
+          <circle cx="28" cy="30" r="11" fill="#2BD47D" fillOpacity="0.2" />
+          <path d="M22.5 30.5l3.8 3.8 7.2-7.4" stroke="#2BD47D" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+          <rect x="48" y="24" width="120" height="8" rx="4" fill="#C3D0DD" fillOpacity="0.8" />
+          <rect x="20" y="54" width="156" height="6" rx="3" fill="#3B5A85" />
+          <rect x="20" y="66" width="140" height="6" rx="3" fill="#3B5A85" />
+          <rect x="20" y="78" width="98" height="6" rx="3" fill="#2A4366" />
+        </g>
         <path d="M160 110 L170 126 L144 110 Z" fill="#10233F" />
       </Carte>
     </>

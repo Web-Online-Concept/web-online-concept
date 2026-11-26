@@ -55,6 +55,85 @@
   animation: ia-tourne 70s linear infinite reverse;
 }
 
+/* FAQ : la réponse du studio arrive comme dans une conversation (trois points, puis le texte) */
+.faq-bulle[open] .faq-ecrit {
+  animation: faq-ecrit 0.85s ease both;
+}
+@keyframes faq-ecrit {
+  0% {
+    opacity: 0;
+  }
+  15%,
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+.faq-ecrit > span {
+  animation: c-saute 0.9s ease-in-out infinite;
+}
+.faq-ecrit > span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.faq-ecrit > span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.faq-bulle[open] .faq-texte {
+  animation: faq-texte 0.45s 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@keyframes faq-texte {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* En-tête de la FAQ : trois points, puis la réponse, en boucle */
+.faqh-points {
+  animation: faqh-points 6s ease infinite both;
+}
+@keyframes faqh-points {
+  0%,
+  6% {
+    opacity: 0;
+  }
+  10%,
+  30% {
+    opacity: 1;
+  }
+  34%,
+  100% {
+    opacity: 0;
+  }
+}
+.faqh-reponse {
+  animation: faqh-reponse 6s ease infinite both;
+}
+@keyframes faqh-reponse {
+  0%,
+  32% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  38%,
+  90% {
+    opacity: 1;
+    transform: none;
+  }
+  97%,
+  100% {
+    opacity: 0;
+    transform: none;
+  }
+}
+
 /* ---------- Méthode : étapes reliées par la ligne de progression ---------- */
 
 .m-visuel {
@@ -1115,6 +1194,14 @@
   }
   .orbite-fixe {
     display: inline;
+  }
+  .faq-ecrit,
+  .faqh-points {
+    display: none;
+  }
+  .faq-bulle[open] .faq-texte,
+  .faqh-reponse {
+    animation: none;
   }
   .ia-orbite,
   .ia-contre {

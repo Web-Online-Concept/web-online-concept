@@ -609,66 +609,94 @@ export const ENGAGEMENTS: Etape[] = [
   },
 ];
 
-export type Question = { question: string; reponse: string; lien?: Lien };
+export type ThemeFaq = "ensemble" | "projet" | "visibilite" | "suivi";
+
+export const THEMES_FAQ: { id: ThemeFaq; titre: string }[] = [
+  { id: "ensemble", titre: "Travailler ensemble" },
+  { id: "projet", titre: "Votre projet" },
+  { id: "visibilite", titre: "Visibilité" },
+  { id: "suivi", titre: "Après la mise en ligne" },
+];
+
+export type Question = { question: string; reponse: string; theme: ThemeFaq; lien?: Lien };
 
 export const FAQ: Question[] = [
   {
+    theme: "ensemble",
     question: "Comment travailler avec nous ?",
     reponse:
       "Nous travaillons sur recommandation et sur demande privée. Si l'on vous a parlé de nous, il suffit de nous écrire directement : chaque projet commence par un échange sur vos objectifs.",
   },
   {
+    theme: "ensemble",
+    question: "Travaillez-vous uniquement à Toulouse ?",
+    reponse:
+      "Nous sommes basés à Toulouse et travaillons partout en France à distance. Plusieurs de nos clients sont installés à Albi, à Bordeaux, dans les Hautes-Pyrénées ou près de La Rochelle.",
+    lien: { href: "/realisations#clients", libelle: "Voir les sites clients" },
+  },
+  {
+    theme: "ensemble",
+    question: "À qui appartient le site une fois livré ?",
+    reponse: "À vous. Votre site, ses contenus et vos données vous appartiennent : vous restez libre, à tout moment.",
+  },
+  {
+    theme: "projet",
     question: "Combien de temps faut-il pour créer un site ?",
     reponse:
       "Cela dépend de l'ambition du projet : quelques semaines pour un site vitrine, davantage pour une application ou une plateforme complète. Grâce à l'IA, les délais sont bien plus courts qu'auparavant, et un planning précis vous est donné dès le cadrage.",
   },
   {
-    question: "Pourrai-je modifier mon site moi-même ?",
-    reponse:
-      "Oui. Votre projet peut inclure un espace d'administration pensé pour vous : textes, images, produits, actualités, œuvres ou rendez-vous. Vous êtes accompagné pour le prendre en main, et vous pouvez toujours confier les évolutions plus importantes.",
-    lien: { href: "/realisations/galerie-carpentier", libelle: "Exemple : la Galerie Michel Carpentier" },
-  },
-  {
-    question: "Le référencement est-il compris ?",
-    reponse:
-      "Les fondations du référencement sont intégrées dès la conception : structure des pages, vitesse de chargement, balisage, données structurées et affichage mobile. Pour aller plus loin, un accompagnement dédié est possible : référencement local, fiche Google Business, contenus.",
-  },
-  {
-    question: "Qu'est-ce que la visibilité dans les IA ?",
-    reponse:
-      "De plus en plus de personnes posent leurs questions à ChatGPT, à Perplexity ou à la recherche Google enrichie par l'IA, au lieu de parcourir une liste de liens. La visibilité IA consiste à structurer votre site et vos contenus pour que ces outils comprennent votre activité, la citent et renvoient vers vous.",
-  },
-  {
+    theme: "projet",
     question: "Faut-il refaire mon site ou simplement le mettre à jour ?",
     reponse:
       "Tout dépend de son état. Un diagnostic de l'existant permet de recommander la solution la plus adaptée : parfois quelques améliorations suffisent, parfois une refonte est plus intéressante. Dans les deux cas, votre référencement est préservé.",
   },
   {
-    question: "À qui appartient le site une fois livré ?",
-    reponse: "À vous. Votre site, ses contenus et vos données vous appartiennent : vous restez libre, à tout moment.",
-  },
-  {
-    question: "Que se passe-t-il après la mise en ligne ?",
-    reponse:
-      "Votre site est suivi dans la durée : mises à jour, sauvegardes, sécurité, évolutions et amélioration du référencement. Vous n'êtes jamais seul face à votre site.",
-  },
-  {
-    question: "Pouvez-vous intégrer de l'IA dans mon projet ?",
-    reponse:
-      "Oui : compréhension des messages, lecture automatique de documents, recherche par le sens, assistants. L'IA est intégrée là où elle vous fait gagner du temps, comme dans l'application MemoDay.",
-    lien: { href: "/realisations/memoday", libelle: "Découvrir MemoDay" },
-  },
-  {
+    theme: "projet",
     question: "Développez-vous des applications mobiles ?",
     reponse:
       "Oui, pour l'iPhone et Android à partir d'une seule base de code, avec publication sur l'App Store et Google Play. L'application fonctionne aussi dans le navigateur.",
     lien: { href: "/realisations/memoday", libelle: "Exemple : MemoDay" },
   },
   {
-    question: "Travaillez-vous uniquement à Toulouse ?",
+    theme: "projet",
+    question: "Pouvez-vous intégrer de l'IA dans mon projet ?",
     reponse:
-      "Nous sommes basés à Toulouse et travaillons partout en France à distance. Plusieurs de nos clients sont installés à Albi, dans les Hautes-Pyrénées ou près de La Rochelle.",
-    lien: { href: "/realisations#clients", libelle: "Voir les sites clients" },
+      "Oui : compréhension des messages, lecture automatique de documents, recherche par le sens, assistants. Nous travaillons avec Claude, ChatGPT, Gemini, Mistral ou Grok, et choisissons le modèle adapté à chaque projet, comme pour l'application MemoDay.",
+    lien: { href: "/capacites", libelle: "Les IA que nous intégrons" },
+  },
+  {
+    theme: "projet",
+    question: "Faites-vous des sites en plusieurs langues ?",
+    reponse:
+      "Oui. Chaque langue a ses propres adresses, pour être bien référencée dans chaque pays, et les traductions sont préparées avec l'IA puis vérifiées. MemoDay, par exemple, existe en français, en anglais et en espagnol.",
+    lien: { href: "/realisations/memoday", libelle: "Découvrir MemoDay" },
+  },
+  {
+    theme: "visibilite",
+    question: "Le référencement est-il compris ?",
+    reponse:
+      "Les fondations du référencement sont intégrées dès la conception : structure des pages, vitesse de chargement, balisage, données structurées et affichage mobile. Pour aller plus loin, un accompagnement dédié est possible : référencement local, fiche Google Business, contenus.",
+  },
+  {
+    theme: "visibilite",
+    question: "Qu'est-ce que la visibilité dans les IA ?",
+    reponse:
+      "De plus en plus de personnes posent leurs questions à ChatGPT, à Claude, à Perplexity ou à la recherche Google enrichie par l'IA, au lieu de parcourir une liste de liens. La visibilité IA consiste à structurer votre site et vos contenus pour que ces outils comprennent votre activité, la citent et renvoient vers vous.",
+    lien: { href: "/blog/visibilite-ia-chatgpt-claude-perplexity", libelle: "Lire notre article sur le sujet" },
+  },
+  {
+    theme: "suivi",
+    question: "Pourrai-je modifier mon site moi-même ?",
+    reponse:
+      "Oui. Votre projet peut inclure un espace d'administration pensé pour vous : textes, images, produits, actualités, œuvres ou rendez-vous. Vous êtes accompagné pour le prendre en main, et vous pouvez toujours confier les évolutions plus importantes.",
+    lien: { href: "/realisations/galerie-carpentier", libelle: "Exemple : la Galerie Michel Carpentier" },
+  },
+  {
+    theme: "suivi",
+    question: "Que se passe-t-il après la mise en ligne ?",
+    reponse:
+      "Votre site est suivi dans la durée : mises à jour, sauvegardes, sécurité, évolutions et amélioration du référencement. Vous n'êtes jamais seul face à votre site.",
   },
 ];
 
