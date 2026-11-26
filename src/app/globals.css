@@ -117,6 +117,28 @@ body {
   }
 }
 
+/* Réseau autour de la planète : pointillés qui circulent, points qui pulsent */
+@keyframes flux {
+  to {
+    stroke-dashoffset: -30;
+  }
+}
+.flux {
+  animation: flux 1.8s linear infinite;
+}
+@keyframes pulse-point {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+.pulse {
+  animation: pulse-point 2.6s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   /* Animations désactivées sur l'appareil : le survol reste visible, mais sans mouvement */
   .logo-anime:hover .logo-anime-image,
@@ -138,7 +160,9 @@ body {
   .orbite-satellite {
     display: none;
   }
-  .flotte {
+  .flotte,
+  .flux,
+  .pulse {
     animation: none;
   }
 }
