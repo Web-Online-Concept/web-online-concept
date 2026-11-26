@@ -41,6 +41,20 @@
   display: none;
 }
 
+/* IA en orbite autour du globe (OrbiteIA) : l'anneau tourne, chaque étiquette tourne en sens inverse */
+@keyframes ia-tourne {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.ia-orbite {
+  animation: ia-tourne 70s linear infinite;
+}
+.ia-contre {
+  transform-origin: 0 0;
+  animation: ia-tourne 70s linear infinite reverse;
+}
+
 /* ---------- Méthode : étapes reliées par la ligne de progression ---------- */
 
 .m-visuel {
@@ -1101,6 +1115,10 @@
   }
   .orbite-fixe {
     display: inline;
+  }
+  .ia-orbite,
+  .ia-contre {
+    animation: none;
   }
   .e2-avatar {
     transform: translate(200px, 74px);

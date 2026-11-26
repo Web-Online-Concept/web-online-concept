@@ -5,7 +5,7 @@ import DefilementEcrans from "@/components/site/DefilementEcrans";
 import { ANIMATIONS_METHODE } from "@/components/site/illustrations/Methode";
 import { CarteFlottante, PhotoCadre } from "@/components/site/Photos";
 import SceneEnVue from "@/components/site/SceneEnVue";
-import { MANIFESTE, METHODE, METHODE_DETAILS, PHOTOS } from "@/lib/contenu";
+import { IA, MANIFESTE, METHODE, METHODE_DETAILS, PHOTOS } from "@/lib/contenu";
 
 export const metadata: Metadata = metaPage("Méthode", "Une méthode augmentée par l'IA : cadrer vite, produire plus, tout vérifier, faire évoluer. Et des engagements concrets à chaque étape.", "/methode");
 
@@ -81,6 +81,21 @@ export default function Methode() {
                                 </svg>
                               </span>
                               {p}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                      {i === 1 && (
+                        <ul className="mt-6 flex flex-wrap gap-2" aria-label="Les IA que nous utilisons">
+                          {IA.modeles.map((m) => (
+                            <li
+                              key={m.nom}
+                              className="flex items-center gap-1.5 rounded-full bg-[#E8EFFF] px-3.5 py-1.5 text-sm font-medium text-[#1638A8]"
+                            >
+                              <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor" aria-hidden="true">
+                                <path d="M12 2.5l2.4 6.6 6.6 2.4-6.6 2.4L12 20.5l-2.4-6.6L3 11.5l6.6-2.4z" />
+                              </svg>
+                              {m.nom}
                             </li>
                           ))}
                         </ul>

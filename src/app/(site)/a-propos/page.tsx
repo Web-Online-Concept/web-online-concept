@@ -5,7 +5,7 @@ import { AppelFinal, Conteneur, EnTetePage } from "@/components/site/Blocs";
 import DefilementEcrans from "@/components/site/DefilementEcrans";
 import EventailApplication from "@/components/site/EventailApplication";
 import { CarteFlottante, PhotoCadre } from "@/components/site/Photos";
-import { PHOTOS, REALISATIONS, ecransApplication } from "@/lib/contenu";
+import { IA, PHOTOS, REALISATIONS, ecransApplication } from "@/lib/contenu";
 
 export const metadata: Metadata = metaPage("À propos", "Web Online Concept, studio de développement web et d'intelligence artificielle à Toulouse depuis 2009 : un interlocuteur unique, la capacité de production d'une équipe entière.", "/a-propos");
 
@@ -49,20 +49,8 @@ const PRINCIPES = [
   },
 ];
 
-const OUTILS = [
-  "Next.js",
-  "React",
-  "TypeScript",
-  "Tailwind CSS",
-  "Supabase",
-  "PostgreSQL",
-  "Vercel",
-  "Stripe",
-  "IA générative",
-  "Recherche par le sens",
-  "iOS et Android",
-  "Données structurées",
-];
+const OUTILS = ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL", "Vercel", "Stripe", "iOS et Android"];
+const NOMS_IA = IA.modeles.map((m) => m.nom);
 
 const H2 = "text-[clamp(1.8rem,3vw,2.5rem)] font-semibold tracking-tight";
 
@@ -174,8 +162,8 @@ export default function APropos() {
             <div>
               <h2 className={`${H2} text-nuit`}>Des outils à la pointe</h2>
               <p className="mt-5 text-[18px] leading-relaxed text-[#2C4558]">
-                Les technologies qui font tourner les services les plus exigeants, et une veille permanente : chaque nouveauté utile vient renforcer vos
-                projets.
+                Les technologies qui font tourner les services les plus exigeants, les meilleures IA du moment, et une veille permanente : chaque
+                nouveauté utile vient renforcer vos projets.
               </p>
               <Link href="/capacites" className="mt-6 inline-block font-medium text-bleu transition-colors hover:text-[#1638A8]">
                 Voir ce que nous réalisons
@@ -184,15 +172,25 @@ export default function APropos() {
             <div className="relative overflow-hidden rounded-3xl bg-ciel p-8 sm:p-10">
               <div aria-hidden="true" className="absolute -right-16 -top-20 h-64 w-64 rounded-full bg-cyan opacity-15 blur-3xl" />
               <ul className="relative flex flex-wrap justify-center gap-3">
-                {OUTILS.map((o, i) => (
-                  <li
-                    key={o}
-                    className="flotte rounded-full bg-white px-5 py-2.5 text-[15px] font-medium text-nuit shadow-[0_14px_30px_-20px_rgba(10,26,47,0.5)] ring-1 ring-[#E3E9F0]"
-                    style={{ animationDelay: `${(i % 5) * 0.7}s` }}
-                  >
-                    {o}
-                  </li>
-                ))}
+                {[...NOMS_IA, ...OUTILS].map((o, i) => {
+                  const ia = i < NOMS_IA.length;
+                  return (
+                    <li
+                      key={o}
+                      className={`flotte flex items-center gap-1.5 rounded-full px-5 py-2.5 text-[15px] font-medium shadow-[0_14px_30px_-20px_rgba(10,26,47,0.5)] ${
+                        ia ? "bg-[linear-gradient(135deg,#1F5EFF,#00B4D8)] text-white" : "bg-white text-nuit ring-1 ring-[#E3E9F0]"
+                      }`}
+                      style={{ animationDelay: `${(i % 5) * 0.7}s` }}
+                    >
+                      {ia && (
+                        <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor" aria-hidden="true">
+                          <path d="M12 2.5l2.4 6.6 6.6 2.4-6.6 2.4L12 20.5l-2.4-6.6L3 11.5l6.6-2.4z" />
+                        </svg>
+                      )}
+                      {o}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>

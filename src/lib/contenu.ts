@@ -441,6 +441,21 @@ export const REALISATIONS: Realisation[] = [
   },
 ];
 
+// IA intégrées aux projets (texte, sans logo) : à tenir à jour, ce marché évolue vite
+export const IA = {
+  titre: "Les IA que nous intégrons",
+  phrase:
+    "Nous ne sommes liés à aucune IA : pour chaque projet, nous choisissons le modèle le plus adapté selon la qualité, le coût, la confidentialité et l'hébergement, en Europe si besoin.",
+  criteres: ["Qualité", "Coût", "Confidentialité", "Hébergement en Europe"],
+  modeles: [
+    { nom: "Claude", editeur: "Anthropic" },
+    { nom: "ChatGPT", editeur: "OpenAI" },
+    { nom: "Gemini", editeur: "Google" },
+    { nom: "Mistral", editeur: "Mistral AI, France" },
+    { nom: "Grok", editeur: "xAI" },
+  ],
+};
+
 export type Capacite = { titre: string; texte: string; points: string[]; exemples: string[]; icone: NomIcone };
 
 export const CAPACITES: Capacite[] = [
@@ -525,7 +540,7 @@ export const METHODE_DETAILS: { points: string[]; photo: keyof typeof PHOTOS; ca
   },
   {
     points: [
-      "Code, tests, contenus et traductions accélérés par l'IA",
+      "Code, tests, contenus et traductions accélérés par les meilleures IA du moment",
       "Des versions à essayer en ligne au fil du développement",
       "Un seul interlocuteur, du premier échange à la mise en ligne",
     ],
