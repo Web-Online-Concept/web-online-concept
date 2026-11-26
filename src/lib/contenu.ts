@@ -360,6 +360,12 @@ export const REALISATIONS: Realisation[] = [
     ],
     site: { href: "https://www.point-serigraphie.com/", libelle: "point-serigraphie.com" },
     teinte: "#00B4D8",
+    visuels: [
+      { src: "/realisations/point-serigraphie/accueil.webp", alt: "Page d'accueil du site de Point Sérigraphie", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/point-serigraphie/autocollants.webp", alt: "Page « Autocollants » du site de Point Sérigraphie", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/point-serigraphie/panneaux.webp", alt: "Page « Panneaux » du site de Point Sérigraphie", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/point-serigraphie/mobile.webp", alt: "Version mobile du site de Point Sérigraphie", l: 659, h: 1187, format: "telephone" },
+    ],
     resume: {
       activite: "Impression sérigraphique et numérique sur tous supports depuis 1976",
       lieu: "Albi",
