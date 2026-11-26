@@ -270,10 +270,36 @@ function Realisations({ id }: { id: string }) {
   );
 }
 
+// Blog : deux articles qui flottent sur l'orbite, le texte du premier plan qui s'écrit, et des points
+// qui gravitent autour (fixes si l'on limite les animations)
 function Blog({ id }: { id: string }) {
+  const rx = 190;
+  const ry = 62;
+  const orbite = `M ${CX + rx} ${CY} A ${rx} ${ry} 0 1 1 ${CX - rx} ${CY} A ${rx} ${ry} 0 1 1 ${CX + rx} ${CY}`;
+  const points = [
+    { r: 5, couleur: "#2BD47D", depart: 0 },
+    { r: 4, couleur: "#7CCBFF", depart: -7 },
+    { r: 3.5, couleur: "#00B4D8", depart: -14 },
+  ];
   return (
     <>
-      <Fond id={id} rx={190} ry={62} planete={0} />
+      <Fond id={id} rx={rx} ry={ry} planete={0} />
+      {/* Points en orbite, derrière les articles */}
+      <g transform={`rotate(-14 ${CX} ${CY})`}>
+        <g className="orbite-mobile">
+          {points.map((p, k) => (
+            <circle key={k} r={p.r} fill={p.couleur}>
+              <animateMotion dur="21s" begin={`${p.depart}s`} repeatCount="indefinite" path={orbite} />
+            </circle>
+          ))}
+        </g>
+        <g className="orbite-fixe">
+          {points.map((p, k) => {
+            const a = (k / points.length) * Math.PI * 2 + 0.4;
+            return <circle key={k} cx={CX + Math.cos(a) * rx} cy={CY + Math.sin(a) * ry} r={p.r} fill={p.couleur} />;
+          })}
+        </g>
+      </g>
       {[
         { x: 66, y: 44, a: -6, retard: 0 },
         { x: 150, y: 70, a: 3, retard: 0.7 },
@@ -283,9 +309,21 @@ function Blog({ id }: { id: string }) {
             <rect x="14" y="14" width="192" height="82" rx="9" fill={i ? `url(#${id}-visuel)` : "#17304F"} fillOpacity={i ? 0.88 : 1} />
             <rect x="14" y="108" width="54" height="16" rx="8" fill="#00B4D8" fillOpacity="0.18" />
             <rect x="22" y="113" width="38" height="6" rx="3" fill="#00B4D8" />
-            <rect x="14" y="134" width="170" height="8" rx="4" fill="#C3D0DD" fillOpacity="0.75" />
-            <rect x="14" y="150" width="132" height="6" rx="3" fill="#3B5A85" />
-            <rect x="14" y="162" width="96" height="6" rx="3" fill="#2A4366" />
+            {i ? (
+              <>
+                {/* L'article du premier plan s'écrit, ligne après ligne */}
+                <rect className="m2-ligne" x="14" y="134" width="170" height="8" rx="4" fill="#C3D0DD" fillOpacity="0.75" />
+                <rect className="m2-ligne" style={{ animationDelay: "0.35s" }} x="14" y="150" width="132" height="6" rx="3" fill="#3B5A85" />
+                <rect className="m2-ligne" style={{ animationDelay: "0.7s" }} x="14" y="162" width="96" height="6" rx="3" fill="#2A4366" />
+                <rect className="m2-caret" x="114" y="160" width="2" height="10" rx="1" fill="#FFFFFF" />
+              </>
+            ) : (
+              <>
+                <rect x="14" y="134" width="170" height="8" rx="4" fill="#C3D0DD" fillOpacity="0.75" />
+                <rect x="14" y="150" width="132" height="6" rx="3" fill="#3B5A85" />
+                <rect x="14" y="162" width="96" height="6" rx="3" fill="#2A4366" />
+              </>
+            )}
           </Carte>
         </g>
       ))}
