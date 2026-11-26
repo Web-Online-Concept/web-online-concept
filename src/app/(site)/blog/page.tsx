@@ -20,7 +20,7 @@ export default async function Blog() {
           {articles.length === 0 ? (
             <div className="rounded-2xl bg-ciel p-10 text-center">
               <p className="text-xl font-semibold text-nuit">Les premiers articles arrivent très bientôt.</p>
-              <p className="mt-2 text-[#4A6178]">En attendant, découvrez les réalisations du studio.</p>
+              <p className="mt-2 text-[#4A6178]">En attendant, découvrez nos réalisations.</p>
               <Link
                 href="/realisations"
                 className="mt-6 inline-block rounded-full bg-bleu px-6 py-3 font-medium text-white hover:bg-[#3A72FF]"

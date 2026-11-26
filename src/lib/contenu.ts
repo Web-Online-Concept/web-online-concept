@@ -6,11 +6,11 @@ export const SITE = {
   nom: "Web Online Concept",
   url: "https://www.web-online-concept.com",
   email: "contact@web-online-concept.com",
-  titre: "Imaginez-le et Web Online Concept le réalise afin d'atteindre vos objectifs.",
+  titre: "Vous l'imaginez. Nous le réalisons, au service de vos objectifs.",
   sousTitre:
     "Plus de quinze ans de développement web, démultipliés par l'IA : sites, applications et plateformes complètes, de la première idée à la mise en ligne.",
   // Signature de fin de page : le studio travaille sur recommandation, pas de démarchage
-  phraseFinale: "Web Online Concept travaille sur recommandation.",
+  phraseFinale: "Nous travaillons sur recommandation.",
 };
 
 export const NAVIGATION = [
@@ -452,9 +452,9 @@ export type Question = { question: string; reponse: string; lien?: Lien };
 
 export const FAQ: Question[] = [
   {
-    question: "Comment travailler avec Web Online Concept ?",
+    question: "Comment travailler avec nous ?",
     reponse:
-      "Web Online Concept travaille sur recommandation et sur demande privée. Si l'on vous a recommandé le studio, il suffit d'écrire directement : chaque projet commence par un échange sur vos objectifs.",
+      "Nous travaillons sur recommandation et sur demande privée. Si l'on vous a parlé de nous, il suffit de nous écrire directement : chaque projet commence par un échange sur vos objectifs.",
   },
   {
     question: "Combien de temps faut-il pour créer un site ?",
@@ -506,7 +506,7 @@ export const FAQ: Question[] = [
   {
     question: "Travaillez-vous uniquement à Toulouse ?",
     reponse:
-      "Le studio est basé à Toulouse et travaille partout en France à distance. Plusieurs clients sont installés à Albi, dans les Hautes-Pyrénées ou près de La Rochelle.",
+      "Nous sommes basés à Toulouse et travaillons partout en France à distance. Plusieurs de nos clients sont installés à Albi, dans les Hautes-Pyrénées ou près de La Rochelle.",
     lien: { href: "/realisations#clients", libelle: "Voir les sites clients" },
   },
 ];

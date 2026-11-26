@@ -9,7 +9,7 @@ export const metadata: Metadata = metaPage("Contact", "Web Online Concept travai
 export default function Contact() {
   return (
     <>
-      <EnTetePage titre="Contact" intro="Web Online Concept travaille sur recommandation et sur demande privée. Pour échanger sur un projet, écrivez directement ici." illustration="contact" />
+      <EnTetePage titre="Contact" intro="Nous travaillons sur recommandation et sur demande privée. Pour échanger sur un projet, écrivez-nous directement ici." illustration="contact" />
       <section className="bg-white py-16 sm:py-20">
         <Conteneur className="grid gap-14 lg:grid-cols-[1.6fr_1fr]">
           <Formulaire />

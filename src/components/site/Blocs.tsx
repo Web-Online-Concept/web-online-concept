@@ -116,7 +116,7 @@ export function AppelFinal() {
         <p className="text-lg text-[#C3D0DD]">
           Vous avez été recommandé ?{" "}
           <Link href="/contact" className="font-medium text-[#7CCBFF] transition-colors hover:text-white">
-            Écrivez directement
+            Écrivez-nous directement
           </Link>
           .
         </p>

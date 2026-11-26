@@ -83,10 +83,8 @@ export default function Accueil() {
         <Conteneur className="relative grid items-center gap-10 py-16 sm:py-24 lg:grid-cols-[1fr_1.05fr] lg:gap-4 lg:py-16">
           <div>
             <h1 className="text-[clamp(1.9rem,4.2vw,3.55rem)] font-semibold leading-[1.08] tracking-tight text-balance">
-              {SITE.titre.replace(
-                "Web Online Concept",
-                "Web\u00a0Online\u00a0Concept",
-              )}
+              <span className="block">Vous l&apos;imaginez.</span>
+              <span className="block">Nous le réalisons, au service de vos objectifs.</span>
             </h1>
             <p className="mt-7 max-w-xl text-lg leading-relaxed text-[#C3D0DD] sm:text-xl">
               {SITE.sousTitre}
