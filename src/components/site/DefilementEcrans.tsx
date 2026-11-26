@@ -2,13 +2,13 @@
 
 import { useEffect, useRef } from "react";
 
-// Accueil : défilement « un bloc par écran » sur ordinateur.
+// Défilement « un bloc par écran » sur ordinateur, pour la page qui rend ce composant (accueil, capacités).
 // - Rend le marqueur .marqueur-ecrans (dès le rendu serveur) : les règles de animations.css calent chaque
 //   bloc (.ecran, .ecran-fin) en haut de l'écran (clavier, barre de défilement).
-// - Next.js garde l'accueil en mémoire, masqué, quand on change de page : le marqueur reste alors dans la
+// - Next.js garde les pages visitées en mémoire, masquées, quand on change de page : le marqueur reste alors dans la
 //   page mais passe en data-inactif, dès le clic sur un lien vers une autre page (avant que la nouvelle page
 //   ne s'affiche et ne remonte en haut) ou au retour arrière, et au plus tard au nettoyage de l'effet.
-//   L'attribut est retiré au retour sur l'accueil.
+//   L'attribut est retiré au retour sur la page. Seuls les blocs affichés comptent (pas ceux d'une page masquée).
 // - La molette et le pavé tactile passent au bloc suivant ou précédent dès le premier cran (les navigateurs,
 //   eux, ramènent au bloc courant si le cran est petit). L'élan du pavé tactile est absorbé.
 // Uniquement sur un écran assez large et haut, et sans « réduire les animations » ; Ctrl + molette (zoom)
@@ -35,6 +35,7 @@ export default function DefilementEcrans() {
 
     const positions = () =>
       Array.from(document.querySelectorAll<HTMLElement>(".ecran, .ecran-fin"))
+        .filter((s) => s.getClientRects().length > 0)
         .map((s) => Math.round(s.getBoundingClientRect().top + window.scrollY - MARGE_MENU))
         .sort((a, b) => a - b);
 

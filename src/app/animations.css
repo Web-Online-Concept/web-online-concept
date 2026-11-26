@@ -23,6 +23,9 @@
     padding-block: 36px;
     contain-intrinsic-size: auto calc(100svh - 77px);
   }
+  html:has(.marqueur-ecrans:not([data-inactif])) li.ecran {
+    border-top-color: transparent;
+  }
   html:has(.marqueur-ecrans:not([data-inactif])) .ecran-hero {
     padding-block: 0;
   }

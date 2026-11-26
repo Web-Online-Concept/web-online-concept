@@ -23,17 +23,23 @@ export function Conteneur({
   );
 }
 
+// ecran : l'en-tête occupe tout l'écran quand la page défile bloc par bloc (DefilementEcrans) ; suite donne
+// l'ancre du bloc suivant, vers lequel pointe une flèche (comme sur l'accueil)
 export function EnTetePage({
   titre,
   intro,
   illustration,
+  ecran = false,
+  suite,
 }: {
   titre: string;
   intro?: string;
   illustration?: VarianteEntete;
+  ecran?: boolean;
+  suite?: { id: string; libelle: string };
 }) {
   return (
-    <section className="relative overflow-hidden bg-nuit text-white">
+    <section className={`relative overflow-hidden bg-nuit text-white ${ecran ? "ecran" : ""}`}>
       <Conteneur
         className={`pb-16 pt-14 sm:pb-20 sm:pt-20 ${illustration ? "lg:grid lg:grid-cols-[1.25fr_1fr] lg:items-center lg:gap-10 lg:py-12" : ""}`}
       >
@@ -50,10 +56,30 @@ export function EnTetePage({
         {illustration && (
           <IllustrationEntete
             variante={illustration}
-            className="hidden w-full max-w-[460px] justify-self-end lg:block"
+            className={`hidden w-full justify-self-end lg:block ${ecran ? "max-w-[540px]" : "max-w-[460px]"}`}
           />
         )}
       </Conteneur>
+      {suite && (
+        <a
+          href={`#${suite.id}`}
+          aria-label={suite.libelle}
+          className="absolute bottom-6 left-1/2 hidden h-11 w-11 -translate-x-1/2 items-center justify-center rounded-full border border-white/20 text-[#B8C6D6] transition-colors hover:border-white/50 hover:text-white lg:flex"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            className="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M6 9.5l6 6 6-6" />
+          </svg>
+        </a>
+      )}
     </section>
   );
 }
