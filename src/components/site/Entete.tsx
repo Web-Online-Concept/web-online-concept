@@ -6,9 +6,24 @@ import { usePathname } from "next/navigation";
 import { Suspense, useState } from "react";
 import { NAVIGATION } from "@/lib/contenu";
 
-function Liens({ chemin }: { chemin: string | null }) {
+type Pastille = { x: number; l: number; visible: boolean; glisse: boolean };
+
+// Menu ordinateur : une pastille lumineuse à bord dégradé glisse d'un lien à l'autre au survol ;
+// la page en cours est soulignée d'un trait dégradé.
+function NavBureau({ chemin }: { chemin: string | null }) {
+  const [p, setP] = useState<Pastille>({ x: 0, l: 0, visible: false, glisse: false });
+
   return (
-    <>
+    <div className="relative flex items-center gap-0.5 xl:gap-1" onMouseLeave={() => setP((v) => ({ ...v, visible: false, glisse: false }))}>
+      <span
+        aria-hidden="true"
+        className={`pointer-events-none absolute top-1/2 h-10 -translate-y-1/2 rounded-full bg-[linear-gradient(90deg,#1F5EFF,#00B4D8_55%,#2BD47D)] p-px shadow-[0_0_26px_-6px_rgba(0,180,216,0.7)] motion-reduce:transition-none ${
+          p.glisse ? "transition-[left,width,opacity] duration-300 ease-out" : "transition-opacity duration-200"
+        }`}
+        style={{ left: p.x, width: p.l, opacity: p.visible ? 1 : 0 }}
+      >
+        <span className="block h-full w-full rounded-full bg-[#0D2240]" />
+      </span>
       {NAVIGATION.map((l) => {
         const actif = !!chemin && (chemin === l.href || chemin.startsWith(l.href + "/"));
         return (
@@ -16,21 +31,36 @@ function Liens({ chemin }: { chemin: string | null }) {
             key={l.href}
             href={l.href}
             aria-current={actif ? "page" : undefined}
-            className={`rounded-full px-2.5 py-2 text-[15px] font-medium transition-colors xl:px-4 xl:text-base ${
-              actif ? "bg-white/12 text-white" : "text-[#E6EDF5] hover:bg-white/6 hover:text-white"
+            onMouseEnter={(e) => {
+              const el = e.currentTarget;
+              setP((v) => ({ x: el.offsetLeft, l: el.offsetWidth, visible: true, glisse: v.visible }));
+            }}
+            onFocus={(e) => {
+              const el = e.currentTarget;
+              setP((v) => ({ x: el.offsetLeft, l: el.offsetWidth, visible: true, glisse: v.visible }));
+            }}
+            onBlur={() => setP((v) => ({ ...v, visible: false, glisse: false }))}
+            className={`relative z-10 rounded-full px-2.5 py-2 text-[15px] font-medium transition-colors duration-200 focus-visible:outline-none xl:px-4 xl:text-base ${
+              actif ? "text-white" : "text-[#E6EDF5] hover:text-white"
             }`}
           >
             {l.libelle}
+            {actif && (
+              <span
+                aria-hidden="true"
+                className="absolute inset-x-3 -bottom-0.5 h-[2px] rounded-full bg-[linear-gradient(90deg,#1F5EFF,#00B4D8,#2BD47D)] shadow-[0_0_10px_rgba(0,180,216,0.8)]"
+              />
+            )}
           </Link>
         );
       })}
-    </>
+    </div>
   );
 }
 
-function LiensActifs() {
+function NavBureauActive() {
   const chemin = usePathname();
-  return <Liens chemin={chemin} />;
+  return <NavBureau chemin={chemin} />;
 }
 
 export default function Entete() {
@@ -39,13 +69,21 @@ export default function Entete() {
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-nuit/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-4 sm:px-8">
-        <Link href="/" className="shrink-0" aria-label="Web Online Concept, accueil" onClick={() => setOuvert(false)}>
-          <Image src="/logo/logo-web-fond-sombre.svg" alt="" width={207} height={44} priority className="h-10 w-auto sm:h-11" />
+        <Link href="/" className="logo-entete group relative shrink-0 rounded-lg" aria-label="Web Online Concept, accueil" onClick={() => setOuvert(false)}>
+          <Image
+            src="/logo/logo-web-fond-sombre.svg"
+            alt=""
+            width={207}
+            height={44}
+            priority
+            className="h-10 w-auto transition-[filter,transform] duration-500 ease-out group-hover:-translate-y-px group-hover:drop-shadow-[0_0_14px_rgba(0,180,216,0.55)] sm:h-11 motion-reduce:transition-none"
+          />
+          <span aria-hidden="true" className="logo-balayage pointer-events-none absolute inset-0" />
         </Link>
 
-        <nav aria-label="Navigation principale" className="hidden items-center gap-0.5 lg:flex xl:gap-1">
-          <Suspense fallback={<Liens chemin={null} />}>
-            <LiensActifs />
+        <nav aria-label="Navigation principale" className="hidden lg:block">
+          <Suspense fallback={<NavBureau chemin={null} />}>
+            <NavBureauActive />
           </Suspense>
         </nav>
 

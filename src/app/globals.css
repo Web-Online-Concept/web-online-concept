@@ -63,7 +63,36 @@ body {
   animation: flotte 6.5s ease-in-out infinite alternate;
 }
 
+/* En-tête : éclat de lumière qui balaie le logo au survol (masqué par la forme du logo) */
+.logo-balayage {
+  -webkit-mask-image: url("/logo/logo-web-fond-sombre.svg");
+  mask-image: url("/logo/logo-web-fond-sombre.svg");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  background: linear-gradient(105deg, transparent 38%, rgba(155, 235, 255, 0.95) 47%, rgba(43, 212, 125, 0.9) 53%, transparent 62%);
+  background-size: 300% 100%;
+  background-position: 100% 0;
+  opacity: 0;
+}
+.logo-entete:hover .logo-balayage,
+.logo-entete:focus-visible .logo-balayage {
+  animation: balayage 1.4s cubic-bezier(0.35, 0.5, 0.25, 1) forwards;
+}
+@keyframes balayage {
+  from {
+    background-position: 100% 0;
+    opacity: 1;
+  }
+  to {
+    background-position: 0% 0;
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .logo-entete:hover .logo-balayage {
+    animation: none;
+  }
   html {
     scroll-behavior: auto;
   }
