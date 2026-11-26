@@ -1,8 +1,10 @@
 // Planète « réseau mondial » : un globe sombre parcouru d'arcs lumineux qui épousent sa courbure
-// et relient des points répartis sur sa face visible. Géométrie calculée une fois (graine fixe),
-// projetée en vue orthographique. Décorative.
+// et relient des points répartis sur sa face visible. Géométrie calculée une fois par densité
+// (graine fixe), projetée en vue orthographique. Décorative.
+// prefixe : rend les identifiants SVG uniques quand plusieurs globes sont sur la même page.
 
 type V3 = [number, number, number];
+type Reseau = { points: V3[]; liens: [number, number][] };
 
 // Générateur pseudo-aléatoire à graine fixe : même dessin à chaque rendu
 function hasard(graine: number) {
@@ -39,36 +41,44 @@ function slerp(a: V3, b: V3, t: number): V3 {
 
 const angle = (a: V3, b: V3) => Math.acos(Math.min(1, Math.max(-1, a[0] * b[0] + a[1] * b[1] + a[2] * b[2])));
 
-const alea = hasard(2026);
-const POINTS: V3[] = [];
-while (POINTS.length < 26) {
-  const p = versVecteur(rad(-58 + alea() * 128), rad(-82 + alea() * 164));
-  if (p[2] > 0.18 && POINTS.every((q) => angle(p, q) > 0.32)) POINTS.push(p);
-}
+const RESEAUX = new Map<number, Reseau>();
 
-// Liens : chaque point vers ses deux plus proches voisins, plus quelques grandes traversées
-const LIENS: [number, number][] = [];
-const cle = (i: number, j: number) => (i < j ? `${i}-${j}` : `${j}-${i}`);
-const vus = new Set<string>();
-POINTS.forEach((p, i) => {
-  POINTS.map((q, j) => ({ j, d: angle(p, q) }))
-    .filter((x) => x.j !== i)
-    .sort((x, y) => x.d - y.d)
-    .slice(0, 3)
-    .forEach(({ j }) => {
-      if (!vus.has(cle(i, j))) {
-        vus.add(cle(i, j));
-        LIENS.push([i, j]);
-      }
-    });
-});
-for (let n = 0; n < 22; n++) {
-  const i = Math.floor(alea() * POINTS.length);
-  const j = Math.floor(alea() * POINTS.length);
-  if (i !== j && !vus.has(cle(i, j)) && angle(POINTS[i], POINTS[j]) < 1.9) {
-    vus.add(cle(i, j));
-    LIENS.push([i, j]);
+// nombre : nombre de points ; les liens suivent (3 plus proches voisins + grandes traversées)
+function reseau(nombre: number): Reseau {
+  const deja = RESEAUX.get(nombre);
+  if (deja) return deja;
+  const alea = hasard(2026);
+  const ecart = 0.32 * Math.sqrt(26 / nombre);
+  const points: V3[] = [];
+  for (let essai = 0; points.length < nombre && essai < 5000; essai++) {
+    const p = versVecteur(rad(-58 + alea() * 128), rad(-82 + alea() * 164));
+    if (p[2] > 0.18 && points.every((q) => angle(p, q) > ecart)) points.push(p);
   }
+  const liens: [number, number][] = [];
+  const vus = new Set<string>();
+  const ajoute = (i: number, j: number) => {
+    const cle = i < j ? `${i}-${j}` : `${j}-${i}`;
+    if (i === j || vus.has(cle)) return;
+    vus.add(cle);
+    liens.push([i, j]);
+  };
+  points.forEach((p, i) => {
+    points
+      .map((q, j) => ({ j, d: angle(p, q) }))
+      .filter((x) => x.j !== i)
+      .sort((x, y) => x.d - y.d)
+      .slice(0, 3)
+      .forEach(({ j }) => ajoute(i, j));
+  });
+  const traversees = Math.round(nombre * 0.85);
+  for (let n = 0; n < traversees; n++) {
+    const i = Math.floor(alea() * points.length);
+    const j = Math.floor(alea() * points.length);
+    if (angle(points[i], points[j]) < 1.9) ajoute(i, j);
+  }
+  const r = { points, liens };
+  RESEAUX.set(nombre, r);
+  return r;
 }
 
 // Tracé d'un arc : grand cercle légèrement surélevé au milieu ; seule la partie visible est dessinée
@@ -92,25 +102,43 @@ function trace(a: V3, b: V3, cx: number, cy: number, r: number) {
   return d.trim();
 }
 
-export default function PlaneteReseau({ cx, cy, r }: { cx: number; cy: number; r: number }) {
+export default function PlaneteReseau({
+  cx,
+  cy,
+  r,
+  points = 26,
+  prefixe = "pr",
+}: {
+  cx: number;
+  cy: number;
+  r: number;
+  points?: number;
+  prefixe?: string;
+}) {
+  const { points: POINTS, liens: LIENS } = reseau(points);
+  // tailles des points et des traits proportionnées au globe (référence : rayon 118)
+  const e = Math.max(0.55, r / 118);
+  const id = (nom: string) => `${prefixe}-${nom}`;
+  const chemins = LIENS.map(([i, j]) => trace(POINTS[i], POINTS[j], cx, cy, r));
+
   return (
     <g>
       <defs>
-        <radialGradient id="pr-globe" cx="0.38" cy="0.32" r="0.78">
+        <radialGradient id={id("globe")} cx="0.38" cy="0.32" r="0.78">
           <stop offset="0" stopColor="#1E5BE0" />
           <stop offset="0.4" stopColor="#10308F" />
           <stop offset="0.8" stopColor="#081B4E" />
           <stop offset="1" stopColor="#050F2C" />
         </radialGradient>
-        <radialGradient id="pr-atmo" cx="0.5" cy="0.5" r="0.5">
+        <radialGradient id={id("atmo")} cx="0.5" cy="0.5" r="0.5">
           <stop offset="0.78" stopColor="#00B4D8" stopOpacity="0" />
           <stop offset="0.86" stopColor="#00B4D8" stopOpacity="0.45" />
           <stop offset="1" stopColor="#00B4D8" stopOpacity="0" />
         </radialGradient>
-        <filter id="pr-lueur" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="2.2" />
+        <filter id={id("lueur")} x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation={2.2 * e} />
         </filter>
-        <radialGradient id="pr-point">
+        <radialGradient id={id("point")}>
           <stop offset="0" stopColor="#FFFFFF" />
           <stop offset="0.35" stopColor="#9BEBFF" stopOpacity="0.9" />
           <stop offset="1" stopColor="#00B4D8" stopOpacity="0" />
@@ -118,32 +146,35 @@ export default function PlaneteReseau({ cx, cy, r }: { cx: number; cy: number; r
       </defs>
 
       {/* Atmosphère et globe */}
-      <circle cx={cx} cy={cy} r={r * 1.18} fill="url(#pr-atmo)" />
-      <circle cx={cx} cy={cy} r={r} fill="url(#pr-globe)" />
-      <circle cx={cx} cy={cy} r={r} fill="none" stroke="#7CCBFF" strokeOpacity="0.55" strokeWidth="1.2" />
+      <circle cx={cx} cy={cy} r={r * 1.18} fill={`url(#${id("atmo")})`} />
+      <circle cx={cx} cy={cy} r={r} fill={`url(#${id("globe")})`} />
+      <circle cx={cx} cy={cy} r={r} fill="none" stroke="#7CCBFF" strokeOpacity="0.55" strokeWidth={1.2 * e} />
 
       {/* Lueur des arcs (copie floutée) */}
-      <g filter="url(#pr-lueur)" opacity="0.8">
-        {LIENS.map(([i, j], k) => {
-          const d = trace(POINTS[i], POINTS[j], cx, cy, r);
-          return d ? <path key={k} d={d} fill="none" stroke={k % 4 === 0 ? "#2BD47D" : "#00B4D8"} strokeWidth="2.4" /> : null;
-        })}
+      <g filter={`url(#${id("lueur")})`} opacity="0.8">
+        {chemins.map((d, k) =>
+          d ? <path key={k} d={d} fill="none" stroke={k % 4 === 0 ? "#2BD47D" : "#00B4D8"} strokeWidth={2.4 * e} /> : null,
+        )}
       </g>
 
-      {/* Arcs lumineux */}
-      {LIENS.map(([i, j], k) => {
-        const d = trace(POINTS[i], POINTS[j], cx, cy, r);
-        if (!d) return null;
-        const vert = k % 4 === 0;
-        return (
+      {/* Arcs lumineux et impulsions qui les parcourent */}
+      {chemins.map((d, k) =>
+        d ? (
           <g key={k}>
-            <path d={d} fill="none" stroke={vert ? "#6FF0AE" : "#B8F1FF"} strokeOpacity="0.8" strokeWidth="1" strokeLinecap="round" />
+            <path
+              d={d}
+              fill="none"
+              stroke={k % 4 === 0 ? "#6FF0AE" : "#B8F1FF"}
+              strokeOpacity="0.8"
+              strokeWidth={Math.max(0.7, e)}
+              strokeLinecap="round"
+            />
             {k % 3 === 0 && (
               <path
                 d={d}
                 fill="none"
                 stroke="#FFFFFF"
-                strokeWidth="1.6"
+                strokeWidth={1.6 * e}
                 strokeLinecap="round"
                 strokeDasharray="6 160"
                 className="influx"
@@ -151,17 +182,17 @@ export default function PlaneteReseau({ cx, cy, r }: { cx: number; cy: number; r
               />
             )}
           </g>
-        );
-      })}
+        ) : null,
+      )}
 
       {/* Points */}
       {POINTS.map((p, i) => {
         const x = cx + r * p[0];
         const y = cy - r * p[1];
-        const k = 0.55 + p[2] * 0.45;
+        const k = (0.55 + p[2] * 0.45) * e;
         return (
           <g key={i} className={i % 3 === 0 ? "pulse" : undefined} style={{ animationDelay: `${(i % 5) * 0.45}s` }}>
-            <circle cx={x} cy={y} r={9 * k} fill="url(#pr-point)" />
+            <circle cx={x} cy={y} r={9 * k} fill={`url(#${id("point")})`} />
             <circle cx={x} cy={y} r={2 * k} fill={i % 4 === 0 ? "#6FF0AE" : "#FFFFFF"} />
           </g>
         );

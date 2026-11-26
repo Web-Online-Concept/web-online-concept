@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import PlaneteReseau from "@/components/site/PlaneteReseau";
 
 // Hero de l'accueil : une fenêtre de navigateur et un téléphone sur le fond orbital de la marque.
 // Avec des captures, ils les font défiler en fondu (toutes les 5 s, pause au survol, au focus
@@ -22,12 +23,6 @@ function FondOrbital() {
         <radialGradient id="v-lueur" cx="0.5" cy="0.5" r="0.5">
           <stop offset="0" stopColor="#1F5EFF" stopOpacity="0.45" />
           <stop offset="1" stopColor="#1F5EFF" stopOpacity="0" />
-        </radialGradient>
-        <radialGradient id="v-planete" cx="0.34" cy="0.3" r="0.8">
-          <stop offset="0" stopColor="#9BEBFF" />
-          <stop offset="0.28" stopColor="#00B4D8" />
-          <stop offset="0.62" stopColor="#1F5EFF" />
-          <stop offset="1" stopColor="#13308F" />
         </radialGradient>
         <linearGradient id="v-orbite" x1="30" y1="0" x2="630" y2="0" gradientUnits="userSpaceOnUse">
           <stop offset="0" stopColor="#1F5EFF" stopOpacity="0.2" />
@@ -49,9 +44,7 @@ function FondOrbital() {
           <animateMotion dur="24s" repeatCount="indefinite" path={ORBITE} />
         </g>
       </g>
-      <circle cx="560" cy="64" r="40" fill="url(#v-planete)" />
-      <ellipse cx="548" cy="50" rx="14" ry="8" fill="#FFFFFF" fillOpacity="0.2" transform="rotate(-28 548 50)" />
-      <ellipse cx="560" cy="64" rx="66" ry="18" stroke="#7CCBFF" strokeOpacity="0.5" strokeWidth="1.4" transform="rotate(-14 560 64)" />
+      <PlaneteReseau cx={566} cy={66} r={48} points={16} prefixe="vitrine" />
     </svg>
   );
 }

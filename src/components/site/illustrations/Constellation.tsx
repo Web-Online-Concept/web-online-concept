@@ -1,3 +1,5 @@
+import PlaneteReseau from "@/components/site/PlaneteReseau";
+
 // Illustration de l'accueil : la « constellation » Web Online Concept.
 // Une planète au centre, des orbites inclinées et, autour, tout ce que le studio réalise :
 // site, application mobile, tableau de bord, IA, code. Décorative (aria-hidden).
@@ -40,12 +42,6 @@ export default function Constellation({ className = "" }: { className?: string }
           <stop offset="0" stopColor="#1F5EFF" stopOpacity="0.45" />
           <stop offset="1" stopColor="#1F5EFF" stopOpacity="0" />
         </radialGradient>
-        <radialGradient id="c-planete" cx="0.34" cy="0.3" r="0.8">
-          <stop offset="0" stopColor="#9BEBFF" />
-          <stop offset="0.28" stopColor="#00B4D8" />
-          <stop offset="0.62" stopColor="#1F5EFF" />
-          <stop offset="1" stopColor="#13308F" />
-        </radialGradient>
         <linearGradient id="c-orbite" x1="30" y1="0" x2="630" y2="0" gradientUnits="userSpaceOnUse">
           <stop offset="0" stopColor="#1F5EFF" stopOpacity="0.2" />
           <stop offset="0.55" stopColor="#00B4D8" stopOpacity="0.9" />
@@ -74,17 +70,10 @@ export default function Constellation({ className = "" }: { className?: string }
       <g transform="translate(0 285) rotate(-14 330 0)">
         <path d={ORBITE} stroke="url(#c-orbite)" strokeWidth="2" />
         <ellipse cx="330" cy="0" rx="215" ry="76" stroke="#1F5EFF" strokeOpacity="0.32" strokeWidth="1.2" />
-        <ellipse cx="330" cy="0" rx="128" ry="46" stroke="#00B4D8" strokeOpacity="0.3" strokeWidth="1.2" strokeDasharray="3 6" />
       </g>
 
-      {/* Planète */}
-      <circle cx="330" cy="285" r="62" fill="url(#c-planete)" />
-      <circle cx="330" cy="285" r="62" stroke="#FFFFFF" strokeOpacity="0.18" />
-      <ellipse cx="312" cy="262" rx="22" ry="12" fill="#FFFFFF" fillOpacity="0.18" transform="rotate(-28 312 262)" />
-      {/* Anneau avant, qui passe devant la planète */}
-      <g transform="translate(0 285) rotate(-14 330 0)">
-        <path d="M 202 0 A 128 46 0 0 0 458 0" stroke="#7CCBFF" strokeOpacity="0.55" strokeWidth="1.6" />
-      </g>
+      {/* Planète réseau */}
+      <PlaneteReseau cx={330} cy={285} r={80} prefixe="hero" />
 
       {/* Satellite */}
       <g transform="translate(0 285) rotate(-14 330 0)">

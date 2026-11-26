@@ -34,7 +34,7 @@ export default function Orbite({ className = "", ajuste = false, planete = false
       {planete && (
         <>
           <circle cx="600" cy="300" r="250" fill="url(#orbite-lueur)" />
-          <PlaneteReseau cx={600} cy={300} r={118} />
+          <PlaneteReseau cx={600} cy={300} r={118} prefixe="fin" />
         </>
       )}
       <g transform="rotate(-14 600 300)">
