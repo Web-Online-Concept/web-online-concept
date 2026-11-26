@@ -318,6 +318,12 @@ export const REALISATIONS: Realisation[] = [
     ],
     site: { href: "https://www.dietetiphyt.com/", libelle: "dietetiphyt.com" },
     teinte: "#1638A8",
+    visuels: [
+      { src: "/realisations/dietetiphyt/accueil.webp", alt: "Page d'accueil du site de Diététi'Phyt", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/dietetiphyt/blog.webp", alt: "Page « Blog » du site de Diététi'Phyt", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/dietetiphyt/services.webp", alt: "Page « Services » du site de Diététi'Phyt", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/dietetiphyt/mobile.webp", alt: "Version mobile du site de Diététi'Phyt", l: 659, h: 1187, format: "telephone" },
+    ],
     resume: {
       activite: "Diététicienne-nutritionniste et conseillère en phytothérapie",
       lieu: "Toulouse",
