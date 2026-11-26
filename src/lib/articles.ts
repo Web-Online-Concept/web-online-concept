@@ -56,3 +56,20 @@ export function dateFr(iso: string | null) {
     new Date(iso),
   );
 }
+
+// Temps de lecture estimé (environ 220 mots par minute), au moins une minute
+export function tempsLecture(contenu: string) {
+  const mots = contenu.trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.round(mots / 220));
+}
+
+// Identifiant d'ancre lisible à partir d'un titre (« 1. Laisser entrer les robots » → « laisser-entrer-les-robots »)
+export function ancre(texte: string) {
+  return texte
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/^\d+[.)]\s*/, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
