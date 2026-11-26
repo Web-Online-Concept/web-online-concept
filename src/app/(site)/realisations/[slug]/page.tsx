@@ -27,6 +27,8 @@ export default async function PageRealisation({
   if (!r) notFound();
   const autres = REALISATIONS.filter((x) => x.slug !== r.slug);
   const [principal, ...galerie] = r.visuels ?? [];
+  const ordis = galerie.filter((v) => v.format === "ordinateur");
+  const tels = galerie.filter((v) => v.format === "telephone");
   const donnees = {
     "@context": "https://schema.org",
     "@graph": [
@@ -183,25 +185,20 @@ export default async function PageRealisation({
           />
           <Conteneur className="relative">
             <h2 className="text-2xl font-semibold text-white">En images</h2>
-            <div
-              className={`mt-10 grid items-start gap-8 ${
-                galerie.every((v) => v.format === "telephone")
-                  ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
-                  : "md:grid-cols-2"
-              }`}
-            >
-              {galerie.map((v) => (
-                <Cadre
-                  key={v.src}
-                  v={v}
-                  sizes={
-                    v.format === "telephone"
-                      ? "(min-width: 1024px) 260px, 45vw"
-                      : "(min-width: 768px) 540px, 92vw"
-                  }
-                />
-              ))}
-            </div>
+            {ordis.length > 0 && (
+              <div className="mt-10 grid items-start gap-8 md:grid-cols-2">
+                {ordis.map((v) => (
+                  <Cadre key={v.src} v={v} sizes="(min-width: 768px) 540px, 92vw" />
+                ))}
+              </div>
+            )}
+            {tels.length > 0 && (
+              <div className="mt-10 grid grid-cols-2 items-start gap-8 sm:grid-cols-3 lg:grid-cols-4">
+                {tels.map((v) => (
+                  <Cadre key={v.src} v={v} sizes="(min-width: 1024px) 260px, 45vw" />
+                ))}
+              </div>
+            )}
           </Conteneur>
         </section>
       )}

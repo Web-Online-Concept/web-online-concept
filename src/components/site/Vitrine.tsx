@@ -171,7 +171,7 @@ export default function Vitrine({ diapos, ecrans }: { diapos: Diapo[]; ecrans: E
       {/* Téléphone */}
       <div className="flotte absolute right-[2%] top-[27%] w-[24%]" style={{ animationDelay: "1.2s" }}>
         <div className="rounded-[1.6rem] bg-[#10233F] p-[5%] shadow-[0_30px_60px_-24px_rgba(2,8,20,0.8)] ring-1 ring-white/12">
-          <div className="relative aspect-[9/19.5] overflow-hidden rounded-[1.25rem] bg-[#0D1E36]">
+          <div className="relative aspect-[9/17.5] overflow-hidden rounded-[1.25rem] bg-[#0D1E36]">
             {ecrans.length ? <Pile liste={ecrans} i={iApp} sizes="(min-width: 1024px) 170px, 30vw" /> : <MaquetteApp />}
           </div>
         </div>

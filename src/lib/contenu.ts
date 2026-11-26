@@ -84,6 +84,12 @@ export const REALISATIONS: Realisation[] = [
       { href: "https://play.google.com/store/apps/details?id=net.memoday.app&hl=fr", libelle: "Google Play" },
     ],
     teinte: "#1F5EFF",
+    visuels: [
+      { src: "/realisations/memoday/site.webp", alt: "Page d'accueil du site de MemoDay", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/memoday/app-1.webp", alt: "Version mobile du site de MemoDay", l: 659, h: 1280, format: "telephone" },
+      { src: "/realisations/memoday/app-2.webp", alt: "Écran « Ma mémoire » de l'application MemoDay", l: 659, h: 1280, format: "telephone" },
+      { src: "/realisations/memoday/app-3.webp", alt: "Écran « Documents » de l'application MemoDay", l: 659, h: 1280, format: "telephone" },
+    ],
   },
   {
     slug: "klart-concept",
@@ -109,6 +115,11 @@ export const REALISATIONS: Realisation[] = [
     ],
     site: { href: "https://www.klart-concept.com/", libelle: "klart-concept.com" },
     teinte: "#0B8E9E",
+    visuels: [
+      { src: "/realisations/klart-concept/accueil.webp", alt: "Page d'accueil du site de Klart Concept", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/klart-concept/concept.webp", alt: "Page « Notre concept » du site de Klart Concept", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/klart-concept/specialites.webp", alt: "Page « Nos spécialités » du site de Klart Concept", l: 1600, h: 900, format: "ordinateur" },
+    ],
     resume: {
       activite: "Création et rénovation de salles de bain, cuisines et agencements",
       lieu: "Argelès-Gazost, Hautes-Pyrénées",
@@ -255,6 +266,7 @@ export const REALISATIONS: Realisation[] = [
     teinte: "#0B8E9E",
     resume: {
       activite: "Galerie d'art en ligne du peintre Michel Carpentier",
+      lieu: "Bordeaux",
       points: ["291 œuvres en neuf univers", "Expositions et parcours de l'artiste", "Gérée par l'artiste lui-même"],
     },
   },
