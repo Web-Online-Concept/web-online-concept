@@ -1,7 +1,9 @@
 // Motif d'orbite de la marque : grande ellipse inclinée en dégradé, avec un satellite.
 // Purement décoratif.
 
-export default function Orbite({ className = "" }: { className?: string }) {
+// ajuste : l'orbite tient entièrement dans son cadre (sinon elle le remplit et peut être rognée)
+// planete : ajoute la planète de la marque au centre de l'orbite
+export default function Orbite({ className = "", ajuste = false, planete = false }: { className?: string; ajuste?: boolean; planete?: boolean }) {
   const chemin =
     "M 60 300 A 540 150 0 1 0 1140 300 A 540 150 0 1 0 60 300";
   return (
@@ -10,7 +12,7 @@ export default function Orbite({ className = "" }: { className?: string }) {
       className={className}
       aria-hidden="true"
       focusable="false"
-      preserveAspectRatio="xMidYMid slice"
+      preserveAspectRatio={ajuste ? "xMidYMid meet" : "xMidYMid slice"}
     >
       <defs>
         <linearGradient id="orbite-degrade" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
@@ -18,11 +20,28 @@ export default function Orbite({ className = "" }: { className?: string }) {
           <stop offset="0.55" stopColor="#00B4D8" stopOpacity="0.85" />
           <stop offset="1" stopColor="#2BD47D" />
         </linearGradient>
+        <radialGradient id="orbite-planete" cx="0.34" cy="0.3" r="0.8">
+          <stop offset="0" stopColor="#9BEBFF" />
+          <stop offset="0.28" stopColor="#00B4D8" />
+          <stop offset="0.62" stopColor="#1F5EFF" />
+          <stop offset="1" stopColor="#13308F" />
+        </radialGradient>
+        <radialGradient id="orbite-lueur" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0" stopColor="#1F5EFF" stopOpacity="0.5" />
+          <stop offset="1" stopColor="#1F5EFF" stopOpacity="0" />
+        </radialGradient>
         <radialGradient id="orbite-halo">
           <stop offset="0" stopColor="#7CCBFF" stopOpacity="0.8" />
           <stop offset="1" stopColor="#7CCBFF" stopOpacity="0" />
         </radialGradient>
       </defs>
+      {planete && (
+        <>
+          <circle cx="600" cy="300" r="230" fill="url(#orbite-lueur)" />
+          <circle cx="600" cy="300" r="62" fill="url(#orbite-planete)" />
+          <ellipse cx="580" cy="276" rx="22" ry="12" fill="#FFFFFF" fillOpacity="0.2" transform="rotate(-28 580 276)" />
+        </>
+      )}
       <g transform="rotate(-14 600 300)">
         <path d={chemin} fill="none" stroke="url(#orbite-degrade)" strokeWidth="2.5" />
         <path
