@@ -218,6 +218,12 @@ export const REALISATIONS: Realisation[] = [
     ],
     site: { href: "https://www.carpentier-impressions.fr/", libelle: "carpentier-impressions.fr" },
     teinte: "#00B4D8",
+    visuels: [
+      { src: "/realisations/carpentier-communication/accueil.webp", alt: "Page d'accueil du site de Carpentier Communication", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/carpentier-communication/affiches.webp", alt: "Page « Affiches » du site de Carpentier Communication", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/carpentier-communication/plv.webp", alt: "Page « PLV » du site de Carpentier Communication", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/carpentier-communication/mobile.webp", alt: "Version mobile du site de Carpentier Communication", l: 659, h: 1187, format: "telephone" },
+    ],
     resume: {
       activite: "Imprimeur d'affiches, PLV, panneaux et adhésifs depuis 1962",
       lieu: "Toulouse",
