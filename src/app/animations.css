@@ -11,10 +11,10 @@
    DefilementEcrans : les blocs ont leur taille dès le premier affichage (aucun décalage de mise en page).
    Seulement si l'écran est assez haut pour que chaque bloc y tienne, et sans « réduire les animations ». */
 @media (min-width: 1024px) and (min-height: 800px) and (prefers-reduced-motion: no-preference) {
-  html:has(.marqueur-ecrans) {
+  html:has(.marqueur-ecrans:not([data-inactif])) {
     scroll-snap-type: y mandatory;
   }
-  html:has(.marqueur-ecrans) .ecran {
+  html:has(.marqueur-ecrans:not([data-inactif])) .ecran {
     min-height: calc(100svh - 77px);
     scroll-snap-align: start;
     display: flex;
@@ -23,10 +23,10 @@
     padding-block: 36px;
     contain-intrinsic-size: auto calc(100svh - 77px);
   }
-  html:has(.marqueur-ecrans) .ecran-hero {
+  html:has(.marqueur-ecrans:not([data-inactif])) .ecran-hero {
     padding-block: 0;
   }
-  html:has(.marqueur-ecrans) .ecran-fin {
+  html:has(.marqueur-ecrans:not([data-inactif])) .ecran-fin {
     scroll-snap-align: start;
     contain-intrinsic-size: auto calc(100svh - 77px - var(--pied, 418px));
   }

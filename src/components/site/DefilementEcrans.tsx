@@ -1,10 +1,14 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 // Accueil : défilement « un bloc par écran » sur ordinateur.
 // - Rend le marqueur .marqueur-ecrans (dès le rendu serveur) : les règles de animations.css calent chaque
 //   bloc (.ecran, .ecran-fin) en haut de l'écran (clavier, barre de défilement).
+// - Next.js garde l'accueil en mémoire, masqué, quand on change de page : le marqueur reste alors dans la
+//   page mais passe en data-inactif, dès le clic sur un lien vers une autre page (avant que la nouvelle page
+//   ne s'affiche et ne remonte en haut) ou au retour arrière, et au plus tard au nettoyage de l'effet.
+//   L'attribut est retiré au retour sur l'accueil.
 // - La molette et le pavé tactile passent au bloc suivant ou précédent dès le premier cran (les navigateurs,
 //   eux, ramènent au bloc courant si le cran est petit). L'élan du pavé tactile est absorbé.
 // Uniquement sur un écran assez large et haut, et sans « réduire les animations » ; Ctrl + molette (zoom)
@@ -17,7 +21,11 @@ const VERROU = 750; // durée minimale entre deux changements de bloc (ms)
 const CALME = 180; // silence requis après un changement pour accepter un nouveau geste (ms)
 
 export default function DefilementEcrans() {
+  const marqueur = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
+    const m = marqueur.current;
+    m?.removeAttribute("data-inactif");
     const media = window.matchMedia(ECRANS);
 
     let cumul = 0;
@@ -57,10 +65,29 @@ export default function DefilementEcrans() {
       window.scrollTo({ top: Math.max(0, cible), behavior: "smooth" });
     };
 
+    // Départ vers une autre page : calage coupé avant que la nouvelle page ne s'affiche
+    const chemin = window.location.pathname;
+    const desactiver = () => m?.setAttribute("data-inactif", "");
+    const surClic = (e: MouseEvent) => {
+      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const lien = (e.target as Element | null)?.closest?.("a[href]") as HTMLAnchorElement | null;
+      if (!lien || lien.target === "_blank") return;
+      const url = new URL(lien.href, window.location.href);
+      if (url.origin === window.location.origin && url.pathname !== chemin) desactiver();
+    };
+    const surRetour = () => {
+      if (window.location.pathname !== chemin) desactiver();
+    };
+
     window.addEventListener("wheel", surMolette, { passive: false });
+    document.addEventListener("click", surClic, true);
+    window.addEventListener("popstate", surRetour);
     return () => {
+      document.removeEventListener("click", surClic, true);
+      window.removeEventListener("popstate", surRetour);
+      m?.setAttribute("data-inactif", "");
       window.removeEventListener("wheel", surMolette);
     };
   }, []);
-  return <div className="marqueur-ecrans" hidden />;
+  return <div ref={marqueur} className="marqueur-ecrans" hidden />;
 }
