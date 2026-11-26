@@ -117,14 +117,17 @@ body {
   }
 }
 
-/* Réseau autour de la planète : pointillés qui circulent, points qui pulsent */
-@keyframes flux {
+/* Globe réseau : impulsions lumineuses qui parcourent les arcs, points qui scintillent */
+@keyframes influx {
+  from {
+    stroke-dashoffset: 0;
+  }
   to {
-    stroke-dashoffset: -30;
+    stroke-dashoffset: -332;
   }
 }
-.flux {
-  animation: flux 1.8s linear infinite;
+.influx {
+  animation: influx 3.4s linear infinite;
 }
 @keyframes pulse-point {
   0%,
@@ -161,7 +164,7 @@ body {
     display: none;
   }
   .flotte,
-  .flux,
+  .influx,
   .pulse {
     animation: none;
   }
