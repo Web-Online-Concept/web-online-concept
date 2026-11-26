@@ -1,44 +1,112 @@
 import type { Metadata } from "next";
 import { metaPage } from "@/lib/seo";
 import { AppelFinal, BlocEngagements, Conteneur, EnTetePage } from "@/components/site/Blocs";
-import { MANIFESTE, METHODE } from "@/lib/contenu";
+import DefilementEcrans from "@/components/site/DefilementEcrans";
+import { ANIMATIONS_METHODE } from "@/components/site/illustrations/Methode";
+import { CarteFlottante, PhotoCadre } from "@/components/site/Photos";
+import SceneEnVue from "@/components/site/SceneEnVue";
+import { MANIFESTE, METHODE, METHODE_DETAILS, PHOTOS } from "@/lib/contenu";
 
 export const metadata: Metadata = metaPage("Méthode", "Une méthode augmentée par l'IA : cadrer vite, produire plus, tout vérifier, faire évoluer. Et des engagements concrets à chaque étape.", "/methode");
 
 export default function Methode() {
   return (
     <>
+      <DefilementEcrans />
       <EnTetePage
+        ecran
+        suite={{ id: "etape-1", libelle: "Descendre vers la première étape" }}
         illustration="methode"
         titre="Une méthode augmentée par l'IA"
         intro="L'expertise technique fixe le cap, l'IA démultiplie la production. Résultat : des projets ambitieux, livrés vite, sans compromis sur la qualité."
       />
-      <section className="bg-white py-16 sm:py-20">
+
+      {/* Les quatre étapes : une photo du studio, et l'animation de l'étape posée dessus */}
+      <section className="bg-white">
         <Conteneur>
-          <ol className="flex flex-col">
-            {METHODE.map((e, i) => (
-              <li
-                key={e.titre}
-                className="grid gap-4 border-t border-[#DCE3EC] py-10 first:border-t-2 first:border-t-nuit md:grid-cols-[10rem_1fr]"
-              >
-                <span className="text-[clamp(2.4rem,4vw,3.2rem)] font-semibold leading-none text-bleu">{i + 1}</span>
-                <div>
-                  <h2 className="text-2xl font-semibold text-nuit">{e.titre}</h2>
-                  <p className="mt-3 max-w-2xl text-[17px] leading-relaxed text-[#2C4558]">{e.texte}</p>
-                </div>
-              </li>
-            ))}
+          <ol>
+            {METHODE.map((e, i) => {
+              const d = METHODE_DETAILS[i];
+              const Animation = ANIMATIONS_METHODE[i];
+              const aDroite = i % 2 === 0;
+              return (
+                <li key={e.titre} id={`etape-${i + 1}`} className="ecran py-16 sm:py-20">
+                  <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-16">
+                    <SceneEnVue decoratif={false} className={`relative ${aDroite ? "lg:order-last" : ""}`}>
+                      <PhotoCadre photo={d ? PHOTOS[d.photo] : PHOTOS.poste} sizes="(min-width: 1024px) 540px, 92vw" className="aspect-[16/11]" />
+                      {Animation && (
+                        <div
+                          aria-hidden="true"
+                          className={`flotte absolute -bottom-10 w-[46%] overflow-hidden rounded-2xl bg-[#0F2340] shadow-[0_30px_60px_-24px_rgba(2,8,20,0.8)] ring-1 ring-white/10 ${
+                            aDroite ? "left-3 lg:-left-6" : "right-3 lg:-right-6"
+                          }`}
+                        >
+                          <div className="aspect-[4/3]">
+                            <Animation />
+                          </div>
+                        </div>
+                      )}
+                      {d && (
+                        <CarteFlottante
+                          icone="coche"
+                          titre={d.carte.titre}
+                          detail={d.carte.detail}
+                          retard={1}
+                          className={`-top-6 ${aDroite ? "right-5" : "left-5"}`}
+                        />
+                      )}
+                    </SceneEnVue>
+                    <div>
+                      <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[linear-gradient(135deg,#1F5EFF,#00B4D8_60%,#2BD47D)] text-lg font-semibold text-white shadow-[0_0_0_6px_rgba(0,180,216,0.12)]">
+                        {i + 1}
+                      </span>
+                      <h2 className="mt-5 text-[clamp(1.8rem,3vw,2.5rem)] font-semibold tracking-tight text-nuit">{e.titre}</h2>
+                      <p className="mt-3 text-[18px] leading-relaxed text-[#2C4558]">{e.texte}</p>
+                      {d && (
+                        <ul className="mt-6 flex flex-col gap-3">
+                          {d.points.map((p) => (
+                            <li key={p} className="flex items-start gap-3 text-[16px] text-[#2C4558]">
+                              <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#E3F8EC] text-[#0E7A45]">
+                                <svg
+                                  viewBox="0 0 24 24"
+                                  className="h-3.5 w-3.5"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="2.4"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  aria-hidden="true"
+                                >
+                                  <path d="M5 12.5l4.2 4.2L19 7" />
+                                </svg>
+                              </span>
+                              {p}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
           </ol>
         </Conteneur>
       </section>
+
       <BlocEngagements fond="bg-ciel" />
-      <section className="bg-white py-16 sm:py-20">
-        <Conteneur className="max-w-4xl">
+
+      {/* Conviction */}
+      <section className="ecran bg-white py-20 sm:py-28">
+        <Conteneur className="max-w-4xl text-center">
           <p className="text-xl leading-relaxed text-[#4A6178]">{MANIFESTE[0]}</p>
           <p className="mt-4 text-xl leading-relaxed text-[#2C4558]">{MANIFESTE[1]}</p>
-          <p className="mt-6 text-[clamp(1.4rem,2.6vw,2rem)] font-semibold leading-snug text-nuit">{MANIFESTE[2]}</p>
+          <p className="mx-auto mt-10 max-w-3xl text-[clamp(1.7rem,3.4vw,2.7rem)] font-semibold leading-tight tracking-tight text-nuit">
+            {MANIFESTE[2]}
+          </p>
         </Conteneur>
       </section>
+
       <AppelFinal />
     </>
   );

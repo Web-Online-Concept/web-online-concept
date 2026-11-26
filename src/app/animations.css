@@ -21,7 +21,8 @@
     flex-direction: column;
     justify-content: center;
     padding-block: 36px;
-    contain-intrinsic-size: auto calc(100svh - 77px);
+    /* taille de réserve du contenu (hors marges intérieures) tant que le bloc n'est pas affiché */
+    contain-intrinsic-size: auto calc(100svh - 77px - 72px);
   }
   html:has(.marqueur-ecrans:not([data-inactif])) li.ecran {
     border-top-color: transparent;

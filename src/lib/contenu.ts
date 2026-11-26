@@ -512,6 +512,46 @@ export const CAPACITES: Capacite[] = [
 
 export type Etape = { titre: string; texte: string };
 
+// Détail de chaque étape pour la page Méthode (même ordre que METHODE)
+export const METHODE_DETAILS: { points: string[]; photo: keyof typeof PHOTOS; carte: { titre: string; detail: string } }[] = [
+  {
+    points: [
+      "Un échange pour comprendre vos objectifs, votre public et vos contraintes",
+      "Un prototype cliquable en quelques jours",
+      "Un périmètre et un planning clairs avant le développement",
+    ],
+    photo: "rendezVous",
+    carte: { titre: "Prototype validé", detail: "On passe au développement" },
+  },
+  {
+    points: [
+      "Code, tests, contenus et traductions accélérés par l'IA",
+      "Des versions à essayer en ligne au fil du développement",
+      "Un seul interlocuteur, du premier échange à la mise en ligne",
+    ],
+    photo: "ultralarge",
+    carte: { titre: "Nouvelle version en ligne", detail: "Prête à être testée" },
+  },
+  {
+    points: [
+      "Des tests automatisés à chaque modification",
+      "Une relecture systématique du code et de la sécurité",
+      "Performance et accessibilité mesurées avant la mise en ligne",
+    ],
+    photo: "poste",
+    carte: { titre: "Tous les tests sont passés", detail: "Sécurité vérifiée" },
+  },
+  {
+    points: [
+      "Mises à jour et sauvegardes suivies",
+      "De nouvelles fonctionnalités quand votre activité grandit",
+      "Une veille permanente sur les technologies et l'IA",
+    ],
+    photo: "validation",
+    carte: { titre: "Évolution livrée", detail: "Votre projet grandit avec vous" },
+  },
+];
+
 export const METHODE: Etape[] = [
   {
     titre: "Cadrer vite",
