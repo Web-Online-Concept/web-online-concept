@@ -13,7 +13,7 @@ const ECRANS = "(min-width: 1024px) and (min-height: 800px) and (prefers-reduced
 const DUREE_TRACE = 2400;
 
 const modeEcrans = () =>
-  document.documentElement.classList.contains("defilement-ecrans") && window.matchMedia(ECRANS).matches;
+  document.querySelector(".marqueur-ecrans") !== null && window.matchMedia(ECRANS).matches;
 
 export default function SuiviEtapes({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   const liste = useRef<HTMLOListElement>(null);

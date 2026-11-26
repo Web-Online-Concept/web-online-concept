@@ -7,27 +7,28 @@
   contain-intrinsic-size: auto 900px;
 }
 
-/* Accueil sur ordinateur : un bloc par écran (classe posée sur <html> par DefilementEcrans).
+/* Accueil sur ordinateur : un bloc par écran. Le marqueur .marqueur-ecrans est rendu côté serveur par
+   DefilementEcrans : les blocs ont leur taille dès le premier affichage (aucun décalage de mise en page).
    Seulement si l'écran est assez haut pour que chaque bloc y tienne, et sans « réduire les animations ». */
 @media (min-width: 1024px) and (min-height: 800px) and (prefers-reduced-motion: no-preference) {
-  html.defilement-ecrans {
+  html:has(.marqueur-ecrans) {
     scroll-snap-type: y mandatory;
   }
-  html.defilement-ecrans .ecran {
+  html:has(.marqueur-ecrans) .ecran {
     min-height: calc(100svh - 77px);
     scroll-snap-align: start;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding-block: 36px;
-    content-visibility: visible;
+    contain-intrinsic-size: auto calc(100svh - 77px);
   }
-  html.defilement-ecrans .ecran-hero {
+  html:has(.marqueur-ecrans) .ecran-hero {
     padding-block: 0;
   }
-  html.defilement-ecrans .ecran-fin {
+  html:has(.marqueur-ecrans) .ecran-fin {
     scroll-snap-align: start;
-    content-visibility: visible;
+    contain-intrinsic-size: auto calc(100svh - 77px - var(--pied, 418px));
   }
 }
 

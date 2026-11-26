@@ -3,8 +3,8 @@
 import { useEffect } from "react";
 
 // Accueil : défilement « un bloc par écran » sur ordinateur.
-// - Pose la classe defilement-ecrans sur <html> : les règles de animations.css calent chaque bloc (.ecran,
-//   .ecran-fin) en haut de l'écran (clavier, barre de défilement).
+// - Rend le marqueur .marqueur-ecrans (dès le rendu serveur) : les règles de animations.css calent chaque
+//   bloc (.ecran, .ecran-fin) en haut de l'écran (clavier, barre de défilement).
 // - La molette et le pavé tactile passent au bloc suivant ou précédent dès le premier cran (les navigateurs,
 //   eux, ramènent au bloc courant si le cran est petit). L'élan du pavé tactile est absorbé.
 // Uniquement sur un écran assez large et haut, et sans « réduire les animations » ; Ctrl + molette (zoom)
@@ -18,8 +18,6 @@ const CALME = 180; // silence requis après un changement pour accepter un nouve
 
 export default function DefilementEcrans() {
   useEffect(() => {
-    const html = document.documentElement;
-    html.classList.add("defilement-ecrans");
     const media = window.matchMedia(ECRANS);
 
     let cumul = 0;
@@ -61,9 +59,8 @@ export default function DefilementEcrans() {
 
     window.addEventListener("wheel", surMolette, { passive: false });
     return () => {
-      html.classList.remove("defilement-ecrans");
       window.removeEventListener("wheel", surMolette);
     };
   }, []);
-  return null;
+  return <div className="marqueur-ecrans" hidden />;
 }
