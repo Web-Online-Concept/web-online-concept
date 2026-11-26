@@ -27,22 +27,33 @@ export function CadreNavigateur({
   );
 }
 
+// petit : bords et arrondis réduits, pour un téléphone affiché en petit format
 export function CadreTelephone({
   v,
   sizes = "(min-width: 1024px) 280px, 60vw",
   priorite = false,
+  petit = false,
   className = "",
 }: {
   v: Visuel;
   sizes?: string;
   priorite?: boolean;
+  petit?: boolean;
   className?: string;
 }) {
   return (
     <figure
-      className={`rounded-[2.2rem] bg-[#10233F] p-2 shadow-[0_30px_60px_-30px_rgba(2,8,20,0.75)] ring-1 ring-white/12 ${className}`}
+      className={`bg-[#10233F] shadow-[0_30px_60px_-30px_rgba(2,8,20,0.75)] ring-1 ring-white/12 ${petit ? "rounded-[1.4rem] p-1.5" : "rounded-[2.2rem] p-2"} ${className}`}
     >
-      <Image src={v.src} alt={v.alt} width={v.l} height={v.h} sizes={sizes} priority={priorite} className="block h-auto w-full rounded-[1.8rem]" />
+      <Image
+        src={v.src}
+        alt={v.alt}
+        width={v.l}
+        height={v.h}
+        sizes={sizes}
+        priority={priorite}
+        className={`block h-auto w-full ${petit ? "rounded-[1.1rem]" : "rounded-[1.8rem]"}`}
+      />
     </figure>
   );
 }
