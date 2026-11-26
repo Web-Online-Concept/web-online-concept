@@ -63,35 +63,65 @@ body {
   animation: flotte 6.5s ease-in-out infinite alternate;
 }
 
-/* En-tête : éclat de lumière qui balaie le logo au survol (masqué par la forme du logo) */
-.logo-balayage {
+/* Logo animé (en-tête et pied de page) : au survol, halo pulsé et reflet holographique
+   qui parcourt en boucle le dessin et les lettres (masqué par la forme du logo) */
+.logo-anime-image {
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.5s ease;
+}
+.logo-anime:hover .logo-anime-image,
+.logo-anime:focus-visible .logo-anime-image {
+  transform: translateY(-1px) scale(1.04);
+  animation: logo-halo 2.4s ease-in-out infinite;
+}
+.logo-anime-reflet {
   -webkit-mask-image: url("/logo/logo-web-fond-sombre.svg");
   mask-image: url("/logo/logo-web-fond-sombre.svg");
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
-  background: linear-gradient(105deg, transparent 38%, rgba(155, 235, 255, 0.95) 47%, rgba(43, 212, 125, 0.9) 53%, transparent 62%);
-  background-size: 300% 100%;
-  background-position: 100% 0;
+  background: linear-gradient(
+    100deg,
+    transparent 26%,
+    rgba(0, 180, 216, 0.9) 38%,
+    rgba(124, 235, 255, 1) 46%,
+    rgba(43, 212, 125, 1) 54%,
+    rgba(0, 180, 216, 0.8) 62%,
+    transparent 72%
+  );
+  background-size: 260% 100%;
+  background-position: 110% 0;
   opacity: 0;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
 }
-.logo-entete:hover .logo-balayage,
-.logo-entete:focus-visible .logo-balayage {
-  animation: balayage 1.4s cubic-bezier(0.35, 0.5, 0.25, 1) forwards;
+.logo-anime:hover .logo-anime-reflet,
+.logo-anime:focus-visible .logo-anime-reflet {
+  opacity: 1;
+  transform: translateY(-1px) scale(1.04);
+  animation: logo-reflet 1.9s cubic-bezier(0.45, 0.05, 0.35, 1) infinite;
 }
-@keyframes balayage {
-  from {
-    background-position: 100% 0;
-    opacity: 1;
+@keyframes logo-reflet {
+  0% {
+    background-position: 110% 0;
   }
-  to {
-    background-position: 0% 0;
-    opacity: 1;
+  70%,
+  100% {
+    background-position: -10% 0;
+  }
+}
+@keyframes logo-halo {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 8px rgba(0, 180, 216, 0.55)) drop-shadow(0 0 22px rgba(31, 94, 255, 0.35));
+  }
+  50% {
+    filter: drop-shadow(0 0 12px rgba(43, 212, 125, 0.6)) drop-shadow(0 0 30px rgba(0, 180, 216, 0.45));
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .logo-entete:hover .logo-balayage {
+  .logo-anime:hover .logo-anime-image,
+  .logo-anime:hover .logo-anime-reflet {
     animation: none;
+    transform: none;
   }
   html {
     scroll-behavior: auto;

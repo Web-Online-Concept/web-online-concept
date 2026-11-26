@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Suspense, useState } from "react";
+import { LogoAnime } from "@/components/site/Survol";
 import { NAVIGATION } from "@/lib/contenu";
 
 type Pastille = { x: number; l: number; visible: boolean; glisse: boolean };
@@ -69,17 +69,7 @@ export default function Entete() {
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-nuit/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-4 sm:px-8">
-        <Link href="/" className="logo-entete group relative shrink-0 rounded-lg" aria-label="Web Online Concept, accueil" onClick={() => setOuvert(false)}>
-          <Image
-            src="/logo/logo-web-fond-sombre.svg"
-            alt=""
-            width={207}
-            height={44}
-            priority
-            className="h-10 w-auto transition-[filter,transform] duration-500 ease-out group-hover:-translate-y-px group-hover:drop-shadow-[0_0_14px_rgba(0,180,216,0.55)] sm:h-11 motion-reduce:transition-none"
-          />
-          <span aria-hidden="true" className="logo-balayage pointer-events-none absolute inset-0" />
-        </Link>
+        <LogoAnime className="h-10 sm:h-11" priorite onClick={() => setOuvert(false)} />
 
         <nav aria-label="Navigation principale" className="hidden lg:block">
           <Suspense fallback={<NavBureau chemin={null} />}>
