@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ID_ENTREPRISE, jsonLd } from "@/lib/seo";
 import { PastilleIcone } from "@/components/site/Icones";
 import Constellation from "@/components/site/illustrations/Constellation";
-import Vitrine, { type Diapo, type Ecran } from "@/components/site/Vitrine";
+import Vitrine, { type Diapo } from "@/components/site/Vitrine";
 import {
   AppelFinal,
   BlocEngagements,
@@ -67,12 +67,14 @@ const DONNEES = {
   ],
 };
 
-// Captures pour le Hero : la première capture « ordinateur » de chaque réalisation, et les écrans de MemoDay
+// Captures pour le Hero : pour chaque réalisation, sa première capture ordinateur et sa première capture mobile
 const DIAPOS: Diapo[] = REALISATIONS.flatMap((r) => {
   const v = r.visuels?.find((x) => x.format === "ordinateur");
-  return v ? [{ src: v.src, alt: v.alt, nom: r.nom, type: r.type, slug: r.slug, domaine: r.site.libelle }] : [];
+  const m = r.visuels?.find((x) => x.format === "telephone");
+  return v
+    ? [{ src: v.src, alt: v.alt, nom: r.nom, type: r.type, slug: r.slug, domaine: r.site.libelle, mobile: m && { src: m.src, alt: m.alt } }]
+    : [];
 });
-const ECRANS: Ecran[] = REALISATIONS.flatMap((r) => (r.visuels ?? []).filter((x) => x.format === "telephone").map((x) => ({ src: x.src, alt: x.alt })));
 
 export default function Accueil() {
   return (
@@ -99,7 +101,7 @@ export default function Accueil() {
             </div>
           </div>
           <div className="mx-auto w-full max-w-[460px] lg:-mr-[6%] lg:w-[112%] lg:max-w-none">
-            {DIAPOS.length ? <Vitrine diapos={DIAPOS} ecrans={ECRANS} /> : <Constellation className="w-full" />}
+            {DIAPOS.length ? <Vitrine diapos={DIAPOS} /> : <Constellation className="w-full" />}
           </div>
         </Conteneur>
         <a

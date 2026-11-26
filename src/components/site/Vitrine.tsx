@@ -6,12 +6,13 @@ import { useEffect, useRef, useState } from "react";
 import PlaneteReseau from "@/components/site/PlaneteReseau";
 
 // Hero de l'accueil : une fenêtre de navigateur et un téléphone sur le fond orbital de la marque.
-// Avec des captures, ils les font défiler en fondu (toutes les 5 s, pause au survol, au focus
-// ou par le bouton, aucun défilement si l'utilisateur limite les animations).
+// Chaque diapo présente un site : sa capture ordinateur dans le navigateur et sa capture mobile
+// dans le téléphone, qui s'efface quand le site n'en a pas. Défilement en fondu toutes les 5 s,
+// pause au survol, au focus ou par le bouton, aucun défilement si l'utilisateur limite les animations.
 // Sans capture, ils affichent une maquette illustrée.
 
-export type Diapo = { src: string; alt: string; nom: string; type: string; slug: string; domaine: string };
 export type Ecran = { src: string; alt: string };
+export type Diapo = Ecran & { nom: string; type: string; slug: string; domaine: string; mobile?: Ecran };
 
 const DUREE = 5000;
 const ORBITE = "M 30 0 A 300 108 0 1 0 630 0 A 300 108 0 1 0 30 0";
@@ -112,13 +113,37 @@ function Pile<T extends { src: string; alt: string }>({ liste, i, sizes, priorit
   );
 }
 
-export default function Vitrine({ diapos, ecrans }: { diapos: Diapo[]; ecrans: Ecran[] }) {
+// Écrans mobiles calés sur les diapos : même indice, rien pour un site sans capture mobile
+function PileMobile({ diapos, i, sizes }: { diapos: Diapo[]; i: number; sizes: string }) {
+  const n = diapos.length;
+  const visibles = [...new Set([(i - 1 + n) % n, i, (i + 1) % n])];
+  return (
+    <>
+      {visibles.map((k) => {
+        const m = diapos[k].mobile;
+        return m ? (
+          <Image
+            key={m.src}
+            src={m.src}
+            alt={k === i ? m.alt : ""}
+            aria-hidden={k !== i}
+            fill
+            sizes={sizes}
+            className={`object-cover object-top transition-opacity duration-700 ease-out ${k === i ? "opacity-100" : "opacity-0"}`}
+          />
+        ) : null;
+      })}
+    </>
+  );
+}
+
+export default function Vitrine({ diapos }: { diapos: Diapo[] }) {
   const [i, setI] = useState(0);
   const [pause, setPause] = useState(false);
   const [survol, setSurvol] = useState(false);
   const [calme, setCalme] = useState(false);
   const zone = useRef<HTMLDivElement>(null);
-  const total = Math.max(diapos.length, ecrans.length);
+  const total = diapos.length;
 
   useEffect(() => {
     const m = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -136,7 +161,7 @@ export default function Vitrine({ diapos, ecrans }: { diapos: Diapo[]; ecrans: E
 
   const d = diapos.length ? diapos[i % diapos.length] : null;
   const iSite = diapos.length ? i % diapos.length : 0;
-  const iApp = ecrans.length ? i % ecrans.length : 0;
+  const avecMobile = !diapos.length || Boolean(d?.mobile);
 
   return (
     <div
@@ -170,9 +195,14 @@ export default function Vitrine({ diapos, ecrans }: { diapos: Diapo[]; ecrans: E
 
       {/* Téléphone */}
       <div className="flotte absolute right-[2%] top-[27%] w-[24%]" style={{ animationDelay: "1.2s" }}>
-        <div className="rounded-[1.6rem] bg-[#10233F] p-[5%] shadow-[0_30px_60px_-24px_rgba(2,8,20,0.8)] ring-1 ring-white/12">
+        <div
+          aria-hidden={!avecMobile}
+          className={`rounded-[1.6rem] bg-[#10233F] p-[5%] shadow-[0_30px_60px_-24px_rgba(2,8,20,0.8)] ring-1 ring-white/12 transition-[opacity,translate] duration-700 ease-out ${
+            avecMobile ? "opacity-100" : "translate-y-3 opacity-0"
+          }`}
+        >
           <div className="relative aspect-[9/17.5] overflow-hidden rounded-[1.25rem] bg-[#0D1E36]">
-            {ecrans.length ? <Pile liste={ecrans} i={iApp} sizes="(min-width: 1024px) 170px, 30vw" /> : <MaquetteApp />}
+            {diapos.length ? <PileMobile diapos={diapos} i={iSite} sizes="(min-width: 1024px) 170px, 30vw" /> : <MaquetteApp />}
           </div>
         </div>
       </div>
