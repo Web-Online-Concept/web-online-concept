@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Cadre } from "@/components/site/Cadres";
+import { Cadre, CadreNavigateur } from "@/components/site/Cadres";
 import Orbite from "@/components/site/Orbite";
 import IllustrationEntete, {
   type VarianteEntete,
@@ -53,6 +53,38 @@ export function EnTetePage({
         )}
       </Conteneur>
     </section>
+  );
+}
+
+// Petite carte vers une autre réalisation (bas des fiches) : vignette de la page d'accueil, nom et type
+export function CarteSuivante({ r }: { r: Realisation }) {
+  const vignette = r.visuels?.find((v) => v.format === "ordinateur");
+  return (
+    <Link
+      href={`/realisations/${r.slug}`}
+      className="group flex flex-col overflow-hidden rounded-2xl border border-[#DCE3EC] bg-white transition-shadow hover:shadow-[0_18px_40px_-24px_rgba(10,26,47,0.45)] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+    >
+      <div className="relative h-40 overflow-hidden bg-nuit">
+        <div
+          aria-hidden="true"
+          className="absolute -right-14 -top-16 h-56 w-56 rounded-full opacity-40 blur-2xl transition-opacity group-hover:opacity-60"
+          style={{ background: r.teinte }}
+        />
+        {vignette ? (
+          <CadreNavigateur
+            v={vignette}
+            sizes="(min-width: 768px) 320px, 90vw"
+            className="absolute left-5 top-5 w-[115%] transition-transform duration-500 group-hover:-translate-y-1"
+          />
+        ) : (
+          <span className="absolute bottom-4 left-5 text-sm text-[#93A6BB]">{r.site.libelle}</span>
+        )}
+      </div>
+      <div className="flex flex-col gap-1 p-5">
+        <p className="text-sm text-[#4A6178]">{r.type}</p>
+        <h3 className="text-lg font-semibold text-nuit transition-colors group-hover:text-bleu">{r.nom}</h3>
+      </div>
+    </Link>
   );
 }
 

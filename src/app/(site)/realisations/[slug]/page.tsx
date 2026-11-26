@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { AppelFinal, Conteneur } from "@/components/site/Blocs";
+import { AppelFinal, CarteSuivante, Conteneur } from "@/components/site/Blocs";
 import { Cadre, CadreNavigateur, CadreTelephone } from "@/components/site/Cadres";
 import { REALISATIONS, realisation, SITE, type Visuel } from "@/lib/contenu";
 import { ID_ENTREPRISE, jsonLd, metaPage } from "@/lib/seo";
@@ -69,7 +69,9 @@ export default async function PageRealisation({
   const { slug } = await params;
   const r = realisation(slug);
   if (!r) notFound();
-  const autres = REALISATIONS.filter((x) => x.slug !== r.slug);
+  // Les trois réalisations qui suivent, en boucle : chaque fiche en propose de différentes
+  const rang = REALISATIONS.findIndex((x) => x.slug === r.slug);
+  const suivantes = [1, 2, 3].map((k) => REALISATIONS[(rang + k) % REALISATIONS.length]);
   const [principal, ...galerie] = r.visuels ?? [];
   const [visuelBesoin, visuelRealise, ...reste] = composer(
     galerie.filter((v) => v.format === "ordinateur"),
@@ -242,23 +244,19 @@ export default async function PageRealisation({
         </Conteneur>
       </section>
 
-      <section className="bg-ciel py-14">
+      <section className="bg-ciel py-16 sm:py-20">
         <Conteneur>
-          <h2 className="text-xl font-semibold text-nuit">
-            Autres réalisations
-          </h2>
-          <ul className="mt-5 flex flex-wrap gap-3">
-            {autres.map((a) => (
-              <li key={a.slug}>
-                <Link
-                  href={`/realisations/${a.slug}`}
-                  className="inline-block rounded-full border border-[#CBD5E1] bg-white px-5 py-2.5 font-medium text-nuit hover:border-nuit"
-                >
-                  {a.nom}
-                </Link>
-              </li>
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <h2 className="text-2xl font-semibold text-nuit">Autres réalisations</h2>
+            <Link href="/realisations" className="font-medium text-bleu transition-colors hover:text-[#1638A8]">
+              Toutes les réalisations
+            </Link>
+          </div>
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            {suivantes.map((a) => (
+              <CarteSuivante key={a.slug} r={a} />
             ))}
-          </ul>
+          </div>
         </Conteneur>
       </section>
 
