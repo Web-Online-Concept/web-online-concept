@@ -2,6 +2,7 @@
 // orbites inclinées, planète en dégradé, panneaux sombres. Décoratives (aria-hidden).
 
 import type { NomIcone } from "@/components/site/Icones";
+import PlaneteReseau from "@/components/site/PlaneteReseau";
 
 export type VarianteEntete = "realisations" | "capacites" | "methode" | "apropos" | "blog" | "contact" | "faq";
 
@@ -166,9 +167,11 @@ function Methode({ id }: { id: string }) {
   );
 }
 
+// À propos : des anneaux autour du globe réseau, et des projets qui gravitent dessus (les anneaux intérieurs
+// tournent plus vite). Avec « réduire les animations », les points restent à leur place.
 function APropos({ id }: { id: string }) {
   const anneaux = [0.42, 0.58, 0.74, 0.88, 1];
-  const projets = [
+  const projets: [number, number][] = [
     [0.42, 0.6],
     [0.58, 2.2],
     [0.58, 4.4],
@@ -182,6 +185,11 @@ function APropos({ id }: { id: string }) {
     [1, 3.9],
     [1, 5.3],
   ];
+  const ellipse = (k: number) => {
+    const rx = 190 * k;
+    const ry = 70 * k;
+    return `M ${CX + rx} ${CY} A ${rx} ${ry} 0 1 1 ${CX - rx} ${CY} A ${rx} ${ry} 0 1 1 ${CX + rx} ${CY}`;
+  };
   return (
     <>
       <circle cx={CX} cy={CY} r="170" fill={`url(#${id}-lueur)`} />
@@ -198,11 +206,32 @@ function APropos({ id }: { id: string }) {
             strokeWidth={i === anneaux.length - 1 ? 1.8 : 1.1}
           />
         ))}
-        {projets.map(([k, a], i) => (
-          <circle key={i} cx={CX + Math.cos(a) * 190 * k} cy={CY + Math.sin(a) * 70 * k} r={k === 1 ? 5 : 3.5} fill={k === 1 ? "#2BD47D" : "#7CCBFF"} fillOpacity={0.5 + k * 0.5} />
-        ))}
+        {/* Projets en orbite : durée proportionnelle à la taille de l'anneau, départ décalé selon l'angle */}
+        <g className="orbite-mobile">
+          {projets.map(([k, a], i) => {
+            const duree = 14 + k * 26;
+            const depart = -((a / (Math.PI * 2)) * duree).toFixed(2);
+            return (
+              <circle key={i} r={k === 1 ? 5 : 3.5} fill={k === 1 ? "#2BD47D" : "#7CCBFF"} fillOpacity={0.5 + k * 0.5}>
+                <animateMotion dur={`${duree}s`} begin={`${depart}s`} repeatCount="indefinite" path={ellipse(k)} />
+              </circle>
+            );
+          })}
+        </g>
+        <g className="orbite-fixe">
+          {projets.map(([k, a], i) => (
+            <circle
+              key={i}
+              cx={CX + Math.cos(a) * 190 * k}
+              cy={CY + Math.sin(a) * 70 * k}
+              r={k === 1 ? 5 : 3.5}
+              fill={k === 1 ? "#2BD47D" : "#7CCBFF"}
+              fillOpacity={0.5 + k * 0.5}
+            />
+          ))}
+        </g>
       </g>
-      <circle cx={CX} cy={CY} r="30" fill={`url(#${id}-planete)`} />
+      <PlaneteReseau cx={CX} cy={CY} r={36} points={14} prefixe={`${id}-globe`} />
     </>
   );
 }

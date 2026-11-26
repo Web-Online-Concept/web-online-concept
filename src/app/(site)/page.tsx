@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ID_ENTREPRISE, jsonLd } from "@/lib/seo";
 import BlocMethode from "@/components/site/BlocMethode";
 import DefilementEcrans from "@/components/site/DefilementEcrans";
-import { CadreTelephone } from "@/components/site/Cadres";
+import EventailApplication from "@/components/site/EventailApplication";
 import { CarteFlottante, PhotoCadre } from "@/components/site/Photos";
 import CapacitesInteractives from "@/components/site/CapacitesInteractives";
 import { SCENES_CAPACITES } from "@/components/site/illustrations/Capacites";
@@ -23,6 +23,7 @@ import {
   STUDIO,
   PROJETS_SUR_MESURE,
   REALISATIONS,
+  ecransApplication,
   SITE,
   SITES_CLIENTS,
 } from "@/lib/contenu";
@@ -84,7 +85,7 @@ const DIAPOS: Diapo[] = REALISATIONS.flatMap((r) => {
 });
 
 // Écrans de l'application MemoDay pour le bloc « Pour qui ? »
-const ECRANS_MEMODAY = (REALISATIONS.find((r) => r.slug === "memoday")?.visuels ?? []).filter((v) => v.format === "telephone").slice(0, 3);
+const ECRANS_MEMODAY = ecransApplication("memoday");
 
 export default function Accueil() {
   return (
@@ -170,24 +171,7 @@ export default function Accueil() {
           <div className="mt-12 grid gap-14 md:grid-cols-2 md:gap-8">
             <article>
               <div className="relative aspect-[16/11]">
-                <div className="absolute inset-0 overflow-hidden rounded-3xl bg-nuit shadow-[0_34px_70px_-40px_rgba(10,26,47,0.55)]">
-                  <div aria-hidden="true" className="absolute -left-16 -top-20 h-72 w-72 rounded-full bg-bleu opacity-40 blur-3xl" />
-                  <div aria-hidden="true" className="absolute -bottom-24 -right-10 h-64 w-64 rounded-full bg-vert opacity-20 blur-3xl" />
-                  {ECRANS_MEMODAY.map((v, k) => (
-                    <div
-                      key={v.src}
-                      className={`absolute top-1/2 ${
-                        k === 1
-                          ? "left-1/2 z-10 w-[29%] -translate-x-1/2 -translate-y-1/2"
-                          : k === 0
-                            ? "left-[14%] w-[24%] -translate-y-[46%] -rotate-6 opacity-90"
-                            : "right-[14%] w-[24%] -translate-y-[46%] rotate-6 opacity-90"
-                      }`}
-                    >
-                      <CadreTelephone v={v} petit sizes="(min-width: 768px) 170px, 30vw" />
-                    </div>
-                  ))}
-                </div>
+                <EventailApplication ecrans={ECRANS_MEMODAY} />
                 <CarteFlottante icone="appareils" titre="iPhone, Android et web" detail="Une seule application" className="-top-6 right-5 z-20" />
               </div>
               <h3 className="mt-10 text-xl font-semibold text-nuit">{POUR_QUI.tous.titre}</h3>

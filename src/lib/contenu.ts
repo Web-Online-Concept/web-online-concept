@@ -689,6 +689,11 @@ export const LEGAL = {
 export const PROJETS_SUR_MESURE = REALISATIONS.filter((r) => r.categorie === "sur-mesure");
 export const SITES_CLIENTS = REALISATIONS.filter((r) => r.categorie === "client");
 
+// Écrans mobiles d'une réalisation (au plus trois), pour les éventails d'application
+export function ecransApplication(slug: string) {
+  return (REALISATIONS.find((r) => r.slug === slug)?.visuels ?? []).filter((v) => v.format === "telephone").slice(0, 3);
+}
+
 export function realisation(slug: string) {
   return REALISATIONS.find((r) => r.slug === slug);
 }

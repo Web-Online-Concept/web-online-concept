@@ -36,6 +36,11 @@
   }
 }
 
+/* Points en orbite (en-tête À propos) : version animée, et version fixe si l'on limite les animations */
+.orbite-fixe {
+  display: none;
+}
+
 /* ---------- Méthode : étapes reliées par la ligne de progression ---------- */
 
 .m-visuel {
@@ -1089,6 +1094,12 @@
     display: none;
   }
   .e-statique {
+    display: inline;
+  }
+  .orbite-mobile {
+    display: none;
+  }
+  .orbite-fixe {
     display: inline;
   }
   .e2-avatar {
