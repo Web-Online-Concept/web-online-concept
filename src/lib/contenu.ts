@@ -119,6 +119,7 @@ export const REALISATIONS: Realisation[] = [
       { src: "/realisations/klart-concept/accueil.webp", alt: "Page d'accueil du site de Klart Concept", l: 1600, h: 900, format: "ordinateur" },
       { src: "/realisations/klart-concept/concept.webp", alt: "Page « Notre concept » du site de Klart Concept", l: 1600, h: 900, format: "ordinateur" },
       { src: "/realisations/klart-concept/specialites.webp", alt: "Page « Nos spécialités » du site de Klart Concept", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/klart-concept/mobile.webp", alt: "Version mobile du site de Klart Concept", l: 659, h: 1187, format: "telephone" },
     ],
     resume: {
       activite: "Création et rénovation de salles de bain, cuisines et agencements",
@@ -150,6 +151,12 @@ export const REALISATIONS: Realisation[] = [
     ],
     site: { href: "https://inspirationetmeditation.com", libelle: "inspirationetmeditation.com" },
     teinte: "#2BD47D",
+    visuels: [
+      { src: "/realisations/inspiration-et-meditation/accueil.webp", alt: "Page d'accueil du site de Inspiration & Méditation", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/inspiration-et-meditation/livre.webp", alt: "Page « Le livre » du site de Inspiration & Méditation", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/inspiration-et-meditation/sanctuaire.webp", alt: "Page « Le Sanctuaire » du site de Inspiration & Méditation", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/inspiration-et-meditation/mobile.webp", alt: "Version mobile du site de Inspiration & Méditation", l: 659, h: 1280, format: "telephone" },
+    ],
   },
   {
     slug: "menuiserie-gaudissard",
