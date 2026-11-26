@@ -1,4 +1,5 @@
 import { cacheLife } from "next/cache";
+import MesurePied from "@/components/site/MesurePied";
 import { LiensLumineux, LogoAnime } from "@/components/site/Survol";
 
 // Année du copyright, recalculée chaque jour
@@ -11,6 +12,7 @@ async function Annee() {
 export default function PiedDePage() {
   return (
     <footer className="border-t border-white/10 bg-nuit text-[#C3D0DD]">
+      <MesurePied />
       <div className="mx-auto grid max-w-5xl gap-12 px-5 py-16 text-center sm:px-8 md:grid-cols-3 md:gap-8">
         <div className="flex flex-col items-center gap-4">
           <LogoAnime className="h-11" />

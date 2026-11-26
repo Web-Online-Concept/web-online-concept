@@ -109,11 +109,12 @@ export function CarteRealisation({ r }: { r: Realisation }) {
 
 export function AppelFinal() {
   return (
-    <section className="relative overflow-hidden bg-[radial-gradient(ellipse_at_85%_40%,#163C86_0%,#0A1A2F_62%)] text-white">
-      <Orbite className="pointer-events-none absolute -right-40 top-1/2 hidden h-[520px] w-[1000px] -translate-y-1/2 opacity-70 md:block" />
-      <Conteneur className="relative flex flex-col items-start gap-5 py-20 sm:py-24">
-        <p className="max-w-3xl text-[clamp(1.6rem,3.4vw,2.6rem)] font-semibold leading-tight">{SITE.phraseFinale}</p>
-        <p className="text-lg text-[#C3D0DD]">
+    // Tout en bas de page, ce bloc et le pied de page remplissent exactement l'écran (77 px = menu)
+    <section className="relative flex min-h-[calc(100svh-77px-var(--pied,418px))] items-center overflow-hidden bg-[radial-gradient(ellipse_at_80%_45%,#163C86_0%,#0A1A2F_64%)] text-white">
+      <Orbite className="pointer-events-none absolute -right-48 top-1/2 hidden h-[680px] w-[1300px] -translate-y-1/2 opacity-70 md:block" />
+      <Conteneur className="relative flex flex-col items-start gap-6 py-20 sm:py-24">
+        <p className="max-w-3xl text-[clamp(1.9rem,4.2vw,3.4rem)] font-semibold leading-[1.1] tracking-tight">{SITE.phraseFinale}</p>
+        <p className="text-xl text-[#C3D0DD]">
           Vous avez été recommandé ?{" "}
           <Link href="/contact" className="font-medium text-[#7CCBFF] transition-colors hover:text-white">
             Écrivez-nous directement
