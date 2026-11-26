@@ -18,7 +18,7 @@ export function LogoAnime({
 }) {
   return (
     <Link href="/" className="logo-anime group relative inline-block shrink-0 rounded-lg" aria-label="Web Online Concept, accueil" onClick={onClick}>
-      <Image src="/logo/logo-web-fond-sombre.svg" alt="" width={207} height={44} priority={priorite} className={`logo-anime-image w-auto ${className}`} />
+      <Image src="/logo/logo-web-fond-sombre.svg" alt="" width={207} height={44} preload={priorite} className={`logo-anime-image w-auto ${className}`} />
       <span aria-hidden="true" className="logo-anime-reflet pointer-events-none absolute inset-0" />
     </Link>
   );

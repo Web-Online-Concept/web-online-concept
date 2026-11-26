@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Cadre, CadreNavigateur } from "@/components/site/Cadres";
 import Orbite from "@/components/site/Orbite";
+import ZoneAnimee from "@/components/site/ZoneAnimee";
+import { VISUELS_ENGAGEMENTS } from "@/components/site/illustrations/Engagements";
 import IllustrationEntete, {
   type VarianteEntete,
 } from "@/components/site/illustrations/Entetes";
@@ -142,7 +144,7 @@ export function CarteRealisation({ r }: { r: Realisation }) {
 export function AppelFinal() {
   return (
     // Tout en bas de page, ce bloc et le pied de page remplissent exactement l'écran (77 px = menu)
-    <section className="relative flex min-h-[calc(100svh-77px-var(--pied,418px))] items-center overflow-hidden bg-[radial-gradient(ellipse_at_80%_45%,#163C86_0%,#0A1A2F_64%)] text-white">
+    <section className="rendu-differe relative flex min-h-[calc(100svh-77px-var(--pied,418px))] items-center overflow-hidden bg-[radial-gradient(ellipse_at_80%_45%,#163C86_0%,#0A1A2F_64%)] text-white">
       <Orbite ajuste planete className="pointer-events-none absolute right-[3%] top-1/2 hidden aspect-[2/1] h-[82%] w-auto -translate-y-1/2 opacity-80 md:block" />
       <Conteneur className="relative flex flex-col items-start gap-6 py-20 sm:py-24">
         <p className="max-w-3xl text-[clamp(1.9rem,4.2vw,3.4rem)] font-semibold leading-[1.1] tracking-tight">{SITE.phraseFinale}</p>
@@ -158,34 +160,30 @@ export function AppelFinal() {
   );
 }
 
+// Les quatre engagements, chacun illustré d'un visuel animé (fond ciel sur une section blanche, et inversement)
 export function BlocEngagements({ fond = "bg-white" }: { fond?: string }) {
+  const visuel = fond === "bg-white" ? "bg-ciel" : "bg-white";
   return (
-    <section className={`${fond} py-20 sm:py-24`}>
+    <section className={`rendu-differe ${fond} py-20 sm:py-24`}>
       <Conteneur>
         <h2 className="text-[clamp(1.7rem,3vw,2.4rem)] font-semibold tracking-tight text-nuit">Nos engagements</h2>
-        <ul className="mt-10 grid gap-x-10 gap-y-9 sm:grid-cols-2 lg:grid-cols-4">
-          {ENGAGEMENTS.map((e) => (
-            <li key={e.titre} className="flex gap-4">
-              <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#E3F8EC] text-[#0E7A45]">
-                <svg
-                  viewBox="0 0 24 24"
-                  className="h-4 w-4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M5 12.5l4.2 4.2L19 7" />
-                </svg>
-              </span>
-              <div>
-                <h3 className="text-lg font-semibold text-nuit">{e.titre}</h3>
-                <p className="mt-1.5 text-[15px] leading-relaxed text-[#2C4558]">{e.texte}</p>
-              </div>
-            </li>
-          ))}
+        <ul className="mt-10 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+          {ENGAGEMENTS.map((e, i) => {
+            const Visuel = VISUELS_ENGAGEMENTS[i];
+            return (
+              <li key={e.titre} className="flex flex-col">
+                <ZoneAnimee className={`relative aspect-[4/3] overflow-hidden rounded-2xl ${visuel}`}>
+                  <div
+                    aria-hidden="true"
+                    className="absolute -right-10 -top-12 h-40 w-40 rounded-full bg-cyan opacity-[0.12] blur-2xl"
+                  />
+                  {Visuel && <Visuel />}
+                </ZoneAnimee>
+                <h3 className="mt-6 text-lg font-semibold text-nuit">{e.titre}</h3>
+                <p className="mt-2 text-[15px] leading-relaxed text-[#2C4558]">{e.texte}</p>
+              </li>
+            );
+          })}
         </ul>
       </Conteneur>
     </section>

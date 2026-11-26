@@ -92,9 +92,10 @@ function MaquetteApp() {
 }
 
 // Superposition en fondu : on garde la précédente (qui s'efface), la courante et la suivante (préchargée)
-function Pile<T extends { src: string; alt: string }>({ liste, i, sizes, priorite }: { liste: T[]; i: number; sizes: string; priorite?: boolean }) {
+// debut : premier affichage, sans diapo précédente (elle n'a pas encore été vue)
+function Pile<T extends { src: string; alt: string }>({ liste, i, sizes, priorite, debut }: { liste: T[]; i: number; sizes: string; priorite?: boolean; debut?: boolean }) {
   const n = liste.length;
-  const visibles = n === 1 ? [0] : n === 2 ? [i, (i + 1) % n] : [(i - 1 + n) % n, i, (i + 1) % n];
+  const visibles = n === 1 ? [0] : n === 2 || debut ? [i, (i + 1) % n] : [(i - 1 + n) % n, i, (i + 1) % n];
   return (
     <>
       {visibles.map((k) => (
@@ -105,7 +106,8 @@ function Pile<T extends { src: string; alt: string }>({ liste, i, sizes, priorit
           aria-hidden={k !== i}
           fill
           sizes={sizes}
-          priority={priorite && k === 0}
+          fetchPriority={priorite && debut && k === i ? "high" : undefined}
+          loading={priorite && debut && k === i ? "eager" : undefined}
           className={`object-cover object-top transition-opacity duration-700 ease-out ${k === i ? "opacity-100" : "opacity-0"}`}
         />
       ))}
@@ -114,9 +116,9 @@ function Pile<T extends { src: string; alt: string }>({ liste, i, sizes, priorit
 }
 
 // Écrans mobiles calés sur les diapos : même indice, rien pour un site sans capture mobile
-function PileMobile({ diapos, i, sizes }: { diapos: Diapo[]; i: number; sizes: string }) {
+function PileMobile({ diapos, i, sizes, debut }: { diapos: Diapo[]; i: number; sizes: string; debut?: boolean }) {
   const n = diapos.length;
-  const visibles = [...new Set([(i - 1 + n) % n, i, (i + 1) % n])];
+  const visibles = [...new Set(debut ? [i, (i + 1) % n] : [(i - 1 + n) % n, i, (i + 1) % n])];
   return (
     <>
       {visibles.map((k) => {
@@ -188,7 +190,7 @@ export default function Vitrine({ diapos }: { diapos: Diapo[] }) {
             </span>
           </div>
           <div className="relative aspect-[16/9] bg-[#0D1E36]">
-            {diapos.length ? <Pile liste={diapos} i={iSite} sizes="(min-width: 1024px) 520px, 88vw" priorite /> : <MaquetteSite />}
+            {diapos.length ? <Pile liste={diapos} i={iSite} sizes="(min-width: 1024px) 520px, 88vw" priorite debut={i === 0} /> : <MaquetteSite />}
           </div>
         </div>
       </div>
@@ -202,7 +204,7 @@ export default function Vitrine({ diapos }: { diapos: Diapo[] }) {
           }`}
         >
           <div className="relative aspect-[9/17.5] overflow-hidden rounded-[1.25rem] bg-[#0D1E36]">
-            {diapos.length ? <PileMobile diapos={diapos} i={iSite} sizes="(min-width: 1024px) 170px, 30vw" /> : <MaquetteApp />}
+            {diapos.length ? <PileMobile diapos={diapos} i={iSite} sizes="(min-width: 1024px) 170px, 30vw" debut={i === 0} /> : <MaquetteApp />}
           </div>
         </div>
       </div>

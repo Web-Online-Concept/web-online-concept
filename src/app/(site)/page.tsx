@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ID_ENTREPRISE, jsonLd } from "@/lib/seo";
-import { PastilleIcone } from "@/components/site/Icones";
+import BlocMethode from "@/components/site/BlocMethode";
+import CapacitesInteractives from "@/components/site/CapacitesInteractives";
+import { SCENES_CAPACITES } from "@/components/site/illustrations/Capacites";
 import Constellation from "@/components/site/illustrations/Constellation";
 import Vitrine, { type Diapo } from "@/components/site/Vitrine";
 import {
@@ -13,7 +15,6 @@ import {
 import {
   CAPACITES,
   MANIFESTE,
-  METHODE,
   PROJETS_SUR_MESURE,
   REALISATIONS,
   SITE,
@@ -170,7 +171,7 @@ export default function Accueil() {
       </section>
 
       {/* Capacités */}
-      <section className="border-t border-[#E3E9F0] bg-white py-20 sm:py-24">
+      <section className="rendu-differe border-t border-[#E3E9F0] bg-white py-20 sm:py-24">
         <Conteneur>
           <div className="flex flex-wrap items-end justify-between gap-4">
             <h2 className="text-[clamp(1.7rem,3vw,2.4rem)] font-semibold tracking-tight text-nuit">
@@ -183,53 +184,17 @@ export default function Accueil() {
               Le détail des capacités
             </Link>
           </div>
-          <ul className="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
-            {CAPACITES.map((c) => (
-              <li key={c.titre} className="flex flex-col gap-4">
-                <PastilleIcone nom={c.icone} />
-                <div>
-                  <h3 className="text-lg font-semibold text-nuit">{c.titre}</h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-[#2C4558]">
-                    {c.texte}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
+          <CapacitesInteractives
+            capacites={CAPACITES.map(({ titre, texte, icone }) => ({ titre, texte, icone }))}
+            scenes={CAPACITES.map((c) => {
+              const Scene = SCENES_CAPACITES[c.icone];
+              return <Scene key={c.icone} />;
+            })}
+          />
         </Conteneur>
       </section>
 
-      {/* Méthode */}
-      <section className="bg-ciel py-20 sm:py-24">
-        <Conteneur>
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <h2 className="text-[clamp(1.7rem,3vw,2.4rem)] font-semibold tracking-tight text-nuit">
-              Une méthode augmentée par l&apos;IA
-            </h2>
-            <Link
-              href="/methode"
-              className="font-medium text-bleu transition-colors hover:text-[#1638A8]"
-            >
-              La méthode en détail
-            </Link>
-          </div>
-          <ol className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {METHODE.map((e, i) => (
-              <li key={e.titre} className="rounded-2xl bg-white p-6">
-                <span className="text-sm font-semibold text-bleu">
-                  Étape {i + 1}
-                </span>
-                <h3 className="mt-2 text-lg font-semibold text-nuit">
-                  {e.titre}
-                </h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-[#2C4558]">
-                  {e.texte}
-                </p>
-              </li>
-            ))}
-          </ol>
-        </Conteneur>
-      </section>
+      <BlocMethode />
 
       <BlocEngagements />
 

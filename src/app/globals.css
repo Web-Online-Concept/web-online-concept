@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./animations.css";
 
 @theme inline {
   --color-bleu: #1f5eff;

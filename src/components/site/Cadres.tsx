@@ -22,7 +22,7 @@ export function CadreNavigateur({
         <span className="h-2 w-2 rounded-full bg-[#3B5A85]" />
         <span className="ml-3 h-3 w-1/3 rounded-full bg-[#1A3358]" />
       </div>
-      <Image src={v.src} alt={v.alt} width={v.l} height={v.h} sizes={sizes} priority={priorite} className="block h-auto w-full" />
+      <Image src={v.src} alt={v.alt} width={v.l} height={v.h} sizes={sizes} fetchPriority={priorite ? "high" : undefined} loading={priorite ? "eager" : undefined} className="block h-auto w-full" />
     </figure>
   );
 }
@@ -51,7 +51,7 @@ export function CadreTelephone({
         width={v.l}
         height={v.h}
         sizes={sizes}
-        priority={priorite}
+        fetchPriority={priorite ? "high" : undefined} loading={priorite ? "eager" : undefined}
         className={`block h-auto w-full ${petit ? "rounded-[1.1rem]" : "rounded-[1.8rem]"}`}
       />
     </figure>
