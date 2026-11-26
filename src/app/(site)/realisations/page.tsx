@@ -34,7 +34,7 @@ export default function Realisations() {
               Sites créés et suivis pour nos clients
             </h2>
             <p className="mt-3 text-lg leading-relaxed text-[#4A6178]">
-              Imprimeurs, artisans, praticiens, professionnels de l&apos;événementiel : des sites conçus, mis en ligne et suivis dans la durée, de
+              Imprimeurs, artisans, praticiens, artiste peintre, professionnels de l&apos;événementiel : des sites conçus, mis en ligne et suivis dans la durée, de
               Toulouse à La Rochelle.
             </p>
           </div>
@@ -58,22 +58,24 @@ export default function Realisations() {
                     </Link>
                   </h3>
                   <p className="mt-1 text-[15px] leading-relaxed text-[#2C4558]">{r.resume?.activite}</p>
-                  <p className="mt-1 flex items-center gap-1.5 text-sm text-[#4A6178]">
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="h-4 w-4 shrink-0"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" />
-                      <circle cx="12" cy="10" r="2.3" />
-                    </svg>
-                    {r.resume?.lieu}
-                  </p>
+                  {r.resume?.lieu && (
+                    <p className="mt-1 flex items-center gap-1.5 text-sm text-[#4A6178]">
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="h-4 w-4 shrink-0"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" />
+                        <circle cx="12" cy="10" r="2.3" />
+                      </svg>
+                      {r.resume?.lieu}
+                    </p>
+                  )}
                 </div>
                 <ul className="flex flex-wrap gap-2" aria-label={`Points forts du site de ${r.nom}`}>
                   {r.resume?.points.map((x) => (

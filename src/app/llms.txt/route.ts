@@ -19,7 +19,7 @@ export function GET() {
     ...PROJETS_SUR_MESURE.map((r) => `- [${r.nom}](${SITE.url}/realisations/${r.slug}) : ${r.type}. ${r.accroche}`),
     "",
     "## Sites créés et suivis pour des clients",
-    ...SITES_CLIENTS.map((r) => `- [${r.nom}](${SITE.url}/realisations/${r.slug}) : ${r.resume?.activite ?? r.type} (${r.resume?.lieu ?? ""}).`),
+    ...SITES_CLIENTS.map((r) => `- [${r.nom}](${SITE.url}/realisations/${r.slug}) : ${r.resume?.activite ?? r.type}${r.resume?.lieu ? ` (${r.resume.lieu})` : ""}.`),
     "",
     "## Questions fréquentes",
     ...FAQ.map((q) => `- ${q.question} ${q.reponse}`),

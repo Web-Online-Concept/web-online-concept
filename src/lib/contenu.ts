@@ -51,7 +51,7 @@ export type Realisation = {
   visuels?: Visuel[]; // le premier sert de vignette
   categorie: "sur-mesure" | "client";
   // Pour la liste des sites clients : activité, ville et trois points forts
-  resume?: { activite: string; lieu: string; points: string[] };
+  resume?: { activite: string; lieu?: string; points: string[] };
 };
 
 export const REALISATIONS: Realisation[] = [
@@ -86,28 +86,34 @@ export const REALISATIONS: Realisation[] = [
     teinte: "#1F5EFF",
   },
   {
-    slug: "galerie-carpentier",
+    slug: "klart-concept",
     categorie: "sur-mesure",
-    nom: "Galerie Michel Carpentier",
-    type: "Galerie d'art en ligne",
-    client: "Michel Carpentier, peintre",
-    accroche: "La galerie en ligne d'un peintre, de ses toiles à ses expositions.",
+    nom: "Klart Concept",
+    type: "Site vitrine d'artisan de la rénovation",
+    client: "Klart Concept, Argelès-Gazost",
+    accroche: "Salles de bain, cuisines et agencements sur mesure dans les Hautes-Pyrénées.",
     besoin:
-      "L'œuvre de Michel Carpentier couvre neuf univers, du rugby aux caricatures, des océans aux créations numériques. Il fallait un écrin à la hauteur de ce travail, et un outil simple pour que l'artiste fasse vivre sa galerie lui-même.",
+      "Klart Concept crée et rénove salles de bain, cuisines et agencements, et prend en charge tous les corps de métier d'une rénovation intérieure, clés en main. Le site devait montrer la qualité des réalisations, couvrir toute la zone d'intervention et générer des demandes de devis.",
     realise: [
-      "Une galerie organisée en neuf catégories, pensée pour mettre chaque toile en valeur.",
-      "Les pages Expositions, Histoire et Amis, qui racontent le parcours de l'artiste.",
-      "Un espace d'administration complet : l'artiste ajoute ses œuvres et ses expositions en toute autonomie.",
-      "Un site rapide, agréable sur mobile et optimisé pour le référencement.",
+      "Une page par spécialité : salles de bain, cuisines, agencements et conseils.",
+      "Des pages métiers : isolation, électricité, plomberie, carrelage et peinture.",
+      "Des galeries photos des réalisations.",
+      "Une page zone d'activité couvrant une vingtaine de communes, dont Tarbes et Lourdes.",
+      "Les avis clients Google, un blog bricolage et une page partenaires.",
+      "Une demande de devis gratuit, ainsi que la création du site et sa gestion dans la durée.",
     ],
-    technos: ["Next.js", "TypeScript", "Supabase", "Vercel"],
     chiffres: [
-      { valeur: "291", libelle: "œuvres en ligne" },
-      { valeur: "22", libelle: "expositions présentées" },
-      { valeur: "9", libelle: "univers artistiques" },
+      { valeur: "15 ans", libelle: "d'expérience de l'entreprise" },
+      { valeur: "20", libelle: "communes dans la zone d'intervention" },
+      { valeur: "5", libelle: "corps de métier présentés" },
     ],
-    site: { href: "https://www.carpentier-galerie.com/fr", libelle: "carpentier-galerie.com" },
+    site: { href: "https://www.klart-concept.com/", libelle: "klart-concept.com" },
     teinte: "#0B8E9E",
+    resume: {
+      activite: "Création et rénovation de salles de bain, cuisines et agencements",
+      lieu: "Argelès-Gazost, Hautes-Pyrénées",
+      points: ["Galeries de réalisations", "Avis clients et blog", "Référencement sur sa zone d'intervention"],
+    },
   },
   {
     slug: "inspiration-et-meditation",
@@ -133,7 +139,8 @@ export const REALISATIONS: Realisation[] = [
     ],
     site: { href: "https://inspirationetmeditation.com", libelle: "inspirationetmeditation.com" },
     teinte: "#2BD47D",
-  },  {
+  },
+  {
     slug: "menuiserie-gaudissard",
     categorie: "client",
     nom: "Menuiserie Gaudissard",
@@ -224,33 +231,31 @@ export const REALISATIONS: Realisation[] = [
     },
   },
   {
-    slug: "klart-concept",
+    slug: "galerie-carpentier",
     categorie: "client",
-    nom: "Klart Concept",
-    type: "Site vitrine d'artisan de la rénovation",
-    client: "Klart Concept, Argelès-Gazost",
-    accroche: "Salles de bain, cuisines et agencements sur mesure dans les Hautes-Pyrénées.",
+    nom: "Galerie Michel Carpentier",
+    type: "Galerie d'art en ligne",
+    client: "Michel Carpentier, peintre",
+    accroche: "La galerie en ligne d'un peintre, de ses toiles à ses expositions.",
     besoin:
-      "Klart Concept crée et rénove salles de bain, cuisines et agencements, et prend en charge tous les corps de métier d'une rénovation intérieure, clés en main. Le site devait montrer la qualité des réalisations, couvrir toute la zone d'intervention et générer des demandes de devis.",
+      "L'œuvre de Michel Carpentier couvre neuf univers, du rugby aux caricatures, des océans aux créations numériques. Il fallait un écrin à la hauteur de ce travail, et un outil simple pour que l'artiste fasse vivre sa galerie lui-même.",
     realise: [
-      "Une page par spécialité : salles de bain, cuisines, agencements et conseils.",
-      "Des pages métiers : isolation, électricité, plomberie, carrelage et peinture.",
-      "Des galeries photos des réalisations.",
-      "Une page zone d'activité couvrant une vingtaine de communes, dont Tarbes et Lourdes.",
-      "Les avis clients Google, un blog bricolage et une page partenaires.",
-      "Une demande de devis gratuit, ainsi que la création du site et sa gestion dans la durée.",
+      "Une galerie organisée en neuf catégories, pensée pour mettre chaque toile en valeur.",
+      "Les pages Expositions, Histoire et Amis, qui racontent le parcours de l'artiste.",
+      "Un espace d'administration complet : l'artiste ajoute ses œuvres et ses expositions en toute autonomie.",
+      "Un site rapide, agréable sur mobile et optimisé pour le référencement.",
     ],
+    technos: ["Next.js", "TypeScript", "Supabase", "Vercel"],
     chiffres: [
-      { valeur: "15 ans", libelle: "d'expérience de l'entreprise" },
-      { valeur: "20", libelle: "communes dans la zone d'intervention" },
-      { valeur: "5", libelle: "corps de métier présentés" },
+      { valeur: "291", libelle: "œuvres en ligne" },
+      { valeur: "22", libelle: "expositions présentées" },
+      { valeur: "9", libelle: "univers artistiques" },
     ],
-    site: { href: "https://www.klart-concept.com/", libelle: "klart-concept.com" },
+    site: { href: "https://www.carpentier-galerie.com/fr", libelle: "carpentier-galerie.com" },
     teinte: "#0B8E9E",
     resume: {
-      activite: "Création et rénovation de salles de bain, cuisines et agencements",
-      lieu: "Argelès-Gazost, Hautes-Pyrénées",
-      points: ["Galeries de réalisations", "Avis clients et blog", "Référencement sur sa zone d'intervention"],
+      activite: "Galerie d'art en ligne du peintre Michel Carpentier",
+      points: ["291 œuvres en neuf univers", "Expositions et parcours de l'artiste", "Gérée par l'artiste lui-même"],
     },
   },
   {
