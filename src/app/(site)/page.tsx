@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ID_ENTREPRISE, jsonLd } from "@/lib/seo";
 import BlocMethode from "@/components/site/BlocMethode";
+import DefilementEcrans from "@/components/site/DefilementEcrans";
 import { CadreTelephone } from "@/components/site/Cadres";
 import { CarteFlottante, PhotoCadre } from "@/components/site/Photos";
 import CapacitesInteractives from "@/components/site/CapacitesInteractives";
@@ -89,8 +90,9 @@ export default function Accueil() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(DONNEES)} />
+      <DefilementEcrans />
       {/* Accroche */}
-      <section className="relative overflow-hidden bg-nuit text-white lg:flex lg:min-h-[calc(100svh-77px)] lg:items-center">
+      <section className="ecran ecran-hero relative overflow-hidden bg-nuit text-white lg:flex lg:min-h-[calc(100svh-77px)] lg:items-center">
         <Conteneur className="relative grid items-center gap-10 py-16 sm:py-24 lg:grid-cols-[1fr_1.05fr] lg:gap-4 lg:py-16">
           <div>
             <h1 className="text-[clamp(1.9rem,4.2vw,3.55rem)] font-semibold leading-[1.08] tracking-tight text-balance">
@@ -125,7 +127,7 @@ export default function Accueil() {
       </section>
 
       {/* Réalisations */}
-      <section id="realisations" className="bg-ciel py-20 sm:py-24">
+      <section id="realisations" className="ecran bg-ciel py-20 sm:py-24">
         <Conteneur>
           <div className="flex flex-wrap items-end justify-between gap-4">
             <h2 className="text-[clamp(1.7rem,3vw,2.4rem)] font-semibold tracking-tight text-nuit">
@@ -159,7 +161,7 @@ export default function Accueil() {
       </section>
 
       {/* Pour qui */}
-      <section className="rendu-differe bg-white py-20 sm:py-28">
+      <section className="ecran rendu-differe bg-white py-20 sm:py-28">
         <Conteneur>
           <div className="max-w-2xl">
             <h2 className="text-[clamp(1.7rem,3vw,2.4rem)] font-semibold tracking-tight text-nuit">Pour qui ?</h2>
@@ -216,8 +218,8 @@ export default function Accueil() {
         </Conteneur>
       </section>
 
-      {/* Manifeste et studio */}
-      <section className="rendu-differe bg-ciel py-20 sm:py-28">
+      {/* Manifeste */}
+      <section className="ecran rendu-differe bg-ciel py-20 sm:py-28">
         <Conteneur>
           <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-16">
             <PhotoCadre photo={PHOTOS.rendezVous} sizes="(min-width: 1024px) 540px, 92vw" className="aspect-[16/11]">
@@ -230,8 +232,13 @@ export default function Accueil() {
               <p className="mt-6 text-[clamp(1.35rem,2.4vw,1.85rem)] font-semibold leading-snug text-nuit">{MANIFESTE[2]}</p>
             </div>
           </div>
+        </Conteneur>
+      </section>
 
-          <div className="mt-24 sm:mt-28">
+      {/* Studio */}
+      <section className="ecran rendu-differe bg-white py-20 sm:py-28">
+        <Conteneur>
+          <div>
             <div className="max-w-2xl">
               <h2 className="text-[clamp(1.7rem,3vw,2.4rem)] font-semibold tracking-tight text-nuit">{STUDIO.titre}</h2>
               <p className="mt-3 text-lg leading-relaxed text-[#4A6178]">{STUDIO.texte}</p>
@@ -254,7 +261,7 @@ export default function Accueil() {
       </section>
 
       {/* Capacités */}
-      <section className="rendu-differe border-t border-[#E3E9F0] bg-white py-20 sm:py-24">
+      <section className="ecran rendu-differe border-t border-[#E3E9F0] bg-white py-20 sm:py-24">
         <Conteneur>
           <div className="flex flex-wrap items-end justify-between gap-4">
             <h2 className="text-[clamp(1.7rem,3vw,2.4rem)] font-semibold tracking-tight text-nuit">

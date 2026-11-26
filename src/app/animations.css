@@ -7,6 +7,30 @@
   contain-intrinsic-size: auto 900px;
 }
 
+/* Accueil sur ordinateur : un bloc par écran (classe posée sur <html> par DefilementEcrans).
+   Seulement si l'écran est assez haut pour que chaque bloc y tienne, et sans « réduire les animations ». */
+@media (min-width: 1024px) and (min-height: 800px) and (prefers-reduced-motion: no-preference) {
+  html.defilement-ecrans {
+    scroll-snap-type: y mandatory;
+  }
+  html.defilement-ecrans .ecran {
+    min-height: calc(100svh - 77px);
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 36px;
+    content-visibility: visible;
+  }
+  html.defilement-ecrans .ecran-hero {
+    padding-block: 0;
+  }
+  html.defilement-ecrans .ecran-fin {
+    scroll-snap-align: start;
+    content-visibility: visible;
+  }
+}
+
 /* ---------- Méthode : étapes reliées par la ligne de progression ---------- */
 
 .m-visuel {

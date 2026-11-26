@@ -144,7 +144,7 @@ export function CarteRealisation({ r }: { r: Realisation }) {
 export function AppelFinal() {
   return (
     // Tout en bas de page, ce bloc et le pied de page remplissent exactement l'écran (77 px = menu)
-    <section className="rendu-differe relative flex min-h-[calc(100svh-77px-var(--pied,418px))] items-center overflow-hidden bg-[radial-gradient(ellipse_at_80%_45%,#163C86_0%,#0A1A2F_64%)] text-white">
+    <section className="ecran-fin rendu-differe relative flex min-h-[calc(100svh-77px-var(--pied,418px))] items-center overflow-hidden bg-[radial-gradient(ellipse_at_80%_45%,#163C86_0%,#0A1A2F_64%)] text-white">
       <Orbite ajuste planete className="pointer-events-none absolute right-[3%] top-1/2 hidden aspect-[2/1] h-[82%] w-auto -translate-y-1/2 opacity-80 md:block" />
       <Conteneur className="relative flex flex-col items-start gap-6 py-20 sm:py-24">
         <p className="max-w-3xl text-[clamp(1.9rem,4.2vw,3.4rem)] font-semibold leading-[1.1] tracking-tight">{SITE.phraseFinale}</p>
@@ -164,7 +164,7 @@ export function AppelFinal() {
 export function BlocEngagements({ fond = "bg-white" }: { fond?: string }) {
   const visuel = fond === "bg-white" ? "bg-ciel" : "bg-white";
   return (
-    <section className={`rendu-differe ${fond} py-20 sm:py-24`}>
+    <section className={`ecran rendu-differe ${fond} py-20 sm:py-24`}>
       <Conteneur>
         <h2 className="text-[clamp(1.7rem,3vw,2.4rem)] font-semibold tracking-tight text-nuit">Nos engagements</h2>
         <ul className="mt-10 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">

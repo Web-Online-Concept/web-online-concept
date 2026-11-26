@@ -8,7 +8,7 @@ import { METHODE } from "@/lib/contenu";
 // avance au fil du défilement ; chaque étape s'allume quand elle l'atteint et lance son animation.
 export default function BlocMethode() {
   return (
-    <section className="rendu-differe relative overflow-hidden bg-nuit py-20 text-white sm:py-28">
+    <section className="ecran rendu-differe relative overflow-hidden bg-nuit py-20 text-white sm:py-28">
       <div aria-hidden="true" className="absolute -left-40 -top-40 h-[30rem] w-[30rem] rounded-full bg-bleu opacity-20 blur-3xl" />
       <div aria-hidden="true" className="absolute -bottom-48 -right-40 h-[30rem] w-[30rem] rounded-full bg-vert opacity-[0.12] blur-3xl" />
       <Conteneur className="relative">
