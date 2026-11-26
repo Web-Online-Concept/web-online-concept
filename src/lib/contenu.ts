@@ -29,6 +29,40 @@ export const MANIFESTE = [
   "Il reste les seules questions qui comptent : que voulez-vous accomplir, pour qui, et avec quels objectifs ?",
 ];
 
+// Photos d'illustration de l'accueil (générées, sans personne réelle identifiable)
+export const PHOTOS = {
+  rendezVous: { src: "/photos/studio-rendez-vous.webp", alt: "Présentation d'un nouveau site à une cliente sur un écran panoramique" },
+  poste: { src: "/photos/studio-poste.webp", alt: "Poste de travail du studio : six écrans avec des maquettes de sites, d'applications et du code" },
+  ultralarge: { src: "/photos/studio-ultralarge.webp", alt: "Développement d'un site sur écran panoramique, avec l'application testée sur téléphone" },
+  validation: { src: "/photos/studio-validation.webp", alt: "Un client valide son nouveau site présenté sur grand écran" },
+  commercante: { src: "/photos/client-commercante.webp", alt: "Une commerçante consulte son site sur une tablette dans sa boutique" },
+  artisan: { src: "/photos/client-artisan.webp", alt: "Un artisan reçoit une demande de devis sur son téléphone dans son atelier" },
+};
+
+export const STUDIO = {
+  titre: "Un studio équipé pour aller loin",
+  texte:
+    "Plusieurs écrans, les outils et les modèles d'IA les plus récents : nous concevons, développons et testons en parallèle, sur tous les formats d'écran. Et vous suivez votre projet sur grand écran, étape par étape.",
+};
+
+export const POUR_QUI = {
+  intro: "Commerçants, artisans, praticiens, entreprises : un site ou une application qui travaille pour vous, même quand vous êtes occupé ailleurs.",
+  profils: [
+    {
+      titre: "Commerçants et indépendants",
+      texte: "Une vitrine à votre image, vos rendez-vous et vos messages réunis au même endroit, et des mises à jour faites en quelques minutes.",
+      photo: "commercante",
+      carte: { icone: "calendrier", titre: "Nouveau rendez-vous", detail: "Samedi à 10 h 30" },
+    },
+    {
+      titre: "Artisans et entreprises",
+      texte: "Vos réalisations mises en valeur, votre zone d'intervention couverte et des demandes de devis qui arrivent directement sur votre téléphone.",
+      photo: "artisan",
+      carte: { icone: "devis", titre: "Nouvelle demande de devis", detail: "Rénovation d'une cuisine" },
+    },
+  ],
+} as const;
+
 export type Chiffre = { valeur: string; libelle: string };
 
 // Capture d'écran d'une réalisation (fichier dans public/realisations/<slug>/)

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ID_ENTREPRISE, jsonLd } from "@/lib/seo";
 import BlocMethode from "@/components/site/BlocMethode";
+import { CarteFlottante, PhotoCadre } from "@/components/site/Photos";
 import CapacitesInteractives from "@/components/site/CapacitesInteractives";
 import { SCENES_CAPACITES } from "@/components/site/illustrations/Capacites";
 import Constellation from "@/components/site/illustrations/Constellation";
@@ -15,6 +16,9 @@ import {
 import {
   CAPACITES,
   MANIFESTE,
+  PHOTOS,
+  POUR_QUI,
+  STUDIO,
   PROJETS_SUR_MESURE,
   REALISATIONS,
   SITE,
@@ -150,22 +154,66 @@ export default function Accueil() {
         </Conteneur>
       </section>
 
-      {/* Manifeste */}
-      <section className="bg-white py-20 sm:py-28">
-        <Conteneur className="grid gap-10 lg:grid-cols-[1fr_2fr]">
-          <h2 className="text-[clamp(1.7rem,3vw,2.4rem)] font-semibold tracking-tight text-nuit">
-            Notre conviction
-          </h2>
-          <div className="flex flex-col gap-6">
-            <p className="text-xl leading-relaxed text-[#4A6178]">
-              {MANIFESTE[0]}
-            </p>
-            <p className="text-xl leading-relaxed text-[#2C4558]">
-              {MANIFESTE[1]}
-            </p>
-            <p className="text-[clamp(1.4rem,2.6vw,2rem)] font-semibold leading-snug text-nuit">
-              {MANIFESTE[2]}
-            </p>
+      {/* Pour qui */}
+      <section className="rendu-differe bg-white py-20 sm:py-28">
+        <Conteneur>
+          <div className="max-w-2xl">
+            <h2 className="text-[clamp(1.7rem,3vw,2.4rem)] font-semibold tracking-tight text-nuit">Pour qui ?</h2>
+            <p className="mt-3 text-lg leading-relaxed text-[#4A6178]">{POUR_QUI.intro}</p>
+          </div>
+          <div className="mt-12 grid gap-14 md:grid-cols-2 md:gap-8">
+            {POUR_QUI.profils.map((p, i) => (
+              <article key={p.titre}>
+                <PhotoCadre photo={PHOTOS[p.photo]} sizes="(min-width: 768px) 540px, 92vw" className="aspect-[16/10]">
+                  <CarteFlottante
+                    icone={p.carte.icone}
+                    titre={p.carte.titre}
+                    detail={p.carte.detail}
+                    retard={i * 1.4}
+                    className={i === 0 ? "-bottom-6 left-5" : "-bottom-6 right-5"}
+                  />
+                </PhotoCadre>
+                <h3 className="mt-10 text-xl font-semibold text-nuit">{p.titre}</h3>
+                <p className="mt-2 text-[16px] leading-relaxed text-[#2C4558]">{p.texte}</p>
+              </article>
+            ))}
+          </div>
+        </Conteneur>
+      </section>
+
+      {/* Manifeste et studio */}
+      <section className="rendu-differe bg-ciel py-20 sm:py-28">
+        <Conteneur>
+          <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-16">
+            <PhotoCadre photo={PHOTOS.rendezVous} sizes="(min-width: 1024px) 540px, 92vw" className="aspect-[16/11]">
+              <CarteFlottante icone="coche" titre="Maquette validée" detail="Place au développement" className="-bottom-6 left-5" />
+            </PhotoCadre>
+            <div>
+              <h2 className="text-[clamp(1.7rem,3vw,2.4rem)] font-semibold tracking-tight text-nuit">Notre conviction</h2>
+              <p className="mt-6 text-xl leading-relaxed text-[#4A6178]">{MANIFESTE[0]}</p>
+              <p className="mt-4 text-xl leading-relaxed text-[#2C4558]">{MANIFESTE[1]}</p>
+              <p className="mt-6 text-[clamp(1.35rem,2.4vw,1.85rem)] font-semibold leading-snug text-nuit">{MANIFESTE[2]}</p>
+            </div>
+          </div>
+
+          <div className="mt-24 sm:mt-28">
+            <div className="max-w-2xl">
+              <h2 className="text-[clamp(1.7rem,3vw,2.4rem)] font-semibold tracking-tight text-nuit">{STUDIO.titre}</h2>
+              <p className="mt-3 text-lg leading-relaxed text-[#4A6178]">{STUDIO.texte}</p>
+            </div>
+            <div className="mt-10 grid gap-5 lg:grid-cols-[1.5fr_1fr] lg:grid-rows-2">
+              <PhotoCadre photo={PHOTOS.poste} sizes="(min-width: 1024px) 680px, 92vw" className="aspect-[16/10] lg:row-span-2 lg:aspect-auto">
+                <CarteFlottante
+                  icone="appareils"
+                  titre="Testé sur tous les écrans"
+                  detail="Ordinateur, tablette et mobile"
+                  retard={0.8}
+                  className="-bottom-6 left-5"
+                />
+              </PhotoCadre>
+              <PhotoCadre photo={PHOTOS.ultralarge} sizes="(min-width: 1024px) 440px, 92vw" className="aspect-[16/10]" />
+              <PhotoCadre photo={PHOTOS.validation} sizes="(min-width: 1024px) 440px, 92vw" className="aspect-[16/10]" />
+            </div>
           </div>
         </Conteneur>
       </section>
