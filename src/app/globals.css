@@ -118,10 +118,19 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* Animations désactivées sur l'appareil : le survol reste visible, mais sans mouvement */
   .logo-anime:hover .logo-anime-image,
-  .logo-anime:hover .logo-anime-reflet {
+  .logo-anime:focus-visible .logo-anime-image {
     animation: none;
     transform: none;
+    filter: drop-shadow(0 0 10px rgba(0, 180, 216, 0.6)) drop-shadow(0 0 26px rgba(31, 94, 255, 0.4));
+  }
+  .logo-anime:hover .logo-anime-reflet,
+  .logo-anime:focus-visible .logo-anime-reflet {
+    animation: none;
+    transform: none;
+    background-position: 55% 0;
+    opacity: 0.9;
   }
   html {
     scroll-behavior: auto;
