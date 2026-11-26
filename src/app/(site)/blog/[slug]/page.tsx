@@ -40,6 +40,11 @@ const md = new Marked({
       const contenu = this.parser.parseInline(tokens);
       return depth === 2 ? `<h2 id="${ancre(text)}">${contenu}</h2>\n` : `<h${depth}>${contenu}</h${depth}>\n`;
     },
+    // Images dans le texte : chargement différé
+    image({ href, text }: Tokens.Image) {
+      const alt = text.replace(/"/g, "&quot;");
+      return `<img src="${href}" alt="${alt}" loading="lazy" decoding="async">`;
+    },
   },
 });
 
