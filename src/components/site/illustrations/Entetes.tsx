@@ -104,23 +104,40 @@ function Picto({ nom, x, y, taille = 26, couleur = "#7CCBFF" }: { nom: NomIcone;
   );
 }
 
+// Capacités : les huit capacités gravitent autour du globe réseau (fixes si l'on limite les animations)
 function Capacites({ id }: { id: string }) {
   const noms: NomIcone[] = ["site", "app", "abonnement", "ia", "visibilite", "donnees", "evolution", "securite"];
+  const RX = 170;
+  const RY = 112;
+  const DUREE = 48;
+  const orbite = `M ${CX} ${CY - RY} A ${RX} ${RY} 0 1 1 ${CX} ${CY + RY} A ${RX} ${RY} 0 1 1 ${CX} ${CY - RY}`;
   const pos = noms.map((_, i) => {
     const a = (i / noms.length) * Math.PI * 2 - Math.PI / 2;
-    return { x: CX + Math.cos(a) * 170, y: CY + Math.sin(a) * 112 };
+    return { x: CX + Math.cos(a) * RX, y: CY + Math.sin(a) * RY };
   });
+  const carte = (nom: NomIcone, i: number, x: number, y: number) => (
+    <Carte id={id} x={x - 25} y={y - 25} l={50} h={50} r={15} retard={i * 0.45}>
+      <Picto nom={nom} x={12} y={12} taille={26} couleur={i % 2 ? "#2BD47D" : "#7CCBFF"} />
+    </Carte>
+  );
   return (
     <>
-      <Fond id={id} rx={168} ry={60} planete={36} />
-      {pos.map((p, i) => (
-        <line key={i} x1={CX} y1={CY} x2={p.x} y2={p.y} stroke="#00B4D8" strokeOpacity="0.28" strokeDasharray="2 5" />
-      ))}
-      {pos.map((p, i) => (
-        <Carte key={noms[i]} id={id} x={p.x - 25} y={p.y - 25} l={50} h={50} r={15} retard={i * 0.45}>
-          <Picto nom={noms[i]} x={12} y={12} taille={26} couleur={i % 2 ? "#2BD47D" : "#7CCBFF"} />
-        </Carte>
-      ))}
+      <Fond id={id} rx={168} ry={60} planete={0} />
+      <ellipse cx={CX} cy={CY} rx={RX} ry={RY} stroke="#00B4D8" strokeOpacity="0.22" strokeDasharray="2 6" />
+      <PlaneteReseau cx={CX} cy={CY} r={40} points={14} prefixe={`${id}-globe`} />
+      <g className="orbite-mobile">
+        {noms.map((nom, i) => (
+          <g key={nom}>
+            <animateMotion dur={`${DUREE}s`} begin={`${-(i * DUREE) / noms.length}s`} repeatCount="indefinite" path={orbite} />
+            {carte(nom, i, 0, 0)}
+          </g>
+        ))}
+      </g>
+      <g className="orbite-fixe">
+        {noms.map((nom, i) => (
+          <g key={nom}>{carte(nom, i, pos[i].x, pos[i].y)}</g>
+        ))}
+      </g>
     </>
   );
 }
@@ -236,20 +253,44 @@ function APropos({ id }: { id: string }) {
   );
 }
 
+// Réalisations : un site et une application qui se construisent en boucle, et des points qui gravitent
+// derrière (fixes si l'on limite les animations)
 function Realisations({ id }: { id: string }) {
+  const rx = 196;
+  const ry = 64;
+  const orbite = `M ${CX + rx} ${CY} A ${rx} ${ry} 0 1 1 ${CX - rx} ${CY} A ${rx} ${ry} 0 1 1 ${CX + rx} ${CY}`;
+  const points = [
+    { r: 5, couleur: "#2BD47D", depart: 0 },
+    { r: 4, couleur: "#7CCBFF", depart: -8 },
+    { r: 3.5, couleur: "#00B4D8", depart: -16 },
+  ];
   return (
     <>
-      <Fond id={id} rx={196} ry={64} planete={0} />
+      <Fond id={id} rx={rx} ry={ry} planete={0} />
+      <g transform={`rotate(-14 ${CX} ${CY})`}>
+        <g className="orbite-mobile">
+          {points.map((p, k) => (
+            <circle key={k} r={p.r} fill={p.couleur}>
+              <animateMotion dur="24s" begin={`${p.depart}s`} repeatCount="indefinite" path={orbite} />
+            </circle>
+          ))}
+        </g>
+        <g className="orbite-fixe">
+          {points.map((p, k) => (
+            <circle key={k} cx={CX + Math.cos(k * 2.1 + 0.4) * rx} cy={CY + Math.sin(k * 2.1 + 0.4) * ry} r={p.r} fill={p.couleur} />
+          ))}
+        </g>
+      </g>
       <Carte id={id} x={40} y={46} l={262} h={178}>
         <circle cx="15" cy="14" r="3.2" fill="#3B5A85" />
         <circle cx="26" cy="14" r="3.2" fill="#3B5A85" />
         <circle cx="37" cy="14" r="3.2" fill="#3B5A85" />
         <rect x="56" y="8" width="140" height="12" rx="6" fill="#1A3358" />
         <rect x="14" y="32" width="234" height="80" rx="9" fill={`url(#${id}-visuel)`} fillOpacity="0.9" />
-        <rect x="27" y="56" width="110" height="9" rx="4.5" fill="#FFFFFF" fillOpacity="0.92" />
-        <rect x="27" y="72" width="70" height="6" rx="3" fill="#FFFFFF" fillOpacity="0.6" />
-        {[14, 94, 174].map((x) => (
-          <g key={x}>
+        <rect className="m2-ligne" x="27" y="56" width="110" height="9" rx="4.5" fill="#FFFFFF" fillOpacity="0.92" />
+        <rect className="m2-ligne" style={{ animationDelay: "0.3s" }} x="27" y="72" width="70" height="6" rx="3" fill="#FFFFFF" fillOpacity="0.6" />
+        {[14, 94, 174].map((x, k) => (
+          <g key={x} className="real-vignette" style={{ animationDelay: `${0.6 + k * 0.3}s` }}>
             <rect x={x} y="122" width="74" height="42" rx="7" fill="#17304F" />
             <rect x={x + 9} y="132" width="44" height="5" rx="2.5" fill="#3B5A85" />
             <rect x={x + 9} y="143" width="30" height="5" rx="2.5" fill="#2A4366" />
@@ -259,12 +300,16 @@ function Realisations({ id }: { id: string }) {
       <Carte id={id} x={274} y={92} l={112} h={208} r={22} retard={0.8}>
         <rect x="41" y="9" width="30" height="6" rx="3" fill="#0A1A2F" />
         <rect x="12" y="28" width="88" height="70" rx="11" fill={`url(#${id}-visuel)`} fillOpacity="0.85" />
-        <rect x="12" y="108" width="88" height="34" rx="9" fill="#1A3358" />
-        <rect x="20" y="117" width="58" height="5" rx="2.5" fill="#7CCBFF" fillOpacity="0.8" />
-        <rect x="20" y="127" width="44" height="5" rx="2.5" fill="#3B5A85" />
-        <rect x="12" y="150" width="88" height="34" rx="9" fill="#17304F" />
-        <circle cx="26" cy="167" r="5" fill="#2BD47D" />
-        <rect x="37" y="164" width="46" height="5" rx="2.5" fill="#3B5A85" />
+        <g className="real-vignette" style={{ animationDelay: "1.2s" }}>
+          <rect x="12" y="108" width="88" height="34" rx="9" fill="#1A3358" />
+          <rect x="20" y="117" width="58" height="5" rx="2.5" fill="#7CCBFF" fillOpacity="0.8" />
+          <rect x="20" y="127" width="44" height="5" rx="2.5" fill="#3B5A85" />
+        </g>
+        <g className="real-vignette" style={{ animationDelay: "1.5s" }}>
+          <rect x="12" y="150" width="88" height="34" rx="9" fill="#17304F" />
+          <circle className="pulse" cx="26" cy="167" r="5" fill="#2BD47D" />
+          <rect x="37" y="164" width="46" height="5" rx="2.5" fill="#3B5A85" />
+        </g>
       </Carte>
     </>
   );

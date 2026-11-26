@@ -95,6 +95,27 @@
   }
 }
 
+/* En-tête des réalisations : les vignettes du site et de l'application apparaissent en boucle */
+.real-vignette {
+  animation: real-vignette 5.5s ease infinite both;
+}
+@keyframes real-vignette {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  8%,
+  72% {
+    opacity: 1;
+    transform: none;
+  }
+  80%,
+  100% {
+    opacity: 0;
+    transform: none;
+  }
+}
+
 /* En-tête de la FAQ : trois points, puis la réponse, en boucle */
 .faqh-points {
   animation: faqh-points 6s ease infinite both;
@@ -1198,6 +1219,9 @@
   .faq-ecrit,
   .faqh-points {
     display: none;
+  }
+  .real-vignette {
+    animation: none;
   }
   .faq-bulle[open] .faq-texte,
   .faqh-reponse {
