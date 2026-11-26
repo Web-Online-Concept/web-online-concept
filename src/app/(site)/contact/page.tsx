@@ -4,18 +4,18 @@ import { Conteneur, EnTetePage } from "@/components/site/Blocs";
 import { SITE } from "@/lib/contenu";
 import Formulaire from "./Formulaire";
 
-export const metadata: Metadata = metaPage("Contact", "Décrivez votre projet et vos objectifs : Web Online Concept vous répond sous 48 heures ouvrées, premier échange gratuit et sans engagement.", "/contact");
+export const metadata: Metadata = metaPage("Contact", "Web Online Concept travaille sur recommandation et sur demande privée. Pour échanger sur un projet, écrivez directement.", "/contact");
 
 export default function Contact() {
   return (
     <>
-      <EnTetePage titre="Parlons de votre projet" intro={SITE.phraseFinale} illustration="contact" />
+      <EnTetePage titre="Contact" intro="Web Online Concept travaille sur recommandation et sur demande privée. Pour échanger sur un projet, écrivez directement ici." illustration="contact" />
       <section className="bg-white py-16 sm:py-20">
         <Conteneur className="grid gap-14 lg:grid-cols-[1.6fr_1fr]">
           <Formulaire />
           <aside className="flex flex-col gap-6 rounded-2xl bg-ciel p-8 self-start">
             <div>
-              <h2 className="text-lg font-semibold text-nuit">Ce qui aide à bien démarrer</h2>
+              <h2 className="text-lg font-semibold text-nuit">Pour préparer l&apos;échange</h2>
               <ul className="mt-3 flex list-disc flex-col gap-2 pl-5 text-[15px] leading-relaxed text-[#2C4558]">
                 <li>Ce que vous voulez accomplir, et pour qui.</li>
                 <li>Les objectifs à atteindre.</li>

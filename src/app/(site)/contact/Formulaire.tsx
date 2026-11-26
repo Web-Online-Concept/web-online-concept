@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useRef } from "react";
-import { BESOINS, SOURCES } from "@/lib/contenu";
+import { BESOINS } from "@/lib/contenu";
 import { envoyerMessage, type EtatContact } from "./actions";
 
 const initial: EtatContact = { statut: "initial" };
@@ -48,7 +48,7 @@ export default function Formulaire() {
     return (
       <div role="status" className="rounded-2xl bg-ciel p-8">
         <p className="text-xl font-semibold text-nuit">Message envoyé.</p>
-        <p className="mt-2 text-[#2C4558]">Merci. Votre projet sera étudié avec attention, et vous recevrez une réponse rapidement.</p>
+        <p className="mt-2 text-[#2C4558]">Merci, votre message est bien arrivé. Vous recevrez une réponse personnelle rapidement.</p>
       </div>
     );
   }
@@ -96,15 +96,8 @@ export default function Formulaire() {
         <textarea id="message" name="message" defaultValue={etat.valeurs?.message} rows={7} required className={styleChamp} aria-invalid={!!e.message} aria-describedby={e.message ? "message-erreur" : undefined} />
       </Champ>
 
-      <Champ id="source" libelle="Comment avez-vous connu Web Online Concept ? (facultatif)">
-        <select key={`source-${etat.valeurs?.source ?? ""}`} id="source" name="source" defaultValue={etat.valeurs?.source ?? ""} className={styleChamp}>
-          <option value="">Choisissez…</option>
-          {SOURCES.map((x) => (
-            <option key={x} value={x}>
-              {x}
-            </option>
-          ))}
-        </select>
+      <Champ id="source" libelle="Qui vous a recommandé ? (facultatif)">
+        <input id="source" name="source" defaultValue={etat.valeurs?.source} autoComplete="off" className={styleChamp} />
       </Champ>
 
       <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">

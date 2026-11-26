@@ -1,7 +1,7 @@
 "use server";
 
 import { after } from "next/server";
-import { BESOINS, SOURCES } from "@/lib/contenu";
+import { BESOINS } from "@/lib/contenu";
 import { notifierNouveauMessage } from "@/lib/notification";
 import { clientService } from "@/lib/supabase/service";
 
@@ -26,8 +26,7 @@ export async function envoyerMessage(_etat: EtatContact, formData: FormData): Pr
   const message = String(formData.get("message") ?? "").trim();
   const telephone = String(formData.get("telephone") ?? "").trim();
   const besoin = String(formData.get("besoin") ?? "");
-  const sourceBrute = String(formData.get("source") ?? "");
-  const source = SOURCES.includes(sourceBrute) ? sourceBrute : "";
+  const source = String(formData.get("source") ?? "").trim().slice(0, 120);
   const valeurs = { nom, email, telephone, besoin, source, objet, message };
 
   const affiche = Number(formData.get("affiche_le") ?? 0);

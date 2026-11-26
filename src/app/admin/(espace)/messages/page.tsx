@@ -55,7 +55,7 @@ async function Contenu() {
                 {(m.besoin || m.source) && (
                   <p className="mt-3 flex flex-wrap gap-2 text-sm">
                     {m.besoin && <span className="rounded-full bg-[#E8EFFF] px-3 py-1 text-[#1638A8]">{m.besoin}</span>}
-                    {m.source && <span className="rounded-full bg-ciel px-3 py-1 text-[#4A6178]">Nous a connu par : {m.source}</span>}
+                    {m.source && <span className="rounded-full bg-ciel px-3 py-1 text-[#4A6178]">Recommandé par : {m.source}</span>}
                   </p>
                 )}
                 <p className="mt-4 whitespace-pre-line text-[15px] leading-relaxed">{m.message}</p>

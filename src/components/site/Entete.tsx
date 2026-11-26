@@ -47,12 +47,6 @@ export default function Entete() {
           <Suspense fallback={<Liens chemin={null} />}>
             <LiensActifs />
           </Suspense>
-          <Link
-            href="/contact"
-            className="ml-2 rounded-full bg-bleu px-4 py-2.5 text-[15px] font-medium whitespace-nowrap text-white transition-colors hover:bg-[#3A72FF] xl:ml-3 xl:px-5 xl:text-base"
-          >
-            Parlons de votre projet
-          </Link>
         </nav>
 
         <button
@@ -84,13 +78,6 @@ export default function Entete() {
               </li>
             ))}
           </ul>
-          <Link
-            href="/contact"
-            onClick={() => setOuvert(false)}
-            className="block rounded-full bg-bleu px-5 py-3 text-center font-medium text-white"
-          >
-            Parlons de votre projet
-          </Link>
         </nav>
       )}
     </header>

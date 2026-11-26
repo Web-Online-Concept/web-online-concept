@@ -9,8 +9,8 @@ export const SITE = {
   titre: "Imaginez-le et Web Online Concept le réalise afin d'atteindre vos objectifs.",
   sousTitre:
     "Plus de quinze ans de développement web, démultipliés par l'IA : sites, applications et plateformes complètes, de la première idée à la mise en ligne.",
-  phraseFinale:
-    "Votre projet commence par vos objectifs. Parlons de ce que vous voulez accomplir.",
+  // Signature de fin de page : le studio travaille sur recommandation, pas de démarchage
+  phraseFinale: "Web Online Concept travaille sur recommandation.",
 };
 
 export const NAVIGATION = [
@@ -20,6 +20,7 @@ export const NAVIGATION = [
   { href: "/a-propos", libelle: "À propos" },
   { href: "/blog", libelle: "Blog" },
   { href: "/faq", libelle: "FAQ" },
+  { href: "/contact", libelle: "Contact" },
 ];
 
 export const MANIFESTE = [
@@ -430,14 +431,6 @@ export const METHODE: Etape[] = [
 
 export const ENGAGEMENTS: Etape[] = [
   {
-    titre: "Un premier échange offert",
-    texte: "Gratuit et sans engagement : on parle de vos objectifs avant de parler de solution.",
-  },
-  {
-    titre: "Une réponse sous 48 heures",
-    texte: "Chaque demande reçoit une réponse sous 48 heures ouvrées.",
-  },
-  {
     titre: "Tout vous appartient",
     texte: "Votre site, ses contenus et vos données sont à vous : vous restez libre, à tout moment.",
   },
@@ -459,10 +452,9 @@ export type Question = { question: string; reponse: string; lien?: Lien };
 
 export const FAQ: Question[] = [
   {
-    question: "Comment se passe un premier contact ?",
+    question: "Comment travailler avec Web Online Concept ?",
     reponse:
-      "Vous décrivez votre projet et vos objectifs grâce au formulaire de contact. Vous recevez une réponse sous 48 heures ouvrées, puis un premier échange, gratuit et sans engagement, permet de cadrer le besoin ensemble.",
-    lien: { href: "/contact", libelle: "Décrire mon projet" },
+      "Web Online Concept travaille sur recommandation et sur demande privée. Si l'on vous a recommandé le studio, il suffit d'écrire directement : chaque projet commence par un échange sur vos objectifs.",
   },
   {
     question: "Combien de temps faut-il pour créer un site ?",
@@ -530,13 +522,6 @@ export const BESOINS = [
   "Autre",
 ];
 
-export const SOURCES = [
-  "Recherche Google",
-  "ChatGPT ou une autre IA",
-  "Recommandation",
-  "Un site réalisé par Web Online Concept",
-  "Autre",
-];
 
 export const LEGAL = {
   editeur: "Florent Regnault EI",

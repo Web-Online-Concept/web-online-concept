@@ -98,12 +98,6 @@ export default function Accueil() {
               >
                 Voir les réalisations
               </Link>
-              <Link
-                href="/contact"
-                className="rounded-full border border-white/40 px-7 py-3.5 font-medium text-white transition-colors hover:border-white hover:bg-white/5"
-              >
-                Parlons de votre projet
-              </Link>
             </div>
           </div>
           <div className="mx-auto w-full max-w-[460px] lg:-mr-[6%] lg:w-[112%] lg:max-w-none">

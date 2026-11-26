@@ -111,16 +111,15 @@ export function AppelFinal() {
   return (
     <section className="relative overflow-hidden bg-[radial-gradient(ellipse_at_85%_40%,#163C86_0%,#0A1A2F_62%)] text-white">
       <Orbite className="pointer-events-none absolute -right-40 top-1/2 hidden h-[520px] w-[1000px] -translate-y-1/2 opacity-70 md:block" />
-      <Conteneur className="relative flex flex-col items-start gap-7 py-20 sm:py-24">
-        <p className="max-w-3xl text-[clamp(1.6rem,3.4vw,2.6rem)] font-semibold leading-tight">
-          {SITE.phraseFinale}
+      <Conteneur className="relative flex flex-col items-start gap-5 py-20 sm:py-24">
+        <p className="max-w-3xl text-[clamp(1.6rem,3.4vw,2.6rem)] font-semibold leading-tight">{SITE.phraseFinale}</p>
+        <p className="text-lg text-[#C3D0DD]">
+          Vous avez été recommandé ?{" "}
+          <Link href="/contact" className="font-medium text-white underline decoration-white/40 underline-offset-4 hover:decoration-white">
+            Écrivez directement
+          </Link>
+          .
         </p>
-        <Link
-          href="/contact"
-          className="rounded-full bg-bleu px-7 py-3.5 text-base font-medium text-white transition-colors hover:bg-[#3A72FF]"
-        >
-          Décrire mon projet
-        </Link>
       </Conteneur>
     </section>
   );
@@ -131,7 +130,7 @@ export function BlocEngagements({ fond = "bg-white" }: { fond?: string }) {
     <section className={`${fond} py-20 sm:py-24`}>
       <Conteneur>
         <h2 className="text-[clamp(1.7rem,3vw,2.4rem)] font-semibold tracking-tight text-nuit">Nos engagements</h2>
-        <ul className="mt-10 grid gap-x-10 gap-y-9 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-10 grid gap-x-10 gap-y-9 sm:grid-cols-2 lg:grid-cols-4">
           {ENGAGEMENTS.map((e) => (
             <li key={e.titre} className="flex gap-4">
               <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#E3F8EC] text-[#0E7A45]">

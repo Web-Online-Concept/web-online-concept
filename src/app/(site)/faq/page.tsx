@@ -57,11 +57,7 @@ export default function Faq() {
             ))}
           </div>
           <p className="mt-10 text-[17px] text-[#2C4558]">
-            Une autre question ?{" "}
-            <Link href="/contact" className="font-medium text-bleu hover:underline">
-              Posez-la directement
-            </Link>{" "}
-            ou écrivez à{" "}
+            Une autre question ? Écrivez à{" "}
             <a href={`mailto:${SITE.email}`} className="font-medium text-bleu hover:underline">
               {SITE.email}
             </a>

@@ -26,9 +26,6 @@ export default function PiedDePage() {
               {l.libelle}
             </Link>
           ))}
-          <Link href="/contact" className="hover:text-white">
-            Contact
-          </Link>
         </nav>
 
         <nav aria-label="Informations légales" className="flex flex-col items-center gap-2.5 text-[15px]">
@@ -38,12 +35,6 @@ export default function PiedDePage() {
           </Link>
           <Link href="/confidentialite" className="hover:text-white">
             Confidentialité
-          </Link>
-          <Link
-            href="/contact"
-            className="mt-5 rounded-full bg-bleu px-6 py-3 font-medium text-white transition-colors hover:bg-[#3A72FF]"
-          >
-            Parlons de votre projet
           </Link>
         </nav>
       </div>

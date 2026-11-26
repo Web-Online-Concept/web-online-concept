@@ -7,7 +7,7 @@ export function GET() {
     "",
     `> Studio de développement web et d'intelligence artificielle à Toulouse, depuis 2009. ${SITE.sousTitre}`,
     "",
-    "Interlocuteur unique, de la première idée à la mise en ligne et au suivi. Intervention partout en France, sur place à Toulouse et en Occitanie.",
+    "Interlocuteur unique, de la première idée à la mise en ligne et au suivi. Le studio travaille sur recommandation et sur demande privée, partout en France.",
     "",
     "## Capacités",
     ...CAPACITES.map((c) => `- ${c.titre} : ${c.texte}`),
@@ -30,7 +30,7 @@ export function GET() {
     `- [Réalisations](${SITE.url}/realisations)`,
     `- [À propos](${SITE.url}/a-propos)`,
     `- [Questions fréquentes](${SITE.url}/faq)`,
-    `- [Contact](${SITE.url}/contact) : formulaire, réponse sous 48 heures ouvrées`,
+    `- [Contact](${SITE.url}/contact)`,
     "",
   ];
   return new Response(lignes.join("\n"), {

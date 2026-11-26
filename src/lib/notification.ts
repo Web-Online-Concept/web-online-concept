@@ -27,7 +27,7 @@ export async function notifierNouveauMessage(m: NouveauMessage) {
     ["E-mail", m.email],
     ["Téléphone", m.telephone],
     ["Projet", m.besoin],
-    ["Nous a connu par", m.source],
+    ["Recommandé par", m.source],
     ["Objet", m.objet],
   ];
   const html = `
