@@ -182,6 +182,12 @@ export const REALISATIONS: Realisation[] = [
     ],
     site: { href: "https://www.gaudissard.fr/", libelle: "gaudissard.fr" },
     teinte: "#1F5EFF",
+    visuels: [
+      { src: "/realisations/menuiserie-gaudissard/accueil.webp", alt: "Page d'accueil du site de Menuiserie Gaudissard", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/menuiserie-gaudissard/fenetres.webp", alt: "Page « Fenêtres » du site de Menuiserie Gaudissard", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/menuiserie-gaudissard/societe.webp", alt: "Page « La société » du site de Menuiserie Gaudissard", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/menuiserie-gaudissard/mobile.webp", alt: "Version mobile du site de Menuiserie Gaudissard", l: 659, h: 1187, format: "telephone" },
+    ],
     resume: {
       activite: "Fabricant de menuiseries PVC et aluminium depuis 1964",
       lieu: "Aigrefeuille-d'Aunis, près de La Rochelle",
