@@ -254,6 +254,12 @@ export const REALISATIONS: Realisation[] = [
     ],
     site: { href: "https://www.reborne-retrogaming.com/", libelle: "reborne-retrogaming.com" },
     teinte: "#2BD47D",
+    visuels: [
+      { src: "/realisations/re-borne-retrogaming/accueil.webp", alt: "Page d'accueil du site de Re-borne Retrogaming", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/re-borne-retrogaming/actualites.webp", alt: "Page « Actualités » du site de Re-borne Retrogaming", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/re-borne-retrogaming/materiel.webp", alt: "Page « Matériel et tarifs » du site de Re-borne Retrogaming", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/re-borne-retrogaming/mobile.webp", alt: "Version mobile du site de Re-borne Retrogaming", l: 659, h: 1187, format: "telephone" },
+    ],
     resume: {
       activite: "Animations retrogaming et location de bornes d'arcade pour les événements",
       lieu: "Toulouse",
