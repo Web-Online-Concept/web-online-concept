@@ -46,22 +46,20 @@ export const STUDIO = {
 };
 
 export const POUR_QUI = {
-  intro: "Commerçants, artisans, praticiens, entreprises : un site ou une application qui travaille pour vous, même quand vous êtes occupé ailleurs.",
-  profils: [
-    {
-      titre: "Commerçants et indépendants",
-      texte: "Une vitrine à votre image, vos rendez-vous et vos messages réunis au même endroit, et des mises à jour faites en quelques minutes.",
-      photo: "commercante",
-      carte: { icone: "calendrier", titre: "Nouveau rendez-vous", detail: "Samedi à 10 h 30" },
-    },
-    {
-      titre: "Artisans et entreprises",
-      texte: "Vos réalisations mises en valeur, votre zone d'intervention couverte et des demandes de devis qui arrivent directement sur votre téléphone.",
-      photo: "artisan",
-      carte: { icone: "devis", titre: "Nouvelle demande de devis", detail: "Rénovation d'une cuisine" },
-    },
-  ],
-} as const;
+  intro: "Nos propres applications, pensées pour tout le monde, et des sites et outils sur mesure pour les professionnels.",
+  tous: {
+    titre: "Pour tout le monde",
+    texte:
+      "Nous concevons et éditons nos propres applications grand public. MemoDay, la première, est disponible sur l'App Store, Google Play et le web ; d'autres sont en préparation.",
+    lien: { href: "/realisations/memoday", libelle: "Découvrir MemoDay" },
+  },
+  pros: {
+    titre: "Pour les professionnels",
+    texte:
+      "Commerçants, artisans, praticiens, indépendants, entreprises : un site ou un outil sur mesure qui travaille pour vous, même quand vous êtes occupé ailleurs.",
+    lien: { href: "/realisations", libelle: "Voir les sites réalisés" },
+  },
+};
 
 export type Chiffre = { valeur: string; libelle: string };
 

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ID_ENTREPRISE, jsonLd } from "@/lib/seo";
 import BlocMethode from "@/components/site/BlocMethode";
+import { CadreTelephone } from "@/components/site/Cadres";
 import { CarteFlottante, PhotoCadre } from "@/components/site/Photos";
 import CapacitesInteractives from "@/components/site/CapacitesInteractives";
 import { SCENES_CAPACITES } from "@/components/site/illustrations/Capacites";
@@ -80,6 +81,9 @@ const DIAPOS: Diapo[] = REALISATIONS.flatMap((r) => {
     ? [{ src: v.src, alt: v.alt, nom: r.nom, type: r.type, slug: r.slug, domaine: r.site.libelle, mobile: m && { src: m.src, alt: m.alt } }]
     : [];
 });
+
+// Écrans de l'application MemoDay pour le bloc « Pour qui ? »
+const ECRANS_MEMODAY = (REALISATIONS.find((r) => r.slug === "memoday")?.visuels ?? []).filter((v) => v.format === "telephone").slice(0, 3);
 
 export default function Accueil() {
   return (
@@ -162,21 +166,52 @@ export default function Accueil() {
             <p className="mt-3 text-lg leading-relaxed text-[#4A6178]">{POUR_QUI.intro}</p>
           </div>
           <div className="mt-12 grid gap-14 md:grid-cols-2 md:gap-8">
-            {POUR_QUI.profils.map((p, i) => (
-              <article key={p.titre}>
-                <PhotoCadre photo={PHOTOS[p.photo]} sizes="(min-width: 768px) 540px, 92vw" className="aspect-[16/10]">
-                  <CarteFlottante
-                    icone={p.carte.icone}
-                    titre={p.carte.titre}
-                    detail={p.carte.detail}
-                    retard={i * 1.4}
-                    className={i === 0 ? "-bottom-6 left-5" : "-bottom-6 right-5"}
-                  />
-                </PhotoCadre>
-                <h3 className="mt-10 text-xl font-semibold text-nuit">{p.titre}</h3>
-                <p className="mt-2 text-[16px] leading-relaxed text-[#2C4558]">{p.texte}</p>
-              </article>
-            ))}
+            <article>
+              <div className="relative aspect-[16/11]">
+                <div className="absolute inset-0 overflow-hidden rounded-3xl bg-nuit shadow-[0_34px_70px_-40px_rgba(10,26,47,0.55)]">
+                  <div aria-hidden="true" className="absolute -left-16 -top-20 h-72 w-72 rounded-full bg-bleu opacity-40 blur-3xl" />
+                  <div aria-hidden="true" className="absolute -bottom-24 -right-10 h-64 w-64 rounded-full bg-vert opacity-20 blur-3xl" />
+                  {ECRANS_MEMODAY.map((v, k) => (
+                    <div
+                      key={v.src}
+                      className={`absolute top-1/2 ${
+                        k === 1
+                          ? "left-1/2 z-10 w-[29%] -translate-x-1/2 -translate-y-1/2"
+                          : k === 0
+                            ? "left-[14%] w-[24%] -translate-y-[46%] -rotate-6 opacity-90"
+                            : "right-[14%] w-[24%] -translate-y-[46%] rotate-6 opacity-90"
+                      }`}
+                    >
+                      <CadreTelephone v={v} petit sizes="(min-width: 768px) 170px, 30vw" />
+                    </div>
+                  ))}
+                </div>
+                <CarteFlottante icone="appareils" titre="iPhone, Android et web" detail="Une seule application" className="-top-6 right-5 z-20" />
+              </div>
+              <h3 className="mt-10 text-xl font-semibold text-nuit">{POUR_QUI.tous.titre}</h3>
+              <p className="mt-2 text-[16px] leading-relaxed text-[#2C4558]">{POUR_QUI.tous.texte}</p>
+              <Link href={POUR_QUI.tous.lien.href} className="mt-4 inline-block font-medium text-bleu transition-colors hover:text-[#1638A8]">
+                {POUR_QUI.tous.lien.libelle}
+              </Link>
+            </article>
+            <article>
+              <div className="relative grid aspect-[16/11] grid-cols-2 gap-3">
+                <PhotoCadre photo={PHOTOS.commercante} sizes="(min-width: 768px) 270px, 46vw" className="h-full" />
+                <PhotoCadre photo={PHOTOS.artisan} sizes="(min-width: 768px) 270px, 46vw" className="h-full" />
+                <CarteFlottante
+                  icone="devis"
+                  titre="Nouvelle demande de devis"
+                  detail="Rénovation d'une cuisine"
+                  retard={1.4}
+                  className="-bottom-6 right-5"
+                />
+              </div>
+              <h3 className="mt-10 text-xl font-semibold text-nuit">{POUR_QUI.pros.titre}</h3>
+              <p className="mt-2 text-[16px] leading-relaxed text-[#2C4558]">{POUR_QUI.pros.texte}</p>
+              <Link href={POUR_QUI.pros.lien.href} className="mt-4 inline-block font-medium text-bleu transition-colors hover:text-[#1638A8]">
+                {POUR_QUI.pros.lien.libelle}
+              </Link>
+            </article>
           </div>
         </Conteneur>
       </section>
