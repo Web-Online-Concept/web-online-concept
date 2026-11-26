@@ -41,7 +41,7 @@ async function Contenu() {
                   return (
                     <tr key={d.id} className="hover:bg-ciel/60">
                       <td className="py-3">
-                        <Link href={`/admin/devis/${d.id}`} className="font-medium text-bleu hover:underline">
+                        <Link href={`/admin/devis/${d.id}`} className="font-medium text-bleu transition-colors hover:text-[#1638A8]">
                           {d.numero ?? "Brouillon"}
                         </Link>
                       </td>

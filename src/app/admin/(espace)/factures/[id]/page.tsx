@@ -77,7 +77,7 @@ async function Contenu({ params, searchParams }: { params: Promise<{ id: string 
           <div className="mb-5">
             <Alerte>
               Avoir sur la facture{" "}
-              <Link href={`/admin/factures/${c.origine.id}`} className="font-medium underline">
+              <Link href={`/admin/factures/${c.origine.id}`} className="font-medium">
                 {c.origine.numero}
               </Link>
               . Les montants sont négatifs ; ajustez les lignes pour un avoir partiel.
@@ -148,7 +148,7 @@ async function Contenu({ params, searchParams }: { params: Promise<{ id: string 
             <div>
               <dt className="text-sm text-[#4A6178]">Client</dt>
               <dd className="mt-1 font-medium">
-                <Link href={`/admin/clients/${f.client_id}`} className="hover:underline">
+                <Link href={`/admin/clients/${f.client_id}`} className="transition-colors hover:text-bleu">
                   {c.client.nom}
                 </Link>
               </dd>
@@ -169,7 +169,7 @@ async function Contenu({ params, searchParams }: { params: Promise<{ id: string 
               <div>
                 <dt className="text-sm text-[#4A6178]">Facture d&apos;origine</dt>
                 <dd className="mt-1">
-                  <Link href={`/admin/factures/${c.origine.id}`} className="text-bleu hover:underline">
+                  <Link href={`/admin/factures/${c.origine.id}`} className="text-bleu transition-colors hover:text-[#1638A8]">
                     {c.origine.numero}
                   </Link>
                 </dd>
@@ -200,7 +200,7 @@ async function Contenu({ params, searchParams }: { params: Promise<{ id: string 
               {c.avoirs.map((a, i) => (
                 <span key={a.id}>
                   {i > 0 && ", "}
-                  <Link href={`/admin/factures/${a.id}`} className="text-bleu hover:underline">
+                  <Link href={`/admin/factures/${a.id}`} className="text-bleu transition-colors hover:text-[#1638A8]">
                     {a.numero ?? "brouillon"}
                   </Link>
                 </span>
@@ -234,7 +234,7 @@ async function Contenu({ params, searchParams }: { params: Promise<{ id: string 
                   <form action={supprimerEncaissement}>
                     <input type="hidden" name="facture_id" value={id} />
                     <input type="hidden" name="encaissement_id" value={e.id} />
-                    <button type="submit" className="text-sm text-[#B42318] hover:underline" aria-label={`Supprimer l'encaissement du ${fmtDate(e.date_encaissement)}`}>
+                    <button type="submit" className="text-sm text-[#B42318] transition-colors hover:text-[#7A1A12]" aria-label={`Supprimer l'encaissement du ${fmtDate(e.date_encaissement)}`}>
                       Retirer
                     </button>
                   </form>

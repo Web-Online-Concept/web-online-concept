@@ -165,10 +165,14 @@ body {
   font-weight: 600;
   margin-top: 1.8em;
 }
+/* Liens des articles : sans soulignement, en gras léger, couleur au survol */
 .prose-woc a {
   color: var(--color-bleu);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+.prose-woc a:hover {
+  color: var(--color-bleu-profond);
 }
 .prose-woc ul {
   list-style: disc;

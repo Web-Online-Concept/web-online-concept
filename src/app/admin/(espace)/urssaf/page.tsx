@@ -118,7 +118,7 @@ async function Contenu({ searchParams }: { searchParams: Promise<Sp> }) {
                 return (
                   <tr key={m.mois} className={selection.mois === m.mois ? "bg-ciel/70" : undefined}>
                     <td className="py-3">
-                      <Link href={`/admin/urssaf?annee=${annee}&mois=${m.mois}#saisie`} className="capitalize hover:text-bleu hover:underline">
+                      <Link href={`/admin/urssaf?annee=${annee}&mois=${m.mois}#saisie`} className="capitalize transition-colors hover:text-bleu">
                         {libelleMois(m.mois)}
                       </Link>
                       {m.caHorsOutil > 0 && (
@@ -137,7 +137,7 @@ async function Contenu({ searchParams }: { searchParams: Promise<Sp> }) {
                           {d.montant_paye !== null && <span className="text-[#4A6178]">, payé {fmtEuros(d.montant_paye, true)}</span>}
                           {ecart && <span className="block text-[#9A5B00]">Écart avec le calcul</span>}
                           {d.note && <span className="block text-[#4A6178]">{d.note}</span>}
-                          <Link href={`/admin/urssaf?annee=${annee}&mois=${m.mois}#saisie`} className="block text-bleu hover:underline">
+                          <Link href={`/admin/urssaf?annee=${annee}&mois=${m.mois}#saisie`} className="block text-bleu transition-colors hover:text-[#1638A8]">
                             Modifier
                           </Link>
                         </>
@@ -146,7 +146,7 @@ async function Contenu({ searchParams }: { searchParams: Promise<Sp> }) {
                       ) : futur ? (
                         ""
                       ) : (
-                        <Link href={`/admin/urssaf?annee=${annee}&mois=${m.mois}#saisie`} className="font-medium text-bleu hover:underline">
+                        <Link href={`/admin/urssaf?annee=${annee}&mois=${m.mois}#saisie`} className="font-medium text-bleu transition-colors hover:text-[#1638A8]">
                           À déclarer avant le {fmtDate(m.echeance)}
                         </Link>
                       )}
@@ -171,7 +171,7 @@ async function Contenu({ searchParams }: { searchParams: Promise<Sp> }) {
         <p className="mt-4 text-sm leading-relaxed text-[#4A6178]">
           Calcul sur le chiffre d&apos;affaires réellement encaissé dans le mois, arrondi à l&apos;euro comme sur le site de l&apos;URSSAF. Chaque part est arrondie à
           l&apos;euro. {tauxActuel && <>Catégorie : {tauxActuel.libelle_categorie}.</>} Les taux se modifient dans{" "}
-          <Link href="/admin/parametres" className="text-bleu hover:underline">
+          <Link href="/admin/parametres" className="text-bleu transition-colors hover:text-[#1638A8]">
             Paramètres
           </Link>
           .
@@ -185,7 +185,7 @@ async function Contenu({ searchParams }: { searchParams: Promise<Sp> }) {
           </h2>
           <p className="mt-1 text-sm text-[#4A6178]">
             À reporter sur{" "}
-            <a href="https://www.autoentrepreneur.urssaf.fr/" target="_blank" rel="noopener" className="text-bleu hover:underline">
+            <a href="https://www.autoentrepreneur.urssaf.fr/" target="_blank" rel="noopener" className="text-bleu transition-colors hover:text-[#1638A8]">
               autoentrepreneur.urssaf.fr
             </a>{" "}
             : chiffre d&apos;affaires de {fmtEuros(selection.caDeclarable, true)}, montant calculé {fmtEuros(selection.total, true)}.
@@ -235,7 +235,7 @@ async function Contenu({ searchParams }: { searchParams: Promise<Sp> }) {
           {declSelection && (
             <form action={supprimerDeclaration} className="mt-3">
               <input type="hidden" name="mois" value={selection.mois} />
-              <button type="submit" className="text-sm text-[#B42318] hover:underline">
+              <button type="submit" className="text-sm text-[#B42318] transition-colors hover:text-[#7A1A12]">
                 Retirer cette déclaration
               </button>
             </form>

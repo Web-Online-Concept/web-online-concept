@@ -122,7 +122,7 @@ export default function Formulaire() {
         </button>
         <p className="text-sm text-[#4A6178]">
           Vos données servent uniquement à vous répondre.{" "}
-          <a href="/confidentialite" className="underline underline-offset-2">
+          <a href="/confidentialite" className="font-medium text-bleu transition-colors hover:text-[#1638A8]">
             En savoir plus
           </a>
         </p>

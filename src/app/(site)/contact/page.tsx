@@ -24,7 +24,7 @@ export default function Contact() {
             </div>
             <div>
               <h2 className="text-lg font-semibold text-nuit">Par e-mail</h2>
-              <a href={`mailto:${SITE.email}`} className="mt-2 inline-block text-[15px] font-medium text-bleu hover:underline">
+              <a href={`mailto:${SITE.email}`} className="mt-2 inline-block text-[15px] font-medium text-bleu transition-colors hover:text-[#1638A8]">
                 {SITE.email}
               </a>
             </div>

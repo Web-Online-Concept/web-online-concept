@@ -72,7 +72,7 @@ async function Contenu() {
                   <p className="mt-1 text-2xl font-semibold">{fmtDate(calcPrec.echeance)}</p>
                 </div>
               </div>
-              <Link href="/admin/urssaf" className="mt-4 inline-block text-[15px] font-medium text-bleu hover:underline">
+              <Link href="/admin/urssaf" className="mt-4 inline-block text-[15px] font-medium text-bleu transition-colors hover:text-[#1638A8]">
                 Voir le détail et marquer comme déclarée
               </Link>
             </>
@@ -107,7 +107,7 @@ async function Contenu() {
           <p className="text-sm text-[#4A6178]">Devis en attente de réponse</p>
           <p className="mt-1 text-2xl font-semibold">{devisAttente.length}</p>
           <p className="mt-1 text-sm text-[#4A6178]">{fmtEuros(devisAttente.reduce((s, d) => s + Number(d.total_ttc), 0))}</p>
-          <Link href="/admin/messages" className="mt-3 inline-block text-[15px] font-medium text-bleu hover:underline">
+          <Link href="/admin/messages" className="mt-3 inline-block text-[15px] font-medium text-bleu transition-colors hover:text-[#1638A8]">
             {messages.count ?? 0} message{(messages.count ?? 0) > 1 ? "s" : ""} non lu{(messages.count ?? 0) > 1 ? "s" : ""}
           </Link>
         </Carte>
@@ -116,7 +116,7 @@ async function Contenu() {
       <Carte className="mt-5">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold">Dernières factures</h2>
-          <Link href="/admin/factures" className="text-[15px] font-medium text-bleu hover:underline">
+          <Link href="/admin/factures" className="text-[15px] font-medium text-bleu transition-colors hover:text-[#1638A8]">
             Toutes les factures
           </Link>
         </div>

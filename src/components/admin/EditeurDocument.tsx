@@ -77,7 +77,7 @@ export default function EditeurDocument({
                 </option>
               ))}
             </select>
-            <Link href={`/admin/clients/nouveau?retour=${encodeURIComponent(retourNouveauClient)}`} className="shrink-0 self-center text-sm font-medium text-bleu hover:underline">
+            <Link href={`/admin/clients/nouveau?retour=${encodeURIComponent(retourNouveauClient)}`} className="shrink-0 self-center text-sm font-medium text-bleu transition-colors hover:text-[#1638A8]">
               Nouveau
             </Link>
           </div>

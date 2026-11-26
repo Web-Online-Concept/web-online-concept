@@ -40,13 +40,13 @@ async function Contenu() {
                 </header>
                 <p className="mt-1 text-[15px]">
                   {m.nom},{" "}
-                  <a href={`mailto:${m.email}?subject=${encodeURIComponent(`Re: ${m.objet || "votre message"}`)}`} className="text-bleu hover:underline">
+                  <a href={`mailto:${m.email}?subject=${encodeURIComponent(`Re: ${m.objet || "votre message"}`)}`} className="text-bleu transition-colors hover:text-[#1638A8]">
                     {m.email}
                   </a>
                   {m.telephone && (
                     <>
                       ,{" "}
-                      <a href={`tel:${String(m.telephone).replace(/[^0-9+]/g, "")}`} className="text-bleu hover:underline">
+                      <a href={`tel:${String(m.telephone).replace(/[^0-9+]/g, "")}`} className="text-bleu transition-colors hover:text-[#1638A8]">
                         {m.telephone}
                       </a>
                     </>
@@ -72,7 +72,7 @@ async function Contenu() {
                   </form>
                   <form action={supprimerMessage}>
                     <input type="hidden" name="id" value={m.id} />
-                    <button type="submit" className="px-2 py-2 text-sm text-[#B42318] hover:underline">
+                    <button type="submit" className="px-2 py-2 text-sm text-[#B42318] transition-colors hover:text-[#7A1A12]">
                       Supprimer
                     </button>
                   </form>

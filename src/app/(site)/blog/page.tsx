@@ -37,7 +37,7 @@ export default async function Blog() {
                       {a.categorie}
                       {a.publie_le && <span>, {dateFr(a.publie_le)}</span>}
                     </p>
-                    <h2 className="mt-3 text-xl font-semibold leading-snug text-nuit group-hover:underline">{a.titre}</h2>
+                    <h2 className="mt-3 text-xl font-semibold leading-snug text-nuit transition-colors group-hover:text-bleu">{a.titre}</h2>
                     <p className="mt-3 text-[15px] leading-relaxed text-[#2C4558]">{a.extrait}</p>
                   </Link>
                 </li>

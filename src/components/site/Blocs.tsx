@@ -99,7 +99,7 @@ export function CarteRealisation({ r }: { r: Realisation }) {
         <p className="text-[15px] leading-relaxed text-[#2C4558]">
           {r.accroche}
         </p>
-        <span className="mt-auto pt-3 text-[15px] font-medium text-bleu group-hover:underline">
+        <span className="mt-auto pt-3 text-[15px] font-medium text-bleu transition-colors group-hover:text-[#1638A8]">
           Voir la réalisation
         </span>
       </div>
@@ -115,7 +115,7 @@ export function AppelFinal() {
         <p className="max-w-3xl text-[clamp(1.6rem,3.4vw,2.6rem)] font-semibold leading-tight">{SITE.phraseFinale}</p>
         <p className="text-lg text-[#C3D0DD]">
           Vous avez été recommandé ?{" "}
-          <Link href="/contact" className="font-medium text-white underline decoration-white/40 underline-offset-4 hover:decoration-white">
+          <Link href="/contact" className="font-medium text-[#7CCBFF] transition-colors hover:text-white">
             Écrivez directement
           </Link>
           .

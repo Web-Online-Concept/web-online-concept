@@ -124,7 +124,7 @@ async function Contenu({ searchParams }: { searchParams: Promise<Sp> }) {
                     {(taux?.length ?? 0) > 1 && (
                       <form action={supprimerTaux}>
                         <input type="hidden" name="id" value={t.id} />
-                        <button type="submit" className="text-sm text-[#B42318] hover:underline">
+                        <button type="submit" className="text-sm text-[#B42318] transition-colors hover:text-[#7A1A12]">
                           Retirer
                         </button>
                       </form>

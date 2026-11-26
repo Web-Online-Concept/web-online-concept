@@ -32,7 +32,7 @@ export default function Capacites() {
                       return (
                         <span key={slug}>
                           {i > 0 && ", "}
-                          <Link href={`/realisations/${slug}`} className="font-medium text-bleu hover:underline">
+                          <Link href={`/realisations/${slug}`} className="font-medium text-bleu transition-colors hover:text-[#1638A8]">
                             {r.nom}
                           </Link>
                         </span>

@@ -124,7 +124,7 @@ export default function Accueil() {
             </h2>
             <Link
               href="/realisations"
-              className="font-medium text-bleu hover:underline"
+              className="font-medium text-bleu transition-colors hover:text-[#1638A8]"
             >
               Toutes les réalisations
             </Link>
@@ -139,7 +139,7 @@ export default function Accueil() {
             {SITES_CLIENTS.map((r, i) => (
               <span key={r.slug}>
                 {i > 0 && ", "}
-                <Link href={`/realisations/${r.slug}`} className="text-[#2C4558] underline decoration-[#CBD5E1] underline-offset-4 hover:text-bleu hover:decoration-bleu">
+                <Link href={`/realisations/${r.slug}`} className="font-medium text-nuit transition-colors hover:text-bleu">
                   {r.nom}
                 </Link>
               </span>
@@ -178,7 +178,7 @@ export default function Accueil() {
             </h2>
             <Link
               href="/capacites"
-              className="font-medium text-bleu hover:underline"
+              className="font-medium text-bleu transition-colors hover:text-[#1638A8]"
             >
               Le détail des capacités
             </Link>
@@ -208,7 +208,7 @@ export default function Accueil() {
             </h2>
             <Link
               href="/methode"
-              className="font-medium text-bleu hover:underline"
+              className="font-medium text-bleu transition-colors hover:text-[#1638A8]"
             >
               La méthode en détail
             </Link>

@@ -40,7 +40,7 @@ async function Contenu() {
           <ul className="mt-3 flex flex-col gap-2">
             {archives.map((c) => (
               <li key={c.id}>
-                <Link href={`/admin/clients/${c.id}`} className="text-[15px] text-bleu hover:underline">
+                <Link href={`/admin/clients/${c.id}`} className="text-[15px] text-bleu transition-colors hover:text-[#1638A8]">
                   {c.nom}
                 </Link>
               </li>

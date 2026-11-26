@@ -1,6 +1,5 @@
 import { cacheLife } from "next/cache";
 import { LiensLumineux, LogoAnime } from "@/components/site/Survol";
-import { NAVIGATION } from "@/lib/contenu";
 
 // Année du copyright, recalculée chaque jour
 async function Annee() {
@@ -20,15 +19,25 @@ export default function PiedDePage() {
 
         <nav aria-label="Plan du site" className="flex flex-col items-center gap-2 text-[15px]">
           <span className="mb-1 font-semibold text-white">Le studio</span>
-          <LiensLumineux liens={NAVIGATION} />
+          <LiensLumineux
+            liens={[
+              { href: "/realisations", libelle: "Réalisations" },
+              { href: "/capacites", libelle: "Capacités" },
+              { href: "/methode", libelle: "Méthode" },
+              { href: "/blog", libelle: "Blog" },
+            ]}
+          />
         </nav>
 
-        <nav aria-label="Informations légales" className="flex flex-col items-center gap-2 text-[15px]">
+        <nav aria-label="Informations" className="flex flex-col items-center gap-2 text-[15px]">
           <span className="mb-1 font-semibold text-white">Informations</span>
           <LiensLumineux
             liens={[
+              { href: "/a-propos", libelle: "À propos" },
+              { href: "/faq", libelle: "FAQ" },
               { href: "/mentions-legales", libelle: "Mentions légales" },
               { href: "/confidentialite", libelle: "Confidentialité" },
+              { href: "/contact", libelle: "Contact" },
             ]}
           />
         </nav>

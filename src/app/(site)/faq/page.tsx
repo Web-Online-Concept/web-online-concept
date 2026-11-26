@@ -48,7 +48,7 @@ export default function Faq() {
                 <div className="pb-6 pr-14">
                   <p className="text-[17px] leading-relaxed text-[#2C4558]">{q.reponse}</p>
                   {q.lien && (
-                    <Link href={q.lien.href} className="mt-3 inline-block font-medium text-bleu hover:underline">
+                    <Link href={q.lien.href} className="mt-3 inline-block font-medium text-bleu transition-colors hover:text-[#1638A8]">
                       {q.lien.libelle}
                     </Link>
                   )}
@@ -58,7 +58,7 @@ export default function Faq() {
           </div>
           <p className="mt-10 text-[17px] text-[#2C4558]">
             Une autre question ? Écrivez à{" "}
-            <a href={`mailto:${SITE.email}`} className="font-medium text-bleu hover:underline">
+            <a href={`mailto:${SITE.email}`} className="font-medium text-bleu transition-colors hover:text-[#1638A8]">
               {SITE.email}
             </a>
             .

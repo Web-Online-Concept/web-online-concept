@@ -70,7 +70,7 @@ async function Contenu({ searchParams }: { searchParams: Promise<{ annee?: strin
                   return (
                     <tr key={f.id} className="hover:bg-ciel/60">
                       <td className="py-3">
-                        <Link href={`/admin/factures/${f.id}`} className="font-medium text-bleu hover:underline">
+                        <Link href={`/admin/factures/${f.id}`} className="font-medium text-bleu transition-colors hover:text-[#1638A8]">
                           {f.numero}
                         </Link>
                       </td>

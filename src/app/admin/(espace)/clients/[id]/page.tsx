@@ -48,7 +48,7 @@ async function Contenu({ params, searchParams }: { params: Promise<{ id: string 
               <ul className="mt-3 divide-y divide-[#EEF2F7]">
                 {factures!.map((f) => (
                   <li key={f.id}>
-                    <Link href={`/admin/factures/${f.id}`} className="flex items-center justify-between gap-2 py-2.5 text-[15px] hover:underline">
+                    <Link href={`/admin/factures/${f.id}`} className="flex items-center justify-between gap-2 py-2.5 text-[15px] transition-colors hover:text-bleu">
                       <span>{f.numero ?? "Brouillon"}</span>
                       <span>{fmtEuros(f.total_ttc)}</span>
                       <Pastille statut={f.statut} libelle={STATUTS_FACTURE[f.statut]} />
@@ -66,7 +66,7 @@ async function Contenu({ params, searchParams }: { params: Promise<{ id: string 
               <ul className="mt-3 divide-y divide-[#EEF2F7]">
                 {devis!.map((d) => (
                   <li key={d.id}>
-                    <Link href={`/admin/devis/${d.id}`} className="flex items-center justify-between gap-2 py-2.5 text-[15px] hover:underline">
+                    <Link href={`/admin/devis/${d.id}`} className="flex items-center justify-between gap-2 py-2.5 text-[15px] transition-colors hover:text-bleu">
                       <span>{d.numero ?? "Brouillon"}</span>
                       <span>{d.date_emission ? fmtDate(d.date_emission) : ""}</span>
                       <Pastille statut={d.statut} libelle={STATUTS_DEVIS[d.statut]} />

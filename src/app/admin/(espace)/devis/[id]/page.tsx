@@ -104,7 +104,7 @@ async function Contenu({ params, searchParams }: { params: Promise<{ id: string 
             <div>
               <dt className="text-sm text-[#4A6178]">Client</dt>
               <dd className="mt-1 font-medium">
-                <Link href={`/admin/clients/${d.client_id}`} className="hover:underline">
+                <Link href={`/admin/clients/${d.client_id}`} className="transition-colors hover:text-bleu">
                   {c.client.nom}
                 </Link>
               </dd>

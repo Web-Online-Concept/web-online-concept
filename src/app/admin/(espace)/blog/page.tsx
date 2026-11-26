@@ -23,7 +23,7 @@ async function Contenu() {
             {articles.map((a) => (
               <li key={a.id} className="flex flex-wrap items-center justify-between gap-3 py-4">
                 <div>
-                  <Link href={`/admin/blog/${a.id}`} className="font-medium hover:text-bleu hover:underline">
+                  <Link href={`/admin/blog/${a.id}`} className="font-medium transition-colors hover:text-bleu">
                     {a.titre}
                   </Link>
                   <p className="mt-0.5 text-sm text-[#4A6178]">
@@ -33,7 +33,7 @@ async function Contenu() {
                 </div>
                 <div className="flex items-center gap-4">
                   {a.publie && (
-                    <a href={`/blog/${a.slug}`} target="_blank" rel="noopener" className="text-sm text-bleu hover:underline">
+                    <a href={`/blog/${a.slug}`} target="_blank" rel="noopener" className="text-sm text-bleu transition-colors hover:text-[#1638A8]">
                       Voir sur le site
                     </a>
                   )}
