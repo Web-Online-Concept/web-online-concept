@@ -1,6 +1,8 @@
 // Modèles des e-mails envoyés par le site (HTML compatible messageries : tableaux et styles en ligne).
 // Aucune dépendance serveur : ce fichier peut être rendu tel quel pour des aperçus.
 
+import { chemin, LOCALES, type Langue, type Page } from "../i18n/chemins";
+
 export type DonneesMessage = {
   nom: string;
   email: string;
@@ -10,6 +12,10 @@ export type DonneesMessage = {
   objet?: string | null;
   message: string;
   recuLe?: Date;
+  // Langue de la page d'où le message a été envoyé : celle de l'accusé de réception (français par défaut)
+  langue?: Langue;
+  // Type de projet tel que le visiteur l'a lu (dans sa langue) ; besoin reste en français pour le studio
+  besoinLibelle?: string | null;
 };
 
 export const URL_SITE = "https://www.web-online-concept.com";
@@ -32,23 +38,27 @@ const BULLE_BLEUE = `background-color:${C.bleu};background-image:linear-gradient
 export const echapper = (t: string) =>
   t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
-const dateFr = (d: Date) =>
-  new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Paris" }).format(d);
-const heureFr = (d: Date) =>
-  new Intl.DateTimeFormat("fr-FR", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Paris" }).format(d).replace(":", " h ");
+const dateL = (d: Date, l: Langue = "fr") =>
+  new Intl.DateTimeFormat(LOCALES[l], { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Paris" }).format(d);
+const heureL = (d: Date, l: Langue = "fr") => {
+  const h = new Intl.DateTimeFormat(LOCALES[l], { hour: l === "en" ? "numeric" : "2-digit", minute: "2-digit", timeZone: "Europe/Paris" }).format(d);
+  return l === "fr" ? h.replace(":", " h ") : h;
+};
+const lienSite = (l: Langue, page?: Page) => `${URL_SITE}${chemin(l, page)}`;
 
 // Texte du visiteur recopié dans l'accusé : tronqué, et sans aucun lien (une adresse saisie par un tiers
 // ne doit pas pouvoir servir à faire passer des liens par nos e-mails).
 const LIEN = /(?:https?:\/\/|www\.)[^\s<>]+|(?<![@\w.-])[\w-]+(?:\.[\w-]+)*\.(?:com|fr|net|org|info|biz|io|co|me|app|site|online|shop|xyz|ru|cn|top|link|club)\b(?:\/\S*)?/gi;
-export const sansLiens = (t: string, max = 700) => {
+const MOT_LIEN: Record<Langue, string> = { fr: "lien", en: "link", es: "enlace" };
+export const sansLiens = (t: string, max = 700, l: Langue = "fr") => {
   // La ponctuation qui suit un lien (parenthèse, point…) est conservée
-  const propre = t.replace(LIEN, (lien) => `[lien]${lien.match(/[)\].,;:!?]+$/)?.[0] ?? ""}`).trim();
+  const propre = t.replace(LIEN, (lien) => `[${MOT_LIEN[l]}]${lien.match(/[)\].,;:!?]+$/)?.[0] ?? ""}`).trim();
   return propre.length > max ? `${propre.slice(0, max).trimEnd()}…` : propre;
 };
 
-function coquille({ titre, preheader, corps, pied }: { titre: string; preheader: string; corps: string; pied: string }) {
+function coquille({ titre, preheader, corps, pied, l = "fr" }: { titre: string; preheader: string; corps: string; pied: string; l?: Langue }) {
   return `<!DOCTYPE html>
-<html lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="${l}" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -80,10 +90,10 @@ ${pied}
 </html>`;
 }
 
-const entete = (droite = "") => `
+const entete = (droite = "", l: Langue = "fr") => `
 <tr><td class="marge" style="background:${C.nuit};padding:26px 36px 24px">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
-    <td valign="middle"><a href="${URL_SITE}" style="text-decoration:none"><img src="${URL_SITE}/email/logo-fond-sombre.png" width="196" height="42" alt="Web Online Concept" style="display:block;border:0;outline:none"></a></td>
+    <td valign="middle"><a href="${lienSite(l)}" style="text-decoration:none"><img src="${URL_SITE}/email/logo-fond-sombre.png" width="196" height="42" alt="Web Online Concept" style="display:block;border:0;outline:none"></a></td>
     ${droite ? `<td valign="middle" align="right">${droite}</td>` : ""}
   </tr></table>
 </td></tr>
@@ -94,38 +104,106 @@ const bouton = (href: string, libelle: string, plein = true) =>
     plein ? `${BULLE_BLEUE};color:#FFFFFF;border:1px solid ${C.bleu}` : `background:#FFFFFF;color:${C.nuit};border:1px solid #C9D5E3`
   }">${libelle}</a>`;
 
-// ——— Accusé de réception envoyé au visiteur ———
+// ——— Accusé de réception envoyé au visiteur (dans sa langue) ———
+
+const ACCUSE = {
+  fr: {
+    bonjour: (nom: string) => `Bonjour ${nom},`,
+    titre: "Votre message est bien arrivé.",
+    vous: "Vous",
+    recu: (d: string, h: string) => `Reçu le ${d} à ${h}`,
+    merci: "Merci pour votre message&nbsp;! Nous revenons vers vous personnellement, par e-mail, pour en parler.",
+    etMaintenant: "Et maintenant&nbsp;?",
+    etapes: [
+      ["Nous lisons votre demande", "Chaque message est lu en personne, avec attention."],
+      ["Nous vous répondons", "Par e-mail, avec nos questions et souvent de premières pistes."],
+      ["Nous en parlons ensemble", "Un premier échange, en visio ou par téléphone, si le projet s'y prête."],
+    ],
+    precision: "Une précision, un document à partager&nbsp;?",
+    repondez: "Répondez simplement à cet e-mail&nbsp;: il arrive directement chez nous.",
+    decouvrir: "Découvrir nos réalisations",
+    accroche: "Sites et applications sur mesure",
+    liens: ["Réalisations", "Méthode", "Blog"],
+    raison:
+      'Vous recevez cet e-mail parce que vous nous avez écrit depuis le formulaire de <span style="white-space:nowrap">web-online-concept.com</span>. Vos informations servent uniquement à vous répondre.',
+    sujet: "Nous avons bien reçu votre message",
+    preheader: "Merci pour votre message ! Nous revenons vers vous personnellement, par e-mail, pour en parler.",
+  },
+  en: {
+    bonjour: (nom: string) => `Hello ${nom},`,
+    titre: "Your message has arrived.",
+    vous: "You",
+    recu: (d: string, h: string) => `Received on ${d} at ${h} (Paris time)`,
+    merci: "Thank you for your message! We'll get back to you personally, by email, to talk it through.",
+    etMaintenant: "What happens next?",
+    etapes: [
+      ["We read your request", "Every message is read personally, with care."],
+      ["We reply to you", "By email, with our questions and often some first ideas."],
+      ["We talk it through together", "A first conversation, by video call or phone, if the project calls for it."],
+    ],
+    precision: "Something to add, a document to share?",
+    repondez: "Simply reply to this email: it comes straight to us.",
+    decouvrir: "Discover our work",
+    accroche: "Custom websites and apps",
+    liens: ["Work", "Method", "Blog"],
+    raison:
+      'You are receiving this email because you wrote to us using the form on <span style="white-space:nowrap">web-online-concept.com</span>. Your information is only used to reply to you.',
+    sujet: "We've received your message",
+    preheader: "Thank you for your message! We'll get back to you personally, by email, to talk it through.",
+  },
+  es: {
+    bonjour: (nom: string) => `Hola, ${nom}:`,
+    titre: "Su mensaje ha llegado correctamente.",
+    vous: "Usted",
+    recu: (d: string, h: string) => `Recibido el ${d} a las ${h} (hora de París)`,
+    merci: "¡Gracias por su mensaje! Le responderemos personalmente, por correo electrónico, para hablarlo.",
+    etMaintenant: "¿Y ahora?",
+    etapes: [
+      ["Leemos su solicitud", "Cada mensaje se lee personalmente, con atención."],
+      ["Le respondemos", "Por correo electrónico, con nuestras preguntas y a menudo con primeras ideas."],
+      ["Lo hablamos juntos", "Una primera conversación, por videollamada o por teléfono, si el proyecto lo requiere."],
+    ],
+    precision: "¿Una precisión, un documento que compartir?",
+    repondez: "Responda simplemente a este correo: nos llega directamente.",
+    decouvrir: "Descubrir nuestros proyectos",
+    accroche: "Sitios y aplicaciones a medida",
+    liens: ["Proyectos", "Método", "Blog"],
+    raison:
+      'Recibe este correo porque nos escribió desde el formulario de <span style="white-space:nowrap">web-online-concept.com</span>. Sus datos solo sirven para responderle.',
+    sujet: "Hemos recibido su mensaje",
+    preheader: "¡Gracias por su mensaje! Le responderemos personalmente, por correo electrónico, para hablarlo.",
+  },
+} satisfies Record<Langue, unknown>;
 
 export function accuseReception(m: DonneesMessage) {
+  const l = m.langue ?? "fr";
+  const x = ACCUSE[l];
   const recu = m.recuLe ?? new Date();
   const nom = echapper(m.nom.slice(0, 60));
-  const objet = m.objet ? sansLiens(m.objet, 160) : "";
-  const texte = sansLiens(m.message);
-  const etapes = [
-    ["Nous lisons votre demande", "Chaque message est lu en personne, avec attention."],
-    ["Nous vous répondons", "Par e-mail, avec nos questions et souvent de premières pistes."],
-    ["Nous en parlons ensemble", "Un premier échange, en visio ou par téléphone, si le projet s'y prête."],
-  ];
+  const objet = m.objet ? sansLiens(m.objet, 160, l) : "";
+  const texte = sansLiens(m.message, 700, l);
+  const besoin = m.besoinLibelle ?? m.besoin;
+  const etapes = x.etapes;
 
-  const corps = `${entete()}
+  const corps = `${entete("", l)}
 <tr><td class="marge" style="padding:38px 36px 6px;font-family:${POLICE}">
-  <p style="margin:0 0 10px;font-size:15px;line-height:22px;color:${C.doux}">Bonjour ${nom},</p>
-  <h1 class="titre" style="margin:0;font-size:27px;line-height:34px;font-weight:700;color:${C.nuit};letter-spacing:-0.4px">Votre message est bien arrivé.</h1>
+  <p style="margin:0 0 10px;font-size:15px;line-height:22px;color:${C.doux}">${x.bonjour(nom)}</p>
+  <h1 class="titre" style="margin:0;font-size:27px;line-height:34px;font-weight:700;color:${C.nuit};letter-spacing:-0.4px">${x.titre}</h1>
 </td></tr>
 
 <tr><td class="marge" style="padding:26px 36px 8px;font-family:${POLICE}">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-    <tr><td align="right" style="padding-bottom:4px;font-size:12px;line-height:16px;color:${C.doux}">Vous</td></tr>
+    <tr><td align="right" style="padding-bottom:4px;font-size:12px;line-height:16px;color:${C.doux}">${x.vous}</td></tr>
     <tr><td align="right">
       <table role="presentation" class="bulle" cellpadding="0" cellspacing="0" border="0" style="max-width:86%"><tr>
         <td style="${BULLE_BLEUE};color:#FFFFFF;border-radius:20px 20px 6px 20px;padding:16px 20px;font-size:15px;line-height:23px">
-          ${m.besoin ? `<div style="font-size:12px;line-height:16px;color:#C9D8FF;padding-bottom:8px">${echapper(m.besoin)}</div>` : ""}
+          ${besoin ? `<div style="font-size:12px;line-height:16px;color:#C9D8FF;padding-bottom:8px">${echapper(besoin)}</div>` : ""}
           ${objet ? `<div style="font-weight:700;padding-bottom:6px">${echapper(objet)}</div>` : ""}
           <div style="white-space:pre-line">${echapper(texte)}</div>
         </td>
       </tr></table>
     </td></tr>
-    <tr><td align="right" style="padding-top:6px;font-size:12px;line-height:16px;color:${C.doux}">Reçu le ${dateFr(recu)} à ${heureFr(recu)} <span style="color:${C.vert};font-weight:700">&#10003;&#10003;</span></td></tr>
+    <tr><td align="right" style="padding-top:6px;font-size:12px;line-height:16px;color:${C.doux}">${x.recu(dateL(recu, l), heureL(recu, l))} <span style="color:${C.vert};font-weight:700">&#10003;&#10003;</span></td></tr>
 
     <tr><td style="padding-top:18px">
       <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
@@ -133,7 +211,7 @@ export function accuseReception(m: DonneesMessage) {
         <td valign="top" style="padding-left:10px">
           <div style="padding-bottom:4px;font-size:12px;line-height:16px;color:${C.doux}">Web Online Concept</div>
           <table role="presentation" class="bulle" cellpadding="0" cellspacing="0" border="0" style="max-width:440px"><tr>
-            <td style="background:${C.ciel};color:${C.nuit};border-radius:6px 20px 20px 20px;padding:14px 18px;font-size:15px;line-height:23px">Merci pour votre message&nbsp;! Nous revenons vers vous personnellement, par e-mail, pour en parler.</td>
+            <td style="background:${C.ciel};color:${C.nuit};border-radius:6px 20px 20px 20px;padding:14px 18px;font-size:15px;line-height:23px">${x.merci}</td>
           </tr></table>
         </td>
       </tr></table>
@@ -143,7 +221,7 @@ export function accuseReception(m: DonneesMessage) {
 
 <tr><td class="marge" style="padding:30px 36px 0;font-family:${POLICE}">
   <div style="height:1px;line-height:1px;font-size:0;background:${C.trait}">&nbsp;</div>
-  <h2 style="margin:28px 0 18px;font-size:17px;line-height:24px;font-weight:700;color:${C.nuit}">Et maintenant&nbsp;?</h2>
+  <h2 style="margin:28px 0 18px;font-size:17px;line-height:24px;font-weight:700;color:${C.nuit}">${x.etMaintenant}</h2>
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
     ${etapes
       .map(
@@ -164,13 +242,13 @@ export function accuseReception(m: DonneesMessage) {
 <tr><td class="marge" style="padding:28px 36px 0;font-family:${POLICE}">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
     <td style="background:${C.ciel};border-radius:16px;padding:16px 20px;font-size:14px;line-height:21px;color:${C.texte}">
-      <strong style="color:${C.nuit}">Une précision, un document à partager&nbsp;?</strong><br>Répondez simplement à cet e-mail&nbsp;: il arrive directement chez nous.
+      <strong style="color:${C.nuit}">${x.precision}</strong><br>${x.repondez}
     </td>
   </tr></table>
 </td></tr>
 
 <tr><td class="marge" align="left" style="padding:30px 36px 38px">
-  ${bouton(`${URL_SITE}/realisations`, "Découvrir nos réalisations")}
+  ${bouton(lienSite(l, "realisations"), x.decouvrir)}
 </td></tr>`;
 
   const pied = `
@@ -178,26 +256,21 @@ export function accuseReception(m: DonneesMessage) {
 <tr><td class="marge" align="center" style="padding:26px 36px 8px;font-family:${POLICE}">
   <img src="${URL_SITE}/email/symbole.png" width="40" height="28" alt="" style="display:block;border:0;margin:0 auto 10px">
   <div style="font-size:14px;line-height:20px;font-weight:700;color:${C.nuit}">Web Online Concept</div>
-  <div style="font-size:13px;line-height:20px;color:${C.doux}">Sites et applications sur mesure</div>
+  <div style="font-size:13px;line-height:20px;color:${C.doux}">${x.accroche}</div>
   <div style="padding-top:12px;font-size:13px;line-height:20px">
-    <a href="${URL_SITE}/realisations" style="color:${C.texte};text-decoration:none">Réalisations</a>
+    <a href="${lienSite(l, "realisations")}" style="color:${C.texte};text-decoration:none">${x.liens[0]}</a>
     <span style="color:#B7C4D3">&nbsp;&nbsp;/&nbsp;&nbsp;</span>
-    <a href="${URL_SITE}/methode" style="color:${C.texte};text-decoration:none">Méthode</a>
+    <a href="${lienSite(l, "methode")}" style="color:${C.texte};text-decoration:none">${x.liens[1]}</a>
     <span style="color:#B7C4D3">&nbsp;&nbsp;/&nbsp;&nbsp;</span>
-    <a href="${URL_SITE}/blog" style="color:${C.texte};text-decoration:none">Blog</a>
+    <a href="${lienSite(l, "blog")}" style="color:${C.texte};text-decoration:none">${x.liens[2]}</a>
   </div>
-  <p style="margin:16px 0 0;font-size:11px;line-height:17px;color:#8A9BAE">Vous recevez cet e-mail parce que vous nous avez écrit depuis le formulaire de <span style="white-space:nowrap">web-online-concept.com</span>. Vos informations servent uniquement à vous répondre.</p>
+  <p style="margin:16px 0 0;font-size:11px;line-height:17px;color:#8A9BAE">${x.raison}</p>
 </td></tr>
 </table>`;
 
   return {
-    sujet: "Nous avons bien reçu votre message",
-    html: coquille({
-      titre: "Nous avons bien reçu votre message",
-      preheader: "Merci pour votre message ! Nous revenons vers vous personnellement, par e-mail, pour en parler.",
-      corps,
-      pied,
-    }),
+    sujet: x.sujet,
+    html: coquille({ titre: x.sujet, preheader: x.preheader, corps, pied, l }),
   };
 }
 
@@ -205,23 +278,57 @@ export function accuseReception(m: DonneesMessage) {
 // Conçue pour être citée telle quelle quand Florent y répond depuis Gmail : elle ne contient que la demande
 // du visiteur et ses propres coordonnées, rien d'interne (pas de lien vers le back-office ni de consigne).
 
+// Dans la langue du visiteur : citée dans la réponse, elle doit lui rester lisible (Florent répond alors dans cette langue).
+const ALERTE = {
+  fr: {
+    email: "E-mail",
+    telephone: "Téléphone",
+    source: "Recommandé par",
+    pastille: "Demande reçue",
+    envoyee: (d: string, h: string) => `Envoyée depuis le formulaire du site, le ${d} à ${h}`,
+    sujet: (b: string) => `Demande : ${b}`,
+    titre: (n: string) => `Demande de ${n}`,
+  },
+  en: {
+    email: "Email",
+    telephone: "Phone",
+    source: "Referred by",
+    pastille: "Request received",
+    envoyee: (d: string, h: string) => `Sent from the website form on ${d} at ${h} (Paris time)`,
+    sujet: (b: string) => `Request: ${b}`,
+    titre: (n: string) => `Request from ${n}`,
+  },
+  es: {
+    email: "Correo electrónico",
+    telephone: "Teléfono",
+    source: "Recomendado por",
+    pastille: "Solicitud recibida",
+    envoyee: (d: string, h: string) => `Enviada desde el formulario del sitio el ${d} a las ${h} (hora de París)`,
+    sujet: (b: string) => `Solicitud: ${b}`,
+    titre: (n: string) => `Solicitud de ${n}`,
+  },
+} satisfies Record<Langue, unknown>;
+
 export function alerteMessage(m: DonneesMessage) {
+  const l = m.langue ?? "fr";
+  const x = ALERTE[l];
   const recu = m.recuLe ?? new Date();
   const nom = echapper(m.nom);
+  const besoin = m.besoinLibelle ?? m.besoin;
   const initiale = echapper((m.nom.trim()[0] ?? "?").toUpperCase());
   const lignes: [string, string][] = [
-    ["E-mail", `<a href="mailto:${echapper(m.email)}" style="color:${C.bleu};text-decoration:none">${echapper(m.email)}</a>`],
+    [x.email, `<a href="mailto:${echapper(m.email)}" style="color:${C.bleu};text-decoration:none">${echapper(m.email)}</a>`],
   ];
-  if (m.telephone) lignes.push(["Téléphone", `<a href="tel:${echapper(m.telephone.replace(/[^0-9+]/g, ""))}" style="color:${C.bleu};text-decoration:none">${echapper(m.telephone)}</a>`]);
-  if (m.source) lignes.push(["Recommandé par", echapper(m.source)]);
+  if (m.telephone) lignes.push([x.telephone, `<a href="tel:${echapper(m.telephone.replace(/[^0-9+]/g, ""))}" style="color:${C.bleu};text-decoration:none">${echapper(m.telephone)}</a>`]);
+  if (m.source) lignes.push([x.source, echapper(m.source)]);
 
-  const pastille = `<span style="display:inline-block;font-family:${POLICE};font-size:12px;line-height:16px;font-weight:600;color:#FFFFFF;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:6px 12px"><span style="color:${C.vert}">&#9679;</span>&nbsp; Demande reçue</span>`;
+  const pastille = `<span style="display:inline-block;font-family:${POLICE};font-size:12px;line-height:16px;font-weight:600;color:#FFFFFF;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:6px 12px"><span style="color:${C.vert}">&#9679;</span>&nbsp; ${x.pastille}</span>`;
 
-  const corps = `${entete(pastille)}
+  const corps = `${entete(pastille, l)}
 <tr><td class="marge" style="padding:34px 36px 0;font-family:${POLICE}">
-  <p style="margin:0 0 8px;font-size:13px;line-height:18px;color:${C.doux}">Envoyée depuis le formulaire du site, le ${dateFr(recu)} à ${heureFr(recu)}</p>
+  <p style="margin:0 0 8px;font-size:13px;line-height:18px;color:${C.doux}">${x.envoyee(dateL(recu, l), heureL(recu, l))}</p>
   <h1 class="titre" style="margin:0 0 12px;font-size:26px;line-height:33px;font-weight:700;color:${C.nuit};letter-spacing:-0.3px">${nom}</h1>
-  ${m.besoin ? `<span style="display:inline-block;font-size:13px;line-height:18px;font-weight:600;color:${C.profond};background:#E8EFFF;border-radius:999px;padding:6px 14px">${echapper(m.besoin)}</span>` : ""}
+  ${besoin ? `<span style="display:inline-block;font-size:13px;line-height:18px;font-weight:600;color:${C.profond};background:#E8EFFF;border-radius:999px;padding:6px 14px">${echapper(besoin)}</span>` : ""}
 </td></tr>
 
 <tr><td class="marge" style="padding:26px 36px 0;font-family:${POLICE}">
@@ -260,8 +367,8 @@ export function alerteMessage(m: DonneesMessage) {
   const apercu = m.message.replace(/\s+/g, " ").slice(0, 110);
   return {
     // Sujet pensé pour la réponse : le visiteur verra « Re: <son objet> »
-    sujet: m.objet || `Demande : ${m.besoin ?? "contact"}`,
-    html: coquille({ titre: `Demande de ${m.nom}`, preheader: apercu, corps, pied }),
+    sujet: m.objet || x.sujet(besoin ?? "contact"),
+    html: coquille({ titre: x.titre(m.nom), preheader: apercu, corps, pied, l }),
   };
 }
 

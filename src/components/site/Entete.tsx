@@ -4,13 +4,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import { LogoAnime } from "@/components/site/Survol";
-import { NAVIGATION } from "@/lib/contenu";
+import { SelecteurLangue, SelecteurLangueMobile, useLangue } from "@/components/site/Langue";
+import { analyserChemin, chemin as cheminPublic } from "@/lib/i18n/chemins";
+
+type Lien = { href: string; libelle: string };
 
 type Pastille = { x: number; l: number; visible: boolean; glisse: boolean };
 
 // Menu ordinateur : une pastille lumineuse à bord dégradé glisse d'un lien à l'autre au survol ;
 // la page en cours est soulignée d'un trait dégradé.
-function NavBureau({ chemin }: { chemin: string | null }) {
+function NavBureau({ chemin, navigation }: { chemin: string | null; navigation: Lien[] }) {
   const [p, setP] = useState<Pastille>({ x: 0, l: 0, visible: false, glisse: false });
 
   return (
@@ -24,7 +27,7 @@ function NavBureau({ chemin }: { chemin: string | null }) {
       >
         <span className="block h-full w-full rounded-full bg-[#0D2240]" />
       </span>
-      {NAVIGATION.map((l) => {
+      {navigation.map((l) => {
         const actif = !!chemin && (chemin === l.href || chemin.startsWith(l.href + "/"));
         return (
           <Link
@@ -58,9 +61,11 @@ function NavBureau({ chemin }: { chemin: string | null }) {
   );
 }
 
-function NavBureauActive() {
-  const chemin = usePathname();
-  return <NavBureau chemin={chemin} />;
+// Au prérendu, usePathname donne l'adresse interne (/fr/capacites, /en/realisations…) et dans le navigateur
+// l'adresse publique (/capacites, /en/work…) : on ramène les deux à l'adresse publique, sinon l'hydratation diverge.
+function NavBureauActive({ navigation }: { navigation: Lien[] }) {
+  const { langue, page, suite } = analyserChemin(usePathname());
+  return <NavBureau chemin={cheminPublic(langue, page, suite)} navigation={navigation} />;
 }
 
 // Un lien vers la page où l'on se trouve déjà (logo sur l'accueil, « Contact » sur la page Contact…)
@@ -83,8 +88,15 @@ function useRetourEnHaut() {
   }, []);
 }
 
-export default function Entete() {
+const LIBELLES = {
+  fr: { nav: "Navigation principale", ouvrir: "Ouvrir le menu", fermer: "Fermer le menu" },
+  en: { nav: "Main navigation", ouvrir: "Open the menu", fermer: "Close the menu" },
+  es: { nav: "Navegación principal", ouvrir: "Abrir el menú", fermer: "Cerrar el menú" },
+};
+
+export default function Entete({ navigation }: { navigation: Lien[] }) {
   const [ouvert, setOuvert] = useState(false);
+  const t = LIBELLES[useLangue()];
   useRetourEnHaut();
 
   return (
@@ -92,18 +104,23 @@ export default function Entete() {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-4 sm:px-8">
         <LogoAnime className="h-10 sm:h-11" priorite onClick={() => setOuvert(false)} />
 
-        <nav aria-label="Navigation principale" className="hidden lg:block">
-          <Suspense fallback={<NavBureau chemin={null} />}>
-            <NavBureauActive />
+        <div className="hidden items-center gap-3 lg:flex xl:gap-5">
+          <nav aria-label={t.nav}>
+            <Suspense fallback={<NavBureau chemin={null} navigation={navigation} />}>
+              <NavBureauActive navigation={navigation} />
+            </Suspense>
+          </nav>
+          <Suspense>
+            <SelecteurLangue />
           </Suspense>
-        </nav>
+        </div>
 
         <button
           type="button"
           className="inline-flex h-11 w-11 items-center justify-center rounded-full text-white lg:hidden"
           aria-expanded={ouvert}
           aria-controls="menu-mobile"
-          aria-label={ouvert ? "Fermer le menu" : "Ouvrir le menu"}
+          aria-label={ouvert ? t.fermer : t.ouvrir}
           onClick={() => setOuvert((o) => !o)}
         >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
@@ -113,9 +130,9 @@ export default function Entete() {
       </div>
 
       {ouvert && (
-        <nav id="menu-mobile" aria-label="Navigation principale" className="border-t border-white/10 px-5 pb-5 lg:hidden">
+        <nav id="menu-mobile" aria-label={t.nav} className="border-t border-white/10 px-5 pb-5 lg:hidden">
           <ul className="flex flex-col py-2">
-            {NAVIGATION.map((l) => (
+            {navigation.map((l) => (
               <li key={l.href}>
                 <Link
                   href={l.href}
@@ -127,6 +144,9 @@ export default function Entete() {
               </li>
             ))}
           </ul>
+          <Suspense>
+            <SelecteurLangueMobile onChoix={() => setOuvert(false)} />
+          </Suspense>
         </nav>
       )}
     </header>

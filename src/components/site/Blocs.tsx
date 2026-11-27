@@ -7,7 +7,9 @@ import IllustrationEntete, {
   type VarianteEntete,
 } from "@/components/site/illustrations/Entetes";
 import type { Realisation } from "@/lib/contenu";
-import { ENGAGEMENTS, SITE } from "@/lib/contenu";
+import { contenu } from "@/lib/i18n/contenu";
+import { chemin } from "@/lib/i18n/chemins";
+import { langue, t } from "@/lib/i18n/langue";
 
 export function Conteneur({
   children,
@@ -85,11 +87,12 @@ export function EnTetePage({
 }
 
 // Petite carte vers une autre réalisation (bas des fiches) : vignette de la page d'accueil, nom et type
-export function CarteSuivante({ r }: { r: Realisation }) {
+export async function CarteSuivante({ r }: { r: Realisation }) {
+  const l = await langue();
   const vignette = r.visuels?.find((v) => v.format === "ordinateur");
   return (
     <Link
-      href={`/realisations/${r.slug}`}
+      href={chemin(l, "realisations", r.slug)}
       className="group flex flex-col overflow-hidden rounded-2xl border border-[#DCE3EC] bg-white transition-shadow hover:shadow-[0_18px_40px_-24px_rgba(10,26,47,0.45)] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-cyan"
     >
       <div className="relative h-40 overflow-hidden bg-nuit">
@@ -116,12 +119,13 @@ export function CarteSuivante({ r }: { r: Realisation }) {
   );
 }
 
-export function CarteRealisation({ r }: { r: Realisation }) {
+export async function CarteRealisation({ r }: { r: Realisation }) {
+  const l = await langue();
   const fort = r.chiffres[0];
   const vignette = r.visuels?.[0];
   return (
     <Link
-      href={`/realisations/${r.slug}`}
+      href={chemin(l, "realisations", r.slug)}
       className="group flex flex-col overflow-hidden rounded-2xl border border-[#DCE3EC] bg-white transition-shadow hover:shadow-[0_18px_40px_-24px_rgba(10,26,47,0.45)] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-cyan"
     >
       <div
@@ -160,24 +164,33 @@ export function CarteRealisation({ r }: { r: Realisation }) {
           {r.accroche}
         </p>
         <span className="mt-auto pt-3 text-[15px] font-medium text-bleu transition-colors group-hover:text-[#1638A8]">
-          Voir la réalisation
+          {t({ fr: "Voir la réalisation", en: "View the project", es: "Ver el proyecto" }, l)}
         </span>
       </div>
     </Link>
   );
 }
 
-export function AppelFinal() {
+export async function AppelFinal() {
+  const c = await contenu();
+  const x = t(
+    {
+      fr: { question: "Vous avez été recommandé ?", lien: "Écrivez-nous directement" },
+      en: { question: "Were you referred to us?", lien: "Write to us directly" },
+      es: { question: "¿Le han recomendado nuestro estudio?", lien: "Escríbanos directamente" },
+    },
+    c.l,
+  );
   return (
     // Tout en bas de page, ce bloc et le pied de page remplissent exactement l'écran (77 px = menu)
     <section className="ecran-fin rendu-differe relative flex min-h-[calc(100svh-77px-var(--pied,418px))] items-center overflow-hidden bg-[radial-gradient(ellipse_at_80%_45%,#163C86_0%,#0A1A2F_64%)] text-white">
       <Orbite ajuste planete className="pointer-events-none absolute right-[3%] top-1/2 hidden aspect-[2/1] h-[82%] w-auto -translate-y-1/2 opacity-80 md:block" />
       <Conteneur className="relative flex flex-col items-start gap-6 py-20 sm:py-24">
-        <p className="max-w-3xl text-[clamp(1.9rem,4.2vw,3.4rem)] font-semibold leading-[1.1] tracking-tight">{SITE.phraseFinale}</p>
+        <p className="max-w-3xl text-[clamp(1.9rem,4.2vw,3.4rem)] font-semibold leading-[1.1] tracking-tight">{c.SITE.phraseFinale}</p>
         <p className="text-xl text-[#C3D0DD]">
-          Vous avez été recommandé ?{" "}
-          <Link href="/contact" className="font-medium text-[#7CCBFF] transition-colors hover:text-white">
-            Écrivez-nous directement
+          {x.question}{" "}
+          <Link href={chemin(c.l, "contact")} className="font-medium text-[#7CCBFF] transition-colors hover:text-white">
+            {x.lien}
           </Link>
           .
         </p>
@@ -187,14 +200,17 @@ export function AppelFinal() {
 }
 
 // Les quatre engagements, chacun illustré d'un visuel animé (fond ciel sur une section blanche, et inversement)
-export function BlocEngagements({ fond = "bg-white" }: { fond?: string }) {
+export async function BlocEngagements({ fond = "bg-white" }: { fond?: string }) {
+  const c = await contenu();
   const visuel = fond === "bg-white" ? "bg-ciel" : "bg-white";
   return (
     <section className={`ecran rendu-differe ${fond} py-20 sm:py-24`}>
       <Conteneur>
-        <h2 className="text-[clamp(1.7rem,3vw,2.4rem)] font-semibold tracking-tight text-nuit">Nos engagements</h2>
+        <h2 className="text-[clamp(1.7rem,3vw,2.4rem)] font-semibold tracking-tight text-nuit">
+          {t({ fr: "Nos engagements", en: "Our commitments", es: "Nuestros compromisos" }, c.l)}
+        </h2>
         <ul className="mt-10 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-          {ENGAGEMENTS.map((e, i) => {
+          {c.ENGAGEMENTS.map((e, i) => {
             const Visuel = VISUELS_ENGAGEMENTS[i];
             return (
               <li key={e.titre} className="flex flex-col">

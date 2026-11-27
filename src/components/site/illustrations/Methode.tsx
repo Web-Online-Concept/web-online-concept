@@ -1,5 +1,6 @@
 // Mini-animations des quatre étapes de la méthode (accueil). Décoratives : SVG + CSS (classes m1- à m4-
 // dans animations.css), en pause tant que l'étape n'est pas « allumée » par la ligne de progression.
+import { langue } from "@/lib/i18n/langue";
 
 const FENETRE = { x: 22, y: 22, l: 236, h: 166 };
 
@@ -100,7 +101,8 @@ const LIGNES: [number, [number, string][]][] = [
   [0, [[36, "#2BD47D"], [40, "#3B5A85"]]],
 ];
 
-export function AnimCode() {
+export async function AnimCode() {
+  const ia = (await langue()) === "en" ? "AI" : "IA";
   return (
     <Svg>
       <defs>
@@ -118,7 +120,7 @@ export function AnimCode() {
         fill="#FFFFFF"
       />
       <text x="224" y="34.4" fontSize="8" fontWeight="600" fill="#FFFFFF" fontFamily="var(--font-sora), sans-serif">
-        IA
+        {ia}
       </text>
       {LIGNES.map((ligne, i) => {
         const y = 50 + i * 16.5;

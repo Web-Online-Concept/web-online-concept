@@ -633,7 +633,7 @@ export const FAQ: Question[] = [
     theme: "ensemble",
     question: "Travaillez-vous à distance ?",
     reponse:
-      "Oui, nous travaillons partout en France, à distance : visio, téléphone et e-mail. Nos clients sont installés aux quatre coins du pays, et le suivi se fait aussi simplement que si nous étions voisins.",
+      "Oui, nous travaillons à distance, en France comme à l'étranger : visio, téléphone et e-mail, en français, en anglais ou en espagnol. Le suivi se fait aussi simplement que si nous étions voisins.",
     lien: { href: "/realisations#clients", libelle: "Voir les sites clients" },
   },
   {
@@ -671,7 +671,7 @@ export const FAQ: Question[] = [
     theme: "projet",
     question: "Faites-vous des sites en plusieurs langues ?",
     reponse:
-      "Oui. Chaque langue a ses propres adresses, pour être bien référencée dans chaque pays, et les traductions sont préparées avec l'IA puis vérifiées. MemoDay, par exemple, existe en français, en anglais et en espagnol.",
+      "Oui, comme ce site, disponible en français, en anglais et en espagnol. Chaque langue a ses propres adresses, pour être bien référencée dans chaque pays, et les traductions sont préparées avec l'IA puis vérifiées. L'application MemoDay existe elle aussi dans ces trois langues.",
     lien: { href: "/realisations/memoday", libelle: "Découvrir MemoDay" },
   },
   {
@@ -730,6 +730,27 @@ export const LEGAL = {
     site: "https://vercel.com",
   },
 };
+
+// Contenu complet en français : modèle des versions anglaise (contenu-en.ts) et espagnole (contenu-es.ts)
+export const CONTENU_FR = {
+  SITE,
+  NAVIGATION,
+  MANIFESTE,
+  QUESTIONS_D_HIER,
+  PHOTOS,
+  STUDIO,
+  POUR_QUI,
+  REALISATIONS,
+  IA,
+  CAPACITES,
+  METHODE_DETAILS,
+  METHODE,
+  ENGAGEMENTS,
+  THEMES_FAQ,
+  FAQ,
+  BESOINS,
+};
+export type Contenu = typeof CONTENU_FR;
 
 export const PROJETS_SUR_MESURE = REALISATIONS.filter((r) => r.categorie === "sur-mesure");
 export const SITES_CLIENTS = REALISATIONS.filter((r) => r.categorie === "client");

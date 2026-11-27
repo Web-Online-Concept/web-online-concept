@@ -3,6 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { useLangue } from "@/components/site/Langue";
+import { chemin } from "@/lib/i18n/chemins";
 
 // Effets de survol partagés par l'en-tête et le pied de page.
 
@@ -16,8 +18,10 @@ export function LogoAnime({
   priorite?: boolean;
   onClick?: () => void;
 }) {
+  const l = useLangue();
+  const accueil = { fr: "accueil", en: "home", es: "inicio" }[l];
   return (
-    <Link href="/" className="logo-anime group relative inline-block shrink-0 rounded-lg" aria-label="Web Online Concept, accueil" onClick={onClick}>
+    <Link href={chemin(l)} className="logo-anime group relative inline-block shrink-0 rounded-lg" aria-label={`Web Online Concept, ${accueil}`} onClick={onClick}>
       <Image src="/logo/logo-web-fond-sombre.svg" alt="" width={207} height={44} preload={priorite} className={`logo-anime-image w-auto ${className}`} />
       <span aria-hidden="true" className="logo-anime-reflet pointer-events-none absolute inset-0" />
     </Link>

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Suspense, useState } from "react";
-import { seDeconnecter } from "@/app/admin/connexion/actions";
+import { seDeconnecter } from "@/app/(interne)/admin/connexion/actions";
 
 const LIENS = [
   { href: "/admin", libelle: "Tableau de bord" },

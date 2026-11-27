@@ -1,9 +1,10 @@
 import PlaneteReseau from "@/components/site/PlaneteReseau";
-import { IA } from "@/lib/contenu";
+import { contenu } from "@/lib/i18n/contenu";
 
 // Les IA intégrées, en étiquettes qui tournent lentement autour du globe réseau (textes toujours droits).
 // Rotation coupée si l'utilisateur limite les animations (règles .ia- dans animations.css).
-export default function OrbiteIA() {
+export default async function OrbiteIA() {
+  const { IA } = await contenu();
   const n = IA.modeles.length;
   return (
     <div className="relative mx-auto aspect-square w-full max-w-[480px]">

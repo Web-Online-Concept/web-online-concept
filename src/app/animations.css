@@ -1353,3 +1353,22 @@
 html[data-intro] .intro-video {
   display: block;
 }
+
+/* Suggestion de langue : masquée pendant la vidéo de présentation (elle chevaucherait ses boutons) */
+html[data-intro] .bandeau-langue {
+  display: none;
+}
+.bandeau-langue {
+  animation: bandeau-langue 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes bandeau-langue {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bandeau-langue {
+    animation: none;
+  }
+}

@@ -1,9 +1,12 @@
 import type { NextConfig } from "next";
+import { reecritures } from "./src/lib/i18n/chemins";
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   experimental: {
+    // Page 404 commune aux deux mises en page racines (site trilingue et espace interne)
+    globalNotFound: true,
     // Images du blog envoyées depuis le back-office (Vercel limite les requêtes à 4,5 Mo)
     serverActions: { bodySizeLimit: "4mb" },
   },
@@ -14,6 +17,12 @@ const nextConfig: NextConfig = {
         as: "*.css",
       },
     },
+  },
+  // Adresses publiques traduites (/realisations, /en/work, /es/proyectos…) vers les dossiers de src/app/[lang].
+  // Après les fichiers publics (les images de public/realisations et public/blog gardent leur adresse),
+  // avant les routes dynamiques (sinon /realisations serait pris pour une langue).
+  async rewrites() {
+    return { beforeFiles: [], afterFiles: reecritures(), fallback: [] };
   },
   // Anciennes adresses du site (2025) vers les nouvelles pages
   async redirects() {

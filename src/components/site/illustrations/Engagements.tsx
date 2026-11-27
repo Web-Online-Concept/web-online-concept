@@ -1,6 +1,15 @@
 // Visuels animés des quatre engagements. SVG clairs (posés sur fond ciel ou blanc), animations CSS
 // (classes e1- à e4- dans animations.css), en pause hors de l'écran. Décoratifs.
 
+import { langue, t } from "@/lib/i18n/langue";
+
+// Textes des maquettes, courts pour tenir dans les bulles et boutons dessinés
+const TEXTES = {
+  fr: { jalons: ["Échange", "Création", "En ligne", "Suivi"], modifier: "Modifier", valider: "Valider", valide: "Validé", enLigne: "En ligne", bulle: "Modifiez ce texte ici", enregistre: "Enregistré" },
+  en: { jalons: ["Talk", "Build", "Live", "Support"], modifier: "Edit", valider: "Approve", valide: "Approved", enLigne: "Live", bulle: "Edit this text here", enregistre: "Saved" },
+  es: { jalons: ["Diálogo", "Creación", "En línea", "Seguimiento"], modifier: "Editar", valider: "Aprobar", valide: "Aprobado", enLigne: "En línea", bulle: "Edite este texto aquí", enregistre: "Guardado" },
+};
+
 function Svg({ children }: { children: React.ReactNode }) {
   return (
     <svg viewBox="0 0 240 180" className="h-full w-full" aria-hidden="true" focusable="false" fill="none">
@@ -77,14 +86,11 @@ export function VisuelPropriete() {
 }
 
 // 2. Un seul interlocuteur : la même personne vous accompagne à chaque étape
-const JALONS = [
-  { x: 44, t: "Échange" },
-  { x: 96, t: "Création" },
-  { x: 148, t: "En ligne" },
-  { x: 200, t: "Suivi" },
-];
+const JALONS_X = [44, 96, 148, 200];
 
-export function VisuelInterlocuteur() {
+export async function VisuelInterlocuteur() {
+  const x = t(TEXTES, await langue());
+  const JALONS = JALONS_X.map((jx, i) => ({ x: jx, t: x.jalons[i] }));
   return (
     <Svg>
       <defs>
@@ -121,7 +127,9 @@ export function VisuelInterlocuteur() {
 }
 
 // 3. Vous validez avant la mise en ligne : aperçu, clic sur « Valider », le site passe en ligne
-export function VisuelValidation() {
+export async function VisuelValidation() {
+  const l = await langue();
+  const x = t(TEXTES, l);
   return (
     <Svg>
       <defs>
@@ -141,26 +149,26 @@ export function VisuelValidation() {
       <path d="M30 130H210" stroke="#E3E9F0" />
       <rect x="42" y="138" width="64" height="16" rx="8" fill="#FFFFFF" stroke="#CBD5E1" />
       <text x="74" y="149" textAnchor="middle" fontSize="8" fill="#4A6178">
-        Modifier
+        {x.modifier}
       </text>
       <g className="e3-valider">
         <rect x="134" y="138" width="64" height="16" rx="8" fill="url(#e3-deg)" />
         <text x="166" y="149" textAnchor="middle" fontSize="8" fontWeight="600" fill="#FFFFFF">
-          Valider
+          {x.valider}
         </text>
       </g>
       <g className="e3-valide">
         <rect x="134" y="138" width="64" height="16" rx="8" fill="#2BD47D" />
         <path d="M148 146l2.6 2.6 4.8-4.9" stroke="#0A1A2F" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-        <text x="172" y="149" textAnchor="middle" fontSize="8" fontWeight="600" fill="#0A1A2F">
-          Validé
+        <text x={l === "fr" ? 172 : 158} y="149" textAnchor={l === "fr" ? "middle" : "start"} fontSize={l === "fr" ? 8 : 7.5} fontWeight="600" fill="#0A1A2F">
+          {x.valide}
         </text>
       </g>
       <g className="e3-enligne">
         <rect x="150" y="10" width="74" height="22" rx="11" fill="#0A1A2F" />
         <circle className="e-respire" cx="164" cy="21" r="4" fill="#2BD47D" />
         <text x="173" y="24.3" fontSize="9" fontWeight="600" fill="#FFFFFF">
-          En ligne
+          {x.enLigne}
         </text>
       </g>
       <g className="e3-curseur">
@@ -171,7 +179,8 @@ export function VisuelValidation() {
 }
 
 // 4. Une prise en main accompagnée : la bulle guide, vous modifiez, c'est enregistré
-export function VisuelPriseEnMain() {
+export async function VisuelPriseEnMain() {
+  const x = t(TEXTES, await langue());
   return (
     <Svg>
       <defs>
@@ -191,7 +200,7 @@ export function VisuelPriseEnMain() {
         <rect x="76" y="4" width="114" height="24" rx="9" fill="#0A1A2F" />
         <path d="M178 27l8 0-2 8z" fill="#0A1A2F" />
         <text x="88" y="20" fontSize="9" fill="#FFFFFF">
-          Modifiez ce texte ici
+          {x.bulle}
         </text>
       </g>
       <g className="e4-toast">
@@ -199,7 +208,7 @@ export function VisuelPriseEnMain() {
         <circle cx="86" cy="167" r="6" fill="#2BD47D" />
         <path d="M83.4 167l1.9 1.9 3.4-3.5" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         <text x="97" y="170.5" fontSize="9" fontWeight="600" fill="#0E7A45">
-          Enregistré
+          {x.enregistre}
         </text>
       </g>
       <g className="e4-curseur">

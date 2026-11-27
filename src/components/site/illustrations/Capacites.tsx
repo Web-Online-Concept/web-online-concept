@@ -4,6 +4,80 @@
 
 import type { NomIcone } from "@/components/site/Icones";
 
+import { langue, t } from "@/lib/i18n/langue";
+
+// Textes des maquettes animées (courts : ils doivent tenir dans les cadres dessinés)
+const TEXTES = {
+  fr: {
+    site: ["Design unique", "Rapide sur mobile", "Bien référencé"],
+    code: "Une seule base de code",
+    stores: "Publiée sur les stores",
+    abonnement: "Abonnement activé",
+    question: "Où est mon contrat d'assurance ?",
+    fichier: "contrat-habitation.pdf",
+    lecture: "Lecture auto",
+    recherche: "plombier bordeaux",
+    domaine: "votre-site.fr",
+    reponse: "Réponse IA",
+    source: "Source citée",
+    hausse: "+32 %",
+    reservations: "Réservations",
+    nouvelle: "Nouvelle réservation",
+    ancien: "Ancien site",
+    nouveau: "Nouveau site",
+    evolution: ["Référencement conservé", "Mises à jour suivies"],
+    performance: "Performance",
+    protections: ["Connexion sécurisée", "Sauvegardes", "Conforme RGPD"],
+  },
+  en: {
+    site: ["Unique design", "Fast on mobile", "Easy to find"],
+    code: "One single codebase",
+    stores: "Published on the stores",
+    abonnement: "Subscription active",
+    question: "Where is my insurance policy?",
+    fichier: "home-insurance.pdf",
+    lecture: "Auto-read",
+    recherche: "plumber near me",
+    domaine: "your-site.com",
+    reponse: "AI answer",
+    source: "Cited source",
+    hausse: "+32%",
+    reservations: "Bookings",
+    nouvelle: "New booking",
+    ancien: "Old site",
+    nouveau: "New site",
+    evolution: ["Rankings preserved", "Ongoing updates"],
+    performance: "Performance",
+    protections: ["Secure sign-in", "Backups", "GDPR compliant"],
+  },
+  es: {
+    site: ["Diseño único", "Rápido en móvil", "SEO optimizado"],
+    code: "Un solo código base",
+    stores: "Publicada en las tiendas",
+    abonnement: "Suscripción activa",
+    question: "¿Dónde está mi seguro de hogar?",
+    fichier: "seguro-hogar.pdf",
+    lecture: "Lectura auto",
+    recherche: "fontanero madrid",
+    domaine: "su-sitio.es",
+    reponse: "Respuesta IA",
+    source: "Fuente citada",
+    hausse: "+32 %",
+    reservations: "Reservas",
+    nouvelle: "Nueva reserva",
+    ancien: "Sitio antiguo",
+    nouveau: "Sitio nuevo",
+    evolution: ["Posicionamiento intacto", "Actualizaciones al día"],
+    performance: "Rendimiento",
+    protections: ["Acceso seguro", "Copias de seguridad", "Conforme al RGPD"],
+  },
+};
+
+async function textes() {
+  const l = await langue();
+  return { ...t(TEXTES, l), langue: l.toUpperCase() };
+}
+
 const BORD = "#24476F";
 const CARTE = "#10233F";
 
@@ -74,7 +148,8 @@ function Etincelle({ cx, cy, t = 1, couleur = "#FFFFFF" }: { cx: number; cy: num
 }
 
 // 1. Sites sur mesure : la page se compose, se décline en langues et sur mobile
-function SceneSite() {
+async function SceneSite() {
+  const x = await textes();
   return (
     <Svg>
       <defs>
@@ -84,7 +159,7 @@ function SceneSite() {
       <rect x="80" y="40" width="118" height="10" rx="5" fill="#1A3358" />
       {["FR", "EN", "ES"].map((l, i) => (
         <g key={l} className="c-pop" style={retard(1.1 + i * 0.12)}>
-          <rect x={246 + i * 30} y="38.5" width="26" height="14" rx="7" fill={i === 0 ? "url(#c1-deg)" : "#1A3358"} />
+          <rect x={246 + i * 30} y="38.5" width="26" height="14" rx="7" fill={l === x.langue ? "url(#c1-deg)" : "#1A3358"} />
           <text x={259 + i * 30} y="48.3" textAnchor="middle" fontSize="7.5" fontWeight="600" fill="#FFFFFF">
             {l}
           </text>
@@ -125,9 +200,9 @@ function SceneSite() {
         <rect x="372" y="152" width="60" height="38" rx="6" fill="#17304F" />
         <rect x="372" y="196" width="60" height="38" rx="6" fill="#17304F" />
       </g>
-      <Puce x={40} y={286} l={118} texte="Design unique" d={1.5} />
-      <Puce x={168} y={286} l={142} texte="Rapide sur mobile" d={1.65} />
-      <Puce x={320} y={286} l={124} texte="Bien référencé" d={1.8} />
+      <Puce x={40} y={286} l={118} texte={x.site[0]} d={1.5} />
+      <Puce x={168} y={286} l={142} texte={x.site[1]} d={1.65} />
+      <Puce x={320} y={286} l={124} texte={x.site[2]} d={1.8} />
     </Svg>
   );
 }
@@ -151,7 +226,8 @@ function EcranApp({ x, y, l, id }: { x: number; y: number; l: number; id: string
 }
 
 // 2. Applications web et mobiles : une base de code, trois appareils synchronisés
-function SceneApp() {
+async function SceneApp() {
+  const x = await textes();
   const liens = ["M240 52C240 72 138 70 138 94", "M240 52C240 66 303 66 303 84", "M240 52C240 70 401 72 401 94"];
   return (
     <Svg>
@@ -165,7 +241,7 @@ function SceneApp() {
         <rect x="146" y="26" width="188" height="28" rx="14" fill="url(#c2-deg)" />
         <path d="M165 35l-6 5 6 5M179 35l6 5-6 5M174.5 33.5l-5 13" stroke="#FFFFFF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
         <text x="192" y="44" fontSize="11" fontWeight="600" fill="#FFFFFF">
-          Une seule base de code
+          {x.code}
         </text>
       </g>
       <g className="c-entre" style={retard(0.55)}>
@@ -198,13 +274,14 @@ function SceneApp() {
           </circle>
         ))}
       </g>
-      <Puce x={150} y={290} l={180} texte="Publiée sur les stores" d={1.35} />
+      <Puce x={150} y={290} l={180} texte={x.stores} d={1.35} />
     </Svg>
   );
 }
 
 // 3. Plateformes à abonnement : formules, paiement, abonnement activé
-function SceneAbonnement() {
+async function SceneAbonnement() {
+  const x = await textes();
   const formule = (x: number, y: number, h: number, mise: boolean) => (
     <>
       <rect x={x} y={y} width="118" height={h} rx="14" fill={mise ? "#13294A" : CARTE} stroke={mise ? "url(#c3-deg)" : BORD} strokeWidth={mise ? 2 : 1} />
@@ -254,7 +331,7 @@ function SceneAbonnement() {
         <rect x="268" y="252" width="176" height="44" rx="22" fill="#2BD47D" fillOpacity="0.14" stroke="#2BD47D" />
         <Coche cx={292} cy={274} r={11} />
         <text x="311" y="278.5" fontSize="12" fontWeight="600" fill="#FFFFFF">
-          Abonnement activé
+          {x.abonnement}
         </text>
       </g>
     </Svg>
@@ -262,7 +339,8 @@ function SceneAbonnement() {
 }
 
 // 4. IA intégrée : une question en langage naturel, l'IA lit le document et répond
-function SceneIA() {
+async function SceneIA() {
+  const x = await textes();
   return (
     <Svg>
       <defs>
@@ -288,7 +366,7 @@ function SceneIA() {
       <g className="c-entre" style={retard(0.3)}>
         <rect x="82" y="94" width="200" height="34" rx="14" fill="#1F5EFF" />
         <text x="96" y="115" fontSize="10.5" fill="#FFFFFF">
-          Où est mon contrat d&apos;assurance ?
+          {x.question}
         </text>
       </g>
       <g className="c-bref" style={retard(0.75)}>
@@ -306,7 +384,7 @@ function SceneIA() {
         <rect x="64" y="200" width="168" height="26" rx="8" fill="#24476F" />
         <path d="M75 205h9l4 4v12H75z" fill="#FFFFFF" fillOpacity="0.9" />
         <text x="96" y="217" fontSize="9.5" fill="#E6EDF5">
-          contrat-habitation.pdf
+          {x.fichier}
         </text>
       </g>
       <g className="c-entre" style={retard(0.35)}>
@@ -323,7 +401,7 @@ function SceneIA() {
         <rect x="320" y="234" width="126" height="26" rx="13" fill="#FFFFFF" fillOpacity="0.06" stroke="#FFFFFF" strokeOpacity="0.14" />
         <Etincelle cx={336} cy={247} t={0.7} couleur="#7CCBFF" />
         <text x="348" y="251" fontSize="10" fill="#E6EDF5">
-          Lecture auto
+          {x.lecture}
         </text>
       </g>
     </Svg>
@@ -331,7 +409,8 @@ function SceneIA() {
 }
 
 // 5. Référencement et visibilité IA : la recherche, le site qui monte en tête, cité par l'IA
-function SceneVisibilite() {
+async function SceneVisibilite() {
+  const x = await textes();
   const autres = [
     { y: 100, l: 150 },
     { y: 148, l: 128 },
@@ -354,7 +433,7 @@ function SceneVisibilite() {
       <circle cx="68" cy="61" r="5.5" stroke="#4A6178" strokeWidth="1.8" />
       <path d="M72 65l4 4" stroke="#4A6178" strokeWidth="1.8" strokeLinecap="round" />
       <text x="84" y="66" fontSize="11.5" fill="#0A1A2F">
-        plombier bordeaux
+        {x.recherche}
       </text>
       <rect className="c-tape" style={retard(0.2)} x="82" y="52" width="140" height="20" fill="#F4F7FB" />
       {autres.map((a, i) => (
@@ -369,7 +448,7 @@ function SceneVisibilite() {
           <rect x="44" y="90" width="256" height="44" rx="10" fill="#1F5EFF" fillOpacity="0.16" stroke="url(#c5-deg)" strokeWidth="1.5" />
           <rect x="54" y="100" width="140" height="7" rx="3.5" fill="#FFFFFF" />
           <text x="54" y="118" fontSize="9" fontWeight="600" fill="#2BD47D">
-            votre-site.fr
+            {x.domaine}
           </text>
           <rect x="54" y="124" width="200" height="5" rx="2.5" fill="#7CCBFF" fillOpacity="0.55" />
         </g>
@@ -385,20 +464,20 @@ function SceneVisibilite() {
         <circle cx="346" cy="84" r="10" fill="url(#c5-deg)" />
         <Etincelle cx={346} cy={84} t={0.8} />
         <text x="362" y="88" fontSize="10.5" fontWeight="600" fill="#FFFFFF">
-          Réponse IA
+          {x.reponse}
         </text>
         {[0, 1, 2, 3, 4].map((k) => (
           <rect key={k} x="340" y={108 + k * 14} width={k === 4 ? 56 : 96} height="5" rx="2.5" fill="#3B5A85" />
         ))}
         <text x="340" y="196" fontSize="8.5" fill="#93A6BB">
-          Source citée
+          {x.source}
         </text>
       </g>
       <g className="c-pop" style={retard(2.55)}>
         <rect x="336" y="206" width="106" height="26" rx="13" fill="#2BD47D" fillOpacity="0.15" stroke="#2BD47D" />
         <circle cx="351" cy="219" r="4" fill="#2BD47D" />
         <text x="361" y="223" fontSize="10" fontWeight="600" fill="#FFFFFF">
-          votre-site.fr
+          {x.domaine}
         </text>
       </g>
     </Svg>
@@ -406,7 +485,8 @@ function SceneVisibilite() {
 }
 
 // 6. Données et back-offices : tableau de bord qui se remplit, réservation qui arrive
-function SceneDonnees() {
+async function SceneDonnees() {
+  const x = await textes();
   const barres = [52, 74, 60, 96, 84, 118, 132];
   return (
     <Svg>
@@ -422,7 +502,7 @@ function SceneDonnees() {
       ))}
       {[
         { x: 110, v: "128", l: 52 },
-        { x: 224, v: "+32 %", l: 40 },
+        { x: 224, v: x.hausse, l: 40 },
         { x: 338, v: "24", l: 60 },
       ].map((k, i) => (
         <g key={k.x} className="c-entre" style={retard(0.1 + i * 0.1)}>
@@ -444,7 +524,7 @@ function SceneDonnees() {
       <g className="c-entre" style={retard(0.35)}>
         <rect x="338" y="120" width="100" height="166" rx="10" fill="#13294A" />
         <text x="350" y="139" fontSize="9" fill="#C3D0DD">
-          Réservations
+          {x.reservations}
         </text>
       </g>
       {[0, 1, 2, 3].map((k) => (
@@ -460,7 +540,7 @@ function SceneDonnees() {
         <circle cx="301" cy="26" r="11" fill="url(#c6-deg)" />
         <path d="M297 29h8m-7-1v-4a3 3 0 0 1 6 0v4m-4 3h2" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         <text x="318" y="30" fontSize="10.5" fontWeight="600" fill="#0A1A2F">
-          Nouvelle réservation
+          {x.nouvelle}
         </text>
       </g>
     </Svg>
@@ -470,7 +550,8 @@ function SceneDonnees() {
 // 7. Refonte, migration et suivi : de l'ancien site au nouveau, sans rien perdre en route
 const MIGRATION = "M208 140C232 98 250 98 272 118";
 
-function SceneEvolution() {
+async function SceneEvolution() {
+  const x = await textes();
   return (
     <Svg>
       <defs>
@@ -486,7 +567,7 @@ function SceneEvolution() {
         ))}
       </g>
       <text x="122" y="232" textAnchor="middle" fontSize="10.5" fill="#93A6BB">
-        Ancien site
+        {x.ancien}
       </text>
       <path className="c-trace" style={{ ...retard(0.4), ["--duree" as string]: "0.7s" }} d={MIGRATION} pathLength={1} strokeDasharray="1" stroke="#3B5A85" strokeWidth="1.5" />
       <g className="c-flux">
@@ -511,17 +592,18 @@ function SceneEvolution() {
         </g>
       ))}
       <text className="c-entre" style={retard(1.6)} x="362" y="252" textAnchor="middle" fontSize="10.5" fill="#E6EDF5">
-        Nouveau site
+        {x.nouveau}
       </text>
-      <Puce x={56} y={276} l={176} texte="Référencement conservé" d={2.1} />
-      <Puce x={248} y={276} l={176} texte="Mises à jour suivies" d={2.3} />
+      <Puce x={56} y={276} l={176} texte={x.evolution[0]} d={2.1} />
+      <Puce x={248} y={276} l={176} texte={x.evolution[1]} d={2.3} />
     </Svg>
   );
 }
 
 // 8. Performance et sécurité : jauge à 100, bouclier, protections cochées une à une
-function SceneSecurite() {
-  const protections = ["Connexion sécurisée", "Sauvegardes", "Conforme RGPD"];
+async function SceneSecurite() {
+  const x = await textes();
+  const protections = x.protections;
   return (
     <Svg>
       <defs>
@@ -550,7 +632,7 @@ function SceneSecurite() {
         100
       </text>
       <text className="c-entre" style={retard(1.6)} x="146" y="198" textAnchor="middle" fontSize="11" fill="#93A6BB">
-        Performance
+        {x.performance}
       </text>
       <g className="c-pop" style={retard(0.5)}>
         <path d="M360 44l38 14v26c0 23-16 39-38 46-22-7-38-23-38-46V58z" fill="url(#c8-deg)" />
@@ -573,7 +655,7 @@ function SceneSecurite() {
   );
 }
 
-export const SCENES_CAPACITES: Record<NomIcone, () => React.JSX.Element> = {
+export const SCENES_CAPACITES: Record<NomIcone, () => Promise<React.JSX.Element>> = {
   site: SceneSite,
   app: SceneApp,
   abonnement: SceneAbonnement,

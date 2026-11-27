@@ -1,19 +1,35 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/contenu";
+import { chemin, LANGUES, LOCALES, LOCALES_OG, type Langue, type Page } from "@/lib/i18n/chemins";
 
-// Métadonnées d'une page : titre, description, adresse canonique et aperçu de partage
-export function metaPage(titre: string, description: string, chemin: string): Metadata {
+// Adresses d'une même page dans chaque langue (balises hreflang), x-default = français
+export type Versions = Record<Langue, string>;
+
+export function versions(page?: Page, suite?: string | Record<Langue, string>): Versions {
+  return Object.fromEntries(
+    LANGUES.map((l) => [l, chemin(l, page, typeof suite === "string" ? suite : suite?.[l])]),
+  ) as Versions;
+}
+
+export function alternatesLangues(v: Versions) {
+  return { ...Object.fromEntries(LANGUES.map((l) => [LOCALES[l], v[l]])), "x-default": v.fr };
+}
+
+// Métadonnées d'une page : titre, description, adresse canonique, versions linguistiques et aperçu de partage
+export function metaPage(l: Langue, titre: string, description: string, v: Versions): Metadata {
+  const adresse = v[l];
   return {
     title: titre,
     description,
-    alternates: { canonical: chemin },
+    alternates: { canonical: adresse, languages: alternatesLangues(v) },
     openGraph: {
       type: "website",
-      locale: "fr_FR",
+      locale: LOCALES_OG[l],
+      alternateLocale: LANGUES.filter((x) => x !== l).map((x) => LOCALES_OG[x]),
       siteName: SITE.nom,
       title: `${titre} | ${SITE.nom}`,
       description,
-      url: chemin,
+      url: adresse,
       images: [IMAGE_PARTAGE],
     },
     twitter: { card: "summary_large_image", title: `${titre} | ${SITE.nom}`, description, images: [IMAGE_PARTAGE.url] },

@@ -1,5 +1,6 @@
 import SceneEnVue from "@/components/site/SceneEnVue";
-import { MANIFESTE, QUESTIONS_D_HIER } from "@/lib/contenu";
+import { contenu } from "@/lib/i18n/contenu";
+import { t } from "@/lib/i18n/langue";
 
 // Bloc « conviction » (page Méthode) : les questions d'hier sont barrées une à une par le trait dégradé du logo,
 // la phrase d'aujourd'hui apparaît, puis la seule question qui compte. Des points gravitent en fond.
@@ -48,13 +49,16 @@ function Fond() {
   );
 }
 
-export default function Conviction() {
+export default async function Conviction() {
+  const { l, MANIFESTE, QUESTIONS_D_HIER } = await contenu();
   return (
     <section className="ecran relative overflow-hidden bg-white py-20 sm:py-28">
       <Fond />
       <SceneEnVue decoratif={false} className="relative">
         <div className="mx-auto w-full max-w-5xl px-5 text-center sm:px-8">
-          <p className="text-lg text-[#4A6178]">Hier, on se demandait&nbsp;:</p>
+          <p className="text-lg text-[#4A6178]">
+            {t({ fr: "Hier, on se demandait\u00a0:", en: "Yesterday, people asked:", es: "Ayer, la pregunta era:" }, l)}
+          </p>
           <ul className="mt-5 flex flex-wrap justify-center gap-3">
             {QUESTIONS_D_HIER.map((q, i) => (
               <li

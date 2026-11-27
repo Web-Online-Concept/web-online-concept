@@ -187,9 +187,10 @@ export default function PlaneteReseau({
 
       {/* Points */}
       {POINTS.map((p, i) => {
-        const x = cx + r * p[0];
-        const y = cy - r * p[1];
-        const k = (0.55 + p[2] * 0.45) * e;
+        // Arrondis : le serveur et le navigateur doivent produire exactement les mêmes valeurs (hydratation)
+        const x = Math.round((cx + r * p[0]) * 100) / 100;
+        const y = Math.round((cy - r * p[1]) * 100) / 100;
+        const k = Math.round((0.55 + p[2] * 0.45) * e * 1000) / 1000;
         return (
           <g key={i} className={i % 3 === 0 ? "pulse" : undefined} style={{ animationDelay: `${(i % 5) * 0.45}s` }}>
             <circle cx={x} cy={y} r={9 * k} fill={`url(#${id("point")})`} />

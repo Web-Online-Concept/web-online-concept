@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { enregistrerClient, rechercherEntreprise } from "@/app/admin/(espace)/clients/actions";
+import { enregistrerClient, rechercherEntreprise } from "@/app/(interne)/admin/(espace)/clients/actions";
 import { Champ, classeBouton, classeBoutonSecondaire, classeChamp } from "@/components/admin/ui";
 
 export type ClientEdition = {

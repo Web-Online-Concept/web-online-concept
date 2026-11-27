@@ -1,4 +1,5 @@
 import { CAPACITES, ENGAGEMENTS, FAQ, PROJETS_SUR_MESURE, SITE, SITES_CLIENTS } from "@/lib/contenu";
+import { chemin } from "@/lib/i18n/chemins";
 
 // Présentation du studio au format llms.txt, lue par les assistants et moteurs d'IA
 export function GET() {
@@ -7,7 +8,9 @@ export function GET() {
     "",
     `> Studio de développement web et d'intelligence artificielle, depuis 2009. ${SITE.sousTitre}`,
     "",
-    "Interlocuteur unique, de la première idée à la mise en ligne et au suivi. Le studio travaille sur recommandation et sur demande privée, partout en France.",
+    "Interlocuteur unique, de la première idée à la mise en ligne et au suivi. Le studio travaille sur recommandation et sur demande privée, en France comme à l'étranger, en français, en anglais et en espagnol.",
+    "",
+    `Le site existe en trois langues : [français](${SITE.url}/), [English](${SITE.url}${chemin("en")}), [español](${SITE.url}${chemin("es")}).`,
     "",
     "## Capacités",
     ...CAPACITES.map((c) => `- ${c.titre} : ${c.texte}`),

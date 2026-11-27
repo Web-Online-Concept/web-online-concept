@@ -2,6 +2,13 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Icone, type NomIcone } from "@/components/site/Icones";
+import { useLangue } from "@/components/site/Langue";
+
+const TEXTES = {
+  fr: { reprendre: "Reprendre l'enchaînement des capacités", pause: "Mettre en pause l'enchaînement des capacités", bReprendre: "Reprendre", bPause: "Pause" },
+  en: { reprendre: "Resume the capabilities slideshow", pause: "Pause the capabilities slideshow", bReprendre: "Resume", bPause: "Pause" },
+  es: { reprendre: "Reanudar la secuencia de capacidades", pause: "Pausar la secuencia de capacidades", bReprendre: "Reanudar", bPause: "Pausa" },
+};
 
 // Bloc « Tout ce qu'un projet web exige » : la liste des capacités à gauche (accordéon), une scène animée
 // à droite. Les capacités s'enchaînent seules (minuteur sous la capacité ouverte) tant que l'utilisateur
@@ -30,6 +37,7 @@ export default function CapacitesInteractives({
   capacites: Capacite[];
   scenes: React.ReactNode[];
 }) {
+  const x = TEXTES[useLangue()];
   const n = capacites.length;
   const [actif, setActif] = useState(0);
   const [lancements, setLancements] = useState<number[]>(() =>
@@ -109,9 +117,7 @@ export default function CapacitesInteractives({
             type="button"
             onClick={() => setPause((p) => !p)}
             aria-label={
-              pause
-                ? "Reprendre l'enchaînement des capacités"
-                : "Mettre en pause l'enchaînement des capacités"
+              pause ? x.reprendre : x.pause
             }
             className={`inline-flex items-center gap-2 self-end rounded-full px-3 py-1.5 text-sm font-medium text-[#4A6178] transition-colors hover:text-nuit ${auto ? "" : "invisible"}`}
           >
@@ -127,7 +133,7 @@ export default function CapacitesInteractives({
                 <path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" />
               )}
             </svg>
-            <span aria-hidden="true">{pause ? "Reprendre" : "Pause"}</span>
+            <span aria-hidden="true">{pause ? x.bReprendre : x.bPause}</span>
           </button>
         )}
       </div>

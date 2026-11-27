@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import PlaneteReseau from "@/components/site/PlaneteReseau";
+import { useLangue } from "@/components/site/Langue";
+import { chemin } from "@/lib/i18n/chemins";
 
 // Hero de l'accueil : une fenêtre de navigateur et un téléphone sur le fond orbital de la marque.
 // Chaque diapo présente un site : sa capture ordinateur dans le navigateur et sa capture mobile
@@ -139,7 +141,15 @@ function PileMobile({ diapos, i, sizes, debut }: { diapos: Diapo[]; i: number; s
   );
 }
 
+const TEXTES = {
+  fr: { ia: "Propulsé par l'IA", reprendre: "Reprendre le défilement des réalisations", pause: "Mettre en pause le défilement des réalisations" },
+  en: { ia: "Powered by AI", reprendre: "Resume the project slideshow", pause: "Pause the project slideshow" },
+  es: { ia: "Impulsado por IA", reprendre: "Reanudar el carrusel de proyectos", pause: "Pausar el carrusel de proyectos" },
+};
+
 export default function Vitrine({ diapos }: { diapos: Diapo[] }) {
+  const l = useLangue();
+  const x = TEXTES[l];
   const [i, setI] = useState(0);
   const [pause, setPause] = useState(false);
   const [survol, setSurvol] = useState(false);
@@ -216,14 +226,14 @@ export default function Vitrine({ diapos }: { diapos: Diapo[] }) {
             <path d="M12 2.5l2.4 6.6 6.6 2.4-6.6 2.4L12 20.5l-2.4-6.6L3 11.5l6.6-2.4z" />
           </svg>
         </span>
-        <span className="text-[13px] font-medium text-[#E6EDF5]">Propulsé par l&apos;IA</span>
+        <span className="text-[13px] font-medium text-[#E6EDF5]">{x.ia}</span>
       </div>
 
       {/* Légende de la capture en cours */}
       {d && (
         <div className="absolute left-0 top-[71%] flex w-[66%] items-center gap-3">
           <Link
-            href={`/realisations/${d.slug}`}
+            href={chemin(l, "realisations", d.slug)}
             className="min-w-0 flex-1 rounded-xl bg-white/[0.06] px-4 py-2.5 ring-1 ring-white/10 transition-colors hover:bg-white/10"
           >
             <span className="block truncate text-[15px] font-semibold text-white">{d.nom}</span>
@@ -233,7 +243,7 @@ export default function Vitrine({ diapos }: { diapos: Diapo[] }) {
             <button
               type="button"
               onClick={() => setPause((p) => !p)}
-              aria-label={pause ? "Reprendre le défilement des réalisations" : "Mettre en pause le défilement des réalisations"}
+              aria-label={pause ? x.reprendre : x.pause}
               className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[#C3D0DD] ring-1 ring-white/20 transition-colors hover:text-white hover:ring-white/50"
             >
               <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
