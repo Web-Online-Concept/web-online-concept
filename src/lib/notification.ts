@@ -4,6 +4,8 @@ import { accuseReception, alerteMessage, type DonneesMessage } from "@/lib/email
 // E-mails envoyés à chaque nouveau message du formulaire de contact (via l'API Brevo) :
 // - une alerte au studio, à contact@ (redirigé vers Gmail) : y répondre part directement au visiteur, depuis contact@ ;
 // - un accusé de réception au visiteur (si demandé par l'appelant).
+// Les deux partent de site@ : Brevo ajoute d'office un lien « Se désabonner » à ses e-mails, et un clic dessus
+// bloque l'expéditeur pour ce destinataire. Ainsi, contact@ (réponses écrites depuis Gmail) n'est jamais bloqué.
 // Inactif tant que BREVO_API_KEY et NOTIF_EXPEDITEUR ne sont pas renseignés dans Vercel :
 // le message reste alors simplement enregistré dans le back-office.
 
@@ -31,10 +33,11 @@ export async function notifierNouveauMessage(m: DonneesMessage, { accuse }: { ac
   if (!cle || !expediteur) return;
   const destinataire = process.env.NOTIF_DESTINATAIRE || CONTACT;
 
+  const site = process.env.NOTIF_EXPEDITEUR_ALERTES || ALERTES;
   const alerte = alerteMessage(m);
   const envois = [
     envoyer(cle, "alerte", {
-      sender: { name: "Formulaire du site", email: process.env.NOTIF_EXPEDITEUR_ALERTES || ALERTES },
+      sender: { name: "Formulaire du site", email: site },
       to: [{ email: destinataire }],
       replyTo: { email: m.email, name: m.nom },
       subject: alerte.sujet,
@@ -46,7 +49,7 @@ export async function notifierNouveauMessage(m: DonneesMessage, { accuse }: { ac
     const reponse = accuseReception(m);
     envois.push(
       envoyer(cle, "accusé de réception", {
-        sender: { name: "Web Online Concept", email: expediteur },
+        sender: { name: "Web Online Concept", email: site },
         to: [{ email: m.email, name: m.nom.slice(0, 60) }],
         replyTo: { email: expediteur, name: "Web Online Concept" },
         subject: reponse.sujet,
