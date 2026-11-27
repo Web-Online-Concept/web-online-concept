@@ -44,7 +44,7 @@ export async function notifierNouveauMessage(m: NouveauMessage) {
     </div>`;
 
   try {
-    await fetch("https://api.brevo.com/v3/smtp/email", {
+    const reponse = await fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
       headers: { "api-key": cle, "content-type": "application/json", accept: "application/json" },
       body: JSON.stringify({
@@ -56,7 +56,9 @@ export async function notifierNouveauMessage(m: NouveauMessage) {
       }),
       signal: AbortSignal.timeout(8000),
     });
-  } catch {
-    // Une notification manquée n'empêche pas l'enregistrement du message
+    // Une notification manquée n'empêche pas l'enregistrement du message, mais on la trace dans les logs Vercel
+    if (!reponse.ok) console.error(`[notification] Brevo a refusé l'envoi (${reponse.status}) : ${(await reponse.text()).slice(0, 300)}`);
+  } catch (e) {
+    console.error("[notification] Brevo injoignable :", e instanceof Error ? e.message : e);
   }
 }
