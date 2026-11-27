@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useActionState, useEffect, useRef, useState } from "react";
+import Envol from "@/components/site/Envol";
 import { BESOINS, SITE } from "@/lib/contenu";
 import { envoyerMessage, type EtatContact } from "./actions";
 
@@ -190,6 +191,9 @@ export default function Formulaire() {
   const v = etat.valeurs;
   const [apercu, setApercu] = useState<Apercu>({ besoin: v?.besoin ?? "", objet: v?.objet ?? "", message: v?.message ?? "" });
   const [enSaisie, setEnSaisie] = useState(false);
+  // Position du bouton « Envoyer » au moment de l'envoi : point de départ de l'avion en papier
+  const [depart, setDepart] = useState<{ x: number; y: number } | null>(null);
+  const carte = useRef<HTMLDivElement>(null);
 
   // Heure d'affichage du formulaire (anti-robots), posée côté navigateur
   // (recopiée à chaque envoi : React remet le formulaire à zéro après une action)
@@ -201,9 +205,15 @@ export default function Formulaire() {
   const e = etat.erreurs ?? {};
   const envoye = etat.statut === "envoye";
 
+  // Après l'envoi, le formulaire laisse place à la confirmation : on la ramène dans l'écran si besoin
+  useEffect(() => {
+    if (envoye) carte.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }, [envoye]);
+
   return (
     <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-10 xl:grid-cols-[minmax(0,1fr)_420px]">
-      <div className="rounded-[28px] bg-white p-6 shadow-[0_24px_60px_-36px_rgba(10,26,47,0.35)] ring-1 ring-[#E3EAF2] sm:p-10">
+      {envoye && depart && <Envol x={depart.x} y={depart.y} />}
+      <div ref={carte} className="scroll-mt-28 rounded-[28px] bg-white p-6 shadow-[0_24px_60px_-36px_rgba(10,26,47,0.35)] ring-1 ring-[#E3EAF2] sm:p-10">
         {envoye ? (
           <div role="status" className="flex flex-col items-start py-6">
             <span className="ct-bulle inline-flex h-14 w-14 items-center justify-center rounded-full bg-[linear-gradient(135deg,#1F5EFF,#00B4D8)] text-white">
@@ -231,6 +241,8 @@ export default function Formulaire() {
             onSubmit={(ev) => {
               const champ = ev.currentTarget.elements.namedItem("affiche_le");
               if (champ instanceof HTMLInputElement) champ.value = String(afficheLe.current);
+              const bouton = ev.currentTarget.querySelector("button[type=submit]")?.getBoundingClientRect();
+              if (bouton) setDepart({ x: bouton.left + bouton.width / 2, y: bouton.top + bouton.height / 2 });
             }}
             onChange={(ev) => {
               const t = ev.target as unknown as HTMLInputElement;
