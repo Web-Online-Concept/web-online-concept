@@ -176,7 +176,7 @@ export function accuseReception(m: DonneesMessage) {
 <tr><td class="marge" align="center" style="padding:26px 36px 8px;font-family:${POLICE}">
   <img src="${URL_SITE}/email/symbole.png" width="40" height="28" alt="" style="display:block;border:0;margin:0 auto 10px">
   <div style="font-size:14px;line-height:20px;font-weight:700;color:${C.nuit}">Web Online Concept</div>
-  <div style="font-size:13px;line-height:20px;color:${C.doux}">Sites et applications sur mesure, depuis Toulouse</div>
+  <div style="font-size:13px;line-height:20px;color:${C.doux}">Sites et applications sur mesure</div>
   <div style="padding-top:12px;font-size:13px;line-height:20px">
     <a href="${URL_SITE}/realisations" style="color:${C.texte};text-decoration:none">Réalisations</a>
     <span style="color:#B7C4D3">&nbsp;&nbsp;/&nbsp;&nbsp;</span>
