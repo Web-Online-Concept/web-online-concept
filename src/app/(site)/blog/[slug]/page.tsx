@@ -8,7 +8,7 @@ import CouvertureArticle from "@/components/site/CouvertureArticle";
 import Partage from "@/components/site/Partage";
 import { ancre, articleParSlug, articlesPublies, dateFr, tempsLecture } from "@/lib/articles";
 import { SITE } from "@/lib/contenu";
-import { IMAGE_PARTAGE } from "@/lib/seo";
+import { ID_ENTREPRISE, IMAGE_PARTAGE, jsonLd } from "@/lib/seo";
 
 export async function generateMetadata({ params }: PageProps<"/blog/[slug]">): Promise<Metadata> {
   const { slug } = await params;
@@ -59,9 +59,38 @@ async function Contenu({ params }: { params: Promise<{ slug: string }> }) {
     .filter((t): t is Tokens.Heading => t.type === "heading" && t.depth === 2)
     .map((t) => ({ id: ancre(t.text), titre: t.text }));
   const autres = (await articlesPublies()).filter((x) => x.slug !== a.slug).slice(0, 3);
+  const adresse = `${SITE.url}/blog/${a.slug}`;
+  // Données structurées : article et fil d'Ariane (Google, IA)
+  const donnees = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": `${adresse}#article`,
+        headline: a.titre,
+        description: a.extrait ?? undefined,
+        image: a.image_url ? new URL(a.image_url, SITE.url).toString() : `${SITE.url}${IMAGE_PARTAGE.url}`,
+        datePublished: a.publie_le ?? undefined,
+        inLanguage: "fr-FR",
+        mainEntityOfPage: adresse,
+        author: { "@id": ID_ENTREPRISE },
+        publisher: { "@id": ID_ENTREPRISE },
+        articleSection: a.categorie ?? undefined,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Accueil", item: SITE.url },
+          { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE.url}/blog` },
+          { "@type": "ListItem", position: 3, name: a.titre, item: adresse },
+        ],
+      },
+    ],
+  };
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(donnees)} />
       <section className="relative overflow-hidden bg-nuit text-white">
         <div aria-hidden="true" className="absolute -right-24 -top-32 h-[28rem] w-[28rem] rounded-full bg-bleu opacity-25 blur-3xl" />
         <Conteneur className="relative max-w-4xl pb-40 pt-12 sm:pb-48 sm:pt-16">

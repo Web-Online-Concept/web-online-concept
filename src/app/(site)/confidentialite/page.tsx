@@ -34,15 +34,18 @@ export default function Confidentialite() {
             <h2>Destinataires</h2>
             <p>
               Les données sont destinées à Web Online Concept uniquement. Elles ne sont ni vendues ni cédées. Elles sont
-              traitées par les prestataires techniques suivants : Vercel (hébergement du site) et Supabase (base de données
-              hébergée dans l&apos;Union européenne). Les transferts éventuels hors de l&apos;Union européenne sont encadrés par
-              les garanties prévues par le RGPD.
+              traitées par les prestataires techniques suivants : Vercel (hébergement du site et protection du formulaire
+              contre les envois automatisés), Supabase (base de données hébergée dans l&apos;Union européenne), Brevo
+              (envoi des e-mails de confirmation et de réponse, France) et Forward Email (acheminement des e-mails reçus).
+              Les transferts éventuels hors de l&apos;Union européenne sont encadrés par les garanties prévues par le RGPD.
             </p>
 
             <h2>Cookies</h2>
             <p>
               Ce site n&apos;utilise aucun cookie publicitaire ni de mesure d&apos;audience. Seul un cookie technique protège
-              l&apos;accès à l&apos;espace d&apos;administration.
+              l&apos;accès à l&apos;espace d&apos;administration. Votre navigateur garde aussi la date de votre dernière visite,
+              uniquement pour ne pas rejouer la vidéo de présentation à chaque passage : cette information reste sur votre
+              appareil et n&apos;est transmise à personne.
             </p>
 
             <h2>Vos droits</h2>
