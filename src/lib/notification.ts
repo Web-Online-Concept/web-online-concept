@@ -1,64 +1,58 @@
 import "server-only";
+import { accuseReception, alerteMessage, type DonneesMessage } from "@/lib/emails/modeles";
 
-// Prévient Florent par e-mail à chaque nouveau message du formulaire de contact (via Brevo).
+// E-mails envoyés à chaque nouveau message du formulaire de contact (via l'API Brevo) :
+// - une alerte au studio, à contact@ (redirigé vers Gmail) : y répondre part directement au visiteur, depuis contact@ ;
+// - un accusé de réception au visiteur (si demandé par l'appelant).
 // Inactif tant que BREVO_API_KEY et NOTIF_EXPEDITEUR ne sont pas renseignés dans Vercel :
 // le message reste alors simplement enregistré dans le back-office.
 
-type NouveauMessage = {
-  nom: string;
-  email: string;
-  telephone?: string | null;
-  besoin?: string | null;
-  source?: string | null;
-  objet?: string | null;
-  message: string;
-};
+const CONTACT = "contact@web-online-concept.com";
+const ALERTES = "site@web-online-concept.com";
 
-const echapper = (t: string) => t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-
-export async function notifierNouveauMessage(m: NouveauMessage) {
-  const cle = process.env.BREVO_API_KEY;
-  const expediteur = process.env.NOTIF_EXPEDITEUR;
-  const destinataire = process.env.NOTIF_DESTINATAIRE || "web.online.concept@gmail.com";
-  if (!cle || !expediteur) return;
-
-  const lignes: [string, string | null | undefined][] = [
-    ["Nom", m.nom],
-    ["E-mail", m.email],
-    ["Téléphone", m.telephone],
-    ["Projet", m.besoin],
-    ["Recommandé par", m.source],
-    ["Objet", m.objet],
-  ];
-  const html = `
-    <div style="font-family:Arial,sans-serif;font-size:15px;color:#0A1A2F">
-      <p style="font-size:18px;font-weight:bold">Nouveau message depuis le site</p>
-      <table style="border-collapse:collapse">
-        ${lignes
-          .filter(([, v]) => v)
-          .map(([k, v]) => `<tr><td style="padding:4px 16px 4px 0;color:#4A6178">${k}</td><td style="padding:4px 0">${echapper(String(v))}</td></tr>`)
-          .join("")}
-      </table>
-      <p style="margin-top:16px;white-space:pre-line">${echapper(m.message)}</p>
-      <p style="margin-top:24px"><a href="https://www.web-online-concept.com/admin/messages">Ouvrir les messages dans le back-office</a></p>
-    </div>`;
-
+async function envoyer(cle: string, quoi: string, corps: Record<string, unknown>) {
   try {
     const reponse = await fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
       headers: { "api-key": cle, "content-type": "application/json", accept: "application/json" },
-      body: JSON.stringify({
-        sender: { name: "Site Web Online Concept", email: expediteur },
-        to: [{ email: destinataire }],
-        replyTo: { email: m.email, name: m.nom },
-        subject: `Nouveau message : ${m.besoin ?? "contact"}${m.objet ? ` (${m.objet})` : ""}`,
-        htmlContent: html,
-      }),
+      body: JSON.stringify(corps),
       signal: AbortSignal.timeout(8000),
     });
-    // Une notification manquée n'empêche pas l'enregistrement du message, mais on la trace dans les logs Vercel
-    if (!reponse.ok) console.error(`[notification] Brevo a refusé l'envoi (${reponse.status}) : ${(await reponse.text()).slice(0, 300)}`);
+    // Un envoi manqué n'empêche pas l'enregistrement du message, mais on le trace dans les logs Vercel
+    if (!reponse.ok) console.error(`[notification] ${quoi} : Brevo a refusé l'envoi (${reponse.status}) : ${(await reponse.text()).slice(0, 300)}`);
   } catch (e) {
-    console.error("[notification] Brevo injoignable :", e instanceof Error ? e.message : e);
+    console.error(`[notification] ${quoi} : Brevo injoignable :`, e instanceof Error ? e.message : e);
   }
+}
+
+export async function notifierNouveauMessage(m: DonneesMessage, { accuse }: { accuse: boolean }) {
+  const cle = process.env.BREVO_API_KEY;
+  const expediteur = process.env.NOTIF_EXPEDITEUR;
+  if (!cle || !expediteur) return;
+  const destinataire = process.env.NOTIF_DESTINATAIRE || CONTACT;
+
+  const alerte = alerteMessage(m);
+  const envois = [
+    envoyer(cle, "alerte", {
+      sender: { name: "Formulaire du site", email: process.env.NOTIF_EXPEDITEUR_ALERTES || ALERTES },
+      to: [{ email: destinataire }],
+      replyTo: { email: m.email, name: m.nom },
+      subject: alerte.sujet,
+      htmlContent: alerte.html,
+    }),
+  ];
+
+  if (accuse) {
+    const reponse = accuseReception(m);
+    envois.push(
+      envoyer(cle, "accusé de réception", {
+        sender: { name: "Web Online Concept", email: expediteur },
+        to: [{ email: m.email, name: m.nom.slice(0, 60) }],
+        replyTo: { email: expediteur, name: "Web Online Concept" },
+        subject: reponse.sujet,
+        htmlContent: reponse.html,
+      }),
+    );
+  }
+  await Promise.all(envois);
 }
