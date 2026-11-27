@@ -5,7 +5,7 @@ export function GET() {
   const lignes = [
     `# ${SITE.nom}`,
     "",
-    `> Studio de développement web et d'intelligence artificielle à Toulouse, depuis 2009. ${SITE.sousTitre}`,
+    `> Studio de développement web et d'intelligence artificielle, depuis 2009. ${SITE.sousTitre}`,
     "",
     "Interlocuteur unique, de la première idée à la mise en ligne et au suivi. Le studio travaille sur recommandation et sur demande privée, partout en France.",
     "",

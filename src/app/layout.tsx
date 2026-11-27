@@ -13,7 +13,7 @@ const sora = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: "Web Online Concept, studio de développement web et IA à Toulouse",
+    default: "Web Online Concept, studio de développement web et IA",
     template: "%s | Web Online Concept",
   },
   description: SITE.sousTitre,

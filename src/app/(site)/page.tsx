@@ -45,14 +45,6 @@ const DONNEES = {
       slogan: SITE.titre,
       email: SITE.email,
       foundingDate: "2009",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "5 rue Paul Estival",
-        postalCode: "31200",
-        addressLocality: "Toulouse",
-        addressRegion: "Occitanie",
-        addressCountry: "FR",
-      },
       areaServed: { "@type": "Country", name: "France" },
       knowsAbout: CAPACITES.map((c) => c.titre),
       hasOfferCatalog: {

@@ -34,8 +34,8 @@ export default function Realisations() {
               Sites créés et suivis pour nos clients
             </h2>
             <p className="mt-3 text-lg leading-relaxed text-[#4A6178]">
-              Imprimeurs, artisans, praticiens, artiste peintre, professionnels de l&apos;événementiel : des sites conçus, mis en ligne et suivis dans la durée, de
-              Toulouse à Bordeaux, d&apos;Albi à La Rochelle.
+              Imprimeurs, artisans, praticiens, artiste peintre, professionnels de l&apos;événementiel : des sites conçus, mis en ligne et suivis dans la durée, partout en
+              France.
             </p>
           </div>
           <ul className="mt-10 divide-y divide-[#E3E9F0] border-y border-[#E3E9F0]">

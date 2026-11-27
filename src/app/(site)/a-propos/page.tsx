@@ -7,10 +7,10 @@ import EventailApplication from "@/components/site/EventailApplication";
 import { CarteFlottante, PhotoCadre } from "@/components/site/Photos";
 import { IA, PHOTOS, REALISATIONS, ecransApplication } from "@/lib/contenu";
 
-export const metadata: Metadata = metaPage("À propos", "Web Online Concept, studio de développement web et d'intelligence artificielle à Toulouse depuis 2009 : un interlocuteur unique, la capacité de production d'une équipe entière.", "/a-propos");
+export const metadata: Metadata = metaPage("À propos", "Web Online Concept, studio de développement web et d'intelligence artificielle depuis 2009 : un interlocuteur unique, la capacité de production d'une équipe entière.", "/a-propos");
 
 const CHIFFRES = [
-  { valeur: "2009", libelle: "création du studio, à Toulouse" },
+  { valeur: "2009", libelle: "création du studio" },
   { valeur: String(REALISATIONS.length), libelle: "réalisations présentées sur ce site" },
   { valeur: "3", libelle: "plateformes : iPhone, Android et web" },
 ];
@@ -62,7 +62,7 @@ export default function APropos() {
         ecran
         suite={{ id: "histoire", libelle: "Descendre vers l'histoire du studio" }}
         illustration="apropos"
-        titre="Un studio de développement web à Toulouse, depuis 2009"
+        titre="Un studio de développement web, depuis 2009"
         intro="Plus de quinze ans à concevoir des sites et des applications, et aujourd'hui une façon de travailler transformée par l'IA : un interlocuteur unique, avec la capacité de production d'une équipe entière."
       />
 
@@ -76,7 +76,7 @@ export default function APropos() {
             <div>
               <h2 className={`${H2} text-nuit`}>Plus de quinze ans de projets</h2>
               <p className="mt-5 text-[18px] leading-relaxed text-[#2C4558]">
-                Le studio est né à Toulouse en 2009. Depuis, il conçoit et fait vivre des sites pour des artisans, des imprimeurs, des praticiens ou des
+                Le studio est né en 2009. Depuis, il conçoit et fait vivre des sites pour des artisans, des imprimeurs, des praticiens ou des
                 artistes, et développe aujourd&apos;hui ses propres applications.
               </p>
               <p className="mt-4 text-[18px] leading-relaxed text-[#2C4558]">

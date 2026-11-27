@@ -231,10 +231,10 @@ export const REALISATIONS: Realisation[] = [
     categorie: "client",
     nom: "Carpentier Communication",
     type: "Site vitrine d'imprimeur avec devis en ligne",
-    client: "Carpentier Communication, Toulouse",
-    accroche: "Affiches, PLV, panneaux et adhésifs : l'offre complète d'un imprimeur toulousain, avec devis gratuit.",
+    client: "Carpentier Communication",
+    accroche: "Affiches, PLV, panneaux et adhésifs : l'offre complète d'un imprimeur, avec devis gratuit.",
     besoin:
-      "Imprimeur à Toulouse depuis 1962, Carpentier Communication réalise affiches, PLV, panneaux et adhésifs en sérigraphie, en numérique et en offset grand format, avec livraison dans toute la France. Le site devait présenter chaque support, mettre en avant le savoir-faire de l'atelier et faciliter les demandes de devis.",
+      "Imprimeur depuis 1962, Carpentier Communication réalise affiches, PLV, panneaux et adhésifs en sérigraphie, en numérique et en offset grand format, avec livraison dans toute la France. Le site devait présenter chaque support, mettre en avant le savoir-faire de l'atelier et faciliter les demandes de devis.",
     realise: [
       "Une page par famille de produits : affiches, PLV, panneaux et adhésifs.",
       "Un formulaire de devis gratuit.",
@@ -258,7 +258,6 @@ export const REALISATIONS: Realisation[] = [
     ],
     resume: {
       activite: "Imprimeur d'affiches, PLV, panneaux et adhésifs depuis 1962",
-      lieu: "Toulouse",
       points: ["Gamme complète par support", "Demande de devis gratuit", "Assistance PAO et brochure à télécharger"],
     },
   },
@@ -267,7 +266,7 @@ export const REALISATIONS: Realisation[] = [
     categorie: "client",
     nom: "Re-borne Retrogaming",
     type: "Site vitrine d'animations événementielles",
-    client: "Re-borne Retrogaming, Toulouse",
+    client: "Re-borne Retrogaming",
     accroche: "Consoles rétro et bornes d'arcade pour les événements, du séminaire au mariage.",
     besoin:
       "Re-borne Retrogaming anime les salons, séminaires, soirées d'entreprise et fêtes privées avec des consoles rétro, des bornes d'arcade et un camion d'arcade mobile, le Pixel Truck. Le site devait donner envie, détailler les formules et le matériel, et recueillir les demandes de devis.",
@@ -294,7 +293,6 @@ export const REALISATIONS: Realisation[] = [
     ],
     resume: {
       activite: "Animations retrogaming et location de bornes d'arcade pour les événements",
-      lieu: "Toulouse",
       points: ["Prestations et tarifs", "Catalogue du matériel", "Actualités et demande de devis"],
     },
   },
@@ -338,7 +336,7 @@ export const REALISATIONS: Realisation[] = [
     categorie: "client",
     nom: "Diététi'Phyt",
     type: "Site de praticienne avec prise de rendez-vous",
-    client: "Diététi'Phyt, Toulouse",
+    client: "Diététi'Phyt",
     accroche: "Le site d'une diététicienne-nutritionniste, avec rendez-vous en ligne et téléconsultation.",
     besoin:
       "Diététi'Phyt accompagne ses patients en nutrition et en phytothérapie : alimentation équilibrée, perte de poids, maladies chroniques. Le site devait présenter clairement chaque accompagnement, mettre les patients en confiance et rendre la prise de rendez-vous immédiate, au cabinet comme à distance.",
@@ -364,7 +362,6 @@ export const REALISATIONS: Realisation[] = [
     ],
     resume: {
       activite: "Diététicienne-nutritionniste et conseillère en phytothérapie",
-      lieu: "Toulouse",
       points: ["Prise de rendez-vous en ligne", "Téléconsultation", "Blog et ressources pour les patients"],
     },
   },
@@ -629,9 +626,9 @@ export const FAQ: Question[] = [
   },
   {
     theme: "ensemble",
-    question: "Travaillez-vous uniquement à Toulouse ?",
+    question: "Travaillez-vous à distance ?",
     reponse:
-      "Nous sommes basés à Toulouse et travaillons partout en France à distance. Plusieurs de nos clients sont installés à Albi, à Bordeaux, dans les Hautes-Pyrénées ou près de La Rochelle.",
+      "Oui, nous travaillons partout en France, à distance : visio, téléphone et e-mail. Nos clients sont installés aux quatre coins du pays, et le suivi se fait aussi simplement que si nous étions voisins.",
     lien: { href: "/realisations#clients", libelle: "Voir les sites clients" },
   },
   {
