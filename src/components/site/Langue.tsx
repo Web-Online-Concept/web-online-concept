@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useId, useRef, useState } from "react";
 import { analyserChemin, chemin, estLangue, LANGUES, LOCALES, NOMS_LANGUES, type Langue } from "@/lib/i18n/chemins";
 
 // Langue de la page pour les composants client (fournie par la mise en page src/app/[lang]/layout.tsx)
@@ -49,11 +49,45 @@ function useChangerLangue() {
   };
 }
 
-function Globe({ className = "h-4 w-4" }: { className?: string }) {
+// Drapeaux ronds dessinés en SVG (les émojis drapeaux ne s'affichent pas sous Windows).
+// Anglais : drapeau du Royaume-Uni.
+export function Drapeau({ l, className = "h-5 w-5" }: { l: Langue; className?: string }) {
+  const id = useId();
   return (
-    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden="true">
-      <circle cx="12" cy="12" r="9" />
-      <path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9s1.3-6.4 3.9-9z" />
+    <svg viewBox="0 0 20 20" className={`shrink-0 rounded-full ring-1 ring-white/25 ${className}`} aria-hidden="true">
+      <defs>
+        <clipPath id={`${id}-rond`}>
+          <circle cx="10" cy="10" r="10" />
+        </clipPath>
+      </defs>
+      <g clipPath={`url(#${id}-rond)`}>
+        {l === "fr" && (
+          <>
+            <rect width="7" height="20" fill="#0055A4" />
+            <rect x="7" width="6" height="20" fill="#FFFFFF" />
+            <rect x="13" width="7" height="20" fill="#EF4135" />
+          </>
+        )}
+        {l === "es" && (
+          <>
+            <rect width="20" height="20" fill="#AA151B" />
+            <rect y="5" width="20" height="10" fill="#F1BF00" />
+          </>
+        )}
+        {l === "en" && (
+          // Union Jack (proportions 2:1), recadré au centre du disque
+          <g transform="translate(-10 0) scale(0.6667)">
+            <rect width="60" height="30" fill="#012169" />
+            <path d="M0 0L60 30M60 0L0 30" stroke="#FFFFFF" strokeWidth="6" />
+            <path d="M0 0L60 30M60 0L0 30" stroke="#C8102E" strokeWidth="4" clipPath={`url(#${id}-diag)`} />
+            <clipPath id={`${id}-diag`}>
+              <path d="M30 15h30v15zv15h-30zh-30v-15zv-15h30z" />
+            </clipPath>
+            <path d="M30 0v30M0 15h60" stroke="#FFFFFF" strokeWidth="10" />
+            <path d="M30 0v30M0 15h60" stroke="#C8102E" strokeWidth="6" />
+          </g>
+        )}
+      </g>
     </svg>
   );
 }
@@ -95,7 +129,7 @@ export function SelecteurLangue() {
         onClick={() => setOuvert((o) => !o)}
         className="flex h-10 items-center gap-1.5 rounded-full border border-white/15 px-3 text-sm font-medium text-[#E6EDF5] transition-colors hover:border-white/40 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
       >
-        <Globe />
+        <Drapeau l={l} className="h-[18px] w-[18px]" />
         {l.toUpperCase()}
         <svg viewBox="0 0 24 24" className={`h-3.5 w-3.5 transition-transform ${ouvert ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
           <path d="M6 9.5l6 6 6-6" />
@@ -122,7 +156,10 @@ export function SelecteurLangue() {
                   x === l ? "bg-white/5 text-white" : "text-[#C3D0DD] hover:bg-white/5 hover:text-white"
                 }`}
               >
-                {NOMS_LANGUES[x]}
+                <span className="flex items-center gap-3">
+                  <Drapeau l={x} />
+                  {NOMS_LANGUES[x]}
+                </span>
                 {x === l && (
                   <svg viewBox="0 0 24 24" className="h-4 w-4 text-[#2BD47D]" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                     <title>{LIBELLES[l].actuelle}</title>
@@ -145,7 +182,6 @@ export function SelecteurLangueMobile({ onChoix }: { onChoix?: () => void }) {
   const changer = useChangerLangue();
   return (
     <div className="flex items-center gap-2 border-t border-white/10 px-3 pt-4">
-      <Globe className="mr-1 h-5 w-5 text-[#93A6BB]" />
       <span className="sr-only">{LIBELLES[l].bouton}</span>
       {LANGUES.map((x) => (
         <Link
@@ -159,10 +195,11 @@ export function SelecteurLangueMobile({ onChoix }: { onChoix?: () => void }) {
             if (x === l) return e.preventDefault();
             changer(x)(e);
           }}
-          className={`min-w-14 rounded-full px-4 py-2.5 text-center text-[15px] font-medium transition-colors ${
+          className={`flex min-w-14 items-center gap-2 rounded-full py-2.5 pr-4 pl-2.5 text-[15px] font-medium transition-colors ${
             x === l ? "bg-white text-nuit" : "border border-white/15 text-[#D5DEE8] hover:border-white/40 hover:text-white"
           }`}
         >
+          <Drapeau l={x} />
           <abbr title={NOMS_LANGUES[x]} className="no-underline">
             {x.toUpperCase()}
           </abbr>
@@ -212,7 +249,7 @@ export function BandeauLangue() {
       aria-label={s.texte}
       className="bandeau-langue fixed inset-x-3 bottom-3 z-50 mx-auto flex max-w-lg items-center gap-3 rounded-2xl border border-white/10 bg-[#0D2240]/95 p-2 pl-4 text-white shadow-[0_24px_60px_-20px_rgba(0,0,0,0.85)] backdrop-blur sm:bottom-5"
     >
-      <Globe className="h-5 w-5 shrink-0 text-[#7CCBFF]" />
+      <Drapeau l={proposee} className="h-6 w-6" />
       <p className="flex-1 text-sm leading-snug text-[#D5DEE8]">{s.texte}</p>
       <Link
         href={adresseCalculee(proposee, pathname)}
