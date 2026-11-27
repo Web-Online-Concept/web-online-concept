@@ -2,7 +2,8 @@ import "server-only";
 import { accuseReception, alerteMessage, type DonneesMessage } from "@/lib/emails/modeles";
 
 // E-mails envoyés à chaque nouveau message du formulaire de contact (via l'API Brevo) :
-// - une alerte au studio, à contact@ (redirigé vers Gmail) : y répondre part directement au visiteur, depuis contact@ ;
+// - une alerte au studio, à contact@ (redirigé vers Gmail) : y répondre part directement au visiteur, depuis contact@,
+//   et la citation de l'alerte dans la réponse ne montre que sa propre demande ;
 // - un accusé de réception au visiteur (si demandé par l'appelant).
 // Les deux partent de site@ : Brevo ajoute d'office un lien « Se désabonner » à ses e-mails, et un clic dessus
 // bloque l'expéditeur pour ce destinataire. Ainsi, contact@ (réponses écrites depuis Gmail) n'est jamais bloqué.
@@ -37,7 +38,8 @@ export async function notifierNouveauMessage(m: DonneesMessage, { accuse }: { ac
   const alerte = alerteMessage(m);
   const envois = [
     envoyer(cle, "alerte", {
-      sender: { name: "Formulaire du site", email: site },
+      // Dans Gmail : « Claire Martin via le site »
+      sender: { name: `${m.nom.replace(/["<>\r\n]/g, "").slice(0, 60)} via le site`, email: site },
       to: [{ email: destinataire }],
       replyTo: { email: m.email, name: m.nom },
       subject: alerte.sujet,

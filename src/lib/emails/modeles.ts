@@ -200,23 +200,24 @@ export function accuseReception(m: DonneesMessage) {
 }
 
 // ——— Alerte envoyée au studio à chaque nouveau message ———
+// Conçue pour être citée telle quelle quand Florent y répond depuis Gmail : elle ne contient que la demande
+// du visiteur et ses propres coordonnées, rien d'interne (pas de lien vers le back-office ni de consigne).
 
 export function alerteMessage(m: DonneesMessage) {
   const recu = m.recuLe ?? new Date();
   const nom = echapper(m.nom);
   const initiale = echapper((m.nom.trim()[0] ?? "?").toUpperCase());
-  const prenom = echapper(m.nom.trim().split(/\s+/)[0] || m.nom);
   const lignes: [string, string][] = [
     ["E-mail", `<a href="mailto:${echapper(m.email)}" style="color:${C.bleu};text-decoration:none">${echapper(m.email)}</a>`],
   ];
   if (m.telephone) lignes.push(["Téléphone", `<a href="tel:${echapper(m.telephone.replace(/[^0-9+]/g, ""))}" style="color:${C.bleu};text-decoration:none">${echapper(m.telephone)}</a>`]);
   if (m.source) lignes.push(["Recommandé par", echapper(m.source)]);
 
-  const pastille = `<span style="display:inline-block;font-family:${POLICE};font-size:12px;line-height:16px;font-weight:600;color:#FFFFFF;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:6px 12px"><span style="color:${C.vert}">&#9679;</span>&nbsp; Nouveau message</span>`;
+  const pastille = `<span style="display:inline-block;font-family:${POLICE};font-size:12px;line-height:16px;font-weight:600;color:#FFFFFF;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:6px 12px"><span style="color:${C.vert}">&#9679;</span>&nbsp; Demande reçue</span>`;
 
   const corps = `${entete(pastille)}
 <tr><td class="marge" style="padding:34px 36px 0;font-family:${POLICE}">
-  <p style="margin:0 0 8px;font-size:13px;line-height:18px;color:${C.doux}">Reçu le ${dateFr(recu)} à ${heureFr(recu)}</p>
+  <p style="margin:0 0 8px;font-size:13px;line-height:18px;color:${C.doux}">Envoyée depuis le formulaire du site, le ${dateFr(recu)} à ${heureFr(recu)}</p>
   <h1 class="titre" style="margin:0 0 12px;font-size:26px;line-height:33px;font-weight:700;color:${C.nuit};letter-spacing:-0.3px">${nom}</h1>
   ${m.besoin ? `<span style="display:inline-block;font-size:13px;line-height:18px;font-weight:600;color:${C.profond};background:#E8EFFF;border-radius:999px;padding:6px 14px">${echapper(m.besoin)}</span>` : ""}
 </td></tr>
@@ -250,29 +251,15 @@ export function alerteMessage(m: DonneesMessage) {
   </table>
 </td></tr>
 
-<tr><td class="marge" style="padding:24px 36px 0;font-family:${POLICE}">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
-    <td style="background:#E8EFFF;border-radius:16px;padding:14px 18px;font-size:14px;line-height:21px;color:${C.profond}">
-      <strong>&#8617;&nbsp; Pour répondre à ${prenom}, répondez simplement à cet e-mail.</strong><br><span style="color:${C.texte}">La réponse lui parvient directement, depuis <span style="white-space:nowrap">contact@web-online-concept.com</span>.</span>
-    </td>
-  </tr></table>
-</td></tr>
+<tr><td style="height:36px;line-height:36px;font-size:0">&nbsp;</td></tr>`;
 
-<tr><td class="marge" style="padding:24px 36px 36px">
-  ${bouton(`${URL_SITE}/admin/messages`, "Ouvrir le back-office")}
-</td></tr>`;
-
-  const pied = `
-<table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;max-width:100%">
-<tr><td class="marge" align="center" style="padding:20px 36px 8px;font-family:${POLICE};font-size:12px;line-height:18px;color:#8A9BAE">
-  Message envoyé depuis le formulaire de <span style="white-space:nowrap">web-online-concept.com</span> et enregistré dans le <span style="white-space:nowrap">back-office</span>.
-</td></tr>
-</table>`;
+  const pied = "";
 
   const apercu = m.message.replace(/\s+/g, " ").slice(0, 110);
   return {
-    sujet: `Nouveau message : ${m.besoin ?? "contact"}${m.objet ? ` (${m.objet})` : ""}`,
-    html: coquille({ titre: `Nouveau message de ${m.nom}`, preheader: `${m.nom} : ${apercu}`, corps, pied }),
+    // Sujet pensé pour la réponse : le visiteur verra « Re: <son objet> »
+    sujet: m.objet || `Demande : ${m.besoin ?? "contact"}`,
+    html: coquille({ titre: `Demande de ${m.nom}`, preheader: apercu, corps, pied }),
   };
 }
 
