@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { LogoAnime } from "@/components/site/Survol";
 import { NAVIGATION } from "@/lib/contenu";
 
@@ -63,8 +63,29 @@ function NavBureauActive() {
   return <NavBureau chemin={chemin} />;
 }
 
+// Un lien vers la page où l'on se trouve déjà (logo sur l'accueil, « Contact » sur la page Contact…)
+// fait remonter en haut de la page, au lieu de ne rien faire. Écouteur en phase de capture : il passe
+// avant les liens Next, qui voient alors la navigation annulée.
+function useRetourEnHaut() {
+  useEffect(() => {
+    const auClic = (e: MouseEvent) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const lien = (e.target as Element | null)?.closest?.("a[href]");
+      if (!(lien instanceof HTMLAnchorElement) || lien.target === "_blank") return;
+      const url = new URL(lien.href, location.href);
+      if (url.origin !== location.origin || url.pathname !== location.pathname || url.search !== location.search || url.hash) return;
+      e.preventDefault();
+      const doux = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: 0, behavior: doux ? "smooth" : "auto" });
+    };
+    document.addEventListener("click", auClic, true);
+    return () => document.removeEventListener("click", auClic, true);
+  }, []);
+}
+
 export default function Entete() {
   const [ouvert, setOuvert] = useState(false);
+  useRetourEnHaut();
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-nuit/95 backdrop-blur">
