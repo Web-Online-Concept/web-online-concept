@@ -37,16 +37,13 @@ const dateFr = (d: Date) =>
 const heureFr = (d: Date) =>
   new Intl.DateTimeFormat("fr-FR", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Paris" }).format(d).replace(":", " h ");
 
-// La demande du visiteur, résumée en une phrase à partir de la liste fermée des besoins
-// (aucun texte libre du formulaire n'est renvoyé à l'adresse saisie : pas de relais de spam possible).
-const PHRASES: Record<string, string> = {
-  "Création de site": "J'ai un projet de création de site.",
-  "Application web ou mobile": "J'ai un projet d'application web ou mobile.",
-  "Plateforme ou abonnement": "J'ai un projet de plateforme ou d'abonnement.",
-  "Refonte ou migration": "J'aimerais faire évoluer mon site existant.",
-  "Référencement et visibilité IA": "J'aimerais être mieux trouvé sur Google et par les IA.",
-  "Maintenance et suivi": "Je cherche quelqu'un pour suivre mon site.",
-  Autre: "J'ai une question pour le studio.",
+// Texte du visiteur recopié dans l'accusé : tronqué, et sans aucun lien (une adresse saisie par un tiers
+// ne doit pas pouvoir servir à faire passer des liens par nos e-mails).
+const LIEN = /(?:https?:\/\/|www\.)[^\s<>]+|(?<![@\w.-])[\w-]+(?:\.[\w-]+)*\.(?:com|fr|net|org|info|biz|io|co|me|app|site|online|shop|xyz|ru|cn|top|link|club)\b(?:\/\S*)?/gi;
+export const sansLiens = (t: string, max = 700) => {
+  // La ponctuation qui suit un lien (parenthèse, point…) est conservée
+  const propre = t.replace(LIEN, (lien) => `[lien]${lien.match(/[)\].,;:!?]+$/)?.[0] ?? ""}`).trim();
+  return propre.length > max ? `${propre.slice(0, max).trimEnd()}…` : propre;
 };
 
 function coquille({ titre, preheader, corps, pied }: { titre: string; preheader: string; corps: string; pied: string }) {
@@ -102,7 +99,8 @@ const bouton = (href: string, libelle: string, plein = true) =>
 export function accuseReception(m: DonneesMessage) {
   const recu = m.recuLe ?? new Date();
   const nom = echapper(m.nom.slice(0, 60));
-  const phrase = PHRASES[m.besoin ?? ""] ?? PHRASES.Autre;
+  const objet = m.objet ? sansLiens(m.objet, 160) : "";
+  const texte = sansLiens(m.message);
   const etapes = [
     ["Nous lisons votre demande", "Chaque message est lu en personne, avec attention."],
     ["Nous vous répondons", "Par e-mail, avec nos questions et souvent de premières pistes."],
@@ -119,8 +117,12 @@ export function accuseReception(m: DonneesMessage) {
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
     <tr><td align="right" style="padding-bottom:4px;font-size:12px;line-height:16px;color:${C.doux}">Vous</td></tr>
     <tr><td align="right">
-      <table role="presentation" class="bulle" cellpadding="0" cellspacing="0" border="0" style="max-width:80%"><tr>
-        <td style="${BULLE_BLEUE};color:#FFFFFF;border-radius:20px 20px 6px 20px;padding:14px 18px;font-size:15px;line-height:22px">${echapper(phrase)}</td>
+      <table role="presentation" class="bulle" cellpadding="0" cellspacing="0" border="0" style="max-width:86%"><tr>
+        <td style="${BULLE_BLEUE};color:#FFFFFF;border-radius:20px 20px 6px 20px;padding:16px 20px;font-size:15px;line-height:23px">
+          ${m.besoin ? `<div style="font-size:12px;line-height:16px;color:#C9D8FF;padding-bottom:8px">${echapper(m.besoin)}</div>` : ""}
+          ${objet ? `<div style="font-weight:700;padding-bottom:6px">${echapper(objet)}</div>` : ""}
+          <div style="white-space:pre-line">${echapper(texte)}</div>
+        </td>
       </tr></table>
     </td></tr>
     <tr><td align="right" style="padding-top:6px;font-size:12px;line-height:16px;color:${C.doux}">Reçu le ${dateFr(recu)} à ${heureFr(recu)} <span style="color:${C.vert};font-weight:700">&#10003;&#10003;</span></td></tr>

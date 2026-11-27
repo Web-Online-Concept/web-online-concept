@@ -54,14 +54,16 @@ export async function envoyerMessage(_etat: EtatContact, formData: FormData): Pr
   if (error) {
     return { statut: "erreur", message: "L'envoi a échoué. Réessayez ou écrivez à contact@web-online-concept.com.", valeurs };
   }
-  // Accusé de réception au visiteur : un seul par adresse et par 24 h, et jamais si le nom ressemble à un lien
-  // (le formulaire ne doit pas pouvoir servir à envoyer des e-mails à des inconnus).
-  const { count } = await sb
-    .from("messages")
-    .select("id", { count: "exact", head: true })
-    .eq("email", email)
-    .gte("cree_le", new Date(Date.now() - 24 * 3600 * 1000).toISOString());
-  const accuse = (count ?? 2) <= 1 && !/https?:|www\.|\.[a-z]{2,}\/|[@<>]/i.test(nom);
+  // Accusé de réception au visiteur (il recopie sa demande, sans les liens) : un seul par adresse et par 24 h,
+  // aucun au-delà de 20 messages en 24 h (signe d'abus), et jamais si le nom ressemble à un lien :
+  // le formulaire ne doit pas pouvoir servir à envoyer des e-mails à des inconnus.
+  const depuis = new Date(Date.now() - 24 * 3600 * 1000).toISOString();
+  const [parAdresse, auTotal] = await Promise.all([
+    sb.from("messages").select("id", { count: "exact", head: true }).eq("email", email).gte("cree_le", depuis),
+    sb.from("messages").select("id", { count: "exact", head: true }).gte("cree_le", depuis),
+  ]);
+  const accuse =
+    (parAdresse.count ?? 2) <= 1 && (auTotal.count ?? 99) <= 20 && !/https?:|www\.|\.[a-z]{2,}\/|[@<>]/i.test(nom);
 
   const recuLe = new Date();
   after(() => notifierNouveauMessage({ nom, email, telephone, besoin, source, objet, message, recuLe }, { accuse }));
