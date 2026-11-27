@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ID_ENTREPRISE, jsonLd } from "@/lib/seo";
 import BlocMethode from "@/components/site/BlocMethode";
 import DefilementEcrans from "@/components/site/DefilementEcrans";
+import IntroVideo, { SCRIPT_INTRO } from "@/components/site/IntroVideo";
 import EventailApplication from "@/components/site/EventailApplication";
 import { CarteFlottante, PhotoCadre } from "@/components/site/Photos";
 import CapacitesInteractives from "@/components/site/CapacitesInteractives";
@@ -84,6 +85,9 @@ export default function Accueil() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(DONNEES)} />
       <DefilementEcrans />
+      {/* Vidéo de présentation : décidée avant l'affichage (première visite, ou après 30 jours d'absence) */}
+      <script dangerouslySetInnerHTML={{ __html: SCRIPT_INTRO }} />
+      <IntroVideo />
       {/* Accroche */}
       <section className="ecran ecran-hero relative overflow-hidden bg-nuit text-white lg:flex lg:min-h-[calc(100svh-77px)] lg:items-center">
         <Conteneur className="relative grid items-center gap-10 py-16 sm:py-24 lg:grid-cols-[1fr_1.05fr] lg:gap-4 lg:py-16">
