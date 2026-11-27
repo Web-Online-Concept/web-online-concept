@@ -6,6 +6,8 @@ export const SITE = {
   nom: "Web Online Concept",
   url: "https://www.web-online-concept.com",
   email: "contact@web-online-concept.com",
+  // Réseaux du studio (pied de page et données structurées)
+  x: "https://x.com/WebOnlineFr",
   titre: "Vous l'imaginez. Nous le réalisons, au service de vos objectifs.",
   sousTitre:
     "Plus de quinze ans de développement web, démultipliés par l'IA : sites, applications et plateformes complètes, de la première idée à la mise en ligne.",

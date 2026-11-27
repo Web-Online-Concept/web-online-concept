@@ -45,6 +45,7 @@ const DONNEES = {
       description: SITE.sousTitre,
       slogan: SITE.titre,
       email: SITE.email,
+      sameAs: [SITE.x],
       foundingDate: "2009",
       areaServed: { "@type": "Country", name: "France" },
       knowsAbout: CAPACITES.map((c) => c.titre),
