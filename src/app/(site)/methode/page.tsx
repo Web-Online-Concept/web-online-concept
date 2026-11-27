@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { metaPage } from "@/lib/seo";
 import { AppelFinal, BlocEngagements, Conteneur, EnTetePage } from "@/components/site/Blocs";
+import Conviction from "@/components/site/Conviction";
 import DefilementEcrans from "@/components/site/DefilementEcrans";
 import { ANIMATIONS_METHODE } from "@/components/site/illustrations/Methode";
 import { CarteFlottante, PhotoCadre } from "@/components/site/Photos";
 import SceneEnVue from "@/components/site/SceneEnVue";
-import { IA, MANIFESTE, METHODE, METHODE_DETAILS, PHOTOS } from "@/lib/contenu";
+import { IA, METHODE, METHODE_DETAILS, PHOTOS } from "@/lib/contenu";
 
 export const metadata: Metadata = metaPage("Méthode", "Une méthode augmentée par l'IA : cadrer vite, produire plus, tout vérifier, faire évoluer. Et des engagements concrets à chaque étape.", "/methode");
 
@@ -111,16 +112,7 @@ export default function Methode() {
 
       <BlocEngagements fond="bg-ciel" />
 
-      {/* Conviction */}
-      <section className="ecran bg-white py-20 sm:py-28">
-        <Conteneur className="max-w-4xl text-center">
-          <p className="text-xl leading-relaxed text-[#4A6178]">{MANIFESTE[0]}</p>
-          <p className="mt-4 text-xl leading-relaxed text-[#2C4558]">{MANIFESTE[1]}</p>
-          <p className="mx-auto mt-10 max-w-3xl text-[clamp(1.7rem,3.4vw,2.7rem)] font-semibold leading-tight tracking-tight text-nuit">
-            {MANIFESTE[2]}
-          </p>
-        </Conteneur>
-      </section>
+      <Conviction />
 
       <AppelFinal />
     </>

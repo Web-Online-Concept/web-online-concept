@@ -24,10 +24,13 @@ export const NAVIGATION = [
 ];
 
 export const MANIFESTE = [
-  "Hier, on se demandait : est-ce faisable ? En combien de temps ? Avec combien de développeurs ?",
+  "Hier, on se demandait\u00a0: est-ce faisable\u00a0? En combien de temps\u00a0? Avec combien de développeurs\u00a0?",
   "Aujourd'hui, l'expertise technique alliée à l'IA a levé ces limites.",
-  "Il reste les seules questions qui comptent : que voulez-vous accomplir, pour qui, et avec quels objectifs ?",
+  "Il reste les seules questions qui comptent\u00a0: que voulez-vous accomplir, pour qui, et avec quels objectifs\u00a0?",
 ];
+
+// Les questions d'hier, barrées une à une dans le bloc « conviction » de la page Méthode
+export const QUESTIONS_D_HIER = ["Est-ce faisable\u00a0?", "En combien de temps\u00a0?", "Avec combien de développeurs\u00a0?"];
 
 // Photos d'illustration de l'accueil (générées, sans personne réelle identifiable)
 export const PHOTOS = {

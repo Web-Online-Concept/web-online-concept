@@ -1292,3 +1292,50 @@
     display: none;
   }
 }
+
+/* Méthode, bloc « conviction » : les questions d'hier barrées une à une, puis la réponse d'aujourd'hui */
+.cv-barre {
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: cv-barre 0.55s cubic-bezier(0.6, 0, 0.3, 1) forwards;
+}
+@keyframes cv-barre {
+  to {
+    transform: scaleX(1);
+  }
+}
+.cv-question {
+  animation: cv-estompe 0.45s ease forwards;
+}
+@keyframes cv-estompe {
+  to {
+    opacity: 0.55;
+    box-shadow: none;
+  }
+}
+.cv-apparait {
+  animation: cv-apparait 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@keyframes cv-apparait {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cv-barre {
+    animation: none;
+    transform: scaleX(1);
+  }
+  .cv-question {
+    animation: none;
+    opacity: 0.55;
+  }
+  .cv-apparait {
+    animation: none;
+  }
+}
