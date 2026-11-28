@@ -98,11 +98,14 @@ export default async function Methode() {
                       )}
                     </SceneEnVue>
                     <div>
-                      <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[linear-gradient(135deg,#1F5EFF,#00B4D8_60%,#2BD47D)] text-lg font-semibold text-white shadow-[0_0_0_6px_rgba(0,180,216,0.12)]">
-                        {i + 1}
-                      </span>
-                      <h2 className="mt-5 text-[clamp(1.8rem,3vw,2.5rem)] font-semibold tracking-tight text-nuit">{e.titre}</h2>
-                      <p className="mt-3 text-[18px] leading-relaxed text-[#2C4558]">{e.texte}</p>
+                      {/* Numéro de l'étape à gauche du titre */}
+                      <div className="flex items-center gap-4">
+                        <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(135deg,#1F5EFF,#00B4D8_60%,#2BD47D)] text-base font-semibold text-white shadow-[0_0_0_5px_rgba(0,180,216,0.12)]">
+                          {i + 1}
+                        </span>
+                        <h2 className="text-[clamp(1.8rem,3vw,2.5rem)] font-semibold leading-tight tracking-tight text-nuit">{e.titre}</h2>
+                      </div>
+                      <p className="mt-4 text-[18px] leading-relaxed text-[#2C4558]">{e.texte}</p>
                       {d && (
                         <ul className="mt-6 flex flex-col gap-3">
                           {d.points.map((p) => (
