@@ -1461,19 +1461,20 @@ html[data-menu] .bandeau-langue {
       #ffffff 100%
     );
     background-size: 300% 100%;
-    background-position: 100% 0;
+    background-position: 90% 0;
     -webkit-background-clip: text;
     background-clip: text;
-    animation: titre-lumiere 7s ease-in-out 1.2s infinite;
+    animation: titre-lumiere 10s cubic-bezier(0.4, 0.1, 0.6, 0.9) 1s infinite;
   }
 }
+/* La lumière n'avance que sur la partie visible (90 % → 10 %) : 4,5 s pour traverser le titre, toutes les 10 s */
 @keyframes titre-lumiere {
   0% {
-    background-position: 100% 0;
+    background-position: 90% 0;
   }
-  34%,
+  45%,
   100% {
-    background-position: 0% 0;
+    background-position: 10% 0;
   }
 }
 @media (prefers-reduced-motion: reduce) {
