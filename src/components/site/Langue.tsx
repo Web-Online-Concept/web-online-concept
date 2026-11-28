@@ -127,11 +127,11 @@ export function SelecteurLangue() {
         aria-controls="choix-langue"
         aria-label={`${LIBELLES[l].bouton} : ${NOMS_LANGUES[l]}`}
         onClick={() => setOuvert((o) => !o)}
-        className="flex h-10 items-center gap-1.5 rounded-full border border-white/15 px-3 text-sm font-medium text-[#E6EDF5] transition-colors hover:border-white/40 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+        className="flex h-10 items-center gap-1.5 rounded-full border border-white/15 px-2.5 text-sm font-medium sm:px-3 text-[#E6EDF5] transition-colors hover:border-white/40 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
       >
         <Drapeau l={l} className="h-[18px] w-[18px]" />
         {l.toUpperCase()}
-        <svg viewBox="0 0 24 24" className={`h-3.5 w-3.5 transition-transform ${ouvert ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+        <svg viewBox="0 0 24 24" className={`hidden h-3.5 w-3.5 transition-transform sm:block ${ouvert ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
           <path d="M6 9.5l6 6 6-6" />
         </svg>
       </button>
@@ -171,40 +171,6 @@ export function SelecteurLangue() {
           ))}
         </ul>
       )}
-    </div>
-  );
-}
-
-// Version du menu mobile : les trois langues côte à côte
-export function SelecteurLangueMobile({ onChoix }: { onChoix?: () => void }) {
-  const l = useLangue();
-  const pathname = usePathname();
-  const changer = useChangerLangue();
-  return (
-    <div className="flex items-center gap-2 border-t border-white/10 px-3 pt-4">
-      <span className="sr-only">{LIBELLES[l].bouton}</span>
-      {LANGUES.map((x) => (
-        <Link
-          key={x}
-          href={adresseCalculee(x, pathname)}
-          hrefLang={x}
-          lang={x}
-          aria-current={x === l ? "true" : undefined}
-          onClick={(e) => {
-            onChoix?.();
-            if (x === l) return e.preventDefault();
-            changer(x)(e);
-          }}
-          className={`flex min-w-14 items-center gap-2 rounded-full py-2.5 pr-4 pl-2.5 text-[15px] font-medium transition-colors ${
-            x === l ? "bg-white text-nuit" : "border border-white/15 text-[#D5DEE8] hover:border-white/40 hover:text-white"
-          }`}
-        >
-          <Drapeau l={x} />
-          <abbr title={NOMS_LANGUES[x]} className="no-underline">
-            {x.toUpperCase()}
-          </abbr>
-        </Link>
-      ))}
     </div>
   );
 }

@@ -11,13 +11,13 @@ const TEXTES = {
   fr: {
     titre: "Réalisations",
     description:
-      "Applications web et mobiles, galerie d'art, sites avec réservation, sites vitrines d'entreprises : les projets conçus et développés par Web Online Concept.",
+      "Applications web et mobiles, galerie d'art, sites avec réservation, sites vitrines d'entreprises : les projets conçus et développés par Web Online Concept.",
     intro:
-      "Une application mobile dopée à l'IA, une galerie d'art, des sites avec réservation ou devis en ligne : chaque projet part d'objectifs précis et va jusqu'à la mise en ligne.",
+      "Une application mobile dopée à l'IA, une galerie d'art, des sites avec réservation ou devis en ligne : chaque projet part d'objectifs précis et va jusqu'à la mise en ligne.",
     surMesure: "Projets sur mesure",
     clients: "Sites créés et suivis pour nos clients",
     clientsIntro:
-      "Imprimeurs, artisans, praticiens, artiste peintre, professionnels de l'événementiel : des sites conçus, mis en ligne et suivis dans la durée, partout en France.",
+      "Imprimeurs, artisans, praticiens, artiste peintre, professionnels de l'événementiel : des sites conçus, mis en ligne et suivis dans la durée, partout en France.",
     points: (nom: string) => `Points forts du site de ${nom}`,
     voir: "Voir la réalisation",
     site: "Voir le site",

@@ -13,7 +13,7 @@ const TEXTES = {
     code: "Une seule base de code",
     stores: "Publiée sur les stores",
     abonnement: "Abonnement activé",
-    question: "Où est mon contrat d'assurance ?",
+    question: "Où est mon contrat d'assurance ?",
     fichier: "contrat-habitation.pdf",
     lecture: "Lecture auto",
     recherche: "plombier bordeaux",

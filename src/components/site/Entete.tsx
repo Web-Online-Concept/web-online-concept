@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import { LogoAnime } from "@/components/site/Survol";
-import { SelecteurLangue, SelecteurLangueMobile, useLangue } from "@/components/site/Langue";
+import { SelecteurLangue, useLangue } from "@/components/site/Langue";
 import { analyserChemin, chemin as cheminPublic } from "@/lib/i18n/chemins";
 
 type Lien = { href: string; libelle: string };
@@ -101,32 +101,32 @@ export default function Entete({ navigation }: { navigation: Lien[] }) {
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-nuit/95 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-4 sm:px-8">
-        <LogoAnime className="h-10 sm:h-11" priorite onClick={() => setOuvert(false)} />
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 sm:px-8">
+        <LogoAnime className="h-9 min-[380px]:h-10 sm:h-11" priorite onClick={() => setOuvert(false)} />
 
-        <div className="hidden items-center gap-3 lg:flex xl:gap-5">
-          <nav aria-label={t.nav}>
+        <div className="flex items-center gap-2 lg:gap-3 xl:gap-5">
+          <nav aria-label={t.nav} className="hidden lg:block">
             <Suspense fallback={<NavBureau chemin={null} navigation={navigation} />}>
               <NavBureauActive navigation={navigation} />
             </Suspense>
           </nav>
+          {/* Langue : accessible d'un geste, aussi sur téléphone */}
           <Suspense>
             <SelecteurLangue />
           </Suspense>
+          <button
+            type="button"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full text-white lg:hidden"
+            aria-expanded={ouvert}
+            aria-controls="menu-mobile"
+            aria-label={ouvert ? t.fermer : t.ouvrir}
+            onClick={() => setOuvert((o) => !o)}
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              {ouvert ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+            </svg>
+          </button>
         </div>
-
-        <button
-          type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full text-white lg:hidden"
-          aria-expanded={ouvert}
-          aria-controls="menu-mobile"
-          aria-label={ouvert ? t.fermer : t.ouvrir}
-          onClick={() => setOuvert((o) => !o)}
-        >
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-            {ouvert ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
-          </svg>
-        </button>
       </div>
 
       {ouvert && (
@@ -144,9 +144,6 @@ export default function Entete({ navigation }: { navigation: Lien[] }) {
               </li>
             ))}
           </ul>
-          <Suspense>
-            <SelecteurLangueMobile onChoix={() => setOuvert(false)} />
-          </Suspense>
         </nav>
       )}
     </header>

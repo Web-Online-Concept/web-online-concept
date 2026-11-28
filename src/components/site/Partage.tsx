@@ -4,7 +4,7 @@ import { useState, useSyncExternalStore } from "react";
 import { useLangue } from "@/components/site/Langue";
 
 const TEXTES = {
-  fr: { copiez: "Copiez ce lien :", titre: "Partager cet article", partager: "Partager", onglet: "(nouvel onglet)", copie: "Lien copié", copier: "Copier le lien" },
+  fr: { copiez: "Copiez ce lien :", titre: "Partager cet article", partager: "Partager", onglet: "(nouvel onglet)", copie: "Lien copié", copier: "Copier le lien" },
   en: { copiez: "Copy this link:", titre: "Share this article", partager: "Share", onglet: "(new tab)", copie: "Link copied", copier: "Copy link" },
   es: { copiez: "Copie este enlace:", titre: "Compartir este artículo", partager: "Compartir", onglet: "(nueva pestaña)", copie: "Enlace copiado", copier: "Copiar el enlace" },
 };

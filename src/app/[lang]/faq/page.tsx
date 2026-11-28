@@ -11,11 +11,11 @@ const TEXTES = {
   fr: {
     titre: "Questions fréquentes",
     description:
-      "Délais, autonomie, référencement, visibilité dans les IA, sites multilingues, propriété du site, suivi : les réponses aux questions les plus fréquentes sur un projet avec Web Online Concept.",
-    intro: "Délais, autonomie, référencement, suivi : les réponses aux questions que l'on nous pose le plus souvent.",
+      "Délais, autonomie, référencement, visibilité dans les IA, sites multilingues, propriété du site, suivi : les réponses aux questions les plus fréquentes sur un projet avec Web Online Concept.",
+    intro: "Délais, autonomie, référencement, suivi : les réponses aux questions que l'on nous pose le plus souvent.",
     themes: "Thèmes",
-    autre: "Une autre question ?",
-    ecrivez: "Écrivez-nous : nous répondons personnellement.",
+    autre: "Une autre question ?",
+    ecrivez: "Écrivez-nous : nous répondons personnellement.",
     ecrire: "Nous écrire",
   },
   en: {

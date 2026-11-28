@@ -86,8 +86,8 @@ function trace(a: V3, b: V3, cx: number, cy: number, r: number) {
   const hauteur = 0.04 + angle(a, b) * 0.09;
   let d = "";
   let enCours = false;
-  for (let k = 0; k <= 28; k++) {
-    const t = k / 28;
+  for (let k = 0; k <= 14; k++) {
+    const t = k / 14;
     const p = slerp(a, b, t);
     const e = 1 + hauteur * Math.sin(Math.PI * t);
     if (p[2] < 0.02) {
@@ -143,6 +143,8 @@ export default function PlaneteReseau({
           <stop offset="0.35" stopColor="#9BEBFF" stopOpacity="0.9" />
           <stop offset="1" stopColor="#00B4D8" stopOpacity="0" />
         </radialGradient>
+        {/* Chaque arc est tracé une fois, puis réutilisé (lueur, trait, impulsion) : page bien plus légère */}
+        {chemins.map((d, k) => (d ? <path key={k} id={id(`arc${k}`)} d={d} /> : null))}
       </defs>
 
       {/* Atmosphère et globe */}
@@ -151,39 +153,21 @@ export default function PlaneteReseau({
       <circle cx={cx} cy={cy} r={r} fill="none" stroke="#7CCBFF" strokeOpacity="0.55" strokeWidth={1.2 * e} />
 
       {/* Lueur des arcs (copie floutée) */}
-      <g filter={`url(#${id("lueur")})`} opacity="0.8">
-        {chemins.map((d, k) =>
-          d ? <path key={k} d={d} fill="none" stroke={k % 4 === 0 ? "#2BD47D" : "#00B4D8"} strokeWidth={2.4 * e} /> : null,
-        )}
+      <g filter={`url(#${id("lueur")})`} opacity="0.8" fill="none" strokeWidth={2.4 * e}>
+        {chemins.map((d, k) => (d ? <use key={k} href={`#${id(`arc${k}`)}`} stroke={k % 4 === 0 ? "#2BD47D" : "#00B4D8"} /> : null))}
       </g>
 
-      {/* Arcs lumineux et impulsions qui les parcourent */}
-      {chemins.map((d, k) =>
-        d ? (
-          <g key={k}>
-            <path
-              d={d}
-              fill="none"
-              stroke={k % 4 === 0 ? "#6FF0AE" : "#B8F1FF"}
-              strokeOpacity="0.8"
-              strokeWidth={Math.max(0.7, e)}
-              strokeLinecap="round"
-            />
-            {k % 3 === 0 && (
-              <path
-                d={d}
-                fill="none"
-                stroke="#FFFFFF"
-                strokeWidth={1.6 * e}
-                strokeLinecap="round"
-                strokeDasharray="6 160"
-                className="influx"
-                style={{ animationDelay: `${(k % 7) * -0.55}s` }}
-              />
-            )}
-          </g>
-        ) : null,
-      )}
+      {/* Arcs lumineux et impulsions qui les parcourent (attributs communs posés sur les groupes) */}
+      <g fill="none" strokeLinecap="round">
+        <g strokeOpacity="0.8" strokeWidth={Math.max(0.7, e)}>
+          {chemins.map((d, k) => (d ? <use key={k} href={`#${id(`arc${k}`)}`} stroke={k % 4 === 0 ? "#6FF0AE" : "#B8F1FF"} /> : null))}
+        </g>
+        <g stroke="#FFFFFF" strokeWidth={1.6 * e} strokeDasharray="6 160">
+          {chemins.map((d, k) =>
+            d && k % 3 === 0 ? <use key={k} href={`#${id(`arc${k}`)}`} className="influx" style={{ animationDelay: `${(k % 7) * -0.55}s` }} /> : null,
+          )}
+        </g>
+      </g>
 
       {/* Points */}
       {POINTS.map((p, i) => {

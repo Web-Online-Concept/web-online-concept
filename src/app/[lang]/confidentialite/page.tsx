@@ -21,16 +21,16 @@ const TEXTES = {
     ),
     collecte: "Données collectées et finalité",
     collecteTexte:
-      "Seules les informations saisies dans le formulaire de contact sont collectées : nom, adresse e-mail, téléphone (facultatif), type de projet, objet, message et, le cas échéant, la personne qui vous a recommandé. Elles servent uniquement à répondre à votre demande et à assurer le suivi de l'échange. Le traitement repose sur l'intérêt légitime à répondre aux messages reçus.",
+      "Seules les informations saisies dans le formulaire de contact sont collectées : nom, adresse e-mail, téléphone (facultatif), type de projet, objet, message et, le cas échéant, la personne qui vous a recommandé. Elles servent uniquement à répondre à votre demande et à assurer le suivi de l'échange. Le traitement repose sur l'intérêt légitime à répondre aux messages reçus.",
     duree: "Durée de conservation",
     dureeTexte:
       "Les messages sont conservés trois ans après le dernier échange, puis supprimés. Les données de facturation des clients sont conservées dix ans, conformément aux obligations comptables.",
     destinataires: "Destinataires",
     destinatairesTexte:
-      "Les données sont destinées à Web Online Concept uniquement. Elles ne sont ni vendues ni cédées. Elles sont traitées par les prestataires techniques suivants : Vercel (hébergement du site et protection du formulaire contre les envois automatisés), Supabase (base de données hébergée dans l'Union européenne), Brevo (envoi des e-mails de confirmation et de réponse, France) et Forward Email (acheminement des e-mails reçus). Les transferts éventuels hors de l'Union européenne sont encadrés par les garanties prévues par le RGPD.",
+      "Les données sont destinées à Web Online Concept uniquement. Elles ne sont ni vendues ni cédées. Elles sont traitées par les prestataires techniques suivants : Vercel (hébergement du site et protection du formulaire contre les envois automatisés), Supabase (base de données hébergée dans l'Union européenne), Brevo (envoi des e-mails de confirmation et de réponse, France) et Forward Email (acheminement des e-mails reçus). Les transferts éventuels hors de l'Union européenne sont encadrés par les garanties prévues par le RGPD.",
     cookies: "Cookies",
     cookiesTexte:
-      "Ce site n'utilise aucun cookie publicitaire ni de mesure d'audience. Seul un cookie technique protège l'accès à l'espace d'administration. Votre navigateur garde aussi la date de votre dernière visite, uniquement pour ne pas rejouer la vidéo de présentation à chaque passage, et la langue du site que vous avez choisie : ces informations restent sur votre appareil et ne sont transmises à personne.",
+      "Ce site n'utilise aucun cookie publicitaire ni de mesure d'audience. Seul un cookie technique protège l'accès à l'espace d'administration. Votre navigateur garde aussi la date de votre dernière visite, uniquement pour ne pas rejouer la vidéo de présentation à chaque passage, et la langue du site que vous avez choisie : ces informations restent sur votre appareil et ne sont transmises à personne.",
     droits: "Vos droits",
     droitsTexte: (
       <>

@@ -9,7 +9,7 @@ import { langue, t } from "@/lib/i18n/langue";
 const TEXTES = {
   fr: {
     titre: "Mentions légales",
-    description: "Mentions légales du site web-online-concept.com : éditeur, hébergeur, propriété intellectuelle.",
+    description: "Mentions légales du site web-online-concept.com : éditeur, hébergeur, propriété intellectuelle.",
     fait: null as string | null,
     editeur: "Éditeur du site",
     nomCommercial: "exerçant sous le nom commercial",

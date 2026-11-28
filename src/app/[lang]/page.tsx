@@ -34,8 +34,8 @@ const TEXTES = {
     descendre: "Descendre vers les réalisations",
     concretes: "Des réalisations concrètes",
     toutes: "Toutes les réalisations",
-    aussi: "Ils nous ont aussi confié leur site :",
-    pourQui: "Pour qui ?",
+    aussi: "Ils nous ont aussi confié leur site :",
+    pourQui: "Pour qui ?",
     appareils: ["iPhone, Android et web", "Une seule application"],
     devis: ["Nouvelle demande de devis", "Rénovation d'une cuisine"],
     conviction: "Notre conviction",
@@ -273,7 +273,7 @@ export default async function Accueil() {
               <p className="mt-3 text-lg leading-relaxed text-[#4A6178]">{STUDIO.texte}</p>
             </div>
             <div className="mt-10 grid gap-5 lg:grid-cols-[1.5fr_1fr] lg:grid-rows-2">
-              <PhotoCadre photo={PHOTOS.poste} sizes="(min-width: 1024px) 680px, 92vw" className="aspect-[16/10] lg:row-span-2 lg:aspect-auto">
+              <PhotoCadre photo={PHOTOS.poste} sizes="(min-width: 1024px) 680px, 92vw" className="mb-5 aspect-[16/10] lg:row-span-2 lg:mb-0 lg:aspect-auto">
                 <CarteFlottante
                   icone="appareils"
                   titre={x.ecrans[0]}

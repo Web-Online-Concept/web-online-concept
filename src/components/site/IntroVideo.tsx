@@ -89,12 +89,18 @@ export default function IntroVideo() {
   if (etat === "terminee") return null;
   return (
     <div className={`intro-video fixed inset-x-0 bottom-0 z-30 bg-nuit transition-opacity duration-700 ${etat === "fin" ? "pointer-events-none opacity-0" : "opacity-100"}`}>
+      {/* Première image de la vidéo, dès le rendu serveur : l'écran est rempli avant même que le script ne démarre
+          (affichée seulement si <html data-intro>, comme tout ce bloc ; la vidéo vient ensuite se poser dessus) */}
+      <picture>
+        <source media="(max-aspect-ratio: 1/1)" srcSet={`${fichier("portrait")}.jpg`} />
+        <img src={`${fichier("paysage")}.jpg`} alt="" decoding="async" className="absolute inset-0 h-full w-full object-cover" />
+      </picture>
       {etat !== "attente" && (
         <>
           <video
             ref={video}
             key={format}
-            className="h-full w-full object-cover"
+            className="relative h-full w-full object-cover"
             src={`${fichier(format)}.mp4`}
             poster={`${fichier(format)}.jpg`}
             muted={muet}

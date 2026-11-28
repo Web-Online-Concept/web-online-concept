@@ -175,7 +175,7 @@ export async function AppelFinal() {
   const c = await contenu();
   const x = t(
     {
-      fr: { question: "Vous avez été recommandé ?", lien: "Écrivez-nous directement" },
+      fr: { question: "Vous avez été recommandé ?", lien: "Écrivez-nous directement" },
       en: { question: "Were you referred to us?", lien: "Write to us directly" },
       es: { question: "¿Le han recomendado nuestro estudio?", lien: "Escríbanos directamente" },
     },

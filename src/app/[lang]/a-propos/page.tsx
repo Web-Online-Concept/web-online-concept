@@ -29,24 +29,24 @@ const TEXTES = {
   fr: {
     titre: "À propos",
     description:
-      "Web Online Concept, studio de développement web et d'intelligence artificielle depuis 2009 : un interlocuteur unique, la capacité de production d'une équipe entière.",
-    chiffres: ["création du studio", "réalisations présentées sur ce site", "plateformes : iPhone, Android et web"],
+      "Web Online Concept, studio de développement web et d'intelligence artificielle depuis 2009 : un interlocuteur unique, la capacité de production d'une équipe entière.",
+    chiffres: ["création du studio", "réalisations présentées sur ce site", "plateformes : iPhone, Android et web"],
     principes: [
       ["Un seul interlocuteur", "De la première discussion à la mise en ligne, une seule personne connaît votre projet de bout en bout. Pas de relais, pas de perte d'information."],
       ["Les technologies de pointe", "Des outils modernes et l'IA générative, choisis pour leur solidité et leur capacité à évoluer avec vous."],
       ["Une qualité vérifiée", "Chaque livraison est testée, relue et sécurisée. Aller vite ne veut jamais dire aller moins bien."],
-      ["Votre autonomie", "Des espaces d'administration pensés pour vous : vous faites vivre votre site ou votre application sans dépendre de personne."],
+      ["Votre autonomie", "Des espaces d'administration pensés pour vous : vous faites vivre votre site ou votre application sans dépendre de personne."],
     ],
     mobile: "iOS et Android",
     descendre: "Descendre vers l'histoire du studio",
     h1: "Un studio de développement web, depuis 2009",
     intro:
-      "Plus de quinze ans à concevoir des sites et des applications, et aujourd'hui une façon de travailler transformée par l'IA : un interlocuteur unique, avec la capacité de production d'une équipe entière.",
+      "Plus de quinze ans à concevoir des sites et des applications, et aujourd'hui une façon de travailler transformée par l'IA : un interlocuteur unique, avec la capacité de production d'une équipe entière.",
     ici: ["Conçu et testé ici", "Sur tous les formats d'écran"],
     histoire: "Plus de quinze ans de projets",
     histoire1:
       "Le studio est né en 2009. Depuis, il conçoit et fait vivre des sites pour des artisans, des imprimeurs, des praticiens ou des artistes, et développe aujourd'hui ses propres applications.",
-    histoire2: "Avec l'IA, la façon de travailler a changé : un seul interlocuteur dispose désormais de la capacité de production d'une équipe entière.",
+    histoire2: "Avec l'IA, la façon de travailler a changé : un seul interlocuteur dispose désormais de la capacité de production d'une équipe entière.",
     guide: "Ce qui guide chaque projet",
     tests: ["Tests réussis", "Prêt pour votre validation"],
     stores: ["App Store, Google Play et web", "Disponible partout"],
@@ -56,7 +56,7 @@ const TEXTES = {
     memoday: "Découvrir MemoDay",
     outils: "Des outils à la pointe",
     outilsTexte:
-      "Les technologies qui font tourner les services les plus exigeants, les meilleures IA du moment, et une veille permanente : chaque nouveauté utile vient renforcer vos projets.",
+      "Les technologies qui font tourner les services les plus exigeants, les meilleures IA du moment, et une veille permanente : chaque nouveauté utile vient renforcer vos projets.",
     voir: "Voir ce que nous réalisons",
   },
   en: {

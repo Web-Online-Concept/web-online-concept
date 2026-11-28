@@ -13,11 +13,11 @@ const TEXTES = {
   fr: {
     titre: "Méthode",
     description:
-      "Une méthode augmentée par l'IA : cadrer vite, produire plus, tout vérifier, faire évoluer. Et des engagements concrets à chaque étape.",
+      "Une méthode augmentée par l'IA : cadrer vite, produire plus, tout vérifier, faire évoluer. Et des engagements concrets à chaque étape.",
     descendre: "Descendre vers la première étape",
     h1: "Une méthode augmentée par l'IA",
     intro:
-      "L'expertise technique fixe le cap, l'IA démultiplie la production. Résultat : des projets ambitieux, livrés vite, sans compromis sur la qualité.",
+      "L'expertise technique fixe le cap, l'IA démultiplie la production. Résultat : des projets ambitieux, livrés vite, sans compromis sur la qualité.",
     ia: "Les IA que nous utilisons",
   },
   en: {

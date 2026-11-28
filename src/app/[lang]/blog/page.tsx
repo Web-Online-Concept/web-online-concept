@@ -9,8 +9,8 @@ import { langue, t } from "@/lib/i18n/langue";
 
 const TEXTES = {
   fr: {
-    description: "IA, développement web et coulisses des projets : les articles de Web Online Concept.",
-    intro: "IA, développement et coulisses des projets : ce qui change vraiment dans la façon de construire le web.",
+    description: "IA, développement web et coulisses des projets : les articles de Web Online Concept.",
+    intro: "IA, développement et coulisses des projets : ce qui change vraiment dans la façon de construire le web.",
     lecture: "min de lecture",
     bientot: "Les premiers articles arrivent très bientôt.",
     attente: "En attendant, découvrez nos réalisations.",

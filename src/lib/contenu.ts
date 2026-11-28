@@ -10,7 +10,7 @@ export const SITE = {
   x: "https://x.com/WebOnlineFr",
   titre: "Vous l'imaginez. Nous le réalisons, au service de vos objectifs.",
   sousTitre:
-    "Plus de quinze ans de développement web, démultipliés par l'IA : sites, applications et plateformes complètes, de la première idée à la mise en ligne.",
+    "Plus de quinze ans de développement web, démultipliés par l'IA : sites, applications et plateformes complètes, de la première idée à la mise en ligne.",
   // Signature de fin de page : le studio travaille sur recommandation, pas de démarchage
   phraseFinale: "Nous travaillons sur recommandation.",
 };
@@ -37,7 +37,7 @@ export const QUESTIONS_D_HIER = ["Est-ce faisable\u00a0?", "En combien de temps\
 // Photos d'illustration de l'accueil (générées, sans personne réelle identifiable)
 export const PHOTOS = {
   rendezVous: { src: "/photos/studio-rendez-vous.webp", alt: "Présentation d'un nouveau site à une cliente sur un écran panoramique" },
-  poste: { src: "/photos/studio-poste.webp", alt: "Poste de travail du studio : six écrans avec des maquettes de sites, d'applications et du code" },
+  poste: { src: "/photos/studio-poste.webp", alt: "Poste de travail du studio : six écrans avec des maquettes de sites, d'applications et du code" },
   ultralarge: { src: "/photos/studio-ultralarge.webp", alt: "Développement d'un site sur écran panoramique, avec l'application testée sur téléphone" },
   validation: { src: "/photos/studio-validation.webp", alt: "Un client valide son nouveau site présenté sur grand écran" },
   commercante: { src: "/photos/client-commercante.webp", alt: "Une commerçante consulte son site sur une tablette dans sa boutique" },
@@ -47,7 +47,7 @@ export const PHOTOS = {
 export const STUDIO = {
   titre: "Un studio équipé pour aller loin",
   texte:
-    "Plusieurs écrans, les outils et les modèles d'IA les plus récents : nous concevons, développons et testons en parallèle, sur tous les formats d'écran. Et vous suivez votre projet sur grand écran, étape par étape.",
+    "Plusieurs écrans, les outils et les modèles d'IA les plus récents : nous concevons, développons et testons en parallèle, sur tous les formats d'écran. Et vous suivez votre projet sur grand écran, étape par étape.",
 };
 
 export const POUR_QUI = {
@@ -55,13 +55,13 @@ export const POUR_QUI = {
   tous: {
     titre: "Pour tout le monde",
     texte:
-      "Nous concevons et éditons nos propres applications grand public. MemoDay, la première, est disponible sur l'App Store, Google Play et le web ; d'autres sont en préparation.",
+      "Nous concevons et éditons nos propres applications grand public. MemoDay, la première, est disponible sur l'App Store, Google Play et le web ; d'autres sont en préparation.",
     lien: { href: "/realisations/memoday", libelle: "Découvrir MemoDay" },
   },
   pros: {
     titre: "Pour les professionnels",
     texte:
-      "Commerçants, artisans, praticiens, indépendants, entreprises : un site ou un outil sur mesure qui travaille pour vous, même quand vous êtes occupé ailleurs.",
+      "Commerçants, artisans, praticiens, indépendants, entreprises : un site ou un outil sur mesure qui travaille pour vous, même quand vous êtes occupé ailleurs.",
     lien: { href: "/realisations", libelle: "Voir les sites réalisés" },
   },
 };
@@ -99,20 +99,20 @@ export const REALISATIONS: Realisation[] = [
     type: "Application web et mobile, produit maison",
     accroche: "Une mémoire personnelle pour tout ce qu'on ne veut pas oublier.",
     besoin:
-      "Dépenses, rendez-vous, papiers, photos : le quotidien s'éparpille entre des dizaines d'applications. L'objectif était d'offrir un seul endroit où l'on confie une information en une phrase, une photo ou à la voix, et où on la retrouve pour toujours, sans rien classer soi-même.",
+      "Dépenses, rendez-vous, papiers, photos : le quotidien s'éparpille entre des dizaines d'applications. L'objectif était d'offrir un seul endroit où l'on confie une information en une phrase, une photo ou à la voix, et où on la retrouve pour toujours, sans rien classer soi-même.",
     realise: [
-      "Une IA qui comprend chaque message et le classe toute seule : dépense, rendez-vous, tâche, document ou souvenir.",
+      "Une IA qui comprend chaque message et le classe toute seule : dépense, rendez-vous, tâche, document ou souvenir.",
       "La lecture automatique des factures et contrats photographiés, avec une alerte avant chaque échéance.",
       "Des rappels automatiques, la veille puis une heure avant chaque rendez-vous.",
-      "Une recherche par le sens : on retrouve une information sans se souvenir des mots exacts.",
+      "Une recherche par le sens : on retrouve une information sans se souvenir des mots exacts.",
       "Le partage familial de listes et de rendez-vous choisis, tout le reste restant privé.",
       "La synchronisation avec Google Agenda, Outlook et l'iPhone, un mode hors ligne et l'import de centaines de documents d'un coup.",
       "Une connexion sans mot de passe et des abonnements gérés par Stripe, l'App Store et Google Play.",
     ],
     technos: ["Next.js", "TypeScript", "Supabase", "IA générative", "Stripe", "iOS et Android", "Application installable"],
     chiffres: [
-      { valeur: "3", libelle: "plateformes : iPhone, Android et web" },
-      { valeur: "3", libelle: "langues : français, anglais et espagnol" },
+      { valeur: "3", libelle: "plateformes : iPhone, Android et web" },
+      { valeur: "3", libelle: "langues : français, anglais et espagnol" },
       { valeur: "70", libelle: "tables de données, chacune cloisonnée par utilisateur" },
     ],
     site: { href: "https://memoday.net", libelle: "memoday.net" },
@@ -124,8 +124,8 @@ export const REALISATIONS: Realisation[] = [
     visuels: [
       { src: "/realisations/memoday/site.webp", alt: "Page d'accueil du site de MemoDay", l: 1600, h: 900, format: "ordinateur" },
       { src: "/realisations/memoday/app-1.webp", alt: "Version mobile du site de MemoDay", l: 659, h: 1280, format: "telephone" },
-      { src: "/realisations/memoday/app-2.webp", alt: "Écran « Ma mémoire » de l'application MemoDay", l: 659, h: 1280, format: "telephone" },
-      { src: "/realisations/memoday/app-3.webp", alt: "Écran « Documents » de l'application MemoDay", l: 659, h: 1280, format: "telephone" },
+      { src: "/realisations/memoday/app-2.webp", alt: "Écran « Ma mémoire » de l'application MemoDay", l: 659, h: 1280, format: "telephone" },
+      { src: "/realisations/memoday/app-3.webp", alt: "Écran « Documents » de l'application MemoDay", l: 659, h: 1280, format: "telephone" },
     ],
   },
   {
@@ -138,8 +138,8 @@ export const REALISATIONS: Realisation[] = [
     besoin:
       "Klart Concept crée et rénove salles de bain, cuisines et agencements, et prend en charge tous les corps de métier d'une rénovation intérieure, clés en main. Le site devait montrer la qualité des réalisations, couvrir toute la zone d'intervention et générer des demandes de devis.",
     realise: [
-      "Une page par spécialité : salles de bain, cuisines, agencements et conseils.",
-      "Des pages métiers : isolation, électricité, plomberie, carrelage et peinture.",
+      "Une page par spécialité : salles de bain, cuisines, agencements et conseils.",
+      "Des pages métiers : isolation, électricité, plomberie, carrelage et peinture.",
       "Des galeries photos des réalisations.",
       "Une page zone d'activité couvrant une vingtaine de communes, dont Tarbes et Lourdes.",
       "Les avis clients Google, un blog bricolage et une page partenaires.",
@@ -154,8 +154,8 @@ export const REALISATIONS: Realisation[] = [
     teinte: "#0B8E9E",
     visuels: [
       { src: "/realisations/klart-concept/accueil.webp", alt: "Page d'accueil du site de Klart Concept", l: 1600, h: 900, format: "ordinateur" },
-      { src: "/realisations/klart-concept/concept.webp", alt: "Page « Notre concept » du site de Klart Concept", l: 1600, h: 900, format: "ordinateur" },
-      { src: "/realisations/klart-concept/specialites.webp", alt: "Page « Nos spécialités » du site de Klart Concept", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/klart-concept/concept.webp", alt: "Page « Notre concept » du site de Klart Concept", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/klart-concept/specialites.webp", alt: "Page « Nos spécialités » du site de Klart Concept", l: 1600, h: 900, format: "ordinateur" },
       { src: "/realisations/klart-concept/mobile.webp", alt: "Version mobile du site de Klart Concept", l: 659, h: 1187, format: "telephone" },
     ],
     resume: {
@@ -174,9 +174,9 @@ export const REALISATIONS: Realisation[] = [
     besoin:
       "Anne Brulard Labasse propose des méditations, des ateliers et des soins à domicile dans les Hautes-Pyrénées, ainsi qu'un livre et un espace numérique. Il fallait réunir toute son activité sur un seul site, et permettre de réserver et de payer en ligne.",
     realise: [
-      "La présentation complète de l'activité : soins, ateliers, livre et presse.",
+      "La présentation complète de l'activité : soins, ateliers, livre et presse.",
       "La réservation des soins et des ateliers, avec paiement en ligne par PayPal.",
-      "Un espace client et « Le Sanctuaire », un espace numérique de méditation.",
+      "Un espace client et « Le Sanctuaire », un espace numérique de méditation.",
       "Des e-mails automatiques envoyés chaque matin.",
       "Les avis Google intégrés et un référencement local sur une quarantaine de villes.",
       "Un espace d'administration pour faire vivre le site au quotidien.",
@@ -190,8 +190,8 @@ export const REALISATIONS: Realisation[] = [
     teinte: "#2BD47D",
     visuels: [
       { src: "/realisations/inspiration-et-meditation/accueil.webp", alt: "Page d'accueil du site de Inspiration & Méditation", l: 1600, h: 900, format: "ordinateur" },
-      { src: "/realisations/inspiration-et-meditation/livre.webp", alt: "Page « Le livre » du site de Inspiration & Méditation", l: 1600, h: 900, format: "ordinateur" },
-      { src: "/realisations/inspiration-et-meditation/sanctuaire.webp", alt: "Page « Le Sanctuaire » du site de Inspiration & Méditation", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/inspiration-et-meditation/livre.webp", alt: "Page « Le livre » du site de Inspiration & Méditation", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/inspiration-et-meditation/sanctuaire.webp", alt: "Page « Le Sanctuaire » du site de Inspiration & Méditation", l: 1600, h: 900, format: "ordinateur" },
       { src: "/realisations/inspiration-et-meditation/mobile.webp", alt: "Version mobile du site de Inspiration & Méditation", l: 659, h: 1280, format: "telephone" },
     ],
   },
@@ -205,10 +205,10 @@ export const REALISATIONS: Realisation[] = [
     besoin:
       "Fabricant de menuiseries PVC et aluminium depuis 1964, près de La Rochelle, la Menuiserie Gaudissard propose une gamme très large, en dimensions standard ou sur mesure. Il fallait présenter chaque famille de produits clairement, faire connaître l'entreprise et son atelier, et transformer les visites en demandes de devis.",
     realise: [
-      "Un catalogue organisé par famille de produits et par matériau : fenêtres, portes, portails, volets, pergolas, carports, clôtures, garde-corps et barrières anti-inondation.",
+      "Un catalogue organisé par famille de produits et par matériau : fenêtres, portes, portails, volets, pergolas, carports, clôtures, garde-corps et barrières anti-inondation.",
       "Une demande de devis gratuit accessible depuis tout le site.",
-      "La présentation de l'entreprise : son histoire, son atelier, les visites du showroom sur rendez-vous et ses reportages.",
-      "Les informations pratiques : services, plan d'accès et documents à télécharger.",
+      "La présentation de l'entreprise : son histoire, son atelier, les visites du showroom sur rendez-vous et ses reportages.",
+      "Les informations pratiques : services, plan d'accès et documents à télécharger.",
       "Un espace client et un accès à la boutique des produits déclassés.",
       "La création du site, puis sa gestion dans la durée.",
     ],
@@ -221,8 +221,8 @@ export const REALISATIONS: Realisation[] = [
     teinte: "#1F5EFF",
     visuels: [
       { src: "/realisations/menuiserie-gaudissard/accueil.webp", alt: "Page d'accueil du site de Menuiserie Gaudissard", l: 1600, h: 900, format: "ordinateur" },
-      { src: "/realisations/menuiserie-gaudissard/fenetres.webp", alt: "Page « Fenêtres » du site de Menuiserie Gaudissard", l: 1600, h: 900, format: "ordinateur" },
-      { src: "/realisations/menuiserie-gaudissard/societe.webp", alt: "Page « La société » du site de Menuiserie Gaudissard", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/menuiserie-gaudissard/fenetres.webp", alt: "Page « Fenêtres » du site de Menuiserie Gaudissard", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/menuiserie-gaudissard/societe.webp", alt: "Page « La société » du site de Menuiserie Gaudissard", l: 1600, h: 900, format: "ordinateur" },
       { src: "/realisations/menuiserie-gaudissard/mobile.webp", alt: "Version mobile du site de Menuiserie Gaudissard", l: 659, h: 1187, format: "telephone" },
     ],
     resume: {
@@ -237,11 +237,11 @@ export const REALISATIONS: Realisation[] = [
     nom: "Carpentier Communication",
     type: "Site vitrine d'imprimeur avec devis en ligne",
     client: "Carpentier Communication",
-    accroche: "Affiches, PLV, panneaux et adhésifs : l'offre complète d'un imprimeur, avec devis gratuit.",
+    accroche: "Affiches, PLV, panneaux et adhésifs : l'offre complète d'un imprimeur, avec devis gratuit.",
     besoin:
       "Imprimeur depuis 1962, Carpentier Communication réalise affiches, PLV, panneaux et adhésifs en sérigraphie, en numérique et en offset grand format, avec livraison dans toute la France. Le site devait présenter chaque support, mettre en avant le savoir-faire de l'atelier et faciliter les demandes de devis.",
     realise: [
-      "Une page par famille de produits : affiches, PLV, panneaux et adhésifs.",
+      "Une page par famille de produits : affiches, PLV, panneaux et adhésifs.",
       "Un formulaire de devis gratuit.",
       "Une page d'assistance PAO pour accompagner les clients dans la préparation de leurs fichiers.",
       "Une brochure de produits à télécharger.",
@@ -257,8 +257,8 @@ export const REALISATIONS: Realisation[] = [
     teinte: "#00B4D8",
     visuels: [
       { src: "/realisations/carpentier-communication/accueil.webp", alt: "Page d'accueil du site de Carpentier Communication", l: 1600, h: 900, format: "ordinateur" },
-      { src: "/realisations/carpentier-communication/affiches.webp", alt: "Page « Affiches » du site de Carpentier Communication", l: 1600, h: 900, format: "ordinateur" },
-      { src: "/realisations/carpentier-communication/plv.webp", alt: "Page « PLV » du site de Carpentier Communication", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/carpentier-communication/affiches.webp", alt: "Page « Affiches » du site de Carpentier Communication", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/carpentier-communication/plv.webp", alt: "Page « PLV » du site de Carpentier Communication", l: 1600, h: 900, format: "ordinateur" },
       { src: "/realisations/carpentier-communication/mobile.webp", alt: "Version mobile du site de Carpentier Communication", l: 659, h: 1187, format: "telephone" },
     ],
     resume: {
@@ -277,7 +277,7 @@ export const REALISATIONS: Realisation[] = [
       "Re-borne Retrogaming anime les salons, séminaires, soirées d'entreprise et fêtes privées avec des consoles rétro, des bornes d'arcade et un camion d'arcade mobile, le Pixel Truck. Le site devait donner envie, détailler les formules et le matériel, et recueillir les demandes de devis.",
     realise: [
       "La présentation du concept et des prestations, pour les entreprises comme pour les particuliers.",
-      "Un catalogue du matériel : consoles, bornes d'arcade et options.",
+      "Un catalogue du matériel : consoles, bornes d'arcade et options.",
       "Une page de tarifs présentant les formules.",
       "Une rubrique d'actualités.",
       "Des formulaires de devis gratuit et de contact.",
@@ -292,8 +292,8 @@ export const REALISATIONS: Realisation[] = [
     teinte: "#2BD47D",
     visuels: [
       { src: "/realisations/re-borne-retrogaming/accueil.webp", alt: "Page d'accueil du site de Re-borne Retrogaming", l: 1600, h: 900, format: "ordinateur" },
-      { src: "/realisations/re-borne-retrogaming/actualites.webp", alt: "Page « Actualités » du site de Re-borne Retrogaming", l: 1600, h: 900, format: "ordinateur" },
-      { src: "/realisations/re-borne-retrogaming/materiel.webp", alt: "Page « Matériel et tarifs » du site de Re-borne Retrogaming", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/re-borne-retrogaming/actualites.webp", alt: "Page « Actualités » du site de Re-borne Retrogaming", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/re-borne-retrogaming/materiel.webp", alt: "Page « Matériel et tarifs » du site de Re-borne Retrogaming", l: 1600, h: 900, format: "ordinateur" },
       { src: "/realisations/re-borne-retrogaming/mobile.webp", alt: "Version mobile du site de Re-borne Retrogaming", l: 659, h: 1187, format: "telephone" },
     ],
     resume: {
@@ -313,7 +313,7 @@ export const REALISATIONS: Realisation[] = [
     realise: [
       "Une galerie organisée en neuf catégories, pensée pour mettre chaque toile en valeur.",
       "Les pages Expositions, Histoire et Amis, qui racontent le parcours de l'artiste.",
-      "Un espace d'administration complet : l'artiste ajoute ses œuvres et ses expositions en toute autonomie.",
+      "Un espace d'administration complet : l'artiste ajoute ses œuvres et ses expositions en toute autonomie.",
       "Un site rapide, agréable sur mobile et optimisé pour le référencement.",
     ],
     technos: ["Next.js", "TypeScript", "Supabase", "Vercel"],
@@ -326,8 +326,8 @@ export const REALISATIONS: Realisation[] = [
     teinte: "#0B8E9E",
     visuels: [
       { src: "/realisations/galerie-carpentier/accueil.webp", alt: "Page d'accueil du site de Galerie Michel Carpentier", l: 1600, h: 900, format: "ordinateur" },
-      { src: "/realisations/galerie-carpentier/expositions.webp", alt: "Page « Expositions » du site de Galerie Michel Carpentier", l: 1600, h: 900, format: "ordinateur" },
-      { src: "/realisations/galerie-carpentier/mers-oceans.webp", alt: "Page « Mers & Océans » du site de Galerie Michel Carpentier", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/galerie-carpentier/expositions.webp", alt: "Page « Expositions » du site de Galerie Michel Carpentier", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/galerie-carpentier/mers-oceans.webp", alt: "Page « Mers & Océans » du site de Galerie Michel Carpentier", l: 1600, h: 900, format: "ordinateur" },
       { src: "/realisations/galerie-carpentier/mobile.webp", alt: "Version mobile du site de Galerie Michel Carpentier", l: 659, h: 1188, format: "telephone" },
     ],
     resume: {
@@ -344,9 +344,9 @@ export const REALISATIONS: Realisation[] = [
     client: "Diététi'Phyt",
     accroche: "Le site d'une diététicienne-nutritionniste, avec rendez-vous en ligne et téléconsultation.",
     besoin:
-      "Diététi'Phyt accompagne ses patients en nutrition et en phytothérapie : alimentation équilibrée, perte de poids, maladies chroniques. Le site devait présenter clairement chaque accompagnement, mettre les patients en confiance et rendre la prise de rendez-vous immédiate, au cabinet comme à distance.",
+      "Diététi'Phyt accompagne ses patients en nutrition et en phytothérapie : alimentation équilibrée, perte de poids, maladies chroniques. Le site devait présenter clairement chaque accompagnement, mettre les patients en confiance et rendre la prise de rendez-vous immédiate, au cabinet comme à distance.",
     realise: [
-      "Une page par accompagnement : alimentation équilibrée, perte de poids et maladies chroniques.",
+      "Une page par accompagnement : alimentation équilibrée, perte de poids et maladies chroniques.",
       "La prise de rendez-vous en ligne, avec téléconsultation et visites à domicile.",
       "Une page lieux et tarifs.",
       "Un blog, une foire aux questions et des ressources pour les patients.",
@@ -361,8 +361,8 @@ export const REALISATIONS: Realisation[] = [
     teinte: "#1638A8",
     visuels: [
       { src: "/realisations/dietetiphyt/accueil.webp", alt: "Page d'accueil du site de Diététi'Phyt", l: 1600, h: 900, format: "ordinateur" },
-      { src: "/realisations/dietetiphyt/blog.webp", alt: "Page « Blog » du site de Diététi'Phyt", l: 1600, h: 900, format: "ordinateur" },
-      { src: "/realisations/dietetiphyt/services.webp", alt: "Page « Services » du site de Diététi'Phyt", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/dietetiphyt/blog.webp", alt: "Page « Blog » du site de Diététi'Phyt", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/dietetiphyt/services.webp", alt: "Page « Services » du site de Diététi'Phyt", l: 1600, h: 900, format: "ordinateur" },
       { src: "/realisations/dietetiphyt/mobile.webp", alt: "Version mobile du site de Diététi'Phyt", l: 659, h: 1187, format: "telephone" },
     ],
     resume: {
@@ -376,11 +376,11 @@ export const REALISATIONS: Realisation[] = [
     nom: "Point Sérigraphie",
     type: "Site vitrine d'imprimeur avec catalogues",
     client: "Point Sérigraphie, Albi",
-    accroche: "Autocollants, vitrophanies, panneaux, marquages : l'impression sur tous supports, à Albi depuis 1976.",
+    accroche: "Autocollants, vitrophanies, panneaux, marquages : l'impression sur tous supports, à Albi depuis 1976.",
     besoin:
       "Point Sérigraphie imprime en sérigraphie et en numérique sur une très grande variété de supports, avec livraison dans toute la France en 24 à 48 heures. Le site devait rendre lisible une offre très large et faciliter les demandes de devis.",
     realise: [
-      "Une page par famille de produits : autocollants, vitrophanies, panneaux, marquages, transferts, banderoles, PLV, magnétiques, cartes et badges, ardoises et doming.",
+      "Une page par famille de produits : autocollants, vitrophanies, panneaux, marquages, transferts, banderoles, PLV, magnétiques, cartes et badges, ardoises et doming.",
       "Un formulaire de devis gratuit, avec une réponse sous 24 heures.",
       "Des catalogues à télécharger.",
       "Un fil d'actualités.",
@@ -396,8 +396,8 @@ export const REALISATIONS: Realisation[] = [
     teinte: "#00B4D8",
     visuels: [
       { src: "/realisations/point-serigraphie/accueil.webp", alt: "Page d'accueil du site de Point Sérigraphie", l: 1600, h: 900, format: "ordinateur" },
-      { src: "/realisations/point-serigraphie/autocollants.webp", alt: "Page « Autocollants » du site de Point Sérigraphie", l: 1600, h: 900, format: "ordinateur" },
-      { src: "/realisations/point-serigraphie/panneaux.webp", alt: "Page « Panneaux » du site de Point Sérigraphie", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/point-serigraphie/autocollants.webp", alt: "Page « Autocollants » du site de Point Sérigraphie", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/point-serigraphie/panneaux.webp", alt: "Page « Panneaux » du site de Point Sérigraphie", l: 1600, h: 900, format: "ordinateur" },
       { src: "/realisations/point-serigraphie/mobile.webp", alt: "Version mobile du site de Point Sérigraphie", l: 659, h: 1187, format: "telephone" },
     ],
     resume: {
@@ -414,7 +414,7 @@ export const REALISATIONS: Realisation[] = [
     client: "Mozaic Environnement, Albi",
     accroche: "Signalétique et supports imprimés pour la collecte et le tri des déchets.",
     besoin:
-      "Mozaic Environnement imprime les supports de communication de la collecte et du tri des déchets : signalétique, adhésifs de conteneurs, consignes de tri, banderoles. Sa clientèle de collectivités, d'associations et d'entreprises du déchet attendait un catalogue clair et un accès direct aux devis et aux échantillons.",
+      "Mozaic Environnement imprime les supports de communication de la collecte et du tri des déchets : signalétique, adhésifs de conteneurs, consignes de tri, banderoles. Sa clientèle de collectivités, d'associations et d'entreprises du déchet attendait un catalogue clair et un accès direct aux devis et aux échantillons.",
     realise: [
       "Un catalogue de dix-huit catégories de produits.",
       "Des catalogues à consulter.",
@@ -431,8 +431,8 @@ export const REALISATIONS: Realisation[] = [
     teinte: "#2BD47D",
     visuels: [
       { src: "/realisations/mozaic-environnement/accueil.webp", alt: "Page d'accueil du site de Mozaic Environnement", l: 1600, h: 900, format: "ordinateur" },
-      { src: "/realisations/mozaic-environnement/catalogues.webp", alt: "Page « Nos catalogues » du site de Mozaic Environnement", l: 1600, h: 900, format: "ordinateur" },
-      { src: "/realisations/mozaic-environnement/etapes.webp", alt: "Page « Étapes de commande » du site de Mozaic Environnement", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/mozaic-environnement/catalogues.webp", alt: "Page « Nos catalogues » du site de Mozaic Environnement", l: 1600, h: 900, format: "ordinateur" },
+      { src: "/realisations/mozaic-environnement/etapes.webp", alt: "Page « Étapes de commande » du site de Mozaic Environnement", l: 1600, h: 900, format: "ordinateur" },
       { src: "/realisations/mozaic-environnement/mobile.webp", alt: "Version mobile du site de Mozaic Environnement", l: 659, h: 1187, format: "telephone" },
     ],
     resume: {
@@ -447,7 +447,7 @@ export const REALISATIONS: Realisation[] = [
 export const IA = {
   titre: "Les IA que nous intégrons",
   phrase:
-    "Nous ne sommes liés à aucune IA : pour chaque projet, nous choisissons le modèle le plus adapté selon la qualité, le coût, la confidentialité et l'hébergement, en Europe si besoin.",
+    "Nous ne sommes liés à aucune IA : pour chaque projet, nous choisissons le modèle le plus adapté selon la qualité, le coût, la confidentialité et l'hébergement, en Europe si besoin.",
   criteres: ["Qualité", "Coût", "Confidentialité", "Hébergement en Europe"],
   modeles: [
     { nom: "Claude", editeur: "Anthropic" },
@@ -465,7 +465,7 @@ export const CAPACITES: Capacite[] = [
     titre: "Sites sur mesure",
     icone: "site",
     texte:
-      "Vitrines, galeries, sites multilingues : un design unique, rapide sur tous les écrans et pensé pour le référencement dès la première ligne.",
+      "Vitrines, galeries, sites multilingues : un design unique, rapide sur tous les écrans et pensé pour le référencement dès la première ligne.",
     points: ["Un design unique, sans modèle tout fait", "Rapide et lisible sur tous les écrans", "Pensé pour le référencement dès la conception"],
     exemples: ["galerie-carpentier", "inspiration-et-meditation"],
   },
@@ -481,7 +481,7 @@ export const CAPACITES: Capacite[] = [
     titre: "Plateformes à abonnement",
     icone: "abonnement",
     texte:
-      "Comptes utilisateurs, formules, paiement par Stripe et achats intégrés aux stores : un service en ligne prêt à encaisser.",
+      "Comptes utilisateurs, formules, paiement par Stripe et achats intégrés aux stores : un service en ligne prêt à encaisser.",
     points: ["Comptes utilisateurs et formules", "Paiement par Stripe et achats intégrés aux stores", "Abonnements gérés automatiquement"],
     exemples: ["memoday"],
   },
@@ -489,7 +489,7 @@ export const CAPACITES: Capacite[] = [
     titre: "IA intégrée",
     icone: "ia",
     texte:
-      "Compréhension du langage, lecture de documents, recherche par le sens, assistants : l'IA au cœur du produit, là où elle fait gagner du temps.",
+      "Compréhension du langage, lecture de documents, recherche par le sens, assistants : l'IA au cœur du produit, là où elle fait gagner du temps.",
     points: ["Compréhension du langage naturel", "Lecture automatique de documents", "Recherche par le sens"],
     exemples: ["memoday"],
   },
@@ -497,7 +497,7 @@ export const CAPACITES: Capacite[] = [
     titre: "Référencement et visibilité IA",
     icone: "visibilite",
     texte:
-      "Référencement naturel et local, fiche Google Business, données structurées et contenus pensés pour être cités par ChatGPT, Perplexity ou Google : votre site trouvé là où vos clients cherchent.",
+      "Référencement naturel et local, fiche Google Business, données structurées et contenus pensés pour être cités par ChatGPT, Perplexity ou Google : votre site trouvé là où vos clients cherchent.",
     points: ["Référencement naturel et local", "Données structurées et fiche Google Business", "Des contenus pensés pour être cités par les IA"],
     exemples: ["inspiration-et-meditation", "klart-concept"],
   },
@@ -505,7 +505,7 @@ export const CAPACITES: Capacite[] = [
     titre: "Données et back-offices",
     icone: "donnees",
     texte:
-      "Bases de données sécurisées, outils de gestion, réservations, e-mails automatiques et tableaux de bord : vous pilotez votre activité en autonomie.",
+      "Bases de données sécurisées, outils de gestion, réservations, e-mails automatiques et tableaux de bord : vous pilotez votre activité en autonomie.",
     points: ["Bases de données sécurisées", "Outils de gestion et tableaux de bord", "Réservations et e-mails automatiques"],
     exemples: ["galerie-carpentier", "inspiration-et-meditation"],
   },
@@ -521,7 +521,7 @@ export const CAPACITES: Capacite[] = [
     titre: "Performance et sécurité",
     icone: "securite",
     texte:
-      "Hébergement rapide, sauvegardes, sécurité et conformité RGPD : un site qui se charge vite et reste protégé.",
+      "Hébergement rapide, sauvegardes, sécurité et conformité RGPD : un site qui se charge vite et reste protégé.",
     points: ["Un hébergement rapide", "Sauvegardes et protection des données", "Conformité RGPD"],
     exemples: [],
   },
@@ -573,33 +573,33 @@ export const METHODE: Etape[] = [
   {
     titre: "Cadrer vite",
     texte:
-      "Vos objectifs d'abord. En quelques jours, un prototype cliquable rend le projet concret : on décide sur pièce, pas sur plan.",
+      "Vos objectifs d'abord. En quelques jours, un prototype cliquable rend le projet concret : on décide sur pièce, pas sur plan.",
   },
   {
     titre: "Produire plus",
     texte:
-      "L'IA démultiplie chaque étape : code, tests, contenus, traductions. La capacité d'une équipe entière, avec un seul interlocuteur.",
+      "L'IA démultiplie chaque étape : code, tests, contenus, traductions. La capacité d'une équipe entière, avec un seul interlocuteur.",
   },
   {
     titre: "Tout vérifier",
     texte:
-      "Tests automatisés, revue systématique et sécurité dès la conception : la vitesse ne se paie jamais en qualité.",
+      "Tests automatisés, revue systématique et sécurité dès la conception : la vitesse ne se paie jamais en qualité.",
   },
   {
     titre: "Faire évoluer",
     texte:
-      "Une veille permanente sur les technologies et l'IA : chaque nouveauté utile vient renforcer votre projet, longtemps après sa mise en ligne.",
+      "Une veille permanente sur les technologies et l'IA : chaque nouveauté utile vient renforcer votre projet, longtemps après sa mise en ligne.",
   },
 ];
 
 export const ENGAGEMENTS: Etape[] = [
   {
     titre: "Tout vous appartient",
-    texte: "Votre site, ses contenus et vos données sont à vous : vous restez libre, à tout moment.",
+    texte: "Votre site, ses contenus et vos données sont à vous : vous restez libre, à tout moment.",
   },
   {
     titre: "Un seul interlocuteur",
-    texte: "La même personne du premier échange au suivi : pas de relais, pas d'information perdue.",
+    texte: "La même personne du premier échange au suivi : pas de relais, pas d'information perdue.",
   },
   {
     titre: "Vous validez avant la mise en ligne",
@@ -625,80 +625,80 @@ export type Question = { question: string; reponse: string; theme: ThemeFaq; lie
 export const FAQ: Question[] = [
   {
     theme: "ensemble",
-    question: "Comment travailler avec nous ?",
+    question: "Comment travailler avec nous ?",
     reponse:
-      "Nous travaillons sur recommandation et sur demande privée. Si l'on vous a parlé de nous, il suffit de nous écrire directement : chaque projet commence par un échange sur vos objectifs.",
+      "Nous travaillons sur recommandation et sur demande privée. Si l'on vous a parlé de nous, il suffit de nous écrire directement : chaque projet commence par un échange sur vos objectifs.",
   },
   {
     theme: "ensemble",
-    question: "Travaillez-vous à distance ?",
+    question: "Travaillez-vous à distance ?",
     reponse:
-      "Oui, nous travaillons à distance, en France comme à l'étranger : visio, téléphone et e-mail, en français, en anglais ou en espagnol. Le suivi se fait aussi simplement que si nous étions voisins.",
+      "Oui, nous travaillons à distance, en France comme à l'étranger : visio, téléphone et e-mail, en français, en anglais ou en espagnol. Le suivi se fait aussi simplement que si nous étions voisins.",
     lien: { href: "/realisations#clients", libelle: "Voir les sites clients" },
   },
   {
     theme: "ensemble",
-    question: "À qui appartient le site une fois livré ?",
-    reponse: "À vous. Votre site, ses contenus et vos données vous appartiennent : vous restez libre, à tout moment.",
+    question: "À qui appartient le site une fois livré ?",
+    reponse: "À vous. Votre site, ses contenus et vos données vous appartiennent : vous restez libre, à tout moment.",
   },
   {
     theme: "projet",
-    question: "Combien de temps faut-il pour créer un site ?",
+    question: "Combien de temps faut-il pour créer un site ?",
     reponse:
-      "Cela dépend de l'ambition du projet : quelques semaines pour un site vitrine, davantage pour une application ou une plateforme complète. Grâce à l'IA, les délais sont bien plus courts qu'auparavant, et un planning précis vous est donné dès le cadrage.",
+      "Cela dépend de l'ambition du projet : quelques semaines pour un site vitrine, davantage pour une application ou une plateforme complète. Grâce à l'IA, les délais sont bien plus courts qu'auparavant, et un planning précis vous est donné dès le cadrage.",
   },
   {
     theme: "projet",
-    question: "Faut-il refaire mon site ou simplement le mettre à jour ?",
+    question: "Faut-il refaire mon site ou simplement le mettre à jour ?",
     reponse:
-      "Tout dépend de son état. Un diagnostic de l'existant permet de recommander la solution la plus adaptée : parfois quelques améliorations suffisent, parfois une refonte est plus intéressante. Dans les deux cas, votre référencement est préservé.",
+      "Tout dépend de son état. Un diagnostic de l'existant permet de recommander la solution la plus adaptée : parfois quelques améliorations suffisent, parfois une refonte est plus intéressante. Dans les deux cas, votre référencement est préservé.",
   },
   {
     theme: "projet",
-    question: "Développez-vous des applications mobiles ?",
+    question: "Développez-vous des applications mobiles ?",
     reponse:
       "Oui, pour l'iPhone et Android à partir d'une seule base de code, avec publication sur l'App Store et Google Play. L'application fonctionne aussi dans le navigateur.",
-    lien: { href: "/realisations/memoday", libelle: "Exemple : MemoDay" },
+    lien: { href: "/realisations/memoday", libelle: "Exemple : MemoDay" },
   },
   {
     theme: "projet",
-    question: "Pouvez-vous intégrer de l'IA dans mon projet ?",
+    question: "Pouvez-vous intégrer de l'IA dans mon projet ?",
     reponse:
-      "Oui : compréhension des messages, lecture automatique de documents, recherche par le sens, assistants. Nous travaillons avec Claude, ChatGPT, Gemini, Mistral ou Grok, et choisissons le modèle adapté à chaque projet, comme pour l'application MemoDay.",
+      "Oui : compréhension des messages, lecture automatique de documents, recherche par le sens, assistants. Nous travaillons avec Claude, ChatGPT, Gemini, Mistral ou Grok, et choisissons le modèle adapté à chaque projet, comme pour l'application MemoDay.",
     lien: { href: "/capacites", libelle: "Les IA que nous intégrons" },
   },
   {
     theme: "projet",
-    question: "Faites-vous des sites en plusieurs langues ?",
+    question: "Faites-vous des sites en plusieurs langues ?",
     reponse:
       "Oui, comme ce site, disponible en français, en anglais et en espagnol. Chaque langue a ses propres adresses, pour être bien référencée dans chaque pays, et les traductions sont préparées avec l'IA puis vérifiées. L'application MemoDay existe elle aussi dans ces trois langues.",
     lien: { href: "/realisations/memoday", libelle: "Découvrir MemoDay" },
   },
   {
     theme: "visibilite",
-    question: "Le référencement est-il compris ?",
+    question: "Le référencement est-il compris ?",
     reponse:
-      "Les fondations du référencement sont intégrées dès la conception : structure des pages, vitesse de chargement, balisage, données structurées et affichage mobile. Pour aller plus loin, un accompagnement dédié est possible : référencement local, fiche Google Business, contenus.",
+      "Les fondations du référencement sont intégrées dès la conception : structure des pages, vitesse de chargement, balisage, données structurées et affichage mobile. Pour aller plus loin, un accompagnement dédié est possible : référencement local, fiche Google Business, contenus.",
   },
   {
     theme: "visibilite",
-    question: "Qu'est-ce que la visibilité dans les IA ?",
+    question: "Qu'est-ce que la visibilité dans les IA ?",
     reponse:
       "De plus en plus de personnes posent leurs questions à ChatGPT, à Claude, à Perplexity ou à la recherche Google enrichie par l'IA, au lieu de parcourir une liste de liens. La visibilité IA consiste à structurer votre site et vos contenus pour que ces outils comprennent votre activité, la citent et renvoient vers vous.",
     lien: { href: "/blog/visibilite-ia-chatgpt-claude-perplexity", libelle: "Lire notre article sur le sujet" },
   },
   {
     theme: "suivi",
-    question: "Pourrai-je modifier mon site moi-même ?",
+    question: "Pourrai-je modifier mon site moi-même ?",
     reponse:
-      "Oui. Votre projet peut inclure un espace d'administration pensé pour vous : textes, images, produits, actualités, œuvres ou rendez-vous. Vous êtes accompagné pour le prendre en main, et vous pouvez toujours confier les évolutions plus importantes.",
-    lien: { href: "/realisations/galerie-carpentier", libelle: "Exemple : la Galerie Michel Carpentier" },
+      "Oui. Votre projet peut inclure un espace d'administration pensé pour vous : textes, images, produits, actualités, œuvres ou rendez-vous. Vous êtes accompagné pour le prendre en main, et vous pouvez toujours confier les évolutions plus importantes.",
+    lien: { href: "/realisations/galerie-carpentier", libelle: "Exemple : la Galerie Michel Carpentier" },
   },
   {
     theme: "suivi",
-    question: "Que se passe-t-il après la mise en ligne ?",
+    question: "Que se passe-t-il après la mise en ligne ?",
     reponse:
-      "Votre site est suivi dans la durée : mises à jour, sauvegardes, sécurité, évolutions et amélioration du référencement. Vous n'êtes jamais seul face à votre site.",
+      "Votre site est suivi dans la durée : mises à jour, sauvegardes, sécurité, évolutions et amélioration du référencement. Vous n'êtes jamais seul face à votre site.",
   },
 ];
 

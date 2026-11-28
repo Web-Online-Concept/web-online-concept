@@ -25,12 +25,12 @@ const TEXTES = {
     descendre: "Descendre vers les capacités",
     h1: "Tout ce qu'un projet web exige, réuni au même endroit",
     intro:
-      "Du site vitrine à la plateforme complète avec IA intégrée : un seul interlocuteur pour concevoir, développer, mettre en ligne et faire évoluer.",
+      "Du site vitrine à la plateforme complète avec IA intégrée : un seul interlocuteur pour concevoir, développer, mettre en ligne et faire évoluer.",
     criteres: "Nos critères de choix",
     valide: ["Validé par vous", "Avant chaque mise en ligne"],
     seul: "Un seul interlocuteur pour tout le projet",
     seulTexte:
-      "Conception, développement, mise en ligne et suivi : la même personne, du premier échange aux évolutions. Vous validez chaque étape avant qu'elle soit publiée.",
+      "Conception, développement, mise en ligne et suivi : la même personne, du premier échange aux évolutions. Vous validez chaque étape avant qu'elle soit publiée.",
     methode: "Découvrir la méthode",
   },
   en: {

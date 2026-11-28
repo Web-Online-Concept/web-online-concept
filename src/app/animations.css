@@ -1343,12 +1343,7 @@
 /* Accueil : vidéo de présentation par-dessus le hero, sous l'en-tête (affichée seulement si <html data-intro>) */
 .intro-video {
   display: none;
-  top: 73px;
-}
-@media (min-width: 640px) {
-  .intro-video {
-    top: 77px;
-  }
+  top: 77px; /* hauteur de l'en-tête, à toutes les tailles d'écran */
 }
 html[data-intro] .intro-video {
   display: block;

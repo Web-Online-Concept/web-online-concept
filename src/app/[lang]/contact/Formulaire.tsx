@@ -31,12 +31,12 @@ const TEXTES = {
     etapeProjet: "Votre projet",
     type: "Type de projet",
     objet: "Objet (facultatif)",
-    objetExemple: "Ex. : un site pour notre atelier",
+    objetExemple: "Ex. : un site pour notre atelier",
     message: "Votre message",
     messageAide: "Ce que vous voulez accomplir, vos objectifs, vos échéances.",
     max: "5 000",
     etapeReco: "Recommandation",
-    source: "Qui vous a recommandé ? (facultatif)",
+    source: "Qui vous a recommandé ? (facultatif)",
     sourceExemple: "Un client, un partenaire…",
     piege: "Ne pas remplir",
     enCours: "Envoi en cours…",
@@ -418,7 +418,7 @@ export default function Formulaire({ libelles }: { libelles: string[] }) {
                 libelle={x.message}
                 erreur={e.message}
                 aide={
-                  <p className="flex justify-between gap-4 text-[13px] text-[#6B8299]">
+                  <p className="flex justify-between gap-4 text-[13px] text-[#4A6178]">
                     <span>{x.messageAide}</span>
                     <span className="shrink-0 tabular-nums">
                       {apercu.message.length} / {x.max}
@@ -465,7 +465,7 @@ export default function Formulaire({ libelles }: { libelles: string[] }) {
                   </>
                 )}
               </button>
-              <p className="max-w-xs text-[13px] leading-relaxed text-[#6B8299] sm:text-right">
+              <p className="max-w-xs text-[13px] leading-relaxed text-[#4A6178] sm:text-right">
                 {x.donnees}{" "}
                 <Link href={chemin(l, "confidentialite")} className="font-medium text-bleu transition-colors hover:text-[#1638A8]">
                   {x.confidentialite}
