@@ -7,7 +7,7 @@ import { aujourdhui } from "@/lib/admin/format";
 async function NavigationAvecCompteurs() {
   const sb = await exigerAdmin();
   const [messages, retards] = await Promise.all([
-    sb.from("messages").select("id", { count: "exact", head: true }).eq("lu", false),
+    sb.from("messages").select("id", { count: "exact", head: true }).eq("lu", false).eq("archive", false),
     sb.from("factures").select("id", { count: "exact", head: true }).eq("type", "facture").eq("statut", "emise").lt("date_echeance", aujourdhui()),
   ]);
   return <Navigation compteurs={{ messages: messages.count ?? 0, retards: retards.count ?? 0 }} />;

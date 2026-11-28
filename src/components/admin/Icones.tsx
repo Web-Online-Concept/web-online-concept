@@ -118,6 +118,18 @@ const TRACES = {
       <path d="M4 12.5h9a7 7 0 0 1 7 7" />
     </>
   ),
+  archive: (
+    <>
+      <rect x="3" y="4" width="18" height="4.5" rx="1.5" />
+      <path d="M4.8 8.5v9.5a2 2 0 0 0 2 2h10.4a2 2 0 0 0 2-2V8.5M10 12.5h4" />
+    </>
+  ),
+  desarchiver: (
+    <>
+      <rect x="3" y="4" width="18" height="4.5" rx="1.5" />
+      <path d="M4.8 8.5v9.5a2 2 0 0 0 2 2h10.4a2 2 0 0 0 2-2V8.5M12 17.5v-5.5M9.5 14.5 12 12l2.5 2.5" />
+    </>
+  ),
   enveloppe: (
     <>
       <rect x="3" y="5" width="18" height="14" rx="2.5" />

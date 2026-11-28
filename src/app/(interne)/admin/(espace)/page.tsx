@@ -84,8 +84,8 @@ async function Contenu() {
       .order("cree_le", { ascending: false })
       .limit(300),
     sb.from("devis").select("id, total_ttc, date_validite").eq("statut", "envoye"),
-    sb.from("messages").select("id", { count: "exact", head: true }).eq("lu", false),
-    sb.from("messages").select("id, nom, objet, lu, cree_le, langue").order("cree_le", { ascending: false }).limit(4),
+    sb.from("messages").select("id", { count: "exact", head: true }).eq("lu", false).eq("archive", false),
+    sb.from("messages").select("id, nom, objet, lu, cree_le, langue").eq("archive", false).order("cree_le", { ascending: false }).limit(4),
     sb.from("devis").select("id", { count: "exact", head: true }).eq("statut", "brouillon"),
   ]);
 
