@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
 import Entete from "@/components/site/Entete";
 import PiedDePage from "@/components/site/PiedDePage";
@@ -15,6 +15,10 @@ import "../globals.css";
 export function generateStaticParams() {
   return LANGUES.map((lang) => ({ lang }));
 }
+
+// Barres du navigateur mobile (adresse, état) dans le bleu nuit de l'en-tête.
+// Safari 26 ignore theme-color : il reprend la couleur de l'en-tête collé en haut et celle du fond de page
+export const viewport: Viewport = { themeColor: "#0A1A2F" };
 
 export async function generateMetadata(): Promise<Metadata> {
   const l = await langue();
@@ -42,7 +46,7 @@ export default async function RacineSite({ children }: LayoutProps<"/[lang]">) {
   return (
     // suppressHydrationWarning : le script d'avant affichage de l'accueil pose data-intro sur <html>
     <html lang={l} data-scroll-behavior="smooth" suppressHydrationWarning className={`${sora.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col">
+      <body className="site flex min-h-full flex-col">
         <LangueProvider l={l}>
           <a
             href="#contenu"
@@ -51,7 +55,7 @@ export default async function RacineSite({ children }: LayoutProps<"/[lang]">) {
             {t({ fr: "Aller au contenu", en: "Skip to content", es: "Ir al contenido" }, l)}
           </a>
           <Entete navigation={CONTENUS[l].NAVIGATION} />
-          <main id="contenu" className="flex-1">
+          <main id="contenu" className="flex-1 bg-white">
             {children}
           </main>
           <PiedDePage />

@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { sora } from "./police";
 import "./globals.css";
 
 // Page 404 des adresses qui ne correspondent à aucune page (français, anglais ou espagnol selon l'adresse)
 export const metadata: Metadata = { title: "404 | Web Online Concept" };
+export const viewport: Viewport = { themeColor: "#0A1A2F" };
 
 const TEXTES = {
   fr: { erreur: "Erreur 404", titre: "Cette page n'existe pas ou a été déplacée.", lien: "Revenir à l'accueil", href: "/" },
@@ -17,7 +18,7 @@ const SCRIPT = `(function(){var m=location.pathname.match(/^\\/(en|es)(\\/|$)/);
 export default function PageIntrouvableGlobale() {
   return (
     <html lang="fr" data-l="fr" className={`${sora.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col">
+      <body className="site flex min-h-full flex-col">
         <script dangerouslySetInnerHTML={{ __html: SCRIPT }} />
         <style>{`[data-texte]{display:none}${Object.keys(TEXTES)
           .map((l) => `html[data-l="${l}"] [data-texte="${l}"]`)

@@ -26,6 +26,12 @@ body {
   font-family: var(--font-sora), system-ui, sans-serif;
 }
 
+/* Site public : fond de page bleu nuit (le contenu reste sur fond blanc). Les zones
+   d'étirement en haut et en bas sur téléphone et la barre de Safari prennent cette couleur */
+body.site {
+  background: var(--color-nuit);
+}
+
 :focus-visible {
   outline: 3px solid #00b4d8;
   outline-offset: 2px;

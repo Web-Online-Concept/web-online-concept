@@ -100,7 +100,7 @@ export default function Entete({ navigation }: { navigation: Lien[] }) {
   useRetourEnHaut();
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-nuit/95 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-white/10 bg-nuit">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 sm:px-8">
         <LogoAnime className="h-9 min-[380px]:h-10 sm:h-11" priorite onClick={() => setOuvert(false)} />
 
