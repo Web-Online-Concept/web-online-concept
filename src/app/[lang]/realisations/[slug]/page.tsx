@@ -127,26 +127,28 @@ export default async function PageRealisation({
           style={{ background: r.teinte }}
         />
         <Conteneur
-          className={`relative pb-28 pt-12 sm:pb-32 sm:pt-16 ${principal ? "lg:grid lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-12" : ""}`}
+          className={`relative flex flex-col items-start pb-28 pt-8 sm:pb-32 sm:pt-16 ${principal ? "lg:grid lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-12" : "lg:block"}`}
         >
-          <div>
+          {/* Téléphone et tablette : nom, puis la capture du site, puis le texte et les liens.
+              Ordinateur : texte à gauche, capture à droite (le bloc texte redevient un bloc à lg) */}
+          <div className="contents lg:block">
             <Link
               href={chemin(l, "realisations")}
-              className="text-sm text-[#B8C6D6] hover:text-white"
+              className="order-1 text-sm text-[#B8C6D6] hover:text-white"
             >
               {x.toutes}
             </Link>
-            <p className="mt-8 text-[15px] text-[#B8C6D6]">{r.type}</p>
-            <h1 className="mt-2 text-[clamp(2.2rem,5vw,3.8rem)] font-semibold leading-[1.06] tracking-tight">
+            <p className="order-2 mt-6 text-[15px] text-[#B8C6D6] lg:mt-8">{r.type}</p>
+            <h1 className="order-3 mt-2 text-[clamp(2.2rem,5vw,3.8rem)] font-semibold leading-[1.06] tracking-tight">
               {r.nom}
             </h1>
-            <p className="mt-5 max-w-2xl text-xl leading-relaxed text-[#C3D0DD]">
+            <p className="order-5 mt-6 max-w-2xl text-lg leading-relaxed text-[#C3D0DD] sm:text-xl lg:mt-5">
               {r.accroche}
             </p>
             {r.client && (
-              <p className="mt-4 text-[15px] text-[#B8C6D6]">{x.pour} {r.client}</p>
+              <p className="order-6 mt-3 text-[15px] text-[#B8C6D6] lg:mt-4">{x.pour} {r.client}</p>
             )}
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="order-7 mt-7 flex flex-wrap gap-3 lg:mt-8">
               <a
                 href={r.site.href}
                 target="_blank"
@@ -173,7 +175,7 @@ export default async function PageRealisation({
               v={principal}
               priorite
               sizes="(min-width: 1024px) 560px, 92vw"
-              className={`mt-12 lg:mt-0 ${principal.format === "telephone" ? "mx-auto w-[62%] max-w-[300px]" : "w-full"}`}
+              className={`order-4 mt-7 lg:mt-0 ${principal.format === "telephone" ? "mx-auto w-[62%] max-w-[300px]" : "w-full"}`}
             />
           )}
         </Conteneur>
