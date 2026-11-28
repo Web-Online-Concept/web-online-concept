@@ -13,7 +13,7 @@ async function Contenu({ searchParams }: { searchParams: Promise<{ client?: stri
   const clients = await listeClients(sb);
   return (
     <>
-      <TitrePage titre="Nouveau devis" />
+      <TitrePage titre="Nouveau devis" retour={{ href: "/admin/devis", libelle: "Devis" }} description="À l'émission, le devis reçoit son numéro et un lien pour que le client l'accepte en ligne." />
       {sp.erreur && (
         <div className="mb-5">
           <Alerte ton="erreur">{sp.erreur}</Alerte>

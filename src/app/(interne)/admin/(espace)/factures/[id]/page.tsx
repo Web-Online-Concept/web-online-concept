@@ -1,14 +1,15 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import BoutonConfirmer from "@/components/admin/BoutonConfirmer";
 import EditeurDocument from "@/components/admin/EditeurDocument";
+import { Icone } from "@/components/admin/Icones";
 import {
   Alerte,
   Carte,
   Chargement,
   Champ,
   classeBouton,
-  classeBoutonDanger,
   classeBoutonSecondaire,
   classeChamp,
   Pastille,
@@ -67,8 +68,9 @@ async function Contenu({ params, searchParams }: { params: Promise<{ id: string 
     const clients = await listeClients(sb);
     return (
       <>
-        <TitrePage titre={`${nomDoc} en brouillon`}>
+        <TitrePage titre={`${nomDoc} en brouillon`} retour={{ href: "/admin/factures", libelle: "Factures" }}>
           <a href={`/admin/factures/${id}/pdf`} target="_blank" rel="noopener" className={classeBoutonSecondaire}>
+            <Icone nom="oeil" className="h-[18px] w-[18px]" />
             Aperçu PDF
           </a>
         </TitrePage>
@@ -108,12 +110,9 @@ async function Contenu({ params, searchParams }: { params: Promise<{ id: string 
             retourNouveauClient={`/admin/factures/${id}`}
           />
         </Carte>
-        <form action={supprimerBrouillon} className="mt-5">
-          <input type="hidden" name="id" value={id} />
-          <button type="submit" className={classeBoutonDanger}>
-            Supprimer ce brouillon
-          </button>
-        </form>
+        <div className="mt-5">
+          <BoutonConfirmer action={supprimerBrouillon} champs={{ id }} libelle="Supprimer ce brouillon" question="Supprimer ce brouillon ?" />
+        </div>
       </>
     );
   }
@@ -124,9 +123,20 @@ async function Contenu({ params, searchParams }: { params: Promise<{ id: string 
 
   return (
     <>
-      <TitrePage titre={`${nomDoc} ${f.numero}`}>
+      <TitrePage
+        titre={`${nomDoc} ${f.numero}`}
+        retour={{ href: "/admin/factures", libelle: "Factures" }}
+        description={
+          <span className="flex flex-wrap items-center gap-2">
+            {c.client.nom}, {fmtEuros(f.total_ttc)}
+            <Pastille statut={retard ? "retard" : f.statut} libelle={retard ? "En retard" : avoir && f.statut === "payee" ? "Remboursé" : STATUTS_FACTURE[f.statut]} />
+          </span>
+        }
+      >
         <a href={`/admin/factures/${id}/pdf`} target="_blank" rel="noopener" className={classeBouton}>
-          Télécharger le PDF
+          <Icone nom="exports" className="h-[18px] w-[18px]" />
+          <span className="sm:hidden">PDF</span>
+          <span className="hidden sm:inline">Télécharger le PDF</span>
         </a>
         {!avoir && f.statut !== "annulee" && (
           <form action={creerAvoir}>
@@ -138,13 +148,11 @@ async function Contenu({ params, searchParams }: { params: Promise<{ id: string 
         )}
       </TitrePage>
       {messages}
-      <div className="grid gap-5 lg:grid-cols-[1.4fr_1fr]">
+      <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1.4fr_1fr]">
         <Carte>
-          <div className="flex flex-wrap items-center gap-3">
-            <Pastille statut={retard ? "retard" : f.statut} libelle={retard ? "En retard" : STATUTS_FACTURE[f.statut]} />
-            {f.envoyee_le && <span className="text-sm text-[#4A6178]">Envoyée le {fmtDate(f.envoyee_le)}</span>}
-          </div>
-          <dl className="mt-5 grid gap-4 sm:grid-cols-2">
+          <h2 className="text-[17px] font-semibold">Détail</h2>
+          {f.envoyee_le && <p className="mt-1 text-sm text-[#4A6178]">Envoyée au client le {fmtDate(f.envoyee_le)}</p>}
+          <dl className="mt-5 grid grid-cols-2 gap-4">
             <div>
               <dt className="text-sm text-[#4A6178]">Client</dt>
               <dd className="mt-1 font-medium">

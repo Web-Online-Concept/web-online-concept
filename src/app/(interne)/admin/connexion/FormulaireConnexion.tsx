@@ -33,7 +33,7 @@ export default function FormulaireConnexion({ erreurLien }: { erreurLien?: boole
         type="email"
         autoComplete="email"
         required
-        className="rounded-xl border border-[#CBD5E1] px-4 py-3 text-base outline-none focus:border-bleu focus:ring-2 focus:ring-bleu/20"
+        className="rounded-xl border border-[#D5DEE8] px-4 py-3 text-base outline-none transition-[border-color,box-shadow] focus:border-bleu focus:ring-4 focus:ring-bleu/12"
       />
       {etat.message && (
         <p role="alert" className="text-sm text-[#B42318]">
@@ -43,7 +43,7 @@ export default function FormulaireConnexion({ erreurLien }: { erreurLien?: boole
       <button
         type="submit"
         disabled={enCours}
-        className="rounded-full bg-bleu px-6 py-3 font-medium text-white hover:bg-[#3A72FF] disabled:opacity-60"
+        className="rounded-full bg-bleu px-6 py-3 font-medium text-white shadow-[0_10px_24px_-14px_rgba(31,94,255,0.9)] transition-colors hover:bg-[#3A72FF] disabled:opacity-60"
       >
         {enCours ? "Envoi…" : "Recevoir le lien de connexion"}
       </button>

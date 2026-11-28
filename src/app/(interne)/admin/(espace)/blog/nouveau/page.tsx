@@ -11,7 +11,7 @@ async function Contenu({ searchParams }: { searchParams: Promise<{ erreur?: stri
   const sp = await searchParams;
   return (
     <>
-      <TitrePage titre="Nouvel article" />
+      <TitrePage titre="Nouvel article" retour={{ href: "/admin/blog", libelle: "Blog" }} description="Écrivez la version française ; les traductions anglaise et espagnole se font ensuite depuis l'article." />
       {sp.erreur && (
         <div className="mb-5">
           <Alerte ton="erreur">{sp.erreur}</Alerte>

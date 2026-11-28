@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Suspense } from "react";
-import { Alerte, Carte, Chargement, Champ, classeBouton, classeBoutonSecondaire, classeChamp, TitrePage } from "@/components/admin/ui";
+import { Icone } from "@/components/admin/Icones";
+import { Alerte, Carte, Chargement, Champ, classeBouton, classeBoutonSecondaire, classeChamp, Filtres, TitrePage } from "@/components/admin/ui";
 import { exigerAdmin } from "@/lib/admin/acces";
 import { urssafAnnee } from "@/lib/admin/donnees";
 import { aujourdhui, deMois, fmtDate, fmtEuros, libelleMois, MOIS } from "@/lib/admin/format";
@@ -37,19 +38,18 @@ async function Contenu({ searchParams }: { searchParams: Promise<Sp> }) {
 
   return (
     <>
-      <TitrePage titre={`URSSAF ${annee}`}>
-        <Link href={`/admin/urssaf?annee=${annee - 1}`} className={classeBoutonSecondaire}>
-          {annee - 1}
-        </Link>
-        {annee < anneeCourante && (
-          <Link href={`/admin/urssaf?annee=${annee + 1}`} className={classeBoutonSecondaire}>
-            {annee + 1}
-          </Link>
-        )}
+      <TitrePage titre={`URSSAF ${annee}`} description="Chiffre d'affaires encaissé, cotisations calculées et suivi des déclarations mensuelles.">
         <a href={`/admin/exports/urssaf?annee=${annee}&format=pdf`} className={classeBouton}>
+          <Icone nom="exports" className="h-[18px] w-[18px]" />
           Récapitulatif PDF
         </a>
       </TitrePage>
+      <div className="mb-5">
+        <Filtres
+          libelle="Année"
+          options={[anneeCourante - 2, anneeCourante - 1, anneeCourante].map((a) => ({ href: `/admin/urssaf?annee=${a}`, libelle: String(a), actif: a === annee }))}
+        />
+      </div>
 
       {sp.erreur && (
         <div className="mb-5">
@@ -64,12 +64,12 @@ async function Contenu({ searchParams }: { searchParams: Promise<Sp> }) {
         </div>
       )}
 
-      <div className="mb-5 grid gap-5 md:grid-cols-3">
+      <div className="mb-5 grid grid-cols-1 gap-3 sm:gap-5 md:grid-cols-3">
         <Carte>
           <p className="text-sm text-[#4A6178]">CA encaissé {annee}</p>
           <p className="mt-1 text-2xl font-semibold">{fmtEuros(caAnnee)}</p>
-          <div className="mt-3 h-2 rounded-full bg-[#E1E7EF]" role="img" aria-label={`${ratio} % du plafond de ${fmtEuros(plafond, true)}`}>
-            <div className={`h-2 rounded-full ${ratio >= 90 ? "bg-[#D97706]" : "bg-bleu"}`} style={{ width: `${ratio}%` }} />
+          <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#E1E7EF]" role="img" aria-label={`${ratio} % du plafond de ${fmtEuros(plafond, true)}`}>
+            <div className={`h-2 rounded-full ${ratio >= 90 ? "bg-[#D97706]" : "bg-[linear-gradient(90deg,#1F5EFF,#00B4D8_60%,#2BD47D)]"}`} style={{ width: `${Math.max(ratio, 1)}%` }} />
           </div>
           <p className="mt-2 text-sm text-[#4A6178]">
             {ratio} % du plafond de {fmtEuros(plafond, true)}
@@ -90,7 +90,41 @@ async function Contenu({ searchParams }: { searchParams: Promise<Sp> }) {
       </div>
 
       <Carte>
-        <div className="overflow-x-auto">
+        {/* Téléphone : un mois par ligne, l'essentiel seulement */}
+        <ul className="-mx-2 flex flex-col divide-y divide-[#EEF2F7] md:hidden">
+          {mois.map((m) => {
+            const d = declarations.get(m.mois);
+            const enCours = m.mois === moisCourant;
+            const futur = m.mois > moisCourant;
+            if (futur) return null;
+            return (
+              <li key={m.mois}>
+                <Link
+                  href={`/admin/urssaf?annee=${annee}&mois=${m.mois}#saisie`}
+                  className={`grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 rounded-xl px-2 py-3 ${selection.mois === m.mois ? "bg-ciel" : ""}`}
+                >
+                  <span className="min-w-0">
+                    <span className="block font-medium capitalize text-nuit">{libelleMois(m.mois)}</span>
+                    <span className="block text-sm text-[#4A6178] tabular-nums">CA {fmtEuros(m.ca, true)}, à payer {fmtEuros(m.total, true)}</span>
+                  </span>
+                  <span className="text-right text-sm">
+                    {d ? (
+                      <span className="inline-flex items-center gap-1 text-[#0E7A45]">
+                        <Icone nom="coche" className="h-4 w-4" />
+                        Déclaré
+                      </span>
+                    ) : enCours ? (
+                      <span className="text-[#4A6178]">En cours</span>
+                    ) : (
+                      <span className="font-medium text-bleu">À déclarer</span>
+                    )}
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+        <div className="hidden overflow-x-auto md:block">
           <table className="w-full min-w-[860px] text-left text-[15px]">
             <thead className="text-sm text-[#4A6178]">
               <tr>
@@ -178,7 +212,7 @@ async function Contenu({ searchParams }: { searchParams: Promise<Sp> }) {
         </p>
       </Carte>
 
-      <div className="mt-5 grid gap-5 lg:grid-cols-2">
+      <div className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-2">
         <Carte>
           <h2 id="saisie" className="scroll-mt-6 text-lg font-semibold">
             Déclaration {deMois(selection.mois)}
@@ -192,7 +226,7 @@ async function Contenu({ searchParams }: { searchParams: Promise<Sp> }) {
           </p>
           <form action={enregistrerDeclaration} className="mt-5 flex flex-col gap-4">
             <input type="hidden" name="mois" value={selection.mois} />
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Champ libelle="CA déclaré" htmlFor="ca_declare">
                 <input
                   id="ca_declare"
@@ -250,7 +284,7 @@ async function Contenu({ searchParams }: { searchParams: Promise<Sp> }) {
           </p>
           <form action={enregistrerHorsOutil} className="mt-5 flex flex-col gap-4">
             <input type="hidden" name="mois" value={selection.mois} />
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <Champ libelle="Montant encaissé" htmlFor="montant_hors">
                 <input
                   id="montant_hors"

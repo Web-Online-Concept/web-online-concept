@@ -1,42 +1,46 @@
 import Link from "next/link";
 import { Suspense } from "react";
+import ListeClients from "@/components/admin/ListeClients";
 import { BoutonLien, Carte, Chargement, TitrePage, Vide } from "@/components/admin/ui";
 import { exigerAdmin } from "@/lib/admin/acces";
-import { listeClients } from "@/lib/admin/donnees";
+import { listeClients, round2 } from "@/lib/admin/donnees";
 
 export const metadata = { title: "Clients" };
 
 async function Contenu() {
   const sb = await exigerAdmin();
-  const clients = await listeClients(sb, true);
-  const actifs = clients.filter((c) => !c.archive);
+  const [clients, { data: factures }] = await Promise.all([
+    listeClients(sb, true),
+    sb.from("factures").select("client_id, type, statut, total_ttc, montant_encaisse").neq("statut", "brouillon").neq("statut", "annulee"),
+  ]);
+  const stats = (id: string) => {
+    const f = (factures ?? []).filter((x) => x.client_id === id);
+    return {
+      facture: round2(f.reduce((s, x) => s + Number(x.total_ttc), 0)),
+      reste: round2(f.filter((x) => x.type === "facture" && x.statut === "emise").reduce((s, x) => s + Number(x.total_ttc) - Number(x.montant_encaisse), 0)),
+      documents: f.length,
+    };
+  };
+  const actifs = clients.filter((c) => !c.archive).map((c) => ({ id: c.id, nom: c.nom, type: c.type, ville: c.ville, email: c.email, ...stats(c.id) }));
   const archives = clients.filter((c) => c.archive);
+
   return (
     <>
-      <TitrePage titre="Clients">
-        <BoutonLien href="/admin/clients/nouveau">Nouveau client</BoutonLien>
+      <TitrePage titre="Clients" description={`${actifs.length} client${actifs.length > 1 ? "s" : ""} actif${actifs.length > 1 ? "s" : ""}. Le montant indiqué est le total facturé.`}>
+        <BoutonLien href="/admin/clients/nouveau" icone="plus">
+          Nouveau client
+        </BoutonLien>
       </TitrePage>
-      <Carte>
-        {actifs.length === 0 ? (
-          <Vide>Aucun client pour l&apos;instant. Ajoutez le premier : son SIREN suffit pour remplir la fiche.</Vide>
-        ) : (
-          <ul className="divide-y divide-[#EEF2F7]">
-            {actifs.map((c) => (
-              <li key={c.id}>
-                <Link href={`/admin/clients/${c.id}`} className="flex flex-wrap items-center justify-between gap-3 py-3 hover:bg-ciel/60">
-                  <span className="font-medium">{c.nom}</span>
-                  <span className="text-[15px] text-[#4A6178]">
-                    {[c.type === "entreprise" ? c.siren && `SIREN ${c.siren}` : "Particulier", c.ville].filter(Boolean).join(", ")}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
-      </Carte>
+      {actifs.length === 0 ? (
+        <Carte>
+          <Vide icone="clients">Aucun client pour l&apos;instant. Ajoutez le premier : son SIREN suffit pour remplir la fiche.</Vide>
+        </Carte>
+      ) : (
+        <ListeClients clients={actifs} />
+      )}
       {archives.length > 0 && (
-        <details className="mt-5">
-          <summary className="cursor-pointer text-[15px] text-[#4A6178]">Clients archivés ({archives.length})</summary>
+        <details className="mt-6 rounded-2xl border border-[#E3E9F0] bg-white p-5">
+          <summary className="cursor-pointer text-[15px] font-medium text-[#2C4558]">Clients archivés ({archives.length})</summary>
           <ul className="mt-3 flex flex-col gap-2">
             {archives.map((c) => (
               <li key={c.id}>

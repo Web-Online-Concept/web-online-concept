@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { enregistrerClient, rechercherEntreprise } from "@/app/(interne)/admin/(espace)/clients/actions";
+import { Icone } from "@/components/admin/Icones";
 import { Champ, classeBouton, classeBoutonSecondaire, classeChamp } from "@/components/admin/ui";
 
 export type ClientEdition = {
@@ -62,26 +63,34 @@ export default function FormulaireClient({ client, retour }: { client?: ClientEd
       {c.id && <input type="hidden" name="id" value={c.id} />}
       {retour && <input type="hidden" name="retour" value={retour} />}
 
-      <fieldset className="flex gap-6">
+      <fieldset>
         <legend className="sr-only">Type de client</legend>
-        {[
-          ["entreprise", "Professionnel"],
-          ["particulier", "Particulier"],
-        ].map(([v, l]) => (
-          <label key={v} className="flex items-center gap-2 text-[15px]">
-            <input type="radio" name="type" value={v} checked={c.type === v} onChange={maj("type")} className="h-4 w-4 accent-bleu" />
-            {l}
-          </label>
-        ))}
+        <div className="inline-flex rounded-full bg-ciel p-1">
+          {[
+            ["entreprise", "Professionnel"],
+            ["particulier", "Particulier"],
+          ].map(([v, l]) => (
+            <label
+              key={v}
+              className={`cursor-pointer rounded-full px-4 py-2 text-sm font-medium transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-cyan ${
+                c.type === v ? "bg-white text-nuit shadow-[0_1px_3px_rgba(10,26,47,0.15)]" : "text-[#4A6178] hover:text-nuit"
+              }`}
+            >
+              <input type="radio" name="type" value={v} checked={c.type === v} onChange={maj("type")} className="sr-only" />
+              {l}
+            </label>
+          ))}
+        </div>
       </fieldset>
 
       {c.type === "entreprise" && (
         <div className="flex flex-wrap items-end gap-3 rounded-xl bg-ciel p-4">
-          <Champ libelle="SIREN" htmlFor="siren" className="w-48">
+          <Champ libelle="SIREN" htmlFor="siren" className="w-full sm:w-48">
             <input id="siren" name="siren" inputMode="numeric" value={c.siren ?? ""} onChange={maj("siren")} className={classeChamp} />
           </Champ>
           <button type="button" onClick={remplir} disabled={recherche} className={classeBoutonSecondaire}>
-            {recherche ? "Recherche…" : "Remplir automatiquement"}
+            <Icone nom="recherche" className="h-[18px] w-[18px]" />
+            {recherche ? "Recherche…" : "Remplir avec le SIREN"}
           </button>
           {message && (
             <p role="status" className="w-full text-sm text-[#2C4558]">
@@ -91,7 +100,7 @@ export default function FormulaireClient({ client, retour }: { client?: ClientEd
         </div>
       )}
 
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Champ libelle={c.type === "entreprise" ? "Raison sociale" : "Nom et prénom"} htmlFor="nom" className="sm:col-span-2">
           <input id="nom" name="nom" required value={c.nom} onChange={maj("nom")} className={classeChamp} />
         </Champ>
@@ -134,6 +143,7 @@ export default function FormulaireClient({ client, retour }: { client?: ClientEd
 
       <div>
         <button type="submit" className={classeBouton}>
+          <Icone nom="coche" className="h-[18px] w-[18px]" />
           Enregistrer le client
         </button>
       </div>

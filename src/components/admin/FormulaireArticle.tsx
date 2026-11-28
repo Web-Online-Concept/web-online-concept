@@ -1,3 +1,4 @@
+import { Icone } from "@/components/admin/Icones";
 import { Champ, classeBouton, classeChamp } from "@/components/admin/ui";
 
 export type ValeursArticle = {
@@ -20,7 +21,7 @@ export default function FormulaireArticle({ action, valeurs }: { action: (f: For
       <Champ libelle="Titre" htmlFor="titre">
         <input id="titre" name="titre" required defaultValue={valeurs.titre} className={classeChamp} />
       </Champ>
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <Champ libelle="Adresse de l'article" htmlFor="slug" aide="Laissez vide pour la créer à partir du titre.">
           <div className="flex items-center gap-1">
             <span className="text-sm text-[#4A6178]">/blog/</span>
@@ -59,11 +60,15 @@ export default function FormulaireArticle({ action, valeurs }: { action: (f: For
           </label>
         </div>
       )}
-      <label className="flex cursor-pointer items-center gap-3 rounded-xl bg-ciel px-4 py-3 text-[15px]">
-        <input type="checkbox" name="publie" value="oui" defaultChecked={valeurs.publie} className="h-4 w-4 accent-bleu" />
-        Publier sur le site
+      <label className="flex cursor-pointer items-start gap-3 rounded-xl bg-ciel px-4 py-3 text-[15px]">
+        <input type="checkbox" name="publie" value="oui" defaultChecked={valeurs.publie} className="mt-1 h-4 w-4 accent-bleu" />
+        <span>
+          Publier sur le site
+          <span className="block text-sm text-[#4A6178]">Les traductions enregistrées sont publiées en même temps.</span>
+        </span>
       </label>
       <button type="submit" className={`${classeBouton} self-start`}>
+        <Icone nom="coche" className="h-[18px] w-[18px]" />
         Enregistrer
       </button>
     </form>

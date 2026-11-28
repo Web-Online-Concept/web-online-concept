@@ -2,7 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import CopierLien from "@/components/admin/CopierLien";
+import BoutonConfirmer from "@/components/admin/BoutonConfirmer";
 import EditeurDocument from "@/components/admin/EditeurDocument";
+import { Icone } from "@/components/admin/Icones";
 import { Alerte, Carte, Chargement, classeBouton, classeBoutonDanger, classeBoutonSecondaire, Pastille, TitrePage } from "@/components/admin/ui";
 import { exigerAdmin } from "@/lib/admin/acces";
 import { listeClients } from "@/lib/admin/donnees";
@@ -46,8 +48,9 @@ async function Contenu({ params, searchParams }: { params: Promise<{ id: string 
     const clients = await listeClients(sb);
     return (
       <>
-        <TitrePage titre="Devis en brouillon">
+        <TitrePage titre="Devis en brouillon" retour={{ href: "/admin/devis", libelle: "Devis" }}>
           <a href={`/admin/devis/${id}/pdf`} target="_blank" rel="noopener" className={classeBoutonSecondaire}>
+            <Icone nom="oeil" className="h-[18px] w-[18px]" />
             Aperçu PDF
           </a>
         </TitrePage>
@@ -70,12 +73,9 @@ async function Contenu({ params, searchParams }: { params: Promise<{ id: string 
             retourNouveauClient={`/admin/devis/${id}`}
           />
         </Carte>
-        <form action={supprimerDevisBrouillon} className="mt-5">
-          <input type="hidden" name="id" value={id} />
-          <button type="submit" className={classeBoutonDanger}>
-            Supprimer ce brouillon
-          </button>
-        </form>
+        <div className="mt-5">
+          <BoutonConfirmer action={supprimerDevisBrouillon} champs={{ id }} libelle="Supprimer ce brouillon" question="Supprimer ce brouillon ?" />
+        </div>
       </>
     );
   }
@@ -85,22 +85,34 @@ async function Contenu({ params, searchParams }: { params: Promise<{ id: string 
 
   return (
     <>
-      <TitrePage titre={`Devis ${d.numero}`}>
+      <TitrePage
+        titre={`Devis ${d.numero}`}
+        retour={{ href: "/admin/devis", libelle: "Devis" }}
+        description={
+          <span className="flex flex-wrap items-center gap-2">
+            {c.client.nom}, {fmtEuros(d.total_ttc)}
+            <Pastille statut={expire ? "expire" : d.statut} libelle={expire ? "Expiré" : STATUTS_DEVIS[d.statut]} />
+          </span>
+        }
+      >
         <a href={`/admin/devis/${id}/pdf`} target="_blank" rel="noopener" className={classeBouton}>
-          Télécharger le PDF
+          <Icone nom="exports" className="h-[18px] w-[18px]" />
+          <span className="sm:hidden">PDF</span>
+          <span className="hidden sm:inline">Télécharger le PDF</span>
         </a>
         <form action={dupliquerDevis}>
           <input type="hidden" name="id" value={id} />
-          <button type="submit" className={classeBoutonSecondaire}>
+          <button type="submit" className={`${classeBoutonSecondaire} w-full`}>
+            <Icone nom="copie" className="h-[18px] w-[18px]" />
             Dupliquer
           </button>
         </form>
       </TitrePage>
       {messages}
-      <div className="grid gap-5 lg:grid-cols-[1.4fr_1fr]">
+      <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1.4fr_1fr]">
         <Carte>
-          <Pastille statut={expire ? "expire" : d.statut} libelle={expire ? "Expiré" : STATUTS_DEVIS[d.statut]} />
-          <dl className="mt-5 grid gap-4 sm:grid-cols-2">
+          <h2 className="text-[17px] font-semibold">Détail</h2>
+          <dl className="mt-5 grid grid-cols-2 gap-4">
             <div>
               <dt className="text-sm text-[#4A6178]">Client</dt>
               <dd className="mt-1 font-medium">
@@ -149,7 +161,7 @@ async function Contenu({ params, searchParams }: { params: Promise<{ id: string 
               Accepté le {fmtDate(d.accepte_le)} {d.accepte_par && <>par {d.accepte_par}</>}.
             </p>
           )}
-          <div className="mt-4 flex flex-col items-start gap-3">
+          <div className="mt-4 flex flex-col items-stretch gap-3 sm:items-start [&_button]:w-full sm:[&_button]:w-auto [&>a]:w-full sm:[&>a]:w-auto">
             {d.statut === "envoye" && <CopierLien chemin={`/devis/${d.jeton_acceptation}`} />}
             {d.facture_id ? (
               <Link href={`/admin/factures/${d.facture_id}`} className={classeBouton}>

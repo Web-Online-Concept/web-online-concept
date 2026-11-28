@@ -37,7 +37,7 @@ async function Contenu({ searchParams }: { searchParams: Promise<Sp> }) {
 
   return (
     <>
-      <TitrePage titre="Paramètres" />
+      <TitrePage titre="Paramètres" description="Les informations de l'entreprise reprises sur les devis et factures, et les taux URSSAF." />
       {sp.erreur && (
         <div className="mb-5">
           <Alerte ton="erreur">{sp.erreur}</Alerte>
@@ -55,14 +55,14 @@ async function Contenu({ searchParams }: { searchParams: Promise<Sp> }) {
           Ces informations sont recopiées dans chaque facture et devis au moment de l&apos;émission : un document déjà émis ne change jamais.
         </p>
         <form action={enregistrerParametres} className="mt-6 flex flex-col gap-5">
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {CHAMPS.map((c) => (
               <Champ key={c.cle} libelle={c.libelle} htmlFor={c.cle} className={c.large ? "sm:col-span-2 lg:col-span-3" : ""}>
                 <input id={c.cle} name={c.cle} required defaultValue={v(c.cle)} className={classeChamp} />
               </Champ>
             ))}
           </div>
-          <div className="grid gap-5 sm:grid-cols-[2fr_1fr]">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-[2fr_1fr]">
             <Champ libelle="IBAN" htmlFor="iban" aide="Affiché sur les factures pour le règlement par virement.">
               <input id="iban" name="iban" defaultValue={v("iban")} autoComplete="off" className={classeChamp} />
             </Champ>
@@ -70,7 +70,7 @@ async function Contenu({ searchParams }: { searchParams: Promise<Sp> }) {
               <input id="bic" name="bic" defaultValue={v("bic")} autoComplete="off" className={classeChamp} />
             </Champ>
           </div>
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <Champ libelle="Délai de paiement (jours)" htmlFor="delai_paiement_jours" aide="Fixe l'échéance des factures. 60 jours au maximum.">
               <input id="delai_paiement_jours" name="delai_paiement_jours" type="number" min={0} max={60} defaultValue={v("delai_paiement_jours") || "30"} className={classeChamp} />
             </Champ>
@@ -135,7 +135,7 @@ async function Contenu({ searchParams }: { searchParams: Promise<Sp> }) {
             </tbody>
           </table>
         </div>
-        <form action={ajouterTaux} className="mt-6 grid gap-4 border-t border-[#EEF2F7] pt-6 sm:grid-cols-2 lg:grid-cols-3">
+        <form action={ajouterTaux} className="mt-6 grid grid-cols-1 gap-4 border-t border-[#EEF2F7] pt-6 sm:grid-cols-2 lg:grid-cols-3">
           <Champ libelle="Date d'effet (1er du mois)" htmlFor="date_effet">
             <input id="date_effet" name="date_effet" type="date" required className={classeChamp} />
           </Champ>

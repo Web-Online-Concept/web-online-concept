@@ -129,7 +129,7 @@ export async function envoyerMessage(_etat: EtatContact, formData: FormData): Pr
 
   const { error } = await sb
     .from("messages")
-    .insert({ nom, email, objet, message, besoin, telephone: telephone || null, source: source || null });
+    .insert({ nom, email, objet, message, besoin, telephone: telephone || null, source: source || null, langue });
   if (error) return { statut: "erreur", message: `${x.echec} ${ECRIRE}`, valeurs };
 
   // Accusé de réception au visiteur (il recopie sa demande, sans les liens) : un seul par adresse et par 24 h,

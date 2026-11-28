@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { Icone } from "@/components/admin/Icones";
 import { Champ, classeBouton, classeBoutonSecondaire, classeChamp } from "@/components/admin/ui";
 
 export type LigneEdition = {
@@ -66,7 +67,7 @@ export default function EditeurDocument({
       {cache && Object.entries(cache).map(([k, v]) => <input key={k} type="hidden" name={k} value={v} />)}
       <input type="hidden" name="lignes" value={JSON.stringify(lignes)} />
 
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <Champ libelle="Client" htmlFor="client_id">
           <div className="flex gap-2">
             <select id="client_id" name="client_id" defaultValue={valeurs.client_id} required className={classeChamp}>
@@ -109,11 +110,11 @@ export default function EditeurDocument({
             return (
               <fieldset key={i} className="rounded-xl border border-[#E1E7EF] p-4">
                 <legend className="sr-only">Ligne {i + 1}</legend>
-                <div className="grid gap-3 md:grid-cols-[1fr_90px_90px_130px]">
-                  <input aria-label={`Désignation, ligne ${i + 1}`} placeholder="Désignation" value={l.designation} onChange={(e) => maj(i, "designation", e.target.value)} className={classeChamp} />
+                <div className="grid grid-cols-3 gap-3 md:grid-cols-[1fr_90px_90px_130px]">
+                  <input aria-label={`Désignation, ligne ${i + 1}`} placeholder="Désignation" value={l.designation} onChange={(e) => maj(i, "designation", e.target.value)} className={`${classeChamp} col-span-3 md:col-span-1`} />
                   <input aria-label={`Quantité, ligne ${i + 1}`} inputMode="decimal" placeholder="Qté" value={l.quantite} onChange={(e) => maj(i, "quantite", e.target.value)} className={classeChamp} />
                   <input aria-label={`Unité, ligne ${i + 1}`} placeholder="Unité" value={l.unite} onChange={(e) => maj(i, "unite", e.target.value)} className={classeChamp} />
-                  <input aria-label={`Prix unitaire HT, ligne ${i + 1}`} inputMode="decimal" placeholder="Prix unitaire" value={l.prix_unitaire} onChange={(e) => maj(i, "prix_unitaire", e.target.value)} className={classeChamp} />
+                  <input aria-label={`Prix unitaire HT, ligne ${i + 1}`} inputMode="decimal" placeholder="Prix" value={l.prix_unitaire} onChange={(e) => maj(i, "prix_unitaire", e.target.value)} className={classeChamp} />
                 </div>
                 <textarea aria-label={`Description, ligne ${i + 1}`} placeholder="Description (facultatif)" rows={2} value={l.description} onChange={(e) => maj(i, "description", e.target.value)} className={`${classeChamp} mt-3`} />
                 <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
@@ -135,6 +136,7 @@ export default function EditeurDocument({
           })}
         </div>
         <button type="button" onClick={() => setLignes((ls) => [...ls, ligneVide()])} className={`${classeBoutonSecondaire} mt-3`}>
+          <Icone nom="plus" className="h-[18px] w-[18px]" />
           Ajouter une ligne
         </button>
       </div>
@@ -148,7 +150,7 @@ export default function EditeurDocument({
         <textarea id="notes" name="notes" rows={2} defaultValue={valeurs.notes} className={classeChamp} />
       </Champ>
 
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-col-reverse gap-3 sm:flex-row">
         <button type="submit" name="intention" value="enregistrer" className={classeBoutonSecondaire}>
           Enregistrer le brouillon
         </button>

@@ -11,7 +11,7 @@ async function Contenu({ searchParams }: { searchParams: Promise<{ retour?: stri
   const retourSur = retour && retour.startsWith("/admin/") ? retour : undefined;
   return (
     <>
-      <TitrePage titre="Nouveau client" />
+      <TitrePage titre="Nouveau client" retour={{ href: retourSur ?? "/admin/clients", libelle: retourSur ? "Retour au document" : "Clients" }} description="Pour un professionnel, le SIREN suffit : le reste de la fiche se remplit depuis l'annuaire des entreprises." />
       <Carte>
         <FormulaireClient retour={retourSur} />
       </Carte>

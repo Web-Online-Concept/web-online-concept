@@ -13,7 +13,7 @@ async function Contenu({ searchParams }: { searchParams: Promise<{ client?: stri
   const clients = await listeClients(sb);
   return (
     <>
-      <TitrePage titre="Nouvelle facture" />
+      <TitrePage titre="Nouvelle facture" retour={{ href: "/admin/factures", libelle: "Factures" }} description="Enregistrez un brouillon à tout moment. À l'émission, la facture reçoit son numéro et son PDF est archivé : elle ne peut plus être modifiée." />
       {sp.erreur && (
         <div className="mb-5">
           <Alerte ton="erreur">{sp.erreur}</Alerte>
