@@ -1,6 +1,7 @@
 import "server-only";
 import fontkit from "@pdf-lib/fontkit";
 import { degrees, PDFDocument, rgb, type PDFFont, type PDFPage } from "pdf-lib";
+import QRCode from "qrcode";
 import { LOGO_PNG, SORA_REGULAR, SORA_SEMIBOLD } from "./ressources";
 
 export type Partie = {
@@ -65,6 +66,26 @@ const dateFr = (iso?: string | null) =>
 // IBAN par groupes de quatre caractères, titulaire du compte = dénomination sans la mention « EI »
 const ibanLisible = (iban: string) => iban.replace(/\s+/g, "").replace(/(.{4})/g, "$1 ").trim();
 const titulaire = (e: Partie) => (e.raison_sociale ?? "").replace(/\s+(EI|E\.I\.)$/i, "").trim();
+
+// QR code de virement SEPA (norme EPC069-12, « GiroCode ») : bénéficiaire, IBAN, montant et référence préremplis
+function qrVirement(e: Partie, doc: DocumentPdf) {
+  if (!e.iban || !(doc.total_ttc > 0) || doc.total_ttc > 999999999.99) return null;
+  const charge = [
+    "BCD",
+    "002",
+    "1",
+    "SCT",
+    (e.bic ?? "").replace(/\s+/g, ""),
+    titulaire(e).slice(0, 70),
+    e.iban.replace(/\s+/g, "").toUpperCase(),
+    `EUR${doc.total_ttc.toFixed(2)}`,
+    "",
+    "",
+    (doc.numero ?? "").slice(0, 140),
+  ].join("\n");
+  const { modules } = QRCode.create(charge, { errorCorrectionLevel: "M" });
+  return { size: modules.size, data: modules.data };
+}
 
 const qte = (n: number) => new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 3 }).format(n).replace(/ /g, " ");
 
@@ -237,37 +258,9 @@ export async function genererPdf(doc: DocumentPdf, lignes: LignePdf[], brouillon
     page.drawLine({ start: { x: M, y: y + 17 }, end: { x: L - M, y: y + 17 }, thickness: 0.6, color: FILET });
   }
 
-  // Totaux (à droite) et, sur une facture, encadré de règlement (à gauche)
+  // Totaux, à droite
   if (y < 230) nouvellePage();
   y -= 4;
-  const yHautTotaux = y;
-  let yBasReglement = y;
-  if (doc.genre === "facture" && e.iban) {
-    const largeur = L - M - 220 - 10 - M - 22;
-    const lignesR: [string, string][] = [
-      ["Titulaire", titulaire(e)],
-      ["IBAN", ibanLisible(e.iban)],
-      ...(e.bic ? ([["BIC", e.bic]] as [string, string][]) : []),
-      ...(doc.numero ? ([["Référence", doc.numero]] as [string, string][]) : []),
-    ];
-    const hR = 26 + lignesR.length * 13 + (doc.date_echeance ? 14 : 2);
-    page.drawRectangle({ x: M, y: y - hR + 12, width: largeur, height: hR, borderColor: FILET, borderWidth: 1 });
-    page.drawRectangle({ x: M, y: y - hR + 12, width: 3, height: hR, color: BLEU });
-    let yr = y;
-    texte("Règlement par virement", M + 14, yr, 9.5, gras);
-    yr -= 17;
-    for (const [lib, val] of lignesR) {
-      texte(lib, M + 14, yr, 8.5, reg, GRIS);
-      texte(val, M + 70, yr, 8.5, lib === "IBAN" || lib === "Référence" ? gras : reg);
-      yr -= 13;
-    }
-    if (doc.date_echeance) {
-      yr -= 3;
-      texte(`À régler au plus tard le ${dateFr(doc.date_echeance)}.`, M + 14, yr, 8, reg, GRIS);
-    }
-    yBasReglement = y - hR + 12;
-  }
-  y = yHautTotaux;
   const xLib = L - M - 220;
   const ligneTotal = (lib: string, val: string, fort = false) => {
     texte(lib, xLib, y, fort ? 11 : 9.5, fort ? gras : reg, fort ? NUIT : GRIS);
@@ -280,7 +273,59 @@ export async function genererPdf(doc: DocumentPdf, lignes: LignePdf[], brouillon
   y -= 8;
   page.drawRectangle({ x: xLib - 10, y: y - 8, width: L - M - xLib + 10, height: 26, color: CIEL });
   ligneTotal(doc.genre === "devis" ? "Total" : doc.genre === "avoir" ? "Montant de l'avoir" : "Net à payer", euros(doc.total_ttc), true);
-  y = Math.min(y - 6, yBasReglement - 16);
+  y -= 10;
+
+  // Facture : encadré de règlement par virement, avec un QR code que l'application bancaire du client sait lire
+  if (doc.genre === "facture" && e.iban) {
+    const lignesR: [string, string][] = [
+      ["Titulaire", titulaire(e)],
+      ["IBAN", ibanLisible(e.iban)],
+      ...(e.bic ? ([["BIC", e.bic]] as [string, string][]) : []),
+      ...(doc.numero ? ([["Référence", doc.numero]] as [string, string][]) : []),
+    ];
+    const qr = qrVirement(e, doc);
+    const tailleQr = 74;
+    const hR = Math.max(26 + lignesR.length * 13 + (doc.date_echeance ? 14 : 2), qr ? tailleQr + 20 : 0);
+    if (y - hR < 80) nouvellePage();
+    const bas = y - hR + 12;
+    page.drawRectangle({ x: M, y: bas, width: L - 2 * M, height: hR, borderColor: FILET, borderWidth: 1 });
+    page.drawRectangle({ x: M, y: bas, width: 3, height: hR, color: BLEU });
+    let yr = y;
+    texte("Règlement par virement", M + 14, yr, 9.5, gras);
+    yr -= 17;
+    for (const [lib, val] of lignesR) {
+      texte(lib, M + 14, yr, 8.5, reg, GRIS);
+      texte(val, M + 70, yr, 8.5, lib === "IBAN" || lib === "Référence" ? gras : reg);
+      yr -= 13;
+    }
+    if (doc.date_echeance) {
+      yr -= 3;
+      texte(`À régler au plus tard le ${dateFr(doc.date_echeance)}.`, M + 14, yr, 8, reg, GRIS);
+    }
+    if (qr) {
+      const xQr = L - M - 10 - tailleQr;
+      const yQr = bas + (hR - tailleQr) / 2;
+      const n = qr.size;
+      const m = tailleQr / n;
+      for (let r = 0; r < n; r++) {
+        // Modules noirs consécutifs d'une rangée tracés d'un seul rectangle
+        let debut = -1;
+        for (let col = 0; col <= n; col++) {
+          const noir = col < n && qr.data[r * n + col] === 1;
+          if (noir && debut < 0) debut = col;
+          if (!noir && debut >= 0) {
+            page.drawRectangle({ x: xQr + debut * m, y: yQr + (n - 1 - r) * m, width: (col - debut) * m + 0.05, height: m + 0.05, color: NUIT });
+            debut = -1;
+          }
+        }
+      }
+      const xTexte = xQr - 14;
+      const yMilieu = bas + hR / 2;
+      aDroite("Payez en scannant ce code", xTexte, yMilieu + 4, 8.5, gras);
+      aDroite("avec l'application de votre banque", xTexte, yMilieu - 8, 8, reg, GRIS);
+    }
+    y = bas - 16;
+  }
 
   // Mentions
   const mentions: { t: string; gras?: boolean }[] = [];

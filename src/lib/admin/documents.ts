@@ -128,7 +128,8 @@ export async function archiverFacture(sb: SupabaseClient, id: string) {
   const r = await pdfFacture(sb, id);
   if (!r || r.facture.statut === "brouillon") return;
   const annee = String(r.facture.date_emission).slice(0, 4);
-  const chemin = `factures/${annee}/${r.facture.numero}.pdf`;
+  // Le numéro seul ne suffit pas : un numéro peut avoir servi à une facture de test retirée avant la mise en service
+  const chemin = `factures/${annee}/${r.facture.numero}-${String(id).slice(0, 8)}.pdf`;
   const { error } = await sb.storage.from("documents").upload(chemin, r.octets, { contentType: "application/pdf", upsert: false });
   if (error && !/exists/i.test(error.message)) throw new Error(`Archivage du PDF impossible : ${error.message}`);
   const sha = createHash("sha256").update(r.octets).digest("hex");
