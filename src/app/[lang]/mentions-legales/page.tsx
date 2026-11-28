@@ -89,9 +89,10 @@ export default async function MentionsLegales() {
   return (
     <>
       <EnTetePage titre={x.titre} />
-      <section className="bg-white py-14 sm:py-16">
+      {/* Téléphone : moins d'espace entre l'en-tête et le début du texte */}
+      <section className="bg-white pb-14 pt-8 sm:py-16">
         <Conteneur className="max-w-3xl">
-          <div className="prose-woc">
+          <div className="prose-woc prose-legale">
             {x.fait && (
               <p>
                 <em>{x.fait}</em> <Link href={chemin("fr", "mentions-legales")} hrefLang="fr" lang="fr">Version française</Link>
