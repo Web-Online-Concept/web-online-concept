@@ -23,19 +23,44 @@ const PICTOS = [
   </>,
 ];
 
-const OUTILS = ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL", "Vercel", "Stripe"];
+const OUTILS = [
+  "Next.js",
+  "React",
+  "TypeScript",
+  "Tailwind CSS",
+  "Supabase",
+  "PostgreSQL",
+  "Vercel",
+  "Stripe",
+];
 
 const TEXTES = {
   fr: {
     titre: "À propos",
     description:
       "Web Online Concept, studio de développement web et d'intelligence artificielle depuis 2009 : un interlocuteur unique, la capacité de production d'une équipe entière.",
-    chiffres: ["création du studio", "réalisations présentées sur ce site", "plateformes : iPhone, Android et web"],
+    chiffres: [
+      "création du studio",
+      "réalisations présentées sur ce site",
+      "plateformes : iPhone, Android et web",
+    ],
     principes: [
-      ["Un seul interlocuteur", "De la première discussion à la mise en ligne, une seule personne connaît votre projet de bout en bout. Pas de relais, pas de perte d'information."],
-      ["Les technologies de pointe", "Des outils modernes et l'IA générative, choisis pour leur solidité et leur capacité à évoluer avec vous."],
-      ["Une qualité vérifiée", "Chaque livraison est testée, relue et sécurisée. Aller vite ne veut jamais dire aller moins bien."],
-      ["Votre autonomie", "Des espaces d'administration pensés pour vous : vous faites vivre votre site ou votre application sans dépendre de personne."],
+      [
+        "Un seul interlocuteur",
+        "De la première discussion à la mise en ligne, une seule personne connaît votre projet de bout en bout. Pas de relais, pas de perte d'information.",
+      ],
+      [
+        "Les technologies de pointe",
+        "Des outils modernes et l'IA générative, choisis pour leur solidité et leur capacité à évoluer avec vous.",
+      ],
+      [
+        "Une qualité vérifiée",
+        "Chaque livraison est testée, relue et sécurisée. Aller vite ne veut jamais dire aller moins bien.",
+      ],
+      [
+        "Votre autonomie",
+        "Des espaces d'administration pensés pour vous : vous faites vivre votre site ou votre application sans dépendre de personne.",
+      ],
     ],
     mobile: "iOS et Android",
     descendre: "Descendre vers l'histoire du studio",
@@ -46,7 +71,8 @@ const TEXTES = {
     histoire: "Plus de quinze ans de projets",
     histoire1:
       "Le studio est né en 2009. Depuis, il conçoit et fait vivre des sites pour des artisans, des imprimeurs, des praticiens ou des artistes, et développe aujourd'hui ses propres applications.",
-    histoire2: "Avec l'IA, la façon de travailler a changé : un seul interlocuteur dispose désormais de la capacité de production d'une équipe entière.",
+    histoire2:
+      "Avec l'IA, la façon de travailler a changé : un seul interlocuteur dispose désormais de la capacité de production d'une équipe entière.",
     guide: "Ce qui guide chaque projet",
     tests: ["Tests réussis", "Prêt pour votre validation"],
     stores: ["App Store, Google Play et web", "Disponible partout"],
@@ -63,12 +89,28 @@ const TEXTES = {
     titre: "About",
     description:
       "Web Online Concept, a web development and artificial intelligence studio since 2009: a single point of contact, with the production capacity of an entire team.",
-    chiffres: ["studio founded", "projects showcased on this site", "platforms: iPhone, Android and web"],
+    chiffres: [
+      "studio founded",
+      "projects showcased on this site",
+      "platforms: iPhone, Android and web",
+    ],
     principes: [
-      ["A single point of contact", "From the first conversation to launch, one person knows your project inside out. No hand-offs, no lost information."],
-      ["Cutting-edge technology", "Modern tools and generative AI, chosen for their reliability and their ability to grow with you."],
-      ["Proven quality", "Every release is tested, reviewed and secured. Moving fast never means cutting corners."],
-      ["Your independence", "Admin areas designed for you: you keep your website or app alive without depending on anyone."],
+      [
+        "A single point of contact",
+        "From the first conversation to launch, one person knows your project inside out. No hand-offs, no lost information.",
+      ],
+      [
+        "Cutting-edge technology",
+        "Modern tools and generative AI, chosen for their reliability and their ability to grow with you.",
+      ],
+      [
+        "Proven quality",
+        "Every release is tested, reviewed and secured. Moving fast never means cutting corners.",
+      ],
+      [
+        "Your independence",
+        "Admin areas designed for you: you keep your website or app alive without depending on anyone.",
+      ],
     ],
     mobile: "iOS and Android",
     descendre: "Scroll down to the studio's story",
@@ -79,7 +121,8 @@ const TEXTES = {
     histoire: "Over fifteen years of projects",
     histoire1:
       "The studio was founded in 2009. Since then, it has designed and maintained websites for tradespeople, printers, practitioners and artists, and today it also builds its own apps.",
-    histoire2: "With AI, the way we work has changed: a single point of contact now has the production capacity of an entire team.",
+    histoire2:
+      "With AI, the way we work has changed: a single point of contact now has the production capacity of an entire team.",
     guide: "What guides every project",
     tests: ["Tests passed", "Ready for your approval"],
     stores: ["App Store, Google Play and web", "Available everywhere"],
@@ -96,12 +139,28 @@ const TEXTES = {
     titre: "Nosotros",
     description:
       "Web Online Concept, estudio de desarrollo web e inteligencia artificial desde 2009: un único interlocutor, con la capacidad de producción de un equipo entero.",
-    chiffres: ["creación del estudio", "proyectos presentados en este sitio", "plataformas: iPhone, Android y web"],
+    chiffres: [
+      "creación del estudio",
+      "proyectos presentados en este sitio",
+      "plataformas: iPhone, Android y web",
+    ],
     principes: [
-      ["Un único interlocutor", "Desde la primera conversación hasta la puesta en línea, una sola persona conoce su proyecto de principio a fin. Sin intermediarios ni información perdida."],
-      ["Tecnologías de vanguardia", "Herramientas modernas e IA generativa, elegidas por su solidez y su capacidad para evolucionar con usted."],
-      ["Una calidad verificada", "Cada entrega se prueba, se revisa y se protege. Ir rápido nunca significa hacerlo peor."],
-      ["Su autonomía", "Paneles de administración pensados para usted: mantiene vivo su sitio o su aplicación sin depender de nadie."],
+      [
+        "Un único interlocutor",
+        "Desde la primera conversación hasta la puesta en línea, una sola persona conoce su proyecto de principio a fin. Sin intermediarios ni información perdida.",
+      ],
+      [
+        "Tecnologías de vanguardia",
+        "Herramientas modernas e IA generativa, elegidas por su solidez y su capacidad para evolucionar con usted.",
+      ],
+      [
+        "Una calidad verificada",
+        "Cada entrega se prueba, se revisa y se protege. Ir rápido nunca significa hacerlo peor.",
+      ],
+      [
+        "Su autonomía",
+        "Paneles de administración pensados para usted: mantiene vivo su sitio o su aplicación sin depender de nadie.",
+      ],
     ],
     mobile: "iOS y Android",
     descendre: "Bajar a la historia del estudio",
@@ -112,7 +171,8 @@ const TEXTES = {
     histoire: "Más de quince años de proyectos",
     histoire1:
       "El estudio nació en 2009. Desde entonces, diseña y mantiene sitios para artesanos, imprentas, profesionales de la salud y artistas, y hoy desarrolla también sus propias aplicaciones.",
-    histoire2: "Con la IA, la forma de trabajar ha cambiado: un único interlocutor dispone ahora de la capacidad de producción de un equipo entero.",
+    histoire2:
+      "Con la IA, la forma de trabajar ha cambiado: un único interlocutor dispone ahora de la capacidad de producción de un equipo entero.",
     guide: "Lo que guía cada proyecto",
     tests: ["Pruebas superadas", "Listo para su aprobación"],
     stores: ["App Store, Google Play y web", "Disponible en todas partes"],
@@ -144,32 +204,60 @@ export default async function APropos() {
     { valeur: String(REALISATIONS.length), libelle: x.chiffres[1] },
     { valeur: "3", libelle: x.chiffres[2] },
   ];
-  const PRINCIPES = x.principes.map(([titre, texte], i) => ({ titre, texte, picto: PICTOS[i] }));
+  const PRINCIPES = x.principes.map(([titre, texte], i) => ({
+    titre,
+    texte,
+    picto: PICTOS[i],
+  }));
   const NOMS_IA = IA.modeles.map((m) => m.nom);
   const outils = [...OUTILS, x.mobile];
   return (
     <>
       <DefilementEcrans />
-      <EnTetePage ecran suite={{ id: "histoire", libelle: x.descendre }} illustration="apropos" titre={x.h1} intro={x.intro} />
+      <EnTetePage
+        ecran
+        suite={{ id: "histoire", libelle: x.descendre }}
+        illustration="apropos"
+        titre={x.h1}
+        intro={x.intro}
+      />
 
       {/* Histoire */}
       <section id="histoire" className="ecran bg-white py-20 sm:py-24">
         <Conteneur>
           <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-16">
-            <PhotoCadre photo={PHOTOS.poste} sizes="(min-width: 1024px) 540px, 92vw" className="aspect-[16/11]">
-              <CarteFlottante icone="appareils" titre={x.ici[0]} detail={x.ici[1]} className="-bottom-6 left-5" />
+            <PhotoCadre
+              photo={PHOTOS.poste}
+              sizes="(min-width: 1024px) 540px, 92vw"
+              className="aspect-[16/11]"
+            >
+              <CarteFlottante
+                icone="appareils"
+                titre={x.ici[0]}
+                detail={x.ici[1]}
+                className="-bottom-6 left-5"
+              />
             </PhotoCadre>
             <div>
               <h2 className={`${H2} text-nuit`}>{x.histoire}</h2>
-              <p className="mt-5 text-[18px] leading-relaxed text-[#2C4558]">{x.histoire1}</p>
-              <p className="mt-4 text-[18px] leading-relaxed text-[#2C4558]">{x.histoire2}</p>
+              <p className="mt-5 text-[18px] leading-relaxed text-[#2C4558]">
+                {x.histoire1}
+              </p>
+              <p className="mt-4 text-[18px] leading-relaxed text-[#2C4558]">
+                {x.histoire2}
+              </p>
             </div>
           </div>
           <dl className="mt-14 grid gap-8 border-t border-[#E3E9F0] pt-10 sm:grid-cols-3">
             {CHIFFRES.map((c) => (
-              <div key={c.libelle} className="flex flex-col-reverse text-center">
+              <div
+                key={c.libelle}
+                className="flex flex-col-reverse text-center"
+              >
                 <dt className="mt-3 text-[15px] text-[#4A6178]">{c.libelle}</dt>
-                <dd className="text-[clamp(2.2rem,4vw,3rem)] font-semibold leading-none tracking-tight text-nuit">{c.valeur}</dd>
+                <dd className="text-[clamp(2.2rem,4vw,3rem)] font-semibold leading-none tracking-tight text-nuit">
+                  {c.valeur}
+                </dd>
               </div>
             ))}
           </dl>
@@ -185,28 +273,45 @@ export default async function APropos() {
               <ul className="mt-10 grid gap-x-8 gap-y-9 sm:grid-cols-2">
                 {PRINCIPES.map((p) => (
                   <li key={p.titre}>
-                    <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[linear-gradient(135deg,#1F5EFF,#00B4D8)] text-white">
-                      <svg
-                        viewBox="0 0 24 24"
-                        className="h-5 w-5"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        aria-hidden="true"
-                      >
-                        {p.picto}
-                      </svg>
-                    </span>
-                    <h3 className="mt-4 text-lg font-semibold text-nuit">{p.titre}</h3>
-                    <p className="mt-2 text-[15px] leading-relaxed text-[#2C4558]">{p.texte}</p>
+                    {/* Pictogramme à gauche du titre */}
+                    <div className="flex items-center gap-3">
+                      <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[linear-gradient(135deg,#1F5EFF,#00B4D8)] text-white">
+                        <svg
+                          viewBox="0 0 24 24"
+                          className="h-[18px] w-[18px]"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          aria-hidden="true"
+                        >
+                          {p.picto}
+                        </svg>
+                      </span>
+                      <h3 className="text-lg font-semibold leading-snug text-nuit">
+                        {p.titre}
+                      </h3>
+                    </div>
+                    <p className="mt-3 text-[15px] leading-relaxed text-[#2C4558]">
+                      {p.texte}
+                    </p>
                   </li>
                 ))}
               </ul>
             </div>
-            <PhotoCadre photo={PHOTOS.ultralarge} sizes="(min-width: 1024px) 560px, 92vw" className="aspect-[4/3]">
-              <CarteFlottante icone="coche" titre={x.tests[0]} detail={x.tests[1]} retard={0.8} className="-bottom-6 right-5" />
+            <PhotoCadre
+              photo={PHOTOS.ultralarge}
+              sizes="(min-width: 1024px) 560px, 92vw"
+              className="aspect-[4/3]"
+            >
+              <CarteFlottante
+                icone="coche"
+                titre={x.tests[0]}
+                detail={x.tests[1]}
+                retard={0.8}
+                className="-bottom-6 right-5"
+              />
             </PhotoCadre>
           </div>
         </Conteneur>
@@ -214,17 +319,33 @@ export default async function APropos() {
 
       {/* Studio et éditeur */}
       <section className="ecran relative overflow-hidden bg-nuit py-20 text-white sm:py-24">
-        <div aria-hidden="true" className="absolute -left-40 -top-40 h-[30rem] w-[30rem] rounded-full bg-bleu opacity-20 blur-3xl" />
+        <div
+          aria-hidden="true"
+          className="absolute -left-40 -top-40 h-[30rem] w-[30rem] rounded-full bg-bleu opacity-20 blur-3xl"
+        />
         <Conteneur className="relative">
           <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-16">
             <div className="relative aspect-[16/11]">
-              <EventailApplication ecrans={ecransDe(c, "memoday")} sizes="(min-width: 1024px) 180px, 30vw" />
-              <CarteFlottante icone="appareils" titre={x.stores[0]} detail={x.stores[1]} className="-bottom-6 right-5 z-20" />
+              <EventailApplication
+                ecrans={ecransDe(c, "memoday")}
+                sizes="(min-width: 1024px) 180px, 30vw"
+              />
+              <CarteFlottante
+                icone="appareils"
+                titre={x.stores[0]}
+                detail={x.stores[1]}
+                className="-bottom-6 right-5 z-20"
+              />
             </div>
             <div>
               <h2 className={H2}>{x.editeur}</h2>
-              <p className="mt-5 text-[18px] leading-relaxed text-[#C3D0DD]">{x.editeurTexte}</p>
-              <Link href={chemin(l, "realisations", "memoday")} className="mt-6 inline-block font-medium text-[#7CCBFF] transition-colors hover:text-white">
+              <p className="mt-5 text-[18px] leading-relaxed text-[#C3D0DD]">
+                {x.editeurTexte}
+              </p>
+              <Link
+                href={chemin(l, "realisations", "memoday")}
+                className="mt-6 inline-block font-medium text-[#7CCBFF] transition-colors hover:text-white"
+              >
                 {x.memoday}
               </Link>
             </div>
@@ -238,13 +359,21 @@ export default async function APropos() {
           <div className="grid items-center gap-14 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
             <div>
               <h2 className={`${H2} text-nuit`}>{x.outils}</h2>
-              <p className="mt-5 text-[18px] leading-relaxed text-[#2C4558]">{x.outilsTexte}</p>
-              <Link href={chemin(l, "capacites")} className="mt-6 inline-block font-medium text-bleu transition-colors hover:text-[#1638A8]">
+              <p className="mt-5 text-[18px] leading-relaxed text-[#2C4558]">
+                {x.outilsTexte}
+              </p>
+              <Link
+                href={chemin(l, "capacites")}
+                className="mt-6 inline-block font-medium text-bleu transition-colors hover:text-[#1638A8]"
+              >
                 {x.voir}
               </Link>
             </div>
             <div className="relative overflow-hidden rounded-3xl bg-ciel p-8 sm:p-10">
-              <div aria-hidden="true" className="absolute -right-16 -top-20 h-64 w-64 rounded-full bg-cyan opacity-15 blur-3xl" />
+              <div
+                aria-hidden="true"
+                className="absolute -right-16 -top-20 h-64 w-64 rounded-full bg-cyan opacity-15 blur-3xl"
+              />
               <ul className="relative flex flex-wrap justify-center gap-3">
                 {[...NOMS_IA, ...outils].map((o, i) => {
                   const ia = i < NOMS_IA.length;
@@ -252,12 +381,19 @@ export default async function APropos() {
                     <li
                       key={o}
                       className={`flotte flex items-center gap-1.5 rounded-full px-5 py-2.5 text-[15px] font-medium shadow-[0_14px_30px_-20px_rgba(10,26,47,0.5)] ${
-                        ia ? "bg-[linear-gradient(135deg,#1F5EFF,#00B4D8)] text-white" : "bg-white text-nuit ring-1 ring-[#E3E9F0]"
+                        ia
+                          ? "bg-[linear-gradient(135deg,#1F5EFF,#00B4D8)] text-white"
+                          : "bg-white text-nuit ring-1 ring-[#E3E9F0]"
                       }`}
                       style={{ animationDelay: `${(i % 5) * 0.7}s` }}
                     >
                       {ia && (
-                        <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor" aria-hidden="true">
+                        <svg
+                          viewBox="0 0 24 24"
+                          className="h-3.5 w-3.5"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
                           <path d="M12 2.5l2.4 6.6 6.6 2.4-6.6 2.4L12 20.5l-2.4-6.6L3 11.5l6.6-2.4z" />
                         </svg>
                       )}
