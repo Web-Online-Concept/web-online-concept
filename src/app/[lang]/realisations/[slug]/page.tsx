@@ -148,12 +148,13 @@ export default async function PageRealisation({
             {r.client && (
               <p className="order-6 mt-3 text-[15px] text-[#B8C6D6] lg:mt-4">{x.pour} {r.client}</p>
             )}
-            <div className="order-7 mt-7 flex flex-wrap gap-3 lg:mt-8">
+            {/* Téléphone et tablette : bouton du site sur toute la largeur, liens secondaires dessous, côte à côte */}
+            <div className="order-7 mt-7 grid w-full grid-cols-2 gap-3 sm:max-w-md lg:mt-8 lg:flex lg:max-w-none lg:flex-wrap">
               <a
                 href={r.site.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full bg-bleu px-6 py-3 font-medium text-white transition-colors hover:bg-[#3A72FF]"
+                className="col-span-2 rounded-full bg-bleu px-6 py-3 text-center font-medium text-white transition-colors hover:bg-[#3A72FF]"
               >
                 {x.visiter} {r.site.libelle}
               </a>
@@ -163,7 +164,7 @@ export default async function PageRealisation({
                   href={l.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full border border-white/40 px-6 py-3 font-medium text-white transition-colors hover:border-white hover:bg-white/5"
+                  className={`rounded-full border border-white/40 px-6 py-3 text-center font-medium text-white transition-colors hover:border-white hover:bg-white/5 ${r.autresLiens?.length === 1 ? "col-span-2" : ""}`}
                 >
                   {l.libelle}
                 </a>
