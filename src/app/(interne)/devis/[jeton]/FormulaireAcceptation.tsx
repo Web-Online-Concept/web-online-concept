@@ -3,7 +3,7 @@
 import { useActionState } from "react";
 import { accepterDevis, type EtatAcceptation } from "./actions";
 
-export default function FormulaireAcceptation({ jeton, total }: { jeton: string; total: string }) {
+export default function FormulaireAcceptation({ jeton, total, particulier = false }: { jeton: string; total: string; particulier?: boolean }) {
   const [etat, action, enCours] = useActionState(accepterDevis, { statut: "initial" } as EtatAcceptation);
 
   if (etat.statut === "accepte") {
@@ -27,8 +27,17 @@ export default function FormulaireAcceptation({ jeton, total }: { jeton: string;
       </div>
       <label className="flex cursor-pointer items-start gap-3 text-[15px] leading-relaxed">
         <input type="checkbox" name="accord" value="oui" required className="mt-1 h-4 w-4 accent-bleu" />
-        <span>J&apos;accepte ce devis d&apos;un montant de {total}. Ce bon pour accord vaut commande.</span>
+        <span>J&apos;accepte ce devis d&apos;un montant de {total} et les conditions de réalisation ci-dessus. Ce bon pour accord vaut commande.</span>
       </label>
+      {particulier && (
+        <label className="flex cursor-pointer items-start gap-3 text-[15px] leading-relaxed text-[#2C4558]">
+          <input type="checkbox" name="anticipe" value="oui" className="mt-1 h-4 w-4 accent-bleu" />
+          <span>
+            Facultatif : je demande que les travaux commencent avant la fin de mon délai de rétractation de 14 jours. Si je me rétracte ensuite, la part
+            déjà réalisée me sera facturée.
+          </span>
+        </label>
+      )}
       {etat.message && (
         <p role="alert" className="text-[15px] text-[#B42318]">
           {etat.message}

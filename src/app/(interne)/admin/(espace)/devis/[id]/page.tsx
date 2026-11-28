@@ -161,6 +161,9 @@ async function Contenu({ params, searchParams }: { params: Promise<{ id: string 
               Accepté le {fmtDate(d.accepte_le)} {d.accepte_par && <>par {d.accepte_par}</>}.
             </p>
           )}
+          {d.statut === "accepte" && d.debut_anticipe && (
+            <p className="mt-2 text-sm text-[#4A6178]">Le client a demandé que les travaux commencent avant la fin de son délai de rétractation de 14 jours.</p>
+          )}
           <div className="mt-4 flex flex-col items-stretch gap-3 sm:items-start [&_button]:w-full sm:[&_button]:w-auto [&>a]:w-full sm:[&>a]:w-auto">
             {d.statut === "envoye" && <CopierLien chemin={`/devis/${d.jeton_acceptation}`} />}
             {d.facture_id ? (

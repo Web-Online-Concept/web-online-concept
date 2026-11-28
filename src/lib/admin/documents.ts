@@ -117,7 +117,7 @@ export async function pdfDevis(sb: SupabaseClient, id: string, origine?: string)
     emetteur: c.emetteur,
     client: c.client,
     lien_acceptation: d.numero && origine ? `${origine}/devis/${d.jeton_acceptation}` : null,
-    accepte: d.accepte_le ? { le: d.accepte_le, par: d.accepte_par ?? "" } : null,
+    accepte: d.accepte_le ? { le: d.accepte_le, par: d.accepte_par ?? "", debut_anticipe: Boolean(d.debut_anticipe) } : null,
   };
   const octets = await genererPdf(doc, versLignesPdf(c.lignes), !d.numero);
   return { octets, nom: `Devis-${d.numero ?? "brouillon"}.pdf`, devis: d };

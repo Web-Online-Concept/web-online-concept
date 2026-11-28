@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import { CONDITIONS, RETRACTATION, TITRE_CONDITIONS } from "@/lib/conditions";
 import { clientService } from "@/lib/supabase/service";
 import FormulaireAcceptation from "./FormulaireAcceptation";
 
@@ -18,12 +19,13 @@ async function Contenu({ params }: { params: Promise<{ jeton: string }> }) {
   if (!sb) notFound();
   const { data: d } = await sb
     .from("devis")
-    .select("id, numero, objet, statut, total_ttc, date_emission, date_validite, accepte_le, accepte_par, client")
+    .select("id, numero, objet, statut, total_ttc, date_emission, date_validite, accepte_le, accepte_par, debut_anticipe, client")
     .eq("jeton_acceptation", jeton)
     .maybeSingle();
   if (!d || !d.numero) notFound();
   const { data: lignes } = await sb.from("devis_lignes").select("designation, description, quantite, unite, prix_unitaire, total_ht").eq("devis_id", d.id).order("position");
-  const client = d.client as { nom?: string } | null;
+  const client = d.client as { nom?: string; type?: string } | null;
+  const particulier = client?.type === "particulier";
   const total = euros(Number(d.total_ttc));
 
   return (
@@ -55,6 +57,36 @@ async function Contenu({ params }: { params: Promise<{ jeton: string }> }) {
       </p>
       <p className="mt-2 text-sm text-[#4A6178]">TVA non applicable, art. 293 B du CGI.</p>
 
+      {/* Conditions de réalisation (et droit de rétractation pour un particulier), à lire avant d'accepter */}
+      <details className="group mt-8 rounded-2xl border border-[#DCE3EC]" open={d.statut === "envoye"}>
+        <summary className="cursor-pointer list-none px-6 py-4 font-semibold marker:hidden">
+          {TITRE_CONDITIONS}
+          <span className="ml-2 text-sm font-normal text-[#4A6178] group-open:hidden">(afficher)</span>
+        </summary>
+        <ol className="flex flex-col gap-4 px-6 pb-6">
+          {CONDITIONS.map((c, i) => (
+            <li key={c.titre} className="flex gap-3">
+              <span className="w-5 shrink-0 font-semibold text-bleu">{i + 1}</span>
+              <span>
+                <span className="block font-medium">{c.titre}</span>
+                <span className="mt-0.5 block text-[15px] leading-relaxed text-[#4A6178]">{c.texte}</span>
+              </span>
+            </li>
+          ))}
+        </ol>
+        {particulier && (
+          <div className="mx-6 mb-6 rounded-xl bg-ciel p-5">
+            <p className="font-medium">{RETRACTATION.titre}</p>
+            {RETRACTATION.texte.map((t) => (
+              <p key={t} className="mt-2 text-[15px] leading-relaxed text-[#2C4558]">
+                {t}
+              </p>
+            ))}
+            <p className="mt-2 text-[15px] text-[#2C4558]">Le modèle de formulaire figure dans le devis en PDF.</p>
+          </div>
+        )}
+      </details>
+
       <div className="mt-8 flex flex-col gap-6">
         <a href={`/devis/${jeton}/pdf`} className="self-start rounded-full border border-[#CBD5E1] px-5 py-2.5 font-medium hover:border-nuit">
           Télécharger le devis en PDF
@@ -63,9 +95,10 @@ async function Contenu({ params }: { params: Promise<{ jeton: string }> }) {
           <p role="status" className="rounded-2xl bg-[#E3F8EC] p-6 text-[#0E5A35]">
             Devis accepté le {dateFr(String(d.accepte_le).slice(0, 10))}
             {d.accepte_par ? ` par ${d.accepte_par}` : ""}. Merci pour votre confiance.
+            {d.debut_anticipe && " Vous avez demandé que les travaux commencent avant la fin du délai de rétractation."}
           </p>
         ) : d.statut === "envoye" ? (
-          <FormulaireAcceptation jeton={jeton} total={total} />
+          <FormulaireAcceptation jeton={jeton} total={total} particulier={particulier} />
         ) : (
           <p className="rounded-2xl bg-ciel p-6">Ce devis n&apos;est plus ouvert à l&apos;acceptation en ligne. Contactez contact@web-online-concept.com.</p>
         )}

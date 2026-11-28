@@ -2,6 +2,7 @@ import "server-only";
 import fontkit from "@pdf-lib/fontkit";
 import { degrees, PDFDocument, rgb, type PDFFont, type PDFPage } from "pdf-lib";
 import QRCode from "qrcode";
+import { CONDITIONS, RETRACTATION, TITRE_CONDITIONS } from "@/lib/conditions";
 import { LOGO_PNG, SORA_REGULAR, SORA_SEMIBOLD } from "./ressources";
 
 export type Partie = {
@@ -50,7 +51,7 @@ export type DocumentPdf = {
   emetteur: Partie;
   client: Partie;
   lien_acceptation?: string | null;
-  accepte?: { le: string; par: string } | null;
+  accepte?: { le: string; par: string; debut_anticipe?: boolean } | null;
 };
 
 const NUIT = rgb(10 / 255, 26 / 255, 47 / 255);
@@ -92,7 +93,22 @@ const qte = (n: number) => new Intl.NumberFormat("fr-FR", { maximumFractionDigit
 function decouper(texte: string, police: PDFFont, taille: number, largeur: number): string[] {
   const lignes: string[] = [];
   for (const para of texte.split(/\n/)) {
-    const mots = para.split(/\s+/).filter(Boolean);
+    // Un mot plus large que la colonne (une adresse web, par exemple) est coupé où il faut
+    const mots = para
+      .split(/\s+/)
+      .filter(Boolean)
+      .flatMap((mot) => {
+        if (police.widthOfTextAtSize(mot, taille) <= largeur) return [mot];
+        const morceaux: string[] = [];
+        let m = "";
+        for (const ch of mot) {
+          if (police.widthOfTextAtSize(m + ch, taille) > largeur && m) {
+            morceaux.push(m);
+            m = ch;
+          } else m += ch;
+        }
+        return m ? [...morceaux, m] : morceaux;
+      });
     let courante = "";
     for (const mot of mots) {
       const essai = courante ? `${courante} ${mot}` : mot;
@@ -337,7 +353,7 @@ export async function genererPdf(doc: DocumentPdf, lignes: LignePdf[], brouillon
     if (e.penalites_retard && c.type !== "particulier") mentions.push({ t: e.penalites_retard });
   }
   if (doc.genre === "devis") {
-    mentions.push({ t: `Devis valable jusqu'au ${dateFr(doc.date_validite)}. Le devis accepté vaut commande.` });
+    mentions.push({ t: `Devis valable jusqu'au ${dateFr(doc.date_validite)}. Le devis accepté vaut commande, aux conditions de réalisation jointes en page suivante.` });
     if (e.conditions_paiement) mentions.push({ t: e.conditions_paiement });
   }
   if (doc.notes) mentions.push({ t: doc.notes });
@@ -358,6 +374,10 @@ export async function genererPdf(doc: DocumentPdf, lignes: LignePdf[], brouillon
     if (doc.accepte) {
       texte(`Devis accepté en ligne le ${dateFr(doc.accepte.le.slice(0, 10))} par ${doc.accepte.par}.`, M, y, 10, gras, BLEU);
       y -= 16;
+      if (doc.accepte.debut_anticipe) {
+        texte("Le client a demandé que les travaux commencent avant la fin du délai de rétractation.", M, y, 8.5, reg, GRIS);
+        y -= 14;
+      }
     } else {
       page.drawRectangle({ x: L / 2, y: y - 70, width: L / 2 - M, height: 80, borderColor: FILET, borderWidth: 1 });
       texte("Bon pour accord : date et signature", L / 2 + 10, y - 4, 9, gras);
@@ -366,6 +386,60 @@ export async function genererPdf(doc: DocumentPdf, lignes: LignePdf[], brouillon
         decouper(doc.lien_acceptation, reg, 8, L / 2 - M - 20).forEach((t, i) => texte(t, M, y - 18 - i * 10, 8, reg, BLEU));
       }
       y -= 80;
+    }
+  }
+
+  // Devis : conditions de réalisation sur une page à part
+  if (doc.genre === "devis") {
+    nouvellePage();
+    texte(TITRE_CONDITIONS, M, y - 8, 17, gras);
+    y -= 26;
+    texte(`Jointes au devis ${doc.numero ?? "en brouillon"}${doc.accepte ? "" : " : l'acceptation du devis vaut acceptation de ces conditions"}.`, M, y, 9, reg, GRIS);
+    y -= 26;
+    const largeurTexte = L - 2 * M - 22;
+    CONDITIONS.forEach((cnd, i) => {
+      const ls = decouper(cnd.texte, reg, 9, largeurTexte);
+      if (y - 16 - ls.length * 12.5 < 70) nouvellePage();
+      texte(String(i + 1), M, y, 10, gras, BLEU);
+      texte(cnd.titre, M + 22, y, 10, gras);
+      y -= 14;
+      ls.forEach((t) => {
+        texte(t, M + 22, y, 9, reg, GRIS);
+        y -= 12.5;
+      });
+      y -= 9;
+    });
+
+    if (c.type === "particulier") {
+      const adresse = [e.adresse, [e.code_postal, e.ville].filter(Boolean).join(" ")].filter(Boolean).join(", ");
+      const paras = RETRACTATION.texte.map((t) => decouper(t, reg, 9, largeurTexte));
+      const form = RETRACTATION.formulaire(`${e.raison_sociale ?? ""} (${e.nom_commercial ?? ""})`, adresse, e.email ?? "", doc.numero ?? "")
+        .map((t) => decouper(t, reg, 8.5, largeurTexte - 20));
+      const hauteur = 61 + paras.reduce((n, p) => n + p.length * 12.5 + 6, 0) + form.reduce((n, f) => n + f.length * 12 + 4, 0);
+      y -= 6;
+      if (y - hauteur < 70) nouvellePage();
+      const haut = y + 14;
+      page.drawRectangle({ x: M, y: haut - hauteur, width: L - 2 * M, height: hauteur, color: CIEL });
+      texte(RETRACTATION.titre, M + 14, y, 10, gras);
+      y -= 18;
+      for (const p of paras) {
+        p.forEach((t) => {
+          texte(t, M + 14, y, 9, reg, NUIT);
+          y -= 12.5;
+        });
+        y -= 6;
+      }
+      y -= 4;
+      texte("Modèle de formulaire de rétractation", M + 14, y, 9, gras);
+      y -= 15;
+      for (const f of form) {
+        f.forEach((t) => {
+          texte(t, M + 24, y, 8.5, reg, GRIS);
+          y -= 12;
+        });
+        y -= 4;
+      }
+      y = haut - hauteur - 10;
     }
   }
 
