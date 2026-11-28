@@ -54,7 +54,7 @@ export default async function RacineSite({ children }: LayoutProps<"/[lang]">) {
           >
             {t({ fr: "Aller au contenu", en: "Skip to content", es: "Ir al contenido" }, l)}
           </a>
-          <Entete navigation={CONTENUS[l].NAVIGATION} />
+          <Entete navigation={CONTENUS[l].NAVIGATION} lienX={SITE.x} />
           <main id="contenu" className="flex-1 bg-white">
             {children}
           </main>

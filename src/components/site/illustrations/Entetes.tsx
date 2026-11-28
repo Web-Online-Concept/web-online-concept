@@ -471,8 +471,9 @@ function Faq({ id }: { id: string }) {
   );
 }
 
-export default function IllustrationEntete({ variante, className = "" }: { variante: VarianteEntete; className?: string }) {
-  const id = `ie-${variante}`;
+// prefixe : à changer quand la même illustration apparaît deux fois sur une page (menu mobile), pour des id uniques
+export default function IllustrationEntete({ variante, className = "", prefixe = "ie" }: { variante: VarianteEntete; className?: string; prefixe?: string }) {
+  const id = `${prefixe}-${variante}`;
   return (
     <svg viewBox="0 0 440 320" className={className} aria-hidden="true" focusable="false" fill="none">
       <Defs id={id} />

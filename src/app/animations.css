@@ -1367,3 +1367,46 @@ html[data-intro] .bandeau-langue {
     animation: none;
   }
 }
+
+/* Menu mobile : le panneau glisse depuis la gauche, puis les tuiles arrivent l'une après l'autre */
+.menu-panneau {
+  translate: -100% 0;
+  visibility: hidden;
+  transition:
+    translate 0.42s cubic-bezier(0.22, 0.9, 0.24, 1),
+    visibility 0s linear 0.42s;
+}
+.menu-panneau[data-ouvert] {
+  translate: 0 0;
+  visibility: visible;
+  transition:
+    translate 0.42s cubic-bezier(0.22, 0.9, 0.24, 1),
+    visibility 0s;
+}
+.menu-tuile {
+  opacity: 0;
+  translate: -18px 0;
+  transition:
+    opacity 0.25s ease,
+    translate 0.25s ease;
+}
+.menu-panneau[data-ouvert] .menu-tuile {
+  opacity: 1;
+  translate: 0 0;
+  transition:
+    opacity 0.4s ease,
+    translate 0.55s cubic-bezier(0.22, 0.9, 0.24, 1);
+  transition-delay: calc(110ms + var(--i, 0) * 45ms);
+}
+html[data-menu] .bandeau-langue {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu-panneau,
+  .menu-panneau[data-ouvert],
+  .menu-tuile,
+  .menu-panneau[data-ouvert] .menu-tuile {
+    transition: none;
+    translate: none;
+  }
+}

@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { LogoAnime } from "@/components/site/Survol";
 import { SelecteurLangue, useLangue } from "@/components/site/Langue";
+import MenuMobile from "@/components/site/MenuMobile";
 import { analyserChemin, chemin as cheminPublic } from "@/lib/i18n/chemins";
 
 type Lien = { href: string; libelle: string };
@@ -94,10 +95,15 @@ const LIBELLES = {
   es: { nav: "Navegación principal", ouvrir: "Abrir el menú", fermer: "Cerrar el menú" },
 };
 
-export default function Entete({ navigation }: { navigation: Lien[] }) {
+export default function Entete({ navigation, lienX }: { navigation: Lien[]; lienX: string }) {
   const [ouvert, setOuvert] = useState(false);
+  const bouton = useRef<HTMLButtonElement>(null);
   const t = LIBELLES[useLangue()];
   useRetourEnHaut();
+  const fermer = useCallback((retourBouton: boolean) => {
+    setOuvert(false);
+    if (retourBouton) bouton.current?.focus();
+  }, []);
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-nuit">
@@ -105,6 +111,7 @@ export default function Entete({ navigation }: { navigation: Lien[] }) {
           Ordinateur : logo à gauche, navigation et langue à droite */}
       <div className="mx-auto grid max-w-6xl grid-cols-[1fr_auto_1fr] items-center gap-2 px-5 py-4 sm:px-8 lg:flex lg:justify-between lg:gap-4">
         <button
+          ref={bouton}
           type="button"
           className="-ml-3 inline-flex h-11 w-11 items-center justify-center justify-self-start rounded-full text-white lg:hidden"
           aria-expanded={ouvert}
@@ -112,9 +119,12 @@ export default function Entete({ navigation }: { navigation: Lien[] }) {
           aria-label={ouvert ? t.fermer : t.ouvrir}
           onClick={() => setOuvert((o) => !o)}
         >
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-            {ouvert ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
-          </svg>
+          {/* Trois traits qui se croisent en X à l'ouverture */}
+          <span aria-hidden="true" className="relative block h-4 w-[22px]">
+            <span className={`absolute left-0 top-0 h-0.5 w-full rounded-full bg-current transition-transform duration-300 motion-reduce:transition-none ${ouvert ? "translate-y-[7px] rotate-45" : ""}`} />
+            <span className={`absolute left-0 top-[7px] h-0.5 w-full rounded-full bg-current transition-opacity duration-200 motion-reduce:transition-none ${ouvert ? "opacity-0" : ""}`} />
+            <span className={`absolute bottom-0 left-0 h-0.5 w-full rounded-full bg-current transition-transform duration-300 motion-reduce:transition-none ${ouvert ? "-translate-y-[7px] -rotate-45" : ""}`} />
+          </span>
         </button>
 
         <LogoAnime className="h-7 min-[340px]:h-8 min-[380px]:h-10 sm:h-11" priorite onClick={() => setOuvert(false)} />
@@ -132,23 +142,9 @@ export default function Entete({ navigation }: { navigation: Lien[] }) {
         </div>
       </div>
 
-      {ouvert && (
-        <nav id="menu-mobile" aria-label={t.nav} className="border-t border-white/10 px-5 pb-5 lg:hidden">
-          <ul className="flex flex-col py-2">
-            {navigation.map((l) => (
-              <li key={l.href}>
-                <Link
-                  href={l.href}
-                  onClick={() => setOuvert(false)}
-                  className="block rounded-lg px-3 py-3 text-base text-[#D5DEE8] hover:bg-white/5 hover:text-white"
-                >
-                  {l.libelle}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      )}
+      <Suspense>
+        <MenuMobile navigation={navigation} ouvert={ouvert} onFermer={fermer} nav={t.nav} lienX={lienX} />
+      </Suspense>
     </header>
   );
 }
