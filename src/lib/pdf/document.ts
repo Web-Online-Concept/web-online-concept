@@ -22,6 +22,7 @@ export type Partie = {
   conditions_paiement?: string;
   penalites_retard?: string;
   contact_nom?: string | null;
+  type?: string | null; // client : « entreprise » ou « particulier »
 };
 
 export type LignePdf = {
@@ -61,6 +62,10 @@ const euros = (n: number) =>
   new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(n).replace(/ /g, " ").replace(/ /g, " ");
 const dateFr = (iso?: string | null) =>
   iso ? new Intl.DateTimeFormat("fr-FR", { day: "2-digit", month: "2-digit", year: "numeric", timeZone: "UTC" }).format(new Date(iso + "T00:00:00Z")) : "";
+// IBAN par groupes de quatre caractères, titulaire du compte = dénomination sans la mention « EI »
+const ibanLisible = (iban: string) => iban.replace(/\s+/g, "").replace(/(.{4})/g, "$1 ").trim();
+const titulaire = (e: Partie) => (e.raison_sociale ?? "").replace(/\s+(EI|E\.I\.)$/i, "").trim();
+
 const qte = (n: number) => new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 3 }).format(n).replace(/ /g, " ");
 
 function decouper(texte: string, police: PDFFont, taille: number, largeur: number): string[] {
@@ -209,7 +214,9 @@ export async function genererPdf(doc: DocumentPdf, lignes: LignePdf[], brouillon
   for (const l of lignes) {
     const dl = decouper(l.designation, gras, 9.5, largeurDesignation);
     const desc = l.description ? decouper(l.description, reg, 8.5, largeurDesignation) : [];
-    const hauteur = dl.length * 12.5 + desc.length * 11 + 10;
+    // Hauteur du texte de la ligne, puis un espace avant le filet de séparation et la ligne suivante
+    const contenu = dl.length * 12.5 + desc.length * 11;
+    const hauteur = contenu + 16;
     if (y - hauteur < 150) {
       nouvellePage();
       enTeteTableau();
@@ -227,12 +234,40 @@ export async function genererPdf(doc: DocumentPdf, lignes: LignePdf[], brouillon
     aDroite(euros(l.prix_unitaire), xPu + 8, y, 9.5);
     aDroite(euros(l.total_ht), xTot - 8, y, 9.5, gras);
     y -= hauteur;
-    page.drawLine({ start: { x: M, y: y + 6 }, end: { x: L - M, y: y + 6 }, thickness: 0.6, color: FILET });
+    page.drawLine({ start: { x: M, y: y + 17 }, end: { x: L - M, y: y + 17 }, thickness: 0.6, color: FILET });
   }
 
-  // Totaux
+  // Totaux (à droite) et, sur une facture, encadré de règlement (à gauche)
   if (y < 230) nouvellePage();
-  y -= 8;
+  y -= 4;
+  const yHautTotaux = y;
+  let yBasReglement = y;
+  if (doc.genre === "facture" && e.iban) {
+    const largeur = L - M - 220 - 10 - M - 22;
+    const lignesR: [string, string][] = [
+      ["Titulaire", titulaire(e)],
+      ["IBAN", ibanLisible(e.iban)],
+      ...(e.bic ? ([["BIC", e.bic]] as [string, string][]) : []),
+      ...(doc.numero ? ([["Référence", doc.numero]] as [string, string][]) : []),
+    ];
+    const hR = 26 + lignesR.length * 13 + (doc.date_echeance ? 14 : 2);
+    page.drawRectangle({ x: M, y: y - hR + 12, width: largeur, height: hR, borderColor: FILET, borderWidth: 1 });
+    page.drawRectangle({ x: M, y: y - hR + 12, width: 3, height: hR, color: BLEU });
+    let yr = y;
+    texte("Règlement par virement", M + 14, yr, 9.5, gras);
+    yr -= 17;
+    for (const [lib, val] of lignesR) {
+      texte(lib, M + 14, yr, 8.5, reg, GRIS);
+      texte(val, M + 70, yr, 8.5, lib === "IBAN" || lib === "Référence" ? gras : reg);
+      yr -= 13;
+    }
+    if (doc.date_echeance) {
+      yr -= 3;
+      texte(`À régler au plus tard le ${dateFr(doc.date_echeance)}.`, M + 14, yr, 8, reg, GRIS);
+    }
+    yBasReglement = y - hR + 12;
+  }
+  y = yHautTotaux;
   const xLib = L - M - 220;
   const ligneTotal = (lib: string, val: string, fort = false) => {
     texte(lib, xLib, y, fort ? 11 : 9.5, fort ? gras : reg, fort ? NUIT : GRIS);
@@ -245,18 +280,20 @@ export async function genererPdf(doc: DocumentPdf, lignes: LignePdf[], brouillon
   y -= 8;
   page.drawRectangle({ x: xLib - 10, y: y - 8, width: L - M - xLib + 10, height: 26, color: CIEL });
   ligneTotal(doc.genre === "devis" ? "Total" : doc.genre === "avoir" ? "Montant de l'avoir" : "Net à payer", euros(doc.total_ttc), true);
-  y -= 6;
+  y = Math.min(y - 6, yBasReglement - 16);
 
   // Mentions
   const mentions: { t: string; gras?: boolean }[] = [];
   if (e.mention_tva) mentions.push({ t: e.mention_tva, gras: true });
   if (doc.genre === "facture") {
-    if (e.conditions_paiement) mentions.push({ t: e.conditions_paiement });
-    if (e.iban) mentions.push({ t: `Règlement par virement : IBAN ${e.iban}${e.bic ? `, BIC ${e.bic}` : ""}` });
-    if (e.penalites_retard) mentions.push({ t: e.penalites_retard });
+    // Sans coordonnées bancaires, les conditions de paiement restent écrites en toutes lettres
+    if (!e.iban && e.conditions_paiement) mentions.push({ t: e.conditions_paiement });
+    // Pénalités et indemnité de 40 € : uniquement entre professionnels
+    if (e.penalites_retard && c.type !== "particulier") mentions.push({ t: e.penalites_retard });
   }
   if (doc.genre === "devis") {
     mentions.push({ t: `Devis valable jusqu'au ${dateFr(doc.date_validite)}. Le devis accepté vaut commande.` });
+    if (e.conditions_paiement) mentions.push({ t: e.conditions_paiement });
   }
   if (doc.notes) mentions.push({ t: doc.notes });
 

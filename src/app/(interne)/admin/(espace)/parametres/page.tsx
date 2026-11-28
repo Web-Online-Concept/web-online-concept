@@ -63,7 +63,7 @@ async function Contenu({ searchParams }: { searchParams: Promise<Sp> }) {
             ))}
           </div>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-[2fr_1fr]">
-            <Champ libelle="IBAN" htmlFor="iban" aide="Affiché sur les factures pour le règlement par virement.">
+            <Champ libelle="IBAN" htmlFor="iban" aide="Affiché dans l'encadré « Règlement par virement » des factures, avec le titulaire (votre nom) et le numéro de facture comme référence.">
               <input id="iban" name="iban" defaultValue={v("iban")} autoComplete="off" className={classeChamp} />
             </Champ>
             <Champ libelle="BIC" htmlFor="bic">
@@ -81,10 +81,10 @@ async function Contenu({ searchParams }: { searchParams: Promise<Sp> }) {
           <Champ libelle="Mention TVA" htmlFor="mention_tva">
             <input id="mention_tva" name="mention_tva" required defaultValue={v("mention_tva")} className={classeChamp} />
           </Champ>
-          <Champ libelle="Conditions de paiement" htmlFor="conditions_paiement">
+          <Champ libelle="Conditions de paiement" htmlFor="conditions_paiement" aide="Affichées sur les devis. Sur les factures, l'encadré de règlement indique la date d'échéance.">
             <textarea id="conditions_paiement" name="conditions_paiement" required rows={2} defaultValue={v("conditions_paiement")} className={classeChamp} />
           </Champ>
-          <Champ libelle="Pénalités de retard" htmlFor="penalites_retard" aide="Mention obligatoire sur les factures entre professionnels.">
+          <Champ libelle="Pénalités de retard" htmlFor="penalites_retard" aide="Mention obligatoire sur les factures entre professionnels : elle n'apparaît pas sur les factures aux particuliers.">
             <textarea id="penalites_retard" name="penalites_retard" required rows={3} defaultValue={v("penalites_retard")} className={classeChamp} />
           </Champ>
           <button type="submit" className={`${classeBouton} self-start`}>
