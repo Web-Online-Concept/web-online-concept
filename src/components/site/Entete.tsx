@@ -101,10 +101,25 @@ export default function Entete({ navigation }: { navigation: Lien[] }) {
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-nuit">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 sm:px-8">
-        <LogoAnime className="h-9 min-[380px]:h-10 sm:h-11" priorite onClick={() => setOuvert(false)} />
+      {/* Téléphone et tablette : menu à gauche, logo au centre, langue à droite.
+          Ordinateur : logo à gauche, navigation et langue à droite */}
+      <div className="mx-auto grid max-w-6xl grid-cols-[1fr_auto_1fr] items-center gap-2 px-5 py-4 sm:px-8 lg:flex lg:justify-between lg:gap-4">
+        <button
+          type="button"
+          className="-ml-3 inline-flex h-11 w-11 items-center justify-center justify-self-start rounded-full text-white lg:hidden"
+          aria-expanded={ouvert}
+          aria-controls="menu-mobile"
+          aria-label={ouvert ? t.fermer : t.ouvrir}
+          onClick={() => setOuvert((o) => !o)}
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+            {ouvert ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+          </svg>
+        </button>
 
-        <div className="flex items-center gap-2 lg:gap-3 xl:gap-5">
+        <LogoAnime className="h-7 min-[340px]:h-8 min-[380px]:h-10 sm:h-11" priorite onClick={() => setOuvert(false)} />
+
+        <div className="flex items-center justify-self-end lg:gap-3 xl:gap-5">
           <nav aria-label={t.nav} className="hidden lg:block">
             <Suspense fallback={<NavBureau chemin={null} navigation={navigation} />}>
               <NavBureauActive navigation={navigation} />
@@ -114,18 +129,6 @@ export default function Entete({ navigation }: { navigation: Lien[] }) {
           <Suspense>
             <SelecteurLangue />
           </Suspense>
-          <button
-            type="button"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full text-white lg:hidden"
-            aria-expanded={ouvert}
-            aria-controls="menu-mobile"
-            aria-label={ouvert ? t.fermer : t.ouvrir}
-            onClick={() => setOuvert((o) => !o)}
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-              {ouvert ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
-            </svg>
-          </button>
         </div>
       </div>
 
