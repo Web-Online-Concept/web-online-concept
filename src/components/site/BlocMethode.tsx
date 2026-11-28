@@ -40,10 +40,11 @@ export default async function BlocMethode() {
                 key={e.titre}
                 data-etape=""
                 data-allume="1"
-                className="m-etape flex flex-col"
+                // Téléphone et tablette : numéro à gauche du titre. Ordinateur : numéros sur une frise, titre dessous
+                className="m-etape grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3.5 lg:flex lg:flex-col lg:items-stretch"
                 style={{ "--remplissage": 1 } as React.CSSProperties}
               >
-                <div className="m-visuel aspect-[4/3] overflow-hidden rounded-2xl bg-[#0F2340] shadow-[0_30px_60px_-34px_rgba(0,0,0,0.9)] ring-1 ring-white/10">
+                <div className="m-visuel col-span-2 aspect-[4/3] overflow-hidden rounded-2xl bg-[#0F2340] shadow-[0_30px_60px_-34px_rgba(0,0,0,0.9)] ring-1 ring-white/10">
                   {Animation && <Animation />}
                 </div>
                 <div className="relative mt-7 flex h-10 items-center">
@@ -59,8 +60,8 @@ export default async function BlocMethode() {
                     {i + 1}
                   </span>
                 </div>
-                <h3 className="mt-4 text-lg font-semibold">{e.titre}</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-[#B8C6D6]">{e.texte}</p>
+                <h3 className="mt-7 text-lg font-semibold lg:mt-4">{e.titre}</h3>
+                <p className="col-span-2 mt-3 text-[15px] leading-relaxed text-[#B8C6D6] lg:mt-2">{e.texte}</p>
               </li>
             );
           })}
