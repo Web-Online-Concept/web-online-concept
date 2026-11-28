@@ -305,18 +305,24 @@ const CAPACITES: Contenu["CAPACITES"] = [
     titre: "Sitios a medida",
     texte:
       "Sitios corporativos, galerías, sitios multilingües: un diseño único, rápido en todas las pantallas y pensado para el posicionamiento desde la primera línea.",
+    intro:
+      "Para una empresa, un artesano o un artista cuyo sitio debe dar ganas de entrar, reservar o pedir un presupuesto.",
     points: ["Un diseño único, sin plantillas prefabricadas", "Rápido y legible en todas las pantallas", "Pensado para el posicionamiento desde el diseño"],
   },
   {
     ...CONTENU_FR.CAPACITES[1],
     titre: "Aplicaciones web y móviles",
     texte: "Una sola base de código para iPhone, Android y el navegador, publicada en el App Store y Google Play.",
+    intro:
+      "Para una idea que debe vivir en el bolsillo de sus usuarios, con todo lo que ofrece un teléfono: notificaciones, cámara, micrófono.",
     points: ["Una sola base de código para iPhone, Android y la web", "Publicación en el App Store y Google Play", "Evoluciones que llegan a todos los dispositivos"],
   },
   {
     ...CONTENU_FR.CAPACITES[2],
     titre: "Plataformas de suscripción",
     texte: "Cuentas de usuario, planes, pago con Stripe y compras integradas en las tiendas: un servicio en línea listo para cobrar.",
+    intro:
+      "Para convertir un servicio en ingresos recurrentes: sus clientes se registran, eligen su plan y pagan por su cuenta, a cualquier hora.",
     points: ["Cuentas de usuario y planes", "Pago con Stripe y compras integradas", "Suscripciones gestionadas automáticamente"],
   },
   {
@@ -324,6 +330,8 @@ const CAPACITES: Contenu["CAPACITES"] = [
     titre: "IA integrada",
     texte:
       "Comprensión del lenguaje, lectura de documentos, búsqueda por significado, asistentes: la IA en el corazón del producto, allí donde ahorra tiempo.",
+    intro:
+      "Para las tareas que les quitan tiempo a sus usuarios o a su equipo: ordenar, introducir datos, volver a encontrar. La IA se encarga de ellas, con discreción, en el lugar adecuado.",
     points: ["Comprensión del lenguaje natural", "Lectura automática de documentos", "Búsqueda por significado"],
   },
   {
@@ -331,6 +339,8 @@ const CAPACITES: Contenu["CAPACITES"] = [
     titre: "Posicionamiento y visibilidad en las IA",
     texte:
       "Posicionamiento orgánico y local, perfil de Google Business, datos estructurados y contenidos pensados para ser citados por ChatGPT, Perplexity o Google: su sitio, encontrado allí donde buscan sus clientes.",
+    intro:
+      "Sus clientes ya no buscan solo en Google: también preguntan a ChatGPT o Perplexity. Su actividad debe aparecer en ambos casos.",
     points: ["Posicionamiento orgánico y local", "Datos estructurados y perfil de Google Business", "Contenidos pensados para ser citados por las IA"],
   },
   {
@@ -338,6 +348,8 @@ const CAPACITES: Contenu["CAPACITES"] = [
     titre: "Datos y paneles de gestión",
     texte:
       "Bases de datos seguras, herramientas de gestión, reservas, correos automáticos y cuadros de mando: usted dirige su actividad con autonomía.",
+    intro:
+      "Para no depender más de hojas de cálculo, mensajes dispersos o de un proveedor para cada cambio: su información en un solo lugar y el control de su actividad.",
     points: ["Bases de datos seguras", "Herramientas de gestión y cuadros de mando", "Reservas y correos automáticos"],
   },
   {
@@ -345,12 +357,16 @@ const CAPACITES: Contenu["CAPACITES"] = [
     titre: "Rediseño, migración y seguimiento",
     texte:
       "Rediseño de un sitio existente, cambio de alojamiento o de tecnología sin perder su posicionamiento, y después actualizaciones y evoluciones a lo largo del tiempo.",
+    intro:
+      "Para un sitio que ha envejecido, se ha vuelto lento o que ya nadie sabe modificar: lo volvemos a poner sobre bases sólidas, sin empezar de cero.",
     points: ["Un rediseño sin perder su posicionamiento", "Cambio de alojamiento o de tecnología", "Actualizaciones y evoluciones a lo largo del tiempo"],
   },
   {
     ...CONTENU_FR.CAPACITES[7],
     titre: "Rendimiento y seguridad",
     texte: "Alojamiento rápido, copias de seguridad, seguridad y cumplimiento del RGPD: un sitio que carga rápido y sigue protegido.",
+    intro:
+      "Un visitante se va si la página tarda demasiado en cargar, y una brecha de seguridad puede salir cara. Resolvemos estos temas desde el principio, para que usted no tenga que pensar en ellos.",
     points: ["Un alojamiento rápido", "Copias de seguridad y protección de datos", "Cumplimiento del RGPD"],
   },
 ];

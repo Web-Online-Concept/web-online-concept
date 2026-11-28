@@ -84,14 +84,15 @@ export function Icone({ nom, className = "h-6 w-6" }: { nom: NomIcone; className
 }
 
 // Pastille d'icône aux couleurs de la marque
-export function PastilleIcone({ nom, sombre = false }: { nom: NomIcone; sombre?: boolean }) {
+// petite : version réduite, posée à côté d'un titre
+export function PastilleIcone({ nom, sombre = false, petite = false }: { nom: NomIcone; sombre?: boolean; petite?: boolean }) {
   return (
     <span
-      className={`inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${
+      className={`inline-flex shrink-0 items-center justify-center ${petite ? "h-10 w-10 rounded-xl" : "h-12 w-12 rounded-2xl"} ${
         sombre ? "bg-white/8 text-[#7CCBFF] ring-1 ring-white/12" : "bg-[#E8EFFF] text-bleu"
       }`}
     >
-      <Icone nom={nom} className="h-6 w-6" />
+      <Icone nom={nom} className={petite ? "h-5 w-5" : "h-6 w-6"} />
     </span>
   );
 }

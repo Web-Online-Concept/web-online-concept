@@ -101,12 +101,15 @@ function LigneCapacite({ c, i, contenu: ct, l }: { c: Capacite; i: number; conte
           </div>
         </SceneEnVue>
         <div>
-          <PastilleIcone nom={c.icone} />
-          <h2 className="mt-5 text-[clamp(1.6rem,2.6vw,2.1rem)] font-semibold tracking-tight text-nuit">
-            {c.titre}
-          </h2>
-          <p className="mt-3 text-[17px] leading-relaxed text-[#2C4558]">
-            {c.texte}
+          {/* Pictogramme à gauche du titre (le même que dans le choix des capacités de l'accueil) */}
+          <div className="flex items-center gap-3.5">
+            <PastilleIcone nom={c.icone} petite />
+            <h2 className="text-[clamp(1.6rem,2.6vw,2.1rem)] font-semibold leading-tight tracking-tight text-nuit">
+              {c.titre}
+            </h2>
+          </div>
+          <p className="mt-4 text-[17px] leading-relaxed text-[#2C4558]">
+            {c.intro}
           </p>
           <ul className="mt-6 flex flex-col gap-3">
             {c.points.map((p) => (

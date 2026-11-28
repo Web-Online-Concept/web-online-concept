@@ -458,7 +458,8 @@ export const IA = {
   ],
 };
 
-export type Capacite = { titre: string; texte: string; points: string[]; exemples: string[]; icone: NomIcone };
+// texte : description (accueil, données structurées) ; intro : pour qui et ce que ça change (page Capacités, en tête des points)
+export type Capacite = { titre: string; texte: string; intro: string; points: string[]; exemples: string[]; icone: NomIcone };
 
 export const CAPACITES: Capacite[] = [
   {
@@ -466,6 +467,8 @@ export const CAPACITES: Capacite[] = [
     icone: "site",
     texte:
       "Vitrines, galeries, sites multilingues : un design unique, rapide sur tous les écrans et pensé pour le référencement dès la première ligne.",
+    intro:
+      "Pour une entreprise, un artisan ou un artiste dont le site doit donner envie de pousser la porte, de réserver ou de demander un devis.",
     points: ["Un design unique, sans modèle tout fait", "Rapide et lisible sur tous les écrans", "Pensé pour le référencement dès la conception"],
     exemples: ["galerie-carpentier", "inspiration-et-meditation"],
   },
@@ -474,6 +477,8 @@ export const CAPACITES: Capacite[] = [
     icone: "app",
     texte:
       "Une seule base de code pour l'iPhone, Android et le navigateur, publiée sur l'App Store et Google Play.",
+    intro:
+      "Pour une idée qui doit vivre dans la poche de vos utilisateurs, avec tout ce qu'offre un téléphone : notifications, appareil photo, micro.",
     points: ["Une seule base de code pour l'iPhone, Android et le web", "Publication sur l'App Store et Google Play", "Des évolutions qui suivent sur tous les appareils"],
     exemples: ["memoday"],
   },
@@ -482,6 +487,8 @@ export const CAPACITES: Capacite[] = [
     icone: "abonnement",
     texte:
       "Comptes utilisateurs, formules, paiement par Stripe et achats intégrés aux stores : un service en ligne prêt à encaisser.",
+    intro:
+      "Pour transformer un service en revenus réguliers : vos clients s'inscrivent, choisissent leur formule et paient seuls, à toute heure.",
     points: ["Comptes utilisateurs et formules", "Paiement par Stripe et achats intégrés aux stores", "Abonnements gérés automatiquement"],
     exemples: ["memoday"],
   },
@@ -490,6 +497,8 @@ export const CAPACITES: Capacite[] = [
     icone: "ia",
     texte:
       "Compréhension du langage, lecture de documents, recherche par le sens, assistants : l'IA au cœur du produit, là où elle fait gagner du temps.",
+    intro:
+      "Pour les tâches qui prennent du temps à vos utilisateurs ou à votre équipe : trier, saisir, retrouver. L'IA s'en charge, discrètement, au bon endroit.",
     points: ["Compréhension du langage naturel", "Lecture automatique de documents", "Recherche par le sens"],
     exemples: ["memoday"],
   },
@@ -498,6 +507,8 @@ export const CAPACITES: Capacite[] = [
     icone: "visibilite",
     texte:
       "Référencement naturel et local, fiche Google Business, données structurées et contenus pensés pour être cités par ChatGPT, Perplexity ou Google : votre site trouvé là où vos clients cherchent.",
+    intro:
+      "Vos clients ne cherchent plus seulement sur Google : ils posent aussi leurs questions à ChatGPT ou Perplexity. Votre activité doit apparaître dans les deux cas.",
     points: ["Référencement naturel et local", "Données structurées et fiche Google Business", "Des contenus pensés pour être cités par les IA"],
     exemples: ["inspiration-et-meditation", "klart-concept"],
   },
@@ -506,6 +517,8 @@ export const CAPACITES: Capacite[] = [
     icone: "donnees",
     texte:
       "Bases de données sécurisées, outils de gestion, réservations, e-mails automatiques et tableaux de bord : vous pilotez votre activité en autonomie.",
+    intro:
+      "Pour ne plus dépendre de tableurs, de messages éparpillés ou d'un prestataire à chaque modification : vos informations au même endroit, et la main sur votre activité.",
     points: ["Bases de données sécurisées", "Outils de gestion et tableaux de bord", "Réservations et e-mails automatiques"],
     exemples: ["galerie-carpentier", "inspiration-et-meditation"],
   },
@@ -514,6 +527,8 @@ export const CAPACITES: Capacite[] = [
     icone: "evolution",
     texte:
       "Refonte d'un site existant, changement d'hébergeur ou de technologie sans perdre votre référencement, puis mises à jour et évolutions dans la durée.",
+    intro:
+      "Pour un site qui a vieilli, qui ralentit ou que plus personne ne sait modifier : nous le remettons sur des bases saines, sans repartir de zéro.",
     points: ["Une refonte sans perdre votre référencement", "Changement d'hébergeur ou de technologie", "Mises à jour et évolutions dans la durée"],
     exemples: ["galerie-carpentier", "menuiserie-gaudissard"],
   },
@@ -522,6 +537,8 @@ export const CAPACITES: Capacite[] = [
     icone: "securite",
     texte:
       "Hébergement rapide, sauvegardes, sécurité et conformité RGPD : un site qui se charge vite et reste protégé.",
+    intro:
+      "Un visiteur part si la page met trop de temps à s'afficher, et une faille peut coûter cher. Ces sujets sont réglés en amont, pour que vous n'ayez pas à y penser.",
     points: ["Un hébergement rapide", "Sauvegardes et protection des données", "Conformité RGPD"],
     exemples: [],
   },

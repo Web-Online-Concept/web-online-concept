@@ -305,18 +305,24 @@ const CAPACITES: Contenu["CAPACITES"] = [
     titre: "Custom websites",
     texte:
       "Business sites, galleries, multilingual sites: a unique design, fast on every screen and built for search engines from the very first line.",
+    intro:
+      "For a business, a craftsperson or an artist whose website needs to make people want to walk in, book or ask for a quote.",
     points: ["A unique design, no ready-made templates", "Fast and readable on every screen", "Built for search engines from the start"],
   },
   {
     ...CONTENU_FR.CAPACITES[1],
     titre: "Web and mobile apps",
     texte: "A single codebase for iPhone, Android and the browser, published on the App Store and Google Play.",
+    intro:
+      "For an idea that needs to live in your users' pockets, with everything a phone offers: notifications, camera, microphone.",
     points: ["A single codebase for iPhone, Android and the web", "Published on the App Store and Google Play", "Updates that reach every device"],
   },
   {
     ...CONTENU_FR.CAPACITES[2],
     titre: "Subscription platforms",
     texte: "User accounts, plans, Stripe payments and in-app purchases: an online service ready to take payments.",
+    intro:
+      "To turn a service into recurring revenue: your customers sign up, choose their plan and pay on their own, at any hour.",
     points: ["User accounts and plans", "Stripe payments and in-app purchases", "Subscriptions managed automatically"],
   },
   {
@@ -324,6 +330,8 @@ const CAPACITES: Contenu["CAPACITES"] = [
     titre: "Built-in AI",
     texte:
       "Language understanding, document reading, search by meaning, assistants: AI at the heart of the product, wherever it saves time.",
+    intro:
+      "For the tasks that eat up your users' or your team's time: sorting, typing in, finding things again. AI takes care of them, quietly, in the right place.",
     points: ["Natural language understanding", "Automatic document reading", "Search by meaning"],
   },
   {
@@ -331,6 +339,8 @@ const CAPACITES: Contenu["CAPACITES"] = [
     titre: "SEO and AI visibility",
     texte:
       "Organic and local search, Google Business Profile, structured data and content designed to be cited by ChatGPT, Perplexity or Google: your website found wherever your customers search.",
+    intro:
+      "Your customers no longer search only on Google: they also ask ChatGPT or Perplexity. Your business needs to show up in both cases.",
     points: ["Organic and local search", "Structured data and Google Business Profile", "Content designed to be cited by AI"],
   },
   {
@@ -338,6 +348,8 @@ const CAPACITES: Contenu["CAPACITES"] = [
     titre: "Data and back offices",
     texte:
       "Secure databases, management tools, bookings, automatic emails and dashboards: you run your business on your own.",
+    intro:
+      "No more relying on spreadsheets, scattered messages or a contractor for every change: your information in one place, and you in control of your business.",
     points: ["Secure databases", "Management tools and dashboards", "Bookings and automatic emails"],
   },
   {
@@ -345,12 +357,16 @@ const CAPACITES: Contenu["CAPACITES"] = [
     titre: "Redesign, migration and support",
     texte:
       "Redesigning an existing website, switching hosts or technologies without losing your search rankings, then updates and improvements over time.",
+    intro:
+      "For a website that has aged, slowed down or that nobody knows how to update anymore: we put it back on solid foundations, without starting from scratch.",
     points: ["A redesign that keeps your search rankings", "Switching hosts or technologies", "Updates and improvements over time"],
   },
   {
     ...CONTENU_FR.CAPACITES[7],
     titre: "Performance and security",
     texte: "Fast hosting, backups, security and GDPR compliance: a website that loads quickly and stays protected.",
+    intro:
+      "Visitors leave when a page takes too long to load, and a security flaw can be costly. We handle these issues upfront, so you don't have to think about them.",
     points: ["Fast hosting", "Backups and data protection", "GDPR compliance"],
   },
 ];
