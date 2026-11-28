@@ -432,3 +432,72 @@ export function modeleLienConnexion() {
 
   return coquille({ titre: SUJET_LIEN_CONNEXION, preheader: "Un clic pour ouvrir le back-office, sans mot de passe.", corps, pied });
 }
+
+// ——— Alerte au studio : un devis vient d'être accepté en ligne ———
+
+export type DonneesAcceptation = {
+  numero: string;
+  client: string;
+  signataire: string;
+  objet?: string | null;
+  total: number;
+  particulier: boolean;
+  debutAnticipe: boolean;
+  accepteLe: Date;
+  lienAdmin: string;
+};
+
+export function alerteDevisAccepte(a: DonneesAcceptation) {
+  const sujet = `Devis ${a.numero} accepté par ${a.signataire}`;
+  const montant = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(a.total);
+  const lignes: [string, string][] = [
+    ["Client", echapper(a.client)],
+    ["Accepté par", echapper(a.signataire)],
+    ["Le", `${dateL(a.accepteLe)} à ${heureL(a.accepteLe)}`],
+    ...(a.objet ? ([["Objet", echapper(a.objet)]] as [string, string][]) : []),
+    ["Montant", `<strong style="color:${C.nuit}">${montant}</strong>`],
+  ];
+  const delai = a.particulier
+    ? a.debutAnticipe
+      ? "Client particulier : il a demandé que les travaux commencent sans attendre la fin de son délai de rétractation de 14 jours."
+      : "Client particulier : délai de rétractation de 14 jours. Il n'a pas demandé de démarrage anticipé : les travaux commencent après ce délai."
+    : null;
+
+  const corps = `${entete()}
+
+<tr><td class="marge" style="padding:36px 36px 8px;font-family:${POLICE}">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+    <td valign="middle" style="width:44px;height:44px;border-radius:50%;background:#E3F8EC;text-align:center;font-size:22px;line-height:44px;color:#0E7A45">&#10003;</td>
+    <td valign="middle" style="padding-left:14px;font-size:14px;line-height:20px;color:${C.doux}">Devis ${echapper(a.numero)}</td>
+  </tr></table>
+  <h1 class="titre" style="margin:16px 0 0;font-size:26px;line-height:33px;font-weight:700;letter-spacing:-0.3px;color:${C.nuit}">Devis accepté en ligne</h1>
+</td></tr>
+
+<tr><td class="marge" style="padding:18px 36px 0;font-family:${POLICE}">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${C.ciel};border-radius:14px">
+    ${lignes
+      .map(
+        ([l, v], i) => `<tr>
+      <td style="padding:${i ? 8 : 16}px 0 ${i === lignes.length - 1 ? 16 : 0}px 18px;font-size:13px;line-height:20px;color:${C.doux};width:110px" valign="top">${l}</td>
+      <td style="padding:${i ? 8 : 16}px 18px ${i === lignes.length - 1 ? 16 : 0}px 0;font-size:15px;line-height:21px;color:${C.texte}" valign="top">${v}</td>
+    </tr>`,
+      )
+      .join("")}
+  </table>
+</td></tr>
+${delai ? `<tr><td class="marge" style="padding:16px 36px 0;font-family:${POLICE};font-size:14px;line-height:22px;color:${C.texte}">${delai}</td></tr>` : ""}
+
+<tr><td class="marge" align="left" style="padding:26px 36px 36px">
+  ${bouton(a.lienAdmin, "Ouvrir le devis dans le back-office")}
+</td></tr>`;
+
+  const pied = `
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;max-width:100%">
+<tr><td class="marge" align="center" style="padding:24px 36px 8px;font-family:${POLICE}">
+  <img src="${URL_SITE}/email/symbole.png" width="40" height="28" alt="" style="display:block;border:0;margin:0 auto 10px">
+  <div style="font-size:13px;line-height:20px;color:${C.doux}">Web Online Concept, espace d'administration</div>
+</td></tr>
+</table>`;
+
+  return { sujet, html: coquille({ titre: sujet, preheader: `${a.client}, ${montant}. Vous pouvez lancer le projet.`, corps, pied }) };
+}

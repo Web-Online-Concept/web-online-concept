@@ -1,5 +1,5 @@
 import "server-only";
-import { accuseReception, alerteMessage, type DonneesMessage } from "@/lib/emails/modeles";
+import { accuseReception, alerteDevisAccepte, alerteMessage, type DonneesAcceptation, type DonneesMessage } from "@/lib/emails/modeles";
 
 // E-mails envoyés à chaque nouveau message du formulaire de contact (via l'API Brevo) :
 // - une alerte au studio, à contact@ (redirigé vers Gmail) : y répondre part directement au visiteur, depuis contact@,
@@ -60,4 +60,18 @@ export async function notifierNouveauMessage(m: DonneesMessage, { accuse }: { ac
     );
   }
   await Promise.all(envois);
+}
+
+// Alerte au studio quand un client accepte un devis en ligne
+export async function notifierDevisAccepte(a: DonneesAcceptation) {
+  const cle = process.env.BREVO_API_KEY;
+  const expediteur = process.env.NOTIF_EXPEDITEUR;
+  if (!cle || !expediteur) return;
+  const alerte = alerteDevisAccepte(a);
+  await envoyer(cle, "devis accepté", {
+    sender: { name: "Web Online Concept", email: process.env.NOTIF_EXPEDITEUR_ALERTES || ALERTES },
+    to: [{ email: process.env.NOTIF_DESTINATAIRE || CONTACT }],
+    subject: alerte.sujet,
+    htmlContent: alerte.html,
+  });
 }
