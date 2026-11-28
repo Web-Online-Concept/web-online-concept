@@ -93,8 +93,8 @@ export default async function Faq() {
 
       <section className="bg-white py-16 sm:py-20">
         <Conteneur className="grid gap-12 lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-16">
-          {/* Thèmes */}
-          <aside className="lg:sticky lg:top-28 lg:self-start">
+          {/* Thèmes : sur ordinateur seulement (colonne collée à gauche). Sur téléphone, les titres de thème suffisent */}
+          <aside className="hidden lg:sticky lg:top-28 lg:block lg:self-start">
             <p className="text-sm font-semibold text-nuit">{x.themes}</p>
             <ul className="mt-4 flex flex-wrap gap-2 lg:flex-col lg:gap-1">
               {THEMES_FAQ.map((th) => (
