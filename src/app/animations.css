@@ -1410,3 +1410,36 @@ html[data-menu] .bandeau-langue {
     translate: none;
   }
 }
+
+/* Téléphone et tablette : blocs empilés comme des cartes (SuperpositionMobile pose data-pile, --haut, --couvert).
+   Un bloc plus haut que l'écran défile jusqu'à son dernier pixel avant de se figer ; le suivant glisse dessus,
+   bords arrondis, pendant que celui du dessous s'assombrit et recule. Masqué une fois entièrement recouvert. */
+@media (max-width: 1023.98px) and (prefers-reduced-motion: no-preference) {
+  [data-pile] {
+    position: sticky;
+    top: min(77px, calc(100svh - var(--haut, 100svh)));
+    z-index: 0;
+    transform-origin: 50% max(50%, calc(100% - (100svh - 77px) / 2));
+    scale: calc(1 - var(--couvert, 0) * 0.06);
+  }
+  [data-pile] + [data-pile] {
+    border-radius: 28px 28px 0 0;
+    box-shadow: 0 -22px 44px -26px rgba(2, 8, 20, 0.7);
+  }
+  [data-pile]::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    border-radius: inherit;
+    background: #020814;
+    opacity: calc(var(--couvert, 0) * 0.65);
+  }
+  [data-recule] {
+    will-change: scale;
+  }
+  [data-recouvert] {
+    visibility: hidden;
+  }
+}
