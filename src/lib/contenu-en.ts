@@ -374,6 +374,8 @@ const CAPACITES: Contenu["CAPACITES"] = [
 const METHODE_DETAILS: Contenu["METHODE_DETAILS"] = [
   {
     ...CONTENU_FR.METHODE_DETAILS[0],
+    intro:
+      "You know exactly what you will get before a single line of code is written, with no surprises along the way.",
     points: [
       "A conversation to understand your goals, your audience and your constraints",
       "A clickable prototype within a few days",
@@ -383,6 +385,8 @@ const METHODE_DETAILS: Contenu["METHODE_DETAILS"] = [
   },
   {
     ...CONTENU_FR.METHODE_DETAILS[1],
+    intro:
+      "Projects that once required an entire team and long months become possible, at your scale and at your pace.",
     points: [
       "Code, tests, content and translations accelerated by today's best AIs",
       "Versions you can try online as development progresses",
@@ -392,6 +396,8 @@ const METHODE_DETAILS: Contenu["METHODE_DETAILS"] = [
   },
   {
     ...CONTENU_FR.METHODE_DETAILS[2],
+    intro:
+      "Going fast is pointless if the site breaks at the first click. What you receive works on every screen, on launch day and in the months that follow.",
     points: [
       "Automated tests with every change",
       "A systematic review of code and security",
@@ -401,6 +407,8 @@ const METHODE_DETAILS: Contenu["METHODE_DETAILS"] = [
   },
   {
     ...CONTENU_FR.METHODE_DETAILS[3],
+    intro:
+      "Launch is only the beginning: you keep the same point of contact, who knows your project inside out, for as long as you need.",
     points: ["Updates and backups monitored", "New features as your business grows", "Constant watch on technology and AI"],
     carte: { titre: "Update delivered", detail: "Your project grows with you" },
   },

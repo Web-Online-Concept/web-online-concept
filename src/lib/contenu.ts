@@ -547,8 +547,11 @@ export const CAPACITES: Capacite[] = [
 export type Etape = { titre: string; texte: string };
 
 // Détail de chaque étape pour la page Méthode (même ordre que METHODE)
-export const METHODE_DETAILS: { points: string[]; photo: keyof typeof PHOTOS; carte: { titre: string; detail: string } }[] = [
+// intro : ce que l'étape change pour le client (page Méthode, en tête des points ; le texte court de METHODE sert à l'accueil)
+export const METHODE_DETAILS: { intro: string; points: string[]; photo: keyof typeof PHOTOS; carte: { titre: string; detail: string } }[] = [
   {
+    intro:
+      "Vous savez exactement ce que vous allez obtenir avant qu'une seule ligne de code soit écrite, sans surprise en cours de route.",
     points: [
       "Un échange pour comprendre vos objectifs, votre public et vos contraintes",
       "Un prototype cliquable en quelques jours",
@@ -558,6 +561,8 @@ export const METHODE_DETAILS: { points: string[]; photo: keyof typeof PHOTOS; ca
     carte: { titre: "Prototype validé", detail: "On passe au développement" },
   },
   {
+    intro:
+      "Des projets qui demandaient hier une équipe entière et de longs mois deviennent possibles, à votre échelle et à votre rythme.",
     points: [
       "Code, tests, contenus et traductions accélérés par les meilleures IA du moment",
       "Des versions à essayer en ligne au fil du développement",
@@ -567,6 +572,8 @@ export const METHODE_DETAILS: { points: string[]; photo: keyof typeof PHOTOS; ca
     carte: { titre: "Nouvelle version en ligne", detail: "Prête à être testée" },
   },
   {
+    intro:
+      "Aller vite ne sert à rien si le site casse au premier clic. Ce que vous recevez fonctionne, sur tous les écrans, le jour de la mise en ligne comme les mois suivants.",
     points: [
       "Des tests automatisés à chaque modification",
       "Une relecture systématique du code et de la sécurité",
@@ -576,6 +583,8 @@ export const METHODE_DETAILS: { points: string[]; photo: keyof typeof PHOTOS; ca
     carte: { titre: "Tous les tests sont passés", detail: "Sécurité vérifiée" },
   },
   {
+    intro:
+      "La mise en ligne n'est qu'un début : vous gardez le même interlocuteur, qui connaît votre projet par cœur, aussi longtemps que vous en avez besoin.",
     points: [
       "Mises à jour et sauvegardes suivies",
       "De nouvelles fonctionnalités quand votre activité grandit",

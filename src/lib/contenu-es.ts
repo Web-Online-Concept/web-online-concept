@@ -374,6 +374,8 @@ const CAPACITES: Contenu["CAPACITES"] = [
 const METHODE_DETAILS: Contenu["METHODE_DETAILS"] = [
   {
     ...CONTENU_FR.METHODE_DETAILS[0],
+    intro:
+      "Sabe exactamente lo que va a obtener antes de que se escriba una sola línea de código, sin sorpresas por el camino.",
     points: [
       "Una conversación para entender sus objetivos, su público y sus limitaciones",
       "Un prototipo navegable en pocos días",
@@ -383,6 +385,8 @@ const METHODE_DETAILS: Contenu["METHODE_DETAILS"] = [
   },
   {
     ...CONTENU_FR.METHODE_DETAILS[1],
+    intro:
+      "Proyectos que antes exigían un equipo entero y largos meses se vuelven posibles, a su escala y a su ritmo.",
     points: [
       "Código, pruebas, contenidos y traducciones acelerados por las mejores IA del momento",
       "Versiones para probar en línea a medida que avanza el desarrollo",
@@ -392,6 +396,8 @@ const METHODE_DETAILS: Contenu["METHODE_DETAILS"] = [
   },
   {
     ...CONTENU_FR.METHODE_DETAILS[2],
+    intro:
+      "Ir rápido no sirve de nada si el sitio falla al primer clic. Lo que usted recibe funciona en todas las pantallas, el día del lanzamiento y en los meses siguientes.",
     points: [
       "Pruebas automatizadas en cada modificación",
       "Una revisión sistemática del código y de la seguridad",
@@ -401,6 +407,8 @@ const METHODE_DETAILS: Contenu["METHODE_DETAILS"] = [
   },
   {
     ...CONTENU_FR.METHODE_DETAILS[3],
+    intro:
+      "El lanzamiento es solo el principio: conserva el mismo interlocutor, que conoce su proyecto a fondo, durante todo el tiempo que lo necesite.",
     points: [
       "Actualizaciones y copias de seguridad supervisadas",
       "Nuevas funcionalidades cuando su actividad crece",

@@ -105,7 +105,7 @@ export default async function Methode() {
                         </span>
                         <h2 className="text-[clamp(1.8rem,3vw,2.5rem)] font-semibold leading-tight tracking-tight text-nuit">{e.titre}</h2>
                       </div>
-                      <p className="mt-4 text-[18px] leading-relaxed text-[#2C4558]">{e.texte}</p>
+                      <p className="mt-4 text-[18px] leading-relaxed text-[#2C4558]">{d?.intro ?? e.texte}</p>
                       {d && (
                         <ul className="mt-6 flex flex-col gap-3">
                           {d.points.map((p) => (
