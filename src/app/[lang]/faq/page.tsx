@@ -185,13 +185,6 @@ export default async function Faq() {
               </div>
             ))}
 
-            <div className="rounded-2xl bg-nuit p-6 text-white lg:hidden">
-              <p className="font-semibold">{x.autre}</p>
-              <p className="mt-1.5 text-sm leading-relaxed text-[#B8C6D6]">{x.ecrivez}</p>
-              <Link href={chemin(l, "contact")} className="mt-4 inline-block text-sm font-medium text-[#7CCBFF] transition-colors hover:text-white">
-                {x.ecrire}
-              </Link>
-            </div>
           </div>
         </Conteneur>
       </section>
