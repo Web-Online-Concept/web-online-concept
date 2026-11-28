@@ -39,10 +39,9 @@ const TEXTES = {
     titre: "À propos",
     description:
       "Web Online Concept, studio de développement web et d'intelligence artificielle depuis 2009 : un interlocuteur unique, la capacité de production d'une équipe entière.",
-    centaines: "Des centaines",
     chiffres: [
       "création du studio",
-      "de sites créés",
+      "sites créés",
       "plateformes : iPhone, Android et web",
     ],
     principes: [
@@ -90,10 +89,9 @@ const TEXTES = {
     titre: "About",
     description:
       "Web Online Concept, a web development and artificial intelligence studio since 2009: a single point of contact, with the production capacity of an entire team.",
-    centaines: "Hundreds",
     chiffres: [
       "studio founded",
-      "of websites built",
+      "websites built",
       "platforms: iPhone, Android and web",
     ],
     principes: [
@@ -141,10 +139,9 @@ const TEXTES = {
     titre: "Nosotros",
     description:
       "Web Online Concept, estudio de desarrollo web e inteligencia artificial desde 2009: un único interlocutor, con la capacidad de producción de un equipo entero.",
-    centaines: "Cientos",
     chiffres: [
       "creación del estudio",
-      "de sitios creados",
+      "sitios creados",
       "plataformas: iPhone, Android y web",
     ],
     principes: [
@@ -204,7 +201,7 @@ export default async function APropos() {
   const x = t(TEXTES, l);
   const CHIFFRES = [
     { valeur: "2009", libelle: x.chiffres[0] },
-    { valeur: x.centaines, libelle: x.chiffres[1] },
+    { valeur: "100+", libelle: x.chiffres[1] },
     { valeur: "3", libelle: x.chiffres[2] },
   ];
   const PRINCIPES = x.principes.map(([titre, texte], i) => ({
@@ -251,14 +248,14 @@ export default async function APropos() {
               </p>
             </div>
           </div>
-          <dl className="mt-14 grid gap-8 border-t border-[#E3E9F0] pt-10 lg:grid-cols-[1fr_1.4fr_1fr]">
+          <dl className="mt-14 grid gap-8 border-t border-[#E3E9F0] pt-10 sm:grid-cols-3">
             {CHIFFRES.map((c) => (
               <div
                 key={c.libelle}
                 className="flex flex-col-reverse text-center"
               >
                 <dt className="mt-3 text-[15px] text-[#4A6178]">{c.libelle}</dt>
-                <dd className="bg-[linear-gradient(120deg,#1F5EFF,#00B4D8_55%,#2BD47D)] bg-clip-text pb-1 text-[clamp(2.4rem,3.4vw,3.2rem)] font-semibold leading-none tracking-tight whitespace-nowrap text-transparent">
+                <dd className="bg-[linear-gradient(120deg,#1F5EFF,#00B4D8_55%,#2BD47D)] bg-clip-text pb-1 text-[clamp(2.4rem,4.4vw,3.4rem)] font-semibold leading-none tracking-tight text-transparent">
                   {c.valeur}
                 </dd>
               </div>
