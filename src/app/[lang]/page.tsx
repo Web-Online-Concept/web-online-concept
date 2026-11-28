@@ -140,19 +140,19 @@ export default async function Accueil() {
       <script dangerouslySetInnerHTML={{ __html: SCRIPT_INTRO }} />
       <IntroVideo />
       {/* Accroche */}
-      <section className="ecran ecran-hero relative overflow-hidden bg-nuit text-white lg:flex lg:min-h-[calc(100svh-77px)] lg:items-center">
-        {/* Téléphone et tablette : titre, puis l'image des sites, puis le texte et le bouton.
-            Ordinateur : texte à gauche, image à droite (le bloc texte redevient un bloc à lg) */}
-        <Conteneur className="relative grid items-center pb-14 pt-9 sm:py-20 lg:grid-cols-[1fr_1.05fr] lg:gap-4 lg:py-16">
+      <section className="ecran ecran-hero relative flex min-h-[calc(100svh-77px)] flex-col overflow-hidden bg-nuit text-white lg:flex-row lg:items-center">
+        {/* Téléphone et tablette : titre, image des sites, texte puis bouton centré, le tout dans la hauteur de l'écran
+            (l'image se réduit pour laisser le bouton visible). Ordinateur : texte à gauche, image à droite. */}
+        <Conteneur className="relative flex flex-1 flex-col pb-6 pt-6 sm:pb-10 sm:pt-10 lg:grid lg:flex-initial lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-4 lg:py-16">
           <div className="contents lg:block">
-            <h1 className="order-1 text-[clamp(1.9rem,4.2vw,3.55rem)] font-semibold leading-[1.08] tracking-tight text-balance">
+            <h1 className="order-1 text-[clamp(1.75rem,4.2vw,3.55rem)] font-semibold leading-[1.08] tracking-tight text-balance">
               <span className="block">{x.titre[0]}</span>
               <span className="block">{x.titre[1]}</span>
             </h1>
-            <p className="order-3 mt-6 max-w-xl text-lg leading-relaxed text-[#C3D0DD] sm:text-xl lg:mt-7">
+            <p className="order-3 max-w-xl text-base leading-relaxed text-[#C3D0DD] sm:text-xl lg:mt-7">
               {c.SITE.sousTitre}
             </p>
-            <div className="order-4 mt-8 flex flex-wrap gap-3 lg:mt-10">
+            <div className="order-4 mt-6 flex flex-wrap justify-center gap-3 lg:mt-10 lg:justify-start">
               <Link
                 href={chemin(l, "realisations")}
                 className="rounded-full bg-bleu px-7 py-3.5 font-medium text-white transition-colors hover:bg-[#3A72FF]"
@@ -161,8 +161,13 @@ export default async function Accueil() {
               </Link>
             </div>
           </div>
-          <div className="order-2 mx-auto mt-7 w-full max-w-[460px] lg:order-none lg:-mr-[6%] lg:mt-0 lg:w-[112%] lg:max-w-none">
-            {DIAPOS.length ? <Vitrine diapos={DIAPOS} /> : <Constellation className="w-full" />}
+          {/* Zone de l'image : prend la hauteur restante ; l'image s'y inscrit (largeur limitée par cette hauteur) */}
+          <div className="relative order-2 my-4 min-h-[200px] flex-1 lg:order-none lg:my-0 lg:-mr-[6%] lg:min-h-0 lg:w-[112%]">
+            <div className="absolute inset-0 flex items-center justify-center [container-type:size] lg:static lg:block lg:[container-type:normal]">
+              <div className="w-[min(100%,460px,calc(100cqh*660/560))] lg:w-full">
+                {DIAPOS.length ? <Vitrine diapos={DIAPOS} /> : <Constellation className="w-full" />}
+              </div>
+            </div>
           </div>
         </Conteneur>
         <a

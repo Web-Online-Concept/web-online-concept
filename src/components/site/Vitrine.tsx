@@ -178,7 +178,7 @@ export default function Vitrine({ diapos }: { diapos: Diapo[] }) {
   return (
     <div
       ref={zone}
-      className="relative aspect-[660/560] w-full"
+      className="relative aspect-[660/560] w-full [container-type:inline-size]"
       onMouseEnter={() => setSurvol(true)}
       onMouseLeave={() => setSurvol(false)}
       onFocus={() => setSurvol(true)}
@@ -191,11 +191,11 @@ export default function Vitrine({ diapos }: { diapos: Diapo[] }) {
       {/* Fenêtre de navigateur */}
       <div className="flotte absolute left-0 top-[11%] w-[76%]">
         <div className="overflow-hidden rounded-xl bg-[#10233F] shadow-[0_30px_60px_-24px_rgba(2,8,20,0.75)] ring-1 ring-white/10">
-          <div className="flex h-7 items-center gap-1.5 px-3" aria-hidden="true">
+          <div className="flex h-[min(1.75rem,7.5cqw)] items-center gap-1.5 px-3" aria-hidden="true">
             <span className="h-2 w-2 rounded-full bg-[#3B5A85]" />
             <span className="h-2 w-2 rounded-full bg-[#3B5A85]" />
             <span className="h-2 w-2 rounded-full bg-[#3B5A85]" />
-            <span className="ml-3 truncate rounded-full bg-[#1A3358] px-3 py-0.5 text-[11px] leading-4 text-[#93A6BB]">
+            <span className="ml-3 truncate rounded-full bg-[#1A3358] px-3 py-0.5 text-[min(11px,3cqw)] leading-4 text-[#93A6BB]">
               {d ? d.domaine : "votre-projet.fr"}
             </span>
           </div>
@@ -220,33 +220,33 @@ export default function Vitrine({ diapos }: { diapos: Diapo[] }) {
       </div>
 
       {/* Puce IA */}
-      <div className="flotte absolute left-[46%] top-0 flex items-center gap-2.5 rounded-full bg-[#10233F]/95 py-2 pl-2 pr-4 shadow-[0_18px_40px_-20px_rgba(2,8,20,0.8)] ring-1 ring-white/10" style={{ animationDelay: "2s" }} aria-hidden="true">
-        <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[linear-gradient(135deg,#1F5EFF,#00B4D8_60%,#2BD47D)]">
-          <svg viewBox="0 0 24 24" className="h-4 w-4" fill="#FFFFFF">
+      <div className="flotte absolute left-[46%] top-0 flex items-center gap-[min(0.625rem,2.7cqw)] whitespace-nowrap rounded-full bg-[#10233F]/95 py-[min(0.5rem,2.15cqw)] pl-[min(0.5rem,2.15cqw)] pr-[min(1rem,4.3cqw)] shadow-[0_18px_40px_-20px_rgba(2,8,20,0.8)] ring-1 ring-white/10" style={{ animationDelay: "2s" }} aria-hidden="true">
+        <span className="inline-flex size-[min(2rem,8.6cqw)] items-center justify-center rounded-full bg-[linear-gradient(135deg,#1F5EFF,#00B4D8_60%,#2BD47D)]">
+          <svg viewBox="0 0 24 24" className="size-[min(1rem,4.3cqw)]" fill="#FFFFFF">
             <path d="M12 2.5l2.4 6.6 6.6 2.4-6.6 2.4L12 20.5l-2.4-6.6L3 11.5l6.6-2.4z" />
           </svg>
         </span>
-        <span className="text-[13px] font-medium text-[#E6EDF5]">{x.ia}</span>
+        <span className="text-[min(13px,3.5cqw)] font-medium text-[#E6EDF5]">{x.ia}</span>
       </div>
 
       {/* Légende de la capture en cours */}
       {d && (
-        <div className="absolute left-0 top-[71%] flex w-[66%] items-center gap-3">
+        <div className="absolute left-0 top-[71%] flex w-[66%] items-center gap-[min(0.75rem,3.2cqw)]">
           <Link
             href={chemin(l, "realisations", d.slug)}
-            className="min-w-0 flex-1 rounded-xl bg-white/[0.06] px-4 py-2.5 ring-1 ring-white/10 transition-colors hover:bg-white/10"
+            className="min-w-0 flex-1 rounded-xl bg-white/[0.06] px-[min(1rem,4.3cqw)] py-[min(0.625rem,2.7cqw)] ring-1 ring-white/10 transition-colors hover:bg-white/10"
           >
-            <span className="block truncate text-[15px] font-semibold text-white">{d.nom}</span>
-            <span className="block truncate text-[13px] text-[#93A6BB]">{d.type}</span>
+            <span className="block truncate text-[min(15px,4cqw)] font-semibold text-white">{d.nom}</span>
+            <span className="block truncate text-[min(13px,3.5cqw)] text-[#93A6BB]">{d.type}</span>
           </Link>
           {total > 1 && !calme && (
             <button
               type="button"
               onClick={() => setPause((p) => !p)}
               aria-label={pause ? x.reprendre : x.pause}
-              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[#C3D0DD] ring-1 ring-white/20 transition-colors hover:text-white hover:ring-white/50"
+              className="inline-flex size-[min(2.5rem,10.75cqw)] shrink-0 items-center justify-center rounded-full text-[#C3D0DD] ring-1 ring-white/20 transition-colors hover:text-white hover:ring-white/50"
             >
-              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
+              <svg viewBox="0 0 24 24" className="size-[min(1rem,4.3cqw)]" fill="currentColor" aria-hidden="true">
                 {pause ? <path d="M8 5.5v13l10.5-6.5z" /> : <path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" />}
               </svg>
             </button>
