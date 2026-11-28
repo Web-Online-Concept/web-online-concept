@@ -388,3 +388,47 @@ export function signature() {
 </tr>
 </table>`;
 }
+
+// ——— Lien de connexion au back-office (modèle « Magic Link » de Supabase Auth) ———
+// Ce HTML se colle dans Supabase : Authentication > Emails > Magic Link. Supabase y remplace
+// {{ .ConfirmationURL }} par le lien de connexion (usage unique, durée limitée, même navigateur).
+
+export const SUJET_LIEN_CONNEXION = "Votre lien de connexion au back-office";
+
+export function modeleLienConnexion() {
+  const lien = "{{ .ConfirmationURL }}";
+  const corps = `${entete(`<span style="font-family:${POLICE};font-size:12px;line-height:16px;font-weight:600;color:#9FB2C8">Back-office</span>`)}
+
+<tr><td class="marge" style="padding:38px 36px 6px;font-family:${POLICE}">
+  <div style="font-size:15px;line-height:22px;color:${C.doux}">Bonjour Florent,</div>
+  <h1 class="titre" style="margin:8px 0 0;font-size:26px;line-height:33px;font-weight:700;letter-spacing:-0.3px;color:${C.nuit}">Votre lien de connexion</h1>
+  <p style="margin:14px 0 0;font-size:16px;line-height:25px;color:${C.texte}">Un clic sur le bouton ci-dessous et vous êtes connecté au back‑office, sans mot de passe.</p>
+</td></tr>
+
+<tr><td class="marge" align="left" style="padding:26px 36px 8px">
+  ${bouton(lien, "Ouvrir le back-office")}
+</td></tr>
+
+<tr><td class="marge" style="padding:22px 36px 0;font-family:${POLICE}">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${C.ciel};border-radius:14px"><tr>
+    <td style="padding:16px 18px;font-size:14px;line-height:22px;color:${C.texte}">
+      <strong style="color:${C.nuit}">Un lien à usage unique.</strong> Il ne fonctionne qu'une fois, pendant une durée limitée, et uniquement dans le navigateur où vous l'avez demandé.
+    </td>
+  </tr></table>
+</td></tr>
+
+<tr><td class="marge" style="padding:22px 36px 34px;font-family:${POLICE}">
+  <p style="margin:0;font-size:13px;line-height:20px;color:${C.doux}">Vous n'avez rien demandé&nbsp;? Ignorez cet e-mail&nbsp;: sans ce lien, personne ne peut se connecter.</p>
+  <p style="margin:14px 0 0;font-size:12px;line-height:18px;color:#8A9BAE">Le bouton ne fonctionne pas&nbsp;? Copiez cette adresse dans le navigateur&nbsp;:<br><a href="${lien}" style="color:${C.bleu};word-break:break-all">${lien}</a></p>
+</td></tr>`;
+
+  const pied = `
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;max-width:100%">
+<tr><td class="marge" align="center" style="padding:24px 36px 8px;font-family:${POLICE}">
+  <img src="${URL_SITE}/email/symbole.png" width="40" height="28" alt="" style="display:block;border:0;margin:0 auto 10px">
+  <div style="font-size:13px;line-height:20px;color:${C.doux}">Web Online Concept, espace d'administration</div>
+</td></tr>
+</table>`;
+
+  return coquille({ titre: SUJET_LIEN_CONNEXION, preheader: "Un clic pour ouvrir le back-office, sans mot de passe.", corps, pied });
+}
