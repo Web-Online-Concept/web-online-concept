@@ -141,15 +141,15 @@ export default async function Accueil() {
       <IntroVideo />
       {/* Accroche */}
       <section className="ecran ecran-hero relative flex min-h-[calc(100svh-77px)] flex-col overflow-hidden bg-nuit text-white lg:flex-row lg:items-center">
-        {/* Téléphone et tablette : titre, image des sites, texte puis bouton centré, le tout dans la hauteur de l'écran
+        {/* Téléphone et tablette : titre, image des sites, texte puis bouton, centrés, le tout dans la hauteur de l'écran
             (l'image se réduit pour laisser le bouton visible). Ordinateur : texte à gauche, image à droite. */}
         <Conteneur className="relative flex flex-1 flex-col pb-6 pt-6 sm:pb-10 sm:pt-10 lg:grid lg:flex-initial lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-4 lg:py-16">
           <div className="contents lg:block">
-            <h1 className="order-1 text-[clamp(1.75rem,4.2vw,3.55rem)] font-semibold leading-[1.08] tracking-tight text-balance">
+            <h1 className="titre-lumiere order-1 -mb-[0.12em] pb-[0.12em] text-center text-[clamp(1.75rem,4.2vw,3.55rem)] font-semibold leading-[1.08] tracking-tight text-balance lg:text-left">
               <span className="block">{x.titre[0]}</span>
               <span className="block">{x.titre[1]}</span>
             </h1>
-            <p className="order-3 max-w-xl text-base leading-relaxed text-[#C3D0DD] sm:text-xl lg:mt-7">
+            <p className="order-3 mx-auto max-w-xl text-pretty text-center text-base leading-relaxed text-[#C3D0DD] sm:text-xl lg:mx-0 lg:mt-7 lg:text-left">
               {c.SITE.sousTitre}
             </p>
             <div className="order-4 mt-6 flex flex-wrap justify-center gap-3 lg:mt-10 lg:justify-start">
